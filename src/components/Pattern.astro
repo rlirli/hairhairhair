@@ -13,5 +13,5 @@ const accessibleLabel = label ?? `Simplified ${family} pattern illustration, sub
     {family === 'coily' && subtype === 'B' && Array.from({ length: 6 }).map((_, i) => <path d={`M ${42 + i * 84} 8 ${Array.from({ length: 7 }).map((_, j) => `${j % 2 ? 68 + i * 84 : 16 + i * 84} ${28 + j * 36}`).join(' L ')}`} fill="none" stroke="#181715" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />)}
     {family === 'coily' && subtype === 'C' && Array.from({ length: 6 }).map((_, i) => <path d={`M ${42 + i * 84} 8 C ${12 + i * 84} 22, ${12 + i * 84} 42, ${42 + i * 84} 56 C ${72 + i * 84} 70, ${72 + i * 84} 90, ${42 + i * 84} 104 C ${12 + i * 84} 118, ${12 + i * 84} 138, ${42 + i * 84} 152 C ${72 + i * 84} 166, ${72 + i * 84} 186, ${42 + i * 84} 200 C ${18 + i * 84} 214, ${18 + i * 84} 236, ${42 + i * 84} 252`} fill="none" stroke="#181715" stroke-width="7" stroke-linecap="round" />)}
   </svg>
-  <span class="mt-2 block text-[10px] font-bold uppercase tracking-[.1em]">Illustration · {family} {subtype}</span>
+  <span class="mt-2 block text-[10px] font-bold uppercase tracking-[.1em]">Pattern · {family} {subtype}</span>
 </div>

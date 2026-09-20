@@ -1,0 +1,17 @@
+---
+interface Props { family?: 'straight' | 'wavy' | 'curly' | 'coily'; subtype?: 'A' | 'B' | 'C'; label?: string }
+const { family = 'wavy', subtype = 'B', label } = Astro.props;
+const level = subtype === 'A' ? 1 : subtype === 'C' ? 3 : 2;
+const accessibleLabel = label ?? `Simplified ${family} pattern illustration, subtype ${subtype} — not a diagnostic or photograph`;
+---
+<div class="relative overflow-hidden rounded-[2rem] border-2 border-ink bg-butter p-4 sm:p-6" role="img" aria-label={accessibleLabel}>
+  <svg viewBox="0 0 500 260" class="block h-auto w-full" aria-hidden="true">
+    {family === 'straight' && Array.from({ length: 7 }).map((_, i) => <path d={`M ${45 + i * 68} 12 L ${45 + i * 68 + (level - 1) * 5} 248`} fill="none" stroke="#181715" stroke-width="7" stroke-linecap="round" />)}
+    {family === 'wavy' && Array.from({ length: 6 }).map((_, i) => <path d={`M ${25 + i * 86} 8 C ${-15 + i * 86} ${55 - level * 3}, ${105 + i * 86} ${95 + level * 12}, ${55 + i * 86} 142 S ${-5 + i * 86} ${215 - level * 8}, ${45 + i * 86} 252`} fill="none" stroke="#181715" stroke-width="7" stroke-linecap="round" />)}
+    {family === 'curly' && Array.from({ length: 6 }).map((_, i) => <path d={`M ${45 + i * 84} 8 C ${-5 + i * 84} 32, ${-5 + i * 84} ${78 + level * 5}, ${45 + i * 84} ${98 + level * 4} C ${95 + i * 84} ${118 + level * 5}, ${95 + i * 84} ${170 + level * 8}, ${45 + i * 84} 190 C ${5 + i * 84} 208, ${10 + i * 84} 238, ${45 + i * 84} 252`} fill="none" stroke="#181715" stroke-width="7" stroke-linecap="round" />)}
+    {family === 'coily' && subtype === 'A' && Array.from({ length: 6 }).map((_, i) => <path d={`M ${42 + i * 84} 8 C ${-2 + i * 84} 24, ${-2 + i * 84} 62, ${42 + i * 84} 78 C ${86 + i * 84} 94, ${86 + i * 84} 132, ${42 + i * 84} 148 C ${2 + i * 84} 164, ${2 + i * 84} 202, ${42 + i * 84} 252`} fill="none" stroke="#181715" stroke-width="7" stroke-linecap="round" />)}
+    {family === 'coily' && subtype === 'B' && Array.from({ length: 6 }).map((_, i) => <path d={`M ${42 + i * 84} 8 ${Array.from({ length: 7 }).map((_, j) => `${j % 2 ? 68 + i * 84 : 16 + i * 84} ${28 + j * 36}`).join(' L ')}`} fill="none" stroke="#181715" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />)}
+    {family === 'coily' && subtype === 'C' && Array.from({ length: 6 }).map((_, i) => <path d={`M ${42 + i * 84} 8 C ${12 + i * 84} 22, ${12 + i * 84} 42, ${42 + i * 84} 56 C ${72 + i * 84} 70, ${72 + i * 84} 90, ${42 + i * 84} 104 C ${12 + i * 84} 118, ${12 + i * 84} 138, ${42 + i * 84} 152 C ${72 + i * 84} 166, ${72 + i * 84} 186, ${42 + i * 84} 200 C ${18 + i * 84} 214, ${18 + i * 84} 236, ${42 + i * 84} 252`} fill="none" stroke="#181715" stroke-width="7" stroke-linecap="round" />)}
+  </svg>
+  <span class="mt-2 block text-[10px] font-bold uppercase tracking-[.1em]">Illustration · {family} {subtype}</span>
+</div>

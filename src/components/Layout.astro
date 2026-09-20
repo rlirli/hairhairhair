@@ -1,0 +1,20 @@
+---
+import Header from './Header.astro';
+import '../styles/global.css';
+interface Props { title?: string; description?: string }
+const { title = 'hairhairhair.hair — a clear guide to hair types', description = 'A visual guide to hair type classification, from straight to coily.' } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href} />
+    <meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:type" content="website" /><meta property="og:url" content={new URL(Astro.url.pathname, Astro.site).href} /><meta property="og:image" content={new URL('/og.svg', Astro.site).href} />
+    <meta name="twitter:card" content="summary" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body><Header /><main><slot /></main><footer class="mx-auto mt-24 flex max-w-7xl flex-col gap-3 border-t-2 border-ink px-5 py-8 text-sm sm:flex-row sm:items-center sm:justify-between sm:px-8"><span class="font-black">hairhairhair.hair</span><span>Built for curiosity, not diagnosis.</span></footer></body>
+</html>

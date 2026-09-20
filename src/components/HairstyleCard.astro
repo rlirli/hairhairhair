@@ -1,0 +1,19 @@
+---
+import { Image } from 'astro:assets';
+import { styleExamples } from '../data/hairstyles';
+import type { Hairstyle } from '../data/hairstyles';
+import { kindLabels } from '../data/hairstyle-relations';
+import { getMedia } from '../data/media';
+interface Props { style: Hairstyle; compact?: boolean }
+const { style, compact = false } = Astro.props;
+const example = styleExamples.find((item) => item.hairstyleIds.includes(style.id));
+const media = getMedia(example?.imageId ?? '');
+---
+<a href={`/hairstyles/${style.slug}/`} class={`hover-surface focus-ring group block rounded-3xl border-2 border-ink p-4 transition ${compact ? '' : 'sm:p-6'}`}>
+  {media && <Image src={media.src} widths={[400, 800]} sizes="(min-width: 1024px) 25vw, 100vw" format="webp" loading="lazy" alt={media.alt} class="aspect-square w-full rounded-2xl object-cover" />}
+  {media?.provenance.kind === 'generated' && <p class="mt-2 text-xs font-bold uppercase tracking-[.12em] text-orange">AI-generated reference</p>}
+  {media?.provenance.kind === 'photograph' && <p class="mt-2 text-xs font-bold uppercase tracking-[.12em] text-orange">Photographic reference · {media.provenance.creator} · {media.provenance.licenseName}</p>}
+  <p class="mt-5 text-xs font-black uppercase tracking-[.16em] text-orange">{kindLabels[style.kind]}</p>
+  <h2 class="mt-2 font-display text-3xl tracking-[-.05em]">{style.name}</h2>
+  <p class="mt-1 text-sm leading-6">{style.summary}</p>
+</a>

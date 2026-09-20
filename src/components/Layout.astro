@@ -1,8 +1,8 @@
 ---
 import Header from './Header.astro';
 import '../styles/global.css';
-interface Props { title?: string; description?: string }
-const { title = 'hairhairhair.hair — a clear guide to hair types', description = 'A visual guide to hair type classification, from straight to coily.' } = Astro.props;
+interface Props { title?: string; description?: string; image?: string }
+const { title = 'hairhairhair.hair — a clear guide to hair types', description = 'A visual guide to hair type classification, from straight to coily.', image = '/og.svg' } = Astro.props;
 ---
 <!doctype html>
 <html lang="en">
@@ -12,8 +12,8 @@ const { title = 'hairhairhair.hair — a clear guide to hair types', description
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href} />
-    <meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:type" content="website" /><meta property="og:url" content={new URL(Astro.url.pathname, Astro.site).href} /><meta property="og:image" content={new URL('/og.svg', Astro.site).href} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:type" content="website" /><meta property="og:url" content={new URL(Astro.url.pathname, Astro.site).href} />{image && <meta property="og:image" content={new URL(image, Astro.site).href} />}
+    <meta name="twitter:card" content={image === '/og.svg' ? 'summary' : 'summary_large_image'} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <script is:inline>
       try {

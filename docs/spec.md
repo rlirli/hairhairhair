@@ -2,7 +2,7 @@
 
 ## Experience
 
-The site is a small editorial field guide: a home page introduces the visual language, `/hair-types/` lists the 12 types, and each `/hair-types/{slug}/` page provides a description, characteristics, comparison, and previous/next navigation. The 404 page returns users home.
+The site is a small editorial field guide: a home page introduces the visual language, `/hair-types/` links the four family pages and lists the 12 types, and each `/hair-types/{slug}/` page provides a description, characteristics, comparison, and previous/next navigation. Family pages at `/hair-types/1/` through `/hair-types/4/` group their three subtypes. The 404 page returns users home.
 
 ## Content contract
 

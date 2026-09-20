@@ -1,0 +1,22 @@
+# Hairstyle imagery research
+
+## Practical recommendation
+
+Use generated editorial illustrations as the default for the three pages. Label them as illustrations (not photographs, portraits, or diagnostic examples) and describe the page subject separately from the artwork. This avoids attaching an invented person to a claimed hairstyle or implying that one image represents everyone with that style. If the site needs photographic reference, use one credited Commons image per page with a visible or linked attribution block; do not silently crop away source context.
+
+## Reusable Wikimedia Commons candidates
+
+| Page | File and verified license | Attribution to retain | Notes |
+| --- | --- | --- | --- |
+| Taper fade | [High Tapered Cut.jpg](https://commons.wikimedia.org/wiki/File:High_Tapered_Cut.jpg) — [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) | “High Tapered Cut.jpg”, Bekham.o, Wikimedia Commons, CC BY 4.0; link the file and license; note edits/crops | The file page describes it as an example of a modern high tapered cut, source “Own work,” author Bekham.o. |
+| Buzz cut | [Photo of buzz cut.jpg](https://commons.wikimedia.org/wiki/File:Photo_of_buzz_cut.jpg) — [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | Attribution is not required by CC0, but retain “Photo of buzz cut.jpg”, Absock, Wikimedia Commons, and the file link as provenance | The file page identifies an own-work photo of a man with a buzz cut. CC0 is copyright dedication, not a blanket model/privacy release. |
+| Two-strand twists | [Alternative 2-Stranded Braid.JPG](https://commons.wikimedia.org/wiki/File:Alternative_2-Stranded_Braid.JPG) — [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) (also offered under older BY-SA versions/GFDL) | “Alternative 2-Stranded Braid.JPG”, Stilfehler, Wikimedia Commons, CC BY-SA 3.0; link the file and license; note edits/crops; preserve ShareAlike obligations for adaptations | The file page explicitly describes the two-strand twisting technique and names Stilfehler as author. Choose the CC BY-SA 3.0 option and avoid mixing license terms. |
+
+The Commons file page is the source of truth at the time of use: re-check the license, author, file revision, and any people/privacy considerations before publishing. Copyright permission alone does not establish endorsement, publicity, or model-release rights.
+
+## Generated vs. photographic editorial reference
+
+- Generated art is suitable for a visual explainer when it is clearly marked “editorial illustration” and the alt text describes the intended design subject, not a real person or universal hair outcome.
+- A real photo is useful when readers need to see texture or haircut details, but the caption must identify the pictured style narrowly; it should not claim that the photo defines a category or subtype.
+- For a mixed approach, use generated hero art plus one small credited photo per page. Keep the attribution adjacent to or one click from the photo, record the exact Commons file URL, author, license, and whether the asset was cropped/edited.
+

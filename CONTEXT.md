@@ -1,0 +1,29 @@
+# Hair discovery
+
+A shared vocabulary for exploring hair patterns and hairstyles, with examples that help people discuss a look with a barber or stylist.
+
+## Language
+
+**Hair type**:
+A category of visible natural hair pattern within a named classification system. It does not determine strand thickness, density, porosity, or which styles a person may wear.
+_Avoid_: Hair quality, suitability score
+
+**Hair family**:
+A broad grouping of hair types, such as straight, wavy, curly, or coily.
+
+**Hairstyle**:
+A named look or styling concept someone can explore and discuss with a practitioner. The catalog includes cuts, finishing techniques, and ways of arranging hair; these are distinguished rather than treated as identical services.
+
+**Variation**:
+A named interpretation of a hairstyle that changes a meaningful feature, such as length or the placement of a taper.
+
+**Style example**:
+A particular visual interpretation of one or more hairstyles. An example can combine a cut and a finishing technique without making those concepts synonymous.
+_Avoid_: Person, hairstyle definition
+
+**Reference image**:
+A visual asset used to illustrate a style example, with its origin and attribution recorded. A generated reference is a fictional illustration, not evidence of a real person's hair or a verified haircut result.
+
+**Pattern guidance**:
+An editorial note about how a hairstyle may be approached within a hair family. It supports a conversation with a practitioner rather than declaring eligibility or promising a result.
+_Avoid_: Compatibility score, works for everyone

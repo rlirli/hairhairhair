@@ -4,7 +4,7 @@ const { family = 'wavy', subtype = 'B', label } = Astro.props;
 const level = subtype === 'A' ? 1 : subtype === 'C' ? 3 : 2;
 const accessibleLabel = label ?? `Simplified ${family} pattern illustration, subtype ${subtype} — not a diagnostic or photograph`;
 ---
-<div class="relative overflow-hidden rounded-[2rem] border-2 border-ink bg-butter p-4 sm:p-6" role="img" aria-label={accessibleLabel}>
+<div class="diagram-panel relative overflow-hidden rounded-[2rem] border-2 border-ink p-4 sm:p-6" role="img" aria-label={accessibleLabel}>
   <svg viewBox="0 0 500 260" class="block h-auto w-full" aria-hidden="true">
     {family === 'straight' && Array.from({ length: 7 }).map((_, i) => <path d={`M ${45 + i * 68} 12 L ${45 + i * 68 + (level - 1) * 5} 248`} fill="none" stroke="#181715" stroke-width="7" stroke-linecap="round" />)}
     {family === 'wavy' && Array.from({ length: 6 }).map((_, i) => <path d={`M ${25 + i * 86} 8 C ${-15 + i * 86} ${55 - level * 3}, ${105 + i * 86} ${95 + level * 12}, ${55 + i * 86} 142 S ${-5 + i * 86} ${215 - level * 8}, ${45 + i * 86} 252`} fill="none" stroke="#181715" stroke-width="7" stroke-linecap="round" />)}

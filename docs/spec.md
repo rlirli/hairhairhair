@@ -12,6 +12,8 @@ The site is a small editorial field guide: a home page introduces the visual lan
 
 Warm ivory, near-black ink, orange accents, butter-yellow illustration panels, oversized serif display typography, and compact uppercase labels create the editorial character. `Pattern.astro` generates reusable abstract SVG marks and labels them as simplified illustrations, not diagnostics or photos.
 
+The theme also supports a warm charcoal/cream/copper dark palette. A keyboard-accessible header toggle persists the user's choice in local storage, defaults to the OS preference, and uses an inline head script to avoid a flash of the wrong theme. Storage failures fall back safely to the system preference.
+
 ## Delivery
 
 Astro uses static output, trailing slashes, canonical URLs under `https://hairhairhair.hair`, a local SVG favicon, `robots.txt`, and `sitemap-index.xml`. GitHub Actions builds with `npm ci`, uploads `dist`, and deploys Pages with the required permissions and concurrency guard.

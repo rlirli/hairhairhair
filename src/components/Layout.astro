@@ -15,6 +15,15 @@ const { title = 'hairhairhair.hair — a clear guide to hair types', description
     <meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:type" content="website" /><meta property="og:url" content={new URL(Astro.url.pathname, Astro.site).href} /><meta property="og:image" content={new URL('/og.svg', Astro.site).href} />
     <meta name="twitter:card" content="summary" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script is:inline>
+      try {
+        const saved = localStorage.getItem('hairhairhair-theme');
+        const dark = saved ? saved === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (dark) document.documentElement.classList.add('dark');
+      } catch {
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.classList.add('dark');
+      }
+    </script>
   </head>
   <body><Header /><main><slot /></main><footer class="mx-auto mt-24 flex max-w-7xl flex-col gap-3 border-t-2 border-ink px-5 py-8 text-sm sm:flex-row sm:items-center sm:justify-between sm:px-8"><span class="font-black">hairhairhair.hair</span><span>Built for curiosity, not diagnosis.</span></footer></body>
 </html>

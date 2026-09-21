@@ -10,6 +10,7 @@ export const GET: APIRoute = () => {
     "people/",
     ...hairFamilies.map((item) => `hair-types/${item.slug}/`),
     ...hairTypes.map((item) => `hair-types/${item.slug}/`),
+    ...hairTypes.map((item) => `hair-types/${item.slug}/related-hairstyles/`),
     ...publishedHairstyles.map((item) => `hairstyles/${item.slug}/`),
     ...people.map((item) => `people/${item.slug}/`),
   ];

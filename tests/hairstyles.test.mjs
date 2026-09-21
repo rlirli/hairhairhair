@@ -125,13 +125,14 @@ test("media declarations cover every approved generated asset", () => {
 });
 
 test("static build contains all data-derived expected HTML pages", () => {
-  const expectedPageCount = 3 + hairFamilies.length + hairTypes.length + 1 + publishedHairstyles.length + 2;
+  const expectedPageCount = 3 + hairFamilies.length + hairTypes.length * 2 + 1 + publishedHairstyles.length + 2;
   assert.equal(htmlFiles().length, expectedPageCount);
   for (const path of ["/", "/hair-types/", "/hairstyles/", "/people/", "/people/will-smith/"])
     assert.ok(existsSync(routeFile(path)));
   assert.ok(existsSync(join(dist, "404.html")));
   for (const family of hairFamilies) assert.ok(existsSync(routeFile(`/hair-types/${family.slug}/`)));
   for (const type of hairTypes) assert.ok(existsSync(routeFile(`/hair-types/${type.slug}/`)));
+  for (const type of hairTypes) assert.ok(existsSync(routeFile(`/hair-types/${type.slug}/related-hairstyles/`)));
   for (const style of publishedHairstyles) assert.ok(existsSync(routeFile(`/hairstyles/${style.slug}/`)));
   for (const style of hairstyles.filter((style) => style.guidePublicationStatus === "draft"))
     assert.ok(!existsSync(routeFile(`/hairstyles/${style.slug}/`)));
@@ -198,7 +199,7 @@ test("family and subtype pages expose every hairstyle guide and expected subtype
   }
 });
 
-test("hair-type pages use a compact, five-column hairstyle overview with hover details", () => {
+test("hair-type pages use a compact, five-column hairstyle overview with hover details and a more link", () => {
   for (const type of hairTypes) {
     const markup = page(`/hair-types/${type.slug}/`);
     assert.match(markup, /Hairstyles for this type/i);
@@ -206,7 +207,21 @@ test("hair-type pages use a compact, five-column hairstyle overview with hover d
     assert.match(markup, /grid-flow-col/);
     assert.match(markup, /overflow-x-auto/);
     assert.match(markup, /data-slot="hover-card-trigger"/);
-    assert.doesNotMatch(markup, /related-hairstyles/);
+    assert.match(markup, new RegExp(`href="/hair-types/${type.slug}/related-hairstyles/"`));
+  }
+});
+
+test("related hairstyle pages use a four-column grid with medium cards and hover details", () => {
+  for (const type of hairTypes) {
+    const markup = page(`/hair-types/${type.slug}/related-hairstyles/`);
+    const family = hairFamilies.find((item) => item.family === type.family);
+    assert.ok(family);
+    assert.match(markup, /Hairstyles for/);
+    assert.match(markup, new RegExp(`Hair Type ${type.code}`));
+    assert.match(markup, /lg:grid-cols-4/);
+    assert.match(markup, /data-slot="hover-card-trigger"/);
+    for (const style of getPublishedHairstylesForFamily(family.id))
+      assert.match(markup, new RegExp(`/hairstyles/${style.slug}/`));
   }
 });
 
@@ -228,6 +243,7 @@ test("home, hairstyle index, sitemap, canonical URLs, and social image targets a
     "/people/will-smith/",
     ...hairFamilies.map((family) => `/hair-types/${family.slug}/`),
     ...hairTypes.map((type) => `/hair-types/${type.slug}/`),
+    ...hairTypes.map((type) => `/hair-types/${type.slug}/related-hairstyles/`),
   ])
     assert.match(sitemap, new RegExp(path.replaceAll("/", "\\/")));
   for (const style of hairstyles.filter((style) => style.guidePublicationStatus === "draft"))

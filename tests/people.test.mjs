@@ -61,10 +61,7 @@ test("appearance dates and observations match the phase-one contract", () => {
 test("person page is chronological, local, and contains no generated media", () => {
   const markup = page("/people/will-smith/");
   assert.doesNotMatch(markup, /AI-generated|generated reference/);
-  assert.equal(
-    attrs(markup, "src").filter((src) => /\.png(?:\?|$)/.test(src)).length,
-    0,
-  );
+  assert.equal(attrs(markup, "src").filter((src) => /\.png(?:\?|$)/.test(src)).length, 0);
   assert.match(markup, /2009-12-10/);
   assert.match(markup, /2011-04-24/);
   assert.match(markup, /2012-05-23/);
@@ -77,8 +74,6 @@ test("person page is chronological, local, and contains no generated media", () 
     assert.ok(existsSync(routeFile(pathname)), href);
     if (fragment) assert.match(page(pathname), new RegExp(`id="${fragment.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`));
   }
-  assert.match(markup, /hairstyles\/buzz-cut\//);
-  assert.match(markup, /hairstyles\/flat-top\//);
   assert.match(markup, /#appearance-will-smith-2011/);
 });
 
@@ -93,8 +88,13 @@ test("appearance anchors and hairstyle backlinks are one-to-one", () => {
     for (const observation of appearance.observations) {
       const style = hairstyles.find((item) => item.id === observation.hairstyleId);
       assert.ok(style);
-      const styleMarkup = page(`/hairstyles/${style.slug}/`);
-      assert.match(styleMarkup, new RegExp(`href="/people/${person.slug}/#${appearance.id}"`));
+      if (style.guidePublicationStatus === "published") {
+        const styleMarkup = page(`/hairstyles/${style.slug}/`);
+        assert.match(styleMarkup, new RegExp(`href="/people/${person.slug}/#${appearance.id}"`));
+        assert.match(markup, new RegExp(`href="/hairstyles/${style.slug}/"`));
+      } else {
+        assert.doesNotMatch(markup, new RegExp(`href="/hairstyles/${style.slug}/"`));
+      }
     }
   }
 });

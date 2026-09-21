@@ -3,7 +3,7 @@ import Layout from "../components/Layout.astro";
 import Pattern from "../components/Pattern.astro";
 import { hairFamilies } from "../data/hair-types";
 import HairstyleCard from "../components/HairstyleCard.astro";
-import { hairstyles } from "../data/hairstyles";
+import { publishedHairstyles } from "../data/hairstyles";
 import { people } from "../data/people";
 ---
 
@@ -77,7 +77,7 @@ import { people } from "../data/people";
       </a>
     </div>
     <div class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-      {hairstyles.map((style) => (
+      {publishedHairstyles.map((style) => (
         <HairstyleCard style={style} compact />
       ))}
     </div>

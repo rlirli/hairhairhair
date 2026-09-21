@@ -7,9 +7,11 @@ import { hairFamilies, hairTypes } from "../src/data/hair-types.ts";
 import {
   getExamplesForHairstyle,
   getGuidanceForHairstyle,
-  getHairstylesForFamily,
+  getPublishedHairstylesForFamily,
   hairstyles,
+  isPublishedGuide,
   patternGuidance,
+  publishedHairstyles,
   sources,
   styleExamples,
 } from "../src/data/hairstyles.ts";
@@ -63,6 +65,16 @@ test("data records have unique stable ids and slugs", () => {
   );
 });
 
+test("published hairstyle guides are derived from guide publication status", () => {
+  assert.deepEqual(
+    publishedHairstyles,
+    hairstyles.filter((style) => style.guidePublicationStatus === "published"),
+  );
+  assert.ok(hairstyles.every((style) => ["draft", "published"].includes(style.guidePublicationStatus)));
+  assert.equal(isPublishedGuide({ guidePublicationStatus: "published" }), true);
+  assert.equal(isPublishedGuide({ guidePublicationStatus: "draft" }), false);
+});
+
 test("relationship, source, example, and media references are closed and reciprocal", () => {
   const styleIds = new Set(hairstyles.map((style) => style.id));
   const familyIds = new Set(hairFamilies.map((family) => family.id));
@@ -88,15 +100,15 @@ test("relationship, source, example, and media references are closed and recipro
 });
 
 test("each family has one row per guide in both directions", () => {
-  const styleIds = hairstyles.map((style) => style.id).sort();
+  const publishedStyleIds = publishedHairstyles.map((style) => style.id).sort();
   for (const family of hairFamilies) {
     for (const style of hairstyles)
       assert.equal(getGuidanceForHairstyle(style.id).filter((row) => row.hairFamilyId === family.id).length, 1);
     assert.deepEqual(
-      getHairstylesForFamily(family.id)
+      getPublishedHairstylesForFamily(family.id)
         .map((style) => style.id)
         .sort(),
-      styleIds,
+      publishedStyleIds,
     );
   }
 });
@@ -113,14 +125,16 @@ test("media declarations cover every approved generated asset", () => {
 });
 
 test("static build contains all data-derived expected HTML pages", () => {
-  const expectedPageCount = 3 + hairFamilies.length + hairTypes.length + 1 + hairstyles.length + 2;
+  const expectedPageCount = 3 + hairFamilies.length + hairTypes.length + 1 + publishedHairstyles.length + 2;
   assert.equal(htmlFiles().length, expectedPageCount);
   for (const path of ["/", "/hair-types/", "/hairstyles/", "/people/", "/people/will-smith/"])
     assert.ok(existsSync(routeFile(path)));
   assert.ok(existsSync(join(dist, "404.html")));
   for (const family of hairFamilies) assert.ok(existsSync(routeFile(`/hair-types/${family.slug}/`)));
   for (const type of hairTypes) assert.ok(existsSync(routeFile(`/hair-types/${type.slug}/`)));
-  for (const style of hairstyles) assert.ok(existsSync(routeFile(`/hairstyles/${style.slug}/`)));
+  for (const style of publishedHairstyles) assert.ok(existsSync(routeFile(`/hairstyles/${style.slug}/`)));
+  for (const style of hairstyles.filter((style) => style.guidePublicationStatus === "draft"))
+    assert.ok(!existsSync(routeFile(`/hairstyles/${style.slug}/`)));
 });
 
 test("built HTML internal hrefs, fragments, and local src targets exist", () => {
@@ -150,7 +164,7 @@ test("built HTML internal hrefs, fragments, and local src targets exist", () => 
 });
 
 test("style guides contain two responsive WebP examples, AI labels, and social metadata", () => {
-  for (const style of hairstyles) {
+  for (const style of publishedHairstyles) {
     const markup = page(`/hairstyles/${style.slug}/`);
     assert.ok((markup.match(/<img\b/g) ?? []).length >= 3);
     assert.ok((markup.match(/AI-generated reference/g) ?? []).length >= 3);
@@ -161,7 +175,9 @@ test("style guides contain two responsive WebP examples, AI labels, and social m
     for (const relatedId of style.relatedStyleIds) {
       const related = hairstyles.find((item) => item.id === relatedId);
       assert.ok(related);
-      assert.match(markup, new RegExp(`/hairstyles/${related.slug}/`), `${style.slug} links ${related.slug}`);
+      if (related.guidePublicationStatus === "published")
+        assert.match(markup, new RegExp(`/hairstyles/${related.slug}/`), `${style.slug} links ${related.slug}`);
+      else assert.doesNotMatch(markup, new RegExp(`/hairstyles/${related.slug}/`));
     }
     for (const family of hairFamilies)
       assert.match(markup, new RegExp(`/hair-types/${family.slug}/`), `${style.slug} links ${family.slug}`);
@@ -173,32 +189,38 @@ test("style guides contain two responsive WebP examples, AI labels, and social m
 test("family and subtype pages expose every hairstyle guide and expected subtype links", () => {
   for (const family of hairFamilies) {
     const markup = page(`/hair-types/${family.slug}/`);
-    for (const style of hairstyles) assert.match(markup, new RegExp(`/hairstyles/${style.slug}/`));
+    for (const style of publishedHairstyles) assert.match(markup, new RegExp(`/hairstyles/${style.slug}/`));
     for (const type of hairTypes.filter((item) => item.family === family.family))
       assert.match(markup, new RegExp(`/hair-types/${type.slug}/`));
   }
   for (const type of hairTypes) {
     const markup = page(`/hair-types/${type.slug}/`);
-    for (const style of hairstyles) assert.match(markup, new RegExp(`/hairstyles/${style.slug}/`));
+    for (const style of publishedHairstyles) assert.match(markup, new RegExp(`/hairstyles/${style.slug}/`));
   }
 });
 
 test("home, hairstyle index, sitemap, canonical URLs, and social image targets are complete", () => {
-  for (const style of hairstyles) {
+  for (const style of publishedHairstyles) {
     assert.match(page("/"), new RegExp(`/hairstyles/${style.slug}/`));
     assert.match(page("/hairstyles/"), new RegExp(`/hairstyles/${style.slug}/`));
   }
-  assert.equal((page("/hairstyles/").match(/AI-generated reference/g) ?? []).length, hairstyles.length);
+  for (const style of hairstyles.filter((style) => style.guidePublicationStatus === "draft")) {
+    assert.doesNotMatch(page("/"), new RegExp(`/hairstyles/${style.slug}/`));
+    assert.doesNotMatch(page("/hairstyles/"), new RegExp(`/hairstyles/${style.slug}/`));
+  }
+  assert.equal((page("/hairstyles/").match(/AI-generated reference/g) ?? []).length, publishedHairstyles.length);
   const sitemap = readFileSync(join(dist, "sitemap-index.xml"), "utf8");
   for (const path of [
     "/hairstyles/",
-    ...hairstyles.map((style) => `/hairstyles/${style.slug}/`),
+    ...publishedHairstyles.map((style) => `/hairstyles/${style.slug}/`),
     "/people/",
     "/people/will-smith/",
     ...hairFamilies.map((family) => `/hair-types/${family.slug}/`),
     ...hairTypes.map((type) => `/hair-types/${type.slug}/`),
   ])
     assert.match(sitemap, new RegExp(path.replaceAll("/", "\\/")));
+  for (const style of hairstyles.filter((style) => style.guidePublicationStatus === "draft"))
+    assert.doesNotMatch(sitemap, new RegExp(`/hairstyles/${style.slug}/`));
   for (const file of htmlFiles()) {
     const markup = readFileSync(file, "utf8");
     const canonical = markup.match(/<link rel="canonical" href="([^"]+)"/);

@@ -5,6 +5,7 @@ interface Observation {
   note: string;
   styleName: string;
   styleSlug: string;
+  guidePublished: boolean;
 }
 interface Props {
   media: PersonMedia;
@@ -50,16 +51,18 @@ const { media, event, date, observations, anchor } = Astro.props;
         </a>{" "}
         · {event}
       </p>
-      {observations.map(({ note, styleName, styleSlug }) => (
+      {observations.map(({ note, styleName, styleSlug, guidePublished }) => (
         <div class="mt-4">
           <h2 class="font-display text-3xl">Visible hairstyle observation</h2>
           <p class="mt-4 text-lg leading-8">{note}</p>
-          <a
-            class="focus-ring mt-5 inline-block font-bold text-orange underline decoration-orange decoration-2 underline-offset-4"
-            href={`/hairstyles/${styleSlug}/`}
-          >
-            {styleName} guide ↗
-          </a>
+          {guidePublished && (
+            <a
+              class="focus-ring mt-5 inline-block font-bold text-orange underline decoration-orange decoration-2 underline-offset-4"
+              href={`/hairstyles/${styleSlug}/`}
+            >
+              {styleName} guide ↗
+            </a>
+          )}
         </div>
       ))}
     </div>

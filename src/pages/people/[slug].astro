@@ -100,6 +100,7 @@ const heroAppearance = appearances.find((appearance) => appearance.imageId === p
                 note: observation.note,
                 styleName: style.name,
                 styleSlug: style.slug,
+                guidePublished: style.guidePublicationStatus === "published",
               }))}
               anchor={appearance.id}
             />

@@ -4,19 +4,19 @@ import HairstyleCard from "../../components/HairstyleCard.astro";
 import StyleMedia from "../../components/StyleMedia.astro";
 import { getImage } from "astro:assets";
 import { hairFamilies, hairTypes } from "../../data/hair-types";
-import { hairstyles, sources, getExamplesForHairstyle } from "../../data/hairstyles";
-import { guidanceFor, relatedHairstyles } from "../../data/hairstyle-relations";
+import { publishedHairstyles, sources, getExamplesForHairstyle } from "../../data/hairstyles";
+import { guidanceFor, publishedRelatedHairstyles } from "../../data/hairstyle-relations";
 import { appearancesForStyle, personForAppearance } from "../../data/people-relations";
 import { kindLabels } from "../../data/hairstyle-relations";
 import { getMedia } from "../../data/media";
 
 export function getStaticPaths() {
-  return hairstyles.map((style) => ({ params: { slug: style.slug }, props: { style } }));
+  return publishedHairstyles.map((style) => ({ params: { slug: style.slug }, props: { style } }));
 }
 const { style } = Astro.props;
 const examples = getExamplesForHairstyle(style.id);
 const heroMedia = examples[0]?.imageId;
-const related = relatedHairstyles(style.relatedStyleIds);
+const related = publishedRelatedHairstyles(style.relatedStyleIds);
 const familyLinks = hairFamilies
   .map((family) => ({ family, guidance: guidanceFor(style.id, family.family) }))
   .filter((item): item is { family: typeof item.family; guidance: NonNullable<typeof item.guidance> } =>

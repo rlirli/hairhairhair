@@ -11,7 +11,10 @@ export function observedStylesForAppearance(appearanceId: string) {
   const appearance = appearances.find((item) => item.id === appearanceId);
   return (
     appearance?.observations
-      .map((observation) => ({ observation, style: hairstyles.find((style) => style.id === observation.hairstyleId) }))
+      .map((observation) => ({
+        observation,
+        style: hairstyles.find((style) => style.id === observation.hairstyleId),
+      }))
       .filter((item): item is { observation: typeof item.observation; style: NonNullable<typeof item.style> } =>
         Boolean(item.style),
       ) ?? []

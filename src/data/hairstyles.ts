@@ -22,6 +22,7 @@ export interface Hairstyle {
   considerations: string[];
   sourceIds: string[];
   relatedStyleIds: string[];
+  guidePublicationStatus: "draft" | "published";
 }
 
 export interface PatternGuidance {
@@ -170,6 +171,7 @@ export const hairstyles: Hairstyle[] = [
     ],
     sourceIds: ["andis-low-taper", "wahl-cut-guide"],
     relatedStyleIds: ["hairstyle-buzz-cut", "hairstyle-twists", "hairstyle-flat-top"],
+    guidePublicationStatus: "published",
   },
   {
     id: "hairstyle-buzz-cut",
@@ -217,6 +219,7 @@ export const hairstyles: Hairstyle[] = [
     ],
     sourceIds: ["andis-buzz-cut", "wahl-cut-guide"],
     relatedStyleIds: ["hairstyle-taper-fade", "hairstyle-twists", "hairstyle-flat-top"],
+    guidePublicationStatus: "published",
   },
   {
     id: "hairstyle-twists",
@@ -264,6 +267,7 @@ export const hairstyles: Hairstyle[] = [
     ],
     sourceIds: ["milady-natural-hair", "carols-daughter-braids-twists", "aad-traction"],
     relatedStyleIds: ["hairstyle-taper-fade", "hairstyle-buzz-cut"],
+    guidePublicationStatus: "published",
   },
   {
     id: "hairstyle-flat-top",
@@ -322,8 +326,15 @@ export const hairstyles: Hairstyle[] = [
       "wahl-cut-guide",
     ],
     relatedStyleIds: ["hairstyle-buzz-cut", "hairstyle-taper-fade"],
+    guidePublicationStatus: "published",
   },
 ];
+
+export function isPublishedGuide(hairstyle: Pick<Hairstyle, "guidePublicationStatus">): boolean {
+  return hairstyle.guidePublicationStatus === "published";
+}
+
+export const publishedHairstyles = hairstyles.filter(isPublishedGuide);
 
 export const patternGuidance: PatternGuidance[] = [
   {
@@ -503,9 +514,9 @@ export function getGuidanceForHairstyle(id: string): PatternGuidance[] {
   return patternGuidance.filter((guidance) => guidance.hairstyleId === id);
 }
 
-export function getHairstylesForFamily(familyId: string): Hairstyle[] {
+export function getPublishedHairstylesForFamily(familyId: string): Hairstyle[] {
   const ids = new Set(
     patternGuidance.filter((guidance) => guidance.hairFamilyId === familyId).map((guidance) => guidance.hairstyleId),
   );
-  return hairstyles.filter((hairstyle) => ids.has(hairstyle.id));
+  return publishedHairstyles.filter((hairstyle) => ids.has(hairstyle.id));
 }

@@ -1,5 +1,5 @@
 import { hairFamilies } from "./hair-types";
-import { getHairstylesForFamily, hairstyles, patternGuidance } from "./hairstyles";
+import { getPublishedHairstylesForFamily, patternGuidance, publishedHairstyles } from "./hairstyles";
 
 export const kindLabels = {
   cut: "Cut",
@@ -7,9 +7,9 @@ export const kindLabels = {
   "styling-technique": "Styling technique",
 } as const;
 
-export function stylesForFamily(family: string) {
+export function publishedStylesForFamily(family: string) {
   const familyId = hairFamilies.find((item) => item.family === family)?.id;
-  return familyId ? getHairstylesForFamily(familyId) : [];
+  return familyId ? getPublishedHairstylesForFamily(familyId) : [];
 }
 
 export function guidanceFor(styleId: string, family: string) {
@@ -19,8 +19,8 @@ export function guidanceFor(styleId: string, family: string) {
     : undefined;
 }
 
-export function relatedHairstyles(ids: string[]) {
+export function publishedRelatedHairstyles(ids: string[]) {
   return ids
-    .map((id) => hairstyles.find((style) => style.id === id))
-    .filter((style): style is (typeof hairstyles)[number] => Boolean(style));
+    .map((id) => publishedHairstyles.find((style) => style.id === id))
+    .filter((style): style is (typeof publishedHairstyles)[number] => Boolean(style));
 }

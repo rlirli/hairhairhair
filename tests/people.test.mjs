@@ -61,7 +61,10 @@ test("appearance dates and observations match the phase-one contract", () => {
 test("person page is chronological, local, and contains no generated media", () => {
   const markup = page("/people/will-smith/");
   assert.doesNotMatch(markup, /AI-generated|generated reference/);
-  assert.doesNotMatch(markup, /\.png(?:\?|"|')/);
+  assert.equal(
+    attrs(markup, "src").filter((src) => /\.png(?:\?|$)/.test(src)).length,
+    0,
+  );
   assert.match(markup, /2009-12-10/);
   assert.match(markup, /2011-04-24/);
   assert.match(markup, /2012-05-23/);

@@ -27,7 +27,14 @@ const {
     <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site).href} />
     {image && <meta property="og:image" content={new URL(image, Astro.site).href} />}
     <meta name="twitter:card" content={image === "/og.svg" ? "summary" : "summary_large_image"} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico?v=20260922" sizes="any" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=20260922" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=20260922" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=20260922" />
+    <link rel="manifest" href="/site.webmanifest?v=20260922" />
+    <meta name="theme-color" content="#f4f0e8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#25231f" media="(prefers-color-scheme: dark)" />
+    <meta name="apple-mobile-web-app-title" content="HairHairHair" />
     <script is:inline>
       try {
         const saved = localStorage.getItem("hairhairhair-theme");

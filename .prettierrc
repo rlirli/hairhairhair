@@ -1,0 +1,30 @@
+{
+  "arrowParens": "always",
+  "multilineArraysWrapThreshold": 3,
+  "overrides": [
+    {
+      "files": "*.astro",
+      "options": {
+        "parser": "astro"
+      }
+    }
+  ],
+  "plugins": [
+    "prettier-plugin-astro",
+    "prettier-plugin-multiline-arrays",
+    "prettier-plugin-organize-imports",
+    "prettier-plugin-tailwindcss"
+  ],
+  "printWidth": 120,
+  "semi": true,
+  "singleQuote": false,
+  "tabWidth": 2,
+  "tailwindFunctions": [
+    "tw",
+    "clsx",
+    "cn",
+    "cva"
+  ],
+  "tailwindStylesheet": "./src/styles/global.css",
+  "useTabs": false
+}

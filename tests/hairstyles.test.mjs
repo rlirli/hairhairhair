@@ -163,14 +163,13 @@ test("built HTML internal hrefs, fragments, and local src targets exist", () => 
   }
 });
 
-test("style guides contain two responsive WebP examples, AI labels, and social metadata", () => {
+test("style guides contain two responsive WebP examples and social metadata", () => {
   for (const style of publishedHairstyles) {
     const markup = page(`/hairstyles/${style.slug}/`);
     assert.ok((markup.match(/<img\b/g) ?? []).length >= 3);
-    assert.ok((markup.match(/AI-generated reference/g) ?? []).length >= 3);
+    assert.doesNotMatch(markup, /AI-generated reference/);
     assert.ok((markup.match(/srcset=/g) ?? []).length >= 3);
     assert.ok((markup.match(/\.webp/g) ?? []).length >= 3);
-    assert.match(markup, /Generated references show design details, not a real person or a diagnostic hair type/);
     assert.match(markup, /property="og:image"/);
     for (const relatedId of style.relatedStyleIds) {
       const related = hairstyles.find((item) => item.id === relatedId);
@@ -208,7 +207,7 @@ test("home, hairstyle index, sitemap, canonical URLs, and social image targets a
     assert.doesNotMatch(page("/"), new RegExp(`/hairstyles/${style.slug}/`));
     assert.doesNotMatch(page("/hairstyles/"), new RegExp(`/hairstyles/${style.slug}/`));
   }
-  assert.equal((page("/hairstyles/").match(/AI-generated reference/g) ?? []).length, publishedHairstyles.length);
+  assert.doesNotMatch(page("/hairstyles/"), /AI-generated reference/);
   const sitemap = readFileSync(join(dist, "sitemap-index.xml"), "utf8");
   for (const path of [
     "/hairstyles/",

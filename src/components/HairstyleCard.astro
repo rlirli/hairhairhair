@@ -28,9 +28,6 @@ const media = getMedia(example?.imageId ?? "");
       class="aspect-square w-full rounded-2xl object-cover"
     />
   )}
-  {media?.provenance.kind === "generated" && (
-    <p class="mt-2 text-xs font-bold uppercase tracking-[.12em] text-orange">AI-generated reference</p>
-  )}
   {media?.provenance.kind === "photograph" && (
     <p class="mt-2 text-xs font-bold uppercase tracking-[.12em] text-orange">
       Photographic reference · {media.provenance.creator} · {media.provenance.licenseName}

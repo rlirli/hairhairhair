@@ -1,8 +1,10 @@
 # Hairstyle image prompts
 
+The prompts below are retained verbatim as generation records. Their instruction to show an AI-generated label was superseded when the visual labels were removed; generated provenance remains in `src/data/media.ts`.
+
 ## Flat-top additions — 2026-09-21
 
-Generated with OpenAI's built-in image generation tool after the Will Smith page and flat-top stub were pushed in commit `0b6d201`. No specific model identifier was returned. These fictional adults are not Will Smith, archive photographs, or reconstructions of his appearances. Inspected for a visible flat-top silhouette, complete hair framing, and absence of text or logos. Original generated PNGs are retained and the website labels them as AI-generated references.
+Generated with OpenAI's built-in image generation tool after the Will Smith page and flat-top stub were pushed in commit `0b6d201`. No specific model identifier was returned. These fictional adults are not Will Smith, archive photographs, or reconstructions of his appearances. Inspected for a visible flat-top silhouette, complete hair framing, and absence of text or logos. Original generated PNGs are retained and their provenance is recorded in the media data.
 
 ### flat-top-coily
 
@@ -18,7 +20,7 @@ Use case: photorealistic-natural. Asset: one square original editorial hairstyle
 
 ## Original collection
 
-Generated 2026-09-20 using OpenAI's built-in image generation tool. No specific model identifier was returned. These are fictional AI-generated reference portraits, not real clients or evidence of a person's natural hair subtype. Original PNGs are retained; Astro produces responsive WebP derivatives. Visible captions identify generated imagery.
+Generated 2026-09-20 using OpenAI's built-in image generation tool. No specific model identifier was returned. These are fictional AI-generated reference portraits, not real clients or evidence of a person's natural hair subtype. Original PNGs are retained; Astro produces responsive WebP derivatives, and the media data preserves their generated provenance.
 
 Prompts are art direction, not verified measurements of the output. Editorial captions describe visible features only.
 

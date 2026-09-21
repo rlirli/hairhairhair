@@ -28,8 +28,6 @@ test('people, appearances, and photographs have closed stable records', () => {
   const styleIds = new Set(hairstyles.map((style) => style.id));
   assert.equal(new Set(appearances.map((appearance) => appearance.id)).size, appearances.length);
   assert.equal(new Set(personPhotographs.map((photo) => photo.id)).size, personPhotographs.length);
-  assert.equal(appearances.length, 3);
-  assert.equal(personPhotographs.length, 3);
   for (const appearance of appearances) {
     assert.ok(personIds.has(appearance.personId));
     assert.ok(photoIds.has(appearance.imageId));

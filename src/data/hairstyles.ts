@@ -105,6 +105,34 @@ export const sources: EditorialSource[] = [
     publisher: 'American Academy of Dermatology',
     reviewedAt: '2026-09-20',
   },
+  {
+    id: 'oxford-flat-top',
+    title: 'flat-top',
+    url: 'https://www.oxfordlearnersdictionaries.com/us/definition/english/flat-top',
+    publisher: 'Oxford Learner’s Dictionaries',
+    reviewedAt: '2026-09-21',
+  },
+  {
+    id: 'cambridge-flattop',
+    title: 'flattop',
+    url: 'https://dictionary.cambridge.org/us/dictionary/english/flattop',
+    publisher: 'Cambridge Dictionary',
+    reviewedAt: '2026-09-21',
+  },
+  {
+    id: 'andis-classic-clipper',
+    title: 'Essentials—Classic Clipper Cutting',
+    url: 'https://andis.com/BarberStylistEducation/VideoDetail?EduItemID=1330',
+    publisher: 'Andis Education',
+    reviewedAt: '2026-09-21',
+  },
+  {
+    id: 'wahl-flat-top-guide',
+    title: 'Home Haircutting guide',
+    url: 'https://www.wahlpro.com/amfile/file/download/file/762/product/1818/',
+    publisher: 'Wahl Professional',
+    reviewedAt: '2026-09-21',
+  },
 ];
 
 export const hairstyles: Hairstyle[] = [
@@ -140,7 +168,7 @@ export const hairstyles: Hairstyle[] = [
       'Maintenance depends on how crisp you want the edge and how quickly your perimeter grows, not on a fixed hair-family rule.',
     ],
     sourceIds: ['andis-low-taper', 'wahl-cut-guide'],
-    relatedStyleIds: ['hairstyle-buzz-cut', 'hairstyle-twists'],
+    relatedStyleIds: ['hairstyle-buzz-cut', 'hairstyle-twists', 'hairstyle-flat-top'],
     status: 'published',
   },
   {
@@ -175,7 +203,7 @@ export const hairstyles: Hairstyle[] = [
       'The visible result can differ between dry and damp hair and between straight, wavy, curly, and coily patterns; the cut should be assessed in the state in which it will usually be worn.',
     ],
     sourceIds: ['andis-buzz-cut', 'wahl-cut-guide'],
-    relatedStyleIds: ['hairstyle-taper-fade', 'hairstyle-twists'],
+    relatedStyleIds: ['hairstyle-taper-fade', 'hairstyle-twists', 'hairstyle-flat-top'],
     status: 'published',
   },
   {
@@ -218,10 +246,35 @@ export const hairstyles: Hairstyle[] = [
     slug: 'flat-top',
     name: 'Flat top',
     kind: 'cut',
-    summary: 'A low, squared top is visible in the selected 2011 appearance reference.',
-    status: 'stub',
-    pendingNote: 'Full guide coming next.',
-    observedAppearanceIds: ['appearance-will-smith-2011'],
+    summary: 'A short cut shaped around a visibly flat top plane, with the height and side finish chosen for the wearer.',
+    intro: [
+      'A flat top is defined by its visible plane: the hair is cut short and arranged so the top reads as a flat, squared surface. The plane can sit low and restrained or rise into a more graphic silhouette, while the sides and back can carry a taper or a sharper outline.',
+      'Bring front and side references and name the top height, whether the plane should stay level or follow an intentional slope, and how close the sides and neckline should finish. A single front image cannot establish the back, side profile, or maintenance routine.',
+      'The examples here are visual references, not a permanent hair-type assignment or a guarantee of outcome. Growth direction, hair texture, head shape, proportion, product, and styling effort all affect how the plane reads.',
+    ],
+    variations: [
+      { id: 'flat-top-low', name: 'Low flat top', description: 'Keeps the top plane close to the head for a restrained, compact silhouette like the selected 2011 appearance reference.' },
+      { id: 'flat-top-higher', name: 'Higher top', description: 'Sets the top plane farther above the scalp for a taller, more graphic shape; confirm how much daily direction or product is acceptable.' },
+      { id: 'flat-top-side-finish', name: 'Tapered or outlined sides', description: 'Pairs the plane with a gradual taper, short uniform sides, or a sharper outline around the temples, sideburns, and neckline.' },
+    ],
+    consultation: {
+      intro: 'Name the top height, plane direction, side length, and edge finish separately so the silhouette is clear before cutting.',
+      questions: [
+        'Should the top sit low and compact or rise higher for a more graphic silhouette?',
+        'Should the plane read level, or should it follow an intentional slope or front-to-back direction?',
+        'Do you want a taper, short uniform sides, or a sharper outline at the temples, sideburns, and neckline?',
+        'Where does the hair change direction, and how much brushing or product are you willing to use to keep the top standing?',
+      ],
+      sampleRequest: '“I want a low flat top with a compact, squared plane, short graduated sides, and a natural neckline. Please show me the top height and side profile before taking it shorter, and tell me what daily styling it will need.”',
+    },
+    considerations: [
+      'Growth direction, cowlicks, head shape, and proportion can change where the plane needs to be adjusted; assess the hair in its usual dry, worn state.',
+      'Texture and length affect how easily the top stands and whether the plane reads crisp, soft, stepped, or less level as it grows out. The barber should confirm the visual goal rather than treat any pattern as an exclusion.',
+      'A higher or more sharply outlined shape may require more frequent maintenance and directed styling. Agree on a little extra length first when the desired height or hold is uncertain.',
+    ],
+    sourceIds: ['oxford-flat-top', 'cambridge-flattop', 'andis-classic-clipper', 'wahl-flat-top-guide', 'wahl-cut-guide'],
+    relatedStyleIds: ['hairstyle-buzz-cut', 'hairstyle-taper-fade'],
+    status: 'published',
   },
 ];
 
@@ -238,6 +291,10 @@ export const patternGuidance: PatternGuidance[] = [
   { hairstyleId: 'hairstyle-twists', hairFamilyId: 'hair-family-2', note: 'Wave can add movement to twists or loosen a temporary set; ask whether the goal is visible wave, stretched length, or a tighter wrapped shape.' },
   { hairstyleId: 'hairstyle-twists', hairFamilyId: 'hair-family-3', note: 'Curl can make twists look springier or shorter after release; agree on part size and whether the finished twists should be elongated or compact.' },
   { hairstyleId: 'hairstyle-twists', hairFamilyId: 'hair-family-4', note: 'Coily hair often gives twists strong shape and shrinkage; discuss stretch, moisture, parting, and comfortable tension rather than assuming one required method.' },
+  { hairstyleId: 'hairstyle-flat-top', hairFamilyId: 'hair-family-1', note: 'A flat plane can read clean and compact, but straighter hair may fall rather than stand; assess growth direction, length, and the styling or hold needed for the intended height.' },
+  { hairstyleId: 'hairstyle-flat-top', hairFamilyId: 'hair-family-2', note: 'Wave may soften the plane or add movement as it grows; agree on the intended height, direction, and amount of daily styling.' },
+  { hairstyleId: 'hairstyle-flat-top', hairFamilyId: 'hair-family-3', note: 'Curl can change the apparent height and crispness of the plane; use a reference and ask how much length and hold will keep the desired outline.' },
+  { hairstyleId: 'hairstyle-flat-top', hairFamilyId: 'hair-family-4', note: 'Coily texture can support a strong silhouette while still changing with shrinkage and growth direction; confirm the plane and side finish without treating the family as a guarantee.' },
 ];
 
 export const styleExamples: StyleExample[] = [
@@ -294,6 +351,24 @@ export const styleExamples: StyleExample[] = [
     caption: 'Notice the jaw-length silhouette, visible separation, and movement through the sections.',
     patternDescription: 'Individual twists hang around the jaw with a clear part pattern and a rounded rope-like shape.',
     lengthDescription: 'Discuss the section size and jaw-length finish you want, including how much shrinkage or movement to leave visible.',
+  },
+  {
+    id: 'style-example-flat-top-coily',
+    hairstyleIds: ['hairstyle-flat-top'],
+    imageId: 'flat-top-coily',
+    title: 'Low flat top with graduated sides',
+    caption: 'Notice the low horizontal plane and the compact transition into the shorter sides.',
+    patternDescription: 'The top reads as a restrained flat surface while the visible texture softens the edges of the silhouette.',
+    lengthDescription: 'A low, close shape with short graduated sides; confirm the height and finish with the barber.',
+  },
+  {
+    id: 'style-example-flat-top-straight',
+    hairstyleIds: ['hairstyle-flat-top'],
+    imageId: 'flat-top-straight',
+    title: 'Compact upright flat top',
+    caption: 'Notice the squared corners, compact rise, and short graduated sides.',
+    patternDescription: 'The top forms a small upright plane with a sharper graphic outline than the low example.',
+    lengthDescription: 'Short sides support a compact upright shape; ask about the hold and maintenance needed to keep the plane visible.',
   },
 ];
 

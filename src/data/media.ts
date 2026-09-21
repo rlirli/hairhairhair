@@ -4,6 +4,8 @@ import buzzShort from '../assets/hairstyles/buzz-short.png';
 import buzzTextured from '../assets/hairstyles/buzz-textured.png';
 import twistsShort from '../assets/hairstyles/twists-short.png';
 import twistsLong from '../assets/hairstyles/twists-long.png';
+import flatTopCoily from '../assets/hairstyles/flat-top-coily.png';
+import flatTopStraight from '../assets/hairstyles/flat-top-straight.png';
 
 export type MediaProvenance =
   | { kind: 'generated'; provider: 'OpenAI'; promptKey: string }
@@ -23,6 +25,8 @@ export const hairstyleMedia: HairstyleMedia[] = [
   { id: 'buzz-textured', src: buzzTextured, alt: 'Editorial reference showing a longer textured buzz silhouette.', provenance: { kind: 'generated', provider: 'OpenAI', promptKey: 'buzz-textured' } },
   { id: 'twists-short', src: twistsShort, alt: 'Editorial reference showing short individual two-strand twists.', provenance: { kind: 'generated', provider: 'OpenAI', promptKey: 'twists-short' } },
   { id: 'twists-long', src: twistsLong, alt: 'Editorial reference showing longer individual two-strand twists.', provenance: { kind: 'generated', provider: 'OpenAI', promptKey: 'twists-long' } },
+  { id: 'flat-top-coily', src: flatTopCoily, alt: 'Generated editorial reference showing a low flat plane above short graduated sides on a fictional adult with coily texture.', provenance: { kind: 'generated', provider: 'OpenAI', promptKey: 'flat-top-coily' } },
+  { id: 'flat-top-straight', src: flatTopStraight, alt: 'Generated editorial reference showing an upright compact flat top with squared corners above short graduated sides on a fictional adult.', provenance: { kind: 'generated', provider: 'OpenAI', promptKey: 'flat-top-straight' } },
 ];
 
 export function getMedia(id: string) { return hairstyleMedia.find((media) => media.id === id); }

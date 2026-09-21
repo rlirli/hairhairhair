@@ -31,7 +31,7 @@ export interface HairFamily {
   slug: string;
   name: string;
   description: string;
-  family: HairType['family'];
+  family: HairType["family"];
 }
 
 export const classificationSystems: HairClassificationSystem[] = [
@@ -201,15 +201,44 @@ export const hairTypes: HairType[] = [
     description: "Has very tight bends or coils whose repeated pattern may be subtle without close inspection.",
     sortOrder: 12,
     characteristics: ["Very tight bends", "Pattern can look less defined", "Compact coil or zig-zag path"],
-    comparison: "The least visibly uniform coily pattern in this chart; 4A and 4B show clearer loop or angle repetition.",
+    comparison:
+      "The least visibly uniform coily pattern in this chart; 4A and 4B show clearer loop or angle repetition.",
   },
 ];
 
 export const hairFamilies: HairFamily[] = [
-  { id: 'hair-family-1', code: '1', slug: '1', name: 'Straight', family: 'straight', description: 'Patterns that fall mostly linear, from almost no visible bend to a slight bend through the lengths.' },
-  { id: 'hair-family-2', code: '2', slug: '2', name: 'Wavy', family: 'wavy', description: 'Patterns shaped by visible S-waves, from soft open movement to pronounced bends near the roots.' },
-  { id: 'hair-family-3', code: '3', slug: '3', name: 'Curly', family: 'curly', description: 'Patterns that form repeated rounded loops or spirals, with curl definition that varies by subtype.' },
-  { id: 'hair-family-4', code: '4', slug: '4', name: 'Coily', family: 'coily', description: 'Compact patterns of coils, curves, or angles whose scale and visibility shift across subtypes.' },
+  {
+    id: "hair-family-1",
+    code: "1",
+    slug: "1",
+    name: "Straight",
+    family: "straight",
+    description: "Patterns that fall mostly linear, from almost no visible bend to a slight bend through the lengths.",
+  },
+  {
+    id: "hair-family-2",
+    code: "2",
+    slug: "2",
+    name: "Wavy",
+    family: "wavy",
+    description: "Patterns shaped by visible S-waves, from soft open movement to pronounced bends near the roots.",
+  },
+  {
+    id: "hair-family-3",
+    code: "3",
+    slug: "3",
+    name: "Curly",
+    family: "curly",
+    description: "Patterns that form repeated rounded loops or spirals, with curl definition that varies by subtype.",
+  },
+  {
+    id: "hair-family-4",
+    code: "4",
+    slug: "4",
+    name: "Coily",
+    family: "coily",
+    description: "Compact patterns of coils, curves, or angles whose scale and visibility shift across subtypes.",
+  },
 ];
 
 export function getHairType(slug: string): HairType | undefined {

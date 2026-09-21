@@ -1,26 +1,50 @@
 <header class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-5 py-6 sm:flex-nowrap sm:px-8">
-  <a href="/" class="focus-ring text-lg font-black tracking-[-.06em]">hair<span class="text-orange">hair</span>hair<span class="text-orange">.</span>hair</a>
-  <nav aria-label="Primary navigation" class="order-3 flex w-full items-center justify-end gap-2 text-xs font-bold uppercase tracking-[.1em] sm:order-none sm:w-auto sm:gap-8 sm:text-sm sm:tracking-[.12em]">
-    <a class="focus-ring hover:text-orange" href="/hair-types/">Hair types</a>
-    <a class="focus-ring hover:text-orange" href="/hairstyles/">Hairstyles</a>
-    <a class="focus-ring hover:text-orange" href="/people/">People</a>
-    <a class="focus-ring hidden hover:text-orange sm:inline" href="/#about">About</a>
-    <button id="theme-toggle" type="button" class="focus-ring hover-surface inline-flex shrink-0 items-center gap-1 rounded-full border-2 border-ink px-3 py-2 text-xs font-black uppercase tracking-[.08em]" aria-label="Toggle dark mode" aria-pressed="false"><span aria-hidden="true">◐</span><span class="hidden sm:inline">Theme</span></button>
+  <a href="/" class="focus-ring text-lg font-black tracking-[-.06em]">
+    hair<span class="text-orange">hair</span>hair<span class="text-orange">.</span>hair
+  </a>
+  <nav
+    aria-label="Primary navigation"
+    class="order-3 flex w-full items-center justify-end gap-2 text-xs font-bold uppercase tracking-[.1em] sm:order-none sm:w-auto sm:gap-8 sm:text-sm sm:tracking-[.12em]"
+  >
+    <a class="focus-ring hover:text-orange" href="/hair-types/">
+      Hair types
+    </a>
+    <a class="focus-ring hover:text-orange" href="/hairstyles/">
+      Hairstyles
+    </a>
+    <a class="focus-ring hover:text-orange" href="/people/">
+      People
+    </a>
+    <a class="focus-ring hidden hover:text-orange sm:inline" href="/#about">
+      About
+    </a>
+    <button
+      id="theme-toggle"
+      type="button"
+      class="focus-ring hover-surface inline-flex shrink-0 items-center gap-1 rounded-full border-2 border-ink px-3 py-2 text-xs font-black uppercase tracking-[.08em]"
+      aria-label="Toggle dark mode"
+      aria-pressed="false"
+    >
+      <span aria-hidden="true">◐</span>
+      <span class="hidden sm:inline">Theme</span>
+    </button>
   </nav>
 </header>
 <script>
-  const button = document.querySelector<HTMLButtonElement>('#theme-toggle');
+  const button = document.querySelector<HTMLButtonElement>("#theme-toggle");
   const root = document.documentElement;
   const updateThemeButton = () => {
-    const dark = root.classList.contains('dark');
-    button?.setAttribute('aria-pressed', String(dark));
-    button?.setAttribute('aria-label', dark ? 'Use light mode' : 'Use dark mode');
+    const dark = root.classList.contains("dark");
+    button?.setAttribute("aria-pressed", String(dark));
+    button?.setAttribute("aria-label", dark ? "Use light mode" : "Use dark mode");
   };
   updateThemeButton();
-  button?.addEventListener('click', () => {
-    const dark = !root.classList.contains('dark');
-    root.classList.toggle('dark', dark);
-    try { localStorage.setItem('hairhairhair-theme', dark ? 'dark' : 'light'); } catch {}
+  button?.addEventListener("click", () => {
+    const dark = !root.classList.contains("dark");
+    root.classList.toggle("dark", dark);
+    try {
+      localStorage.setItem("hairhairhair-theme", dark ? "dark" : "light");
+    } catch {}
     updateThemeButton();
   });
 </script>

@@ -1,8 +1,8 @@
-import { defineConfig } from 'astro/config';
-import tailwindcss from '@tailwindcss/vite';
+import tailwindcss from "@tailwindcss/vite";
+import { defineConfig } from "astro/config";
 
 export default defineConfig({
-  site: 'https://hairhairhair.hair',
-  trailingSlash: 'always',
+  site: "https://hairhairhair.hair",
+  trailingSlash: "always",
   vite: { plugins: [tailwindcss()] },
 });

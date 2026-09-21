@@ -1,18 +1,50 @@
 ---
-import { Image } from 'astro:assets';
-import { getMedia } from '../data/media';
-interface Props { mediaId: string; title?: string; caption?: string; patternDescription?: string; lengthDescription?: string; eager?: boolean }
+import { Image } from "astro:assets";
+import { getMedia } from "../data/media";
+interface Props {
+  mediaId: string;
+  title?: string;
+  caption?: string;
+  patternDescription?: string;
+  lengthDescription?: string;
+  eager?: boolean;
+}
 const { mediaId, title, caption, patternDescription, lengthDescription, eager = false } = Astro.props;
 const media = getMedia(mediaId);
 ---
-{media && <figure>
-  <Image src={media.src} widths={[400, 800, 1120]} sizes="(min-width: 1024px) 50vw, 100vw" format="webp" alt={media.alt} loading={eager ? 'eager' : 'lazy'} class="w-full rounded-[2rem] object-cover" />
-  <figcaption class="mt-3 text-sm leading-6">
-    <span class="font-bold">{media.provenance.kind === 'generated' ? 'AI-generated reference' : 'Photographic reference'}</span>
-    {media.provenance.kind === 'photograph' && <> · {media.provenance.creator}; <a class="underline" href={media.provenance.sourceUrl} target="_blank" rel="noreferrer">{media.provenance.licenseName}</a> · <a class="underline" href={media.provenance.licenseUrl} target="_blank" rel="noreferrer">license</a></>}
-    {title && <> · {title}</>}
-    {caption && <> · {caption}</>}
-    {patternDescription && <span class="mt-1 block">{patternDescription}</span>}
-    {lengthDescription && <span class="mt-1 block">{lengthDescription}</span>}
-  </figcaption>
-</figure>}
+
+{media && (
+  <figure>
+    <Image
+      src={media.src}
+      widths={[400, 800, 1120]}
+      sizes="(min-width: 1024px) 50vw, 100vw"
+      format="webp"
+      alt={media.alt}
+      loading={eager ? "eager" : "lazy"}
+      class="w-full rounded-[2rem] object-cover"
+    />
+    <figcaption class="mt-3 text-sm leading-6">
+      <span class="font-bold">
+        {media.provenance.kind === "generated" ? "AI-generated reference" : "Photographic reference"}
+      </span>
+      {media.provenance.kind === "photograph" && (
+        <>
+          {" "}
+          · {media.provenance.creator};{" "}
+          <a class="underline" href={media.provenance.sourceUrl} target="_blank" rel="noreferrer">
+            {media.provenance.licenseName}
+          </a>{" "}
+          ·{" "}
+          <a class="underline" href={media.provenance.licenseUrl} target="_blank" rel="noreferrer">
+            license
+          </a>
+        </>
+      )}
+      {title && <> · {title}</>}
+      {caption && <> · {caption}</>}
+      {patternDescription && <span class="mt-1 block">{patternDescription}</span>}
+      {lengthDescription && <span class="mt-1 block">{lengthDescription}</span>}
+    </figcaption>
+  </figure>
+)}

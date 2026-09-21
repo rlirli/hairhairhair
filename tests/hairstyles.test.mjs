@@ -262,6 +262,15 @@ test("home, hairstyle index, sitemap, canonical URLs, and social image targets a
   }
 });
 
+test("home introduces four numbered hair types without family labels", () => {
+  const markup = page("/");
+  assert.match(markup, /Natural hair/i);
+  assert.match(markup, /The four hair types/);
+  assert.match(markup, /lettered sub-types/);
+  assert.doesNotMatch(markup, /The four families|Family [1-4]/);
+  for (const hairType of hairFamilies) assert.match(markup, new RegExp(`Type ${hairType.code}:`));
+});
+
 test("flat-top is a complete guide with two examples and reciprocal links", () => {
   const flatTop = hairstyles.find((style) => style.slug === "flat-top");
   assert.ok(flatTop);

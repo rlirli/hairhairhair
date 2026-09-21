@@ -36,8 +36,8 @@ import { people } from "../data/people";
   <section class="mx-auto max-w-7xl px-5 py-16 sm:px-8" id="about">
     <div class="mb-8 flex items-end justify-between gap-4">
       <div>
-        <p class="text-xs font-black uppercase tracking-[.2em] text-orange">Start here</p>
-        <h2 class="mt-2 font-display text-5xl tracking-[-.06em]">The four families</h2>
+        <p class="text-xs font-black uppercase tracking-[.2em] text-orange">Natural hair</p>
+        <h2 class="mt-2 font-display text-5xl tracking-[-.06em]">The four hair types</h2>
       </div>
       <a
         href="/hair-types/"
@@ -46,15 +46,27 @@ import { people } from "../data/people";
         See all types →
       </a>
     </div>
+    <p class="mb-8 max-w-2xl text-lg leading-7">
+      This Walker-inspired chart classifies visible natural hair patterns into four numbered types—straight, wavy,
+      curly, and coily—with lettered sub-types for more specific pattern descriptions.
+    </p>
     <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {hairFamilies.map((family) => (
         <a
           href={`/hair-types/${family.slug}/`}
           class="hover-surface focus-ring group rounded-3xl border-2 border-ink bg-white/30 p-5 transition hover:-translate-y-1"
         >
-          <p class="text-xs font-black uppercase tracking-[.16em] text-orange">Family {family.code}</p>
-          <h3 class="mt-14 font-display text-3xl tracking-[-.05em] group-hover:underline">Type {family.code}</h3>
-          <p class="mt-2 font-display text-xl">{family.name}</p>
+          <h3 class="font-display text-3xl tracking-[-.05em] group-hover:underline">
+            <strong>Type {family.code}:</strong> {family.name}
+          </h3>
+          <div class="mt-5">
+            <Pattern
+              family={family.family}
+              subtype="B"
+              label={`Simplified Type ${family.code} ${family.name.toLowerCase()} pattern illustration — not a diagnostic or photograph`}
+              caption={false}
+            />
+          </div>
           <p class="mt-2 text-sm leading-5">{family.description}</p>
         </a>
       ))}

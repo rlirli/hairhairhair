@@ -3,8 +3,9 @@ interface Props {
   family?: "straight" | "wavy" | "curly" | "coily";
   subtype?: "A" | "B" | "C";
   label?: string;
+  caption?: string | false;
 }
-const { family = "wavy", subtype = "B", label } = Astro.props;
+const { family = "wavy", subtype = "B", label, caption } = Astro.props;
 const level = subtype === "A" ? 1 : subtype === "C" ? 3 : 2;
 const accessibleLabel =
   label ?? `Simplified ${family} pattern illustration, subtype ${subtype} — not a diagnostic or photograph`;
@@ -83,7 +84,9 @@ const accessibleLabel =
         />
       ))}
   </svg>
-  <span class="mt-2 block text-[10px] font-bold uppercase tracking-[.1em]">
-    Pattern · {family} {subtype}
-  </span>
+  {caption !== false && (
+    <span class="mt-2 block text-[10px] font-bold uppercase tracking-[.1em]">
+      {caption ?? `Pattern · ${family} ${subtype}`}
+    </span>
+  )}
 </div>

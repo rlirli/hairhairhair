@@ -1,4 +1,4 @@
-import { hairFamilies } from "./hair-types";
+import { hairFamilies, hairTypes } from "./hair-types";
 import { getPublishedHairstylesForFamily, patternGuidance, publishedHairstyles } from "./hairstyles";
 
 export const kindLabels = {
@@ -10,6 +10,11 @@ export const kindLabels = {
 export function publishedStylesForFamily(family: string) {
   const familyId = hairFamilies.find((item) => item.family === family)?.id;
   return familyId ? getPublishedHairstylesForFamily(familyId) : [];
+}
+
+export function publishedStylesForHairType(hairTypeId: string) {
+  const hairType = hairTypes.find((item) => item.id === hairTypeId);
+  return hairType ? publishedStylesForFamily(hairType.family) : [];
 }
 
 export function guidanceFor(styleId: string, family: string) {

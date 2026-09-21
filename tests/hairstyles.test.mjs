@@ -198,6 +198,18 @@ test("family and subtype pages expose every hairstyle guide and expected subtype
   }
 });
 
+test("hair-type pages use a compact, five-column hairstyle overview with hover details", () => {
+  for (const type of hairTypes) {
+    const markup = page(`/hair-types/${type.slug}/`);
+    assert.match(markup, /Hairstyles for this type/i);
+    assert.match(markup, /lg:grid-cols-5/);
+    assert.match(markup, /grid-flow-col/);
+    assert.match(markup, /overflow-x-auto/);
+    assert.match(markup, /data-slot="hover-card-trigger"/);
+    assert.doesNotMatch(markup, /related-hairstyles/);
+  }
+});
+
 test("home, hairstyle index, sitemap, canonical URLs, and social image targets are complete", () => {
   for (const style of publishedHairstyles) {
     assert.match(page("/"), new RegExp(`/hairstyles/${style.slug}/`));

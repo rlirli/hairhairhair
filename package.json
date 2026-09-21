@@ -14,12 +14,20 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",
+    "@astrojs/react": "^6.0.6",
+    "@radix-ui/react-hover-card": "^1.1.23",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.3.3",
+    "clsx": "^2.1.1",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "tailwind-merge": "^3.7.0",
     "tailwindcss": "^4.3.3",
     "typescript": "^5.9.2"
   },
   "devDependencies": {
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "prettier": "^3.9.8",
     "prettier-plugin-astro": "^1.0.1",
     "prettier-plugin-multiline-arrays": "^4.1.11",

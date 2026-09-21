@@ -1,0 +1,38 @@
+---
+import { getImage } from "astro:assets";
+import type { Hairstyle } from "../data/hairstyles";
+import { styleExamples } from "../data/hairstyles";
+import { kindLabels } from "../data/hairstyle-relations";
+import { getMedia } from "../data/media";
+import RelatedHairstyleGridIsland from "./RelatedHairstyleGrid";
+
+interface Props {
+  styles: Hairstyle[];
+  size?: "small" | "medium";
+  className: string;
+}
+
+const { styles, size = "small", className } = Astro.props;
+const imageSizes = size === "small" ? "(min-width: 1024px) 20vw, 40vw" : "(min-width: 1024px) 25vw, 50vw";
+const widths = size === "small" ? [240, 480] : [360, 720];
+const items = await Promise.all(
+  styles.map(async (style) => {
+    const example = styleExamples.find((item) => item.hairstyleIds.includes(style.id));
+    const media = getMedia(example?.imageId ?? "");
+    if (!media) return undefined;
+    const image = await getImage({ src: media.src, widths, sizes: imageSizes, format: "webp" });
+    return {
+      href: `/hairstyles/${style.slug}/`,
+      imageSrc: image.src,
+      imageSrcSet: image.srcSet.attribute,
+      imageAlt: media.alt,
+      imageSizes,
+      kindLabel: kindLabels[style.kind],
+      name: style.name,
+      summary: style.summary,
+    };
+  }),
+);
+---
+
+<RelatedHairstyleGridIsland client:load items={items.filter((item) => item !== undefined)} {size} {className} />

@@ -98,7 +98,7 @@ test("appearance anchors and hairstyle backlinks are one-to-one", () => {
 
 test("person photographs have public-domain provenance and locally built media", () => {
   const mediaSource = readSource("src/data/people-media.ts");
-  assert.match(mediaSource, /kind: 'public-domain'/);
+  assert.match(mediaSource, /kind: ["']public-domain["']/);
   assert.match(mediaSource, /type PublicDomainMedia/);
   const appearancePhotoIds = new Set(appearances.map((appearance) => appearance.imageId));
   assert.deepEqual(appearancePhotoIds, new Set(personPhotographs.map((photo) => photo.id)));

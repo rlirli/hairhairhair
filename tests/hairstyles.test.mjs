@@ -108,9 +108,9 @@ test("media declarations cover every approved generated asset", () => {
   const ids = expectedMediaIds;
   assert.deepEqual([...new Set(ids)].sort(), ids.slice().sort());
   for (const id of ids) {
-    assert.match(mediaSource, new RegExp(`id: '${id}'`));
+    assert.match(mediaSource, new RegExp(`id: ["']${id}["']`));
     assert.ok(existsSync(join(root, `src/assets/hairstyles/${id}.png`)));
-    assert.match(mediaSource, new RegExp(`id: '${id}'[^]*?kind: 'generated'`));
+    assert.match(mediaSource, new RegExp(`id: ["']${id}["'][^]*?kind: ["']generated["']`));
   }
 });
 

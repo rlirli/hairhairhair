@@ -31,5 +31,12 @@
     "*.css": "tailwindcss"
   },
   "prettier.configPath": "./.prettierrc",
-  "prettier.documentSelectors": ["**/*.astro"]
+  "prettier.documentSelectors": ["**/*.astro"],
+  "tailwindCSS.files.exclude": [
+    "**/.git/**",
+    "**/node_modules/**",
+    "**/.hg/**",
+    "**/.svn/**",
+    "**/dist/**"
+  ]
 }

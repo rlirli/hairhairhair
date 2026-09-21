@@ -6,6 +6,7 @@ import { getImage } from 'astro:assets';
 import { hairFamilies, hairTypes } from '../../data/hair-types';
 import { hairstyles, sources, getExamplesForHairstyle } from '../../data/hairstyles';
 import { guidanceFor, relatedHairstyles } from '../../data/hairstyle-relations';
+import { appearancesForStyle, personForAppearance } from '../../data/people-relations';
 import { kindLabels } from '../../data/hairstyle-relations';
 import { getMedia } from '../../data/media';
 
@@ -13,14 +14,29 @@ export function getStaticPaths() { return hairstyles.map((style) => ({ params: {
 const { style } = Astro.props;
 const examples = getExamplesForHairstyle(style.id);
 const heroMedia = examples[0]?.imageId;
-const variations = style.variations;
-const related = relatedHairstyles(style.relatedStyleIds);
+const variations = style.status === 'published' ? style.variations : [];
+const related = style.status === 'published' ? relatedHairstyles(style.relatedStyleIds) : [];
 const familyLinks = hairFamilies.map((family) => ({ family, guidance: guidanceFor(style.id, family.family) })).filter((item): item is { family: typeof item.family; guidance: NonNullable<typeof item.guidance> } => Boolean(item.guidance));
-const sourceIds = style.sourceIds ?? [];
+const sourceIds = style.status === 'published' ? style.sourceIds : [];
 const referencedSources = sources.filter((source) => sourceIds.includes(source.id));
+const documentedAppearances = appearancesForStyle(style.id).map((appearance) => ({ appearance, person: personForAppearance(appearance.id) })).filter((item) => item.person);
+const stubAppearance = style.status === 'stub' ? appearancesForStyle(style.id)[0] : undefined;
+const stubPerson = stubAppearance ? personForAppearance(stubAppearance.id) : undefined;
 const kindLabel = kindLabels[style.kind];
 const ogImage = heroMedia ? (await getImage({ src: getMedia(heroMedia)!.src, width: 1120, format: 'jpg' })).src : undefined;
 ---
+{style.status === 'stub' ? (
+  <Layout title={`${style.name} — guide coming next`} description={style.summary}>
+    <article class="mx-auto max-w-4xl px-5 pb-20 pt-12 sm:px-8">
+      <nav aria-label="Breadcrumb" class="text-sm font-bold uppercase tracking-[.12em]"><a class="focus-ring text-orange" href="/">Home</a><span class="mx-2" aria-hidden="true">/</span><a class="focus-ring text-orange" href="/hairstyles/">Hairstyles</a><span class="mx-2" aria-hidden="true">/</span><span>{style.name}</span></nav>
+      <p class="mt-16 text-xs font-black uppercase tracking-[.18em] text-orange">Guide stub · {kindLabel}</p>
+      <h1 class="mt-5 font-display text-7xl leading-[.84] tracking-[-.08em] sm:text-9xl">{style.name}</h1>
+      <p class="mt-8 max-w-2xl text-xl leading-8">{style.summary}</p>
+      <p class="mt-8 rounded-3xl border-2 border-ink bg-butter p-6 font-display text-3xl text-[#181715]">{style.pendingNote}</p>
+      {stubAppearance && stubPerson && <a href={`/people/${stubPerson.slug}/#${stubAppearance.id}`} class="focus-ring mt-10 inline-block rounded-full border-2 border-ink px-6 py-3 text-sm font-black uppercase tracking-[.1em] hover-surface">See the observed appearance ↗</a>}
+    </article>
+  </Layout>
+) : (
 <Layout title={`${style.name} guide — hairhairhair.hair`} description={style.summary} image={ogImage}>
   <article class="mx-auto max-w-7xl px-5 pb-20 pt-12 sm:px-8">
     <nav aria-label="Breadcrumb" class="text-sm font-bold uppercase tracking-[.12em]"><a class="focus-ring text-orange" href="/">Home</a><span class="mx-2" aria-hidden="true">/</span><a class="focus-ring text-orange" href="/hairstyles/">Hairstyles</a><span class="mx-2" aria-hidden="true">/</span><span>{style.name}</span></nav>
@@ -29,6 +45,8 @@ const ogImage = heroMedia ? (await getImage({ src: getMedia(heroMedia)!.src, wid
     <section class="mt-16 grid gap-10 border-t-2 border-ink pt-10 lg:grid-cols-[1fr_1fr]"><div><p class="text-xs font-black uppercase tracking-[.18em] text-orange">Variations</p><h2 class="mt-2 font-display text-4xl tracking-[-.06em]">Choose the details</h2><div class="mt-6 space-y-5">{variations.map((variation) => <div class="border-b border-ink/30 pb-4"><h3 class="font-display text-2xl">{variation.name}</h3><p class="mt-1 text-base leading-6">{variation.description}</p></div>)}</div></div><div class="inverse-panel rounded-[2rem] p-7"><p class="inverse-label text-xs font-black uppercase tracking-[.16em]">{style.consultation.intro}</p><ul class="mt-5 space-y-3 text-lg leading-8">{style.consultation.questions.map((question: string) => <li class="flex gap-3"><span aria-hidden="true">•</span><span>{question}</span></li>)}</ul><p class="mt-6 border-t border-current/30 pt-5 text-base leading-7">{style.consultation.sampleRequest}</p></div></section>
     <section class="mt-16 grid gap-10 border-t-2 border-ink pt-10 lg:grid-cols-[1fr_1fr]"><div><p class="text-xs font-black uppercase tracking-[.18em] text-orange">What changes the result</p><h2 class="mt-2 font-display text-4xl tracking-[-.06em]">Bring these variables</h2><ul class="mt-6 space-y-3">{style.considerations.map((item: string) => <li class="flex gap-3 text-base leading-6"><span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-orange"></span>{item}</li>)}</ul></div><div><p class="text-xs font-black uppercase tracking-[.18em] text-orange">Pattern guidance</p><h2 class="mt-2 font-display text-4xl tracking-[-.06em]">Explore by family</h2><div class="mt-6 space-y-4">{familyLinks.map(({ family, guidance }) => <div class="rounded-2xl border-2 border-ink p-4"><a class="focus-ring font-display text-2xl hover:text-orange" href={`/hair-types/${family.slug}/`}>Type {family.code} · {family.name}</a><p class="mt-2 text-sm leading-6">{guidance.note}</p><div class="mt-3 flex flex-wrap gap-2">{hairTypes.filter((type) => type.family === family.family).map((type) => <a class="focus-ring text-xs font-bold uppercase tracking-[.1em] text-orange underline" href={`/hair-types/${type.slug}/`}>{type.code}</a>)}</div></div>)}</div></div></section>
     {related.length > 0 && <section class="mt-16 border-t-2 border-ink pt-10"><p class="text-xs font-black uppercase tracking-[.18em] text-orange">Related guides</p><div class="mt-5 grid gap-4 md:grid-cols-3">{related.map((item) => <HairstyleCard style={item} compact />)}</div></section>}
+    {documentedAppearances.length > 0 && <section class="mt-16 border-t-2 border-ink pt-8"><p class="text-xs font-black uppercase tracking-[.18em] text-orange">Dated person records</p><p class="mt-3 max-w-2xl text-sm leading-6">These links show a documented appearance where this style was observed. They are visual records, not universal definitions.</p><div class="mt-4 space-y-2">{documentedAppearances.map(({ appearance, person }) => <a class="focus-ring block font-display text-2xl text-orange underline decoration-orange decoration-2 underline-offset-4" href={`/people/${person!.slug}/#${appearance.id}`}>{person!.name} · {appearance.taken.value} ↗</a>)}</div></section>}
     <section class="mt-16 border-t-2 border-ink pt-8"><p class="text-xs font-black uppercase tracking-[.18em] text-orange">Sources reviewed</p><div class="mt-4 space-y-2 text-sm leading-6">{referencedSources.map((source) => <p><a class="focus-ring underline decoration-orange decoration-2 underline-offset-4" href={source.url} target="_blank" rel="noreferrer">{source.title}</a> · {source.publisher} · reviewed {source.reviewedAt}</p>)}</div></section>
   </article>
 </Layout>
+)}

@@ -27,3 +27,18 @@ A visual asset used to illustrate a style example, with its origin and attributi
 **Pattern guidance**:
 An editorial note about how a hairstyle may be approached within a hair family. It supports a conversation with a practitioner rather than declaring eligibility or promising a result.
 _Avoid_: Compatibility score, works for everyone
+
+**Person**:
+A real individual whose documented hairstyles can be explored. A person is not assigned a permanent hair type merely from styled photographs.
+
+**Appearance**:
+A dated photographic record of a person at a particular event or moment. Its capture date is distinct from when the image was published or uploaded.
+
+**Hairstyle observation**:
+An editorial description of the hairstyle visible in an appearance. It can connect an appearance to several style concepts without claiming the person's stylist used those names.
+
+**Public-domain photograph**:
+A photograph with a recorded basis for public-domain copyright status in the stated jurisdiction. This status does not imply endorsement or erase personality rights.
+
+**Guide stub**:
+A named hairstyle entry whose full explanatory guide has not yet been published. It allows an observed look to be linked without presenting unfinished guidance as complete.

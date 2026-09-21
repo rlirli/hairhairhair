@@ -1,0 +1,117 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { existsSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
+
+import { people, appearances, personPhotographs } from '../src/data/people.ts';
+import { hairstyles } from '../src/data/hairstyles.ts';
+
+const root = new URL('../', import.meta.url).pathname;
+const dist = join(root, 'dist');
+const routeFile = (pathname) => {
+  const route = pathname.split('#')[0].split('?')[0].replace(/^\//, '').replace(/\/$/, '');
+  return route ? join(dist, route, 'index.html') : join(dist, 'index.html');
+};
+const page = (pathname) => readFileSync(routeFile(pathname), 'utf8');
+const readSource = (pathname) => readFileSync(join(root, pathname), 'utf8');
+const attrs = (markup, attribute) => [...markup.matchAll(new RegExp(`${attribute}="([^"]+)"`, 'g'))].map((match) => match[1]);
+const localUrl = (value) => value.startsWith('/') && !value.startsWith('//');
+
+test('people, appearances, and photographs have closed stable records', () => {
+  assert.equal(new Set(people.map((person) => person.id)).size, people.length);
+  assert.equal(new Set(people.map((person) => person.slug)).size, people.length);
+  assert.equal(people.length, 1);
+  assert.equal(people[0].id, 'person-will-smith');
+  assert.equal(people[0].slug, 'will-smith');
+  const personIds = new Set(people.map((person) => person.id));
+  const photoIds = new Set(personPhotographs.map((photo) => photo.id));
+  const styleIds = new Set(hairstyles.map((style) => style.id));
+  assert.equal(new Set(appearances.map((appearance) => appearance.id)).size, appearances.length);
+  assert.equal(new Set(personPhotographs.map((photo) => photo.id)).size, personPhotographs.length);
+  assert.equal(appearances.length, 3);
+  assert.equal(personPhotographs.length, 3);
+  for (const appearance of appearances) {
+    assert.ok(personIds.has(appearance.personId));
+    assert.ok(photoIds.has(appearance.imageId));
+    assert.equal(appearance.taken.precision, 'day');
+    assert.ok(appearance.taken.sourceUrl);
+    for (const observation of appearance.observations) assert.ok(styleIds.has(observation.hairstyleId));
+  }
+  for (const photo of personPhotographs) {
+    assert.ok(photo.fileName.endsWith('.jpg'));
+    assert.ok(photo.creator && photo.sourceUrl && photo.originalUrl && photo.rightsEvidenceUrl && photo.rightsBasis && photo.identifier);
+    assert.equal(photo.jurisdiction, 'United States');
+  }
+});
+
+test('appearance dates and observations match the phase-one contract', () => {
+  const byDate = new Map(appearances.map((appearance) => [appearance.taken.value, appearance]));
+  assert.deepEqual([...byDate.keys()].sort(), ['2009-12-10', '2011-04-24', '2012-05-23']);
+  assert.equal(byDate.get('2009-12-10').observations[0].hairstyleId, 'hairstyle-buzz-cut');
+  assert.equal(byDate.get('2011-04-24').observations[0].hairstyleId, 'hairstyle-flat-top');
+  assert.equal(byDate.get('2012-05-23').observations[0].hairstyleId, 'hairstyle-buzz-cut');
+});
+
+test('person page is chronological, local, and contains no generated media', () => {
+  const markup = page('/people/will-smith/');
+  assert.doesNotMatch(markup, /AI-generated|generated reference/);
+  assert.doesNotMatch(markup, /\.png(?:\?|"|')/);
+  assert.match(markup, /2009-12-10/);
+  assert.match(markup, /2011-04-24/);
+  assert.match(markup, /2012-05-23/);
+  assert.ok(markup.indexOf('id="appearance-will-smith-2009"') < markup.indexOf('id="appearance-will-smith-2011"'));
+  assert.ok(markup.indexOf('id="appearance-will-smith-2011"') < markup.indexOf('id="appearance-will-smith-2012"'));
+  for (const href of attrs(markup, 'href').filter(localUrl).filter((href) => href.split('#')[0].endsWith('/'))) {
+    const [pathname, fragment] = href.split('#');
+    assert.ok(existsSync(routeFile(pathname)), href);
+    if (fragment) assert.match(page(pathname), new RegExp(`id="${fragment.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}"`));
+  }
+  assert.match(markup, /hairstyles\/buzz-cut\//);
+  assert.match(markup, /hairstyles\/flat-top\//);
+  assert.match(markup, /#appearance-will-smith-2011/);
+});
+
+test('appearance anchors and hairstyle backlinks are one-to-one', () => {
+  const personById = new Map(people.map((person) => [person.id, person]));
+  const personMarkup = new Map(people.map((person) => [person.id, page(`/people/${person.slug}/`)]));
+  for (const appearance of appearances) {
+    const person = personById.get(appearance.personId);
+    assert.ok(person);
+    const markup = personMarkup.get(appearance.personId);
+    assert.equal((markup.match(new RegExp(`id="${appearance.id}"`, 'g')) ?? []).length, 1);
+    for (const observation of appearance.observations) {
+      const style = hairstyles.find((item) => item.id === observation.hairstyleId);
+      assert.ok(style);
+      const styleMarkup = page(`/hairstyles/${style.slug}/`);
+      assert.match(styleMarkup, new RegExp(`href="/people/${person.slug}/#${appearance.id}"`));
+    }
+  }
+});
+
+test('person photographs have public-domain provenance and locally built media', () => {
+  const mediaSource = readSource('src/data/people-media.ts');
+  assert.match(mediaSource, /kind: 'public-domain'/);
+  assert.match(mediaSource, /type PublicDomainMedia/);
+  const appearancePhotoIds = new Set(appearances.map((appearance) => appearance.imageId));
+  assert.deepEqual(appearancePhotoIds, new Set(personPhotographs.map((photo) => photo.id)));
+  for (const photo of personPhotographs) {
+    assert.ok(existsSync(join(root, 'src/assets/people', photo.fileName)), photo.fileName);
+    assert.match(mediaSource, new RegExp(photo.fileName.replace('.', '\\.' )));
+  }
+  for (const person of people) {
+    const hero = personPhotographs.find((photo) => photo.id === person.heroImageId);
+    assert.ok(hero, person.heroImageId);
+    assert.match(mediaSource, new RegExp(hero.fileName.replace('.', '\\.' )));
+  }
+});
+
+test('sitemap and canonical metadata include people routes', () => {
+  const sitemap = readFileSync(join(dist, 'sitemap-index.xml'), 'utf8');
+  for (const path of ['/people/', '/people/will-smith/']) assert.match(sitemap, new RegExp(path.replaceAll('/', '\\/')));
+  for (const path of ['/people/', '/people/will-smith/']) {
+    const markup = page(path);
+    const canonical = markup.match(/<link rel="canonical" href="([^"]+)"/);
+    assert.ok(canonical);
+    assert.equal(canonical[1], `https://hairhairhair.hair${path}`);
+  }
+});

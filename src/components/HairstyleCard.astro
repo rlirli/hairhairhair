@@ -16,4 +16,5 @@ const media = getMedia(example?.imageId ?? '');
   <p class="mt-5 text-xs font-black uppercase tracking-[.16em] text-orange">{kindLabels[style.kind]}</p>
   <h2 class="mt-2 font-display text-3xl tracking-[-.05em]">{style.name}</h2>
   <p class="mt-1 text-sm leading-6">{style.summary}</p>
+  {style.status === 'stub' && <p class="mt-4 text-xs font-black uppercase tracking-[.12em] text-orange">Guide stub · {style.pendingNote}</p>}
 </a>

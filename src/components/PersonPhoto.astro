@@ -1,0 +1,19 @@
+---
+import { Image } from 'astro:assets';
+import type { PersonMedia } from '../data/people-media';
+interface Observation { note: string; styleName: string; styleSlug: string }
+interface Props { media: PersonMedia; event: string; date: string; observations: Observation[]; anchor: string }
+const { media, event, date, observations, anchor } = Astro.props;
+---
+<article id={anchor} class="scroll-mt-8 border-t-2 border-ink pt-6">
+  <div class="grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,.8fr)] md:items-start">
+    <figure>
+      <Image src={media.src} widths={[400, 800, 1120]} sizes="(min-width: 768px) 55vw, 100vw" format="webp" alt={media.alt} class="w-full rounded-[2rem] object-contain" />
+      <figcaption class="mt-3 text-sm leading-6"><span class="font-bold">Public-domain photograph.</span> {media.creator}; <a class="underline" href={media.sourceUrl} target="_blank" rel="noreferrer">source record</a> · <a class="underline" href={media.originalUrl} target="_blank" rel="noreferrer">original file</a> · <a class="underline" href={media.rightsEvidenceUrl} target="_blank" rel="noreferrer">rights evidence</a> · {media.identifier}</figcaption>
+    </figure>
+    <div>
+      <p class="text-xs font-black uppercase tracking-[.16em] text-orange"><a class="focus-ring underline decoration-orange decoration-2 underline-offset-4" href={`#${anchor}`}>{date}</a> · {event}</p>
+      {observations.map(({ note, styleName, styleSlug }) => <div class="mt-4"><h2 class="font-display text-3xl">Visible hairstyle observation</h2><p class="mt-4 text-lg leading-8">{note}</p><a class="focus-ring mt-5 inline-block font-bold text-orange underline decoration-orange decoration-2 underline-offset-4" href={`/hairstyles/${styleSlug}/`}>{styleName} guide ↗</a></div>)}
+    </div>
+  </div>
+</article>

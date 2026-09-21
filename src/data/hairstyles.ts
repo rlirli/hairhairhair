@@ -10,7 +10,7 @@ export interface HairstyleConsultation {
   sampleRequest: string;
 }
 
-export interface Hairstyle {
+export interface PublishedHairstyle {
   id: string;
   slug: string;
   name: string;
@@ -22,7 +22,21 @@ export interface Hairstyle {
   considerations: string[];
   sourceIds: string[];
   relatedStyleIds: string[];
+  status: 'published';
 }
+
+export interface StubHairstyle {
+  id: string;
+  slug: string;
+  name: string;
+  kind: 'cut';
+  summary: string;
+  status: 'stub';
+  pendingNote: string;
+  observedAppearanceIds: string[];
+}
+
+export type Hairstyle = PublishedHairstyle | StubHairstyle;
 
 export interface PatternGuidance {
   hairstyleId: string;
@@ -127,6 +141,7 @@ export const hairstyles: Hairstyle[] = [
     ],
     sourceIds: ['andis-low-taper', 'wahl-cut-guide'],
     relatedStyleIds: ['hairstyle-buzz-cut', 'hairstyle-twists'],
+    status: 'published',
   },
   {
     id: 'hairstyle-buzz-cut',
@@ -161,6 +176,7 @@ export const hairstyles: Hairstyle[] = [
     ],
     sourceIds: ['andis-buzz-cut', 'wahl-cut-guide'],
     relatedStyleIds: ['hairstyle-taper-fade', 'hairstyle-twists'],
+    status: 'published',
   },
   {
     id: 'hairstyle-twists',
@@ -195,6 +211,17 @@ export const hairstyles: Hairstyle[] = [
     ],
     sourceIds: ['milady-natural-hair', 'carols-daughter-braids-twists', 'aad-traction'],
     relatedStyleIds: ['hairstyle-taper-fade', 'hairstyle-buzz-cut'],
+    status: 'published',
+  },
+  {
+    id: 'hairstyle-flat-top',
+    slug: 'flat-top',
+    name: 'Flat top',
+    kind: 'cut',
+    summary: 'A low, squared top is visible in the selected 2011 appearance reference.',
+    status: 'stub',
+    pendingNote: 'Full guide coming next.',
+    observedAppearanceIds: ['appearance-will-smith-2011'],
   },
 ];
 

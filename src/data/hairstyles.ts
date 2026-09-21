@@ -10,7 +10,7 @@ export interface HairstyleConsultation {
   sampleRequest: string;
 }
 
-export interface PublishedHairstyle {
+export interface Hairstyle {
   id: string;
   slug: string;
   name: string;
@@ -22,21 +22,7 @@ export interface PublishedHairstyle {
   considerations: string[];
   sourceIds: string[];
   relatedStyleIds: string[];
-  status: "published";
 }
-
-export interface StubHairstyle {
-  id: string;
-  slug: string;
-  name: string;
-  kind: "cut";
-  summary: string;
-  status: "stub";
-  pendingNote: string;
-  observedAppearanceIds: string[];
-}
-
-export type Hairstyle = PublishedHairstyle | StubHairstyle;
 
 export interface PatternGuidance {
   hairstyleId: string;
@@ -184,7 +170,6 @@ export const hairstyles: Hairstyle[] = [
     ],
     sourceIds: ["andis-low-taper", "wahl-cut-guide"],
     relatedStyleIds: ["hairstyle-buzz-cut", "hairstyle-twists", "hairstyle-flat-top"],
-    status: "published",
   },
   {
     id: "hairstyle-buzz-cut",
@@ -232,7 +217,6 @@ export const hairstyles: Hairstyle[] = [
     ],
     sourceIds: ["andis-buzz-cut", "wahl-cut-guide"],
     relatedStyleIds: ["hairstyle-taper-fade", "hairstyle-twists", "hairstyle-flat-top"],
-    status: "published",
   },
   {
     id: "hairstyle-twists",
@@ -280,7 +264,6 @@ export const hairstyles: Hairstyle[] = [
     ],
     sourceIds: ["milady-natural-hair", "carols-daughter-braids-twists", "aad-traction"],
     relatedStyleIds: ["hairstyle-taper-fade", "hairstyle-buzz-cut"],
-    status: "published",
   },
   {
     id: "hairstyle-flat-top",
@@ -339,7 +322,6 @@ export const hairstyles: Hairstyle[] = [
       "wahl-cut-guide",
     ],
     relatedStyleIds: ["hairstyle-buzz-cut", "hairstyle-taper-fade"],
-    status: "published",
   },
 ];
 

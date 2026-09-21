@@ -27,8 +27,6 @@ const expectedMediaIds = [
   "flat-top-straight",
   "flat-top-coily",
 ];
-const publishedHairstyles = hairstyles.filter((style) => style.status === "published");
-const stubHairstyles = hairstyles.filter((style) => style.status === "stub");
 
 function htmlFiles(directory = dist) {
   return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
@@ -66,11 +64,11 @@ test("data records have unique stable ids and slugs", () => {
 });
 
 test("relationship, source, example, and media references are closed and reciprocal", () => {
-  const styleIds = new Set(publishedHairstyles.map((style) => style.id));
+  const styleIds = new Set(hairstyles.map((style) => style.id));
   const familyIds = new Set(hairFamilies.map((family) => family.id));
   const sourceIds = new Set(sources.map((source) => source.id));
   const mediaIds = new Set(expectedMediaIds);
-  for (const style of publishedHairstyles) {
+  for (const style of hairstyles) {
     for (const id of style.relatedStyleIds) {
       assert.ok(styleIds.has(id));
       assert.notEqual(id, style.id);
@@ -89,10 +87,10 @@ test("relationship, source, example, and media references are closed and recipro
   }
 });
 
-test("each family has one row per published guide in both directions", () => {
-  const styleIds = publishedHairstyles.map((style) => style.id).sort();
+test("each family has one row per guide in both directions", () => {
+  const styleIds = hairstyles.map((style) => style.id).sort();
   for (const family of hairFamilies) {
-    for (const style of publishedHairstyles)
+    for (const style of hairstyles)
       assert.equal(getGuidanceForHairstyle(style.id).filter((row) => row.hairFamilyId === family.id).length, 1);
     assert.deepEqual(
       getHairstylesForFamily(family.id)
@@ -152,7 +150,7 @@ test("built HTML internal hrefs, fragments, and local src targets exist", () => 
 });
 
 test("style guides contain two responsive WebP examples, AI labels, and social metadata", () => {
-  for (const style of publishedHairstyles) {
+  for (const style of hairstyles) {
     const markup = page(`/hairstyles/${style.slug}/`);
     assert.ok((markup.match(/<img\b/g) ?? []).length >= 3);
     assert.ok((markup.match(/AI-generated reference/g) ?? []).length >= 3);
@@ -175,22 +173,22 @@ test("style guides contain two responsive WebP examples, AI labels, and social m
 test("family and subtype pages expose every hairstyle guide and expected subtype links", () => {
   for (const family of hairFamilies) {
     const markup = page(`/hair-types/${family.slug}/`);
-    for (const style of publishedHairstyles) assert.match(markup, new RegExp(`/hairstyles/${style.slug}/`));
+    for (const style of hairstyles) assert.match(markup, new RegExp(`/hairstyles/${style.slug}/`));
     for (const type of hairTypes.filter((item) => item.family === family.family))
       assert.match(markup, new RegExp(`/hair-types/${type.slug}/`));
   }
   for (const type of hairTypes) {
     const markup = page(`/hair-types/${type.slug}/`);
-    for (const style of publishedHairstyles) assert.match(markup, new RegExp(`/hairstyles/${style.slug}/`));
+    for (const style of hairstyles) assert.match(markup, new RegExp(`/hairstyles/${style.slug}/`));
   }
 });
 
 test("home, hairstyle index, sitemap, canonical URLs, and social image targets are complete", () => {
-  for (const style of publishedHairstyles) {
+  for (const style of hairstyles) {
     assert.match(page("/"), new RegExp(`/hairstyles/${style.slug}/`));
     assert.match(page("/hairstyles/"), new RegExp(`/hairstyles/${style.slug}/`));
   }
-  assert.equal((page("/hairstyles/").match(/AI-generated reference/g) ?? []).length, publishedHairstyles.length);
+  assert.equal((page("/hairstyles/").match(/AI-generated reference/g) ?? []).length, hairstyles.length);
   const sitemap = readFileSync(join(dist, "sitemap-index.xml"), "utf8");
   for (const path of [
     "/hairstyles/",
@@ -215,21 +213,9 @@ test("home, hairstyle index, sitemap, canonical URLs, and social image targets a
   }
 });
 
-test("stub hairstyle records stay intentionally incomplete and non-generated", () => {
-  for (const style of stubHairstyles) {
-    assert.equal(style.status, "stub");
-    assert.match(style.pendingNote, /Full guide coming next/i);
-    assert.ok(style.observedAppearanceIds.length > 0);
-    const markup = page(`/hairstyles/${style.slug}/`);
-    assert.match(markup, /Full guide coming next/i);
-    assert.doesNotMatch(markup, /AI-generated reference|Reference gallery|Consultation|Variations/);
-  }
-});
-
-test("flat-top is a published guide with two examples and reciprocal links", () => {
+test("flat-top is a complete guide with two examples and reciprocal links", () => {
   const flatTop = hairstyles.find((style) => style.slug === "flat-top");
   assert.ok(flatTop);
-  assert.equal(flatTop.status, "published");
   assert.equal(getExamplesForHairstyle(flatTop.id).length, 2);
   assert.equal(getGuidanceForHairstyle(flatTop.id).length, hairFamilies.length);
   assert.ok(flatTop.relatedStyleIds.includes("hairstyle-buzz-cut"));

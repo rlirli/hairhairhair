@@ -39,6 +39,3 @@ An editorial description of the hairstyle visible in an appearance. It can conne
 
 **Public-domain photograph**:
 A photograph with a recorded basis for public-domain copyright status in the stated jurisdiction. This status does not imply endorsement or erase personality rights.
-
-**Guide stub**:
-A named hairstyle entry whose full explanatory guide has not yet been published. It allows an observed look to be linked without presenting unfinished guidance as complete.

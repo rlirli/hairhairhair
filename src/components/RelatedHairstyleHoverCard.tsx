@@ -10,6 +10,8 @@ export interface RelatedHairstyleHoverCardItem {
   kindLabel: string;
   name: string;
   summary: string;
+  compatibleLabels?: string[];
+  subtypeLabels?: string[];
 }
 
 interface Props extends RelatedHairstyleHoverCardItem {
@@ -26,6 +28,8 @@ export default function RelatedHairstyleHoverCard({
   kindLabel,
   name,
   summary,
+  compatibleLabels = [],
+  subtypeLabels = [],
   size,
 }: Props) {
   return (
@@ -45,12 +49,19 @@ export default function RelatedHairstyleHoverCard({
           >
             {name}
           </h3>
+          {subtypeLabels.length > 0 && <p className="mt-1 truncate text-xs text-ink/60">{subtypeLabels.join(" · ")}</p>}
         </a>
       </HoverCardTrigger>
       <HoverCardContent>
         <p className="text-xs font-black tracking-[.14em] text-orange uppercase">{kindLabel}</p>
         <p className="mt-1 font-display text-xl">{name}</p>
         <p className="mt-2 text-sm leading-5">{summary}</p>
+        {compatibleLabels.length > 0 && (
+          <div className="mt-3 border-t border-ink/20 pt-3">
+            <p className="text-[.65rem] font-black tracking-[.12em] text-ink/60 uppercase">Compatible</p>
+            <p className="mt-1 text-sm leading-5">{compatibleLabels.join(", ")}</p>
+          </div>
+        )}
       </HoverCardContent>
     </HoverCard>
   );

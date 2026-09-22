@@ -2,7 +2,11 @@
 import { getImage } from "astro:assets";
 import type { Hairstyle } from "../data/hairstyles";
 import { styleExamples } from "../data/hairstyles";
-import { kindLabels } from "../data/hairstyle-relations";
+import {
+  compatibilityLabelsForHairstyle,
+  kindLabels,
+  subtypeLabelsForHairstyleInMajorType,
+} from "../data/hairstyle-relations";
 import { getMedia } from "../data/media";
 import RelatedHairstyleGridIsland from "./RelatedHairstyleGrid";
 
@@ -10,9 +14,10 @@ interface Props {
   styles: Hairstyle[];
   size?: "small" | "medium";
   className: string;
+  hairTypeId?: string;
 }
 
-const { styles, size = "small", className } = Astro.props;
+const { styles, size = "small", className, hairTypeId } = Astro.props;
 const imageSizes = size === "small" ? "(min-width: 1024px) 20vw, 40vw" : "(min-width: 1024px) 25vw, 50vw";
 const widths = size === "small" ? [240, 480] : [360, 720];
 const items = await Promise.all(
@@ -31,6 +36,8 @@ const items = await Promise.all(
       kindLabel: kindLabels[style.kind],
       name: style.name,
       summary: style.summary,
+      compatibleLabels: compatibilityLabelsForHairstyle(style.id),
+      subtypeLabels: hairTypeId ? subtypeLabelsForHairstyleInMajorType(style.id, hairTypeId) : [],
     };
   }),
 );

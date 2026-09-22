@@ -375,7 +375,7 @@ test("person hairstyle detail pages collect every matching appearance", () => {
     assert.match(markup, /Person hairstyle record/);
     for (const date of dates) assert.match(markup, new RegExp(date));
     assert.doesNotMatch(markup, /Appearance record ↗/);
-    assert.match(markup, /Read the .* guide/);
+    assert.match(markup, /Explore .* ↗/);
     assert.match(markup, /href="\/people\/will-smith\/photographs\/will-smith-/);
   }
   assert.deepEqual(

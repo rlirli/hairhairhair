@@ -1,5 +1,5 @@
 import { hairSubtypes, hairTypes } from "./hair-types";
-import { publishedStylesForHairType } from "./hairstyle-relations";
+import { compatibleHairstylesForHairType, subtypeLabelsForHairstyleInMajorType } from "./hairstyle-compatibility";
 import { naturalProfileForPerson, naturalProfilesForHairType } from "./natural-profiles";
 import { people, personPhotographs } from "./people";
 import { buildPersonMedia } from "./people-media";
@@ -11,8 +11,13 @@ export function parentHairTypeId(slug: string) {
 }
 
 export function stylesForHairTypeSlug(slug: string) {
-  const id = parentHairTypeId(slug);
-  return id ? publishedStylesForHairType(id) : [];
+  const target = hairTypes.find((item) => item.slug === slug) ?? hairSubtypes.find((item) => item.slug === slug);
+  return target ? compatibleHairstylesForHairType(target.id) : [];
+}
+
+export function subtypeLabelsForHairstyleOnMajorTypePage(styleId: string, slug: string) {
+  const major = hairTypes.find((item) => item.slug === slug);
+  return major ? subtypeLabelsForHairstyleInMajorType(styleId, major.id) : [];
 }
 
 export function peopleForHairTypeSlug(slug: string) {

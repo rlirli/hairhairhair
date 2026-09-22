@@ -1,5 +1,10 @@
-import { hairSubtypes } from "./hair-types";
-import { getPublishedHairstylesForHairType, patternGuidance, publishedHairstyles } from "./hairstyles";
+import {
+  compatibilityForHairstyle,
+  compatibilityLabelsForHairstyle,
+  compatibleHairstylesForHairType,
+  subtypeLabelsForHairstyleInMajorType,
+} from "./hairstyle-compatibility";
+import { publishedHairstyles } from "./hairstyles";
 
 export const kindLabels = {
   cut: "Cut",
@@ -8,13 +13,13 @@ export const kindLabels = {
 } as const;
 
 export function publishedStylesForHairType(hairTypeId: string) {
-  const subtype = hairSubtypes.find((item) => item.id === hairTypeId);
-  const typeId = subtype ? `hair-type-${subtype.code[0]}` : hairTypeId;
-  return getPublishedHairstylesForHairType(typeId);
+  return compatibleHairstylesForHairType(hairTypeId);
 }
 
-export function guidanceFor(styleId: string, hairTypeId: string) {
-  return patternGuidance.find((item) => item.hairstyleId === styleId && item.hairTypeId === hairTypeId);
+export { compatibilityLabelsForHairstyle, subtypeLabelsForHairstyleInMajorType };
+
+export function compatibilityFor(styleId: string, hairTypeId: string) {
+  return compatibilityForHairstyle(styleId, hairTypeId);
 }
 
 export function publishedRelatedHairstyles(ids: string[]) {

@@ -25,9 +25,11 @@ _Avoid_: Person, hairstyle definition
 **Reference image**:
 A visual asset used to illustrate a style example, with its origin and attribution recorded. A generated reference is a fictional illustration, not evidence of a real person's hair or a verified haircut result.
 
-**Pattern guidance**:
-An editorial note about how a hairstyle may be approached within a major hair type. These records form a sparse catalog relation: a row means guidance for that pairing has been reviewed, while a missing row means the catalog does not currently associate it. It supports a conversation with a practitioner rather than declaring biological eligibility, impossibility, or a promised result.
-_Avoid_: Compatibility score, works for everyone
+**Hairstyle–hair-type compatibility**:
+An editorial estimate of how fully a hairstyle's defining features can be achieved on a hair type through ordinary cutting and styling while keeping its natural curl pattern. Scores run from 0 (not achievable) to 1, with unknown represented separately by `null`. A subtype inherits a major type score unless explicitly overridden. Only scores at or above `MIN_COMPATIBILITY_FOR_LISTING` create public hair-type listings; scores are not popularity measurements or promised results. A hairstyle may be published with all scores unknown.
+
+**Hair-type-specific hairstyle advice (archived)**:
+The former `PatternGuidance` notes about approaches within major hair types are parked as `HairTypeSpecificHairstyleAdvice`. They are not displayed, do not determine compatibility, and do not drive hairstyle listings. They may be revisited as editorial material later.
 
 **Person**:
 A real individual whose documented hairstyles can be explored. A person is not assigned a permanent hair type merely from styled photographs.

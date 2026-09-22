@@ -166,7 +166,7 @@ export const appearances: Appearance[] = [
     observations: [
       {
         hairstyleId: "hairstyle-thin-mohawk",
-        note: "The available frame shows a compact fauxhawk-like shape; Thin mohawk is the nearest published guide, not a claim of an exact match.",
+        note: "The available frame shows a compact fauxhawk-like shape; Thin mohawk is the nearest published hairstyle, not a claim of an exact match.",
       },
     ],
   },

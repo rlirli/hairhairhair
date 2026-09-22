@@ -40,10 +40,7 @@ test("published hairstyle detail routes provide the requested previews and full 
     assert.match(appearances, new RegExp(`${style.name} worn by celebs`));
     if (appearancesForStyle(style.id).length) assert.match(appearances, /opacity-75/);
 
-    const dataSheet = detail.split("Data sheet")[1].split("Sources reviewed")[0];
-    assert.equal((dataSheet.match(/Type [1-4] ·/g) ?? []).length, 4);
-    assert.match(dataSheet, /not a suitability score/);
-    if (style.inventedAt) assert.match(dataSheet, /Origin date/);
-    if (style.inventor) assert.match(dataSheet, /Recorded inventor/);
+    assert.doesNotMatch(detail, /Data sheet|Pattern guidance|Related guides/);
+    assert.match(detail, /Sources reviewed/);
   }
 });

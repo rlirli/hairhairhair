@@ -3,9 +3,8 @@ import Layout from "../../components/Layout.astro";
 import HairstyleCard from "../../components/HairstyleCard.astro";
 import StyleMedia from "../../components/StyleMedia.astro";
 import { getImage } from "astro:assets";
-import { hairTypes, hairSubtypes } from "../../data/hair-types";
 import { publishedHairstyles, sources, getExamplesForHairstyle } from "../../data/hairstyles";
-import { guidanceFor, publishedRelatedHairstyles } from "../../data/hairstyle-relations";
+import { publishedRelatedHairstyles } from "../../data/hairstyle-relations";
 import { appearancesForStyle, personForAppearance } from "../../data/people-relations";
 import { kindLabels } from "../../data/hairstyle-relations";
 import { getMedia } from "../../data/media";
@@ -20,11 +19,6 @@ const { style } = Astro.props;
 const examples = getExamplesForHairstyle(style.id);
 const heroMedia = examples[0]?.imageId;
 const related = publishedRelatedHairstyles(style.relatedStyleIds);
-const hairTypeLinks = hairTypes
-  .map((hairType) => ({ hairType, guidance: guidanceFor(style.id, hairType.id) }))
-  .filter((item): item is { hairType: typeof item.hairType; guidance: NonNullable<typeof item.guidance> } =>
-    Boolean(item.guidance),
-  );
 const referencedSources = sources.filter((source) => style.sourceIds.includes(source.id));
 const mediaById = new Map(buildPersonMedia(personPhotographs).map((media) => [media.id, media]));
 const documentedAppearances = appearancesForStyle(style.id)
@@ -50,7 +44,7 @@ const ogImage = heroMedia
   : undefined;
 ---
 
-<Layout title={`${style.name} guide — hairhairhair.hair`} description={style.summary} image={ogImage}>
+<Layout title={`${style.name} — hairhairhair.hair`} description={style.summary} image={ogImage}>
   <article class="mx-auto max-w-7xl px-5 pb-20 pt-12 sm:px-8">
     <nav aria-label="Breadcrumb" class="text-sm font-bold uppercase tracking-[.12em]">
       <a class="focus-ring text-orange" href="/">
@@ -160,36 +154,10 @@ const ogImage = heroMedia
           ))}
         </ul>
       </div>
-      <div>
-        <p class="text-xs font-black uppercase tracking-[.18em] text-orange">Pattern guidance</p>
-        <h2 class="mt-2 font-display text-4xl tracking-[-.06em]">Explore by hair type</h2>
-        <div class="mt-6 space-y-4">
-          {hairTypeLinks.map(({ hairType, guidance }) => (
-            <div class="rounded-2xl border-2 border-ink p-4">
-              <a class="focus-ring font-display text-2xl hover:text-orange" href={`/hair-types/${hairType.slug}/`}>
-                Type {hairType.code} · {hairType.name}
-              </a>
-              <p class="mt-2 text-sm leading-6">{guidance.note}</p>
-              <div class="mt-3 flex flex-wrap gap-2">
-                {hairSubtypes
-                  .filter((type) => type.pattern === hairType.pattern)
-                  .map((type) => (
-                    <a
-                      class="focus-ring text-xs font-bold uppercase tracking-[.1em] text-orange underline"
-                      href={`/hair-types/${type.slug}/`}
-                    >
-                      {type.code}
-                    </a>
-                  ))}
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
     </section>
     {related.length > 0 && (
       <section class="mt-16 border-t-2 border-ink pt-10">
-        <p class="text-xs font-black uppercase tracking-[.18em] text-orange">Related guides</p>
+        <p class="text-xs font-black uppercase tracking-[.18em] text-orange">Related Hairstyles</p>
         <div class="mt-5 grid gap-4 md:grid-cols-3">
           {related.map((item) => (
             <HairstyleCard style={item} compact />
@@ -197,45 +165,6 @@ const ogImage = heroMedia
         </div>
       </section>
     )}
-    <section class="mt-16 border-t-2 border-ink pt-10">
-      <p class="text-xs font-black uppercase tracking-[.18em] text-orange">Data sheet</p>
-      <h2 class="mt-2 font-display text-4xl tracking-[-.06em]">Recorded facts and reviewed associations</h2>
-      {(style.inventedAt || style.inventor) && (
-        <dl class="mt-5 grid gap-3 sm:grid-cols-2">
-          {style.inventedAt && (
-            <div class="rounded-2xl border-2 border-ink p-4">
-              <dt class="text-xs font-black uppercase tracking-[.12em]">Origin date</dt>
-              <dd class="mt-2">
-                {style.inventedAt.precision === "decade" ? `${style.inventedAt.year}s` : style.inventedAt.year}
-              </dd>
-            </div>
-          )}
-          {style.inventor && (
-            <div class="rounded-2xl border-2 border-ink p-4">
-              <dt class="text-xs font-black uppercase tracking-[.12em]">Recorded inventor</dt>
-              <dd class="mt-2">{style.inventor.name}</dd>
-            </div>
-          )}
-        </dl>
-      )}
-      <p class="mt-5 max-w-3xl text-sm leading-6">
-        Associations below reflect reviewed editorial guidance. A missing association means the catalog has no reviewed
-        note for that pair; it is not a suitability score or a claim that the style cannot be worn.
-      </p>
-      <dl class="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-        {hairTypes.map((hairType) => {
-          const guidance = guidanceFor(style.id, hairType.id);
-          return (
-            <div class="rounded-2xl border-2 border-ink p-4">
-              <dt class="font-display text-xl">
-                Type {hairType.code} · {hairType.name}
-              </dt>
-              <dd class="mt-2 text-sm leading-6">{guidance ? guidance.note : "No reviewed association recorded."}</dd>
-            </div>
-          );
-        })}
-      </dl>
-    </section>
     <section class="mt-16 border-t-2 border-ink pt-8">
       <p class="text-xs font-black uppercase tracking-[.18em] text-orange">Sources reviewed</p>
       <div class="mt-4 space-y-2 text-sm leading-6">
@@ -247,7 +176,7 @@ const ogImage = heroMedia
               target="_blank"
               rel="noreferrer"
             >
-              {source.title}
+              {source.displayTitle ?? source.title}
             </a>{" "}
             · {source.publisher} · reviewed {source.reviewedAt}
           </p>

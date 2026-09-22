@@ -96,6 +96,7 @@ const label =
     </div>
     <RelatedHairstyleGrid
       styles={styles}
+      hairTypeId={kind === "hairType" ? hairType.id : undefined}
       className="mt-3 grid grid-flow-col auto-cols-[minmax(8rem,1fr)] gap-4 overflow-x-auto border-t border-ink/30 pt-5 pb-3 lg:grid-flow-row lg:grid-cols-5 lg:auto-cols-auto lg:overflow-visible"
     />
   </section>

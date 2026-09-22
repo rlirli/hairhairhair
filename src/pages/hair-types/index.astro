@@ -1,6 +1,6 @@
 ---
 import Layout from "../../components/Layout.astro";
-import Pattern from "../../components/Pattern.astro";
+import HairStrand from "../../components/HairStrand.astro";
 import { classificationSystems, hairSubtypes, hairTypes } from "../../data/hair-types";
 
 const subtypesFor = (typeId: string) => hairSubtypes.filter((subtype) => subtype.hairTypeId === typeId);
@@ -53,12 +53,7 @@ const subtypesFor = (typeId: string) => hairSubtypes.filter((subtype) => subtype
                 class="hover-surface focus-ring group rounded-2xl p-1.5 transition sm:p-2"
                 aria-label={`${subtype.code}: ${subtype.name}`}
               >
-                <Pattern
-                  pattern={subtype.pattern}
-                  subtype={subtype.subtypeCode}
-                  caption={false}
-                  label={`Simplified ${subtype.code} pattern illustration`}
-                />
+                <HairStrand code={subtype.code} decorative />
                 <span class="mt-2 block text-center font-display text-xl leading-none group-hover:underline">
                   {subtype.code}
                 </span>

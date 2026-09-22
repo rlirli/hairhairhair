@@ -1,0 +1,37 @@
+---
+import type { HairSubtypeCode } from "../data/hair-types";
+
+interface Props {
+  code: HairSubtypeCode;
+  label?: string;
+  decorative?: boolean;
+}
+
+const { code, label = `Hair strand ${code}`, decorative = false } = Astro.props;
+const paths: Record<HairSubtypeCode, string> = {
+  "1A": "M 50 10 L 50 250",
+  "1B": "M 50 10 C 54 70 54 190 50 250",
+  "1C": "M 45 10 C 62 82 35 174 50 250",
+  "2A": "M 50 10 C 88 42 88 78 50 112 C 12 146 12 182 50 216 C 60 226 60 239 50 250",
+  "2B": "M 50 10 C 94 43 94 79 50 112 C 6 144 6 181 50 216 C 64 226 64 240 50 250",
+  "2C": "M 50 10 C 96 39 96 77 50 108 C 4 134 4 166 50 190 C 96 216 96 232 50 250",
+  "3A": "M 50 10 C 95 34 95 72 50 93 C 5 114 5 151 50 172 C 95 193 95 231 50 250",
+  "3B": "M 50 10 C 94 27 94 56 50 72 C 6 88 6 118 50 134 C 94 150 94 180 50 196 C 17 208 17 237 50 250",
+  "3C": "M 50 10 C 82 22 82 44 50 56 C 18 68 18 90 50 102 C 82 114 82 136 50 148 C 18 160 18 182 50 194 C 27 203 27 238 50 250",
+  "4A": "M 50 10 C 0 10 0 38 50 38 C 100 38 100 66 50 66 C 0 66 0 94 50 94 C 100 94 100 122 50 122 C 0 122 0 150 50 150 C 100 150 100 178 50 178 C 0 178 0 206 50 206 C 83 206 83 233 50 250",
+  "4B": "M 50 10 C 8 10 8 34 50 34 C 92 34 92 58 50 58 C 8 58 8 82 50 82 C 92 82 92 106 50 106 C 8 106 8 130 50 130 C 92 130 92 154 50 154 C 8 154 8 178 50 178 C 92 178 92 202 50 202 C 22 202 22 230 50 250",
+  "4C": "M 50 10 C 20 10 20 29 50 29 C 80 29 80 48 50 48 C 20 48 20 67 50 67 C 80 67 80 86 50 86 C 20 86 20 105 50 105 C 80 105 80 124 50 124 C 20 124 20 143 50 143 C 80 143 80 162 50 162 C 20 162 20 181 50 181 C 80 181 80 200 50 200 C 31 200 31 226 50 250",
+};
+---
+
+<svg
+  viewBox="0 0 100 260"
+  class="block h-auto w-full"
+  style="color: var(--type-accent, currentColor)"
+  preserveAspectRatio="xMidYMid meet"
+  role={decorative ? undefined : "img"}
+  aria-label={decorative ? undefined : label}
+  aria-hidden={decorative ? "true" : undefined}
+>
+  <path d={paths[code]} fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" />
+</svg>

@@ -3,6 +3,7 @@ import Layout from "../../components/Layout.astro";
 import Pattern from "../../components/Pattern.astro";
 import RelatedHairstyleGrid from "../../components/RelatedHairstyleGrid.astro";
 import HairTypeCelebrityPreview from "../../components/HairTypeCelebrityPreview.astro";
+import HairTypeNavigator from "../../components/HairTypeNavigator.astro";
 import { hairSubtypes, hairTypes } from "../../data/hair-types";
 import { stylesForHairTypeSlug } from "../../data/hair-type-discovery";
 
@@ -16,57 +17,21 @@ export function getStaticPaths() {
   ];
 }
 
-const { kind } = Astro.props;
+const kind = Astro.props.kind as "hairType" | "hairSubtype";
 const hairType = Astro.props.hairType!;
 const hairSubtype = Astro.props.hairSubtype!;
 const subtypes = kind === "hairType" ? hairSubtypes.filter((item) => item.hairTypeId === hairType.id) : [];
 const selected = kind === "hairType" ? hairType : hairSubtype;
-const sequence = kind === "hairType" ? hairTypes : hairSubtypes;
-const index = sequence.findIndex((item) => item.slug === selected.slug);
-const previous = sequence[index - 1];
-const next = sequence[index + 1];
-const parentType = kind === "hairSubtype" ? hairTypes.find((item) => item.id === hairSubtype.hairTypeId) : undefined;
 const styles = stylesForHairTypeSlug(selected.slug).slice(0, 5);
 const label =
   kind === "hairType" ? `Type ${hairType.code} ${hairType.name}` : `Type ${hairSubtype.code} ${hairSubtype.name}`;
-const navigatorLabel = kind === "hairType" ? label : `${hairSubtype.pattern} · Type ${parentType!.code}`;
 ---
 
 <Layout title={`${label} — hairhairhair.hair`} description={selected.description}>
-  <article class="mx-auto max-w-7xl px-5 pb-14 pt-7 sm:px-8">
-    <nav
-      class="mb-7 flex items-center justify-between gap-3 text-xs font-bold sm:text-sm"
-      aria-label="Hair type sequence"
-    >
-      {previous ? (
-        <a class="focus-ring min-w-0 truncate text-orange hover:underline" href={`/hair-types/${previous.slug}/`}>
-          ← Type {previous.code} {previous.name}
-        </a>
-      ) : (
-        <span />
-      )}
-      {kind === "hairSubtype" ? (
-        <a
-          class="focus-ring shrink-0 truncate uppercase tracking-[.12em] opacity-65 hover:opacity-100"
-          href={`/hair-types/${parentType!.slug}/`}
-        >
-          {navigatorLabel}
-        </a>
-      ) : (
-        <span class="shrink-0 truncate uppercase tracking-[.12em] opacity-60">{navigatorLabel}</span>
-      )}
-      {next ? (
-        <a
-          class="focus-ring min-w-0 truncate text-right text-orange hover:underline"
-          href={`/hair-types/${next.slug}/`}
-        >
-          Type {next.code} {next.name} →
-        </a>
-      ) : (
-        <span />
-      )}
-    </nav>
-
+  <div class="mt-2 mb-10 sm:mb-16">
+    <HairTypeNavigator kind={kind} hairType={hairType} hairSubtype={hairSubtype} />
+  </div>
+  <article class="mx-auto max-w-7xl px-5 pb-14 pt-0 sm:px-8">
     <header class="border-b-2 border-ink pb-8">
       <h1 class="mt-3 font-display text-5xl leading-[.95] tracking-[-.07em] sm:text-7xl">{label}</h1>
       <p class="mt-4 max-w-3xl text-lg leading-7 sm:text-xl">{selected.description}</p>

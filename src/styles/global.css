@@ -48,6 +48,13 @@
 html {
   scroll-behavior: smooth;
 }
+.scrollbar-hidden {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
 body {
   margin: 0;
   background: var(--color-ivory);

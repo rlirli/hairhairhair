@@ -5,23 +5,24 @@ import test from "node:test";
 import { hairSubtypes, hairTypes } from "../src/data/hair-types.ts";
 import { dist, page, publicRoutes, root } from "./helpers/site.mjs";
 
-test("detail pages show one-line names and an unobtrusive previous/current/next navigator", () => {
+test("detail pages show one-line names and a grouped hair-type navigator", () => {
   const subtypeMarkup = page("/hair-types/3a/");
   assert.match(subtypeMarkup, /<h1[^>]*>Type 3A Loose spiral curl<\/h1>/);
-  assert.match(subtypeMarkup, /aria-label="Hair type sequence"/);
-  assert.match(subtypeMarkup, /href="\/hair-types\/2c\/"/);
-  assert.match(subtypeMarkup, /href="\/hair-types\/3\/"[^>]*>curly · Type 3/i);
-  assert.match(subtypeMarkup, /href="\/hair-types\/3b\/"/);
-  assert.doesNotMatch(subtypeMarkup, /coily · subtype/i);
-  assert.doesNotMatch(subtypeMarkup, /aria-label="Adjacent hair sub-types"/);
+  assert.match(subtypeMarkup, /aria-label="Hair type navigator"/);
+  assert.match(subtypeMarkup, /aria-label="Type 3 curly"/);
+  assert.match(subtypeMarkup, /href="\/hair-types\/3a\/"[^>]*aria-current="page"/);
+
+  for (const type of hairTypes) {
+    assert.match(subtypeMarkup, new RegExp(`href="/hair-types/${type.slug}/"`));
+  }
+  for (const subtype of hairSubtypes) {
+    assert.match(subtypeMarkup, new RegExp(`href="/hair-types/${subtype.slug}/"`));
+  }
 
   for (const type of hairTypes) {
     const markup = page(`/hair-types/${type.slug}/`);
-    assert.match(markup, /aria-label="Hair type sequence"/);
-    if (type !== hairTypes[0])
-      assert.match(markup, new RegExp(`href="/hair-types/${hairTypes[hairTypes.indexOf(type) - 1].slug}/"`));
-    if (type !== hairTypes.at(-1))
-      assert.match(markup, new RegExp(`href="/hair-types/${hairTypes[hairTypes.indexOf(type) + 1].slug}/"`));
+    assert.match(markup, /aria-label="Hair type navigator"/);
+    assert.match(markup, new RegExp(`href="/hair-types/${type.slug}/"[^>]*aria-current="page"`));
   }
 });
 

@@ -1,0 +1,68 @@
+---
+import Layout from "../../../components/Layout.astro";
+import HairstyleAppearanceGrid from "../../../components/HairstyleAppearanceGrid.astro";
+import { people, personPhotographs } from "../../../data/people";
+import { buildPersonMedia } from "../../../data/people-media";
+import { appearancesForStyle } from "../../../data/people-relations";
+import { publishedHairstyles } from "../../../data/hairstyles";
+
+export function getStaticPaths() {
+  return publishedHairstyles.map((style) => ({ params: { slug: style.slug }, props: { style } }));
+}
+
+const { style } = Astro.props;
+const mediaById = new Map(buildPersonMedia(personPhotographs).map((media) => [media.id, media]));
+const appearanceCards = appearancesForStyle(style.id)
+  .map((appearance) => {
+    const person = people.find((item) => item.id === appearance.personId);
+    const media = mediaById.get(appearance.imageId);
+    return person && media
+      ? {
+          id: appearance.id,
+          personSlug: person.slug,
+          personName: person.name,
+          date: appearance.taken.value,
+          event: appearance.event,
+          media,
+        }
+      : undefined;
+  })
+  .filter((item): item is NonNullable<typeof item> => Boolean(item));
+---
+
+<Layout
+  title={`${style.name} worn by celebs — hairhairhair.hair`}
+  description={`Dated photographic appearances connected to ${style.name}.`}
+>
+  <main class="mx-auto max-w-7xl px-5 pb-20 pt-12 sm:px-8">
+    <nav aria-label="Breadcrumb" class="text-sm font-bold uppercase tracking-[.12em]">
+      <a class="focus-ring text-orange" href="/hairstyles/">
+        Hairstyles
+      </a>
+      <span class="mx-2" aria-hidden="true">
+        /
+      </span>
+      <a class="focus-ring text-orange" href={`/hairstyles/${style.slug}/`}>
+        {style.name}
+      </a>
+      <span class="mx-2" aria-hidden="true">
+        /
+      </span>
+      <span>Worn by celebs</span>
+    </nav>
+    <h1 class="mt-10 font-display text-5xl tracking-[-.07em] sm:text-7xl">{style.name} worn by celebs</h1>
+    <p class="mt-4 max-w-2xl text-lg leading-7">
+      Dated appearance photographs where this style has been visually documented. Each record is a moment in time, not a
+      definition of the style.
+    </p>
+    {appearanceCards.length ? (
+      <div class="mt-10">
+        <HairstyleAppearanceGrid appearances={appearanceCards} />
+      </div>
+    ) : (
+      <p class="mt-10 rounded-2xl border-2 border-ink p-6">
+        No dated appearance photographs are currently documented for this style.
+      </p>
+    )}
+  </main>
+</Layout>

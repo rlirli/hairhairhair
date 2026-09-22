@@ -9,6 +9,9 @@ import { guidanceFor, publishedRelatedHairstyles } from "../../data/hairstyle-re
 import { appearancesForStyle, personForAppearance } from "../../data/people-relations";
 import { kindLabels } from "../../data/hairstyle-relations";
 import { getMedia } from "../../data/media";
+import { buildPersonMedia } from "../../data/people-media";
+import { personPhotographs } from "../../data/people";
+import HairstyleAppearanceGrid from "../../components/HairstyleAppearanceGrid.astro";
 
 export function getStaticPaths() {
   return publishedHairstyles.map((style) => ({ params: { slug: style.slug }, props: { style } }));
@@ -23,9 +26,24 @@ const hairTypeLinks = hairTypes
     Boolean(item.guidance),
   );
 const referencedSources = sources.filter((source) => style.sourceIds.includes(source.id));
+const mediaById = new Map(buildPersonMedia(personPhotographs).map((media) => [media.id, media]));
 const documentedAppearances = appearancesForStyle(style.id)
-  .map((appearance) => ({ appearance, person: personForAppearance(appearance.id) }))
-  .filter((item) => item.person);
+  .sort((a, b) => b.taken.value.localeCompare(a.taken.value))
+  .map((appearance) => {
+    const person = personForAppearance(appearance.id);
+    const media = mediaById.get(appearance.imageId);
+    return person && media
+      ? {
+          id: appearance.id,
+          personSlug: person.slug,
+          personName: person.name,
+          date: appearance.taken.value,
+          event: appearance.event,
+          media,
+        }
+      : undefined;
+  })
+  .filter((item): item is NonNullable<typeof item> => Boolean(item));
 const kindLabel = kindLabels[style.kind];
 const ogImage = heroMedia
   ? (await getImage({ src: getMedia(heroMedia)!.src, width: 1120, format: "jpg" })).src
@@ -57,18 +75,7 @@ const ogImage = heroMedia
           <p class="mt-6 max-w-xl text-lg leading-7">{paragraph}</p>
         ))}
       </div>
-      <div>
-        {heroMedia && (
-          <StyleMedia
-            mediaId={heroMedia}
-            title={examples[0]?.title}
-            caption={examples[0]?.caption}
-            patternDescription={examples[0]?.patternDescription}
-            lengthDescription={examples[0]?.lengthDescription}
-            eager
-          />
-        )}
-      </div>
+      <div>{heroMedia && <StyleMedia mediaId={heroMedia} eager />}</div>
     </div>
     <section class="mt-16 border-t-2 border-ink pt-10">
       <div class="flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-end">
@@ -77,17 +84,43 @@ const ogImage = heroMedia
           <h2 class="mt-2 font-display text-4xl tracking-[-.06em]">Different ways it can read</h2>
         </div>
       </div>
-      <div class="mt-7 grid gap-5 md:grid-cols-2">
-        {examples.slice(0, 2).map((example) => (
+      <div class="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {examples.slice(0, 4).map((example, index) => (
           <StyleMedia
             mediaId={example.imageId}
             title={example.title}
             caption={example.caption}
             patternDescription={example.patternDescription}
             lengthDescription={example.lengthDescription}
+            eager={index === 0}
           />
         ))}
       </div>
+      <a
+        class="focus-ring mt-5 inline-block text-sm font-bold text-ink/60 underline decoration-ink/30 underline-offset-4 hover:text-orange"
+        href={`/hairstyles/${style.slug}/examples/`}
+      >
+        More
+      </a>
+    </section>
+    <section class="mt-16 border-t-2 border-ink pt-8">
+      <p class="text-xs font-black uppercase tracking-[.18em] text-orange">Worn by celebs</p>
+      <p class="mt-3 max-w-2xl text-sm leading-6">
+        Dated appearance photographs where this style has been visually documented.
+      </p>
+      {documentedAppearances.length > 0 ? (
+        <div class="mt-5">
+          <HairstyleAppearanceGrid appearances={documentedAppearances.slice(0, 6)} />
+        </div>
+      ) : (
+        <p class="mt-5 text-sm leading-6">No dated appearance photographs are currently documented for this style.</p>
+      )}
+      <a
+        class="focus-ring mt-5 inline-block text-sm font-bold text-ink/60 underline decoration-ink/30 underline-offset-4 hover:text-orange"
+        href={`/hairstyles/${style.slug}/appearances/`}
+      >
+        More
+      </a>
     </section>
     <section class="mt-16 grid gap-10 border-t-2 border-ink pt-10 lg:grid-cols-[1fr_1fr]">
       <div>
@@ -165,25 +198,45 @@ const ogImage = heroMedia
         </div>
       </section>
     )}
-    {documentedAppearances.length > 0 && (
-      <section class="mt-16 border-t-2 border-ink pt-8">
-        <p class="text-xs font-black uppercase tracking-[.18em] text-orange">Dated person records</p>
-        <p class="mt-3 max-w-2xl text-sm leading-6">
-          These links show a documented appearance where this style was observed. They are visual records, not universal
-          definitions.
-        </p>
-        <div class="mt-4 space-y-2">
-          {documentedAppearances.map(({ appearance, person }) => (
-            <a
-              class="focus-ring block font-display text-2xl text-orange underline decoration-orange decoration-2 underline-offset-4"
-              href={`/people/${person!.slug}/appearances/${appearance.id}/`}
-            >
-              {person!.name} · {appearance.taken.value} ↗
-            </a>
-          ))}
-        </div>
-      </section>
-    )}
+    <section class="mt-16 border-t-2 border-ink pt-10">
+      <p class="text-xs font-black uppercase tracking-[.18em] text-orange">Data sheet</p>
+      <h2 class="mt-2 font-display text-4xl tracking-[-.06em]">Recorded facts and reviewed associations</h2>
+      {(style.inventedAt || style.inventor) && (
+        <dl class="mt-5 grid gap-3 sm:grid-cols-2">
+          {style.inventedAt && (
+            <div class="rounded-2xl border-2 border-ink p-4">
+              <dt class="text-xs font-black uppercase tracking-[.12em]">Origin date</dt>
+              <dd class="mt-2">
+                {style.inventedAt.precision === "decade" ? `${style.inventedAt.year}s` : style.inventedAt.year}
+              </dd>
+            </div>
+          )}
+          {style.inventor && (
+            <div class="rounded-2xl border-2 border-ink p-4">
+              <dt class="text-xs font-black uppercase tracking-[.12em]">Recorded inventor</dt>
+              <dd class="mt-2">{style.inventor.name}</dd>
+            </div>
+          )}
+        </dl>
+      )}
+      <p class="mt-5 max-w-3xl text-sm leading-6">
+        Associations below reflect reviewed editorial guidance. A missing association means the catalog has no reviewed
+        note for that pair; it is not a suitability score or a claim that the style cannot be worn.
+      </p>
+      <dl class="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        {hairTypes.map((hairType) => {
+          const guidance = guidanceFor(style.id, hairType.id);
+          return (
+            <div class="rounded-2xl border-2 border-ink p-4">
+              <dt class="font-display text-xl">
+                Type {hairType.code} · {hairType.name}
+              </dt>
+              <dd class="mt-2 text-sm leading-6">{guidance ? guidance.note : "No reviewed association recorded."}</dd>
+            </div>
+          );
+        })}
+      </dl>
+    </section>
     <section class="mt-16 border-t-2 border-ink pt-8">
       <p class="text-xs font-black uppercase tracking-[.18em] text-orange">Sources reviewed</p>
       <div class="mt-4 space-y-2 text-sm leading-6">

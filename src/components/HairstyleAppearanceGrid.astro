@@ -1,0 +1,42 @@
+---
+import { Image } from "astro:assets";
+import PersonPhotoAttribution from "./PersonPhotoAttribution.astro";
+import type { PersonMedia } from "../data/people-media";
+
+interface AppearanceCard {
+  id: string;
+  personSlug: string;
+  personName: string;
+  date: string;
+  event: string;
+  media: PersonMedia;
+}
+
+interface Props {
+  appearances: AppearanceCard[];
+}
+
+const { appearances } = Astro.props;
+---
+
+<div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+  {appearances.map(({ id, personSlug, personName, date, event, media }) => (
+    <article class="min-w-0">
+      <a class="focus-ring block" href={`/people/${personSlug}/appearances/${id}/`}>
+        <Image
+          src={media.src}
+          widths={[240, 480]}
+          sizes="(min-width: 1024px) 16vw, (min-width: 640px) 30vw, 45vw"
+          format="webp"
+          alt={media.alt}
+          class="aspect-[4/5] w-full rounded-2xl object-cover"
+          style={`object-position: ${media.objectPosition}`}
+        />
+        <span class="mt-2 block font-display text-lg leading-tight">{personName}</span>
+        <span class="mt-1 block text-xs leading-5">{date}</span>
+        <span class="sr-only"> · {event}</span>
+      </a>
+      <PersonPhotoAttribution media={media} density="compact" linkLicense={false} />
+    </article>
+  ))}
+</div>

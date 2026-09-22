@@ -25,6 +25,10 @@ test("people overview offers portrait cards, profile filters, and profile detail
   assert.match(markup, /data-profile-filter="hair"/);
   assert.match(markup, /data-profile-filter="color"/);
   assert.match(markup, /data-profile-filter="skin"/);
+  assert.match(markup, /data-default-label="Hair type"/);
+  assert.match(markup, /data-default-label="Color"/);
+  assert.match(markup, /data-default-label="Skin tone"/);
+  assert.doesNotMatch(markup, /<select|>\s*Any\s*</);
   assert.match(markup, /data-profile-hair=/);
   assert.match(markup, /data-profile-color=/);
   assert.match(markup, /data-profile-skin=/);
@@ -39,8 +43,10 @@ test("people overview offers portrait cards, profile filters, and profile detail
   assert.match(readSource("src/components/PersonDirectoryCard.tsx"), /person\.description/);
   assert.match(markup, /data-profile-results/);
   assert.match(readSource("src/pages/people/index.astro"), /card\.classList\.toggle\("hidden", !matches\)/);
-  assert.match(readSource("src/pages/people/index.astro"), /card\.dataset\.profileColor === filter\.value/);
-  assert.match(readSource("src/pages/people/index.astro"), /card\.dataset\.profileSkin === filter\.value/);
+  const filters = readSource("src/pages/people/index.astro");
+  assert.match(filters, /selected\.some\(\(value\) => values\.includes\(value\)\)/);
+  assert.match(filters, /selected\.length === 1/);
+  assert.match(markup, /text-sm font-normal text-ink\/60/);
 });
 
 test("people, appearances, and photographs have closed stable records", () => {

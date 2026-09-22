@@ -99,6 +99,15 @@ const skinLabels: Record<string, string> = {
   light: "Light",
   fair: "Fair",
 };
+const filterGroups = [
+  { key: "hair", label: "Hair type", options: hairTypeOptions },
+  { key: "color", label: "Color", options: observedColors.map((value) => ({ id: value, label: colorLabels[value] })) },
+  {
+    key: "skin",
+    label: "Skin tone",
+    options: observedSkinTones.map((value) => ({ id: value, label: skinLabels[value] })),
+  },
+];
 ---
 
 <Layout
@@ -112,43 +121,32 @@ const skinLabels: Record<string, string> = {
       <br />
       <span class="text-orange">the record.</span>
     </h1>
-    <div class="mt-10 flex flex-col gap-4 border-b border-ink/30 pb-5 sm:flex-row sm:flex-wrap sm:items-center sm:justify-end">
-      <label class="grid gap-1 text-xs font-bold uppercase tracking-[.08em]">
-        Hair type
-        <select
-          data-profile-filter="hair"
-          class="focus-ring rounded-full border border-ink/30 bg-transparent px-3 py-2 text-sm font-normal normal-case tracking-normal"
-        >
-          <option value="">Any</option>
-          {hairTypeOptions.map((option) => (
-            <option value={option.id}>{option.label}</option>
-          ))}
-        </select>
-      </label>
-      <label class="grid gap-1 text-xs font-bold uppercase tracking-[.08em]">
-        Color
-        <select
-          data-profile-filter="color"
-          class="focus-ring rounded-full border border-ink/30 bg-transparent px-3 py-2 text-sm font-normal normal-case tracking-normal"
-        >
-          <option value="">Any</option>
-          {observedColors.map((color) => (
-            <option value={color}>{colorLabels[color]}</option>
-          ))}
-        </select>
-      </label>
-      <label class="grid gap-1 text-xs font-bold uppercase tracking-[.08em]">
-        Skin tone
-        <select
-          data-profile-filter="skin"
-          class="focus-ring rounded-full border border-ink/30 bg-transparent px-3 py-2 text-sm font-normal normal-case tracking-normal"
-        >
-          <option value="">Any</option>
-          {observedSkinTones.map((tone) => (
-            <option value={tone}>{skinLabels[tone]}</option>
-          ))}
-        </select>
-      </label>
+    <div class="mt-10 border-b border-ink/30 pb-1.5 pr-1.5">
+      <div class="flex justify-end gap-3 text-xs font-normal text-ink/60 sm:gap-5" data-profile-filters>
+        {filterGroups.map((group) => (
+          <details class="relative" data-profile-filter={group.key}>
+            <summary class="focus-ring flex cursor-pointer uppercase list-none items-center gap-1 whitespace-nowrap">
+              <span data-filter-label data-default-label={group.label}>
+                {group.label}
+              </span>
+              <span aria-hidden="true" class="relative -top-0.75">
+                ⌄
+              </span>
+            </summary>
+            <fieldset class="absolute right-0 top-full z-30 mt-2 max-h-64 w-56 overflow-auto rounded-xl border border-ink/20 bg-ivory p-3 shadow-lg">
+              <legend class="sr-only">{group.label}</legend>
+              <div class="grid gap-2">
+                {group.options.map((option) => (
+                  <label class="flex cursor-pointer items-center gap-2 text-sm font-normal text-ink/60">
+                    <input class="accent-orange" type="checkbox" value={option.id} />
+                    <span>{option.label}</span>
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+          </details>
+        ))}
+      </div>
     </div>
     <p class="sr-only" data-profile-results role="status" aria-live="polite"></p>
     <div class="mt-7 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6" data-people-grid>
@@ -163,21 +161,35 @@ const skinLabels: Record<string, string> = {
 </Layout>
 
 <script>
-  const filters = [...document.querySelectorAll<HTMLSelectElement>("[data-profile-filter]")];
+  const filters = [...document.querySelectorAll<HTMLDetailsElement>("[data-profile-filter]")];
   const cards = [...document.querySelectorAll<HTMLElement>("[data-person-card]")];
   const results = document.querySelector<HTMLElement>("[data-profile-results]");
   const empty = document.querySelector<HTMLElement>("[data-profile-empty]");
 
   const update = () => {
     let visible = 0;
+    for (const filter of filters) {
+      const selected = [...filter.querySelectorAll<HTMLInputElement>('input[type="checkbox"]:checked')];
+      const label = filter.querySelector<HTMLElement>("[data-filter-label]");
+      if (label) {
+        const fallback = label.dataset.defaultLabel ?? "";
+        label.textContent =
+          selected.length === 1 ? (selected[0].nextElementSibling?.textContent?.trim() ?? fallback) : fallback;
+      }
+    }
     for (const card of cards) {
       const matches = filters.every((filter) => {
         const dimension = filter.dataset.profileFilter;
-        if (!filter.value || !dimension) return true;
-        if (dimension === "hair") return (card.dataset.profileHair ?? "").split(",").includes(filter.value);
-        if (dimension === "color") return card.dataset.profileColor === filter.value;
-        if (dimension === "skin") return card.dataset.profileSkin === filter.value;
-        return true;
+        const selected = [...filter.querySelectorAll<HTMLInputElement>('input[type="checkbox"]:checked')].map(
+          (input) => input.value,
+        );
+        if (selected.length === 0 || !dimension) return true;
+        let values: string[];
+        if (dimension === "hair") values = (card.dataset.profileHair ?? "").split(",");
+        else if (dimension === "color") values = [card.dataset.profileColor ?? ""];
+        else if (dimension === "skin") values = [card.dataset.profileSkin ?? ""];
+        else return true;
+        return selected.some((value) => values.includes(value));
       });
       card.classList.toggle("hidden", !matches);
       if (matches) visible += 1;
@@ -187,5 +199,18 @@ const skinLabels: Record<string, string> = {
   };
 
   for (const filter of filters) filter.addEventListener("change", update);
+  document.addEventListener("click", (event) => {
+    for (const filter of filters) {
+      if (event.target instanceof Node && !filter.contains(event.target)) filter.open = false;
+    }
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    for (const filter of filters) {
+      if (!filter.open) continue;
+      filter.open = false;
+      filter.querySelector("summary")?.focus();
+    }
+  });
   update();
 </script>

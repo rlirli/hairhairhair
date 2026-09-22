@@ -1,5 +1,5 @@
-import { hairFamilies, hairTypes } from "./hair-types";
-import { getPublishedHairstylesForFamily, patternGuidance, publishedHairstyles } from "./hairstyles";
+import { hairSubtypes } from "./hair-types";
+import { getPublishedHairstylesForHairType, patternGuidance, publishedHairstyles } from "./hairstyles";
 
 export const kindLabels = {
   cut: "Cut",
@@ -7,21 +7,14 @@ export const kindLabels = {
   "styling-technique": "Styling technique",
 } as const;
 
-export function publishedStylesForFamily(family: string) {
-  const familyId = hairFamilies.find((item) => item.family === family)?.id;
-  return familyId ? getPublishedHairstylesForFamily(familyId) : [];
-}
-
 export function publishedStylesForHairType(hairTypeId: string) {
-  const hairType = hairTypes.find((item) => item.id === hairTypeId);
-  return hairType ? publishedStylesForFamily(hairType.family) : [];
+  const subtype = hairSubtypes.find((item) => item.id === hairTypeId);
+  const typeId = subtype ? `hair-type-${subtype.code[0]}` : hairTypeId;
+  return getPublishedHairstylesForHairType(typeId);
 }
 
-export function guidanceFor(styleId: string, family: string) {
-  const familyId = hairFamilies.find((item) => item.family === family)?.id;
-  return familyId
-    ? patternGuidance.find((item) => item.hairstyleId === styleId && item.hairFamilyId === familyId)
-    : undefined;
+export function guidanceFor(styleId: string, hairTypeId: string) {
+  return patternGuidance.find((item) => item.hairstyleId === styleId && item.hairTypeId === hairTypeId);
 }
 
 export function publishedRelatedHairstyles(ids: string[]) {

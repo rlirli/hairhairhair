@@ -3,7 +3,7 @@ import Layout from "../../components/Layout.astro";
 import HairstyleCard from "../../components/HairstyleCard.astro";
 import StyleMedia from "../../components/StyleMedia.astro";
 import { getImage } from "astro:assets";
-import { hairFamilies, hairTypes } from "../../data/hair-types";
+import { hairTypes, hairSubtypes } from "../../data/hair-types";
 import { publishedHairstyles, sources, getExamplesForHairstyle } from "../../data/hairstyles";
 import { guidanceFor, publishedRelatedHairstyles } from "../../data/hairstyle-relations";
 import { appearancesForStyle, personForAppearance } from "../../data/people-relations";
@@ -17,9 +17,9 @@ const { style } = Astro.props;
 const examples = getExamplesForHairstyle(style.id);
 const heroMedia = examples[0]?.imageId;
 const related = publishedRelatedHairstyles(style.relatedStyleIds);
-const familyLinks = hairFamilies
-  .map((family) => ({ family, guidance: guidanceFor(style.id, family.family) }))
-  .filter((item): item is { family: typeof item.family; guidance: NonNullable<typeof item.guidance> } =>
+const hairTypeLinks = hairTypes
+  .map((hairType) => ({ hairType, guidance: guidanceFor(style.id, hairType.id) }))
+  .filter((item): item is { hairType: typeof item.hairType; guidance: NonNullable<typeof item.guidance> } =>
     Boolean(item.guidance),
   );
 const referencedSources = sources.filter((source) => style.sourceIds.includes(source.id));
@@ -130,17 +130,17 @@ const ogImage = heroMedia
       </div>
       <div>
         <p class="text-xs font-black uppercase tracking-[.18em] text-orange">Pattern guidance</p>
-        <h2 class="mt-2 font-display text-4xl tracking-[-.06em]">Explore by family</h2>
+        <h2 class="mt-2 font-display text-4xl tracking-[-.06em]">Explore by hair type</h2>
         <div class="mt-6 space-y-4">
-          {familyLinks.map(({ family, guidance }) => (
+          {hairTypeLinks.map(({ hairType, guidance }) => (
             <div class="rounded-2xl border-2 border-ink p-4">
-              <a class="focus-ring font-display text-2xl hover:text-orange" href={`/hair-types/${family.slug}/`}>
-                Type {family.code} · {family.name}
+              <a class="focus-ring font-display text-2xl hover:text-orange" href={`/hair-types/${hairType.slug}/`}>
+                Type {hairType.code} · {hairType.name}
               </a>
               <p class="mt-2 text-sm leading-6">{guidance.note}</p>
               <div class="mt-3 flex flex-wrap gap-2">
-                {hairTypes
-                  .filter((type) => type.family === family.family)
+                {hairSubtypes
+                  .filter((type) => type.pattern === hairType.pattern)
                   .map((type) => (
                     <a
                       class="focus-ring text-xs font-bold uppercase tracking-[.1em] text-orange underline"

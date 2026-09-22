@@ -2,7 +2,7 @@
 
 ## Outcome
 
-Publish three researched guides at `/hairstyles/taper-fade/`, `/hairstyles/buzz-cut/`, and `/hairstyles/twists/`, with a browsable `/hairstyles/` index. A visitor can go from a hair family or subtype to a relevant guide and return to that pattern's family. Preserve the existing static Astro, TypeScript, Tailwind, light/dark theme, and GitHub Pages deployment.
+Publish three researched guides at `/hairstyles/taper-fade/`, `/hairstyles/buzz-cut/`, and `/hairstyles/twists/`, with a browsable `/hairstyles/` index. A visitor can go from a hair type or sub-type to a relevant guide and return to that numbered hair type. Preserve the existing static Astro, TypeScript, Tailwind, light/dark theme, and GitHub Pages deployment.
 
 ## Model decisions
 
@@ -10,18 +10,18 @@ Publish three researched guides at `/hairstyles/taper-fade/`, `/hairstyles/buzz-
 - A variation is scoped to a hairstyle. Do not add empty future person, salon, review, or product models.
 - A style example is separate from the hairstyle and references an array of hairstyle IDs. This allows future combined looks. Its image references a media record; it is not a person record.
 - Image provenance remains explicit in the data: generated reference versus attributed photograph. Generated images record their provider and prompt key, never a fictional photographer, exact natural hair type, or real-person identity.
-- Pattern guidance is a single relationship table keyed by hairstyle ID and existing hair-family ID. Both directions of navigation derive from this table. Subtypes inherit family-level guidance, clearly described as general guidance rather than evidence about a specific subtype.
-- Use qualitative notes, not suitability scores or guaranteed outcomes. The hairstyle page links to the relevant family and all three of its subtype pages. All four families can explore all three guides, with honest differences in approach and hold described for twists.
+- Pattern guidance is a single relationship table keyed by hairstyle ID and existing hair-type ID. Both directions of navigation derive from this table. Subtypes inherit type-level guidance, clearly described as general guidance rather than evidence about a specific subtype.
+- Use qualitative notes, not suitability scores or guaranteed outcomes. The hairstyle page links to the relevant hair type and all three of its sub-type pages. All four hair types can explore all three guides, with honest differences in approach and hold described for twists.
 
 ## Page structure
 
 1. Breadcrumbs, style name, category, short introduction, and a primary reference image.
 2. Two-example reference gallery with captions about visible design details; generated-image provenance remains in the media data rather than appearing as a visual label, and depicted people receive no diagnostic classification.
 3. Variations and a practical, copyable-in-the-browser consultation brief: what to ask the barber/stylist, with decisions about placement, length, finish, or part size. No new interactive copy control is required.
-4. What changes the result and pattern-family guidance with links back to the hair-type guides.
+4. What changes the result and pattern-type guidance with links back to the hair-type guides.
 5. Meaningful related-guide links and visible primary-source references with a reviewed date. No fabricated author expertise, testimonials, medical promises, maintenance schedules, or guard-length equivalences.
 
-The homepage previews the new collection; primary navigation adds Hairstyles without breaking the mobile header. Family and subtype detail pages gain a compact hairstyle section. No account, CMS, database, search service, or external image hotlink is needed.
+The homepage previews the new collection; primary navigation adds Hairstyles without breaking the mobile header. Hair-type and sub-type detail pages gain a compact hairstyle section. No account, CMS, database, search service, or external image hotlink is needed.
 
 ## Visual direction
 

@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { hairFamilies, hairTypes } from "../data/hair-types";
+import { hairSubtypes, hairTypes } from "../data/hair-types";
 import { publishedHairstyles } from "../data/hairstyles";
 import { people } from "../data/people";
 export const GET: APIRoute = () => {
@@ -8,9 +8,9 @@ export const GET: APIRoute = () => {
     "hair-types/",
     "hairstyles/",
     "people/",
-    ...hairFamilies.map((item) => `hair-types/${item.slug}/`),
     ...hairTypes.map((item) => `hair-types/${item.slug}/`),
-    ...hairTypes.map((item) => `hair-types/${item.slug}/related-hairstyles/`),
+    ...hairSubtypes.map((item) => `hair-types/${item.slug}/`),
+    ...hairSubtypes.map((item) => `hair-types/${item.slug}/related-hairstyles/`),
     ...publishedHairstyles.map((item) => `hairstyles/${item.slug}/`),
     ...people.map((item) => `people/${item.slug}/`),
   ];

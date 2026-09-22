@@ -4,7 +4,7 @@ An illustrated, static field guide to hair type vocabulary and hairstyle convers
 
 ## Content
 
-The site starts with a modern expanded Walker-inspired reference chart: 12 visible pattern types from 1A through 4C, grouped into straight, wavy, curly, and coily families. Pattern is descriptive only; it does not determine strand thickness, density, porosity, identity, or style suitability.
+The site starts with a modern expanded Walker-inspired reference chart: 12 visible pattern types from 1A through 4C, grouped into four numbered types—straight, wavy, curly, and coily. Pattern is descriptive only; it does not determine strand thickness, density, porosity, identity, or style suitability.
 
 The hairstyle collection adds three researched guides:
 
@@ -12,7 +12,7 @@ The hairstyle collection adds three researched guides:
 - **Buzz cut** — a short clipper-led cut with choices about evenness, top length, and edges.
 - **Two-strand twists** — a styling technique distinguished from flat twists, braids, and loc services.
 
-Each guide includes variations, consultation prompts, family-level pattern guidance, related styles, and two AI-generated reference images. The references are fictional visual aids: captions describe visible design details and do not infer a depicted person’s exact natural pattern, density, ethnicity, or suitability. See [`CONTEXT.md`](CONTEXT.md), [`docs/hairstyles-spec.md`](docs/hairstyles-spec.md), [`docs/hairstyles-research.md`](docs/hairstyles-research.md), [`docs/content-notes.md`](docs/content-notes.md), [`docs/hairstyle-imagery-research.md`](docs/hairstyle-imagery-research.md), and [`docs/image-prompts.md`](docs/image-prompts.md) for the language model, editorial research, image limits, and prompt records.
+Each guide includes variations, consultation prompts, type-level pattern guidance, related styles, and two AI-generated reference images. The references are fictional visual aids: captions describe visible design details and do not infer a depicted person’s exact natural pattern, density, ethnicity, or suitability. See [`CONTEXT.md`](CONTEXT.md), [`docs/hairstyles-spec.md`](docs/hairstyles-spec.md), [`docs/hairstyles-research.md`](docs/hairstyles-research.md), [`docs/content-notes.md`](docs/content-notes.md), [`docs/hairstyle-imagery-research.md`](docs/hairstyle-imagery-research.md), and [`docs/image-prompts.md`](docs/image-prompts.md) for the language model, editorial research, image limits, and prompt records.
 
 ## Local setup
 

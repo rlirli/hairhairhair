@@ -4,7 +4,7 @@
 
 This v0 uses the familiar 1A–4C shorthand as a compact description of **visible natural curl or wave pattern**. The record is intentionally named a _modern expanded Walker-inspired curl-pattern chart_: public sources describe the Walker tradition, but do not provide a sufficiently reliable primary record to claim that the exact modern 12-cell chart was Walker's original formulation.
 
-The letters are treated as relative pattern descriptors within each family, not as measurements of strand thickness, density, porosity, strength, health, or required care. A person's hair can contain multiple patterns, and pattern can look different with length, shrinkage, moisture, styling, heat, chemical processing, or damage. The chart also makes no claims about ethnicity, ancestry, or identity. Pattern vocabulary cannot replace a trichological or dermatological assessment.
+The letters are treated as relative pattern descriptors within each hair type, not as measurements of strand thickness, density, porosity, strength, health, or required care. A person's hair can contain multiple patterns, and pattern can look different with length, shrinkage, moisture, styling, heat, chemical processing, or damage. The chart also makes no claims about ethnicity, ancestry, or identity. Pattern vocabulary cannot replace a trichological or dermatological assessment.
 
 The separate `HairCharacteristics` interface leaves room for future thickness, density, and porosity data without implying that any one of those properties belongs to a specific 1A–4C type. Those properties should be collected independently if the product later needs them.
 

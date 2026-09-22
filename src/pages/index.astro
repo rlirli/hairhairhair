@@ -1,7 +1,7 @@
 ---
 import Layout from "../components/Layout.astro";
 import Pattern from "../components/Pattern.astro";
-import { hairFamilies } from "../data/hair-types";
+import { hairTypes } from "../data/hair-types";
 import HairstyleCard from "../components/HairstyleCard.astro";
 import { publishedHairstyles } from "../data/hairstyles";
 import { people } from "../data/people";
@@ -18,8 +18,7 @@ import { people } from "../data/people";
         <em class="text-orange">mapped.</em>
       </h1>
       <p class="mt-10 max-w-md text-lg leading-7">
-        Hair is wonderfully specific. Browse a clear, visual language for the patterns, textures, and families that make
-        it yours.
+        Hair is wonderfully specific. Browse a clear, visual language for the patterns and textures that make it yours.
       </p>
       <a
         href="/hair-types/"
@@ -31,7 +30,7 @@ import { people } from "../data/people";
         </span>
       </a>
     </div>
-    <Pattern family="wavy" subtype="B" />
+    <Pattern pattern="wavy" subtype="B" />
   </section>
   <section class="mx-auto max-w-7xl px-5 py-16 sm:px-8" id="about">
     <div class="mb-8 flex items-end justify-between gap-4">
@@ -51,23 +50,23 @@ import { people } from "../data/people";
       curly, and coily—with lettered sub-types for more specific pattern descriptions.
     </p>
     <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      {hairFamilies.map((family) => (
+      {hairTypes.map((hairType) => (
         <a
-          href={`/hair-types/${family.slug}/`}
+          href={`/hair-types/${hairType.slug}/`}
           class="hover-surface focus-ring group rounded-3xl border-2 border-ink bg-white/30 p-5 transition hover:-translate-y-1"
         >
           <h3 class="font-display text-3xl tracking-[-.05em] group-hover:underline">
-            <strong>Type {family.code}:</strong> {family.name}
+            <strong>Type {hairType.code}:</strong> {hairType.name}
           </h3>
           <div class="mt-5">
             <Pattern
-              family={family.family}
+              pattern={hairType.pattern}
               subtype="B"
-              label={`Simplified Type ${family.code} ${family.name.toLowerCase()} pattern illustration — not a diagnostic or photograph`}
+              label={`Simplified Type ${hairType.code} ${hairType.name.toLowerCase()} pattern illustration — not a diagnostic or photograph`}
               caption={false}
             />
           </div>
-          <p class="mt-2 text-sm leading-5">{family.description}</p>
+          <p class="mt-2 text-sm leading-5">{hairType.description}</p>
         </a>
       ))}
     </div>

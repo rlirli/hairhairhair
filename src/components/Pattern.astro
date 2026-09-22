@@ -1,14 +1,14 @@
 ---
 interface Props {
-  family?: "straight" | "wavy" | "curly" | "coily";
+  pattern?: "straight" | "wavy" | "curly" | "coily";
   subtype?: "A" | "B" | "C";
   label?: string;
   caption?: string | false;
 }
-const { family = "wavy", subtype = "B", label, caption } = Astro.props;
+const { pattern = "wavy", subtype = "B", label, caption } = Astro.props;
 const level = subtype === "A" ? 1 : subtype === "C" ? 3 : 2;
 const accessibleLabel =
-  label ?? `Simplified ${family} pattern illustration, subtype ${subtype} — not a diagnostic or photograph`;
+  label ?? `Simplified ${pattern} pattern illustration, subtype ${subtype} — not a diagnostic or photograph`;
 ---
 
 <div
@@ -17,7 +17,7 @@ const accessibleLabel =
   aria-label={accessibleLabel}
 >
   <svg viewBox="0 0 500 260" class="block h-auto w-full" aria-hidden="true">
-    {family === "straight" &&
+    {pattern === "straight" &&
       Array.from({ length: 7 }).map((_, i) => (
         <path
           d={`M ${45 + i * 68} 12 L ${45 + i * 68 + (level - 1) * 5} 248`}
@@ -27,7 +27,7 @@ const accessibleLabel =
           stroke-linecap="round"
         />
       ))}
-    {family === "wavy" &&
+    {pattern === "wavy" &&
       Array.from({ length: 6 }).map((_, i) => (
         <path
           d={`M ${25 + i * 86} 8 C ${-15 + i * 86} ${55 - level * 3}, ${105 + i * 86} ${95 + level * 12}, ${55 + i * 86} 142 S ${-5 + i * 86} ${215 - level * 8}, ${45 + i * 86} 252`}
@@ -37,7 +37,7 @@ const accessibleLabel =
           stroke-linecap="round"
         />
       ))}
-    {family === "curly" &&
+    {pattern === "curly" &&
       Array.from({ length: 6 }).map((_, i) => (
         <path
           d={`M ${45 + i * 84} 8 C ${-5 + i * 84} 32, ${-5 + i * 84} ${78 + level * 5}, ${45 + i * 84} ${98 + level * 4} C ${95 + i * 84} ${118 + level * 5}, ${95 + i * 84} ${170 + level * 8}, ${45 + i * 84} 190 C ${5 + i * 84} 208, ${10 + i * 84} 238, ${45 + i * 84} 252`}
@@ -47,7 +47,7 @@ const accessibleLabel =
           stroke-linecap="round"
         />
       ))}
-    {family === "coily" &&
+    {pattern === "coily" &&
       subtype === "A" &&
       Array.from({ length: 6 }).map((_, i) => (
         <path
@@ -58,7 +58,7 @@ const accessibleLabel =
           stroke-linecap="round"
         />
       ))}
-    {family === "coily" &&
+    {pattern === "coily" &&
       subtype === "B" &&
       Array.from({ length: 6 }).map((_, i) => (
         <path
@@ -72,7 +72,7 @@ const accessibleLabel =
           stroke-linejoin="round"
         />
       ))}
-    {family === "coily" &&
+    {pattern === "coily" &&
       subtype === "C" &&
       Array.from({ length: 6 }).map((_, i) => (
         <path
@@ -86,7 +86,7 @@ const accessibleLabel =
   </svg>
   {caption !== false && (
     <span class="mt-2 block text-[10px] font-bold uppercase tracking-[.1em]">
-      {caption ?? `Pattern · ${family} ${subtype}`}
+      {caption ?? `Pattern · ${pattern} ${subtype}`}
     </span>
   )}
 </div>

@@ -2,11 +2,11 @@
 
 ## Experience
 
-The site is a small editorial field guide: a home page introduces the visual language, `/hair-types/` links the four family pages and lists the 12 types, and each `/hair-types/{slug}/` page provides a description, characteristics, comparison, and previous/next navigation. Family pages at `/hair-types/1/` through `/hair-types/4/` group their three subtypes. The 404 page returns users home.
+The site is a small editorial field guide: a home page introduces the visual language, `/hair-types/` links the four hair-type pages and lists the 12 sub-types, and each `/hair-types/{slug}/` page provides a description, characteristics, comparison, and previous/next navigation. Hair-type pages at `/hair-types/1/` through `/hair-types/4/` group their three sub-types. The 404 page returns users home.
 
 ## Content contract
 
-`src/data/hair-types.ts` owns the content model. It exports `classificationSystems`, `hairTypes`, and `getHairType(slug)`. Each type has `id`, `classificationSystemId`, `code`, `slug`, `family`, `subtype`, `name`, `description`, `sortOrder`, `characteristics`, and `comparison`.
+`src/data/hair-types.ts` owns the content model. It exports `classificationSystems`, `hairTypes`, `hairSubtypes`, and `getHairSubtype(slug)`. Numbered hair types carry their visible `pattern`; lettered sub-types carry `hairTypeId`, `pattern`, and `subtypeCode` alongside their descriptive content.
 
 ## Visual system
 

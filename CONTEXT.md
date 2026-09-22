@@ -4,12 +4,12 @@ A shared vocabulary for exploring hair patterns and hairstyles, with examples th
 
 ## Language
 
-**Hair type**:
-A category of visible natural hair pattern within a named classification system. It does not determine strand thickness, density, porosity, or which styles a person may wear.
+**Hair sub-type**:
+A lettered category of visible natural hair pattern within a numbered hair type. It does not determine strand thickness, density, porosity, or which styles a person may wear.
 _Avoid_: Hair quality, suitability score
 
-**Hair family**:
-A broad grouping of hair types, such as straight, wavy, curly, or coily.
+**Hair type**:
+One of the four numbered Walker-inspired pattern categories: straight, wavy, curly, or coily. Each contains three lettered sub-types.
 
 **Hairstyle**:
 A named look or styling concept someone can explore and discuss with a practitioner. The catalog includes cuts, finishing techniques, and ways of arranging hair; these are distinguished rather than treated as identical services.
@@ -25,7 +25,7 @@ _Avoid_: Person, hairstyle definition
 A visual asset used to illustrate a style example, with its origin and attribution recorded. A generated reference is a fictional illustration, not evidence of a real person's hair or a verified haircut result.
 
 **Pattern guidance**:
-An editorial note about how a hairstyle may be approached within a hair family. It supports a conversation with a practitioner rather than declaring eligibility or promising a result.
+An editorial note about how a hairstyle may be approached within a hair type. It supports a conversation with a practitioner rather than declaring eligibility or promising a result.
 _Avoid_: Compatibility score, works for everyone
 
 **Person**:

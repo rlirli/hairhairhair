@@ -2,7 +2,7 @@
 
 ## Editorial scope
 
-The feature should help someone name a haircut or styling service and prepare for a consultation. It should not promise that a style is “for” one curl family, ethnicity, gender, face shape, or density. Length, density, shrinkage, growth pattern, previous chemical/heat work, scalp comfort, time, and maintenance can change the result. The 1A–4C code is a pattern vocabulary, not a suitability gate.
+The feature should help someone name a haircut or styling service and prepare for a consultation. It should not promise that a style is “for” one hair type, ethnicity, gender, face shape, or density. Length, density, shrinkage, growth pattern, previous chemical/heat work, scalp comfort, time, and maintenance can change the result. The 1A–4C code is a pattern vocabulary, not a suitability gate.
 
 ## Verified sources and findings
 

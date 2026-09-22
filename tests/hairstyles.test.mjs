@@ -3,11 +3,11 @@ import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { extname, join, relative } from "node:path";
 import test from "node:test";
 
-import { hairFamilies, hairTypes } from "../src/data/hair-types.ts";
+import { hairSubtypes, hairTypes } from "../src/data/hair-types.ts";
 import {
   getExamplesForHairstyle,
   getGuidanceForHairstyle,
-  getPublishedHairstylesForFamily,
+  getPublishedHairstylesForHairType,
   hairstyles,
   isPublishedGuide,
   patternGuidance,
@@ -54,13 +54,13 @@ function localUrl(value) {
 }
 
 test("data records have unique stable ids and slugs", () => {
-  for (const records of [hairTypes, hairFamilies, hairstyles, styleExamples, sources]) {
+  for (const records of [hairSubtypes, hairTypes, hairstyles, styleExamples, sources]) {
     assert.equal(new Set(records.map((record) => record.id)).size, records.length);
   }
-  assert.equal(new Set(hairTypes.map((type) => type.slug)).size, hairTypes.length);
+  assert.equal(new Set(hairSubtypes.map((type) => type.slug)).size, hairSubtypes.length);
   assert.equal(new Set(hairstyles.map((style) => style.slug)).size, hairstyles.length);
   assert.equal(
-    new Set(patternGuidance.map((row) => `${row.hairstyleId}:${row.hairFamilyId}`)).size,
+    new Set(patternGuidance.map((row) => `${row.hairstyleId}:${row.hairTypeId}`)).size,
     patternGuidance.length,
   );
 });
@@ -77,7 +77,7 @@ test("published hairstyle guides are derived from guide publication status", () 
 
 test("relationship, source, example, and media references are closed and reciprocal", () => {
   const styleIds = new Set(hairstyles.map((style) => style.id));
-  const familyIds = new Set(hairFamilies.map((family) => family.id));
+  const hairTypeIds = new Set(hairTypes.map((hairType) => hairType.id));
   const sourceIds = new Set(sources.map((source) => source.id));
   const mediaIds = new Set(expectedMediaIds);
   for (const style of hairstyles) {
@@ -95,17 +95,17 @@ test("relationship, source, example, and media references are closed and recipro
   }
   for (const row of patternGuidance) {
     assert.ok(styleIds.has(row.hairstyleId));
-    assert.ok(familyIds.has(row.hairFamilyId));
+    assert.ok(hairTypeIds.has(row.hairTypeId));
   }
 });
 
-test("each family has one row per guide in both directions", () => {
+test("each hair type has one row per guide in both directions", () => {
   const publishedStyleIds = publishedHairstyles.map((style) => style.id).sort();
-  for (const family of hairFamilies) {
+  for (const hairType of hairTypes) {
     for (const style of hairstyles)
-      assert.equal(getGuidanceForHairstyle(style.id).filter((row) => row.hairFamilyId === family.id).length, 1);
+      assert.equal(getGuidanceForHairstyle(style.id).filter((row) => row.hairTypeId === hairType.id).length, 1);
     assert.deepEqual(
-      getPublishedHairstylesForFamily(family.id)
+      getPublishedHairstylesForHairType(hairType.id)
         .map((style) => style.id)
         .sort(),
       publishedStyleIds,
@@ -125,14 +125,14 @@ test("media declarations cover every approved generated asset", () => {
 });
 
 test("static build contains all data-derived expected HTML pages", () => {
-  const expectedPageCount = 3 + hairFamilies.length + hairTypes.length * 2 + 1 + publishedHairstyles.length + 2;
+  const expectedPageCount = 3 + hairTypes.length + hairSubtypes.length * 2 + 1 + publishedHairstyles.length + 2;
   assert.equal(htmlFiles().length, expectedPageCount);
   for (const path of ["/", "/hair-types/", "/hairstyles/", "/people/", "/people/will-smith/"])
     assert.ok(existsSync(routeFile(path)));
   assert.ok(existsSync(join(dist, "404.html")));
-  for (const family of hairFamilies) assert.ok(existsSync(routeFile(`/hair-types/${family.slug}/`)));
-  for (const type of hairTypes) assert.ok(existsSync(routeFile(`/hair-types/${type.slug}/`)));
-  for (const type of hairTypes) assert.ok(existsSync(routeFile(`/hair-types/${type.slug}/related-hairstyles/`)));
+  for (const hairType of hairTypes) assert.ok(existsSync(routeFile(`/hair-types/${hairType.slug}/`)));
+  for (const type of hairSubtypes) assert.ok(existsSync(routeFile(`/hair-types/${type.slug}/`)));
+  for (const type of hairSubtypes) assert.ok(existsSync(routeFile(`/hair-types/${type.slug}/related-hairstyles/`)));
   for (const style of publishedHairstyles) assert.ok(existsSync(routeFile(`/hairstyles/${style.slug}/`)));
   for (const style of hairstyles.filter((style) => style.guidePublicationStatus === "draft"))
     assert.ok(!existsSync(routeFile(`/hairstyles/${style.slug}/`)));
@@ -179,28 +179,28 @@ test("style guides contain two responsive WebP examples and social metadata", ()
         assert.match(markup, new RegExp(`/hairstyles/${related.slug}/`), `${style.slug} links ${related.slug}`);
       else assert.doesNotMatch(markup, new RegExp(`/hairstyles/${related.slug}/`));
     }
-    for (const family of hairFamilies)
-      assert.match(markup, new RegExp(`/hair-types/${family.slug}/`), `${style.slug} links ${family.slug}`);
-    for (const type of hairTypes)
+    for (const hairType of hairTypes)
+      assert.match(markup, new RegExp(`/hair-types/${hairType.slug}/`), `${style.slug} links ${hairType.slug}`);
+    for (const type of hairSubtypes)
       assert.match(markup, new RegExp(`/hair-types/${type.slug}/`), `${style.slug} links ${type.slug}`);
   }
 });
 
-test("family and subtype pages expose every hairstyle guide and expected subtype links", () => {
-  for (const family of hairFamilies) {
-    const markup = page(`/hair-types/${family.slug}/`);
+test("hair type and sub-type pages expose every hairstyle guide and expected subtype links", () => {
+  for (const hairType of hairTypes) {
+    const markup = page(`/hair-types/${hairType.slug}/`);
     for (const style of publishedHairstyles) assert.match(markup, new RegExp(`/hairstyles/${style.slug}/`));
-    for (const type of hairTypes.filter((item) => item.family === family.family))
+    for (const type of hairSubtypes.filter((item) => item.pattern === hairType.pattern))
       assert.match(markup, new RegExp(`/hair-types/${type.slug}/`));
   }
-  for (const type of hairTypes) {
+  for (const type of hairSubtypes) {
     const markup = page(`/hair-types/${type.slug}/`);
     for (const style of publishedHairstyles) assert.match(markup, new RegExp(`/hairstyles/${style.slug}/`));
   }
 });
 
 test("hair-type pages use a compact, five-column hairstyle overview with hover details and a more link", () => {
-  for (const type of hairTypes) {
+  for (const type of hairSubtypes) {
     const markup = page(`/hair-types/${type.slug}/`);
     assert.match(markup, /Hairstyles for this type/i);
     assert.match(markup, /lg:grid-cols-5/);
@@ -212,15 +212,15 @@ test("hair-type pages use a compact, five-column hairstyle overview with hover d
 });
 
 test("related hairstyle pages use a four-column grid with medium cards and hover details", () => {
-  for (const type of hairTypes) {
+  for (const type of hairSubtypes) {
     const markup = page(`/hair-types/${type.slug}/related-hairstyles/`);
-    const family = hairFamilies.find((item) => item.family === type.family);
-    assert.ok(family);
+    const parentType = hairTypes.find((item) => item.pattern === type.pattern);
+    assert.ok(parentType);
     assert.match(markup, /Hairstyles for/);
     assert.match(markup, new RegExp(`Hair Type ${type.code}`));
     assert.match(markup, /lg:grid-cols-4/);
     assert.match(markup, /data-slot="hover-card-trigger"/);
-    for (const style of getPublishedHairstylesForFamily(family.id))
+    for (const style of getPublishedHairstylesForHairType(parentType.id))
       assert.match(markup, new RegExp(`/hairstyles/${style.slug}/`));
   }
 });
@@ -241,9 +241,9 @@ test("home, hairstyle index, sitemap, canonical URLs, and social image targets a
     ...publishedHairstyles.map((style) => `/hairstyles/${style.slug}/`),
     "/people/",
     "/people/will-smith/",
-    ...hairFamilies.map((family) => `/hair-types/${family.slug}/`),
-    ...hairTypes.map((type) => `/hair-types/${type.slug}/`),
-    ...hairTypes.map((type) => `/hair-types/${type.slug}/related-hairstyles/`),
+    ...hairTypes.map((hairType) => `/hair-types/${hairType.slug}/`),
+    ...hairSubtypes.map((type) => `/hair-types/${type.slug}/`),
+    ...hairSubtypes.map((type) => `/hair-types/${type.slug}/related-hairstyles/`),
   ])
     assert.match(sitemap, new RegExp(path.replaceAll("/", "\\/")));
   for (const style of hairstyles.filter((style) => style.guidePublicationStatus === "draft"))
@@ -268,14 +268,14 @@ test("home introduces four numbered hair types without family labels", () => {
   assert.match(markup, /The four hair types/);
   assert.match(markup, /lettered sub-types/);
   assert.doesNotMatch(markup, /The four families|Family [1-4]/);
-  for (const hairType of hairFamilies) assert.match(markup, new RegExp(`Type ${hairType.code}:`));
+  for (const hairType of hairTypes) assert.match(markup, new RegExp(`Type ${hairType.code}:`));
 });
 
 test("flat-top is a complete guide with two examples and reciprocal links", () => {
   const flatTop = hairstyles.find((style) => style.slug === "flat-top");
   assert.ok(flatTop);
   assert.equal(getExamplesForHairstyle(flatTop.id).length, 2);
-  assert.equal(getGuidanceForHairstyle(flatTop.id).length, hairFamilies.length);
+  assert.equal(getGuidanceForHairstyle(flatTop.id).length, hairTypes.length);
   assert.ok(flatTop.relatedStyleIds.includes("hairstyle-buzz-cut"));
   assert.ok(flatTop.relatedStyleIds.includes("hairstyle-taper-fade"));
 });

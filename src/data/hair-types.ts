@@ -11,13 +11,14 @@ export interface HairCharacteristics {
   porosity?: string;
 }
 
-export interface HairType {
+export interface HairSubtype {
   id: string;
   classificationSystemId: string;
   code: string;
   slug: string;
-  family: "straight" | "wavy" | "curly" | "coily";
-  subtype: "A" | "B" | "C";
+  hairTypeId: "hair-type-1" | "hair-type-2" | "hair-type-3" | "hair-type-4";
+  pattern: "straight" | "wavy" | "curly" | "coily";
+  subtypeCode: "A" | "B" | "C";
   name: string;
   description: string;
   sortOrder: number;
@@ -25,13 +26,13 @@ export interface HairType {
   comparison: string;
 }
 
-export interface HairFamily {
+export interface HairType {
   id: string;
   code: string;
   slug: string;
   name: string;
   description: string;
-  family: HairType["family"];
+  pattern: HairSubtype["pattern"];
 }
 
 export const classificationSystems: HairClassificationSystem[] = [
@@ -46,14 +47,15 @@ export const classificationSystems: HairClassificationSystem[] = [
 
 const classificationSystemId = "walker-inspired-expanded";
 
-export const hairTypes: HairType[] = [
+export const hairSubtypes: HairSubtype[] = [
   {
     id: "hair-type-1a",
     classificationSystemId,
     code: "1A",
     slug: "1a",
-    family: "straight",
-    subtype: "A",
+    hairTypeId: "hair-type-1",
+    pattern: "straight",
+    subtypeCode: "A",
     name: "Straight, very little visible bend",
     description: "Falls from root to tip with a nearly linear silhouette.",
     sortOrder: 1,
@@ -65,8 +67,9 @@ export const hairTypes: HairType[] = [
     classificationSystemId,
     code: "1B",
     slug: "1b",
-    family: "straight",
-    subtype: "B",
+    hairTypeId: "hair-type-1",
+    pattern: "straight",
+    subtypeCode: "B",
     name: "Straight with gentle body",
     description: "Mostly straight, with a little natural fullness or movement.",
     sortOrder: 2,
@@ -78,21 +81,23 @@ export const hairTypes: HairType[] = [
     classificationSystemId,
     code: "1C",
     slug: "1c",
-    family: "straight",
-    subtype: "C",
+    hairTypeId: "hair-type-1",
+    pattern: "straight",
+    subtypeCode: "C",
     name: "Straight with visible bend",
     description: "Generally straight, with occasional bends or a slight wave through the lengths.",
     sortOrder: 3,
     characteristics: ["Straight overall shape", "Noticeable bends", "Movement may appear in the lengths"],
-    comparison: "The most visibly bent straight-family pattern; 2A forms a more continuous S-wave.",
+    comparison: "The most visibly bent straight type pattern; 2A forms a more continuous S-wave.",
   },
   {
     id: "hair-type-2a",
     classificationSystemId,
     code: "2A",
     slug: "2a",
-    family: "wavy",
-    subtype: "A",
+    hairTypeId: "hair-type-2",
+    pattern: "wavy",
+    subtypeCode: "A",
     name: "Loose S-wave",
     description: "Forms a soft, open S-shape that may begin below the roots.",
     sortOrder: 4,
@@ -104,8 +109,9 @@ export const hairTypes: HairType[] = [
     classificationSystemId,
     code: "2B",
     slug: "2b",
-    family: "wavy",
-    subtype: "B",
+    hairTypeId: "hair-type-2",
+    pattern: "wavy",
+    subtypeCode: "B",
     name: "Defined S-wave",
     description: "Shows a clearer S-shaped wave through the lengths, often with a straighter root area.",
     sortOrder: 5,
@@ -117,8 +123,9 @@ export const hairTypes: HairType[] = [
     classificationSystemId,
     code: "2C",
     slug: "2c",
-    family: "wavy",
-    subtype: "C",
+    hairTypeId: "hair-type-2",
+    pattern: "wavy",
+    subtypeCode: "C",
     name: "Strong S-wave",
     description: "Forms pronounced S-bends from near the roots and can approach a loose curl.",
     sortOrder: 6,
@@ -130,8 +137,9 @@ export const hairTypes: HairType[] = [
     classificationSystemId,
     code: "3A",
     slug: "3a",
-    family: "curly",
-    subtype: "A",
+    hairTypeId: "hair-type-3",
+    pattern: "curly",
+    subtypeCode: "A",
     name: "Loose spiral curl",
     description: "Forms visible, open spiral loops with a rounded curl path.",
     sortOrder: 7,
@@ -143,21 +151,23 @@ export const hairTypes: HairType[] = [
     classificationSystemId,
     code: "3B",
     slug: "3b",
-    family: "curly",
-    subtype: "B",
+    hairTypeId: "hair-type-3",
+    pattern: "curly",
+    subtypeCode: "B",
     name: "Springy spiral curl",
     description: "Forms compact, spring-like spirals with a clear repeating curl path.",
     sortOrder: 8,
     characteristics: ["Spring-like spirals", "Compact repeating loops", "Defined curl path"],
-    comparison: "Tighter and more compact than 3A; 3C has the smallest curls in the curly family.",
+    comparison: "Tighter and more compact than 3A; 3C has the smallest curls in the curly type.",
   },
   {
     id: "hair-type-3c",
     classificationSystemId,
     code: "3C",
     slug: "3c",
-    family: "curly",
-    subtype: "C",
+    hairTypeId: "hair-type-3",
+    pattern: "curly",
+    subtypeCode: "C",
     name: "Tight spiral curl",
     description: "Forms dense, tightly looping spirals that retain a rounded curl shape.",
     sortOrder: 9,
@@ -169,8 +179,9 @@ export const hairTypes: HairType[] = [
     classificationSystemId,
     code: "4A",
     slug: "4a",
-    family: "coily",
-    subtype: "A",
+    hairTypeId: "hair-type-4",
+    pattern: "coily",
+    subtypeCode: "A",
     name: "Defined coiled loops",
     description: "Forms small, visibly coiled loops with a repeating rounded pattern.",
     sortOrder: 10,
@@ -182,8 +193,9 @@ export const hairTypes: HairType[] = [
     classificationSystemId,
     code: "4B",
     slug: "4b",
-    family: "coily",
-    subtype: "B",
+    hairTypeId: "hair-type-4",
+    pattern: "coily",
+    subtypeCode: "B",
     name: "Z-shaped coils and bends",
     description: "Follows a compact path of sharp bends and angles rather than round loops.",
     sortOrder: 11,
@@ -195,8 +207,9 @@ export const hairTypes: HairType[] = [
     classificationSystemId,
     code: "4C",
     slug: "4c",
-    family: "coily",
-    subtype: "C",
+    hairTypeId: "hair-type-4",
+    pattern: "coily",
+    subtypeCode: "C",
     name: "Very tight, subtle coil pattern",
     description: "Has very tight bends or coils whose repeated pattern may be subtle without close inspection.",
     sortOrder: 12,
@@ -206,41 +219,41 @@ export const hairTypes: HairType[] = [
   },
 ];
 
-export const hairFamilies: HairFamily[] = [
+export const hairTypes: HairType[] = [
   {
-    id: "hair-family-1",
+    id: "hair-type-1",
     code: "1",
     slug: "1",
     name: "Straight",
-    family: "straight",
+    pattern: "straight",
     description: "Patterns that fall mostly linear, from almost no visible bend to a slight bend through the lengths.",
   },
   {
-    id: "hair-family-2",
+    id: "hair-type-2",
     code: "2",
     slug: "2",
     name: "Wavy",
-    family: "wavy",
+    pattern: "wavy",
     description: "Patterns shaped by visible S-waves, from soft open movement to pronounced bends near the roots.",
   },
   {
-    id: "hair-family-3",
+    id: "hair-type-3",
     code: "3",
     slug: "3",
     name: "Curly",
-    family: "curly",
+    pattern: "curly",
     description: "Patterns that form repeated rounded loops or spirals, with curl definition that varies by subtype.",
   },
   {
-    id: "hair-family-4",
+    id: "hair-type-4",
     code: "4",
     slug: "4",
     name: "Coily",
-    family: "coily",
+    pattern: "coily",
     description: "Compact patterns of coils, curves, or angles whose scale and visibility shift across subtypes.",
   },
 ];
 
-export function getHairType(slug: string): HairType | undefined {
-  return hairTypes.find((hairType) => hairType.slug === slug);
+export function getHairSubtype(slug: string): HairSubtype | undefined {
+  return hairSubtypes.find((hairType) => hairType.slug === slug);
 }

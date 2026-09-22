@@ -31,6 +31,9 @@ _Avoid_: Compatibility score, works for everyone
 **Person**:
 A real individual whose documented hairstyles can be explored. A person is not assigned a permanent hair type merely from styled photographs.
 
+**Natural profile**:
+A separate, optional record of a person's natural hair type, natural hair color, natural skin tone, hair thickness, and hair density. Each trait carries its own source, status, and confidence so provisional AI-prefills can be replaced by community corrections. An undocumented trait remains explicitly unknown.
+
 **Appearance**:
 A dated photographic record of a person at a particular event or moment. Its capture date is distinct from when the image was published or uploaded.
 

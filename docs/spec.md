@@ -8,6 +8,8 @@ The site is a small editorial field guide: a home page introduces the visual lan
 
 `src/data/hair-types.ts` owns the content model. It exports `classificationSystems`, `hairTypes`, `hairSubtypes`, and `getHairSubtype(slug)`. Numbered hair types carry their visible `pattern`; lettered sub-types carry `hairTypeId`, `pattern`, and `subtypeCode` alongside their descriptive content.
 
+`src/data/natural-profiles.ts` owns optional person-level natural profile records. Every trait is a value paired with `provenance.source`, `provenance.status`, and `provenance.confidence`. A natural hair type stores a `hairTypeId` that resolves to the existing `/hair-types/{slug}/` route. Unknown thickness and density stay `null` with `not-documented` provenance; they are never inferred from a styled photograph.
+
 ## Visual system
 
 Warm ivory, near-black ink, orange accents, butter-yellow illustration panels, oversized serif display typography, and compact uppercase labels create the editorial character. `Pattern.astro` generates reusable abstract SVG marks and labels them as simplified illustrations, not diagnostics or photos.

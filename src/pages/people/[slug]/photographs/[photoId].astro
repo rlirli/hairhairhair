@@ -79,6 +79,7 @@ const uniqueStyles = photoStyles.filter(
         format="webp"
         alt={photo.alt}
         class="max-h-[75vh] w-full rounded-[2rem] object-contain"
+        style={`object-position: ${photo.objectPosition}`}
       />
       <PersonPhotoAttribution media={photo} />
       <figcaption class="mt-5 border-l-4 border-orange pl-4 text-sm leading-6">
@@ -140,17 +141,25 @@ const uniqueStyles = photoStyles.filter(
           </ul>
         </div>
         <div>
-          <h3 class="font-display text-3xl tracking-[-.03em]">Related guides</h3>
+          <h3 class="font-display text-3xl tracking-[-.03em]">Hairstyle records</h3>
           {uniqueStyles.length ? (
             <ul class="mt-4 space-y-3 text-sm leading-6">
               {uniqueStyles.map((style) => (
                 <li>
                   <a
                     class="focus-ring font-bold text-orange underline decoration-orange decoration-2 underline-offset-4"
-                    href={`/hairstyles/${style.slug}/`}
+                    href={`/people/${person.slug}/hairstyles/${style.slug}/`}
                   >
-                    {style.name} guide ↗
+                    {style.name} — {person.name}'s record ↗
                   </a>
+                  {style.guidePublicationStatus === "published" && (
+                    <a
+                      class="focus-ring ml-3 text-orange underline decoration-orange decoration-2 underline-offset-4"
+                      href={`/hairstyles/${style.slug}/`}
+                    >
+                      guide ↗
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>

@@ -4,7 +4,12 @@ export interface Person {
   name: string;
   description: string;
   heroImageId: string;
-  sourceUrls: string[];
+  sources: PersonSource[];
+}
+
+export interface PersonSource {
+  kind: "photograph" | "biography";
+  url: string;
 }
 
 export interface AppearanceObservation {
@@ -40,6 +45,7 @@ export interface PersonPhotograph {
   rightsBasis: string;
   jurisdiction: string;
   identifier: string;
+  objectPosition: string;
 }
 
 const obamaFindingAid =
@@ -55,7 +61,10 @@ export const people: Person[] = [
     description:
       "Willard Carroll Smith II (born September 25, 1968, in Philadelphia, Pennsylvania) is an American actor, rapper, and film producer.",
     heroImageId: "will-smith-2012",
-    sourceUrls: [obamaFindingAid, paramountBiography],
+    sources: [
+      { kind: "photograph", url: obamaFindingAid },
+      { kind: "biography", url: paramountBiography },
+    ],
   },
   {
     id: "person-mario-balotelli",
@@ -64,7 +73,7 @@ export const people: Person[] = [
     description:
       "Mario Balotelli Barwuah (born August 12, 1990, in Palermo, Italy) is an Italian professional footballer.",
     heroImageId: "mario-balotelli-2012-training",
-    sourceUrls: [britannicaMarioBalotelli],
+    sources: [{ kind: "biography", url: britannicaMarioBalotelli }],
   },
 ];
 
@@ -212,6 +221,7 @@ export const personPhotographs: PersonPhotograph[] = [
       "Official U.S. federal White House photograph held in the Obama Presidential Library collection; public-domain U.S. government work.",
     jurisdiction: "United States",
     identifier: "P121009PS-0547",
+    objectPosition: "70% 48%",
   },
   {
     id: "will-smith-2011",
@@ -230,6 +240,7 @@ export const personPhotographs: PersonPhotograph[] = [
       "Official U.S. federal White House photograph held in the Obama Presidential Library collection; public-domain U.S. government work.",
     jurisdiction: "United States",
     identifier: "P042411PS-0363",
+    objectPosition: "58% 43%",
   },
   {
     id: "will-smith-2012",
@@ -250,6 +261,7 @@ export const personPhotographs: PersonPhotograph[] = [
       "U.S. Navy personnel official-duty photograph; the file record identifies the work as public domain under the PD-US Navy basis. VIRIN 120523-N-MH374-101; released.",
     jurisdiction: "United States",
     identifier: "120523-N-MH374-101",
+    objectPosition: "61% 43%",
   },
   {
     id: "mario-balotelli-2009-inter",
@@ -266,6 +278,7 @@ export const personPhotographs: PersonPhotograph[] = [
     rightsBasis: "Wikimedia Commons file record identifies this image as CC BY-SA 3.0.",
     jurisdiction: "Italy",
     identifier: "Mario Balotelli - Inter Mailand (1)",
+    objectPosition: "50% 40%",
   },
   {
     id: "mario-balotelli-2012-training",
@@ -282,6 +295,7 @@ export const personPhotographs: PersonPhotograph[] = [
     rightsBasis: "Wikimedia Commons file record identifies this image as CC BY 2.0.",
     jurisdiction: "Poland",
     identifier: "Mario Balotelli Euro 2012 Training",
+    objectPosition: "50% 38%",
   },
   {
     id: "mario-balotelli-2013-inter",
@@ -300,6 +314,7 @@ export const personPhotographs: PersonPhotograph[] = [
     rightsBasis: "Wikimedia Commons file record identifies this crop as CC BY 2.0.",
     jurisdiction: "United Kingdom",
     identifier: "Balotelli Inter-Milan february 2013 (cropped)",
+    objectPosition: "52% 40%",
   },
   {
     id: "mario-balotelli-2014-liverpool",
@@ -318,6 +333,7 @@ export const personPhotographs: PersonPhotograph[] = [
     rightsBasis: "Wikimedia Commons file record identifies this image as CC BY-SA 4.0.",
     jurisdiction: "United Kingdom",
     identifier: "Mario Balotelli with Liverpool September 2014",
+    objectPosition: "50% 42%",
   },
   {
     id: "mario-balotelli-2019-marseille",
@@ -334,5 +350,6 @@ export const personPhotographs: PersonPhotograph[] = [
     rightsBasis: "Wikimedia Commons file record identifies this crop as CC BY-SA 4.0.",
     jurisdiction: "France",
     identifier: "Mario Balotelli OM (cropped)",
+    objectPosition: "50% 43%",
   },
 ];

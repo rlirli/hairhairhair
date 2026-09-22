@@ -27,6 +27,7 @@ const { media, event, date, observations, anchor } = Astro.props;
         format="webp"
         alt={media.alt}
         class="w-full rounded-[2rem] object-contain"
+        style={`object-position: ${media.objectPosition}`}
       />
       <figcaption class="mt-3 text-sm leading-6">
         <span class="font-bold">{media.provenance.attribution}</span>{" "}

@@ -27,6 +27,14 @@ test("people, appearances, and photographs have closed stable records", () => {
   assert.equal(people[0].slug, "will-smith");
   assert.equal(people[1].id, "person-mario-balotelli");
   assert.equal(people[1].slug, "mario-balotelli");
+  assert.deepEqual(
+    people[0].sources.map((source) => source.kind),
+    ["photograph", "biography"],
+  );
+  assert.deepEqual(
+    people[1].sources.map((source) => source.kind),
+    ["biography"],
+  );
   const personIds = new Set(people.map((person) => person.id));
   const photoIds = new Set(personPhotographs.map((photo) => photo.id));
   const styleIds = new Set(hairstyles.map((style) => style.id));
@@ -47,7 +55,8 @@ test("people, appearances, and photographs have closed stable records", () => {
         photo.originalUrl &&
         photo.rightsEvidenceUrl &&
         photo.rightsBasis &&
-        photo.identifier,
+        photo.identifier &&
+        photo.objectPosition,
     );
     assert.ok(photo.licenseName && photo.licenseUrl && photo.attribution);
     assert.ok(["original", "cropped", "edited"].includes(photo.derivativeStatus));
@@ -119,6 +128,7 @@ test("Mario Balotelli is a complete second person record with five licensed appe
   assert.match(profile, /Natural profile/);
   assert.match(profile, /href="\/hair-types\/4\/"/);
   assert.match(profile, /CC BY/);
+  assert.match(profile, /bio source/);
   assert.match(profile, /href="\/people\/mario-balotelli\/appearances\/"/);
 
   const archive = page("/people/mario-balotelli/appearances/");
@@ -129,6 +139,7 @@ test("Mario Balotelli is a complete second person record with five licensed appe
   assert.match(archive, /CC BY-SA 4\.0/);
   assert.match(page("/people/mario-balotelli/hairstyles/"), /Thin mohawk/);
   assert.match(page("/people/mario-balotelli/photographs/mario-balotelli-2013-inter/"), /cropped image/);
+  assert.match(page("/people/mario-balotelli/photographs/mario-balotelli-2013-inter/"), /Mario Balotelli's record/);
 });
 
 test("appearance overview is newest-first and links back to the person record", () => {
@@ -208,6 +219,13 @@ test("person photographs have reusable license provenance and locally built medi
   for (const photo of personPhotographs) {
     assert.ok(existsSync(join(root, "src/assets/people", photo.fileName)), photo.fileName);
     assert.match(mediaSource, new RegExp(photo.fileName.replace(".", "\\.")));
+    const owner = people.find((person) =>
+      appearances.some((appearance) => appearance.personId === person.id && appearance.imageId === photo.id),
+    );
+    assert.ok(owner);
+    assert.ok(
+      page(`/people/${owner.slug}/photographs/${photo.id}/`).includes(`object-position: ${photo.objectPosition}`),
+    );
   }
   for (const person of people) {
     const hero = personPhotographs.find((photo) => photo.id === person.heroImageId);

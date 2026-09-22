@@ -28,8 +28,6 @@ const formatDate = (value: string) =>
   new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric" }).format(
     new Date(`${value}T00:00:00`),
   );
-const facePosition =
-  photo.id === "will-smith-2009" ? "70% 48%" : photo.id === "will-smith-2011" ? "58% 43%" : "61% 43%";
 ---
 
 <Layout
@@ -84,7 +82,7 @@ const facePosition =
             format="webp"
             alt={photo.alt}
             class="aspect-[4/3] w-full rounded-[2rem] object-cover transition-transform duration-300 group-hover:scale-[1.01]"
-            style={`object-position: ${facePosition}`}
+            style={`object-position: ${photo.objectPosition}`}
           />
           <PersonPhotoAttribution media={photo} compact />
         </a>

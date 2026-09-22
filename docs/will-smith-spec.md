@@ -1,25 +1,56 @@
-# Will Smith: two release phases
+# People, appearances, and hairstyle records
 
-## Phase 1 — publish the person first
+Person records provide a concise, factual mini bio and a source-attributed image. They are not biography pages or a
+complete career archive. Current coverage is limited to documented appearances with usable source photographs; dates
+retain their recorded precision and are never inferred from upload dates.
 
-Create `/people/` and person records with concise factual mini bios and locally stored, source-verified photographs. Each photograph records its creator, source/original URLs, license name and URL, visible attribution, and crop/derivative status. Show exact capture dates where recorded; never substitute upload dates. Current usable coverage starts in 2009; do not imply a complete career timeline or invent missing decades. Do not copy biography prose or generate a likeness of Smith.
+## Data model
 
-Model Person separately from dated Appearance. Each Appearance connects a person to a photo and one or more editorial hairstyle observations. Observations describe the visible cut, not a verified stylist's terminology or an immutable natural hair type. Do not use appearance photographs as definitive evidence of ethnicity, natural color, density, porosity, or exact 1A–4C subtype. Keep dates with explicit precision and supporting source URLs. Photo provenance includes creator, source record, original download URL, license name/URL, visible attribution, derivative status, rights evidence, and identifier.
+`Person` is separate from dated `Appearance` records. A person has typed biography and photograph sources. Each
+photograph records its creator, source and original URLs, license, visible attribution, derivative status, rights
+evidence, identifier, and the object position used when a face-focused crop is rendered.
 
-Natural profile traits are a separate, explicitly provisional record. Each trait stores its value independently from provenance, status, and confidence so an AI prefill can later be replaced by a community correction without changing the page model. Missing thickness and density remain `null` with a `not-documented` provenance instead of being guessed.
+An appearance connects one person to one photograph and one or more editorial hairstyle observations. Observations
+describe only the visible haircut in that image. They are not evidence for a person's immutable natural hair type,
+color, density, porosity, ethnicity, or exact 1A–4C subtype.
 
-Keep this static Astro/TypeScript/Tailwind with no database. Use pure data modules for people/appearance relationships and separately imported Astro image assets. The reusable person-media provenance union supports public-domain and attribution-licensed photos; compact attribution is rendered wherever a licensed photo appears, including overview cards. Preserve existing generated-image labeling.
+Natural profile traits are a separate, explicitly provisional record. Each trait stores its value and provenance,
+status, and confidence independently so an AI prefill can later be replaced by a community correction. Missing
+thickness and density remain `null` with `not-documented` provenance rather than being guessed.
 
-The person page has breadcrumbs, a concise factual mini bio, a source-attributed profile image, a natural profile, a compact newest-first appearances preview with face-cropped images, capture dates, event titles, and a link to the full `/appearances/` overview, plus a compact hairstyles-worn preview using explicit editorial order, one face-cropped observed photograph per style, title-only cards, and a link to `/hairstyles/`. Each dated appearance has its own record at `/people/{person}/appearances/{appearance}/`, which presents the event, primary photograph, hairstyle observations, guide/person-style links, and restrained source links. The appearances overview links to those records. Photograph records present creator, source, original file, rights evidence, and every current appearance backlink. The person hairstyle overview at `/people/{person}/hairstyles/` uses the same explicit ordering and links each hairstyle to `/people/{person}/hairstyles/{hairstyle}/`, where all matching appearance records are collected. Keep the bio short and factual; it is not a second editorial essay.
+The static Astro/TypeScript/Tailwind implementation uses pure data modules, relationship helpers, and locally imported
+image assets. Licensed photographs show compact attribution wherever they appear, including overview cards.
 
-Integrate People navigation and a homepage introduction. Derive hairstyle-page backlinks to Will Smith's appearance records from the same relationship records. Add sitemap URLs, canonical metadata and optimized raster social image. Preserve narrow-screen navigation and both themes. Prefer readable multiline new templates. Keep original photos unaltered on disk; responsive images must not cut off the hairstyle or upscale low-resolution archive images.
+## Routes and presentation
 
-For a newly observed hairstyle absent from the library, create a real minimal stub record with an explicit `stub` status and canonical page: title, short scope, 'Full guide coming next', and the observed person/photo backlink. Do not generate style images or fill consultation/variation/source sections until AFTER phase 1 has been committed and pushed. Existing three hairstyles are `published`. Prefer a discriminated union so stub records do not pretend to have complete guide fields.
+The person page has breadcrumbs, a concise expandable mini bio, a source-attributed profile image, a natural profile,
+a compact newest-first appearances preview, and a compact hairstyles-worn preview in explicit editorial order.
 
-Likely new style: `flat-top` (low, squared top visible in the 2011 photograph); confirm against inspected photos before finalizing. Do not add famous hairstyles for which selected photos provide no visible evidence. Existing close cropped examples may link to buzz-cut with clear editorial wording.
+The full appearances archive lives at `/people/{person}/appearances/`. Each appearance record presents the event,
+face-focused primary photograph, hairstyle observations, global guide links, person-specific hairstyle links, and source
+links. Photograph records live at `/people/{person}/photographs/{photo}/`; they present provenance and every current
+appearance backlink, plus the person's hairstyle records and any published global guides that use the photograph.
 
-Verify relationship IDs, dates/precision/source provenance, no restricted-license media on the person page, no generated images passed off as real appearances, real backlinks, local image targets, canonical/sitemap routes, and intentional stub status. Adapt the existing tests to data-derived page/guide counts rather than deleting coverage. Run check/build/test. Commit and push phase 1 explicitly before any phase-2 implementation or image generation.
+The person hairstyle overview lives at `/people/{person}/hairstyles/`. Each person-specific hairstyle record at
+`/people/{person}/hairstyles/{hairstyle}/` collects all matching appearance records and links to the global guide when
+that guide's `guidePublicationStatus` is `published`.
 
-## Phase 2 — complete only the new style guides
+Keep the bio short and factual. It is not a second editorial essay. Keep original photographs unaltered on disk and
+use responsive image crops only for presentation; do not imply that a crop changes the underlying source image.
 
-After phase-1 push succeeds, research the pending style(s), fill their guides to the existing standard, add clearly labeled generated images of fictional adults (not Will Smith), and convert their statuses to published. Retain the actual dated Will Smith photo backlinks as a distinct real-world examples section. Keep pending-guide list explicit and update it on completion. Verify again, then make a separate commit and push.
+## Hairstyle guides
+
+The global hairstyle model is a complete `Hairstyle` record with an explicit `guidePublicationStatus` of `draft` or
+`published`. Draft records are retained when an observation is useful before a full guide is ready, but draft guides
+are not linked as public global guide pages. A person-specific hairstyle record can still link to every observed style,
+including a draft, because it documents what was recorded for that person.
+
+Do not use a separate stub model or a generic `status` field. When a draft becomes ready, complete its normal guide
+fields, set `guidePublicationStatus` to `published`, and keep the real dated appearance backlinks distinct from any
+generated guide imagery.
+
+## Verification
+
+Verify relationship IDs, date precision, source provenance, local image targets, object-position metadata, attribution,
+canonical routes, sitemap entries, and reciprocal appearance/hairstyle/photo backlinks. Run the repository check,
+build, formatting check, and tests after each holistic product increment.

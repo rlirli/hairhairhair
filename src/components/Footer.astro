@@ -1,30 +1,137 @@
-<footer class="mx-auto mt-24 flex max-w-7xl flex-col gap-6 border-t-2 border-ink px-5 py-8 text-sm sm:px-8">
-  <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+<footer class="mx-auto mt-24 max-w-7xl border-t-2 border-ink px-5 py-8 text-sm sm:px-8">
+  <div class="flex items-center justify-between gap-4">
     <span class="font-black">hairhairhair.hair</span>
-    <span>Built for curiosity, not diagnosis.</span>
+
+    <details class="theme-menu relative">
+      <summary class="focus-ring flex cursor-pointer list-none items-center rounded-full p-2 opacity-70 transition hover:bg-ink/8 hover:opacity-100">
+        <span class="sr-only">
+          Choose color theme. Current theme: <span id="current-theme">system</span>
+        </span>
+        <svg class="theme-icon theme-icon-system" aria-hidden="true" viewBox="0 0 24 24" width="19" height="19">
+          <rect x="3" y="4" width="18" height="13" rx="2"></rect>
+          <path d="M8 21h8M12 17v4"></path>
+        </svg>
+        <svg class="theme-icon theme-icon-light" aria-hidden="true" viewBox="0 0 24 24" width="19" height="19">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path>
+        </svg>
+        <svg class="theme-icon theme-icon-dark" aria-hidden="true" viewBox="0 0 24 24" width="19" height="19">
+          <path d="M20.5 14.1A8.3 8.3 0 0 1 9.9 3.5 8.5 8.5 0 1 0 20.5 14.1Z"></path>
+        </svg>
+      </summary>
+
+      <div class="theme-options absolute right-0 bottom-full z-20 mb-2 min-w-36 rounded-xl p-1.5">
+        <button type="button" data-theme-value="system">
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <rect x="3" y="4" width="18" height="13" rx="2"></rect>
+            <path d="M8 21h8M12 17v4"></path>
+          </svg>
+          System
+        </button>
+        <button type="button" data-theme-value="light">
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"></path>
+          </svg>
+          Light
+        </button>
+        <button type="button" data-theme-value="dark">
+          <svg aria-hidden="true" viewBox="0 0 24 24">
+            <path d="M20.5 14.1A8.3 8.3 0 0 1 9.9 3.5 8.5 8.5 0 1 0 20.5 14.1Z"></path>
+          </svg>
+          Dark
+        </button>
+      </div>
+    </details>
   </div>
-  <label class="flex w-fit items-center gap-3 font-bold" for="theme-choice">
-    <span>Theme</span>
-    <select
-      id="theme-choice"
-      class="focus-ring rounded-full border-2 border-ink bg-transparent px-3 py-2 text-xs font-black uppercase tracking-[.08em]"
-      aria-label="Choose theme"
-    >
-      <option value="system">System</option>
-      <option value="light">Light</option>
-      <option value="dark">Dark</option>
-    </select>
-  </label>
 </footer>
+
+<style>
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .theme-icon,
+  .theme-options svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.7;
+  }
+
+  .theme-icon-light,
+  .theme-icon-dark {
+    display: none;
+  }
+
+  :global(html[data-theme="light"]) .theme-icon-system,
+  :global(html[data-theme="dark"]) .theme-icon-system {
+    display: none;
+  }
+
+  :global(html[data-theme="light"]) .theme-icon-light,
+  :global(html[data-theme="dark"]) .theme-icon-dark {
+    display: block;
+  }
+
+  .theme-options {
+    border: 1px solid color-mix(in srgb, var(--color-ink) 22%, transparent);
+    background: var(--color-ivory);
+    box-shadow: 0 1rem 2.5rem color-mix(in srgb, var(--color-ink) 14%, transparent);
+  }
+
+  .theme-options button {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 0.6rem;
+    border-radius: 0.6rem;
+    padding: 0.55rem 0.65rem;
+    text-align: left;
+    font-size: 0.75rem;
+    font-weight: 400;
+  }
+
+  .theme-options button:hover,
+  .theme-options button:focus-visible {
+    background: color-mix(in srgb, var(--color-ink) 8%, transparent);
+    outline: none;
+  }
+
+  .theme-options button[aria-pressed="true"] {
+    color: var(--color-orange);
+  }
+
+  .theme-options svg {
+    width: 1rem;
+    height: 1rem;
+  }
+</style>
+
 <script>
-  const themeChoice = document.querySelector<HTMLSelectElement>("#theme-choice");
+  const themeMenu = document.querySelector<HTMLDetailsElement>(".theme-menu");
+  const themeButtons = document.querySelectorAll<HTMLButtonElement>("[data-theme-value]");
+  const currentTheme = document.querySelector<HTMLElement>("#current-theme");
   const themeController = window.hairhairhairTheme;
-  if (themeChoice && themeController) {
+
+  if (themeMenu && themeButtons.length && currentTheme && themeController) {
     const syncChoice = (theme: string) => {
-      themeChoice.value = theme;
+      currentTheme.textContent = theme;
+      themeButtons.forEach((button) =>
+        button.setAttribute("aria-pressed", String(button.dataset.themeValue === theme)),
+      );
     };
+
     syncChoice(themeController.getPreference());
     themeController.subscribe(syncChoice);
-    themeChoice.addEventListener("change", () => themeController.setPreference(themeChoice.value));
+    themeButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const theme = button.dataset.themeValue;
+        if (theme) themeController.setPreference(theme);
+        themeMenu.open = false;
+        themeMenu.querySelector("summary")?.focus();
+      });
+    });
   }
 </script>

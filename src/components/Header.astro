@@ -1,10 +1,29 @@
-<header class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-5 py-6 sm:flex-nowrap sm:px-8">
-  <a href="/" class="focus-ring text-lg font-black tracking-[-.06em]">
+<header class="site-header relative z-20 mx-auto flex max-w-7xl items-center justify-between gap-3 px-5 py-6 sm:px-8">
+  <a href="/" class="focus-ring shrink-0 text-lg font-black tracking-[-.06em]">
     hair<span class="text-orange">hair</span>hair<span class="text-orange">.</span>hair
   </a>
+
+  <button
+    id="primary-menu-toggle"
+    class="menu-toggle focus-ring -mr-2 rounded-full p-2"
+    type="button"
+    aria-controls="primary-menu"
+    aria-expanded="false"
+  >
+    <span class="sr-only">Open navigation</span>
+    <svg class="menu-icon" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20">
+      <path d="M4 7h16M4 12h16M4 17h16"></path>
+    </svg>
+    <svg class="close-icon" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20">
+      <path d="m6 6 12 12M18 6 6 18"></path>
+    </svg>
+  </button>
+
   <nav
+    id="primary-menu"
     aria-label="Primary navigation"
-    class="order-3 flex w-full items-center justify-end gap-2 text-xs font-bold uppercase tracking-[.1em] sm:order-none sm:w-auto sm:gap-8 sm:text-sm sm:tracking-[.12em]"
+    data-open="false"
+    class="primary-nav items-center justify-end gap-8 text-sm font-bold uppercase tracking-[.12em]"
   >
     <a class="focus-ring hover:text-orange" href="/hair-types/">
       Hair types
@@ -15,8 +34,99 @@
     <a class="focus-ring hover:text-orange" href="/people/">
       People
     </a>
-    <a class="focus-ring hidden hover:text-orange sm:inline" href="/#about">
-      About
-    </a>
   </nav>
 </header>
+
+<style>
+  .site-header {
+    container-type: inline-size;
+  }
+
+  .primary-nav {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: none;
+  }
+
+  .menu-toggle svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-width: 1.8;
+  }
+
+  .close-icon {
+    display: none;
+  }
+
+  @container (max-width: 41rem) {
+    .menu-toggle {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .menu-toggle[aria-expanded="true"] .menu-icon {
+      display: none;
+    }
+
+    .menu-toggle[aria-expanded="true"] .close-icon {
+      display: block;
+    }
+
+    .primary-nav {
+      position: absolute;
+      top: calc(100% - 0.5rem);
+      right: 1.25rem;
+      display: none;
+      min-width: 12rem;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      border: 1px solid color-mix(in srgb, var(--color-ink) 28%, transparent);
+      border-radius: 1rem;
+      background: var(--color-ivory);
+      padding: 0.5rem;
+      box-shadow: 0 1rem 2.5rem color-mix(in srgb, var(--color-ink) 16%, transparent);
+    }
+
+    .primary-nav[data-open="true"] {
+      display: flex;
+    }
+
+    .primary-nav a {
+      border-radius: 0.65rem;
+      padding: 0.75rem 0.9rem;
+    }
+  }
+</style>
+
+<script>
+  const header = document.querySelector<HTMLElement>(".site-header");
+  const menuToggle = document.querySelector<HTMLButtonElement>("#primary-menu-toggle");
+  const primaryMenu = document.querySelector<HTMLElement>("#primary-menu");
+
+  if (header && menuToggle && primaryMenu) {
+    const setMenuOpen = (open: boolean) => {
+      menuToggle.setAttribute("aria-expanded", String(open));
+      menuToggle.querySelector(".sr-only")!.textContent = open ? "Close navigation" : "Open navigation";
+      primaryMenu.dataset.open = String(open);
+    };
+
+    menuToggle.addEventListener("click", () => setMenuOpen(menuToggle.getAttribute("aria-expanded") !== "true"));
+    primaryMenu.addEventListener("click", (event) => {
+      if ((event.target as HTMLElement).closest("a")) setMenuOpen(false);
+    });
+    document.addEventListener("click", (event) => {
+      if (!header.contains(event.target as Node)) setMenuOpen(false);
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && menuToggle.getAttribute("aria-expanded") === "true") {
+        setMenuOpen(false);
+        menuToggle.focus();
+      }
+    });
+  }
+</script>

@@ -5,17 +5,31 @@ import test from "node:test";
 const root = new URL("../", import.meta.url).pathname;
 const source = (path) => readFileSync(`${root}${path}`, "utf8");
 
-test("theme control lives in the footer and offers system, light, and dark choices", () => {
+test("the icon theme menu lives beside the footer wordmark and offers all three choices", () => {
   const footer = source("src/components/Footer.astro");
   const header = source("src/components/Header.astro");
 
-  assert.match(footer, /id="theme-choice"/);
-  assert.match(footer, /value="system">System/);
-  assert.match(footer, /value="light">Light/);
-  assert.match(footer, /value="dark">Dark/);
+  assert.match(footer, /class="theme-menu relative"/);
+  assert.match(footer, /data-theme-value="system"/);
+  assert.match(footer, /data-theme-value="light"/);
+  assert.match(footer, /data-theme-value="dark"/);
+  assert.match(footer, /aria-pressed/);
   assert.match(footer, /window\.hairhairhairTheme/);
   assert.doesNotMatch(footer, /localStorage|prefers-color-scheme|onSystemThemeChange/);
-  assert.doesNotMatch(header, /theme-toggle|Choose theme|Toggle dark mode/);
+  assert.doesNotMatch(footer, /Built for curiosity/);
+  assert.doesNotMatch(header, /Choose color theme|Toggle dark mode/);
+});
+
+test("primary navigation stays on one row and collapses behind an accessible menu", () => {
+  const header = source("src/components/Header.astro");
+
+  assert.doesNotMatch(header, />\s*About\s*</);
+  assert.doesNotMatch(header, /flex-wrap/);
+  assert.match(header, /id="primary-menu-toggle"/);
+  assert.match(header, /aria-controls="primary-menu"/);
+  assert.match(header, /aria-expanded="false"/);
+  assert.match(header, /@container \(max-width: 41rem\)/);
+  assert.match(header, /event\.key === "Escape"/);
 });
 
 test("the initial theme script defaults to system and applies before first paint", () => {

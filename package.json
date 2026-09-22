@@ -5,12 +5,15 @@
   "type": "module",
   "scripts": {
     "build": "astro build",
+    "build:clean": "node scripts/clean-dist.mjs && astro build",
     "check": "astro check",
     "dev": "astro dev",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "preview": "astro preview",
-    "test": "node --test tests/*.test.mjs"
+    "test": "npm run build:clean && npm run test:content",
+    "test:content": "node --test tests/*.test.mjs",
+    "verify": "npm run format:check && npm run check && npm test"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",

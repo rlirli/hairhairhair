@@ -14,13 +14,10 @@ Astro prints the local URL after startup.
 Before committing, run:
 
 ```sh
-npm run format:check
-npm run check
-npm run build
-npm test
+npm run verify
 ```
 
-The tests inspect the generated site in `dist/`, so `npm run build` must run before `npm test`.
+`npm run verify` checks formatting and types, removes stale build output, rebuilds the site, and runs the content-integrity tests. `npm test` also performs a clean build before testing generated pages.
 
 ## Contributing content
 

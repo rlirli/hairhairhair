@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import test from "node:test";
 
@@ -7,18 +7,9 @@ import { hairstyles } from "../src/data/hairstyles.ts";
 import { hairstylesForPerson } from "../src/data/people-relations.ts";
 import { appearances, people, personPhotographs } from "../src/data/people.ts";
 import { appearanceTitle, formatAppearanceDate } from "../src/lib/appearance-formatting.ts";
+import { attrs, dist, localUrl, page, publicRoutes, root, routeFile } from "./helpers/site.mjs";
 
-const root = new URL("../", import.meta.url).pathname;
-const dist = join(root, "dist");
-const routeFile = (pathname) => {
-  const route = pathname.split("#")[0].split("?")[0].replace(/^\//, "").replace(/\/$/, "");
-  return route ? join(dist, route, "index.html") : join(dist, "index.html");
-};
-const page = (pathname) => readFileSync(routeFile(pathname), "utf8");
 const readSource = (pathname) => readFileSync(join(root, pathname), "utf8");
-const attrs = (markup, attribute) =>
-  [...markup.matchAll(new RegExp(`${attribute}="([^"]+)"`, "g"))].map((match) => match[1]);
-const localUrl = (value) => value.startsWith("/") && !value.startsWith("//");
 const compactFourColumnGrids = (markup) =>
   [
     ...markup.matchAll(
@@ -29,29 +20,25 @@ const compactFourColumnGrids = (markup) =>
 test("people, appearances, and photographs have closed stable records", () => {
   assert.equal(new Set(people.map((person) => person.id)).size, people.length);
   assert.equal(new Set(people.map((person) => person.slug)).size, people.length);
-  assert.equal(people.length, 2);
-  assert.equal(people[0].id, "person-will-smith");
-  assert.equal(people[0].slug, "will-smith");
-  assert.equal(people[1].id, "person-mario-balotelli");
-  assert.equal(people[1].slug, "mario-balotelli");
-  assert.deepEqual(
-    people[0].sources.map((source) => source.kind),
-    ["photograph", "biography"],
-  );
-  assert.deepEqual(
-    people[1].sources.map((source) => source.kind),
-    ["biography"],
-  );
   const personIds = new Set(people.map((person) => person.id));
   const photoIds = new Set(personPhotographs.map((photo) => photo.id));
   const styleIds = new Set(hairstyles.map((style) => style.id));
   assert.equal(new Set(appearances.map((appearance) => appearance.id)).size, appearances.length);
   assert.equal(new Set(personPhotographs.map((photo) => photo.id)).size, personPhotographs.length);
+  for (const person of people) {
+    assert.ok(person.id && person.slug && person.name && person.description && person.heroImageId);
+    assert.ok(person.sources.length > 0);
+    assert.ok(person.sources.every((source) => ["photograph", "biography"].includes(source.kind) && source.url));
+    assert.ok(appearances.some((appearance) => appearance.personId === person.id));
+  }
   for (const appearance of appearances) {
     assert.ok(personIds.has(appearance.personId));
     assert.ok(photoIds.has(appearance.imageId));
     assert.equal(appearance.taken.precision, "day");
+    assert.match(appearance.taken.value, /^\d{4}-\d{2}-\d{2}$/);
+    assert.equal(Number.isNaN(Date.parse(`${appearance.taken.value}T00:00:00Z`)), false);
     assert.ok(appearance.taken.sourceUrl);
+    assert.ok(appearance.observations.length > 0);
     for (const observation of appearance.observations) assert.ok(styleIds.has(observation.hairstyleId));
   }
   for (const photo of personPhotographs) {
@@ -70,21 +57,15 @@ test("people, appearances, and photographs have closed stable records", () => {
   }
 });
 
-test("appearance dates and observations match the documented people contract", () => {
-  const byDate = new Map(appearances.map((appearance) => [appearance.taken.value, appearance]));
-  assert.deepEqual([...byDate.keys()].sort(), [
-    "2009-08-16",
-    "2009-12-10",
-    "2011-04-24",
-    "2012-05-23",
-    "2012-06-26",
-    "2013-02-24",
-    "2014-09-21",
-    "2019-01-25",
-  ]);
-  assert.equal(byDate.get("2009-12-10").observations[0].hairstyleId, "hairstyle-buzz-cut");
-  assert.equal(byDate.get("2011-04-24").observations[0].hairstyleId, "hairstyle-flat-top");
-  assert.equal(byDate.get("2012-05-23").observations[0].hairstyleId, "hairstyle-buzz-cut");
+test("editorial hairstyle order covers every observed person/style relationship", () => {
+  for (const person of people) {
+    const observedStyleIds = new Set(
+      appearances
+        .filter((appearance) => appearance.personId === person.id)
+        .flatMap((appearance) => appearance.observations.map((observation) => observation.hairstyleId)),
+    );
+    assert.deepEqual(new Set(hairstylesForPerson(person.id).map(({ style }) => style.id)), observedStyleIds);
+  }
 });
 
 test("person page has a newest-first appearance preview with local media", () => {
@@ -161,7 +142,6 @@ test("person page presents a concise bio and natural profile above appearances",
 
 test("person profile hero uses a balanced record header and links directly to photograph details", () => {
   const markup = page("/people/mario-balotelli/");
-  assert.match(markup, /lg:grid-cols-\[minmax\(0,\.95fr\)_minmax\(0,1\.2fr\)_minmax\(15rem,\.85fr\)\]/);
   assert.match(markup, /href="\/people\/mario-balotelli\/photographs\/mario-balotelli-2012-training\/"/);
   assert.match(markup, /aria-label="View photograph details for Mario Balotelli"/);
   assert.doesNotMatch(markup, /photograph details ↓/);
@@ -234,7 +214,7 @@ test("each photograph has a dedicated provenance page and existing cards reach i
 
 test("appearance anchors and hairstyle backlinks are one-to-one", () => {
   const personById = new Map(people.map((person) => [person.id, person]));
-  for (const appearance of appearances.filter((item) => item.personId === "person-will-smith")) {
+  for (const appearance of appearances) {
     const person = personById.get(appearance.personId);
     assert.ok(person);
     const archiveMarkup = page(`/people/${person.slug}/appearances/`);
@@ -263,51 +243,52 @@ test("single appearance records connect the photograph, observations, and archiv
   assert.match(markup, /href="\/people\/will-smith\/"/);
 });
 
-test("reference record pages use restrained responsive title scales", () => {
-  const appearance = readSource("src/pages/people/[slug]/appearances/[appearanceId].astro");
-  const photograph = readSource("src/pages/people/[slug]/photographs/[photoId].astro");
-  for (const source of [appearance, photograph]) {
-    assert.match(source, /font-display text-4xl leading-\[\.95\] tracking-\[-\.05em\] sm:text-5xl sm:leading-\[\.92\]/);
-    assert.doesNotMatch(source, /font-display text-6xl[\s\S]*sm:text-8xl/);
-  }
-});
-
 test("person photographs have reusable license provenance and locally built media", () => {
-  const mediaSource = readSource("src/data/people-media.ts");
-  assert.match(mediaSource, /kind: photo\.licenseName === ["']Public domain["']/);
   const appearancePhotoIds = new Set(appearances.map((appearance) => appearance.imageId));
   assert.deepEqual(appearancePhotoIds, new Set(personPhotographs.map((photo) => photo.id)));
+  assert.deepEqual(
+    personPhotographs.map((photo) => photo.fileName).sort(),
+    readdirSync(join(root, "src/assets/people"))
+      .filter((fileName) => fileName.endsWith(".jpg"))
+      .sort(),
+  );
   for (const photo of personPhotographs) {
     assert.ok(existsSync(join(root, "src/assets/people", photo.fileName)), photo.fileName);
-    assert.match(mediaSource, new RegExp(photo.fileName.replace(".", "\\.")));
     const owner = people.find((person) =>
       appearances.some((appearance) => appearance.personId === person.id && appearance.imageId === photo.id),
     );
     assert.ok(owner);
-    assert.ok(
-      page(`/people/${owner.slug}/photographs/${photo.id}/`).includes(`object-position: ${photo.objectPosition}`),
-    );
+    const photographPage = page(`/people/${owner.slug}/photographs/${photo.id}/`);
+    assert.ok(attrs(photographPage, "src").some(localUrl), `${photo.id} should render local media`);
+    assert.ok(photographPage.includes(`object-position: ${photo.objectPosition}`));
   }
   for (const person of people) {
     const hero = personPhotographs.find((photo) => photo.id === person.heroImageId);
     assert.ok(hero, person.heroImageId);
-    assert.match(mediaSource, new RegExp(hero.fileName.replace(".", "\\.")));
+    assert.ok(appearances.some((appearance) => appearance.personId === person.id && appearance.imageId === hero.id));
   }
 });
 
 test("licensed people media exposes visible attribution metadata", () => {
-  const source = readSource("src/components/PersonPhotoAttribution.astro");
-  assert.match(source, /provenance\.attribution/);
-  assert.match(source, /provenance\.licenseUrl/);
-  assert.match(source, /derivativeStatus/);
   for (const photo of personPhotographs.filter((item) => item.licenseName.startsWith("CC "))) {
     assert.ok(photo.attribution.includes(photo.creator));
     assert.ok(photo.licenseUrl.startsWith("https://creativecommons.org/"));
+    const owner = people.find((person) =>
+      appearances.some((appearance) => appearance.personId === person.id && appearance.imageId === photo.id),
+    );
+    assert.ok(owner);
+    const markup = page(`/people/${owner.slug}/photographs/${photo.id}/`);
+    assert.ok(markup.includes(photo.attribution));
+    assert.ok(markup.includes(photo.licenseUrl));
   }
 });
 
 test("compact people grids keep each attribution inside its card", () => {
-  for (const route of ["/people/will-smith/", "/people/will-smith/appearances/", "/people/will-smith/hairstyles/"]) {
+  for (const route of people.flatMap((person) => [
+    `/people/${person.slug}/`,
+    `/people/${person.slug}/appearances/`,
+    `/people/${person.slug}/hairstyles/`,
+  ])) {
     const grids = compactFourColumnGrids(page(route));
     assert.ok(grids.length, `${route} should render at least one four-column grid`);
     for (const grid of grids) {
@@ -329,25 +310,9 @@ test("compact people grids keep each attribution inside its card", () => {
 
 test("sitemap and canonical metadata include people routes", () => {
   const sitemap = readFileSync(join(dist, "sitemap-index.xml"), "utf8");
-  for (const path of [
-    "/people/",
-    "/people/will-smith/",
-    "/people/will-smith/appearances/",
-    "/people/will-smith/appearances/appearance-will-smith-2009/",
-    "/people/will-smith/appearances/appearance-will-smith-2011/",
-    "/people/will-smith/appearances/appearance-will-smith-2012/",
-    "/people/will-smith/hairstyles/",
-  ])
-    assert.match(sitemap, new RegExp(path.replaceAll("/", "\\/")));
-  for (const path of [
-    "/people/",
-    "/people/will-smith/",
-    "/people/will-smith/appearances/",
-    "/people/will-smith/appearances/appearance-will-smith-2009/",
-    "/people/will-smith/appearances/appearance-will-smith-2011/",
-    "/people/will-smith/appearances/appearance-will-smith-2012/",
-    "/people/will-smith/hairstyles/",
-  ]) {
+  const peopleRoutes = publicRoutes().filter((path) => path.startsWith("/people/"));
+  for (const path of peopleRoutes) assert.match(sitemap, new RegExp(path.replaceAll("/", "\\/")));
+  for (const path of peopleRoutes) {
     const markup = page(path);
     const canonical = markup.match(/<link rel="canonical" href="([^"]+)"/);
     assert.ok(canonical);

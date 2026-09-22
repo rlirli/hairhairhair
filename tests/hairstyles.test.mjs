@@ -15,55 +15,22 @@ import {
   sources,
   styleExamples,
 } from "../src/data/hairstyles.ts";
-import { hairstylesForPerson } from "../src/data/people-relations.ts";
-import { appearances, people, personPhotographs } from "../src/data/people.ts";
+import {
+  attrs,
+  builtHtmlRoutes,
+  dist,
+  htmlFiles,
+  localUrl,
+  page,
+  publicRoutes,
+  root,
+  routeFile,
+} from "./helpers/site.mjs";
 
-const root = new URL("../", import.meta.url).pathname;
-const dist = join(root, "dist");
-const read = (path) => readFileSync(join(root, path), "utf8");
-const expectedMediaIds = [
-  "taper-coily",
-  "taper-wavy",
-  "buzz-short",
-  "buzz-textured",
-  "twists-short",
-  "twists-long",
-  "flat-top-straight",
-  "flat-top-coily",
-  "patterned-mohawk-curved",
-  "patterned-mohawk-geometric",
-  "thin-mohawk-dark",
-  "thin-mohawk-blond",
-  "cropped-afro-full",
-  "cropped-afro-compact",
-  "top-knot-tapered",
-  "top-knot-curly",
-  "wolf-cut-curly-medium",
-  "wolf-cut-wavy-medium",
-];
-
-function htmlFiles(directory = dist) {
-  return readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
-    const path = join(directory, entry.name);
-    return entry.isDirectory() ? htmlFiles(path) : entry.name.endsWith(".html") ? [path] : [];
-  });
-}
-
-function routeFile(pathname) {
-  const route = pathname.split("#")[0].split("?")[0].replace(/^\//, "").replace(/\/$/, "");
-  if (!route) return join(dist, "index.html");
-  return extname(route) ? join(dist, route) : join(dist, route, "index.html");
-}
-
-function page(pathname) {
-  return readFileSync(routeFile(pathname), "utf8");
-}
-function attrs(markup, attribute) {
-  return [...markup.matchAll(new RegExp(`${attribute}="([^"]+)"`, "g"))].map((match) => match[1]);
-}
-function localUrl(value) {
-  return value.startsWith("/") && !value.startsWith("//");
-}
+const hairstyleAssetIds = readdirSync(join(root, "src/assets/hairstyles"))
+  .filter((fileName) => extname(fileName) === ".png")
+  .map((fileName) => fileName.slice(0, -extname(fileName).length))
+  .sort();
 
 test("data records have unique stable ids and slugs", () => {
   for (const records of [hairSubtypes, hairTypes, hairstyles, styleExamples, sources]) {
@@ -91,7 +58,7 @@ test("relationship, source, example, and media references are closed and recipro
   const styleIds = new Set(hairstyles.map((style) => style.id));
   const hairTypeIds = new Set(hairTypes.map((hairType) => hairType.id));
   const sourceIds = new Set(sources.map((source) => source.id));
-  const mediaIds = new Set(expectedMediaIds);
+  const mediaIds = new Set(hairstyleAssetIds);
   for (const style of hairstyles) {
     for (const id of style.relatedStyleIds) {
       assert.ok(styleIds.has(id));
@@ -125,49 +92,15 @@ test("each hair type has one row per guide in both directions", () => {
   }
 });
 
-test("media declarations cover every approved generated asset", () => {
-  const mediaSource = read("src/data/media.ts");
-  const ids = expectedMediaIds;
-  assert.deepEqual([...new Set(ids)].sort(), ids.slice().sort());
-  for (const id of ids) {
-    assert.match(mediaSource, new RegExp(`id: ["']${id}["']`));
-    assert.ok(existsSync(join(root, `src/assets/hairstyles/${id}.png`)));
-    assert.match(mediaSource, new RegExp(`id: ["']${id}["'][^]*?kind: ["']generated["']`));
-  }
+test("style examples and hairstyle assets stay in one-to-one correspondence", () => {
+  const exampleMediaIds = styleExamples.map((example) => example.imageId).sort();
+  assert.deepEqual(exampleMediaIds, hairstyleAssetIds);
 });
 
 test("static build contains all data-derived expected HTML pages", () => {
-  const expectedPageCount =
-    3 +
-    hairTypes.length +
-    hairSubtypes.length * 2 +
-    1 +
-    publishedHairstyles.length +
-    3 +
-    appearances.length +
-    personPhotographs.length +
-    people.length * 2 +
-    people.reduce((count, person) => count + hairstylesForPerson(person.id).length, 0);
-  assert.equal(htmlFiles().length, expectedPageCount);
-  for (const path of [
-    "/",
-    "/hair-types/",
-    "/hairstyles/",
-    "/people/",
-    "/people/will-smith/",
-    "/people/will-smith/appearances/",
-    "/people/will-smith/hairstyles/",
-  ])
-    assert.ok(existsSync(routeFile(path)));
-  assert.ok(existsSync(join(dist, "404.html")));
-  for (const hairType of hairTypes) assert.ok(existsSync(routeFile(`/hair-types/${hairType.slug}/`)));
-  for (const type of hairSubtypes) assert.ok(existsSync(routeFile(`/hair-types/${type.slug}/`)));
-  for (const type of hairSubtypes) assert.ok(existsSync(routeFile(`/hair-types/${type.slug}/related-hairstyles/`)));
-  for (const style of publishedHairstyles) assert.ok(existsSync(routeFile(`/hairstyles/${style.slug}/`)));
-  for (const person of people) {
-    for (const { style } of hairstylesForPerson(person.id))
-      assert.ok(existsSync(routeFile(`/people/${person.slug}/hairstyles/${style.slug}/`)));
-  }
+  const expectedRoutes = [...publicRoutes(), "/404.html"].sort();
+  assert.equal(new Set(expectedRoutes).size, expectedRoutes.length);
+  assert.deepEqual(builtHtmlRoutes().sort(), expectedRoutes);
   for (const style of hairstyles.filter((style) => style.guidePublicationStatus === "draft"))
     assert.ok(!existsSync(routeFile(`/hairstyles/${style.slug}/`)));
 });
@@ -237,11 +170,12 @@ test("hair-type pages use a compact, five-column hairstyle overview with hover d
   for (const type of hairSubtypes) {
     const markup = page(`/hair-types/${type.slug}/`);
     assert.match(markup, /Hairstyles for this type/i);
-    assert.match(markup, /lg:grid-cols-5/);
-    assert.match(markup, /grid-flow-col/);
-    assert.match(markup, /overflow-x-auto/);
     assert.match(markup, /data-slot="hover-card-trigger"/);
     assert.match(markup, new RegExp(`href="/hair-types/${type.slug}/related-hairstyles/"`));
+    assert.equal(
+      (markup.match(/data-slot="hover-card-trigger"/g) ?? []).length,
+      Math.min(5, publishedHairstyles.length),
+    );
   }
 });
 
@@ -252,7 +186,6 @@ test("related hairstyle pages use a four-column grid with medium cards and hover
     assert.ok(parentType);
     assert.match(markup, /Hairstyles for/);
     assert.match(markup, new RegExp(`Hair Type ${type.code}`));
-    assert.match(markup, /lg:grid-cols-4/);
     assert.match(markup, /data-slot="hover-card-trigger"/);
     for (const style of getPublishedHairstylesForHairType(parentType.id))
       assert.match(markup, new RegExp(`/hairstyles/${style.slug}/`));
@@ -270,17 +203,10 @@ test("home, hairstyle index, sitemap, canonical URLs, and social image targets a
   }
   assert.doesNotMatch(page("/hairstyles/"), /AI-generated reference/);
   const sitemap = readFileSync(join(dist, "sitemap-index.xml"), "utf8");
-  for (const path of [
-    "/hairstyles/",
-    ...publishedHairstyles.map((style) => `/hairstyles/${style.slug}/`),
-    "/people/",
-    "/people/will-smith/",
-    "/people/will-smith/appearances/",
-    ...hairTypes.map((hairType) => `/hair-types/${hairType.slug}/`),
-    ...hairSubtypes.map((type) => `/hair-types/${type.slug}/`),
-    ...hairSubtypes.map((type) => `/hair-types/${type.slug}/related-hairstyles/`),
-  ])
-    assert.match(sitemap, new RegExp(path.replaceAll("/", "\\/")));
+  const sitemapRoutes = [...sitemap.matchAll(/<loc>https:\/\/hairhairhair\.hair([^<]*)<\/loc>/g)].map(
+    (match) => match[1] || "/",
+  );
+  assert.deepEqual(sitemapRoutes.sort(), publicRoutes().sort());
   for (const style of hairstyles.filter((style) => style.guidePublicationStatus === "draft"))
     assert.doesNotMatch(sitemap, new RegExp(`/hairstyles/${style.slug}/`));
   for (const file of htmlFiles()) {

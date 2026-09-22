@@ -1,5 +1,4 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
 import test from "node:test";
 
 import {
@@ -7,6 +6,7 @@ import {
   naturalProfileForPerson,
   naturalProfiles,
 } from "../src/data/natural-profiles.ts";
+import { page } from "./helpers/site.mjs";
 
 test("Will Smith has a provisional natural profile with trait-level provenance", () => {
   const profile = naturalProfileForPerson("person-will-smith");
@@ -64,19 +64,14 @@ test("Mario Balotelli has the same explicitly unverified natural profile scheme"
   }
 });
 
-test("NaturalProfile keeps the table compact while preserving provenance in the model", () => {
-  const source = readFileSync(new URL("../src/components/NaturalProfile.astro", import.meta.url), "utf8");
-  assert.match(source, /Natural profile/);
-  assert.match(source, /label: "Hair type"/);
-  assert.match(source, /label: "Hair color"/);
-  assert.match(source, /label: "Skin tone"/);
-  assert.match(source, /label: "Hair thickness"/);
-  assert.match(source, /label: "Hair density"/);
-  assert.match(source, /\.filter\(\(trait\) => trait\.value !== null\)/);
-  assert.match(source, /trait\.value === "Not documented" \? "font-normal/);
-  assert.doesNotMatch(source, /AI prefill/);
-  assert.doesNotMatch(source, /Low Confidence/);
-  assert.doesNotMatch(source, /Editable record/);
-  assert.match(source, /href=\{trait\.href\}/);
-  assert.match(source, /`\/hair-types\/\$\{hairType\.slug\}\/`/);
+test("NaturalProfile renders documented traits and hides null traits", () => {
+  const markup = page("/people/will-smith/");
+  assert.match(markup, /Natural profile/);
+  assert.match(markup, /Hair type/);
+  assert.match(markup, /Hair color/);
+  assert.match(markup, /Skin tone/);
+  assert.doesNotMatch(markup, /Hair thickness/);
+  assert.doesNotMatch(markup, /Hair density/);
+  assert.match(markup, /href="\/hair-types\/4\/"/);
+  assert.doesNotMatch(markup, /AI prefill|Low Confidence|Editable record/);
 });

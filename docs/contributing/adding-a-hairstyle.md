@@ -11,8 +11,7 @@ This checklist describes the current repository contract. Published hairstyle gu
 5. Add every referenced image under `src/assets/hairstyles/`. The current collection uses PNG files.
 6. In `src/data/media.ts`, statically import each image and add its `HairstyleMedia` record. Keep the media ID, filename, and `StyleExample.imageId` aligned.
 7. For generated images, record the prompts in `docs/media/hairstyle-image-prompts.md` and keep each `promptKey` aligned with the media record.
-8. Add every new hairstyle media ID to `expectedMediaIds` in `tests/hairstyles.test.mjs`. This manual test list is part of the current contract.
-9. Run `npm run format:check`, `npm run check`, `npm run build`, then `npm test`.
+8. Run `npm run verify`. The integrity tests derive the expected media and routes from the content data and asset directories; do not add parallel bookkeeping lists.
 
 Set `guidePublicationStatus` to `draft` until the complete guide is ready. Draft hairstyles may be referenced by appearance observations but do not get a public global guide page.
 

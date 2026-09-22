@@ -28,3 +28,9 @@ test("the initial theme script defaults to system and applies before first paint
   assert.match(layout, /document\.documentElement\.dataset\.theme = theme/);
   assert.match(layout, /<script is:inline>/);
 });
+
+test("dark utility classes follow the page theme instead of the operating-system preference", () => {
+  const styles = source("src/styles/global.css");
+
+  assert.match(styles, /@custom-variant dark \(&:where\(\.dark, \.dark \*\)\);/);
+});

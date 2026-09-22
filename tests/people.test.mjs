@@ -17,6 +17,26 @@ const compactFourColumnGrids = (markup) =>
     ),
   ].map(([, content]) => content);
 
+test("people overview offers portrait cards, profile filters, and profile details on focus or hover", () => {
+  const markup = page("/people/");
+  assert.match(markup, /Browse celebrities/i);
+  assert.match(markup, /A look at/);
+  assert.doesNotMatch(markup, /People and appearances|Dated photographs can show|Person record/);
+  assert.match(markup, /data-profile-filter="hair"/);
+  assert.match(markup, /data-profile-filter="color"/);
+  assert.match(markup, /data-profile-filter="skin"/);
+  assert.match(markup, /grid-cols-2[^\"]*sm:grid-cols-3[^\"]*lg:grid-cols-4[^\"]*xl:grid-cols-6/);
+  assert.equal((markup.match(/data-slot="hover-card-trigger"/g) ?? []).length, people.length);
+  for (const person of people) {
+    assert.match(markup, new RegExp(`href="/people/${person.slug}/"`));
+    assert.match(markup, new RegExp(`alt="${person.name}[^\"]*"`));
+  }
+  assert.match(readSource("src/components/PersonDirectoryCard.tsx"), /Natural profile/);
+  assert.match(readSource("src/components/PersonDirectoryCard.tsx"), /person\.description/);
+  assert.match(markup, /data-profile-results/);
+  assert.match(readSource("src/pages/people/index.astro"), /card\.classList\.toggle\("hidden", !matches\)/);
+});
+
 test("people, appearances, and photographs have closed stable records", () => {
   assert.equal(new Set(people.map((person) => person.id)).size, people.length);
   assert.equal(new Set(people.map((person) => person.slug)).size, people.length);

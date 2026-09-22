@@ -1,28 +1,199 @@
 ---
 import Layout from "../../components/Layout.astro";
-import { people } from "../../data/people";
+import PersonDirectoryCard from "../../components/PersonDirectoryCard";
+import { hairSubtypes, hairTypes } from "../../data/hair-types";
+import { people, personPhotographs } from "../../data/people";
+import { naturalProfileForPerson, resolvedHairTypeForNaturalProfile } from "../../data/natural-profiles";
+import { buildPersonMedia } from "../../data/people-media";
+
+const mediaById = new Map(buildPersonMedia(personPhotographs).map((photo) => [photo.id, photo]));
+const profileLabel = (value: string | null, labels: Record<string, string>) =>
+  value ? (labels[value] ?? value) : null;
+const peopleCards = people.flatMap((person) => {
+  const image = mediaById.get(person.heroImageId);
+  if (!image) return [];
+
+  const profile = naturalProfileForPerson(person.id);
+  const resolvedType = profile ? resolvedHairTypeForNaturalProfile(profile) : undefined;
+  const majorTypeId = profile?.hairTypeId.value;
+  const subtypeId = profile?.hairSubtypeId.value;
+  const hairValues = [majorTypeId, subtypeId].filter((value): value is string => Boolean(value));
+  const profileRows = profile
+    ? [
+        resolvedType && {
+          label: "Hair type",
+          value: `Type ${resolvedType.code} · ${resolvedType.name}`,
+          href: `/hair-types/${resolvedType.slug}/`,
+        },
+        profile.naturalHairColor.value && {
+          label: "Hair color",
+          value: profileLabel(profile.naturalHairColor.value, {
+            black: "Black",
+            brown: "Brown",
+            blonde: "Blonde",
+            red: "Red",
+            gray: "Gray",
+            white: "White",
+          })!,
+        },
+        profile.naturalSkinTone.value && {
+          label: "Skin tone",
+          value: profileLabel(profile.naturalSkinTone.value, {
+            "deep-brown": "Deep brown",
+            brown: "Brown",
+            medium: "Medium",
+            light: "Light",
+            fair: "Fair",
+          })!,
+        },
+        profile.hairThickness.value && {
+          label: "Hair thickness",
+          value: profileLabel(profile.hairThickness.value, { fine: "Fine", medium: "Medium", coarse: "Coarse" })!,
+        },
+        profile.hairDensity.value && {
+          label: "Hair density",
+          value: profileLabel(profile.hairDensity.value, { low: "Low", medium: "Medium", high: "High" })!,
+        },
+      ].filter((row): row is NonNullable<typeof row> => Boolean(row))
+    : [];
+
+  return [
+    {
+      href: `/people/${person.slug}/`,
+      name: person.name,
+      imageSrc: image.src.src,
+      imageAlt: image.alt,
+      description: person.description,
+      profileValues: [...hairValues, profile?.naturalHairColor.value, profile?.naturalSkinTone.value].filter(
+        (value): value is string => Boolean(value),
+      ),
+      profileRows,
+    },
+  ];
+});
+const observedHairTypes = new Set(peopleCards.flatMap((person) => person.profileValues));
+const observedColors = [
+  ...new Set(
+    peopleCards
+      .map((person) =>
+        person.profileValues.find((value) => ["black", "brown", "blonde", "red", "gray", "white"].includes(value)),
+      )
+      .filter(Boolean),
+  ),
+] as string[];
+const observedSkinTones = [
+  ...new Set(
+    peopleCards
+      .map((person) =>
+        person.profileValues.find((value) => ["deep-brown", "brown", "medium", "light", "fair"].includes(value)),
+      )
+      .filter(Boolean),
+  ),
+] as string[];
+const hairTypeOptions = [
+  ...hairTypes
+    .filter((type) => observedHairTypes.has(type.id))
+    .map((type) => ({ id: type.id, label: `Type ${type.code}` })),
+  ...hairSubtypes
+    .filter((type) => observedHairTypes.has(type.id))
+    .map((type) => ({ id: type.id, label: `Type ${type.code}` })),
+];
+const colorLabels: Record<string, string> = {
+  black: "Black",
+  brown: "Brown",
+  blonde: "Blonde",
+  red: "Red",
+  gray: "Gray",
+  white: "White",
+};
+const skinLabels: Record<string, string> = {
+  "deep-brown": "Deep brown",
+  brown: "Brown",
+  medium: "Medium",
+  light: "Light",
+  fair: "Fair",
+};
 ---
 
-<Layout title="People — hairhairhair.hair" description="Dated, source-attributed hairstyle appearances.">
+<Layout
+  title="Celebrities — hairhairhair.hair"
+  description="Browse celebrities by natural hair type, hair color, or skin tone."
+>
   <section class="mx-auto max-w-7xl px-5 pb-20 pt-14 sm:px-8">
-    <p class="text-xs font-black uppercase tracking-[.2em] text-orange">People and appearances</p>
+    <p class="text-xs font-black uppercase tracking-[.2em] text-orange">Browse celebrities</p>
     <h1 class="mt-3 max-w-4xl font-display text-6xl leading-[.88] tracking-[-.08em] sm:text-8xl">
       A look at
       <br />
       <span class="text-orange">the record.</span>
     </h1>
-    <p class="mt-8 max-w-2xl text-lg leading-7">
-      Dated photographs can show how a hairstyle reads at one moment. They do not assign a permanent hair type or
-      explain the full story behind a look.
-    </p>
-    <div class="mt-12 grid gap-5 md:grid-cols-2">
-      {people.map((person) => (
-        <a class="hover-surface focus-ring rounded-3xl border-2 border-ink p-6" href={`/people/${person.slug}/`}>
-          <p class="text-xs font-black uppercase tracking-[.16em] text-orange">Person record</p>
-          <h2 class="mt-16 font-display text-4xl">{person.name}</h2>
-          <p class="mt-2 text-lg leading-7">{person.description}</p>
-        </a>
+    <div class="mt-10 flex flex-col gap-4 border-b border-ink/30 pb-5 sm:flex-row sm:flex-wrap sm:items-center sm:justify-end">
+      <label class="grid gap-1 text-xs font-bold uppercase tracking-[.08em]">
+        Hair type
+        <select
+          data-profile-filter="hair"
+          class="focus-ring rounded-full border border-ink/30 bg-transparent px-3 py-2 text-sm font-normal normal-case tracking-normal"
+        >
+          <option value="">Any</option>
+          {hairTypeOptions.map((option) => (
+            <option value={option.id}>{option.label}</option>
+          ))}
+        </select>
+      </label>
+      <label class="grid gap-1 text-xs font-bold uppercase tracking-[.08em]">
+        Color
+        <select
+          data-profile-filter="color"
+          class="focus-ring rounded-full border border-ink/30 bg-transparent px-3 py-2 text-sm font-normal normal-case tracking-normal"
+        >
+          <option value="">Any</option>
+          {observedColors.map((color) => (
+            <option value={color}>{colorLabels[color]}</option>
+          ))}
+        </select>
+      </label>
+      <label class="grid gap-1 text-xs font-bold uppercase tracking-[.08em]">
+        Skin tone
+        <select
+          data-profile-filter="skin"
+          class="focus-ring rounded-full border border-ink/30 bg-transparent px-3 py-2 text-sm font-normal normal-case tracking-normal"
+        >
+          <option value="">Any</option>
+          {observedSkinTones.map((tone) => (
+            <option value={tone}>{skinLabels[tone]}</option>
+          ))}
+        </select>
+      </label>
+    </div>
+    <p class="sr-only" data-profile-results role="status" aria-live="polite"></p>
+    <div class="mt-7 grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6" data-people-grid>
+      {peopleCards.map((person) => (
+        <PersonDirectoryCard client:load person={person} />
       ))}
     </div>
+    <p class="mt-8 hidden text-sm opacity-70" data-profile-empty>
+      No celebrities match these filters.
+    </p>
   </section>
 </Layout>
+
+<script>
+  const filters = [...document.querySelectorAll<HTMLSelectElement>("[data-profile-filter]")];
+  const cards = [...document.querySelectorAll<HTMLElement>("[data-person-card]")];
+  const results = document.querySelector<HTMLElement>("[data-profile-results]");
+  const empty = document.querySelector<HTMLElement>("[data-profile-empty]");
+
+  const update = () => {
+    let visible = 0;
+    for (const card of cards) {
+      const values = (card.dataset.profileValues ?? "").split(",");
+      const matches = filters.every((filter) => !filter.value || values.includes(filter.value));
+      card.classList.toggle("hidden", !matches);
+      if (matches) visible += 1;
+    }
+    if (results) results.textContent = `${visible} ${visible === 1 ? "celebrity" : "celebrities"} shown`;
+    if (empty) empty.classList.toggle("hidden", visible !== 0);
+  };
+
+  for (const filter of filters) filter.addEventListener("change", update);
+  update();
+</script>

@@ -64,10 +64,19 @@ test("Mario Balotelli has the same explicitly unverified natural profile scheme"
   }
 });
 
-test("NaturalProfile documents the compact product name and provenance display", () => {
+test("NaturalProfile keeps the table compact while preserving provenance in the model", () => {
   const source = readFileSync(new URL("../src/components/NaturalProfile.astro", import.meta.url), "utf8");
   assert.match(source, /Natural profile/);
-  assert.match(source, /AI prefill/);
-  assert.match(source, /Community correction/);
-  assert.match(source, /href={`\/hair-types\/\$\{hairType\.slug\}\/`}/);
+  assert.match(source, /label: "Hair type"/);
+  assert.match(source, /label: "Hair color"/);
+  assert.match(source, /label: "Skin tone"/);
+  assert.match(source, /label: "Hair thickness"/);
+  assert.match(source, /label: "Hair density"/);
+  assert.match(source, /\.filter\(\(trait\) => trait\.value !== null\)/);
+  assert.match(source, /trait\.value === "Not documented" \? "font-normal/);
+  assert.doesNotMatch(source, /AI prefill/);
+  assert.doesNotMatch(source, /Low Confidence/);
+  assert.doesNotMatch(source, /Editable record/);
+  assert.match(source, /href=\{trait\.href\}/);
+  assert.match(source, /`\/hair-types\/\$\{hairType\.slug\}\/`/);
 });

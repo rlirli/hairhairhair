@@ -17,6 +17,8 @@ color, density, porosity, ethnicity, or exact 1A–4C subtype.
 Natural profile traits are a separate, explicitly provisional record. Each trait stores its value and provenance,
 status, and confidence independently so an AI prefill can later be replaced by a community correction. Missing
 thickness and density remain `null` with `not-documented` provenance rather than being guessed.
+The compact Natural profile table displays only traits with a value, uses short labels (`Hair type`, `Hair color`,
+`Skin tone`, `Hair thickness`, and `Hair density`), and keeps provenance metadata out of the visual presentation.
 
 The static Astro/TypeScript/Tailwind implementation uses pure data modules, relationship helpers, and locally imported
 image assets. Licensed photographs show compact attribution wherever they appear, including overview cards.

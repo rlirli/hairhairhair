@@ -1,9 +1,5 @@
 ---
-import {
-  hairTypeForNaturalProfileTrait,
-  type NaturalProfile,
-  type NaturalProfileProvenance,
-} from "../data/natural-profiles";
+import { hairTypeForNaturalProfileTrait, type NaturalProfile } from "../data/natural-profiles";
 
 interface Props {
   profile: NaturalProfile;
@@ -13,23 +9,21 @@ const { profile } = Astro.props;
 const hairType = hairTypeForNaturalProfileTrait(profile.hairTypeId);
 
 const displayValue = (value: string | null, labels: Record<string, string>) =>
-  value ? (labels[value] ?? value) : "Not documented";
-
-const provenanceLabel = (provenance: NaturalProfileProvenance) => {
-  if (provenance.source === "not-documented") return "Not documented";
-  if (provenance.source === "ai-prefill") return `AI prefill · ${provenance.confidence} confidence`;
-  if (provenance.source === "community-correction") return "Community correction";
-  return "Self-reported";
-};
+  value ? (labels[value] ?? value) : null;
 
 const traits = [
   {
-    label: "Natural hair type",
-    value: hairType ? `Type ${hairType.code} · ${hairType.name}` : "Not documented",
-    provenance: profile.hairTypeId.provenance,
+    label: "Hair type",
+    value:
+      profile.hairTypeId.value === null
+        ? null
+        : hairType
+          ? `Type ${hairType.code} · ${hairType.name}`
+          : "Not documented",
+    href: hairType ? `/hair-types/${hairType.slug}/` : undefined,
   },
   {
-    label: "Natural hair color",
+    label: "Hair color",
     value: displayValue(profile.naturalHairColor.value, {
       black: "Black",
       brown: "Brown",
@@ -38,10 +32,9 @@ const traits = [
       gray: "Gray",
       white: "White",
     }),
-    provenance: profile.naturalHairColor.provenance,
   },
   {
-    label: "Natural skin tone",
+    label: "Skin tone",
     value: displayValue(profile.naturalSkinTone.value, {
       "deep-brown": "Deep brown",
       brown: "Brown",
@@ -49,49 +42,41 @@ const traits = [
       light: "Light",
       fair: "Fair",
     }),
-    provenance: profile.naturalSkinTone.provenance,
   },
   {
     label: "Hair thickness",
     value: displayValue(profile.hairThickness.value, { fine: "Fine", medium: "Medium", coarse: "Coarse" }),
-    provenance: profile.hairThickness.provenance,
   },
   {
     label: "Hair density",
     value: displayValue(profile.hairDensity.value, { low: "Low", medium: "Medium", high: "High" }),
-    provenance: profile.hairDensity.provenance,
   },
-];
+].filter((trait) => trait.value !== null);
 ---
 
 <section class="rounded-[1.5rem] border border-ink/25 p-5" aria-labelledby="natural-profile-heading">
-  <div class="flex items-baseline justify-between gap-4 border-b border-ink/25 pb-3">
+  <div class="border-b border-ink/25 pb-3">
     <h2 id="natural-profile-heading" class="text-xs font-black uppercase tracking-[.16em] text-orange">
       Natural profile
     </h2>
-    <span class="text-[10px] font-bold uppercase tracking-[.12em] opacity-60">Editable record</span>
   </div>
-  <dl class="mt-4 divide-y divide-ink/15">
+  <dl class="mt-2">
     {traits.map((trait) => (
-      <div class="grid grid-cols-[minmax(0,1fr)_auto] gap-4 py-3 first:pt-0 last:pb-0">
+      <div class="grid grid-cols-[minmax(0,1fr)_minmax(0,auto)] items-baseline gap-x-4 border-b border-ink/10 py-3 last:border-b-0">
         <dt class="text-xs font-bold uppercase tracking-[.08em] opacity-65">{trait.label}</dt>
-        <dd class="text-right text-sm font-bold">
-          {trait.label === "Natural hair type" && hairType ? (
+        <dd
+          class:list={["text-right text-sm", trait.value === "Not documented" ? "font-normal opacity-70" : "font-bold"]}
+        >
+          {trait.href ? (
             <a
               class="focus-ring text-orange underline decoration-orange decoration-2 underline-offset-4"
-              href={`/hair-types/${hairType.slug}/`}
+              href={trait.href}
             >
               {trait.value}
             </a>
           ) : (
             trait.value
           )}
-        </dd>
-        <dd
-          class="col-start-2 text-right text-[10px] uppercase tracking-[.08em] opacity-55"
-          title={trait.provenance.note}
-        >
-          {provenanceLabel(trait.provenance)}
         </dd>
       </div>
     ))}

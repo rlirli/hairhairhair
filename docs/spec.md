@@ -9,6 +9,7 @@ The site is a small editorial field guide: a home page introduces the visual lan
 `src/data/hair-types.ts` owns the content model. It exports `classificationSystems`, `hairTypes`, `hairSubtypes`, and `getHairSubtype(slug)`. Numbered hair types carry their visible `pattern`; lettered sub-types carry `hairTypeId`, `pattern`, and `subtypeCode` alongside their descriptive content.
 
 `src/data/natural-profiles.ts` owns optional person-level natural profile records. Every trait is a value paired with `provenance.source`, `provenance.status`, and `provenance.confidence`. A natural hair type stores a `hairTypeId` that resolves to the existing `/hair-types/{slug}/` route. Unknown thickness and density stay `null` with `not-documented` provenance; they are never inferred from a styled photograph.
+The `NaturalProfile` component renders a compact two-column table with short labels and omits traits whose values are `null`. Provenance remains available in the data model but is not rendered as AI, confidence, or editability labels.
 
 `src/data/people.ts` owns person records, dated appearances, observations, and reusable photograph metadata. Person photographs record creator, license name and URL, attribution, source and original URLs, rights evidence, and derivative/crop status. The generic people routes work for every person record; the current records are Will Smith and Mario Balotelli. CC attribution is rendered on every page or overview card that displays a licensed photograph.
 

@@ -58,15 +58,18 @@ test("appearance dates and observations match the phase-one contract", () => {
   assert.equal(byDate.get("2012-05-23").observations[0].hairstyleId, "hairstyle-buzz-cut");
 });
 
-test("person page is chronological, local, and contains no generated media", () => {
+test("person page has a newest-first appearance preview with local media", () => {
   const markup = page("/people/will-smith/");
   assert.doesNotMatch(markup, /AI-generated|generated reference/);
   assert.equal(attrs(markup, "src").filter((src) => /\.png(?:\?|$)/.test(src)).length, 0);
-  assert.match(markup, /2009-12-10/);
-  assert.match(markup, /2011-04-24/);
-  assert.match(markup, /2012-05-23/);
-  assert.ok(markup.indexOf('id="appearance-will-smith-2009"') < markup.indexOf('id="appearance-will-smith-2011"'));
-  assert.ok(markup.indexOf('id="appearance-will-smith-2011"') < markup.indexOf('id="appearance-will-smith-2012"'));
+  assert.match(markup, /Appearances/);
+  assert.match(markup, /More/);
+  assert.match(markup, /May 2012/);
+  assert.match(markup, /Apr 2011/);
+  assert.match(markup, /Dec 2009/);
+  assert.ok(markup.indexOf("May 2012") < markup.indexOf("Apr 2011"));
+  assert.ok(markup.indexOf("Apr 2011") < markup.indexOf("Dec 2009"));
+  assert.match(markup, /href="\/people\/will-smith\/appearances\/"/);
   for (const href of attrs(markup, "href")
     .filter(localUrl)
     .filter((href) => href.split("#")[0].endsWith("/"))) {
@@ -74,7 +77,7 @@ test("person page is chronological, local, and contains no generated media", () 
     assert.ok(existsSync(routeFile(pathname)), href);
     if (fragment) assert.match(page(pathname), new RegExp(`id="${fragment.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`));
   }
-  assert.match(markup, /#appearance-will-smith-2011/);
+  assert.match(markup, /\/people\/will-smith\/appearances\/#appearance-will-smith-2011/);
 });
 
 test("appearance overview is newest-first and links back to the person record", () => {
@@ -84,7 +87,8 @@ test("appearance overview is newest-first and links back to the person record", 
   assert.ok(markup.indexOf("2012-05-23") < markup.indexOf("2011-04-24"));
   assert.ok(markup.indexOf("2011-04-24") < markup.indexOf("2009-12-10"));
   for (const appearance of appearances) {
-    assert.match(markup, new RegExp(`href="/people/will-smith/#${appearance.id}"`));
+    assert.match(markup, new RegExp(`id="${appearance.id}"`));
+    assert.match(markup, /href="\/people\/will-smith\/"/);
   }
   assert.doesNotMatch(markup, /AI-generated|generated reference/);
   assert.match(markup, /<link rel="canonical" href="https:\/\/hairhairhair\.hair\/people\/will-smith\/appearances\//);
@@ -92,21 +96,17 @@ test("appearance overview is newest-first and links back to the person record", 
 
 test("appearance anchors and hairstyle backlinks are one-to-one", () => {
   const personById = new Map(people.map((person) => [person.id, person]));
-  const personMarkup = new Map(people.map((person) => [person.id, page(`/people/${person.slug}/`)]));
   for (const appearance of appearances) {
     const person = personById.get(appearance.personId);
     assert.ok(person);
-    const markup = personMarkup.get(appearance.personId);
-    assert.equal((markup.match(new RegExp(`id="${appearance.id}"`, "g")) ?? []).length, 1);
+    const archiveMarkup = page(`/people/${person.slug}/appearances/`);
+    assert.equal((archiveMarkup.match(new RegExp(`id="${appearance.id}"`, "g")) ?? []).length, 1);
     for (const observation of appearance.observations) {
       const style = hairstyles.find((item) => item.id === observation.hairstyleId);
       assert.ok(style);
       if (style.guidePublicationStatus === "published") {
         const styleMarkup = page(`/hairstyles/${style.slug}/`);
-        assert.match(styleMarkup, new RegExp(`href="/people/${person.slug}/#${appearance.id}"`));
-        assert.match(markup, new RegExp(`href="/hairstyles/${style.slug}/"`));
-      } else {
-        assert.doesNotMatch(markup, new RegExp(`href="/hairstyles/${style.slug}/"`));
+        assert.match(styleMarkup, new RegExp(`href="/people/${person.slug}/appearances/#${appearance.id}"`));
       }
     }
   }

@@ -76,8 +76,9 @@ const appearanceTitle = (event: string) => event.split(",")[0];
         {appearances.map(({ appearance, photo }) => (
           <a
             class="group focus-ring block"
-            href={`/people/${person.slug}/#${appearance.id}`}
+            href={`/people/${person.slug}/`}
             aria-label={`${appearance.taken.value}: ${appearance.event}`}
+            id={appearance.id}
           >
             <figure>
               <Image

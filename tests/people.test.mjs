@@ -108,6 +108,11 @@ test("person page has a newest-first appearance preview with local media", () =>
     if (fragment) assert.match(page(pathname), new RegExp(`id="${fragment.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`));
   }
   assert.match(markup, /\/people\/will-smith\/appearances\/appearance-will-smith-2011\//);
+  const moreLabels = [
+    ...markup.matchAll(/<a[^>]*href="\/people\/will-smith\/(?:appearances|hairstyles)\/"[^>]*>(.*?)<\/a>/g),
+  ].map(([, content]) => content);
+  assert.equal(moreLabels.length, 2);
+  assert.ok(moreLabels.every((content) => content.trim() === "More"));
 });
 
 test("appearance formatting is shared and keeps title/date conventions stable", () => {

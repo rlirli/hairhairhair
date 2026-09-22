@@ -1,0 +1,59 @@
+---
+interface Props {
+  id: string;
+  text: string;
+}
+
+const { id, text } = Astro.props;
+---
+
+<div data-expandable-bio class="max-w-xl" data-expanded="false">
+  <p id={id} data-bio-text class="leading-7" style="max-height: 4.5rem; overflow: hidden;">
+    {text}
+  </p>
+  <button
+    type="button"
+    data-bio-toggle
+    class="focus-ring mt-2 text-sm font-black uppercase tracking-[.12em] text-orange underline decoration-orange decoration-2 underline-offset-4"
+    aria-controls={id}
+    aria-expanded="false"
+    hidden
+  >
+    More
+  </button>
+</div>
+
+<script>
+  const setupExpandableBios = () => {
+    document.querySelectorAll<HTMLElement>("[data-expandable-bio]").forEach((root) => {
+      if (root.dataset.ready === "true") return;
+      root.dataset.ready = "true";
+      const text = root.querySelector<HTMLElement>("[data-bio-text]");
+      const toggle = root.querySelector<HTMLButtonElement>("[data-bio-toggle]");
+      if (!text || !toggle) return;
+
+      const sync = () => {
+        const expanded = root.dataset.expanded === "true";
+        text.style.maxHeight = expanded ? "none" : "4.5rem";
+        text.style.overflow = expanded ? "visible" : "hidden";
+        const overflows = text.scrollHeight > text.clientHeight + 1;
+        toggle.hidden = expanded || !overflows;
+        toggle.setAttribute("aria-expanded", String(expanded));
+        toggle.textContent = expanded ? "Less" : "More";
+      };
+
+      toggle.addEventListener("click", () => {
+        root.dataset.expanded = root.dataset.expanded !== "true" ? "true" : "false";
+        sync();
+      });
+      sync();
+      window.addEventListener("resize", sync);
+    });
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupExpandableBios, { once: true });
+  } else {
+    setupExpandableBios();
+  }
+</script>

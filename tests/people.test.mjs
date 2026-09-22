@@ -80,6 +80,17 @@ test("person page has a newest-first appearance preview with local media", () =>
   assert.match(markup, /\/people\/will-smith\/appearances\/#appearance-will-smith-2011/);
 });
 
+test("person page presents a concise bio and natural profile above appearances", () => {
+  const markup = page("/people/will-smith/");
+  assert.match(markup, /Home/);
+  assert.match(markup, /People/);
+  assert.match(markup, /Person record/);
+  assert.match(markup, /Willard Carroll Smith II/);
+  assert.match(markup, /Natural profile/);
+  assert.match(markup, /href="\/hair-types\/4\/"/);
+  assert.doesNotMatch(markup, /change a silhouette|Use the images as haircut references/);
+});
+
 test("appearance overview is newest-first and links back to the person record", () => {
   const markup = page("/people/will-smith/appearances/");
   assert.match(markup, /Appearance archive/);

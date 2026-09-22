@@ -3,7 +3,6 @@ export interface Person {
   slug: string;
   name: string;
   description: string;
-  intro: string[];
   heroImageId: string;
   sourceUrls: string[];
 }
@@ -49,11 +48,7 @@ export const people: Person[] = [
     slug: "will-smith",
     name: "Will Smith",
     description:
-      "Actor and recording artist whose public appearances show how a haircut can change a silhouette over time.",
-    intro: [
-      "Will Smith is an actor and recording artist. These three dated photographs follow close-cropped looks and a low flat top between 2009 and 2012.",
-      "Compare top height, outline, edge shape, and visible finish as you move through the appearances. Use the images as haircut references, not as a definition of someone’s natural hair characteristics.",
-    ],
+      "Willard Carroll Smith II (born September 25, 1968, in Philadelphia, Pennsylvania) is an American actor, rapper, and film producer.",
     heroImageId: "will-smith-2012",
     sourceUrls: [obamaFindingAid, paramountBiography],
   },

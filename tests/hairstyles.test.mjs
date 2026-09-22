@@ -193,10 +193,14 @@ test("related hairstyle pages use a four-column grid with medium cards and hover
 });
 
 test("home, hairstyle index, sitemap, canonical URLs, and social image targets are complete", () => {
-  for (const style of publishedHairstyles) {
+  for (const style of publishedHairstyles.slice(0, 4)) {
     assert.match(page("/"), new RegExp(`/hairstyles/${style.slug}/`));
+  }
+  for (const style of publishedHairstyles) {
     assert.match(page("/hairstyles/"), new RegExp(`/hairstyles/${style.slug}/`));
   }
+  for (const style of publishedHairstyles.slice(4))
+    assert.doesNotMatch(page("/"), new RegExp(`/hairstyles/${style.slug}/`));
   for (const style of hairstyles.filter((style) => style.guidePublicationStatus === "draft")) {
     assert.doesNotMatch(page("/"), new RegExp(`/hairstyles/${style.slug}/`));
     assert.doesNotMatch(page("/hairstyles/"), new RegExp(`/hairstyles/${style.slug}/`));
@@ -221,6 +225,17 @@ test("home, hairstyle index, sitemap, canonical URLs, and social image targets a
       `${relative(dist, file)} social image exists`,
     );
   }
+});
+
+test("home limits visual hairstyle discovery and presents concise celebrity links", () => {
+  const markup = page("/");
+
+  assert.equal((markup.match(/data-slot="hover-card-trigger"/g) ?? []).length, Math.min(4, publishedHairstyles.length));
+  assert.match(markup, /Get inspired/i);
+  assert.match(markup, /A look at the record/);
+  assert.match(markup, /Browse celebrities who share your hair type or skin tone/);
+  assert.match(markup, /href="\/people\/"[^>]*>\s*Browse all celebs/);
+  assert.doesNotMatch(markup, /People and appearances|Explore Will Smith|Explore Mario Balotelli/);
 });
 
 test("home introduces four numbered hair types without family labels", () => {

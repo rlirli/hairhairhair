@@ -18,7 +18,6 @@ const appearances = appearancesForPerson(person.id).sort((a, b) => b.taken.value
 const hairstyleRecords = hairstylesForPerson(person.id);
 const media = buildPersonMedia(personPhotographs);
 const hero = media.find((photo) => photo.id === person.heroImageId) ?? media[0];
-const heroAppearance = appearances.find((appearance) => appearance.imageId === person.heroImageId);
 const naturalProfile = naturalProfileForPerson(person.id);
 ---
 
@@ -43,10 +42,12 @@ const naturalProfile = naturalProfileForPerson(person.id);
       </span>
       <span>{person.name}</span>
     </nav>
-    <header class="mt-10 grid gap-10 lg:grid-cols-[.85fr_1.15fr] lg:items-start">
-      <div>
+    <header class="mt-10 grid gap-10 lg:grid-cols-[minmax(0,.95fr)_minmax(0,1.2fr)_minmax(15rem,.85fr)] lg:items-start lg:gap-8 xl:gap-12">
+      <div class="lg:pt-3">
         <p class="text-xs font-black uppercase tracking-[.18em] text-orange">Person record</p>
-        <h1 class="mt-5 font-display text-7xl leading-[.84] tracking-[-.08em] sm:text-9xl">{person.name}</h1>
+        <h1 class="mt-5 font-display text-6xl leading-[.84] tracking-[-.08em] sm:text-8xl xl:text-9xl">
+          {person.name}
+        </h1>
         <div class="mt-8">
           <p class="text-xs font-black uppercase tracking-[.14em] opacity-60">Mini bio</p>
           <ExpandableBio id={`person-${person.slug}-bio`} text={person.description} />
@@ -64,33 +65,31 @@ const naturalProfile = naturalProfileForPerson(person.id);
           ))}
         </div>
       </div>
-      <div class="grid gap-7 md:grid-cols-[1.1fr_.9fr] lg:grid-cols-1 xl:grid-cols-[1.1fr_.9fr]">
-        {hero && (
-          <figure>
+      {hero && (
+        <figure>
+          <a
+            class="focus-ring group block"
+            href={`/people/${person.slug}/photographs/${hero.id}/`}
+            aria-label={`View photograph details for ${person.name}`}
+          >
             <Image
               src={hero.src}
               widths={[400, 800, 1120]}
-              sizes="(min-width: 1280px) 38vw, (min-width: 768px) 55vw, 100vw"
+              sizes="(min-width: 1280px) 38vw, (min-width: 768px) 40vw, 100vw"
               format="webp"
               alt={hero.alt}
-              class="aspect-[4/3] w-full rounded-[2rem] object-cover"
+              class="aspect-[4/3] w-full rounded-[2rem] object-cover transition-transform duration-300 group-hover:scale-[1.015]"
               style={`object-position: ${hero.objectPosition}`}
             />
-            <PersonPhotoAttribution media={hero} compact />
-            {heroAppearance && (
-              <figcaption class="mt-3 text-sm leading-6">
-                <a
-                  class="focus-ring font-bold text-orange underline decoration-orange decoration-2 underline-offset-4"
-                  href={`/people/${person.slug}/appearances/${heroAppearance.id}/`}
-                >
-                  {heroAppearance.taken.value} · {heroAppearance.event} — photograph details ↓
-                </a>
-              </figcaption>
-            )}
-          </figure>
-        )}
-        {naturalProfile && <NaturalProfile profile={naturalProfile} />}
-      </div>
+          </a>
+          <PersonPhotoAttribution media={hero} compact />
+        </figure>
+      )}
+      {naturalProfile && (
+        <div class="lg:pt-3">
+          <NaturalProfile profile={naturalProfile} />
+        </div>
+      )}
     </header>
     <section class="mt-20" aria-labelledby="appearances-heading">
       <div class="flex items-end justify-between gap-5 border-b border-ink pb-3">

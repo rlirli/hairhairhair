@@ -159,6 +159,18 @@ test("person page presents a concise bio and natural profile above appearances",
   assert.doesNotMatch(markup, /change a silhouette|Use the images as haircut references/);
 });
 
+test("person profile hero uses a balanced record header and links directly to photograph details", () => {
+  const markup = page("/people/mario-balotelli/");
+  assert.match(markup, /lg:grid-cols-\[minmax\(0,\.95fr\)_minmax\(0,1\.2fr\)_minmax\(15rem,\.85fr\)\]/);
+  assert.match(markup, /href="\/people\/mario-balotelli\/photographs\/mario-balotelli-2012-training\/"/);
+  assert.match(markup, /aria-label="View photograph details for Mario Balotelli"/);
+  assert.doesNotMatch(markup, /photograph details ↓/);
+  assert.doesNotMatch(
+    markup,
+    /href="\/people\/mario-balotelli\/appearances\/appearance-mario-balotelli-2012\/"[^>]*>[^<]*2012-06-26/,
+  );
+});
+
 test("Mario Balotelli is a complete second person record with five licensed appearances", () => {
   const profile = page("/people/mario-balotelli/");
   assert.match(profile, /Mario Balotelli Barwuah/);

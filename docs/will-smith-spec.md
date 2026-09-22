@@ -25,8 +25,11 @@ image assets. Licensed photographs show compact attribution wherever they appear
 
 ## Routes and presentation
 
-The person page has breadcrumbs, a concise expandable mini bio, a source-attributed profile image, a natural profile,
-a compact newest-first appearances preview, and a compact hairstyles-worn preview in explicit editorial order.
+The person page has breadcrumbs, a concise expandable mini bio, a source-attributed hero photograph linked to its
+photograph record, a natural profile, a compact newest-first appearances preview, and a compact hairstyles-worn preview
+in explicit editorial order. The desktop header uses a balanced three-column arrangement for identity, hero image, and
+natural profile; on small screens these stack in reading order. The compact attribution stays below the hero image, with
+appearance/date context kept out of the profile header.
 
 The full appearances archive lives at `/people/{person}/appearances/`. Each appearance record presents the event,
 face-focused primary photograph, hairstyle observations, global guide links, person-specific hairstyle links, and source

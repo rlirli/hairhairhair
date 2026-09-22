@@ -2,7 +2,7 @@
 
 ## Practical recommendation
 
-Use generated editorial illustrations as the default for the three pages. Label them as illustrations (not photographs, portraits, or diagnostic examples) and describe the page subject separately from the artwork. This avoids attaching an invented person to a claimed hairstyle or implying that one image represents everyone with that style. If the site needs photographic reference, use one credited Commons image per page with a visible or linked attribution block; do not silently crop away source context.
+Use generated editorial illustrations as the default for the three pages. Describe the page subject separately from the artwork and retain the generated provenance in content data. This avoids attaching an invented person to a claimed hairstyle or implying that one image represents everyone with that style. If the site needs photographic reference, use one credited Commons image per page with a visible or linked attribution block; do not silently crop away source context.
 
 ## Reusable Wikimedia Commons candidates
 
@@ -16,6 +16,6 @@ The Commons file page is the source of truth at the time of use: re-check the li
 
 ## Generated vs. photographic editorial reference
 
-- Generated art is suitable for a visual explainer when it is clearly marked “editorial illustration” and the alt text describes the intended design subject, not a real person or universal hair outcome.
+- Generated art is suitable for a visual explainer when the alt text describes the intended design subject, not a real person or universal hair outcome. Keep its generated provenance in the content model for later presentation decisions.
 - A real photo is useful when readers need to see texture or haircut details, but the caption must identify the pictured style narrowly; it should not claim that the photo defines a category or subtype.
 - For a mixed approach, use generated hero art plus one small credited photo per page. Keep the attribution adjacent to or one click from the photo, record the exact Commons file URL, author, license, and whether the asset was cropped/edited.

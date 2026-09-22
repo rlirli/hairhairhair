@@ -42,4 +42,4 @@ Use the flat-top page as a concise guide with:
 2. Three consultation choices: low vs. higher top, level vs. intentionally sloped plane, and taper/outline finish.
 3. Qualitative notes on growth direction, stand, hold, head shape, texture, and styling effort.
 4. A clear caveat that the guide describes visible shape, not a permanent hair-type assignment or a guarantee of outcome.
-5. The real Will Smith 2011 photograph as a dated example only; generated references should depict fictional adults and should be labeled as generated.
+5. The real Will Smith 2011 photograph as a dated example only; generated references should depict fictional adults, with their generated provenance retained in the content data.

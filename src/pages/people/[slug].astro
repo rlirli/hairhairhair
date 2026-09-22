@@ -8,6 +8,7 @@ import { appearancesForPerson, hairstylesForPerson } from "../../data/people-rel
 import { buildPersonMedia } from "../../data/people-media";
 import { naturalProfileForPerson } from "../../data/natural-profiles";
 import PersonPhotoAttribution from "../../components/PersonPhotoAttribution.astro";
+import { appearanceTitle, formatAppearanceDate } from "../../lib/appearance-formatting";
 
 export function getStaticPaths() {
   return people.map((person) => ({ params: { slug: person.slug }, props: { person } }));
@@ -19,9 +20,6 @@ const media = buildPersonMedia(personPhotographs);
 const hero = media.find((photo) => photo.id === person.heroImageId) ?? media[0];
 const heroAppearance = appearances.find((appearance) => appearance.imageId === person.heroImageId);
 const naturalProfile = naturalProfileForPerson(person.id);
-const appearanceTitle = (event: string) => event.split(",")[0];
-const formatAppearanceDate = (value: string) =>
-  new Intl.DateTimeFormat("en-US", { month: "short", year: "numeric" }).format(new Date(`${value}T00:00:00`));
 ---
 
 <Layout
@@ -113,7 +111,7 @@ const formatAppearanceDate = (value: string) =>
             <a
               class="group focus-ring block"
               href={`/people/${person.slug}/appearances/${appearance.id}/`}
-              aria-label={`${formatAppearanceDate(appearance.taken.value)}: ${appearanceTitle(appearance.event)}`}
+              aria-label={`${formatAppearanceDate(appearance.taken.value, "short")}: ${appearanceTitle(appearance.event)}`}
             >
               <figure>
                 <Image
@@ -128,7 +126,7 @@ const formatAppearanceDate = (value: string) =>
                 <PersonPhotoAttribution media={photo} compact />
                 <figcaption class="mt-4">
                   <p class="text-xs font-black uppercase tracking-[.14em] text-orange">
-                    {formatAppearanceDate(appearance.taken.value)}
+                    {formatAppearanceDate(appearance.taken.value, "short")}
                   </p>
                   <h3 class="mt-2 font-display text-2xl leading-[.95] tracking-[-.03em]">
                     {appearanceTitle(appearance.event)}

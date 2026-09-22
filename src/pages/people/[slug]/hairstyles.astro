@@ -5,6 +5,7 @@ import { buildPersonMedia } from "../../../data/people-media";
 import { hairstylesForPerson } from "../../../data/people-relations";
 import { people, personPhotographs } from "../../../data/people";
 import PersonPhotoAttribution from "../../../components/PersonPhotoAttribution.astro";
+import { appearanceTitle, formatAppearanceDate } from "../../../lib/appearance-formatting";
 
 export function getStaticPaths() {
   return people.map((person) => ({ params: { slug: person.slug }, props: { person } }));
@@ -13,9 +14,6 @@ export function getStaticPaths() {
 const { person } = Astro.props;
 const media = buildPersonMedia(personPhotographs);
 const styleRecords = hairstylesForPerson(person.id);
-const appearanceTitle = (event: string) => event.split(",")[0];
-const formatDate = (value: string) =>
-  new Intl.DateTimeFormat("en-US", { month: "short", year: "numeric" }).format(new Date(`${value}T00:00:00`));
 ---
 
 <Layout
@@ -86,7 +84,7 @@ const formatDate = (value: string) =>
                   <PersonPhotoAttribution media={photo} compact />
                   <figcaption class="mt-4">
                     <p class="text-xs font-black uppercase tracking-[.14em] text-orange">
-                      {formatDate(appearance.taken.value)} · {appearanceTitle(appearance.event)}
+                      {formatAppearanceDate(appearance.taken.value, "short")} · {appearanceTitle(appearance.event)}
                     </p>
                     <h3 class="mt-2 font-display text-3xl leading-[.95] tracking-[-.04em]">{style.name}</h3>
                   </figcaption>

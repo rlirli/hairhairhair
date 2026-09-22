@@ -6,6 +6,7 @@ import test from "node:test";
 import { hairstyles } from "../src/data/hairstyles.ts";
 import { hairstylesForPerson } from "../src/data/people-relations.ts";
 import { appearances, people, personPhotographs } from "../src/data/people.ts";
+import { appearanceTitle, formatAppearanceDate } from "../src/lib/appearance-formatting.ts";
 
 const root = new URL("../", import.meta.url).pathname;
 const dist = join(root, "dist");
@@ -100,6 +101,36 @@ test("person page has a newest-first appearance preview with local media", () =>
     if (fragment) assert.match(page(pathname), new RegExp(`id="${fragment.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`));
   }
   assert.match(markup, /\/people\/will-smith\/appearances\/appearance-will-smith-2011\//);
+});
+
+test("appearance formatting is shared and keeps title/date conventions stable", () => {
+  assert.equal(
+    appearanceTitle("White House State Dining Room visit, Washington, D.C."),
+    "White House State Dining Room visit",
+  );
+  assert.equal(formatAppearanceDate("2011-04-24", "short"), "Apr 2011");
+  assert.equal(formatAppearanceDate("2011-04-24"), "April 24, 2011");
+  const formattingSource = readSource("src/lib/appearance-formatting.ts");
+  assert.match(formattingSource, /shortDateFormatter/);
+  assert.match(formattingSource, /longDateFormatter/);
+  for (const route of [
+    "src/pages/people/[slug].astro",
+    "src/pages/people/[slug]/appearances.astro",
+    "src/pages/people/[slug]/hairstyles.astro",
+    "src/pages/people/[slug]/appearances/[appearanceId].astro",
+    "src/pages/people/[slug]/photographs/[photoId].astro",
+    "src/pages/people/[slug]/hairstyles/[hairstyleSlug].astro",
+  ]) {
+    assert.doesNotMatch(readSource(route), /new Intl\.DateTimeFormat|event\.split\(","\)/);
+  }
+});
+
+test("expandable bio only adds a visible multiline ellipsis after measuring overflow", () => {
+  const source = readSource("src/components/ExpandableBio.astro");
+  assert.match(source, /fullHeight > collapsedHeight/);
+  assert.match(source, /-webkit-line-clamp: 3/);
+  assert.match(source, /if \(expanded \|\| !overflows\) text\.classList\.remove\("bio-text--collapsed"\)/);
+  assert.match(source, /toggle\.hidden = !overflows/);
 });
 
 test("person page presents an explicitly ordered hairstyles-worn preview", () => {

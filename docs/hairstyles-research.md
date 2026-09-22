@@ -41,4 +41,4 @@ The feature should help someone name a haircut or styling service and prepare fo
 
 ## Imagery limits
 
-Use original diagrams or clearly labeled illustrative references to show placement, taper height, guard-length progression, parting, and twist direction. A generated styled image cannot establish the subject’s exact natural 1A–4C type, strand thickness, density, porosity, ethnicity, or suitability for the style. Do not use one photorealistic model as the definition of a style; show variation and label images as illustrative rather than diagnostic.
+Use original diagrams or illustrative references to show placement, taper height, guard-length progression, parting, and twist direction. A generated styled image cannot establish the subject’s exact natural 1A–4C type, strand thickness, density, porosity, ethnicity, or suitability for the style. Record generated provenance in the content data, and do not use one photorealistic model as the definition of a style; show variation and treat images as illustrative rather than diagnostic.

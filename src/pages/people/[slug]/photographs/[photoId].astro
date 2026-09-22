@@ -5,6 +5,7 @@ import { buildPersonMedia } from "../../../../data/people-media";
 import { appearances, people, personPhotographs } from "../../../../data/people";
 import { observedStylesForAppearance } from "../../../../data/people-relations";
 import PersonPhotoAttribution from "../../../../components/PersonPhotoAttribution.astro";
+import { appearanceTitle, formatAppearanceDate } from "../../../../lib/appearance-formatting";
 
 export function getStaticPaths() {
   const media = buildPersonMedia(personPhotographs);
@@ -24,11 +25,6 @@ const { person, photo } = Astro.props;
 const photoAppearances = appearances
   .filter((appearance) => appearance.personId === person.id && appearance.imageId === photo.id)
   .sort((a, b) => b.taken.value.localeCompare(a.taken.value));
-const appearanceTitle = (event: string) => event.split(",")[0];
-const formatDate = (value: string) =>
-  new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric" }).format(
-    new Date(`${value}T00:00:00`),
-  );
 const photoStyles = photoAppearances.flatMap((appearance) =>
   observedStylesForAppearance(appearance.id).map(({ style }) => style),
 );
@@ -133,7 +129,7 @@ const uniqueStyles = photoStyles.filter(
                   class="focus-ring font-bold text-orange underline decoration-orange decoration-2 underline-offset-4"
                   href={`/people/${person.slug}/appearances/${appearance.id}/`}
                 >
-                  {formatDate(appearance.taken.value)} · {appearanceTitle(appearance.event)} ↗
+                  {formatAppearanceDate(appearance.taken.value)} · {appearanceTitle(appearance.event)} ↗
                 </a>
                 <p class="mt-1">{appearance.event}</p>
               </li>

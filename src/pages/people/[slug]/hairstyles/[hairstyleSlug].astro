@@ -6,6 +6,7 @@ import { appearancesForPersonStyle, hairstylesForPerson } from "../../../../data
 import { getHairstyle } from "../../../../data/hairstyles";
 import { people, personPhotographs } from "../../../../data/people";
 import PersonPhotoAttribution from "../../../../components/PersonPhotoAttribution.astro";
+import { appearanceTitle, formatAppearanceDate } from "../../../../lib/appearance-formatting";
 
 export function getStaticPaths() {
   return people.flatMap((person) =>
@@ -21,11 +22,6 @@ const style = pathStyle ?? getHairstyle(Astro.params.hairstyleSlug ?? "");
 if (!style) throw new Error(`Unknown hairstyle: ${Astro.params.hairstyleSlug}`);
 const media = buildPersonMedia(personPhotographs);
 const records = appearancesForPersonStyle(person.id, style.id);
-const appearanceTitle = (event: string) => event.split(",")[0];
-const formatDate = (value: string) =>
-  new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric" }).format(
-    new Date(`${value}T00:00:00`),
-  );
 ---
 
 <Layout
@@ -110,7 +106,7 @@ const formatDate = (value: string) =>
               </a>
               <div class="mt-4">
                 <p class="text-xs font-black uppercase tracking-[.14em] text-orange">
-                  {formatDate(appearance.taken.value)}
+                  {formatAppearanceDate(appearance.taken.value)}
                 </p>
                 <h3 class="mt-2 font-display text-2xl leading-[.95] tracking-[-.03em]">
                   {appearanceTitle(appearance.event)}

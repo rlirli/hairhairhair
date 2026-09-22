@@ -8,7 +8,7 @@ const { id, text } = Astro.props;
 ---
 
 <div data-expandable-bio class="max-w-xl" data-expanded="false">
-  <p id={id} data-bio-text class="leading-7" style="max-height: 4.5rem; overflow: hidden;">
+  <p id={id} data-bio-text class="leading-7">
     {text}
   </p>
   <button
@@ -34,10 +34,16 @@ const { id, text } = Astro.props;
 
       const sync = () => {
         const expanded = root.dataset.expanded === "true";
-        text.style.maxHeight = expanded ? "none" : "4.5rem";
-        text.style.overflow = expanded ? "visible" : "hidden";
-        const overflows = text.scrollHeight > text.clientHeight + 1;
-        toggle.hidden = expanded || !overflows;
+        text.classList.remove("bio-text--collapsed");
+        text.style.maxHeight = "none";
+        text.style.overflow = "visible";
+        const fullHeight = text.scrollHeight;
+        text.classList.add("bio-text--collapsed");
+        const collapsedHeight = text.clientHeight;
+        const overflows = fullHeight > collapsedHeight + 1;
+        if (expanded || !overflows) text.classList.remove("bio-text--collapsed");
+        text.style.overflow = expanded || !overflows ? "visible" : "hidden";
+        toggle.hidden = !overflows;
         toggle.setAttribute("aria-expanded", String(expanded));
         toggle.textContent = expanded ? "Less" : "More";
       };
@@ -57,3 +63,12 @@ const { id, text } = Astro.props;
     setupExpandableBios();
   }
 </script>
+
+<style>
+  [data-bio-text].bio-text--collapsed {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+  }
+</style>

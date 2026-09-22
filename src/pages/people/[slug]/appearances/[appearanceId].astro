@@ -5,6 +5,7 @@ import { buildPersonMedia } from "../../../../data/people-media";
 import { appearances, people, personPhotographs } from "../../../../data/people";
 import { observedStylesForAppearance } from "../../../../data/people-relations";
 import PersonPhotoAttribution from "../../../../components/PersonPhotoAttribution.astro";
+import { formatAppearanceDate } from "../../../../lib/appearance-formatting";
 
 export function getStaticPaths() {
   const media = buildPersonMedia(personPhotographs);
@@ -24,14 +25,10 @@ export function getStaticPaths() {
 
 const { person, appearance, photo } = Astro.props;
 const observedStyles = observedStylesForAppearance(appearance.id);
-const formatDate = (value: string) =>
-  new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric" }).format(
-    new Date(`${value}T00:00:00`),
-  );
 ---
 
 <Layout
-  title={`${formatDate(appearance.taken.value)} — ${appearance.event} — ${person.name}`}
+  title={`${formatAppearanceDate(appearance.taken.value)} — ${appearance.event} — ${person.name}`}
   description={`Appearance record for ${person.name} at ${appearance.event}.`}
   image={photo.src.src}
 >
@@ -61,13 +58,13 @@ const formatDate = (value: string) =>
       <span class="mx-2" aria-hidden="true">
         /
       </span>
-      <span>{formatDate(appearance.taken.value)}</span>
+      <span>{formatAppearanceDate(appearance.taken.value)}</span>
     </nav>
 
     <header class="mt-12 max-w-4xl">
       <p class="text-xs font-black uppercase tracking-[.18em] text-orange">Appearance record</p>
       <h1 class="mt-4 font-display text-6xl leading-[.88] tracking-[-.08em] sm:text-8xl">
-        {formatDate(appearance.taken.value)}
+        {formatAppearanceDate(appearance.taken.value)}
       </h1>
       <p class="mt-6 text-xl leading-8">{appearance.event}</p>
     </header>

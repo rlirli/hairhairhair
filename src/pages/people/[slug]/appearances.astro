@@ -5,6 +5,7 @@ import { appearancesForPerson } from "../../../data/people-relations";
 import { buildPersonMedia } from "../../../data/people-media";
 import { people, personPhotographs } from "../../../data/people";
 import PersonPhotoAttribution from "../../../components/PersonPhotoAttribution.astro";
+import { appearanceTitle } from "../../../lib/appearance-formatting";
 
 export function getStaticPaths() {
   return people.map((person) => ({ params: { slug: person.slug }, props: { person } }));
@@ -18,8 +19,6 @@ const appearances = appearancesForPerson(person.id)
     return photo ? [{ appearance, photo }] : [];
   })
   .sort((a, b) => b.appearance.taken.value.localeCompare(a.appearance.taken.value));
-
-const appearanceTitle = (event: string) => event.split(",")[0];
 ---
 
 <Layout

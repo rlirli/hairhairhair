@@ -125,9 +125,16 @@ test("media declarations cover every approved generated asset", () => {
 });
 
 test("static build contains all data-derived expected HTML pages", () => {
-  const expectedPageCount = 3 + hairTypes.length + hairSubtypes.length * 2 + 1 + publishedHairstyles.length + 2;
+  const expectedPageCount = 3 + hairTypes.length + hairSubtypes.length * 2 + 1 + publishedHairstyles.length + 3;
   assert.equal(htmlFiles().length, expectedPageCount);
-  for (const path of ["/", "/hair-types/", "/hairstyles/", "/people/", "/people/will-smith/"])
+  for (const path of [
+    "/",
+    "/hair-types/",
+    "/hairstyles/",
+    "/people/",
+    "/people/will-smith/",
+    "/people/will-smith/appearances/",
+  ])
     assert.ok(existsSync(routeFile(path)));
   assert.ok(existsSync(join(dist, "404.html")));
   for (const hairType of hairTypes) assert.ok(existsSync(routeFile(`/hair-types/${hairType.slug}/`)));
@@ -241,6 +248,7 @@ test("home, hairstyle index, sitemap, canonical URLs, and social image targets a
     ...publishedHairstyles.map((style) => `/hairstyles/${style.slug}/`),
     "/people/",
     "/people/will-smith/",
+    "/people/will-smith/appearances/",
     ...hairTypes.map((hairType) => `/hair-types/${hairType.slug}/`),
     ...hairSubtypes.map((type) => `/hair-types/${type.slug}/`),
     ...hairSubtypes.map((type) => `/hair-types/${type.slug}/related-hairstyles/`),

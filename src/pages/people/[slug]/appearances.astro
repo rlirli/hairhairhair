@@ -1,0 +1,110 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../../../components/Layout.astro";
+import { appearancesForPerson } from "../../../data/people-relations";
+import { buildPersonMedia } from "../../../data/people-media";
+import { people, personPhotographs } from "../../../data/people";
+
+export function getStaticPaths() {
+  return people.map((person) => ({ params: { slug: person.slug }, props: { person } }));
+}
+
+const { person } = Astro.props;
+const media = buildPersonMedia(personPhotographs);
+const appearances = appearancesForPerson(person.id)
+  .flatMap((appearance) => {
+    const photo = media.find((photo) => photo.id === appearance.imageId);
+    return photo ? [{ appearance, photo }] : [];
+  })
+  .sort((a, b) => b.appearance.taken.value.localeCompare(a.appearance.taken.value));
+
+const appearanceTitle = (event: string) => event.split(",")[0];
+---
+
+<Layout
+  title={`${person.name} appearances — people — hairhairhair.hair`}
+  description={`A chronological overview of ${person.name}'s documented public appearances and hairstyles.`}
+>
+  <article class="mx-auto max-w-7xl px-5 pb-20 pt-12 sm:px-8">
+    <nav aria-label="Breadcrumb" class="text-sm font-bold uppercase tracking-[.12em]">
+      <a class="focus-ring text-orange" href="/">
+        Home
+      </a>
+      <span class="mx-2" aria-hidden="true">
+        /
+      </span>
+      <a class="focus-ring text-orange" href="/people/">
+        People
+      </a>
+      <span class="mx-2" aria-hidden="true">
+        /
+      </span>
+      <a class="focus-ring text-orange" href={`/people/${person.slug}/`}>
+        {person.name}
+      </a>
+      <span class="mx-2" aria-hidden="true">
+        /
+      </span>
+      <span>Appearances</span>
+    </nav>
+
+    <header class="mt-12 max-w-3xl">
+      <p class="text-xs font-black uppercase tracking-[.18em] text-orange">Appearance archive</p>
+      <h1 class="mt-4 font-display text-6xl leading-[.88] tracking-[-.08em] sm:text-8xl">
+        {person.name}
+        <br />
+        <span class="text-orange">in public.</span>
+      </h1>
+      <p class="mt-7 text-lg leading-7">
+        A chronological visual record of documented appearances. Each entry points back to the source photograph and the
+        hairstyle observations recorded for that moment.
+      </p>
+    </header>
+
+    <section class="mt-16" aria-labelledby="appearances-heading">
+      <div class="flex items-end justify-between gap-5 border-b-2 border-ink pb-4">
+        <div>
+          <p class="text-xs font-black uppercase tracking-[.18em] text-orange">Person record</p>
+          <h2 id="appearances-heading" class="mt-2 font-display text-4xl tracking-[-.04em]">
+            Appearances
+          </h2>
+        </div>
+        <p class="text-right text-sm font-bold uppercase tracking-[.12em]">Newest first</p>
+      </div>
+
+      <div class="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        {appearances.map(({ appearance, photo }) => (
+          <a
+            class="group focus-ring block"
+            href={`/people/${person.slug}/#${appearance.id}`}
+            aria-label={`${appearance.taken.value}: ${appearance.event}`}
+          >
+            <figure>
+              <Image
+                src={photo.src}
+                widths={[400, 700, 1000]}
+                sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                format="webp"
+                alt={photo.alt}
+                class="aspect-square w-full rounded-[1.5rem] object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                style={`object-position: ${photo.id === "will-smith-2009" ? "70% 48%" : photo.id === "will-smith-2011" ? "58% 43%" : "61% 43%"}`}
+              />
+              <figcaption class="mt-4">
+                <p class="text-xs font-black uppercase tracking-[.14em] text-orange">{appearance.taken.value}</p>
+                <h3 class="mt-2 font-display text-2xl leading-[.95] tracking-[-.03em]">
+                  {appearanceTitle(appearance.event)}
+                </h3>
+                <p class="mt-2 text-sm leading-6">{appearance.event}</p>
+              </figcaption>
+            </figure>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <p class="mt-16 max-w-3xl border-l-4 border-orange pl-4 text-sm leading-6">
+      This is an overview, not a complete career timeline. The archive currently includes only appearances with a
+      source-verified photograph suitable for hairstyle reference.
+    </p>
+  </article>
+</Layout>

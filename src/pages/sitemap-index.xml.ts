@@ -13,6 +13,7 @@ export const GET: APIRoute = () => {
     ...hairSubtypes.map((item) => `hair-types/${item.slug}/related-hairstyles/`),
     ...publishedHairstyles.map((item) => `hairstyles/${item.slug}/`),
     ...people.map((item) => `people/${item.slug}/`),
+    ...people.map((item) => `people/${item.slug}/appearances/`),
   ];
   return new Response(
     `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls.map((url) => `<url><loc>https://hairhairhair.hair/${url}</loc></url>`).join("")}</urlset>`,

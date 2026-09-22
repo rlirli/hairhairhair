@@ -77,6 +77,19 @@ test("person page is chronological, local, and contains no generated media", () 
   assert.match(markup, /#appearance-will-smith-2011/);
 });
 
+test("appearance overview is newest-first and links back to the person record", () => {
+  const markup = page("/people/will-smith/appearances/");
+  assert.match(markup, /Appearance archive/);
+  assert.match(markup, /Newest first/);
+  assert.ok(markup.indexOf("2012-05-23") < markup.indexOf("2011-04-24"));
+  assert.ok(markup.indexOf("2011-04-24") < markup.indexOf("2009-12-10"));
+  for (const appearance of appearances) {
+    assert.match(markup, new RegExp(`href="/people/will-smith/#${appearance.id}"`));
+  }
+  assert.doesNotMatch(markup, /AI-generated|generated reference/);
+  assert.match(markup, /<link rel="canonical" href="https:\/\/hairhairhair\.hair\/people\/will-smith\/appearances\//);
+});
+
 test("appearance anchors and hairstyle backlinks are one-to-one", () => {
   const personById = new Map(people.map((person) => [person.id, person]));
   const personMarkup = new Map(people.map((person) => [person.id, page(`/people/${person.slug}/`)]));
@@ -118,9 +131,9 @@ test("person photographs have public-domain provenance and locally built media",
 
 test("sitemap and canonical metadata include people routes", () => {
   const sitemap = readFileSync(join(dist, "sitemap-index.xml"), "utf8");
-  for (const path of ["/people/", "/people/will-smith/"])
+  for (const path of ["/people/", "/people/will-smith/", "/people/will-smith/appearances/"])
     assert.match(sitemap, new RegExp(path.replaceAll("/", "\\/")));
-  for (const path of ["/people/", "/people/will-smith/"]) {
+  for (const path of ["/people/", "/people/will-smith/", "/people/will-smith/appearances/"]) {
     const markup = page(path);
     const canonical = markup.match(/<link rel="canonical" href="([^"]+)"/);
     assert.ok(canonical);

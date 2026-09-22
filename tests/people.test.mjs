@@ -81,6 +81,15 @@ test("person page has a newest-first appearance preview with local media", () =>
   assert.match(markup, /\/people\/will-smith\/appearances\/appearance-will-smith-2011\//);
 });
 
+test("person page presents an explicitly ordered hairstyles-worn preview", () => {
+  const markup = page("/people/will-smith/");
+  assert.match(markup, /Hairstyles worn/);
+  assert.match(markup, /href="\/people\/will-smith\/hairstyles\/"/);
+  assert.match(markup, /href="\/people\/will-smith\/hairstyles\/flat-top\/"/);
+  assert.match(markup, /href="\/people\/will-smith\/hairstyles\/buzz-cut\/"/);
+  assert.ok(markup.indexOf("Flat top") < markup.indexOf("Buzz cut"));
+});
+
 test("person page presents a concise bio and natural profile above appearances", () => {
   const markup = page("/people/will-smith/");
   assert.match(markup, /Home/);

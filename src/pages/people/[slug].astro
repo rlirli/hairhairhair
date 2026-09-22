@@ -4,7 +4,7 @@ import ExpandableBio from "../../components/ExpandableBio.astro";
 import NaturalProfile from "../../components/NaturalProfile.astro";
 import { Image } from "astro:assets";
 import { people, personPhotographs } from "../../data/people";
-import { appearancesForPerson } from "../../data/people-relations";
+import { appearancesForPerson, hairstylesForPerson } from "../../data/people-relations";
 import { buildPersonMedia } from "../../data/people-media";
 import { naturalProfileForPerson } from "../../data/natural-profiles";
 
@@ -13,6 +13,7 @@ export function getStaticPaths() {
 }
 const { person } = Astro.props;
 const appearances = appearancesForPerson(person.id).sort((a, b) => b.taken.value.localeCompare(a.taken.value));
+const hairstyleRecords = hairstylesForPerson(person.id);
 const media = buildPersonMedia(personPhotographs);
 const hero = media.find((photo) => photo.id === person.heroImageId) ?? media[0];
 const heroAppearance = appearances.find((appearance) => appearance.imageId === person.heroImageId);
@@ -20,6 +21,8 @@ const naturalProfile = naturalProfileForPerson(person.id);
 const appearanceTitle = (event: string) => event.split(",")[0];
 const formatAppearanceDate = (value: string) =>
   new Intl.DateTimeFormat("en-US", { month: "short", year: "numeric" }).format(new Date(`${value}T00:00:00`));
+const facePosition = (photoId: string) =>
+  photoId === "will-smith-2009" ? "70% 48%" : photoId === "will-smith-2011" ? "58% 43%" : "61% 43%";
 ---
 
 <Layout
@@ -131,6 +134,44 @@ const formatAppearanceDate = (value: string) =>
                   <span class="mt-2 inline-block text-xs font-bold uppercase tracking-[.12em] text-orange underline decoration-orange decoration-2 underline-offset-4">
                     Appearance record ↗
                   </span>
+                </figcaption>
+              </figure>
+            </a>
+          ) : null;
+        })}
+      </div>
+    </section>
+    <section class="mt-20" aria-labelledby="hairstyles-heading">
+      <div class="flex items-end justify-between gap-5 border-b border-ink pb-3">
+        <h2 id="hairstyles-heading" class="text-xs font-black uppercase tracking-[.18em] text-orange">
+          Hairstyles worn
+        </h2>
+        <a
+          class="focus-ring text-xs font-black uppercase tracking-[.14em] text-orange underline decoration-orange decoration-2 underline-offset-4"
+          href={`/people/${person.slug}/hairstyles/`}
+        >
+          More <span aria-hidden="true">→</span>
+        </a>
+      </div>
+      <div class="mt-7 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        {hairstyleRecords.slice(0, 4).map(({ style, appearances: styleAppearances }) => {
+          const appearance = styleAppearances[0];
+          const photo = media.find((item) => item.id === appearance.imageId);
+          return photo ? (
+            <a class="group focus-ring block" href={`/people/${person.slug}/hairstyles/${style.slug}/`}>
+              <figure>
+                <Image
+                  src={photo.src}
+                  widths={[400, 700, 1000]}
+                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                  format="webp"
+                  loading="lazy"
+                  alt={`${person.name} wearing ${style.name}`}
+                  class="aspect-square w-full rounded-[1.5rem] object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                  style={`object-position: ${facePosition(photo.id)}`}
+                />
+                <figcaption class="mt-4">
+                  <h3 class="font-display text-3xl leading-[.95] tracking-[-.04em]">{style.name}</h3>
                 </figcaption>
               </figure>
             </a>

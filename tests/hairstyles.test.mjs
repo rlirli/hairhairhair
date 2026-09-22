@@ -16,7 +16,7 @@ import {
   styleExamples,
 } from "../src/data/hairstyles.ts";
 import { hairstylesForPerson } from "../src/data/people-relations.ts";
-import { people, personPhotographs } from "../src/data/people.ts";
+import { appearances, people, personPhotographs } from "../src/data/people.ts";
 
 const root = new URL("../", import.meta.url).pathname;
 const dist = join(root, "dist");
@@ -134,6 +134,7 @@ test("static build contains all data-derived expected HTML pages", () => {
     1 +
     publishedHairstyles.length +
     3 +
+    appearances.length +
     personPhotographs.length +
     people.length +
     people.reduce((count, person) => count + hairstylesForPerson(person.id).length, 0);

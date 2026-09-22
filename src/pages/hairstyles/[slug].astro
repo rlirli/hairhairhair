@@ -176,7 +176,7 @@ const ogImage = heroMedia
           {documentedAppearances.map(({ appearance, person }) => (
             <a
               class="focus-ring block font-display text-2xl text-orange underline decoration-orange decoration-2 underline-offset-4"
-              href={`/people/${person!.slug}/appearances/#${appearance.id}`}
+              href={`/people/${person!.slug}/appearances/${appearance.id}/`}
             >
               {person!.name} · {appearance.taken.value} ↗
             </a>

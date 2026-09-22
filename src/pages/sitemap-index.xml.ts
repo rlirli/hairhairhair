@@ -15,6 +15,12 @@ export const GET: APIRoute = () => {
     ...publishedHairstyles.map((item) => `hairstyles/${item.slug}/`),
     ...people.map((item) => `people/${item.slug}/`),
     ...people.map((item) => `people/${item.slug}/appearances/`),
+    ...appearances
+      .map((appearance) => {
+        const person = people.find((item) => item.id === appearance.personId);
+        return person ? `people/${person.slug}/appearances/${appearance.id}/` : null;
+      })
+      .filter((url): url is string => Boolean(url)),
     ...people.map((person) => `people/${person.slug}/hairstyles/`),
     ...people.flatMap((person) =>
       hairstylesForPerson(person.id).map(({ style }) => `people/${person.slug}/hairstyles/${style.slug}/`),

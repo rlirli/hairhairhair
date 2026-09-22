@@ -79,7 +79,7 @@ const formatAppearanceDate = (value: string) =>
               <figcaption class="mt-3 text-sm leading-6">
                 <a
                   class="focus-ring font-bold text-orange underline decoration-orange decoration-2 underline-offset-4"
-                  href={`/people/${person.slug}/appearances/#${heroAppearance.id}`}
+                  href={`/people/${person.slug}/appearances/${heroAppearance.id}/`}
                 >
                   {heroAppearance.taken.value} · {heroAppearance.event} — photograph details ↓
                 </a>
@@ -108,7 +108,7 @@ const formatAppearanceDate = (value: string) =>
           return photo ? (
             <a
               class="group focus-ring block"
-              href={`/people/${person.slug}/appearances/#${appearance.id}`}
+              href={`/people/${person.slug}/appearances/${appearance.id}/`}
               aria-label={`${formatAppearanceDate(appearance.taken.value)}: ${appearanceTitle(appearance.event)}`}
             >
               <figure>
@@ -129,7 +129,7 @@ const formatAppearanceDate = (value: string) =>
                     {appearanceTitle(appearance.event)}
                   </h3>
                   <span class="mt-2 inline-block text-xs font-bold uppercase tracking-[.12em] text-orange underline decoration-orange decoration-2 underline-offset-4">
-                    Photograph details ↗
+                    Appearance record ↗
                   </span>
                 </figcaption>
               </figure>

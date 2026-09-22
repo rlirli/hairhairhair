@@ -78,7 +78,7 @@ test("person page has a newest-first appearance preview with local media", () =>
     assert.ok(existsSync(routeFile(pathname)), href);
     if (fragment) assert.match(page(pathname), new RegExp(`id="${fragment.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`));
   }
-  assert.match(markup, /\/people\/will-smith\/appearances\/#appearance-will-smith-2011/);
+  assert.match(markup, /\/people\/will-smith\/appearances\/appearance-will-smith-2011\//);
 });
 
 test("person page presents a concise bio and natural profile above appearances", () => {
@@ -117,13 +117,13 @@ test("each photograph has a dedicated provenance page and existing cards reach i
     assert.match(markup, new RegExp(photo.creator.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
     assert.match(markup, /Rights evidence/);
     assert.match(markup, /Appearances/);
-    assert.match(markup, /href="\/people\/will-smith\/appearances\/#appearance-will-smith-/);
+    assert.match(markup, /href="\/people\/will-smith\/appearances\/appearance-will-smith-/);
     assert.match(markup, /href="\/people\/will-smith\/"/);
   }
   const profile = page("/people/will-smith/");
-  assert.match(profile, /Photograph details/);
+  assert.match(profile, /Appearance record/);
   const archive = page("/people/will-smith/appearances/");
-  assert.match(archive, /\/people\/will-smith\/photographs\/will-smith-2011\//);
+  assert.match(archive, /\/people\/will-smith\/appearances\/appearance-will-smith-2011\//);
 });
 
 test("appearance anchors and hairstyle backlinks are one-to-one", () => {
@@ -138,10 +138,23 @@ test("appearance anchors and hairstyle backlinks are one-to-one", () => {
       assert.ok(style);
       if (style.guidePublicationStatus === "published") {
         const styleMarkup = page(`/hairstyles/${style.slug}/`);
-        assert.match(styleMarkup, new RegExp(`href="/people/${person.slug}/appearances/#${appearance.id}"`));
+        assert.match(styleMarkup, new RegExp(`href="/people/${person.slug}/appearances/${appearance.id}/"`));
       }
     }
   }
+});
+
+test("single appearance records connect the photograph, observations, and archives", () => {
+  const markup = page("/people/will-smith/appearances/appearance-will-smith-2011/");
+  assert.match(markup, /Appearance record/);
+  assert.match(markup, /April 24, 2011/);
+  assert.match(markup, /White House State Dining Room visit/);
+  assert.match(markup, /href="\/people\/will-smith\/photographs\/will-smith-2011\/"/);
+  assert.match(markup, /href="\/hairstyles\/flat-top\/"/);
+  assert.match(markup, /href="\/people\/will-smith\/hairstyles\/flat-top\/"/);
+  assert.match(markup, /Open source record/);
+  assert.match(markup, /href="\/people\/will-smith\/appearances\/"/);
+  assert.match(markup, /href="\/people\/will-smith\/"/);
 });
 
 test("person photographs have public-domain provenance and locally built media", () => {
@@ -167,6 +180,9 @@ test("sitemap and canonical metadata include people routes", () => {
     "/people/",
     "/people/will-smith/",
     "/people/will-smith/appearances/",
+    "/people/will-smith/appearances/appearance-will-smith-2009/",
+    "/people/will-smith/appearances/appearance-will-smith-2011/",
+    "/people/will-smith/appearances/appearance-will-smith-2012/",
     "/people/will-smith/hairstyles/",
   ])
     assert.match(sitemap, new RegExp(path.replaceAll("/", "\\/")));
@@ -174,6 +190,9 @@ test("sitemap and canonical metadata include people routes", () => {
     "/people/",
     "/people/will-smith/",
     "/people/will-smith/appearances/",
+    "/people/will-smith/appearances/appearance-will-smith-2009/",
+    "/people/will-smith/appearances/appearance-will-smith-2011/",
+    "/people/will-smith/appearances/appearance-will-smith-2012/",
     "/people/will-smith/hairstyles/",
   ]) {
     const markup = page(path);

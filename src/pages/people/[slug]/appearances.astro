@@ -76,7 +76,7 @@ const appearanceTitle = (event: string) => event.split(",")[0];
         {appearances.map(({ appearance, photo }) => (
           <a
             class="group focus-ring block"
-            href={`/people/${person.slug}/photographs/${photo.id}/`}
+            href={`/people/${person.slug}/appearances/${appearance.id}/`}
             aria-label={`${appearance.taken.value}: ${appearance.event}`}
             id={appearance.id}
           >
@@ -96,7 +96,7 @@ const appearanceTitle = (event: string) => event.split(",")[0];
                   {appearanceTitle(appearance.event)}
                 </h3>
                 <p class="mt-2 text-sm leading-6">{appearance.event}</p>
-                <p class="mt-3 text-xs font-bold uppercase tracking-[.12em] text-orange">Photograph details ↗</p>
+                <p class="mt-3 text-xs font-bold uppercase tracking-[.12em] text-orange">Appearance record ↗</p>
               </figcaption>
             </figure>
           </a>

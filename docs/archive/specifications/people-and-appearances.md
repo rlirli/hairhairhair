@@ -1,5 +1,7 @@
 # People, appearances, and hairstyle records
 
+> Historical implementation specification. It records the first person-record feature and is not the current contributor contract.
+
 Person records provide a concise, factual mini bio and a source-attributed image. They are not biography pages or a
 complete career archive. Current coverage is limited to documented appearances with usable source photographs; dates
 retain their recorded precision and are never inferred from upload dates.

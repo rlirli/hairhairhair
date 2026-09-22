@@ -1,5 +1,7 @@
 # First hairstyle collection
 
+> Historical implementation specification. It records the first hairstyle collection and is not the current contributor contract.
+
 ## Outcome
 
 Publish three researched guides at `/hairstyles/taper-fade/`, `/hairstyles/buzz-cut/`, and `/hairstyles/twists/`, with a browsable `/hairstyles/` index. A visitor can go from a hair type or sub-type to a relevant guide and return to that numbered hair type. Preserve the existing static Astro, TypeScript, Tailwind, light/dark theme, and GitHub Pages deployment.
@@ -30,7 +32,7 @@ Continue the existing editorial serif type, warm paper, dark charcoal, copper ac
 
 ## Image plan
 
-Six original generated reference portraits: a low taper with coily top, a low taper with wavy top, a very short even buzz, a longer textured buzz, short two-strand twists, and longer two-strand twists. Inspect each before use and make captions fit actual output. Do not infer a person's ethnicity, natural pattern code, or suitability from appearance. Keep prompt records in `docs/image-prompts.md` and originals under `src/assets/hairstyles/`; serve optimized responsive images through Astro. If generation cannot complete, report that limitation instead of disguising placeholders as completed photos.
+Six original generated reference portraits: a low taper with coily top, a low taper with wavy top, a very short even buzz, a longer textured buzz, short two-strand twists, and longer two-strand twists. Inspect each before use and make captions fit actual output. Do not infer a person's ethnicity, natural pattern code, or suitability from appearance. Keep prompt records in [`docs/media/hairstyle-image-prompts.md`](../../media/hairstyle-image-prompts.md) and originals under `src/assets/hairstyles/`; serve optimized responsive images through Astro. If generation cannot complete, report that limitation instead of disguising placeholders as completed photos.
 
 ## Verification and delivery
 

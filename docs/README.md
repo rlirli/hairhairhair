@@ -1,0 +1,35 @@
+# Documentation
+
+Use this index to find the current contributor guides, supporting research, media records, and historical specifications.
+
+## Contributor guides
+
+- [Add a hairstyle](contributing/adding-a-hairstyle.md)
+- [Add a person](contributing/adding-a-person.md)
+
+These guides describe the repository as it works now. Update the relevant guide in the same commit whenever a content workflow changes.
+
+## Reference
+
+- [`CONTEXT.md`](../CONTEXT.md) defines the shared domain language.
+- [`src/data/`](../src/data/) contains the current executable content model.
+
+## Research
+
+- Hair types: [content and sources](research/hair-types/content-notes.md)
+- Hairstyles: [editorial overview](research/hairstyles/overview.md), [imagery](research/hairstyles/imagery.md), [flat top](research/hairstyles/flat-top.md), and [Mario Balotelli-inspired styles](research/hairstyles/mario-balotelli.md)
+- People: [Will Smith](research/people/will-smith.md) and [Mario Balotelli](research/people/mario-balotelli.md)
+
+Research files preserve evidence and editorial decisions. They are not step-by-step contributor instructions.
+
+## Media records
+
+- [Hairstyle image prompts](media/hairstyle-image-prompts.md)
+
+## Historical specifications
+
+- [V0](archive/specifications/v0.md)
+- [First hairstyle collection](archive/specifications/first-hairstyle-collection.md)
+- [First person records](archive/specifications/people-and-appearances.md)
+
+Archived specifications record earlier implementation scopes. They are non-normative and may intentionally describe superseded behavior.

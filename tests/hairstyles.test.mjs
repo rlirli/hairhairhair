@@ -15,7 +15,8 @@ import {
   sources,
   styleExamples,
 } from "../src/data/hairstyles.ts";
-import { personPhotographs } from "../src/data/people.ts";
+import { hairstylesForPerson } from "../src/data/people-relations.ts";
+import { people, personPhotographs } from "../src/data/people.ts";
 
 const root = new URL("../", import.meta.url).pathname;
 const dist = join(root, "dist");
@@ -127,7 +128,15 @@ test("media declarations cover every approved generated asset", () => {
 
 test("static build contains all data-derived expected HTML pages", () => {
   const expectedPageCount =
-    3 + hairTypes.length + hairSubtypes.length * 2 + 1 + publishedHairstyles.length + 3 + personPhotographs.length;
+    3 +
+    hairTypes.length +
+    hairSubtypes.length * 2 +
+    1 +
+    publishedHairstyles.length +
+    3 +
+    personPhotographs.length +
+    people.length +
+    people.reduce((count, person) => count + hairstylesForPerson(person.id).length, 0);
   assert.equal(htmlFiles().length, expectedPageCount);
   for (const path of [
     "/",
@@ -136,6 +145,7 @@ test("static build contains all data-derived expected HTML pages", () => {
     "/people/",
     "/people/will-smith/",
     "/people/will-smith/appearances/",
+    "/people/will-smith/hairstyles/",
   ])
     assert.ok(existsSync(routeFile(path)));
   assert.ok(existsSync(join(dist, "404.html")));
@@ -143,6 +153,10 @@ test("static build contains all data-derived expected HTML pages", () => {
   for (const type of hairSubtypes) assert.ok(existsSync(routeFile(`/hair-types/${type.slug}/`)));
   for (const type of hairSubtypes) assert.ok(existsSync(routeFile(`/hair-types/${type.slug}/related-hairstyles/`)));
   for (const style of publishedHairstyles) assert.ok(existsSync(routeFile(`/hairstyles/${style.slug}/`)));
+  for (const person of people) {
+    for (const { style } of hairstylesForPerson(person.id))
+      assert.ok(existsSync(routeFile(`/people/${person.slug}/hairstyles/${style.slug}/`)));
+  }
   for (const style of hairstyles.filter((style) => style.guidePublicationStatus === "draft"))
     assert.ok(!existsSync(routeFile(`/hairstyles/${style.slug}/`)));
 });

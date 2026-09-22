@@ -4,6 +4,7 @@ import { join } from "node:path";
 import test from "node:test";
 
 import { hairstyles } from "../src/data/hairstyles.ts";
+import { hairstylesForPerson } from "../src/data/people-relations.ts";
 import { appearances, people, personPhotographs } from "../src/data/people.ts";
 
 const root = new URL("../", import.meta.url).pathname;
@@ -162,12 +163,49 @@ test("person photographs have public-domain provenance and locally built media",
 
 test("sitemap and canonical metadata include people routes", () => {
   const sitemap = readFileSync(join(dist, "sitemap-index.xml"), "utf8");
-  for (const path of ["/people/", "/people/will-smith/", "/people/will-smith/appearances/"])
+  for (const path of [
+    "/people/",
+    "/people/will-smith/",
+    "/people/will-smith/appearances/",
+    "/people/will-smith/hairstyles/",
+  ])
     assert.match(sitemap, new RegExp(path.replaceAll("/", "\\/")));
-  for (const path of ["/people/", "/people/will-smith/", "/people/will-smith/appearances/"]) {
+  for (const path of [
+    "/people/",
+    "/people/will-smith/",
+    "/people/will-smith/appearances/",
+    "/people/will-smith/hairstyles/",
+  ]) {
     const markup = page(path);
     const canonical = markup.match(/<link rel="canonical" href="([^"]+)"/);
     assert.ok(canonical);
     assert.equal(canonical[1], `https://hairhairhair.hair${path}`);
   }
+});
+
+test("person hairstyle overview uses explicit editorial order", () => {
+  const markup = page("/people/will-smith/hairstyles/");
+  assert.match(markup, /Hairstyles worn/);
+  assert.ok(markup.indexOf("Flat top") < markup.indexOf("Buzz cut"));
+  assert.match(markup, /href="\/people\/will-smith\/hairstyles\/flat-top\/"/);
+  assert.match(markup, /href="\/people\/will-smith\/hairstyles\/buzz-cut\/"/);
+});
+
+test("person hairstyle detail pages collect every matching appearance", () => {
+  const expected = [
+    ["flat-top", ["April 24, 2011"]],
+    ["buzz-cut", ["May 23, 2012", "December 10, 2009"]],
+  ];
+  for (const [slug, dates] of expected) {
+    const markup = page(`/people/will-smith/hairstyles/${slug}/`);
+    assert.match(markup, /Person hairstyle record/);
+    for (const date of dates) assert.match(markup, new RegExp(date));
+    assert.match(markup, /Appearance record/);
+    assert.match(markup, /Read the .* guide/);
+    assert.match(markup, /href="\/people\/will-smith\/photographs\/will-smith-/);
+  }
+  assert.deepEqual(
+    hairstylesForPerson("person-will-smith").map(({ style }) => style.slug),
+    ["flat-top", "buzz-cut"],
+  );
 });

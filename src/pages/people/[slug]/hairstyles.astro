@@ -1,0 +1,103 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../../../components/Layout.astro";
+import { buildPersonMedia } from "../../../data/people-media";
+import { hairstylesForPerson } from "../../../data/people-relations";
+import { people, personPhotographs } from "../../../data/people";
+
+export function getStaticPaths() {
+  return people.map((person) => ({ params: { slug: person.slug }, props: { person } }));
+}
+
+const { person } = Astro.props;
+const media = buildPersonMedia(personPhotographs);
+const styleRecords = hairstylesForPerson(person.id);
+const appearanceTitle = (event: string) => event.split(",")[0];
+const formatDate = (value: string) =>
+  new Intl.DateTimeFormat("en-US", { month: "short", year: "numeric" }).format(new Date(`${value}T00:00:00`));
+const facePosition = (photoId: string) =>
+  photoId === "will-smith-2009" ? "70% 48%" : photoId === "will-smith-2011" ? "58% 43%" : "61% 43%";
+---
+
+<Layout
+  title={`${person.name} hairstyles — people — hairhairhair.hair`}
+  description={`Hairstyles documented in ${person.name}'s public appearances.`}
+>
+  <article class="mx-auto max-w-7xl px-5 pb-20 pt-12 sm:px-8">
+    <nav aria-label="Breadcrumb" class="text-sm font-bold uppercase tracking-[.12em]">
+      <a class="focus-ring text-orange" href="/">
+        Home
+      </a>
+      <span class="mx-2" aria-hidden="true">
+        /
+      </span>
+      <a class="focus-ring text-orange" href="/people/">
+        People
+      </a>
+      <span class="mx-2" aria-hidden="true">
+        /
+      </span>
+      <a class="focus-ring text-orange" href={`/people/${person.slug}/`}>
+        {person.name}
+      </a>
+      <span class="mx-2" aria-hidden="true">
+        /
+      </span>
+      <span>Hairstyles</span>
+    </nav>
+
+    <header class="mt-12 max-w-3xl">
+      <p class="text-xs font-black uppercase tracking-[.18em] text-orange">Hairstyles worn</p>
+      <h1 class="mt-4 font-display text-6xl leading-[.88] tracking-[-.08em] sm:text-8xl">{person.name}</h1>
+      <p class="mt-7 text-lg leading-7">
+        A visual index of hairstyle guides connected to documented appearances. Select a style to see every appearance
+        currently recorded for it.
+      </p>
+    </header>
+
+    <section class="mt-16" aria-labelledby="styles-heading">
+      <div class="flex items-end justify-between gap-5 border-b-2 border-ink pb-4">
+        <div>
+          <p class="text-xs font-black uppercase tracking-[.18em] text-orange">Person record</p>
+          <h2 id="styles-heading" class="mt-2 font-display text-4xl tracking-[-.06em]">
+            Hairstyles worn
+          </h2>
+        </div>
+        <p class="text-right text-sm font-bold uppercase tracking-[.12em]">Editorial order</p>
+      </div>
+
+      {styleRecords.length ? (
+        <div class="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          {styleRecords.map(({ style, appearances }) => {
+            const appearance = appearances[0];
+            const photo = media.find((item) => item.id === appearance.imageId);
+            return photo ? (
+              <a class="group focus-ring block" href={`/people/${person.slug}/hairstyles/${style.slug}/`}>
+                <figure>
+                  <Image
+                    src={photo.src}
+                    widths={[400, 700, 1000]}
+                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                    format="webp"
+                    loading="lazy"
+                    alt={photo.alt}
+                    class="aspect-square w-full rounded-[1.5rem] object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                    style={`object-position: ${facePosition(photo.id)}`}
+                  />
+                  <figcaption class="mt-4">
+                    <p class="text-xs font-black uppercase tracking-[.14em] text-orange">
+                      {formatDate(appearance.taken.value)} · {appearanceTitle(appearance.event)}
+                    </p>
+                    <h3 class="mt-2 font-display text-3xl leading-[.95] tracking-[-.04em]">{style.name}</h3>
+                  </figcaption>
+                </figure>
+              </a>
+            ) : null;
+          })}
+        </div>
+      ) : (
+        <p class="mt-8 text-lg leading-7">No hairstyle records are available yet.</p>
+      )}
+    </section>
+  </article>
+</Layout>

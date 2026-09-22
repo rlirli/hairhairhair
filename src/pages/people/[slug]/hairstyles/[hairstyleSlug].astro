@@ -1,0 +1,139 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../../../../components/Layout.astro";
+import { buildPersonMedia } from "../../../../data/people-media";
+import { appearancesForPersonStyle, hairstylesForPerson } from "../../../../data/people-relations";
+import { getHairstyle } from "../../../../data/hairstyles";
+import { people, personPhotographs } from "../../../../data/people";
+
+export function getStaticPaths() {
+  return people.flatMap((person) =>
+    hairstylesForPerson(person.id).map(({ style }) => ({
+      params: { slug: person.slug, hairstyleSlug: style.slug },
+      props: { person, style },
+    })),
+  );
+}
+
+const { person, style: pathStyle } = Astro.props;
+const style = pathStyle ?? getHairstyle(Astro.params.hairstyleSlug ?? "");
+if (!style) throw new Error(`Unknown hairstyle: ${Astro.params.hairstyleSlug}`);
+const media = buildPersonMedia(personPhotographs);
+const records = appearancesForPersonStyle(person.id, style.id);
+const appearanceTitle = (event: string) => event.split(",")[0];
+const formatDate = (value: string) =>
+  new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric" }).format(
+    new Date(`${value}T00:00:00`),
+  );
+const facePosition = (photoId: string) =>
+  photoId === "will-smith-2009" ? "70% 48%" : photoId === "will-smith-2011" ? "58% 43%" : "61% 43%";
+---
+
+<Layout
+  title={`${style.name} worn by ${person.name} — people — hairhairhair.hair`}
+  description={`Documented appearances where ${person.name} wore ${style.name}.`}
+>
+  <article class="mx-auto max-w-7xl px-5 pb-20 pt-12 sm:px-8">
+    <nav aria-label="Breadcrumb" class="text-sm font-bold uppercase tracking-[.12em]">
+      <a class="focus-ring text-orange" href="/">
+        Home
+      </a>
+      <span class="mx-2" aria-hidden="true">
+        /
+      </span>
+      <a class="focus-ring text-orange" href="/people/">
+        People
+      </a>
+      <span class="mx-2" aria-hidden="true">
+        /
+      </span>
+      <a class="focus-ring text-orange" href={`/people/${person.slug}/`}>
+        {person.name}
+      </a>
+      <span class="mx-2" aria-hidden="true">
+        /
+      </span>
+      <a class="focus-ring text-orange" href={`/people/${person.slug}/hairstyles/`}>
+        Hairstyles
+      </a>
+      <span class="mx-2" aria-hidden="true">
+        /
+      </span>
+      <span>{style.name}</span>
+    </nav>
+
+    <header class="mt-12 max-w-3xl">
+      <p class="text-xs font-black uppercase tracking-[.18em] text-orange">Person hairstyle record</p>
+      <h1 class="mt-4 font-display text-6xl leading-[.88] tracking-[-.08em] sm:text-8xl">{style.name}</h1>
+      <p class="mt-6 text-lg leading-7">
+        {person.name} wearing this hairstyle in {records.length} documented{" "}
+        {records.length === 1 ? "appearance" : "appearances"}.
+      </p>
+      {style.guidePublicationStatus === "published" && (
+        <a
+          class="focus-ring mt-5 inline-block font-bold text-orange underline decoration-orange decoration-2 underline-offset-4"
+          href={`/hairstyles/${style.slug}/`}
+        >
+          Read the {style.name} guide ↗
+        </a>
+      )}
+    </header>
+
+    <section class="mt-16" aria-labelledby="appearances-heading">
+      <div class="flex items-end justify-between gap-5 border-b-2 border-ink pb-4">
+        <div>
+          <p class="text-xs font-black uppercase tracking-[.18em] text-orange">Appearance archive</p>
+          <h2 id="appearances-heading" class="mt-2 font-display text-4xl tracking-[-.06em]">
+            All documented appearances
+          </h2>
+        </div>
+        <p class="text-right text-sm font-bold uppercase tracking-[.12em]">Newest first</p>
+      </div>
+
+      <div class="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        {records.map((appearance) => {
+          const photo = media.find((item) => item.id === appearance.imageId);
+          const observation = appearance.observations.find((item) => item.hairstyleId === style.id);
+          return photo ? (
+            <article class="group">
+              <a class="focus-ring block" href={`/people/${person.slug}/photographs/${photo.id}/`}>
+                <Image
+                  src={photo.src}
+                  widths={[400, 700, 1000]}
+                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                  format="webp"
+                  loading="lazy"
+                  alt={photo.alt}
+                  class="aspect-square w-full rounded-[1.5rem] object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                  style={`object-position: ${facePosition(photo.id)}`}
+                />
+              </a>
+              <div class="mt-4">
+                <p class="text-xs font-black uppercase tracking-[.14em] text-orange">
+                  {formatDate(appearance.taken.value)}
+                </p>
+                <h3 class="mt-2 font-display text-2xl leading-[.95] tracking-[-.03em]">
+                  {appearanceTitle(appearance.event)}
+                </h3>
+                {observation && <p class="mt-3 text-sm leading-6">{observation.note}</p>}
+                <a
+                  class="focus-ring mt-3 inline-block text-xs font-bold uppercase tracking-[.12em] text-orange underline decoration-orange decoration-2 underline-offset-4"
+                  href={`/people/${person.slug}/appearances/#${appearance.id}`}
+                >
+                  Appearance record ↗
+                </a>
+              </div>
+            </article>
+          ) : null;
+        })}
+      </div>
+    </section>
+
+    <a
+      class="focus-ring mt-14 inline-block font-bold text-orange underline decoration-orange decoration-2 underline-offset-4"
+      href={`/people/${person.slug}/hairstyles/`}
+    >
+      ← All hairstyles worn by {person.name}
+    </a>
+  </article>
+</Layout>

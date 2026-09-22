@@ -2,6 +2,7 @@ import type { APIRoute } from "astro";
 import { hairSubtypes, hairTypes } from "../data/hair-types";
 import { publishedHairstyles } from "../data/hairstyles";
 import { appearances, people, personPhotographs } from "../data/people";
+import { hairstylesForPerson } from "../data/people-relations";
 export const GET: APIRoute = () => {
   const urls = [
     "",
@@ -14,6 +15,10 @@ export const GET: APIRoute = () => {
     ...publishedHairstyles.map((item) => `hairstyles/${item.slug}/`),
     ...people.map((item) => `people/${item.slug}/`),
     ...people.map((item) => `people/${item.slug}/appearances/`),
+    ...people.map((person) => `people/${person.slug}/hairstyles/`),
+    ...people.flatMap((person) =>
+      hairstylesForPerson(person.id).map(({ style }) => `people/${person.slug}/hairstyles/${style.slug}/`),
+    ),
     ...people.flatMap((person) =>
       personPhotographs
         .filter((photo) =>

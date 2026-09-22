@@ -1,5 +1,5 @@
-import { hairstyles } from "./hairstyles";
-import { appearances, people } from "./people";
+import { hairstyles } from "./hairstyles.ts";
+import { appearances, people } from "./people.ts";
 
 export function appearancesForPerson(personId: string) {
   return appearances
@@ -25,6 +25,33 @@ export function appearancesForStyle(styleId: string) {
   return appearances.filter((appearance) =>
     appearance.observations.some((observation) => observation.hairstyleId === styleId),
   );
+}
+
+// This is editorial order, not an accidental consequence of the hairstyle or appearance data order.
+export const personHairstyleOrder: Record<string, string[]> = {
+  "person-will-smith": ["hairstyle-flat-top", "hairstyle-buzz-cut"],
+};
+
+export function appearancesForPersonStyle(personId: string, styleId: string) {
+  return appearances
+    .filter(
+      (appearance) =>
+        appearance.personId === personId &&
+        appearance.observations.some((observation) => observation.hairstyleId === styleId),
+    )
+    .sort((a, b) => b.taken.value.localeCompare(a.taken.value));
+}
+
+export function hairstylesForPerson(personId: string) {
+  const orderedIds = personHairstyleOrder[personId] ?? [];
+  return orderedIds
+    .map((styleId) => ({
+      style: hairstyles.find((style) => style.id === styleId),
+      appearances: appearancesForPersonStyle(personId, styleId),
+    }))
+    .filter((item): item is { style: NonNullable<typeof item.style>; appearances: typeof item.appearances } =>
+      Boolean(item.style && item.appearances.length),
+    );
 }
 
 export function personForAppearance(appearanceId: string) {

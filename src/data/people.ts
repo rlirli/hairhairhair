@@ -30,17 +30,22 @@ export interface PersonPhotograph {
   fileName: string;
   alt: string;
   creator: string;
+  licenseName: string;
+  licenseUrl: string;
+  attribution: string;
+  derivativeStatus: "original" | "cropped" | "edited";
   sourceUrl: string;
   originalUrl: string;
   rightsEvidenceUrl: string;
   rightsBasis: string;
-  jurisdiction: "United States";
+  jurisdiction: string;
   identifier: string;
 }
 
 const obamaFindingAid =
   "https://www.obamalibrary.gov/digital-research-room/finding-aids/photographs-will-smith-22-64503-f";
 const paramountBiography = "https://ir.paramount.com/static-files/9b49e1c7-435f-49d1-b432-b9b08f8cd9e1";
+const britannicaMarioBalotelli = "https://www.britannica.com/biography/Mario-Balotelli";
 
 export const people: Person[] = [
   {
@@ -51,6 +56,15 @@ export const people: Person[] = [
       "Willard Carroll Smith II (born September 25, 1968, in Philadelphia, Pennsylvania) is an American actor, rapper, and film producer.",
     heroImageId: "will-smith-2012",
     sourceUrls: [obamaFindingAid, paramountBiography],
+  },
+  {
+    id: "person-mario-balotelli",
+    slug: "mario-balotelli",
+    name: "Mario Balotelli",
+    description:
+      "Mario Balotelli Barwuah (born August 12, 1990, in Palermo, Italy) is an Italian professional footballer.",
+    heroImageId: "mario-balotelli-2012-training",
+    sourceUrls: [britannicaMarioBalotelli],
   },
 ];
 
@@ -96,6 +110,88 @@ export const appearances: Appearance[] = [
       },
     ],
   },
+  {
+    id: "appearance-mario-balotelli-2009",
+    personId: "person-mario-balotelli",
+    imageId: "mario-balotelli-2009-inter",
+    event: "Inter Milan match",
+    taken: {
+      value: "2009-08-16",
+      precision: "day",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Mario_Balotelli_-_Inter_Mailand_(1).jpg",
+    },
+    observations: [
+      {
+        hairstyleId: "hairstyle-buzz-cut",
+        note: "Very short, even buzz cut with a clean, low profile; the hair is visible from the front and crown.",
+      },
+    ],
+  },
+  {
+    id: "appearance-mario-balotelli-2012",
+    personId: "person-mario-balotelli",
+    imageId: "mario-balotelli-2012-training",
+    event: "Italy Euro 2012 training camp",
+    taken: {
+      value: "2012-06-26",
+      precision: "day",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Mario_Balotelli_Euro_2012_Training.jpg",
+    },
+    observations: [
+      {
+        hairstyleId: "hairstyle-thin-mohawk",
+        note: "Shaved sides and a narrow raised strip along the centre create a clearly visible mohawk-style silhouette.",
+      },
+    ],
+  },
+  {
+    id: "appearance-mario-balotelli-2013",
+    personId: "person-mario-balotelli",
+    imageId: "mario-balotelli-2013-inter",
+    event: "Inter Milan–AC Milan match",
+    taken: {
+      value: "2013-02-24",
+      precision: "day",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Balotelli_Inter-Milan_february_2013_(cropped).jpg",
+    },
+    observations: [
+      {
+        hairstyleId: "hairstyle-thin-mohawk",
+        note: "The available frame shows a compact fauxhawk-like shape; Thin mohawk is the nearest published guide, not a claim of an exact match.",
+      },
+    ],
+  },
+  {
+    id: "appearance-mario-balotelli-2014",
+    personId: "person-mario-balotelli",
+    imageId: "mario-balotelli-2014-liverpool",
+    event: "Liverpool vs West Ham United",
+    taken: {
+      value: "2014-09-21",
+      precision: "day",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Mario_Balotelli_with_Liverpool_September_2014.jpg",
+    },
+    observations: [
+      {
+        hairstyleId: "hairstyle-taper-fade",
+        note: "Short close tapered sides with a slightly longer textured top are visible in the available frame.",
+      },
+    ],
+  },
+  {
+    id: "appearance-mario-balotelli-2019",
+    personId: "person-mario-balotelli",
+    imageId: "mario-balotelli-2019-marseille",
+    event: "Olympique de Marseille debut",
+    taken: {
+      value: "2019-01-25",
+      precision: "day",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Mario_Balotelli_OM_(cropped).jpg",
+    },
+    observations: [
+      { hairstyleId: "hairstyle-top-knot", note: "Very short sides frame a longer top gathered into a small topknot." },
+    ],
+  },
 ];
 
 export const personPhotographs: PersonPhotograph[] = [
@@ -104,6 +200,10 @@ export const personPhotographs: PersonPhotograph[] = [
     fileName: "will-smith-2009.jpg",
     alt: "Will Smith seated at a 2009 Nobel Peace Prize event, shown in profile with a close-cropped haircut.",
     creator: "White House Photo Office / National Archives and Records Administration",
+    licenseName: "Public domain",
+    licenseUrl: "https://www.usa.gov/government-copyright",
+    attribution: "White House Photo Office / National Archives and Records Administration, public domain",
+    derivativeStatus: "original",
     sourceUrl: "https://catalog.archives.gov/id/355006648",
     originalUrl:
       "https://catalog.archives.gov/medialz/presidential-libraries/obama/bho-whpo/81145631/Batch0031/P121009PS-0547.JPG",
@@ -118,6 +218,10 @@ export const personPhotographs: PersonPhotograph[] = [
     fileName: "will-smith-2011.jpg",
     alt: "Will Smith standing at a 2011 White House event with a low squared flat-top haircut.",
     creator: "White House Photo Office / National Archives and Records Administration",
+    licenseName: "Public domain",
+    licenseUrl: "https://www.usa.gov/government-copyright",
+    attribution: "White House Photo Office / National Archives and Records Administration, public domain",
+    derivativeStatus: "original",
     sourceUrl: "https://catalog.archives.gov/id/355008678",
     originalUrl:
       "https://catalog.archives.gov/medialz/presidential-libraries/obama/bho-whpo/81145631/Batch0031/P042411PS-0363.JPG",
@@ -132,6 +236,10 @@ export const personPhotographs: PersonPhotograph[] = [
     fileName: "will-smith-2012.jpg",
     alt: "Will Smith aboard the Intrepid during Fleet Week New York in 2012, wearing a short close-cropped haircut beside sailors.",
     creator: "Mass Communication Specialist 2nd Class Drae Parker / U.S. Navy",
+    licenseName: "Public domain",
+    licenseUrl: "https://www.usa.gov/government-copyright",
+    attribution: "Mass Communication Specialist 2nd Class Drae Parker / U.S. Navy, public domain",
+    derivativeStatus: "original",
     sourceUrl:
       "https://commons.wikimedia.org/wiki/File:Flickr_-_Official_U.S._Navy_Imagery_-_Actor_Will_Smith_poses_for_a_photo_with_Sailors..jpg",
     originalUrl:
@@ -142,5 +250,89 @@ export const personPhotographs: PersonPhotograph[] = [
       "U.S. Navy personnel official-duty photograph; the file record identifies the work as public domain under the PD-US Navy basis. VIRIN 120523-N-MH374-101; released.",
     jurisdiction: "United States",
     identifier: "120523-N-MH374-101",
+  },
+  {
+    id: "mario-balotelli-2009-inter",
+    fileName: "mario-balotelli-2009-inter.jpg",
+    alt: "Mario Balotelli playing for Inter Milan in 2009 with a very short buzz cut.",
+    creator: "Steindy",
+    licenseName: "CC BY-SA 3.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/",
+    attribution: "Steindy, CC BY-SA 3.0, via Wikimedia Commons",
+    derivativeStatus: "original",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Mario_Balotelli_-_Inter_Mailand_(1).jpg",
+    originalUrl: "https://upload.wikimedia.org/wikipedia/commons/c/c4/Mario_Balotelli_-_Inter_Mailand_%281%29.jpg",
+    rightsEvidenceUrl: "https://commons.wikimedia.org/wiki/File:Mario_Balotelli_-_Inter_Mailand_(1).jpg#Licensing",
+    rightsBasis: "Wikimedia Commons file record identifies this image as CC BY-SA 3.0.",
+    jurisdiction: "Italy",
+    identifier: "Mario Balotelli - Inter Mailand (1)",
+  },
+  {
+    id: "mario-balotelli-2012-training",
+    fileName: "mario-balotelli-2012-training.jpg",
+    alt: "Mario Balotelli at Italy's Euro 2012 training camp with a narrow mohawk.",
+    creator: "Piotr Drabik",
+    licenseName: "CC BY 2.0",
+    licenseUrl: "https://creativecommons.org/licenses/by/2.0/",
+    attribution: "Piotr Drabik, CC BY 2.0, via Wikimedia Commons",
+    derivativeStatus: "original",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Mario_Balotelli_Euro_2012_Training.jpg",
+    originalUrl: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Mario_Balotelli_Euro_2012_Training.jpg",
+    rightsEvidenceUrl: "https://commons.wikimedia.org/wiki/File:Mario_Balotelli_Euro_2012_Training.jpg#Licensing",
+    rightsBasis: "Wikimedia Commons file record identifies this image as CC BY 2.0.",
+    jurisdiction: "Poland",
+    identifier: "Mario Balotelli Euro 2012 Training",
+  },
+  {
+    id: "mario-balotelli-2013-inter",
+    fileName: "mario-balotelli-2013-inter.jpg",
+    alt: "Mario Balotelli during an Inter Milan match in February 2013 with a compact raised front.",
+    creator: "danheap77",
+    licenseName: "CC BY 2.0",
+    licenseUrl: "https://creativecommons.org/licenses/by/2.0/",
+    attribution: "danheap77, CC BY 2.0, via Wikimedia Commons",
+    derivativeStatus: "cropped",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Balotelli_Inter-Milan_february_2013_(cropped).jpg",
+    originalUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/d/d5/Balotelli_Inter-Milan_february_2013_%28cropped%29.jpg",
+    rightsEvidenceUrl:
+      "https://commons.wikimedia.org/wiki/File:Balotelli_Inter-Milan_february_2013_(cropped).jpg#Licensing",
+    rightsBasis: "Wikimedia Commons file record identifies this crop as CC BY 2.0.",
+    jurisdiction: "United Kingdom",
+    identifier: "Balotelli Inter-Milan february 2013 (cropped)",
+  },
+  {
+    id: "mario-balotelli-2014-liverpool",
+    fileName: "mario-balotelli-2014-liverpool.jpg",
+    alt: "Mario Balotelli with Liverpool in September 2014 wearing a short tapered haircut.",
+    creator: "Egghead06",
+    licenseName: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+    attribution: "Egghead06, CC BY-SA 4.0, via Wikimedia Commons",
+    derivativeStatus: "original",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Mario_Balotelli_with_Liverpool_September_2014.jpg",
+    originalUrl:
+      "https://upload.wikimedia.org/wikipedia/commons/2/21/Mario_Balotelli_with_Liverpool_September_2014.jpg",
+    rightsEvidenceUrl:
+      "https://commons.wikimedia.org/wiki/File:Mario_Balotelli_with_Liverpool_September_2014.jpg#Licensing",
+    rightsBasis: "Wikimedia Commons file record identifies this image as CC BY-SA 4.0.",
+    jurisdiction: "United Kingdom",
+    identifier: "Mario Balotelli with Liverpool September 2014",
+  },
+  {
+    id: "mario-balotelli-2019-marseille",
+    fileName: "mario-balotelli-2019-marseille.jpg",
+    alt: "Mario Balotelli at Olympique de Marseille in January 2019 with a small topknot.",
+    creator: "Bigmatbasket",
+    licenseName: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/",
+    attribution: "Bigmatbasket, CC BY-SA 4.0, via Wikimedia Commons",
+    derivativeStatus: "cropped",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Mario_Balotelli_OM_(cropped).jpg",
+    originalUrl: "https://upload.wikimedia.org/wikipedia/commons/8/8c/Mario_Balotelli_OM_%28cropped%29.jpg",
+    rightsEvidenceUrl: "https://commons.wikimedia.org/wiki/File:Mario_Balotelli_OM_(cropped).jpg#Licensing",
+    rightsBasis: "Wikimedia Commons file record identifies this crop as CC BY-SA 4.0.",
+    jurisdiction: "France",
+    identifier: "Mario Balotelli OM (cropped)",
   },
 ];

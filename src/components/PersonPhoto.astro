@@ -29,7 +29,11 @@ const { media, event, date, observations, anchor } = Astro.props;
         class="w-full rounded-[2rem] object-contain"
       />
       <figcaption class="mt-3 text-sm leading-6">
-        <span class="font-bold">Public-domain photograph.</span> {media.creator};{" "}
+        <span class="font-bold">{media.provenance.attribution}</span>{" "}
+        <a class="underline" href={media.provenance.licenseUrl} target="_blank" rel="noreferrer">
+          {media.provenance.licenseName}
+        </a>
+        ;{" "}
         <a class="underline" href={media.sourceUrl} target="_blank" rel="noreferrer">
           source record
         </a>{" "}

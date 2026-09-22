@@ -4,6 +4,7 @@ import Layout from "../../../components/Layout.astro";
 import { buildPersonMedia } from "../../../data/people-media";
 import { hairstylesForPerson } from "../../../data/people-relations";
 import { people, personPhotographs } from "../../../data/people";
+import PersonPhotoAttribution from "../../../components/PersonPhotoAttribution.astro";
 
 export function getStaticPaths() {
   return people.map((person) => ({ params: { slug: person.slug }, props: { person } }));
@@ -84,6 +85,7 @@ const facePosition = (photoId: string) =>
                     class="aspect-square w-full rounded-[1.5rem] object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                     style={`object-position: ${facePosition(photo.id)}`}
                   />
+                  <PersonPhotoAttribution media={photo} compact />
                   <figcaption class="mt-4">
                     <p class="text-xs font-black uppercase tracking-[.14em] text-orange">
                       {formatDate(appearance.taken.value)} · {appearanceTitle(appearance.event)}

@@ -22,9 +22,11 @@ const localUrl = (value) => value.startsWith("/") && !value.startsWith("//");
 test("people, appearances, and photographs have closed stable records", () => {
   assert.equal(new Set(people.map((person) => person.id)).size, people.length);
   assert.equal(new Set(people.map((person) => person.slug)).size, people.length);
-  assert.equal(people.length, 1);
+  assert.equal(people.length, 2);
   assert.equal(people[0].id, "person-will-smith");
   assert.equal(people[0].slug, "will-smith");
+  assert.equal(people[1].id, "person-mario-balotelli");
+  assert.equal(people[1].slug, "mario-balotelli");
   const personIds = new Set(people.map((person) => person.id));
   const photoIds = new Set(personPhotographs.map((photo) => photo.id));
   const styleIds = new Set(hairstyles.map((style) => style.id));
@@ -47,13 +49,23 @@ test("people, appearances, and photographs have closed stable records", () => {
         photo.rightsBasis &&
         photo.identifier,
     );
-    assert.equal(photo.jurisdiction, "United States");
+    assert.ok(photo.licenseName && photo.licenseUrl && photo.attribution);
+    assert.ok(["original", "cropped", "edited"].includes(photo.derivativeStatus));
   }
 });
 
-test("appearance dates and observations match the phase-one contract", () => {
+test("appearance dates and observations match the documented people contract", () => {
   const byDate = new Map(appearances.map((appearance) => [appearance.taken.value, appearance]));
-  assert.deepEqual([...byDate.keys()].sort(), ["2009-12-10", "2011-04-24", "2012-05-23"]);
+  assert.deepEqual([...byDate.keys()].sort(), [
+    "2009-08-16",
+    "2009-12-10",
+    "2011-04-24",
+    "2012-05-23",
+    "2012-06-26",
+    "2013-02-24",
+    "2014-09-21",
+    "2019-01-25",
+  ]);
   assert.equal(byDate.get("2009-12-10").observations[0].hairstyleId, "hairstyle-buzz-cut");
   assert.equal(byDate.get("2011-04-24").observations[0].hairstyleId, "hairstyle-flat-top");
   assert.equal(byDate.get("2012-05-23").observations[0].hairstyleId, "hairstyle-buzz-cut");
@@ -101,13 +113,31 @@ test("person page presents a concise bio and natural profile above appearances",
   assert.doesNotMatch(markup, /change a silhouette|Use the images as haircut references/);
 });
 
+test("Mario Balotelli is a complete second person record with five licensed appearances", () => {
+  const profile = page("/people/mario-balotelli/");
+  assert.match(profile, /Mario Balotelli Barwuah/);
+  assert.match(profile, /Natural profile/);
+  assert.match(profile, /href="\/hair-types\/4\/"/);
+  assert.match(profile, /CC BY/);
+  assert.match(profile, /href="\/people\/mario-balotelli\/appearances\/"/);
+
+  const archive = page("/people/mario-balotelli/appearances/");
+  for (const year of ["2019-01-25", "2014-09-21", "2013-02-24", "2012-06-26", "2009-08-16"]) {
+    assert.ok(archive.includes(year));
+  }
+  assert.ok(archive.indexOf("2019-01-25") < archive.indexOf("2014-09-21"));
+  assert.match(archive, /CC BY-SA 4\.0/);
+  assert.match(page("/people/mario-balotelli/hairstyles/"), /Thin mohawk/);
+  assert.match(page("/people/mario-balotelli/photographs/mario-balotelli-2013-inter/"), /cropped image/);
+});
+
 test("appearance overview is newest-first and links back to the person record", () => {
   const markup = page("/people/will-smith/appearances/");
   assert.match(markup, /Appearance archive/);
   assert.match(markup, /Newest first/);
   assert.ok(markup.indexOf("2012-05-23") < markup.indexOf("2011-04-24"));
   assert.ok(markup.indexOf("2011-04-24") < markup.indexOf("2009-12-10"));
-  for (const appearance of appearances) {
+  for (const appearance of appearances.filter((item) => item.personId === "person-will-smith")) {
     assert.match(markup, new RegExp(`id="${appearance.id}"`));
     assert.match(markup, /href="\/people\/will-smith\/"/);
   }
@@ -118,16 +148,20 @@ test("appearance overview is newest-first and links back to the person record", 
 test("each photograph has a dedicated provenance page and existing cards reach it", () => {
   const sitemap = readFileSync(join(dist, "sitemap-index.xml"), "utf8");
   for (const photo of personPhotographs) {
-    const path = `/people/will-smith/photographs/${photo.id}/`;
+    const owner = people.find((person) =>
+      appearances.some((appearance) => appearance.personId === person.id && appearance.imageId === photo.id),
+    );
+    assert.ok(owner);
+    const path = `/people/${owner.slug}/photographs/${photo.id}/`;
     assert.match(sitemap, new RegExp(path.replaceAll("/", "\\/")));
     const markup = page(path);
     assert.match(markup, /Photograph record/);
-    assert.match(markup, new RegExp(photo.identifier));
+    assert.ok(markup.includes(photo.identifier));
     assert.match(markup, new RegExp(photo.creator.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
     assert.match(markup, /Rights evidence/);
     assert.match(markup, /Appearances/);
-    assert.match(markup, /href="\/people\/will-smith\/appearances\/appearance-will-smith-/);
-    assert.match(markup, /href="\/people\/will-smith\/"/);
+    assert.match(markup, new RegExp(`href="/people/${owner.slug}/appearances/appearance-${owner.slug}-`));
+    assert.match(markup, new RegExp(`href="/people/${owner.slug}/"`));
   }
   const profile = page("/people/will-smith/");
   assert.match(profile, /Appearance record/);
@@ -137,7 +171,7 @@ test("each photograph has a dedicated provenance page and existing cards reach i
 
 test("appearance anchors and hairstyle backlinks are one-to-one", () => {
   const personById = new Map(people.map((person) => [person.id, person]));
-  for (const appearance of appearances) {
+  for (const appearance of appearances.filter((item) => item.personId === "person-will-smith")) {
     const person = personById.get(appearance.personId);
     assert.ok(person);
     const archiveMarkup = page(`/people/${person.slug}/appearances/`);
@@ -166,10 +200,9 @@ test("single appearance records connect the photograph, observations, and archiv
   assert.match(markup, /href="\/people\/will-smith\/"/);
 });
 
-test("person photographs have public-domain provenance and locally built media", () => {
+test("person photographs have reusable license provenance and locally built media", () => {
   const mediaSource = readSource("src/data/people-media.ts");
-  assert.match(mediaSource, /kind: ["']public-domain["']/);
-  assert.match(mediaSource, /type PublicDomainMedia/);
+  assert.match(mediaSource, /kind: photo\.licenseName === ["']Public domain["']/);
   const appearancePhotoIds = new Set(appearances.map((appearance) => appearance.imageId));
   assert.deepEqual(appearancePhotoIds, new Set(personPhotographs.map((photo) => photo.id)));
   for (const photo of personPhotographs) {
@@ -180,6 +213,17 @@ test("person photographs have public-domain provenance and locally built media",
     const hero = personPhotographs.find((photo) => photo.id === person.heroImageId);
     assert.ok(hero, person.heroImageId);
     assert.match(mediaSource, new RegExp(hero.fileName.replace(".", "\\.")));
+  }
+});
+
+test("licensed people media exposes visible attribution metadata", () => {
+  const source = readSource("src/components/PersonPhotoAttribution.astro");
+  assert.match(source, /provenance\.attribution/);
+  assert.match(source, /provenance\.licenseUrl/);
+  assert.match(source, /derivativeStatus/);
+  for (const photo of personPhotographs.filter((item) => item.licenseName.startsWith("CC "))) {
+    assert.ok(photo.attribution.includes(photo.creator));
+    assert.ok(photo.licenseUrl.startsWith("https://creativecommons.org/"));
   }
 });
 

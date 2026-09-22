@@ -10,6 +10,8 @@ The site is a small editorial field guide: a home page introduces the visual lan
 
 `src/data/natural-profiles.ts` owns optional person-level natural profile records. Every trait is a value paired with `provenance.source`, `provenance.status`, and `provenance.confidence`. A natural hair type stores a `hairTypeId` that resolves to the existing `/hair-types/{slug}/` route. Unknown thickness and density stay `null` with `not-documented` provenance; they are never inferred from a styled photograph.
 
+`src/data/people.ts` owns person records, dated appearances, observations, and reusable photograph metadata. Person photographs record creator, license name and URL, attribution, source and original URLs, rights evidence, and derivative/crop status. The generic people routes work for every person record; the current records are Will Smith and Mario Balotelli. CC attribution is rendered on every page or overview card that displays a licensed photograph.
+
 ## Visual system
 
 Warm ivory, near-black ink, orange accents, butter-yellow illustration panels, oversized serif display typography, and compact uppercase labels create the editorial character. `Pattern.astro` generates reusable abstract SVG marks and labels them as simplified illustrations, not diagnostics or photos.

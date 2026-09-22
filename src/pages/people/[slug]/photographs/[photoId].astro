@@ -4,6 +4,7 @@ import Layout from "../../../../components/Layout.astro";
 import { buildPersonMedia } from "../../../../data/people-media";
 import { appearances, people, personPhotographs } from "../../../../data/people";
 import { observedStylesForAppearance } from "../../../../data/people-relations";
+import PersonPhotoAttribution from "../../../../components/PersonPhotoAttribution.astro";
 
 export function getStaticPaths() {
   const media = buildPersonMedia(personPhotographs);
@@ -38,7 +39,7 @@ const uniqueStyles = photoStyles.filter(
 
 <Layout
   title={`${photo.identifier} photograph — ${person.name} — hairhairhair.hair`}
-  description={`Source and usage record for a public-domain photograph of ${person.name}.`}
+  description={`Source, license, and usage record for a photograph of ${person.name}.`}
   image={photo.src.src}
 >
   <article class="mx-auto max-w-5xl px-5 pb-20 pt-12 sm:px-8">
@@ -79,6 +80,7 @@ const uniqueStyles = photoStyles.filter(
         alt={photo.alt}
         class="max-h-[75vh] w-full rounded-[2rem] object-contain"
       />
+      <PersonPhotoAttribution media={photo} />
       <figcaption class="mt-5 border-l-4 border-orange pl-4 text-sm leading-6">
         <p class="font-bold">{photo.creator}</p>
         <p>{photo.rightsBasis}</p>
@@ -109,7 +111,7 @@ const uniqueStyles = photoStyles.filter(
           </a>
         </p>
         <p class="mt-2 opacity-70">
-          Identifier: {photo.identifier} · {photo.jurisdiction} public-domain basis
+          Identifier: {photo.identifier} · {photo.derivativeStatus} image · {photo.licenseName}
         </p>
       </figcaption>
     </figure>

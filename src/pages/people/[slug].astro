@@ -7,6 +7,7 @@ import { people, personPhotographs } from "../../data/people";
 import { appearancesForPerson, hairstylesForPerson } from "../../data/people-relations";
 import { buildPersonMedia } from "../../data/people-media";
 import { naturalProfileForPerson } from "../../data/natural-profiles";
+import PersonPhotoAttribution from "../../components/PersonPhotoAttribution.astro";
 
 export function getStaticPaths() {
   return people.map((person) => ({ params: { slug: person.slug }, props: { person } }));
@@ -78,6 +79,7 @@ const facePosition = (photoId: string) =>
               alt={hero.alt}
               class="aspect-[4/3] w-full rounded-[2rem] object-cover object-[60%_50%]"
             />
+            <PersonPhotoAttribution media={hero} compact />
             {heroAppearance && (
               <figcaption class="mt-3 text-sm leading-6">
                 <a
@@ -124,6 +126,7 @@ const facePosition = (photoId: string) =>
                   class="aspect-square w-full rounded-[1.5rem] object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                   style={`object-position: ${photo.id === "will-smith-2009" ? "70% 48%" : photo.id === "will-smith-2011" ? "58% 43%" : "61% 43%"}`}
                 />
+                <PersonPhotoAttribution media={photo} compact />
                 <figcaption class="mt-4">
                   <p class="text-xs font-black uppercase tracking-[.14em] text-orange">
                     {formatAppearanceDate(appearance.taken.value)}
@@ -170,6 +173,7 @@ const facePosition = (photoId: string) =>
                   class="aspect-square w-full rounded-[1.5rem] object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                   style={`object-position: ${facePosition(photo.id)}`}
                 />
+                <PersonPhotoAttribution media={photo} compact />
                 <figcaption class="mt-4">
                   <h3 class="font-display text-3xl leading-[.95] tracking-[-.04em]">{style.name}</h3>
                 </figcaption>

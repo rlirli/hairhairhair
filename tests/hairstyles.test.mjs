@@ -144,7 +144,7 @@ test("static build contains all data-derived expected HTML pages", () => {
     3 +
     appearances.length +
     personPhotographs.length +
-    people.length +
+    people.length * 2 +
     people.reduce((count, person) => count + hairstylesForPerson(person.id).length, 0);
   assert.equal(htmlFiles().length, expectedPageCount);
   for (const path of [

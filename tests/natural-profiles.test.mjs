@@ -50,6 +50,20 @@ test("natural profile records remain uniquely addressable", () => {
   assert.equal(new Set(naturalProfiles.map((profile) => profile.personId)).size, naturalProfiles.length);
 });
 
+test("Mario Balotelli has the same explicitly unverified natural profile scheme", () => {
+  const profile = naturalProfileForPerson("person-mario-balotelli");
+  assert.ok(profile);
+  assert.equal(profile.hairTypeId.value, "hair-type-4");
+  assert.equal(profile.naturalHairColor.value, "black");
+  assert.equal(profile.naturalSkinTone.value, "deep-brown");
+  assert.equal(profile.hairThickness.value, null);
+  assert.equal(profile.hairDensity.value, null);
+  for (const trait of [profile.hairTypeId, profile.naturalHairColor, profile.naturalSkinTone]) {
+    assert.equal(trait.provenance.source, "ai-prefill");
+    assert.equal(trait.provenance.status, "unverified");
+  }
+});
+
 test("NaturalProfile documents the compact product name and provenance display", () => {
   const source = readFileSync(new URL("../src/components/NaturalProfile.astro", import.meta.url), "utf8");
   assert.match(source, /Natural profile/);

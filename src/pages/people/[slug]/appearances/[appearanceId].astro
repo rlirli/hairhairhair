@@ -4,6 +4,7 @@ import Layout from "../../../../components/Layout.astro";
 import { buildPersonMedia } from "../../../../data/people-media";
 import { appearances, people, personPhotographs } from "../../../../data/people";
 import { observedStylesForAppearance } from "../../../../data/people-relations";
+import PersonPhotoAttribution from "../../../../components/PersonPhotoAttribution.astro";
 
 export function getStaticPaths() {
   const media = buildPersonMedia(personPhotographs);
@@ -85,6 +86,7 @@ const facePosition =
             class="aspect-[4/3] w-full rounded-[2rem] object-cover transition-transform duration-300 group-hover:scale-[1.01]"
             style={`object-position: ${facePosition}`}
           />
+          <PersonPhotoAttribution media={photo} compact />
         </a>
         <figcaption class="mt-4 flex flex-wrap items-baseline justify-between gap-3 text-sm leading-6">
           <span>{photo.creator}</span>

@@ -1,0 +1,19 @@
+---
+import type { PersonMedia } from "../data/people-media";
+
+interface Props {
+  media: PersonMedia;
+  compact?: boolean;
+}
+
+const { media, compact = false } = Astro.props;
+---
+
+<p class:list={["text-xs leading-5 opacity-75", compact ? "mt-2" : "mt-3"]}>
+  <span class="font-bold">{media.provenance.attribution}</span>
+  {media.provenance.derivativeStatus !== "original" && <> · {media.provenance.derivativeStatus} image</>}
+  {" · "}
+  <a class="underline" href={media.provenance.licenseUrl} target="_blank" rel="noreferrer">
+    {media.provenance.licenseName}
+  </a>
+</p>

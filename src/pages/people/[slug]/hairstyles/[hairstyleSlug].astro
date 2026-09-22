@@ -5,6 +5,7 @@ import { buildPersonMedia } from "../../../../data/people-media";
 import { appearancesForPersonStyle, hairstylesForPerson } from "../../../../data/people-relations";
 import { getHairstyle } from "../../../../data/hairstyles";
 import { people, personPhotographs } from "../../../../data/people";
+import PersonPhotoAttribution from "../../../../components/PersonPhotoAttribution.astro";
 
 export function getStaticPaths() {
   return people.flatMap((person) =>
@@ -107,6 +108,7 @@ const facePosition = (photoId: string) =>
                   class="aspect-square w-full rounded-[1.5rem] object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                   style={`object-position: ${facePosition(photo.id)}`}
                 />
+                <PersonPhotoAttribution media={photo} compact />
               </a>
               <div class="mt-4">
                 <p class="text-xs font-black uppercase tracking-[.14em] text-orange">

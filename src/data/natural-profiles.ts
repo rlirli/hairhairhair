@@ -38,6 +38,13 @@ const willSmithAiPrefill = (note: string): NaturalProfileProvenance => ({
   note,
 });
 
+const marioBalotelliAiPrefill = (note: string): NaturalProfileProvenance => ({
+  source: "ai-prefill",
+  status: "unverified",
+  confidence: "low",
+  note,
+});
+
 const notDocumented = (note: string): NaturalProfileProvenance => ({
   source: "not-documented",
   status: "unverified",
@@ -69,6 +76,28 @@ export const naturalProfiles: NaturalProfile[] = [
       value: null,
       provenance: notDocumented("No reliable public documentation found."),
     },
+  },
+  {
+    id: "natural-profile-mario-balotelli",
+    personId: "person-mario-balotelli",
+    hairTypeId: {
+      value: "hair-type-4",
+      provenance: marioBalotelliAiPrefill(
+        "Inferred from public photographs; not self-reported or independently verified.",
+      ),
+    },
+    naturalHairColor: {
+      value: "black",
+      provenance: marioBalotelliAiPrefill(
+        "Inferred from public photographs; lighting and styling can affect appearance.",
+      ),
+    },
+    naturalSkinTone: {
+      value: "deep-brown",
+      provenance: marioBalotelliAiPrefill("A visual descriptor, not a scientific or clinical measurement."),
+    },
+    hairThickness: { value: null, provenance: notDocumented("No reliable public documentation found.") },
+    hairDensity: { value: null, provenance: notDocumented("No reliable public documentation found.") },
   },
 ];
 

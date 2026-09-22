@@ -40,5 +40,5 @@ A dated photographic record of a person at a particular event or moment. Its cap
 **Hairstyle observation**:
 An editorial description of the hairstyle visible in an appearance. It can connect an appearance to several style concepts without claiming the person's stylist used those names.
 
-**Public-domain photograph**:
-A photograph with a recorded basis for public-domain copyright status in the stated jurisdiction. This status does not imply endorsement or erase personality rights.
+**Person photograph**:
+A locally stored, source-attributed photograph used as evidence for a dated appearance. Its creator, source/original URLs, license, attribution, jurisdiction or license evidence, and crop/derivative status are recorded. Copyright permission does not imply endorsement or erase personality rights.

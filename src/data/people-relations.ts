@@ -30,6 +30,12 @@ export function appearancesForStyle(styleId: string) {
 // This is editorial order, not an accidental consequence of the hairstyle or appearance data order.
 export const personHairstyleOrder: Record<string, string[]> = {
   "person-will-smith": ["hairstyle-flat-top", "hairstyle-buzz-cut"],
+  "person-mario-balotelli": [
+    "hairstyle-thin-mohawk",
+    "hairstyle-taper-fade",
+    "hairstyle-top-knot",
+    "hairstyle-buzz-cut",
+  ],
 };
 
 export function appearancesForPersonStyle(personId: string, styleId: string) {

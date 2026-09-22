@@ -134,6 +134,20 @@ export const sources: EditorialSource[] = [
     publisher: "Manchester City",
     reviewedAt: "2026-09-22",
   },
+  {
+    id: "allure-wolf-cut-2026",
+    title: "The Wolf Cut Won't Ever Go Out of Style",
+    url: "https://www.allure.com/story/wolf-cut-trend-haircut-tips-2026",
+    publisher: "Allure",
+    reviewedAt: "2026-09-22",
+  },
+  {
+    id: "haircom-wolf-cut",
+    title: "What You Need To Know About The Wolf Cut Hair Trend",
+    url: "https://www.hair.com/wolf-cut-hair.html",
+    publisher: "Hair.com by L'Oréal",
+    reviewedAt: "2026-09-22",
+  },
 ];
 
 export const hairstyles: Hairstyle[] = [
@@ -533,6 +547,59 @@ export const hairstyles: Hairstyle[] = [
     relatedStyleIds: ["hairstyle-buzz-cut", "hairstyle-taper-fade"],
     guidePublicationStatus: "published",
   },
+  {
+    id: "hairstyle-wolf-cut",
+    slug: "wolf-cut",
+    name: "Wolf cut",
+    kind: "cut",
+    summary:
+      "A heavily layered shag–mullet hybrid with shorter volume around the crown and face and more length retained toward the back.",
+    intro: [
+      "The wolf cut combines the abundant layering and movement of a shag with some of the front-to-back length contrast associated with a mullet.",
+      "There is no single fixed wolf-cut geometry. Softer versions blend the layers heavily, while more extreme versions use stronger disconnection between the crown, sides and retained back length.",
+    ],
+    variations: [
+      {
+        id: "wolf-cut-medium",
+        name: "Medium wolf cut",
+        description:
+          "A shoulder-area version with visible crown layering, face framing and longer layers through the back.",
+      },
+      {
+        id: "wolf-cut-curly",
+        name: "Curly wolf cut",
+        description:
+          "Uses layered natural curls to create crown volume and a broader, more irregular outer silhouette.",
+      },
+      {
+        id: "wolf-cut-soft",
+        name: "Soft wolf cut",
+        description:
+          "A more blended interpretation that sits closer to a shag, with less dramatic separation between short and long layers.",
+      },
+    ],
+    consultation: {
+      intro: "The key consultation choice is how strongly the cut should lean toward shag versus mullet.",
+      questions: [
+        "How much length should remain at the back?",
+        "How short should the crown layers become?",
+        "Should the layers blend softly or look deliberately disconnected?",
+        "Do you want a fringe or face-framing pieces?",
+        "Will the hair normally be worn in its natural texture or styled differently?",
+      ],
+      sampleRequest:
+        "“I’d like a medium wolf cut with lots of crown volume and face-framing layers, but keep the transition into the longer back fairly soft rather than giving me a strong mullet.”",
+    },
+    considerations: [
+      "The name covers a broad family of cuts, so reference images are especially important.",
+      "Heavy layering removes weight and can expose differences in density more strongly than a one-length cut.",
+      "Straight hair may need styling to emphasize the texture and separation that occur naturally in wavy or curly hair.",
+      "Curly and coily hair can shrink substantially, so the intended dry silhouette and layer placement should be assessed in the natural state.",
+    ],
+    sourceIds: ["allure-wolf-cut-2026", "haircom-wolf-cut"],
+    relatedStyleIds: [],
+    guidePublicationStatus: "published",
+  },
 ];
 
 export function isPublishedGuide(hairstyle: Pick<Hairstyle, "guidePublicationStatus">): boolean {
@@ -702,6 +769,26 @@ export const patternGuidance: PatternGuidance[] = [
     hairTypeId: "hair-type-4",
     note: "Coily hair may shrink substantially before gathering; discuss stretch, tie tension, and how much natural texture should remain visible.",
   },
+  {
+    hairstyleId: "hairstyle-wolf-cut",
+    hairTypeId: "hair-type-1",
+    note: "Straight hair makes the individual layer lengths very legible, but may need styling or natural density to produce the characteristic volume and separation.",
+  },
+  {
+    hairstyleId: "hairstyle-wolf-cut",
+    hairTypeId: "hair-type-2",
+    note: "Natural wave readily emphasizes the cut's layered movement and irregular silhouette.",
+  },
+  {
+    hairstyleId: "hairstyle-wolf-cut",
+    hairTypeId: "hair-type-3",
+    note: "Curl creates substantial crown volume and makes layer placement especially important; dry-state shrinkage should be considered.",
+  },
+  {
+    hairstyleId: "hairstyle-wolf-cut",
+    hairTypeId: "hair-type-4",
+    note: "Coily hair can produce a much denser, more sculptural interpretation; the stylist should design the dry silhouette rather than reproduce straight-hair layer lengths literally.",
+  },
 ];
 
 export const styleExamples: StyleExample[] = [
@@ -860,6 +947,29 @@ export const styleExamples: StyleExample[] = [
     patternDescription: "The top forms a small upright plane with a sharper graphic outline than the low example.",
     lengthDescription:
       "Short sides support a compact upright shape; ask about the hold and maintenance needed to keep the plane visible.",
+  },
+  {
+    id: "style-example-wolf-cut-wavy-medium",
+    hairstyleIds: ["hairstyle-wolf-cut"],
+    imageId: "wolf-cut-wavy-medium",
+    title: "Medium wavy wolf cut",
+    caption: "Shorter crown and face-framing layers create volume above visibly longer, lighter ends.",
+    patternDescription:
+      "The silhouette expands around the crown and cheek area before narrowing into longer separated layers toward the shoulders.",
+    lengthDescription:
+      "Longest layers finish around the shoulders while substantially shorter layers sit through the crown and front.",
+  },
+  {
+    id: "style-example-wolf-cut-curly-medium",
+    hairstyleIds: ["hairstyle-wolf-cut"],
+    imageId: "wolf-cut-curly-medium",
+    title: "Medium curly wolf cut",
+    caption:
+      "Notice the concentrated crown volume, shorter face-framing curls, and longer layers retained toward the nape.",
+    patternDescription:
+      "Defined curls make the layered silhouette fuller and rounder while the shorter crown remains distinct from the longer back.",
+    lengthDescription:
+      "The longest curls reach around the shoulders, with substantially shorter layers through the crown and around the face.",
   },
 ];
 

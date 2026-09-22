@@ -79,3 +79,17 @@ Prompt intent: square transparent editorial reference portraits of fictional adu
 ### top-knot-tapered / top-knot-curly
 
 Prompt intent: square transparent editorial reference portraits of fictional adults wearing a compact top knot, respectively with a tapered perimeter and visible natural curl. Show the gathered crown and full silhouette, no celebrity likeness, text, logos, or background.
+
+<!-- Manual additions below -->
+
+## wolf-cut-curly-medium
+
+Asset: `src/assets/hairstyles/wolf-cut-curly-medium.png`
+
+One square original editorial hairstyle reference portrait for hairhairhair.hair. Fictional adult woman with deep dark-brown skin and dense natural black TYPE-3 CURLY HAIR cut into a MEDIUM WOLF CUT. Clearly defined springy ringlets rather than waves or tight coils. CRITICAL HAIRCUT GEOMETRY: noticeably shorter layered curls through the crown creating elevated volume; shorter face-framing curls around cheek and jaw level; progressively longer curls toward the back and nape, with the longest pieces reaching approximately shoulder length. The wolf-cut structure must remain visible despite the curl volume: shorter rounded crown above a narrower, elongated back silhouette. More blended than an extreme mullet, but clearly not a conventional round curly cut, curly bob, uniform layered cut, or afro. No straight fringe; a few shorter natural curls may fall toward the forehead. Three-quarter SIDE/BACK portrait at eye level, deliberately different from the existing frontal three-quarter wavy reference, clearly exposing crown layering, side profile, nape and retained rear length. Cream T-shirt, soft neutral daylight, realistic individual curls, subtle frizz and natural skin pores, understated editorial photography. Full crown and complete outer hairstyle silhouette inside frame with space around the hair. Transparent RGBA background with clean natural curl edges. Single portrait, no split panels. No celebrity likeness, text, watermarks, logos, jewelry, hats or props.
+
+## wolf-cut-wavy-medium
+
+Asset: `src/assets/hairstyles/wolf-cut-wavy-medium.png`
+
+One square original editorial hairstyle reference portrait for hairhairhair.hair. Fictional adult woman with light-medium olive skin and dense naturally wavy dark-brown hair cut into a MEDIUM WOLF CUT. CRITICAL HAIRCUT GEOMETRY: visibly short, choppy layers concentrated around the crown and upper sides; abundant face-framing layers beginning around cheekbone level; longer disconnected-but-blended layers retained toward the nape and shoulders. The silhouette should be full and irregular around the crown, then narrow into longer wispy ends. Clearly a shag–mullet hybrid, but NOT an extreme mullet, NOT a butterfly cut, NOT a uniform layered lob, NOT a blunt cut. Soft broken fringe across the forehead. Natural loose waves with realistic separation and some controlled irregularity, not salon-perfect curls. Three-quarter portrait at eye level showing crown height, face framing, side layering and retained back length. Cream T-shirt, soft neutral daylight, realistic individual hair strands and natural skin pores, understated editorial photography. Shoulder-up composition with complete crown and outer hair silhouette inside frame; lower ends may approach the bottom edge. Transparent RGBA background with clean natural hair edges. Single portrait, no split panels. No celebrity likeness, text, watermarks, logos, jewelry, hats or props.t.

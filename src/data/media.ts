@@ -14,6 +14,8 @@ import topKnotCurly from "../assets/hairstyles/top-knot-curly.png";
 import topKnotTapered from "../assets/hairstyles/top-knot-tapered.png";
 import twistsLong from "../assets/hairstyles/twists-long.png";
 import twistsShort from "../assets/hairstyles/twists-short.png";
+import wolfCutCurlyMedium from "../assets/hairstyles/wolf-cut-curly-medium.png";
+import wolfCutWavyMedium from "../assets/hairstyles/wolf-cut-wavy-medium.png";
 
 export type MediaProvenance =
   | { kind: "generated"; provider: "OpenAI"; promptKey: string; background: "opaque" | "transparent" }
@@ -132,6 +134,23 @@ export const hairstyleMedia: HairstyleMedia[] = [
     src: topKnotCurly,
     alt: "Transparent editorial reference showing a compact curly top knot.",
     provenance: { kind: "generated", provider: "OpenAI", promptKey: "top-knot-curly", background: "transparent" },
+  },
+  {
+    id: "wolf-cut-curly-medium",
+    src: wolfCutCurlyMedium,
+    alt: "Editorial reference showing a dark-skinned woman with a medium-length curly wolf cut.",
+    provenance: {
+      kind: "generated",
+      provider: "OpenAI",
+      promptKey: "wolf-cut-curly-medium",
+      background: "transparent",
+    },
+  },
+  {
+    id: "wolf-cut-wavy-medium",
+    src: wolfCutWavyMedium,
+    alt: "Editorial reference showing mid-20s, light skin woman with a wavy shoulder length wolf cut.",
+    provenance: { kind: "generated", provider: "OpenAI", promptKey: "wolf-cut-wavy-medium", background: "transparent" },
   },
 ];
 

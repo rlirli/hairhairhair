@@ -38,6 +38,8 @@ const expectedMediaIds = [
   "cropped-afro-compact",
   "top-knot-tapered",
   "top-knot-curly",
+  "wolf-cut-curly-medium",
+  "wolf-cut-wavy-medium",
 ];
 
 function htmlFiles(directory = dist) {

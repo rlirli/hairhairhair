@@ -47,9 +47,7 @@ const subtypesFor = (typeId: string) => hairSubtypes.filter((subtype) => subtype
           <a href={`/hair-types/${hairType.slug}/`} class="focus-ring group block rounded-[1.35rem] px-2 py-2">
             <span class="type-accent block text-xs font-black uppercase tracking-[.16em]">Type {hairType.code}</span>
 
-            <h3 class="mt-1 font-display text-3xl tracking-[-.06em] group-hover:underline">
-              {hairType.name} <span aria-hidden="true">↗</span>
-            </h3>
+            <h3 class="mt-1 font-display text-3xl tracking-[-.06em] group-hover:underline">{hairType.name}</h3>
 
             <p class="mt-2 text-xs leading-4">{hairType.description}</p>
           </a>

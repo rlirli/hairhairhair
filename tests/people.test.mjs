@@ -19,6 +19,12 @@ const readSource = (pathname) => readFileSync(join(root, pathname), "utf8");
 const attrs = (markup, attribute) =>
   [...markup.matchAll(new RegExp(`${attribute}="([^"]+)"`, "g"))].map((match) => match[1]);
 const localUrl = (value) => value.startsWith("/") && !value.startsWith("//");
+const compactFourColumnGrids = (markup) =>
+  [
+    ...markup.matchAll(
+      /<div class="mt-(?:7|8) grid gap-8 sm:grid-cols-2 lg:grid-cols-4">([\s\S]*?)<\/div><\/section>/g,
+    ),
+  ].map(([, content]) => content);
 
 test("people, appearances, and photographs have closed stable records", () => {
   assert.equal(new Set(people.map((person) => person.id)).size, people.length);
@@ -273,6 +279,27 @@ test("licensed people media exposes visible attribution metadata", () => {
   for (const photo of personPhotographs.filter((item) => item.licenseName.startsWith("CC "))) {
     assert.ok(photo.attribution.includes(photo.creator));
     assert.ok(photo.licenseUrl.startsWith("https://creativecommons.org/"));
+  }
+});
+
+test("compact people grids keep each attribution inside its card", () => {
+  for (const route of ["/people/will-smith/", "/people/will-smith/appearances/", "/people/will-smith/hairstyles/"]) {
+    const grids = compactFourColumnGrids(page(route));
+    assert.ok(grids.length, `${route} should render at least one four-column grid`);
+    for (const grid of grids) {
+      const cards = grid.match(/<a class="group focus-ring block"/g) ?? [];
+      assert.ok(cards.length, `${route} should render cards`);
+      assert.equal(
+        grid.match(/<p class="text-xs leading-5 opacity-75/g)?.length ?? 0,
+        cards.length,
+        `${route} should render one attribution per card`,
+      );
+      assert.doesNotMatch(
+        grid,
+        /<a class="group focus-ring block"[\s\S]*?<a class="underline"/,
+        `${route} must not put a license link inside a linked card`,
+      );
+    }
   }
 });
 

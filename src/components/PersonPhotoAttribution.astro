@@ -13,7 +13,11 @@ const { media, compact = false } = Astro.props;
   <span class="font-bold">{media.provenance.attribution}</span>
   {media.provenance.derivativeStatus !== "original" && <> · {media.provenance.derivativeStatus} image</>}
   {" · "}
-  <a class="underline" href={media.provenance.licenseUrl} target="_blank" rel="noreferrer">
-    {media.provenance.licenseName}
-  </a>
+  {compact ? (
+    <span>{media.provenance.licenseName}</span>
+  ) : (
+    <a class="underline" href={media.provenance.licenseUrl} target="_blank" rel="noreferrer">
+      {media.provenance.licenseName}
+    </a>
+  )}
 </p>

@@ -372,7 +372,7 @@ test("person hairstyle detail pages collect every matching appearance", () => {
     const markup = page(`/people/will-smith/hairstyles/${slug}/`);
     assert.match(markup, /Person hairstyle record/);
     for (const date of dates) assert.match(markup, new RegExp(date));
-    assert.match(markup, /Appearance record/);
+    assert.doesNotMatch(markup, /Appearance record ↗/);
     assert.match(markup, /Read the .* guide/);
     assert.match(markup, /href="\/people\/will-smith\/photographs\/will-smith-/);
   }
@@ -380,4 +380,18 @@ test("person hairstyle detail pages collect every matching appearance", () => {
     hairstylesForPerson("person-will-smith").map(({ style }) => style.slug),
     ["flat-top", "buzz-cut"],
   );
+});
+
+test("hairstyle appearance cards link titles to appearance records without nested links", () => {
+  const markup = page("/people/will-smith/hairstyles/buzz-cut/");
+  assert.doesNotMatch(markup, /Appearance record ↗/);
+  for (const [date, appearanceId] of [
+    ["May 23, 2012", "appearance-will-smith-2012"],
+    ["December 10, 2009", "appearance-will-smith-2009"],
+  ]) {
+    const titleIndex = markup.indexOf(date);
+    assert.ok(titleIndex >= 0, date);
+    const card = markup.slice(titleIndex, titleIndex + 800);
+    assert.match(card, new RegExp(`href="/people/will-smith/appearances/${appearanceId}/"`));
+  }
 });

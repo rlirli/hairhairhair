@@ -91,7 +91,7 @@ const appearances = appearancesForPerson(person.id)
                   style={`object-position: ${photo.objectPosition}`}
                 />
               </a>
-              <PersonPhotoAttribution media={photo} compact />
+              <PersonPhotoAttribution media={photo} density="compact" linkLicense={false} />
               <figcaption class="mt-4">
                 <p class="text-xs font-black uppercase tracking-[.14em] text-orange">{appearance.taken.value}</p>
                 <h3 class="mt-2 font-display text-2xl leading-[.95] tracking-[-.03em]">

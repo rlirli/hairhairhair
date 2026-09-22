@@ -81,8 +81,8 @@ const observedStyles = observedStylesForAppearance(appearance.id);
             class="aspect-[4/3] w-full rounded-[2rem] object-cover transition-transform duration-300 group-hover:scale-[1.01]"
             style={`object-position: ${photo.objectPosition}`}
           />
-          <PersonPhotoAttribution media={photo} compact />
         </a>
+        <PersonPhotoAttribution media={photo} density="default" linkLicense={true} />
         <figcaption class="mt-4 flex flex-wrap items-baseline justify-between gap-3 text-sm leading-6">
           <span>{photo.creator}</span>
           <a

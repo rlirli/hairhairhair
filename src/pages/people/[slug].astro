@@ -82,7 +82,7 @@ const naturalProfile = naturalProfileForPerson(person.id);
               style={`object-position: ${hero.objectPosition}`}
             />
           </a>
-          <PersonPhotoAttribution media={hero} compact />
+          <PersonPhotoAttribution media={hero} density="compact" linkLicense={false} />
         </figure>
       )}
       {naturalProfile && (
@@ -124,7 +124,7 @@ const naturalProfile = naturalProfileForPerson(person.id);
                     style={`object-position: ${photo.objectPosition}`}
                   />
                 </a>
-                <PersonPhotoAttribution media={photo} compact />
+                <PersonPhotoAttribution media={photo} density="compact" linkLicense={false} />
                 <figcaption class="mt-4">
                   <p class="text-xs font-black uppercase tracking-[.14em] text-orange">
                     {formatAppearanceDate(appearance.taken.value, "short")}
@@ -170,7 +170,7 @@ const naturalProfile = naturalProfileForPerson(person.id);
                   class="aspect-square w-full rounded-[1.5rem] object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                   style={`object-position: ${photo.objectPosition}`}
                 />
-                <PersonPhotoAttribution media={photo} compact />
+                <PersonPhotoAttribution media={photo} density="compact" linkLicense={false} />
                 <figcaption class="mt-4">
                   <h3 class="font-display text-3xl leading-[.95] tracking-[-.04em]">{style.name}</h3>
                 </figcaption>

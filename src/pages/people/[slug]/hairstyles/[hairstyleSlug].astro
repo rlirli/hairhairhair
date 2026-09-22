@@ -102,22 +102,18 @@ const records = appearancesForPersonStyle(person.id, style.id);
                   class="aspect-square w-full rounded-[1.5rem] object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                   style={`object-position: ${photo.objectPosition}`}
                 />
-                <PersonPhotoAttribution media={photo} compact />
+                <PersonPhotoAttribution media={photo} density="compact" linkLicense={false} />
               </a>
               <div class="mt-4">
                 <p class="text-xs font-black uppercase tracking-[.14em] text-orange">
                   {formatAppearanceDate(appearance.taken.value)}
                 </p>
                 <h3 class="mt-2 font-display text-2xl leading-[.95] tracking-[-.03em]">
-                  {appearanceTitle(appearance.event)}
+                  <a class="focus-ring" href={`/people/${person.slug}/appearances/${appearance.id}/`}>
+                    {appearanceTitle(appearance.event)}
+                  </a>
                 </h3>
                 {observation && <p class="mt-3 text-sm leading-6">{observation.note}</p>}
-                <a
-                  class="focus-ring mt-3 inline-block text-xs font-bold uppercase tracking-[.12em] text-orange underline decoration-orange decoration-2 underline-offset-4"
-                  href={`/people/${person.slug}/appearances/${appearance.id}/`}
-                >
-                  Appearance record ↗
-                </a>
               </div>
             </article>
           ) : null;

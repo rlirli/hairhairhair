@@ -79,7 +79,7 @@ const uniqueStyles = photoStyles.filter(
         class="max-h-[75vh] w-full rounded-[2rem] object-contain"
         style={`object-position: ${photo.objectPosition}`}
       />
-      <PersonPhotoAttribution media={photo} />
+      <PersonPhotoAttribution media={photo} density="default" linkLicense={true} />
       <figcaption class="mt-5 border-l-4 border-orange pl-4 text-sm leading-6">
         <p class="font-bold">{photo.creator}</p>
         <p>{photo.rightsBasis}</p>

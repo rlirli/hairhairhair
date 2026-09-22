@@ -18,39 +18,13 @@
 </footer>
 <script>
   const themeChoice = document.querySelector<HTMLSelectElement>("#theme-choice");
-  const root = document.documentElement;
-  const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
-  const themes = new Set(["system", "light", "dark"]);
-
-  const currentTheme = () => {
-    try {
-      const saved = localStorage.getItem("hairhairhair-theme");
-      return saved && themes.has(saved) ? saved : "system";
-    } catch {
-      return "system";
-    }
-  };
-
-  const applyTheme = (theme: string) => {
-    const dark = theme === "dark" || (theme === "system" && systemTheme.matches);
-    root.classList.toggle("dark", dark);
-    root.dataset.theme = theme;
-    if (themeChoice) themeChoice.value = theme;
-  };
-
-  applyTheme(currentTheme());
-  themeChoice?.addEventListener("change", () => {
-    const theme = themeChoice.value;
-    if (!themes.has(theme)) return;
-    try {
-      localStorage.setItem("hairhairhair-theme", theme);
-    } catch {}
-    applyTheme(theme);
-  });
-
-  const onSystemThemeChange = () => {
-    if (currentTheme() === "system") applyTheme("system");
-  };
-  if (typeof systemTheme.addEventListener === "function") systemTheme.addEventListener("change", onSystemThemeChange);
-  else (systemTheme as unknown as { addListener: (listener: () => void) => void }).addListener(onSystemThemeChange);
+  const themeController = window.hairhairhairTheme;
+  if (themeChoice && themeController) {
+    const syncChoice = (theme: string) => {
+      themeChoice.value = theme;
+    };
+    syncChoice(themeController.getPreference());
+    themeController.subscribe(syncChoice);
+    themeChoice.addEventListener("change", () => themeController.setPreference(themeChoice.value));
+  }
 </script>

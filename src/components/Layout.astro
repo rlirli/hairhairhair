@@ -37,17 +37,47 @@ const {
     <meta name="theme-color" content="#25231f" media="(prefers-color-scheme: dark)" />
     <meta name="apple-mobile-web-app-title" content="HairHairHair" />
     <script is:inline>
-      try {
-        const saved = localStorage.getItem("hairhairhair-theme");
-        const theme = saved === "light" || saved === "dark" || saved === "system" ? saved : "system";
-        const dark =
-          theme === "dark" || (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
-        document.documentElement.classList.toggle("dark", dark);
-        document.documentElement.dataset.theme = theme;
-      } catch {
-        document.documentElement.classList.toggle("dark", window.matchMedia("(prefers-color-scheme: dark)").matches);
-        document.documentElement.dataset.theme = "system";
-      }
+      (() => {
+        const storageKey = "hairhairhair-theme";
+        const themes = new Set(["system", "light", "dark"]);
+        const root = document.documentElement;
+        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
+        const readPreference = () => {
+          try {
+            const saved = localStorage.getItem(storageKey);
+            return saved && themes.has(saved) ? saved : "system";
+          } catch {
+            return "system";
+          }
+        };
+        const apply = (preference) => {
+          const dark = preference === "dark" || (preference === "system" && systemTheme.matches);
+          root.classList.toggle("dark", dark);
+          root.dataset.theme = preference;
+          window.dispatchEvent(new CustomEvent("hairhairhair:theme-change", { detail: preference }));
+        };
+        const controller = {
+          getPreference: readPreference,
+          setPreference: (preference) => {
+            if (!themes.has(preference)) return;
+            try {
+              localStorage.setItem(storageKey, preference);
+            } catch {}
+            apply(preference);
+          },
+          subscribe: (listener) => {
+            const onChange = (event) => listener(event.detail);
+            window.addEventListener("hairhairhair:theme-change", onChange);
+            return () => window.removeEventListener("hairhairhair:theme-change", onChange);
+          },
+        };
+        window.hairhairhairTheme = controller;
+        apply(readPreference());
+        const onSystemThemeChange = () => {
+          if (readPreference() === "system") apply("system");
+        };
+        systemTheme.addEventListener("change", onSystemThemeChange);
+      })();
     </script>
   </head>
   <body>

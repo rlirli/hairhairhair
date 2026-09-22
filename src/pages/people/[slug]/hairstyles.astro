@@ -81,7 +81,7 @@ const styleRecords = hairstylesForPerson(person.id);
                     class="aspect-square w-full rounded-[1.5rem] object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                     style={`object-position: ${photo.objectPosition}`}
                   />
-                  <PersonPhotoAttribution media={photo} compact />
+                  <PersonPhotoAttribution media={photo} density="compact" linkLicense={false} />
                   <figcaption class="mt-4">
                     <p class="text-xs font-black uppercase tracking-[.14em] text-orange">
                       {formatAppearanceDate(appearance.taken.value, "short")} · {appearanceTitle(appearance.event)}

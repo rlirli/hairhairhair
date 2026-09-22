@@ -13,20 +13,22 @@ test("theme control lives in the footer and offers system, light, and dark choic
   assert.match(footer, /value="system">System/);
   assert.match(footer, /value="light">Light/);
   assert.match(footer, /value="dark">Dark/);
-  assert.match(footer, /localStorage\.setItem\("hairhairhair-theme", theme\)/);
-  assert.match(footer, /prefers-color-scheme: dark/);
-  assert.match(footer, /onSystemThemeChange/);
+  assert.match(footer, /window\.hairhairhairTheme/);
+  assert.doesNotMatch(footer, /localStorage|prefers-color-scheme|onSystemThemeChange/);
   assert.doesNotMatch(header, /theme-toggle|Choose theme|Toggle dark mode/);
 });
 
 test("the initial theme script defaults to system and applies before first paint", () => {
   const layout = source("src/components/Layout.astro");
 
-  assert.match(layout, /saved === "light" \|\| saved === "dark" \|\| saved === "system"/);
+  assert.match(layout, /themes = new Set\(\["system", "light", "dark"\]\)/);
   assert.match(layout, /: "system"/);
-  assert.match(layout, /document\.documentElement\.classList\.toggle\("dark", dark\)/);
-  assert.match(layout, /document\.documentElement\.dataset\.theme = theme/);
+  assert.match(layout, /root\.classList\.toggle\("dark", dark\)/);
+  assert.match(layout, /root\.dataset\.theme = preference/);
   assert.match(layout, /<script is:inline>/);
+  assert.match(layout, /window\.hairhairhairTheme = controller/);
+  assert.match(layout, /localStorage\.setItem\(storageKey, preference\)/);
+  assert.match(layout, /onSystemThemeChange/);
 });
 
 test("dark utility classes follow the page theme instead of the operating-system preference", () => {

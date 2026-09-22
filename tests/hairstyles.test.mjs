@@ -167,7 +167,7 @@ test("style guides contain responsive imagery, sparse hair-type links, and socia
 test("hair type and sub-type pages expose only styles associated by guidance", () => {
   for (const hairType of hairTypes) {
     const markup = page(`/hair-types/${hairType.slug}/`);
-    const expectedStyles = getPublishedHairstylesForHairType(hairType.id);
+    const expectedStyles = getPublishedHairstylesForHairType(hairType.id).slice(0, 5);
     for (const style of expectedStyles) assert.match(markup, new RegExp(`/hairstyles/${style.slug}/`));
     for (const style of publishedHairstyles.filter((item) => !expectedStyles.includes(item)))
       assert.doesNotMatch(markup, new RegExp(`/hairstyles/${style.slug}/`));
@@ -183,26 +183,26 @@ test("hair type and sub-type pages expose only styles associated by guidance", (
   }
 });
 
-test("hair-type pages use a compact, five-column hairstyle overview with hover details and a more link", () => {
-  for (const type of hairSubtypes) {
+test("hair-type pages use a compact, five-card hairstyle preview with a more link", () => {
+  for (const type of [...hairTypes, ...hairSubtypes]) {
     const markup = page(`/hair-types/${type.slug}/`);
-    const relatedStyles = getPublishedHairstylesForHairType(type.hairTypeId);
+    const relatedStyles = getPublishedHairstylesForHairType(hairTypes.includes(type) ? type.id : type.hairTypeId);
     assert.match(markup, /Hairstyles for this type/i);
     assert.match(markup, /data-slot="hover-card-trigger"/);
-    assert.match(markup, new RegExp(`href="/hair-types/${type.slug}/related-hairstyles/"`));
+    assert.match(markup, new RegExp(`href="/hair-types/${type.slug}/hairstyles/"`));
     assert.equal((markup.match(/data-slot="hover-card-trigger"/g) ?? []).length, Math.min(5, relatedStyles.length));
+    assert.doesNotMatch(markup, /Pattern is one part of the picture|not a guaranteed result/i);
+    assert.doesNotMatch(markup, /Pattern illustration/);
   }
 });
 
-test("related hairstyle pages use a four-column grid with medium cards and hover details", () => {
-  for (const type of hairSubtypes) {
-    const markup = page(`/hair-types/${type.slug}/related-hairstyles/`);
-    const parentType = hairTypes.find((item) => item.pattern === type.pattern);
-    assert.ok(parentType);
-    assert.match(markup, /Hairstyles for/);
-    assert.match(markup, new RegExp(`Hair Type ${type.code}`));
+test("hair-type hairstyle pages use a four-column grid with medium cards", () => {
+  for (const type of [...hairTypes, ...hairSubtypes]) {
+    const markup = page(`/hair-types/${type.slug}/hairstyles/`);
+    assert.match(markup, /Hairstyle guides/);
+    assert.match(markup, new RegExp(`Type ${type.code}`));
     assert.match(markup, /data-slot="hover-card-trigger"/);
-    const expectedStyles = getPublishedHairstylesForHairType(parentType.id);
+    const expectedStyles = getPublishedHairstylesForHairType(hairTypes.includes(type) ? type.id : type.hairTypeId);
     for (const style of expectedStyles) assert.match(markup, new RegExp(`/hairstyles/${style.slug}/`));
     for (const style of publishedHairstyles.filter((item) => !expectedStyles.includes(item)))
       assert.doesNotMatch(markup, new RegExp(`/hairstyles/${style.slug}/`));

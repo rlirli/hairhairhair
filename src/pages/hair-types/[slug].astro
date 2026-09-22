@@ -1,10 +1,10 @@
 ---
 import Layout from "../../components/Layout.astro";
 import Pattern from "../../components/Pattern.astro";
-import HairstyleCard from "../../components/HairstyleCard.astro";
 import RelatedHairstyleGrid from "../../components/RelatedHairstyleGrid.astro";
+import HairTypeCelebrityPreview from "../../components/HairTypeCelebrityPreview.astro";
 import { hairSubtypes, hairTypes } from "../../data/hair-types";
-import { publishedStylesForHairType } from "../../data/hairstyle-relations";
+import { stylesForHairTypeSlug } from "../../data/hair-type-discovery";
 
 export function getStaticPaths() {
   return [
@@ -15,38 +15,68 @@ export function getStaticPaths() {
     })),
   ];
 }
+
 const { kind } = Astro.props;
 const hairType = Astro.props.hairType!;
 const hairSubtype = Astro.props.hairSubtype!;
-const subtypes = kind === "hairType" ? hairSubtypes.filter((item) => item.pattern === hairType.pattern) : [];
-const currentIndex = kind === "hairSubtype" ? hairSubtypes.findIndex((item) => item.slug === hairSubtype.slug) : -1;
-const previous = currentIndex > 0 ? hairSubtypes[currentIndex - 1] : undefined;
-const next = currentIndex < hairSubtypes.length - 1 ? hairSubtypes[currentIndex + 1] : undefined;
-const parentType = kind === "hairSubtype" ? hairTypes.find((item) => item.id === hairSubtype.hairTypeId)! : hairType;
-const relatedStyles = publishedStylesForHairType(parentType.id);
+const subtypes = kind === "hairType" ? hairSubtypes.filter((item) => item.hairTypeId === hairType.id) : [];
+const selected = kind === "hairType" ? hairType : hairSubtype;
+const sequence = kind === "hairType" ? hairTypes : hairSubtypes;
+const index = sequence.findIndex((item) => item.slug === selected.slug);
+const previous = sequence[index - 1];
+const next = sequence[index + 1];
+const styles = stylesForHairTypeSlug(selected.slug).slice(0, 5);
+const label =
+  kind === "hairType" ? `Type ${hairType.code} ${hairType.name}` : `Type ${hairSubtype.code} ${hairSubtype.name}`;
 ---
 
-{kind === "hairType" ? (
-  <Layout title={`Type ${hairType.code} ${hairType.name} hair — hairhairhair.hair`} description={hairType.description}>
-    <article class="mx-auto max-w-7xl px-5 pb-20 pt-12 sm:px-8">
-      <a class="focus-ring text-sm font-bold uppercase tracking-[.12em] text-orange" href="/hair-types/">
-        ← All hair types
-      </a>
-      <div class="mt-10 grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
-        <div>
-          <p class="text-xs font-black uppercase tracking-[.18em]">Hair type</p>
-          <h1 class="mt-5 font-display text-7xl leading-[.82] tracking-[-.09em] sm:text-9xl">Type {hairType.code}</h1>
-          <p class="mt-5 font-display text-3xl">{hairType.name}</p>
-          <p class="mt-7 max-w-xl text-xl leading-8">{hairType.description}</p>
+<Layout title={`${label} — hairhairhair.hair`} description={selected.description}>
+  <article class="mx-auto max-w-7xl px-5 pb-14 pt-7 sm:px-8">
+    <nav
+      class="mb-7 flex items-center justify-between gap-3 text-xs font-bold sm:text-sm"
+      aria-label="Hair type sequence"
+    >
+      {previous ? (
+        <a class="focus-ring min-w-0 truncate text-orange hover:underline" href={`/hair-types/${previous.slug}/`}>
+          ← Type {previous.code} {previous.name}
+        </a>
+      ) : (
+        <span />
+      )}
+      <span class="shrink-0 uppercase tracking-[.12em] opacity-60">{label}</span>
+      {next ? (
+        <a
+          class="focus-ring min-w-0 truncate text-right text-orange hover:underline"
+          href={`/hair-types/${next.slug}/`}
+        >
+          Type {next.code} {next.name} →
+        </a>
+      ) : (
+        <span />
+      )}
+    </nav>
+
+    <header class="border-b-2 border-ink pb-8">
+      <p class="text-xs font-black uppercase tracking-[.18em] text-orange">
+        {kind === "hairType" ? "Hair type" : `${hairSubtype.pattern} · subtype`}
+      </p>
+      <h1 class="mt-3 font-display text-5xl leading-[.95] tracking-[-.07em] sm:text-7xl">{label}</h1>
+      <p class="mt-4 max-w-3xl text-lg leading-7 sm:text-xl">{selected.description}</p>
+    </header>
+
+    {kind === "hairType" ? (
+      <section class="mt-9" aria-labelledby="subtypes-heading">
+        <div class="flex items-baseline justify-between gap-4">
+          <h2 id="subtypes-heading" class="font-display text-3xl">
+            Explore the subtypes
+          </h2>
+          <a
+            class="focus-ring text-xs font-black uppercase tracking-[.12em] text-orange hover:underline"
+            href={`/hair-types/${hairType.slug}/people/`}
+          >
+            People →
+          </a>
         </div>
-        <Pattern
-          pattern={hairType.pattern}
-          subtype="B"
-          label={`Simplified Type ${hairType.code} ${hairType.name.toLowerCase()} pattern illustration — not a diagnostic or photograph`}
-        />
-      </div>
-      <section class="mt-14 border-t-2 border-ink pt-8">
-        <p class="text-xs font-black uppercase tracking-[.16em] text-orange">Explore the sub-types</p>
         <div class="mt-5 grid gap-4 md:grid-cols-3">
           {subtypes.map((item) => (
             <a
@@ -54,113 +84,47 @@ const relatedStyles = publishedStylesForHairType(parentType.id);
               class="hover-surface focus-ring rounded-3xl border-2 border-ink p-5 transition"
             >
               <Pattern pattern={item.pattern} subtype={item.subtypeCode} />
-              <h2 class="mt-5 font-display text-3xl">Type {item.code}</h2>
-              <p class="mt-1 font-display text-lg">{item.name}</p>
+              <h3 class="mt-4 font-display text-2xl">Type {item.code}</h3>
+              <p class="mt-1">{item.name}</p>
             </a>
           ))}
         </div>
       </section>
-    </article>
-    <section class="mx-auto max-w-7xl px-5 pb-20 sm:px-8">
-      <p class="text-xs font-black uppercase tracking-[.16em] text-orange">Hairstyle guides</p>
-      <div class="mt-5 grid gap-4 md:grid-cols-3">
-        {relatedStyles.map((item) => (
-          <HairstyleCard style={item} compact />
-        ))}
-      </div>
-    </section>
-  </Layout>
-) : (
-  <Layout
-    title={`Type ${hairSubtype.code}: ${hairSubtype.name} — hairhairhair.hair`}
-    description={hairSubtype.description}
-  >
-    <article class="mx-auto max-w-7xl px-5 pb-20 pt-12 sm:px-8">
-      <a
-        class="focus-ring text-sm font-bold uppercase tracking-[.12em] text-orange"
-        href={`/hair-types/${parentType.slug}/`}
-      >
-        ← Type {parentType.code}
-      </a>
-      <div class="mt-10 grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
-        <div>
-          <p class="text-xs font-black uppercase tracking-[.18em]">
-            {hairSubtype.pattern} · {hairSubtype.code}
-          </p>
-          <h1 class="mt-5 font-display text-7xl leading-[.82] tracking-[-.09em] sm:text-9xl">
-            Type {hairSubtype.code}
-          </h1>
-          <p class="mt-5 font-display text-3xl leading-tight tracking-[-.04em]">{hairSubtype.name}</p>
-          <p class="mt-7 max-w-xl text-xl leading-8">{hairSubtype.description}</p>
-        </div>
-        <Pattern pattern={hairSubtype.pattern} subtype={hairSubtype.subtypeCode} />
-      </div>
-      <p class="mt-8 max-w-2xl border-l-4 border-orange pl-4 text-sm leading-6">
-        Pattern is one part of the picture. You may have more than one pattern on the same head. Thickness, density,
-        porosity, and care history can change how any type looks and behaves.
-      </p>
-      <div class="mt-14 grid gap-5 border-t-2 border-ink pt-8 md:grid-cols-2">
+    ) : (
+      <div class="mt-7 grid gap-8 md:grid-cols-[1.2fr_.8fr]">
         <section>
           <h2 class="font-display text-3xl tracking-[-.05em]">What to notice</h2>
-          <ul class="mt-5 space-y-3">
+          <ul class="mt-4 space-y-3">
             {hairSubtype.characteristics.map((item) => (
-              <li class="flex gap-3 text-base leading-6">
+              <li class="flex gap-3 leading-6">
                 <span class="mt-2 h-2 w-2 shrink-0 rounded-full bg-orange"></span>
                 {item}
               </li>
             ))}
           </ul>
         </section>
-        <section class="inverse-panel rounded-3xl p-7">
+        <section class="inverse-panel rounded-3xl p-6">
           <p class="inverse-label text-xs font-black uppercase tracking-[.16em]">A useful comparison</p>
-          <p class="mt-5 text-lg leading-7">{hairSubtype.comparison}</p>
+          <p class="mt-4 text-lg leading-7">{hairSubtype.comparison}</p>
         </section>
       </div>
-      <nav class="mt-16 grid grid-cols-2 gap-4 border-t-2 border-ink pt-6" aria-label="Adjacent hair sub-types">
-        {previous ? (
-          <a
-            class="hover-surface focus-ring rounded-2xl border-2 border-ink p-4"
-            href={`/hair-types/${previous.slug}/`}
-          >
-            <span class="block text-xs font-bold uppercase tracking-[.12em] text-orange">Previous</span>
-            <span class="mt-2 block font-display text-2xl">Type {previous.code}</span>
-            <span class="block text-sm">{previous.name}</span>
-          </a>
-        ) : (
-          <span></span>
-        )}
-        {next ? (
-          <a
-            class="hover-surface focus-ring rounded-2xl border-2 border-ink p-4 text-right"
-            href={`/hair-types/${next.slug}/`}
-          >
-            <span class="block text-xs font-bold uppercase tracking-[.12em] text-orange">Next</span>
-            <span class="mt-2 block font-display text-2xl">Type {next.code}</span>
-            <span class="block text-sm">{next.name}</span>
-          </a>
-        ) : (
-          <span></span>
-        )}
-      </nav>
-    </article>
-    <section class="mx-auto max-w-7xl px-5 pb-20 sm:px-8">
-      <div class="flex items-center justify-between gap-4">
-        <p class="text-xs font-black uppercase tracking-[.16em] text-orange">Hairstyles for this type</p>
-        <a
-          class="focus-ring text-xs font-black uppercase tracking-[.16em] text-orange hover:underline"
-          href={`/hair-types/${hairSubtype.slug}/related-hairstyles/`}
-        >
-          More →
-        </a>
-      </div>
-      <RelatedHairstyleGrid
-        styles={relatedStyles.slice(0, 5)}
-        className="mt-3 grid grid-flow-col auto-cols-[minmax(8rem,1fr)] gap-4 overflow-x-auto border-t border-ink/30 pt-5 pb-3 lg:grid-flow-row lg:grid-cols-5 lg:auto-cols-auto lg:overflow-visible"
-      />
-      <p class="mt-4 text-sm leading-6">
-        These guides use Type {parentType.code} guidance. They offer general conversation prompts, not evidence that a
-        specific sub-type will produce a guaranteed result.
-      </p>
-    </section>
-  </Layout>
-)}
+    )}
+  </article>
+
+  <section class="mx-auto max-w-7xl px-5 pb-14 sm:px-8" aria-label={`Hairstyles for ${label}`}>
+    <div class="flex items-center justify-between gap-4">
+      <h2 class="text-xs font-black uppercase tracking-[.16em] text-orange">Hairstyles for this type</h2>
+      <a
+        class="focus-ring text-xs font-black uppercase tracking-[.16em] text-orange hover:underline"
+        href={`/hair-types/${selected.slug}/hairstyles/`}
+      >
+        More →
+      </a>
+    </div>
+    <RelatedHairstyleGrid
+      styles={styles}
+      className="mt-3 grid grid-flow-col auto-cols-[minmax(8rem,1fr)] gap-4 overflow-x-auto border-t border-ink/30 pt-5 pb-3 lg:grid-flow-row lg:grid-cols-5 lg:auto-cols-auto lg:overflow-visible"
+    />
+  </section>
+  <HairTypeCelebrityPreview slug={selected.slug} />
+</Layout>

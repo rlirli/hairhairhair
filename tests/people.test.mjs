@@ -212,9 +212,12 @@ test("each photograph has a dedicated provenance page and existing cards reach i
     assert.match(markup, new RegExp(`href="/people/${owner.slug}/"`));
   }
   const profile = page("/people/will-smith/");
-  assert.match(profile, /Appearance record/);
+  assert.doesNotMatch(profile, /Appearance record ↗/);
+  assert.match(profile, /href="\/people\/will-smith\/appearances\/appearance-will-smith-2011\/"/);
   const archive = page("/people/will-smith/appearances/");
   assert.match(archive, /\/people\/will-smith\/appearances\/appearance-will-smith-2011\//);
+  assert.doesNotMatch(archive, /Appearance record ↗/);
+  assert.match(archive, /<h3[^>]*>\s*<a[^>]*href="\/people\/will-smith\/appearances\/appearance-will-smith-2011\/"/);
 });
 
 test("appearance anchors and hairstyle backlinks are one-to-one", () => {

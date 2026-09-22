@@ -108,35 +108,36 @@ const naturalProfile = naturalProfileForPerson(person.id);
         {appearances.slice(0, 4).map((appearance) => {
           const photo = media.find((item) => item.id === appearance.imageId);
           return photo ? (
-            <a
-              class="group focus-ring block"
-              href={`/people/${person.slug}/appearances/${appearance.id}/`}
-              aria-label={`${formatAppearanceDate(appearance.taken.value, "short")}: ${appearanceTitle(appearance.event)}`}
-            >
+            <article class="group">
               <figure>
-                <Image
-                  src={photo.src}
-                  widths={[400, 700, 1000]}
-                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-                  format="webp"
-                  alt={photo.alt}
-                  class="aspect-square w-full rounded-[1.5rem] object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-                  style={`object-position: ${photo.objectPosition}`}
-                />
+                <a
+                  class="group focus-ring block"
+                  href={`/people/${person.slug}/appearances/${appearance.id}/`}
+                  aria-label={`${formatAppearanceDate(appearance.taken.value, "short")}: ${appearanceTitle(appearance.event)}`}
+                >
+                  <Image
+                    src={photo.src}
+                    widths={[400, 700, 1000]}
+                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                    format="webp"
+                    alt={photo.alt}
+                    class="aspect-square w-full rounded-[1.5rem] object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                    style={`object-position: ${photo.objectPosition}`}
+                  />
+                </a>
                 <PersonPhotoAttribution media={photo} compact />
                 <figcaption class="mt-4">
                   <p class="text-xs font-black uppercase tracking-[.14em] text-orange">
                     {formatAppearanceDate(appearance.taken.value, "short")}
                   </p>
                   <h3 class="mt-2 font-display text-2xl leading-[.95] tracking-[-.03em]">
-                    {appearanceTitle(appearance.event)}
+                    <a class="focus-ring" href={`/people/${person.slug}/appearances/${appearance.id}/`}>
+                      {appearanceTitle(appearance.event)}
+                    </a>
                   </h3>
-                  <span class="mt-2 inline-block text-xs font-bold uppercase tracking-[.12em] text-orange underline decoration-orange decoration-2 underline-offset-4">
-                    Appearance record ↗
-                  </span>
                 </figcaption>
               </figure>
-            </a>
+            </article>
           ) : null;
         })}
       </div>

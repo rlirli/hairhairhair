@@ -32,7 +32,7 @@ _Avoid_: Compatibility score, works for everyone
 A real individual whose documented hairstyles can be explored. A person is not assigned a permanent hair type merely from styled photographs.
 
 **Natural profile**:
-A separate, optional record of a person's natural hair type, natural hair color, natural skin tone, hair thickness, and hair density. Each trait carries its own source, status, and confidence so provisional AI-prefills can be replaced by community corrections. An undocumented trait remains explicitly unknown.
+A separate, optional record of a person's broad natural hair type, optional exact hair sub-type, natural hair color, natural skin tone, hair thickness, and hair density. Each trait carries its own source, status, and confidence so provisional AI-prefills can be replaced by community corrections. A sub-type must belong to the recorded broad type; when it is unknown, it stays `null` rather than being inferred. A broad-only profile belongs on the major type page only, while a profile with a documented sub-type belongs on both that exact sub-type page and its parent major type page.
 
 **Appearance**:
 A dated photographic record of a person at a particular event or moment. Its capture date is distinct from when the image was published or uploaded.

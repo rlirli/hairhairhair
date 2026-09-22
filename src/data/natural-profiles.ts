@@ -1,4 +1,4 @@
-import { hairTypes, type HairType } from "./hair-types.ts";
+import { hairSubtypes, hairTypes, type HairSubtype, type HairType } from "./hair-types.ts";
 
 export type NaturalProfileStatus = "unverified" | "community-corrected";
 export type NaturalProfileSource = "ai-prefill" | "community-correction" | "self-reported" | "not-documented";
@@ -25,20 +25,14 @@ export interface NaturalProfile {
   id: string;
   personId: string;
   hairTypeId: NaturalProfileTrait<HairType["id"]>;
+  hairSubtypeId: NaturalProfileTrait<HairSubtype["id"]>;
   naturalHairColor: NaturalProfileTrait<NaturalHairColor>;
   naturalSkinTone: NaturalProfileTrait<NaturalSkinTone>;
   hairThickness: NaturalProfileTrait<HairThickness>;
   hairDensity: NaturalProfileTrait<HairDensity>;
 }
 
-const willSmithAiPrefill = (note: string): NaturalProfileProvenance => ({
-  source: "ai-prefill",
-  status: "unverified",
-  confidence: "low",
-  note,
-});
-
-const marioBalotelliAiPrefill = (note: string): NaturalProfileProvenance => ({
+export const aiPrefill = (note: string): NaturalProfileProvenance => ({
   source: "ai-prefill",
   status: "unverified",
   confidence: "low",
@@ -58,15 +52,19 @@ export const naturalProfiles: NaturalProfile[] = [
     personId: "person-will-smith",
     hairTypeId: {
       value: "hair-type-4",
-      provenance: willSmithAiPrefill("Inferred from public photographs; not self-reported or independently verified."),
+      provenance: aiPrefill("Inferred from public photographs; not self-reported or independently verified."),
+    },
+    hairSubtypeId: {
+      value: null,
+      provenance: notDocumented("No reliable public documentation found for a specific hair subtype."),
     },
     naturalHairColor: {
       value: "black",
-      provenance: willSmithAiPrefill("Inferred from public photographs; lighting and styling can affect appearance."),
+      provenance: aiPrefill("Inferred from public photographs; lighting and styling can affect appearance."),
     },
     naturalSkinTone: {
       value: "deep-brown",
-      provenance: willSmithAiPrefill("A visual descriptor, not a scientific or clinical measurement."),
+      provenance: aiPrefill("A visual descriptor, not a scientific or clinical measurement."),
     },
     hairThickness: {
       value: null,
@@ -82,19 +80,19 @@ export const naturalProfiles: NaturalProfile[] = [
     personId: "person-mario-balotelli",
     hairTypeId: {
       value: "hair-type-4",
-      provenance: marioBalotelliAiPrefill(
-        "Inferred from public photographs; not self-reported or independently verified.",
-      ),
+      provenance: aiPrefill("Inferred from public photographs; not self-reported or independently verified."),
+    },
+    hairSubtypeId: {
+      value: null,
+      provenance: notDocumented("No reliable public documentation found for a specific hair subtype."),
     },
     naturalHairColor: {
       value: "black",
-      provenance: marioBalotelliAiPrefill(
-        "Inferred from public photographs; lighting and styling can affect appearance.",
-      ),
+      provenance: aiPrefill("Inferred from public photographs; lighting and styling can affect appearance."),
     },
     naturalSkinTone: {
       value: "deep-brown",
-      provenance: marioBalotelliAiPrefill("A visual descriptor, not a scientific or clinical measurement."),
+      provenance: aiPrefill("A visual descriptor, not a scientific or clinical measurement."),
     },
     hairThickness: { value: null, provenance: notDocumented("No reliable public documentation found.") },
     hairDensity: { value: null, provenance: notDocumented("No reliable public documentation found.") },
@@ -107,4 +105,36 @@ export function naturalProfileForPerson(personId: string) {
 
 export function hairTypeForNaturalProfileTrait(trait: NaturalProfileTrait<HairType["id"]>) {
   return trait.value ? hairTypes.find((hairType) => hairType.id === trait.value) : undefined;
+}
+
+export function hairSubtypeForNaturalProfileTrait(trait: NaturalProfileTrait<HairSubtype["id"]>) {
+  return trait.value ? hairSubtypes.find((hairSubtype) => hairSubtype.id === trait.value) : undefined;
+}
+
+export function naturalProfileHasValidHairTypeHierarchy(profile: NaturalProfile) {
+  const hairType = hairTypeForNaturalProfileTrait(profile.hairTypeId);
+  const hairSubtype = hairSubtypeForNaturalProfileTrait(profile.hairSubtypeId);
+
+  if (profile.hairTypeId.value !== null && !hairType) return false;
+  if (profile.hairSubtypeId.value === null) return true;
+  return Boolean(hairType && hairSubtype && hairSubtype.hairTypeId === hairType.id);
+}
+
+export function resolvedHairTypeForNaturalProfile(profile: NaturalProfile) {
+  if (!naturalProfileHasValidHairTypeHierarchy(profile)) return undefined;
+  return hairSubtypeForNaturalProfileTrait(profile.hairSubtypeId) ?? hairTypeForNaturalProfileTrait(profile.hairTypeId);
+}
+
+export function naturalProfileMatchesHairType(profile: NaturalProfile, hairTypeOrSubtypeId: string) {
+  if (!naturalProfileHasValidHairTypeHierarchy(profile)) return false;
+
+  const targetType = hairTypes.find((hairType) => hairType.id === hairTypeOrSubtypeId);
+  if (targetType) return profile.hairTypeId.value === targetType.id;
+
+  const targetSubtype = hairSubtypes.find((hairSubtype) => hairSubtype.id === hairTypeOrSubtypeId);
+  return Boolean(targetSubtype && profile.hairSubtypeId.value === targetSubtype.id);
+}
+
+export function naturalProfilesForHairType(hairTypeOrSubtypeId: string) {
+  return naturalProfiles.filter((profile) => naturalProfileMatchesHairType(profile, hairTypeOrSubtypeId));
 }

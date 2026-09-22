@@ -1,12 +1,12 @@
 ---
-import { hairTypeForNaturalProfileTrait, type NaturalProfile } from "../data/natural-profiles";
+import { resolvedHairTypeForNaturalProfile, type NaturalProfile } from "../data/natural-profiles";
 
 interface Props {
   profile: NaturalProfile;
 }
 
 const { profile } = Astro.props;
-const hairType = hairTypeForNaturalProfileTrait(profile.hairTypeId);
+const hairType = resolvedHairTypeForNaturalProfile(profile);
 
 const displayValue = (value: string | null, labels: Record<string, string>) =>
   value ? (labels[value] ?? value) : null;

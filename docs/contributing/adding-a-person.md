@@ -13,6 +13,6 @@ This checklist describes the current static-data workflow for a person with at l
 
 ## Optional
 
-- Add a `NaturalProfile` in `src/data/natural-profiles.ts`. The person page omits the table when no profile exists; do not infer undocumented traits.
+- Add a `NaturalProfile` in `src/data/natural-profiles.ts` only when there is enough evidence for at least one natural trait. Keep `hairTypeId` at the broad numbered type, and set `hairSubtypeId` to `null` unless the exact lettered subtype is supported. A documented subtype must belong to the broad type. Use the shared provenance helpers rather than adding person-specific helper functions. The person page omits the table when no profile exists and hides null traits; do not infer undocumented values.
 - Add a research note under `docs/research/people/` when source selection or rights decisions need an audit trail.
 - Add more appearances and photographs after the first complete record; follow the same provenance requirements for each one.

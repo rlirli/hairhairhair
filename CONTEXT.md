@@ -13,6 +13,7 @@ One of the four numbered Walker-inspired pattern categories: straight, wavy, cur
 
 **Hairstyle**:
 A named look or styling concept someone can explore and discuss with a practitioner. The catalog includes cuts, finishing techniques, and ways of arranging hair; these are distinguished rather than treated as identical services.
+Optional invention date and inventor claims are recorded only when each claim cites an editorial source. Missing origin information is omitted rather than inferred.
 
 **Variation**:
 A named interpretation of a hairstyle that changes a meaningful feature, such as length or the placement of a taper.
@@ -25,7 +26,7 @@ _Avoid_: Person, hairstyle definition
 A visual asset used to illustrate a style example, with its origin and attribution recorded. A generated reference is a fictional illustration, not evidence of a real person's hair or a verified haircut result.
 
 **Pattern guidance**:
-An editorial note about how a hairstyle may be approached within a hair type. It supports a conversation with a practitioner rather than declaring eligibility or promising a result.
+An editorial note about how a hairstyle may be approached within a major hair type. These records form a sparse catalog relation: a row means guidance for that pairing has been reviewed, while a missing row means the catalog does not currently associate it. It supports a conversation with a practitioner rather than declaring biological eligibility, impossibility, or a promised result.
 _Avoid_: Compatibility score, works for everyone
 
 **Person**:

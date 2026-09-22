@@ -10,6 +10,17 @@ export interface HairstyleConsultation {
   sampleRequest: string;
 }
 
+export interface HairstyleOriginDate {
+  year: number;
+  precision: "year" | "decade";
+  sourceId: string;
+}
+
+export interface HairstyleInventor {
+  name: string;
+  sourceId: string;
+}
+
 export interface Hairstyle {
   id: string;
   slug: string;
@@ -23,8 +34,12 @@ export interface Hairstyle {
   sourceIds: string[];
   relatedStyleIds: string[];
   guidePublicationStatus: "draft" | "published";
+  inventedAt?: HairstyleOriginDate;
+  inventor?: HairstyleInventor;
 }
 
+// This is a sparse editorial relation. A row means guidance has been reviewed for that major hair type.
+// A missing row means the catalog does not currently associate the pair, not that the style is impossible to wear.
 export interface PatternGuidance {
   hairstyleId: string;
   hairTypeId: string;
@@ -728,21 +743,6 @@ export const patternGuidance: PatternGuidance[] = [
     hairstyleId: "hairstyle-thin-mohawk",
     hairTypeId: "hair-type-4",
     note: "Coily texture can keep a narrow crest visibly upright; plan around shrinkage, density, and the contrast created by close sides.",
-  },
-  {
-    hairstyleId: "hairstyle-cropped-afro",
-    hairTypeId: "hair-type-1",
-    note: "A cropped afro is a shape choice rather than a straight-texture default; a stylist can discuss the texture or styling needed to create fullness.",
-  },
-  {
-    hairstyleId: "hairstyle-cropped-afro",
-    hairTypeId: "hair-type-2",
-    note: "Wave may make a compact crop read softer or flatter; agree on the rounded outline and the amount of visible movement.",
-  },
-  {
-    hairstyleId: "hairstyle-cropped-afro",
-    hairTypeId: "hair-type-3",
-    note: "Curl can create a rounded cropped silhouette with visible spring; assess the dry length and how much shrinkage to leave.",
   },
   {
     hairstyleId: "hairstyle-cropped-afro",

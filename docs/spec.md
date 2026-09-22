@@ -16,7 +16,7 @@ The site is a small editorial field guide: a home page introduces the visual lan
 
 Warm ivory, near-black ink, orange accents, butter-yellow illustration panels, oversized serif display typography, and compact uppercase labels create the editorial character. `Pattern.astro` generates reusable abstract SVG marks and labels them as simplified illustrations, not diagnostics or photos.
 
-The theme also supports a warm charcoal/cream/copper dark palette. A keyboard-accessible header toggle persists the user's choice in local storage, defaults to the OS preference, and uses an inline head script to avoid a flash of the wrong theme. Storage failures fall back safely to the system preference.
+The theme also supports a warm charcoal/cream/copper dark palette. A keyboard-accessible footer selector offers System, Light, and Dark choices. System is the default, follows live OS preference changes, and explicit Light/Dark choices persist in local storage. An inline head script applies the choice before first paint to avoid a flash of the wrong theme; storage failures fall back safely to the system preference. The selector remains available on every page through the shared layout.
 
 ## Delivery
 

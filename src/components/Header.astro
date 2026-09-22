@@ -18,33 +18,5 @@
     <a class="focus-ring hidden hover:text-orange sm:inline" href="/#about">
       About
     </a>
-    <button
-      id="theme-toggle"
-      type="button"
-      class="focus-ring hover-surface inline-flex shrink-0 items-center gap-1 rounded-full border-2 border-ink px-3 py-2 text-xs font-black uppercase tracking-[.08em]"
-      aria-label="Toggle dark mode"
-      aria-pressed="false"
-    >
-      <span aria-hidden="true">◐</span>
-      <span class="hidden sm:inline">Theme</span>
-    </button>
   </nav>
 </header>
-<script>
-  const button = document.querySelector<HTMLButtonElement>("#theme-toggle");
-  const root = document.documentElement;
-  const updateThemeButton = () => {
-    const dark = root.classList.contains("dark");
-    button?.setAttribute("aria-pressed", String(dark));
-    button?.setAttribute("aria-label", dark ? "Use light mode" : "Use dark mode");
-  };
-  updateThemeButton();
-  button?.addEventListener("click", () => {
-    const dark = !root.classList.contains("dark");
-    root.classList.toggle("dark", dark);
-    try {
-      localStorage.setItem("hairhairhair-theme", dark ? "dark" : "light");
-    } catch {}
-    updateThemeButton();
-  });
-</script>

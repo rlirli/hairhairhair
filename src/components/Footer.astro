@@ -1,0 +1,56 @@
+<footer class="mx-auto mt-24 flex max-w-7xl flex-col gap-6 border-t-2 border-ink px-5 py-8 text-sm sm:px-8">
+  <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+    <span class="font-black">hairhairhair.hair</span>
+    <span>Built for curiosity, not diagnosis.</span>
+  </div>
+  <label class="flex w-fit items-center gap-3 font-bold" for="theme-choice">
+    <span>Theme</span>
+    <select
+      id="theme-choice"
+      class="focus-ring rounded-full border-2 border-ink bg-transparent px-3 py-2 text-xs font-black uppercase tracking-[.08em]"
+      aria-label="Choose theme"
+    >
+      <option value="system">System</option>
+      <option value="light">Light</option>
+      <option value="dark">Dark</option>
+    </select>
+  </label>
+</footer>
+<script>
+  const themeChoice = document.querySelector<HTMLSelectElement>("#theme-choice");
+  const root = document.documentElement;
+  const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
+  const themes = new Set(["system", "light", "dark"]);
+
+  const currentTheme = () => {
+    try {
+      const saved = localStorage.getItem("hairhairhair-theme");
+      return saved && themes.has(saved) ? saved : "system";
+    } catch {
+      return "system";
+    }
+  };
+
+  const applyTheme = (theme: string) => {
+    const dark = theme === "dark" || (theme === "system" && systemTheme.matches);
+    root.classList.toggle("dark", dark);
+    root.dataset.theme = theme;
+    if (themeChoice) themeChoice.value = theme;
+  };
+
+  applyTheme(currentTheme());
+  themeChoice?.addEventListener("change", () => {
+    const theme = themeChoice.value;
+    if (!themes.has(theme)) return;
+    try {
+      localStorage.setItem("hairhairhair-theme", theme);
+    } catch {}
+    applyTheme(theme);
+  });
+
+  const onSystemThemeChange = () => {
+    if (currentTheme() === "system") applyTheme("system");
+  };
+  if (typeof systemTheme.addEventListener === "function") systemTheme.addEventListener("change", onSystemThemeChange);
+  else (systemTheme as unknown as { addListener: (listener: () => void) => void }).addListener(onSystemThemeChange);
+</script>

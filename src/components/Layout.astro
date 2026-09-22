@@ -1,5 +1,6 @@
 ---
 import Header from "./Header.astro";
+import Footer from "./Footer.astro";
 import "../styles/global.css";
 interface Props {
   title?: string;
@@ -38,10 +39,14 @@ const {
     <script is:inline>
       try {
         const saved = localStorage.getItem("hairhairhair-theme");
-        const dark = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
-        if (dark) document.documentElement.classList.add("dark");
+        const theme = saved === "light" || saved === "dark" || saved === "system" ? saved : "system";
+        const dark =
+          theme === "dark" || (theme === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.classList.toggle("dark", dark);
+        document.documentElement.dataset.theme = theme;
       } catch {
-        if (window.matchMedia("(prefers-color-scheme: dark)").matches) document.documentElement.classList.add("dark");
+        document.documentElement.classList.toggle("dark", window.matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.dataset.theme = "system";
       }
     </script>
   </head>
@@ -50,9 +55,6 @@ const {
     <main>
       <slot />
     </main>
-    <footer class="mx-auto mt-24 flex max-w-7xl flex-col gap-3 border-t-2 border-ink px-5 py-8 text-sm sm:flex-row sm:items-center sm:justify-between sm:px-8">
-      <span class="font-black">hairhairhair.hair</span>
-      <span>Built for curiosity, not diagnosis.</span>
-    </footer>
+    <Footer />
   </body>
 </html>

@@ -59,3 +59,23 @@ Use case: photorealistic-natural. Asset: one square original editorial hairstyle
 Asset: `src/assets/hairstyles/twists-long.png`
 
 Use case: photorealistic-natural. Asset: one square original editorial hairstyle reference portrait for hairhairhair.hair. Fictional adult woman with warm medium-brown skin wearing MEDIUM-LENGTH TWO-STRAND TWISTS from natural black hair ending near jawline. Individually visible pairs of strands wrapped around each other from gently sectioned roots to loose ends. Three-quarter side portrait clearly showing sectioned crown and twist structure. No locs, braids, cornrows, extensions, jewelry. Plain warm ivory studio background, cream T-shirt, neutral soft daylight, realistic individual hair texture and natural skin pores, understated editorial photography style, shoulder-up composition with full crown and ALL hair in frame. Hair silhouette sharp and anatomically plausible. Single portrait, no split panels. No celebrity likeness, text, watermarks, or logos. Website will visibly label this AI-generated reference, not a real client.
+
+## Mario Balotelli reference collection — 2026-09-22
+
+These eight transparent RGBA PNGs were generated with OpenAI's built-in image generation tool as fictional editorial hairstyle references. They are not photographs of Mario Balotelli and do not assert anything about a person's natural hair. The prompt intent was to isolate each hairstyle silhouette on transparency so the site can provide its own warm ivory light-mode or dark-mode underlay in CSS. No opaque studio background was baked into these files.
+
+### patterned-mohawk-curved / patterned-mohawk-geometric
+
+Prompt intent: square transparent editorial reference portraits of fictional adults wearing a central raised mohawk crest, respectively with a curved shaved side pattern and a crisp geometric shaved side pattern. Show the full hair silhouette, close sides, realistic texture, neutral styling, no celebrity likeness, text, logos, or background.
+
+### thin-mohawk-dark / thin-mohawk-blond
+
+Prompt intent: square transparent editorial reference portraits of fictional adults wearing the same narrow mohawk cut in two visible color variations: deep natural dark hair and light blond hair. Keep the strip narrow and upright, sides close, full silhouette in frame, no celebrity likeness, text, logos, or background.
+
+### cropped-afro-full / cropped-afro-compact
+
+Prompt intent: square transparent editorial reference portraits of fictional adults wearing a short rounded cropped afro, one fuller and one closer to the head. Preserve visible coily texture and a compact silhouette, no celebrity likeness, text, logos, or background.
+
+### top-knot-tapered / top-knot-curly
+
+Prompt intent: square transparent editorial reference portraits of fictional adults wearing a compact top knot, respectively with a tapered perimeter and visible natural curl. Show the gathered crown and full silhouette, no celebrity likeness, text, logos, or background.

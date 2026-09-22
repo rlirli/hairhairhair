@@ -11,6 +11,10 @@ interface Props {
 const { style, compact = false } = Astro.props;
 const example = styleExamples.find((item) => item.hairstyleIds.includes(style.id));
 const media = getMedia(example?.imageId ?? "");
+const imageClass =
+  media?.provenance.kind === "generated" && media.provenance.background === "transparent"
+    ? "bg-ivory dark:bg-[#25231f]"
+    : "";
 ---
 
 <a
@@ -25,7 +29,7 @@ const media = getMedia(example?.imageId ?? "");
       format="webp"
       loading="lazy"
       alt={media.alt}
-      class="aspect-square w-full rounded-2xl object-cover"
+      class:list={["aspect-square w-full rounded-2xl object-cover", imageClass]}
     />
   )}
   {media?.provenance.kind === "photograph" && (

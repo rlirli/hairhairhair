@@ -120,6 +120,20 @@ export const sources: EditorialSource[] = [
     publisher: "Wahl Professional",
     reviewedAt: "2026-09-21",
   },
+  {
+    id: "guardian-balotelli-hair-obituary",
+    title: "Mario Balotelli’s hair: an obituary 2008–2015",
+    url: "https://www.theguardian.com/fashion/2015/aug/26/mario-balotellis-liverpool-milan-loan-hair-an-obituary",
+    publisher: "The Guardian",
+    reviewedAt: "2026-09-22",
+  },
+  {
+    id: "mancity-balotelli-blond-bombshell",
+    title: "Mario Balotelli: Blond bombshell",
+    url: "https://www.mancity.com/news/first-team/first-team-news/archive/2011/november/mario-balotelli-blond-bombshell",
+    publisher: "Manchester City",
+    reviewedAt: "2026-09-22",
+  },
 ];
 
 export const hairstyles: Hairstyle[] = [
@@ -270,6 +284,197 @@ export const hairstyles: Hairstyle[] = [
     guidePublicationStatus: "published",
   },
   {
+    id: "hairstyle-patterned-mohawk",
+    slug: "patterned-mohawk",
+    name: "Patterned mohawk",
+    kind: "cut",
+    summary: "A raised central crest paired with deliberately shaved or patterned sides.",
+    intro: [
+      "A patterned mohawk keeps the sides intentionally visible as design: shaved lines, geometric panels, or a shaped transition frame a central strip of longer hair.",
+      "The crest can be narrow or broad, softly rounded or sharply graphic. Bring front, side, and rear references so the barber can map the pattern and explain how it will grow out.",
+    ],
+    variations: [
+      {
+        id: "patterned-mohawk-geometric",
+        name: "Geometric sides",
+        description: "Uses crisp lines or panels shaved into the sides for a graphic finish.",
+      },
+      {
+        id: "patterned-mohawk-curved",
+        name: "Curved crest",
+        description: "Keeps the central strip rounded or swept rather than strictly angular.",
+      },
+      {
+        id: "patterned-mohawk-soft",
+        name: "Soft transition",
+        description: "Blends the sides more gradually while retaining a distinct raised center.",
+      },
+    ],
+    consultation: {
+      intro: "Name the crest width, height, side pattern, and maintenance tolerance separately.",
+      questions: [
+        "How wide and tall should the central strip read from the front and side?",
+        "Do you want hard shaved lines, a geometric panel, or a softer pattern?",
+        "Should the crest stand naturally or rely on product and directed styling?",
+        "How often can you refresh the shaved design as it grows out?",
+      ],
+      sampleRequest:
+        "“I want a narrow raised crest with one curved shaved design on each side. Keep the edges crisp but leave enough length to style the crest without heavy product.”",
+    },
+    considerations: [
+      "A pattern is a design commitment: small growth changes can soften its legibility quickly.",
+      "Crest height depends on length, density, growth direction, and styling support; agree on the dry silhouette before cutting.",
+      "Shaved designs are not a natural-pattern classification and should be assessed as a cut and finish choice.",
+    ],
+    sourceIds: ["guardian-balotelli-hair-obituary", "mancity-balotelli-blond-bombshell"],
+    relatedStyleIds: ["hairstyle-thin-mohawk", "hairstyle-cropped-afro", "hairstyle-top-knot"],
+    guidePublicationStatus: "published",
+  },
+  {
+    id: "hairstyle-thin-mohawk",
+    slug: "thin-mohawk",
+    name: "Thin mohawk",
+    kind: "cut",
+    summary: "A narrow, elongated strip of hair left through the center with close sides and a focused silhouette.",
+    intro: [
+      "A thin mohawk reduces the mohawk idea to a deliberately narrow center strip. The sides can be skin-close or shadowed, while the strip stays short and upright or grows into a sharper crest.",
+      "Dark and blond versions can read very differently: contrast, color, and texture change how wide and tall the strip appears. Treat them as variations of one cut, not separate guides.",
+    ],
+    variations: [
+      {
+        id: "thin-mohawk-dark",
+        name: "Dark natural finish",
+        description: "Keeps the center strip in a deep natural tone for strong silhouette contrast.",
+      },
+      {
+        id: "thin-mohawk-blond",
+        name: "Blond contrast",
+        description: "Uses a lightened center strip to make the crest read brighter and more graphic.",
+      },
+      {
+        id: "thin-mohawk-low",
+        name: "Low narrow crest",
+        description: "Keeps the center close and restrained for easier everyday maintenance.",
+      },
+    ],
+    consultation: {
+      intro: "Specify the strip width, side finish, color plan, and desired height before discussing styling product.",
+      questions: [
+        "How narrow should the center strip be at the hairline, crown, and nape?",
+        "Should the sides be skin-close, shadowed, or softly tapered?",
+        "Is the center staying dark, or is a blond/lightened contrast part of the brief?",
+        "Should the strip stand upright, sweep back, or stay low and textured?",
+      ],
+      sampleRequest:
+        "“Please leave a narrow center strip, close-shave the sides without taking the skin too high, and keep the top low enough to wear with a light matte product.”",
+    },
+    considerations: [
+      "Lightened hair needs a separate color and condition conversation; the cut alone does not determine its final tone.",
+      "A narrow strip exposes growth direction and cowlicks, so a side and rear reference matters as much as the front.",
+      "The contrast between center and sides is strongest immediately after the cut and softens as the sides grow.",
+    ],
+    sourceIds: ["guardian-balotelli-hair-obituary", "mancity-balotelli-blond-bombshell"],
+    relatedStyleIds: ["hairstyle-patterned-mohawk", "hairstyle-cropped-afro"],
+    guidePublicationStatus: "published",
+  },
+  {
+    id: "hairstyle-cropped-afro",
+    slug: "cropped-afro",
+    name: "Cropped afro",
+    kind: "cut",
+    summary:
+      "A short rounded shape that keeps coily texture visible while trimming the silhouette close and intentional.",
+    intro: [
+      "A cropped afro keeps the natural coily texture visible in a compact, rounded silhouette. It is fuller than a buzz cut while remaining short enough for a simple everyday shape.",
+      "The outline can be soft and natural or more closely edged. Length should be agreed in the hair’s usual dry state because shrinkage changes the apparent height and width.",
+    ],
+    variations: [
+      {
+        id: "cropped-afro-full",
+        name: "Full compact crop",
+        description: "Leaves enough length for a clearly rounded, textured silhouette.",
+      },
+      {
+        id: "cropped-afro-compact",
+        name: "Close crop",
+        description: "Keeps the shape tighter and closer to the head while preserving visible texture.",
+      },
+      {
+        id: "cropped-afro-edge",
+        name: "Natural or edged perimeter",
+        description: "Chooses between a softer natural hairline and a more defined outline.",
+      },
+    ],
+    consultation: {
+      intro:
+        "Describe the desired rounded height, shrinkage, and perimeter finish rather than relying on a generic short-cut label.",
+      questions: [
+        "How much rounded height should remain after the hair returns to its dry state?",
+        "Should the shape stay full at the sides or taper slightly toward the perimeter?",
+        "Do you want a natural edge or a more defined line-up?",
+        "Would a small test section help confirm the finished length before the full cut?",
+      ],
+      sampleRequest:
+        "“I’d like a compact cropped afro with enough length to keep the coil texture visible, a softly rounded outline, and a natural hairline rather than a sharp line-up.”",
+    },
+    considerations: [
+      "Shrinkage can make a short crop look substantially tighter after washing or drying; assess it in the state it will usually be worn.",
+      "Density and growth direction influence whether the silhouette reads round, squared, or uneven as it grows.",
+      "A cropped afro is distinct from a buzz cut by the visible textured fullness it retains; if you want a simpler uniform crop, use the Buzz cut guide.",
+    ],
+    sourceIds: ["guardian-balotelli-hair-obituary"],
+    relatedStyleIds: ["hairstyle-patterned-mohawk", "hairstyle-thin-mohawk", "hairstyle-top-knot"],
+    guidePublicationStatus: "published",
+  },
+  {
+    id: "hairstyle-top-knot",
+    slug: "top-knot",
+    name: "Top knot",
+    kind: "styling-technique",
+    summary: "Longer hair gathered and secured at the crown, often paired with a shorter or tapered perimeter.",
+    intro: [
+      "A top knot gathers enough length at or near the crown to form a compact tied shape. The surrounding hair may remain longer or be tapered, making the perimeter part of the overall silhouette.",
+      "This is a styling arrangement as much as a cut: section placement, tie tension, and the amount of loose texture left around the knot change its character.",
+    ],
+    variations: [
+      {
+        id: "top-knot-tapered",
+        name: "Tapered perimeter",
+        description: "Pairs the gathered crown with close, gradually shorter sides and nape.",
+      },
+      {
+        id: "top-knot-curly",
+        name: "Curly knot",
+        description: "Allows curl and coil to remain visible through the gathered shape and loose ends.",
+      },
+      {
+        id: "top-knot-loose",
+        name: "Loose gather",
+        description: "Keeps the knot relaxed with less tension and more visible texture around the tie.",
+      },
+    ],
+    consultation: {
+      intro:
+        "Confirm the minimum length, tie position, perimeter finish, and comfortable tension before committing to the arrangement.",
+      questions: [
+        "Where should the knot sit: crown, high top, or farther back?",
+        "Should the sides and nape stay long, taper, or be cut close?",
+        "How much curl, coil, or loose texture should remain visible around the tie?",
+        "What level of tension is comfortable, and how often will the style be worn?",
+      ],
+      sampleRequest:
+        "“I want a small top knot at the crown with a low taper around the sides and nape. Keep the tie comfortable and leave the natural texture visible through the knot.”",
+    },
+    considerations: [
+      "A knot needs enough length to gather securely; a stylist can test the placement before cutting the perimeter.",
+      "Tension matters. Styles that hurt, sting, or pull should be loosened and reassessed.",
+      "Curl and coil shrinkage change the apparent knot size and required length; plan with the hair in its usual worn state.",
+    ],
+    sourceIds: ["guardian-balotelli-hair-obituary", "mancity-balotelli-blond-bombshell"],
+    relatedStyleIds: ["hairstyle-patterned-mohawk", "hairstyle-cropped-afro"],
+    guidePublicationStatus: "published",
+  },
+  {
     id: "hairstyle-flat-top",
     slug: "flat-top",
     name: "Flat top",
@@ -417,9 +622,165 @@ export const patternGuidance: PatternGuidance[] = [
     hairTypeId: "hair-type-4",
     note: "Coily texture can support a strong silhouette while still changing with shrinkage and growth direction; confirm the plane and side finish without treating the hair type as a guarantee.",
   },
+  {
+    hairstyleId: "hairstyle-patterned-mohawk",
+    hairTypeId: "hair-type-1",
+    note: "Straight hair can make shaved patterns and the central crest read sharply; discuss hold and growth direction before choosing height.",
+  },
+  {
+    hairstyleId: "hairstyle-patterned-mohawk",
+    hairTypeId: "hair-type-2",
+    note: "Wave can soften the crest or add movement; agree on whether the pattern should stay graphic or follow the natural bend.",
+  },
+  {
+    hairstyleId: "hairstyle-patterned-mohawk",
+    hairTypeId: "hair-type-3",
+    note: "Curl can widen the visual crest through volume; leave enough length to preserve the chosen shape without treating curl as a limitation.",
+  },
+  {
+    hairstyleId: "hairstyle-patterned-mohawk",
+    hairTypeId: "hair-type-4",
+    note: "Coily texture can support a strong crest and crisp pattern, while shrinkage and density affect the final width and height.",
+  },
+  {
+    hairstyleId: "hairstyle-thin-mohawk",
+    hairTypeId: "hair-type-1",
+    note: "A narrow strip can fall without product on straight hair; confirm the desired direction and the shortest comfortable side finish.",
+  },
+  {
+    hairstyleId: "hairstyle-thin-mohawk",
+    hairTypeId: "hair-type-2",
+    note: "Wave can make a thin strip look fuller or less even; use a side reference to agree on the intended silhouette.",
+  },
+  {
+    hairstyleId: "hairstyle-thin-mohawk",
+    hairTypeId: "hair-type-3",
+    note: "Curl changes apparent strip width and height; discuss whether the crest should stay compact or be left longer for lift.",
+  },
+  {
+    hairstyleId: "hairstyle-thin-mohawk",
+    hairTypeId: "hair-type-4",
+    note: "Coily texture can keep a narrow crest visibly upright; plan around shrinkage, density, and the contrast created by close sides.",
+  },
+  {
+    hairstyleId: "hairstyle-cropped-afro",
+    hairTypeId: "hair-type-1",
+    note: "A cropped afro is a shape choice rather than a straight-texture default; a stylist can discuss the texture or styling needed to create fullness.",
+  },
+  {
+    hairstyleId: "hairstyle-cropped-afro",
+    hairTypeId: "hair-type-2",
+    note: "Wave may make a compact crop read softer or flatter; agree on the rounded outline and the amount of visible movement.",
+  },
+  {
+    hairstyleId: "hairstyle-cropped-afro",
+    hairTypeId: "hair-type-3",
+    note: "Curl can create a rounded cropped silhouette with visible spring; assess the dry length and how much shrinkage to leave.",
+  },
+  {
+    hairstyleId: "hairstyle-cropped-afro",
+    hairTypeId: "hair-type-4",
+    note: "Coily texture makes the compact rounded shape especially sensitive to shrinkage, density, and edge choice; agree on the dry result.",
+  },
+  {
+    hairstyleId: "hairstyle-top-knot",
+    hairTypeId: "hair-type-1",
+    note: "Straight hair may need more length or a secure tie to keep a compact knot; discuss placement and perimeter contrast.",
+  },
+  {
+    hairstyleId: "hairstyle-top-knot",
+    hairTypeId: "hair-type-2",
+    note: "Wave can add looseness and volume around the knot; decide whether the finish should stay smooth or visibly textured.",
+  },
+  {
+    hairstyleId: "hairstyle-top-knot",
+    hairTypeId: "hair-type-3",
+    note: "Curl changes the gathered length and knot size; plan placement with the hair in its usual dry state and keep tension comfortable.",
+  },
+  {
+    hairstyleId: "hairstyle-top-knot",
+    hairTypeId: "hair-type-4",
+    note: "Coily hair may shrink substantially before gathering; discuss stretch, tie tension, and how much natural texture should remain visible.",
+  },
 ];
 
 export const styleExamples: StyleExample[] = [
+  {
+    id: "style-example-patterned-mohawk-curved",
+    hairstyleIds: ["hairstyle-patterned-mohawk"],
+    imageId: "patterned-mohawk-curved",
+    title: "Curved patterned crest",
+    caption: "Notice the raised center and the curved side design working as one silhouette.",
+    patternDescription: "The central strip stays visibly higher while the shaved pattern frames its rounded edge.",
+    lengthDescription:
+      "The crest keeps enough length to stand above close patterned sides; exact height is a consultation choice.",
+  },
+  {
+    id: "style-example-patterned-mohawk-geometric",
+    hairstyleIds: ["hairstyle-patterned-mohawk"],
+    imageId: "patterned-mohawk-geometric",
+    title: "Geometric patterned crest",
+    caption: "Notice the crisp geometric side detail and the narrower upright center.",
+    patternDescription: "Hard side lines make the central crest read more graphic and deliberate.",
+    lengthDescription:
+      "Close sides contrast with a short upright center; the shaved detail will need regular refreshing.",
+  },
+  {
+    id: "style-example-thin-mohawk-dark",
+    hairstyleIds: ["hairstyle-thin-mohawk"],
+    imageId: "thin-mohawk-dark",
+    title: "Dark narrow mohawk",
+    caption: "Notice how the dark center strip keeps the silhouette focused against close sides.",
+    patternDescription: "A narrow upright strip provides the only concentrated height through the top.",
+    lengthDescription: "The sides are kept close while the center retains short styling length.",
+  },
+  {
+    id: "style-example-thin-mohawk-blond",
+    hairstyleIds: ["hairstyle-thin-mohawk"],
+    imageId: "thin-mohawk-blond",
+    title: "Blond contrast mohawk",
+    caption: "Notice how the lightened center makes the narrow crest read brighter and taller.",
+    patternDescription: "Color contrast emphasizes the strip without changing the underlying narrow cut.",
+    lengthDescription: "The center remains short and directed; color and cut should be planned as separate services.",
+  },
+  {
+    id: "style-example-cropped-afro-full",
+    hairstyleIds: ["hairstyle-cropped-afro"],
+    imageId: "cropped-afro-full",
+    title: "Full compact cropped afro",
+    caption: "Notice the rounded silhouette and visible coily texture through the top and sides.",
+    patternDescription: "The shape stays compact but full enough for texture to define the outline.",
+    lengthDescription: "Short textured length remains through the crown; assess the result after dry shrinkage.",
+  },
+  {
+    id: "style-example-cropped-afro-compact",
+    hairstyleIds: ["hairstyle-cropped-afro"],
+    imageId: "cropped-afro-compact",
+    title: "Close cropped afro",
+    caption: "Notice the tighter rounded shape while the textured surface remains visible.",
+    patternDescription: "A closer crop reduces height without turning the silhouette into a uniform buzz cut.",
+    lengthDescription:
+      "The shape sits close to the head with enough texture to distinguish it from a simple clipper crop.",
+  },
+  {
+    id: "style-example-top-knot-tapered",
+    hairstyleIds: ["hairstyle-top-knot"],
+    imageId: "top-knot-tapered",
+    title: "Top knot with tapered perimeter",
+    caption: "Notice the gathered crown above the close, gradually shortened sides.",
+    patternDescription: "The knot concentrates length at the crown while the perimeter creates a clean contrast.",
+    lengthDescription:
+      "Enough crown length is gathered securely; the perimeter is shorter and tapered around the ears and nape.",
+  },
+  {
+    id: "style-example-top-knot-curly",
+    hairstyleIds: ["hairstyle-top-knot"],
+    imageId: "top-knot-curly",
+    title: "Curly top knot",
+    caption: "Notice the natural curl remaining visible through the compact gathered shape.",
+    patternDescription: "Texture gives the knot a fuller, softer outline than a smooth pulled-back finish.",
+    lengthDescription: "The gathered shape depends on enough dry length and comfortable tension through the crown.",
+  },
   {
     id: "style-example-taper-coily",
     hairstyleIds: ["hairstyle-taper-fade"],

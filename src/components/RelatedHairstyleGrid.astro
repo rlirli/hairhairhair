@@ -26,6 +26,7 @@ const items = await Promise.all(
       imageSrc: image.src,
       imageSrcSet: image.srcSet.attribute,
       imageAlt: media.alt,
+      transparentBackground: media.provenance.kind === "generated" && media.provenance.background === "transparent",
       imageSizes,
       kindLabel: kindLabels[style.kind],
       name: style.name,

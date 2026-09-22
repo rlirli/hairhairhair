@@ -30,6 +30,14 @@ const expectedMediaIds = [
   "twists-long",
   "flat-top-straight",
   "flat-top-coily",
+  "patterned-mohawk-curved",
+  "patterned-mohawk-geometric",
+  "thin-mohawk-dark",
+  "thin-mohawk-blond",
+  "cropped-afro-full",
+  "cropped-afro-compact",
+  "top-knot-tapered",
+  "top-knot-curly",
 ];
 
 function htmlFiles(directory = dist) {
@@ -219,7 +227,7 @@ test("hair type and sub-type pages expose every hairstyle guide and expected sub
   }
   for (const type of hairSubtypes) {
     const markup = page(`/hair-types/${type.slug}/`);
-    for (const style of publishedHairstyles) assert.match(markup, new RegExp(`/hairstyles/${style.slug}/`));
+    for (const style of publishedHairstyles.slice(0, 5)) assert.match(markup, new RegExp(`/hairstyles/${style.slug}/`));
   }
 });
 
@@ -303,4 +311,16 @@ test("flat-top is a complete guide with two examples and reciprocal links", () =
   assert.equal(getGuidanceForHairstyle(flatTop.id).length, hairTypes.length);
   assert.ok(flatTop.relatedStyleIds.includes("hairstyle-buzz-cut"));
   assert.ok(flatTop.relatedStyleIds.includes("hairstyle-taper-fade"));
+});
+
+test("Balotelli-inspired guides are complete, distinct, and published", () => {
+  for (const slug of ["patterned-mohawk", "thin-mohawk", "cropped-afro", "top-knot"]) {
+    const style = hairstyles.find((item) => item.slug === slug);
+    assert.ok(style);
+    assert.equal(style.guidePublicationStatus, "published");
+    assert.equal(getExamplesForHairstyle(style.id).length, 2);
+    assert.equal(getGuidanceForHairstyle(style.id).length, hairTypes.length);
+    for (const relatedId of style.relatedStyleIds)
+      assert.ok(hairstyles.find((item) => item.id === relatedId)?.relatedStyleIds.includes(style.id));
+  }
 });

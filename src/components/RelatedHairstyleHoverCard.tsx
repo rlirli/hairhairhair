@@ -5,6 +5,7 @@ export interface RelatedHairstyleHoverCardItem {
   imageSrc: string;
   imageSrcSet: string;
   imageAlt: string;
+  transparentBackground: boolean;
   imageSizes: string;
   kindLabel: string;
   name: string;
@@ -20,6 +21,7 @@ export default function RelatedHairstyleHoverCard({
   imageSrc,
   imageSrcSet,
   imageAlt,
+  transparentBackground,
   imageSizes,
   kindLabel,
   name,
@@ -36,7 +38,7 @@ export default function RelatedHairstyleHoverCard({
             sizes={imageSizes}
             loading="lazy"
             alt={imageAlt}
-            className={`aspect-square w-full border border-ink/25 object-cover transition group-hover:border-orange ${size === "small" ? "rounded-xl" : "rounded-2xl"}`}
+            className={`aspect-square w-full border border-ink/25 object-cover transition group-hover:border-orange ${transparentBackground ? "bg-ivory dark:bg-[#25231f]" : ""} ${size === "small" ? "rounded-xl" : "rounded-2xl"}`}
           />
           <h3
             className={`truncate font-display tracking-[-.03em] group-hover:text-orange ${size === "small" ? "mt-2 text-lg" : "mt-3 text-2xl"}`}

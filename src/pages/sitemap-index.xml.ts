@@ -14,6 +14,10 @@ export const GET: APIRoute = () => {
     ...hairTypes.flatMap((item) => [`hair-types/${item.slug}/hairstyles/`, `hair-types/${item.slug}/people/`]),
     ...hairSubtypes.flatMap((item) => [`hair-types/${item.slug}/hairstyles/`, `hair-types/${item.slug}/people/`]),
     ...publishedHairstyles.map((item) => `hairstyles/${item.slug}/`),
+    ...publishedHairstyles.flatMap((item) => [
+      `hairstyles/${item.slug}/examples/`,
+      `hairstyles/${item.slug}/appearances/`,
+    ]),
     ...people.map((item) => `people/${item.slug}/`),
     ...people.map((item) => `people/${item.slug}/appearances/`),
     ...appearances

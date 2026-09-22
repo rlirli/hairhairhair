@@ -5,7 +5,7 @@ export interface PersonDirectoryCardItem {
   name: string;
   imageSrc: string;
   imageAlt: string;
-  profileValues: string[];
+  profileValues: { hair: string[]; color: string; skin: string };
   description: string;
   profileRows: { label: string; value: string; href?: string }[];
 }
@@ -18,7 +18,9 @@ export default function PersonDirectoryCard({ person }: { person: PersonDirector
           href={person.href}
           className="focus-ring group block min-w-0"
           data-person-card
-          data-profile-values={person.profileValues.join(",")}
+          data-profile-hair={person.profileValues.hair.join(",")}
+          data-profile-color={person.profileValues.color}
+          data-profile-skin={person.profileValues.skin}
         >
           <img
             src={person.imageSrc}

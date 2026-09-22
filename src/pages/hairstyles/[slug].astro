@@ -78,13 +78,16 @@ const ogImage = heroMedia
       <div>{heroMedia && <StyleMedia mediaId={heroMedia} eager />}</div>
     </div>
     <section class="mt-16 border-t-2 border-ink pt-10">
-      <div class="flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-end">
-        <div>
-          <p class="text-xs font-black uppercase tracking-[.18em] text-orange">Reference gallery</p>
-          <h2 class="mt-2 font-display text-4xl tracking-[-.06em]">Different ways it can read</h2>
-        </div>
+      <div class="flex items-baseline justify-between gap-4 border-b border-ink/30 pb-3">
+        <h2 class="font-display text-3xl tracking-[-.06em]">Examples</h2>
+        <a
+          class="focus-ring text-xs font-normal uppercase tracking-[.12em] text-ink/60 transition hover:text-orange"
+          href={`/hairstyles/${style.slug}/examples/`}
+        >
+          More
+        </a>
       </div>
-      <div class="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {examples.slice(0, 4).map((example, index) => (
           <StyleMedia
             mediaId={example.imageId}
@@ -96,15 +99,17 @@ const ogImage = heroMedia
           />
         ))}
       </div>
-      <a
-        class="focus-ring mt-5 inline-block text-sm font-bold text-ink/60 underline decoration-ink/30 underline-offset-4 hover:text-orange"
-        href={`/hairstyles/${style.slug}/examples/`}
-      >
-        More
-      </a>
     </section>
     <section class="mt-16 border-t-2 border-ink pt-8">
-      <p class="text-xs font-black uppercase tracking-[.18em] text-orange">Worn by celebs</p>
+      <div class="flex items-baseline justify-between gap-4 border-b border-ink/30 pb-3">
+        <h2 class="text-xs font-black uppercase tracking-[.18em] text-orange">Worn by celebs</h2>
+        <a
+          class="focus-ring text-xs font-normal uppercase tracking-[.12em] text-ink/60 transition hover:text-orange"
+          href={`/hairstyles/${style.slug}/appearances/`}
+        >
+          More
+        </a>
+      </div>
       <p class="mt-3 max-w-2xl text-sm leading-6">
         Dated appearance photographs where this style has been visually documented.
       </p>
@@ -115,12 +120,6 @@ const ogImage = heroMedia
       ) : (
         <p class="mt-5 text-sm leading-6">No dated appearance photographs are currently documented for this style.</p>
       )}
-      <a
-        class="focus-ring mt-5 inline-block text-sm font-bold text-ink/60 underline decoration-ink/30 underline-offset-4 hover:text-orange"
-        href={`/hairstyles/${style.slug}/appearances/`}
-      >
-        More
-      </a>
     </section>
     <section class="mt-16 grid gap-10 border-t-2 border-ink pt-10 lg:grid-cols-[1fr_1fr]">
       <div>

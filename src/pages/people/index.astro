@@ -64,32 +64,18 @@ const peopleCards = people.flatMap((person) => {
       imageSrc: image.src.src,
       imageAlt: image.alt,
       description: person.description,
-      profileValues: [...hairValues, profile?.naturalHairColor.value, profile?.naturalSkinTone.value].filter(
-        (value): value is string => Boolean(value),
-      ),
+      profileValues: {
+        hair: hairValues,
+        color: profile?.naturalHairColor.value ?? "",
+        skin: profile?.naturalSkinTone.value ?? "",
+      },
       profileRows,
     },
   ];
 });
-const observedHairTypes = new Set(peopleCards.flatMap((person) => person.profileValues));
-const observedColors = [
-  ...new Set(
-    peopleCards
-      .map((person) =>
-        person.profileValues.find((value) => ["black", "brown", "blonde", "red", "gray", "white"].includes(value)),
-      )
-      .filter(Boolean),
-  ),
-] as string[];
-const observedSkinTones = [
-  ...new Set(
-    peopleCards
-      .map((person) =>
-        person.profileValues.find((value) => ["deep-brown", "brown", "medium", "light", "fair"].includes(value)),
-      )
-      .filter(Boolean),
-  ),
-] as string[];
+const observedHairTypes = new Set(peopleCards.flatMap((person) => person.profileValues.hair));
+const observedColors = [...new Set(peopleCards.map((person) => person.profileValues.color).filter(Boolean))];
+const observedSkinTones = [...new Set(peopleCards.map((person) => person.profileValues.skin).filter(Boolean))];
 const hairTypeOptions = [
   ...hairTypes
     .filter((type) => observedHairTypes.has(type.id))
@@ -185,8 +171,14 @@ const skinLabels: Record<string, string> = {
   const update = () => {
     let visible = 0;
     for (const card of cards) {
-      const values = (card.dataset.profileValues ?? "").split(",");
-      const matches = filters.every((filter) => !filter.value || values.includes(filter.value));
+      const matches = filters.every((filter) => {
+        const dimension = filter.dataset.profileFilter;
+        if (!filter.value || !dimension) return true;
+        if (dimension === "hair") return (card.dataset.profileHair ?? "").split(",").includes(filter.value);
+        if (dimension === "color") return card.dataset.profileColor === filter.value;
+        if (dimension === "skin") return card.dataset.profileSkin === filter.value;
+        return true;
+      });
       card.classList.toggle("hidden", !matches);
       if (matches) visible += 1;
     }

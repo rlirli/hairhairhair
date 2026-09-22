@@ -188,6 +188,8 @@ test("hair-type pages use a compact, five-card hairstyle preview with a more lin
     const markup = page(`/hair-types/${type.slug}/`);
     const relatedStyles = getPublishedHairstylesForHairType(hairTypes.includes(type) ? type.id : type.hairTypeId);
     assert.match(markup, /Hairstyles for this type/i);
+    assert.match(markup, /font-normal[^\"]*text-ink\/60/);
+    assert.doesNotMatch(markup, /More →/);
     assert.match(markup, /data-slot="hover-card-trigger"/);
     assert.match(markup, new RegExp(`href="/hair-types/${type.slug}/hairstyles/"`));
     assert.equal((markup.match(/data-slot="hover-card-trigger"/g) ?? []).length, Math.min(5, relatedStyles.length));
@@ -202,6 +204,7 @@ test("hair-type hairstyle pages use a four-column grid with medium cards", () =>
     assert.match(markup, /Hairstyle guides/);
     assert.match(markup, new RegExp(`Type ${type.code}`));
     assert.match(markup, /data-slot="hover-card-trigger"/);
+    assert.match(markup, /grid-cols-2[^\"]*md:grid-cols-3[^\"]*lg:grid-cols-4/);
     const expectedStyles = getPublishedHairstylesForHairType(hairTypes.includes(type) ? type.id : type.hairTypeId);
     for (const style of expectedStyles) assert.match(markup, new RegExp(`/hairstyles/${style.slug}/`));
     for (const style of publishedHairstyles.filter((item) => !expectedStyles.includes(item)))

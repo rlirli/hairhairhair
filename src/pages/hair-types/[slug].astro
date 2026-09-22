@@ -25,9 +25,11 @@ const sequence = kind === "hairType" ? hairTypes : hairSubtypes;
 const index = sequence.findIndex((item) => item.slug === selected.slug);
 const previous = sequence[index - 1];
 const next = sequence[index + 1];
+const parentType = kind === "hairSubtype" ? hairTypes.find((item) => item.id === hairSubtype.hairTypeId) : undefined;
 const styles = stylesForHairTypeSlug(selected.slug).slice(0, 5);
 const label =
   kind === "hairType" ? `Type ${hairType.code} ${hairType.name}` : `Type ${hairSubtype.code} ${hairSubtype.name}`;
+const navigatorLabel = kind === "hairType" ? label : `${hairSubtype.pattern} · Type ${parentType!.code}`;
 ---
 
 <Layout title={`${label} — hairhairhair.hair`} description={selected.description}>
@@ -43,7 +45,16 @@ const label =
       ) : (
         <span />
       )}
-      <span class="shrink-0 uppercase tracking-[.12em] opacity-60">{label}</span>
+      {kind === "hairSubtype" ? (
+        <a
+          class="focus-ring shrink-0 truncate uppercase tracking-[.12em] opacity-65 hover:opacity-100"
+          href={`/hair-types/${parentType!.slug}/`}
+        >
+          {navigatorLabel}
+        </a>
+      ) : (
+        <span class="shrink-0 truncate uppercase tracking-[.12em] opacity-60">{navigatorLabel}</span>
+      )}
       {next ? (
         <a
           class="focus-ring min-w-0 truncate text-right text-orange hover:underline"
@@ -57,9 +68,6 @@ const label =
     </nav>
 
     <header class="border-b-2 border-ink pb-8">
-      <p class="text-xs font-black uppercase tracking-[.18em] text-orange">
-        {kind === "hairType" ? "Hair type" : `${hairSubtype.pattern} · subtype`}
-      </p>
       <h1 class="mt-3 font-display text-5xl leading-[.95] tracking-[-.07em] sm:text-7xl">{label}</h1>
       <p class="mt-4 max-w-3xl text-lg leading-7 sm:text-xl">{selected.description}</p>
     </header>
@@ -115,10 +123,10 @@ const label =
     <div class="flex items-center justify-between gap-4">
       <h2 class="text-xs font-black uppercase tracking-[.16em] text-orange">Hairstyles for this type</h2>
       <a
-        class="focus-ring text-xs font-black uppercase tracking-[.16em] text-orange hover:underline"
+        class="focus-ring text-xs font-normal uppercase tracking-[.16em] text-ink/60 transition hover:text-orange"
         href={`/hair-types/${selected.slug}/hairstyles/`}
       >
-        More →
+        More
       </a>
     </div>
     <RelatedHairstyleGrid

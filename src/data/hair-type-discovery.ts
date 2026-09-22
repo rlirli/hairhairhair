@@ -20,16 +20,14 @@ export function peopleForHairTypeSlug(slug: string) {
   if (!target) return [];
   const profiles = naturalProfilesForHairType(target.id);
   const mediaById = new Map(buildPersonMedia(personPhotographs).map((photo) => [photo.id, photo]));
-  return profiles
-    .flatMap((profile) => {
-      const person = people.find((item) => item.id === profile.personId);
-      const photo = person && mediaById.get(person.heroImageId);
-      if (!person || !photo) return [];
-      const naturalProfile = naturalProfileForPerson(person.id);
-      const subtype = naturalProfile?.hairSubtypeId.value
-        ? hairSubtypes.find((item) => item.id === naturalProfile.hairSubtypeId.value)
-        : undefined;
-      return [{ person, photo, naturalProfile: naturalProfile!, subtype }];
-    })
-    .slice(0, 7);
+  return profiles.flatMap((profile) => {
+    const person = people.find((item) => item.id === profile.personId);
+    const photo = person && mediaById.get(person.heroImageId);
+    if (!person || !photo) return [];
+    const naturalProfile = naturalProfileForPerson(person.id);
+    const subtype = naturalProfile?.hairSubtypeId.value
+      ? hairSubtypes.find((item) => item.id === naturalProfile.hairSubtypeId.value)
+      : undefined;
+    return [{ person, photo, naturalProfile: naturalProfile!, subtype }];
+  });
 }

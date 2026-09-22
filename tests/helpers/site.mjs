@@ -53,6 +53,10 @@ export function publicRoutes() {
     ...hairTypes.flatMap((type) => [`/hair-types/${type.slug}/hairstyles/`, `/hair-types/${type.slug}/people/`]),
     ...hairSubtypes.flatMap((type) => [`/hair-types/${type.slug}/hairstyles/`, `/hair-types/${type.slug}/people/`]),
     ...publishedHairstyles.map((style) => `/hairstyles/${style.slug}/`),
+    ...publishedHairstyles.flatMap((style) => [
+      `/hairstyles/${style.slug}/examples/`,
+      `/hairstyles/${style.slug}/appearances/`,
+    ]),
     ...people.map((person) => `/people/${person.slug}/`),
     ...people.map((person) => `/people/${person.slug}/appearances/`),
     ...appearances.map((appearance) => {

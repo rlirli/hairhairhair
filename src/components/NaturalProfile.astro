@@ -6,6 +6,7 @@ interface Props {
 }
 
 const { profile } = Astro.props;
+const headingId = profile.id;
 const hairType = resolvedHairTypeForNaturalProfile(profile);
 
 const displayValue = (value: string | null, labels: Record<string, string>) =>
@@ -54,9 +55,9 @@ const traits = [
 ].filter((trait) => trait.value !== null);
 ---
 
-<section class="rounded-[1.5rem] border border-ink/25 p-5" aria-labelledby="natural-profile-heading">
+<section class="rounded-[1.5rem] border border-ink/25 p-5" aria-labelledby={headingId}>
   <div class="border-b border-ink/25 pb-3">
-    <h2 id="natural-profile-heading" class="text-xs font-black uppercase tracking-[.16em] text-orange">
+    <h2 id={headingId} class="text-xs font-black uppercase tracking-[.16em] text-orange">
       Natural profile
     </h2>
   </div>

@@ -14,20 +14,20 @@ test("published hairstyle detail routes provide the requested previews and full 
 
     assert.ok(existsSync(routeFile(`/hairstyles/${style.slug}/examples/`)));
     assert.ok(existsSync(routeFile(`/hairstyles/${style.slug}/appearances/`)));
-    assert.match(detail, /Reference gallery/);
+    assert.match(detail, />Examples</);
     assert.match(detail, /Worn by celebs/);
     assert.ok(detail.indexOf("Worn by celebs") < detail.indexOf("Variations"));
     assert.match(detail, new RegExp(`href="/hairstyles/${style.slug}/examples/">More</a>`));
     assert.match(detail, new RegExp(`href="/hairstyles/${style.slug}/appearances/">More</a>`));
 
-    const previewGallery = detail.split("Different ways it can read")[1].split("Worn by celebs")[0];
+    const previewGallery = detail.split(">Examples</")[1].split("Worn by celebs")[0];
     assert.equal(
       (previewGallery.match(/<figure>/g) ?? []).length,
       Math.min(4, getExamplesForHairstyle(style.id).length),
     );
     assert.doesNotMatch(previewGallery, /More\s*↗/);
 
-    const hero = detail.split("<h1")[1].split("Reference gallery")[0];
+    const hero = detail.split("<h1")[1].split(">Examples</")[0];
     assert.doesNotMatch(hero, /figcaption|<title>|Photographic reference/);
 
     const appearancePreview = detail.split("Worn by celebs")[1].split("Variations")[0];

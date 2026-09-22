@@ -25,6 +25,10 @@ test("people overview offers portrait cards, profile filters, and profile detail
   assert.match(markup, /data-profile-filter="hair"/);
   assert.match(markup, /data-profile-filter="color"/);
   assert.match(markup, /data-profile-filter="skin"/);
+  assert.match(markup, /data-profile-hair=/);
+  assert.match(markup, /data-profile-color=/);
+  assert.match(markup, /data-profile-skin=/);
+  assert.doesNotMatch(markup, /data-profile-values=/);
   assert.match(markup, /grid-cols-2[^\"]*sm:grid-cols-3[^\"]*lg:grid-cols-4[^\"]*xl:grid-cols-6/);
   assert.equal((markup.match(/data-slot="hover-card-trigger"/g) ?? []).length, people.length);
   for (const person of people) {
@@ -35,6 +39,8 @@ test("people overview offers portrait cards, profile filters, and profile detail
   assert.match(readSource("src/components/PersonDirectoryCard.tsx"), /person\.description/);
   assert.match(markup, /data-profile-results/);
   assert.match(readSource("src/pages/people/index.astro"), /card\.classList\.toggle\("hidden", !matches\)/);
+  assert.match(readSource("src/pages/people/index.astro"), /card\.dataset\.profileColor === filter\.value/);
+  assert.match(readSource("src/pages/people/index.astro"), /card\.dataset\.profileSkin === filter\.value/);
 });
 
 test("people, appearances, and photographs have closed stable records", () => {

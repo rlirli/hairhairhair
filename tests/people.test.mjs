@@ -105,6 +105,26 @@ test("appearance overview is newest-first and links back to the person record", 
   assert.match(markup, /<link rel="canonical" href="https:\/\/hairhairhair\.hair\/people\/will-smith\/appearances\//);
 });
 
+test("each photograph has a dedicated provenance page and existing cards reach it", () => {
+  const sitemap = readFileSync(join(dist, "sitemap-index.xml"), "utf8");
+  for (const photo of personPhotographs) {
+    const path = `/people/will-smith/photographs/${photo.id}/`;
+    assert.match(sitemap, new RegExp(path.replaceAll("/", "\\/")));
+    const markup = page(path);
+    assert.match(markup, /Photograph record/);
+    assert.match(markup, new RegExp(photo.identifier));
+    assert.match(markup, new RegExp(photo.creator.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+    assert.match(markup, /Rights evidence/);
+    assert.match(markup, /Appearances/);
+    assert.match(markup, /href="\/people\/will-smith\/appearances\/#appearance-will-smith-/);
+    assert.match(markup, /href="\/people\/will-smith\/"/);
+  }
+  const profile = page("/people/will-smith/");
+  assert.match(profile, /Photograph details/);
+  const archive = page("/people/will-smith/appearances/");
+  assert.match(archive, /\/people\/will-smith\/photographs\/will-smith-2011\//);
+});
+
 test("appearance anchors and hairstyle backlinks are one-to-one", () => {
   const personById = new Map(people.map((person) => [person.id, person]));
   for (const appearance of appearances) {

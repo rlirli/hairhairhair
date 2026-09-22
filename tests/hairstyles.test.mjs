@@ -15,6 +15,7 @@ import {
   sources,
   styleExamples,
 } from "../src/data/hairstyles.ts";
+import { personPhotographs } from "../src/data/people.ts";
 
 const root = new URL("../", import.meta.url).pathname;
 const dist = join(root, "dist");
@@ -125,7 +126,8 @@ test("media declarations cover every approved generated asset", () => {
 });
 
 test("static build contains all data-derived expected HTML pages", () => {
-  const expectedPageCount = 3 + hairTypes.length + hairSubtypes.length * 2 + 1 + publishedHairstyles.length + 3;
+  const expectedPageCount =
+    3 + hairTypes.length + hairSubtypes.length * 2 + 1 + publishedHairstyles.length + 3 + personPhotographs.length;
   assert.equal(htmlFiles().length, expectedPageCount);
   for (const path of [
     "/",

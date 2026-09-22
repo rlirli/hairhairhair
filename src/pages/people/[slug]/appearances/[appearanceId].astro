@@ -61,12 +61,12 @@ const observedStyles = observedStylesForAppearance(appearance.id);
       <span>{formatAppearanceDate(appearance.taken.value)}</span>
     </nav>
 
-    <header class="mt-12 max-w-4xl">
+    <header class="mt-10 max-w-3xl sm:mt-12">
       <p class="text-xs font-black uppercase tracking-[.18em] text-orange">Appearance record</p>
-      <h1 class="mt-4 font-display text-6xl leading-[.88] tracking-[-.08em] sm:text-8xl">
+      <h1 class="mt-4 font-display text-4xl leading-[.95] tracking-[-.05em] sm:text-5xl sm:leading-[.92]">
         {formatAppearanceDate(appearance.taken.value)}
       </h1>
-      <p class="mt-6 text-xl leading-8">{appearance.event}</p>
+      <p class="mt-5 text-lg leading-7 sm:text-xl sm:leading-8">{appearance.event}</p>
     </header>
 
     <div class="mt-12 grid gap-12 lg:grid-cols-[1.2fr_.8fr] lg:items-start">

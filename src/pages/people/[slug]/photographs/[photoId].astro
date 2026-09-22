@@ -61,10 +61,12 @@ const uniqueStyles = photoStyles.filter(
       <span>Photograph</span>
     </nav>
 
-    <header class="mt-12 max-w-3xl">
+    <header class="mt-10 max-w-3xl sm:mt-12">
       <p class="text-xs font-black uppercase tracking-[.18em] text-orange">Photograph record</p>
-      <h1 class="mt-4 font-display text-6xl leading-[.88] tracking-[-.08em] sm:text-8xl">{photo.identifier}</h1>
-      <p class="mt-6 text-lg leading-7">A source and usage record for this image of {person.name}.</p>
+      <h1 class="mt-4 font-display text-4xl leading-[.95] tracking-[-.05em] sm:text-5xl sm:leading-[.92]">
+        {photo.identifier}
+      </h1>
+      <p class="mt-5 text-lg leading-7">A source and usage record for this image of {person.name}.</p>
     </header>
 
     <figure class="mt-12">

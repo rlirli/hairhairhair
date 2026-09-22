@@ -263,6 +263,15 @@ test("single appearance records connect the photograph, observations, and archiv
   assert.match(markup, /href="\/people\/will-smith\/"/);
 });
 
+test("reference record pages use restrained responsive title scales", () => {
+  const appearance = readSource("src/pages/people/[slug]/appearances/[appearanceId].astro");
+  const photograph = readSource("src/pages/people/[slug]/photographs/[photoId].astro");
+  for (const source of [appearance, photograph]) {
+    assert.match(source, /font-display text-4xl leading-\[\.95\] tracking-\[-\.05em\] sm:text-5xl sm:leading-\[\.92\]/);
+    assert.doesNotMatch(source, /font-display text-6xl[\s\S]*sm:text-8xl/);
+  }
+});
+
 test("person photographs have reusable license provenance and locally built media", () => {
   const mediaSource = readSource("src/data/people-media.ts");
   assert.match(mediaSource, /kind: photo\.licenseName === ["']Public domain["']/);

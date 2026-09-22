@@ -4,6 +4,7 @@
 @theme {
   --color-ink: #181715;
   --color-ivory: #f4f0e8;
+  --color-hairstyle-image-bg: #e0d5c6;
   --color-orange: #b83e16;
   --color-butter: #f3c969;
   --color-sage: #aab7a0;
@@ -30,6 +31,7 @@
   color-scheme: dark;
   --color-ink: #f6efdf;
   --color-ivory: #25231f;
+  --color-hairstyle-image-bg: #323127;
   --color-orange: #e27c49;
   --color-butter: #d9b65e;
   --color-sage: #aab7a0;

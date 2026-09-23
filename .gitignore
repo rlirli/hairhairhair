@@ -6,4 +6,7 @@ dist/
 .env.*
 IMPLEMENTATION_PLAN*.md
 /inbox*
+!/inbox-hairstyles/
+/inbox-hairstyles/*
+!/inbox-hairstyles/README.md
 *__private__*

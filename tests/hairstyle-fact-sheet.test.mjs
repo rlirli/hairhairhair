@@ -50,9 +50,8 @@ test("hairstyle fact sheets render resolved subtype estimates without implying s
       }
     }
 
-    assert.match(factSheet, /Fill intensity is an editorial estimate/);
-    assert.match(factSheet, /not suitability/);
-    assert.match(factSheet, /not promises/);
+    assert.doesNotMatch(factSheet, /Fill intensity|Dashed = unknown/);
+    assert.match(factSheet, /not personal suitability scores, promises, or eligibility guidance/);
 
     if (style.inventedAt) {
       assert.match(factSheet, /Origin date/);

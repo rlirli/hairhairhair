@@ -51,21 +51,23 @@ const originRows = [
       <dt class="text-xs font-bold uppercase tracking-[.08em] opacity-65">Curl-pattern compatibility</dt>
       <dd class="mt-3">
         <div
-          class="grid grid-cols-12 gap-[2px]"
+          class="grid grid-cols-12"
           role="group"
           aria-label="Subtype compatibility estimates in order from Type 1A through Type 4C"
         >
           {subtypeSegments.map(({ subtype, compatibility }, index) => {
             const score = compatibility?.score ?? null;
             const unknown = score === null;
-            const majorTypeStart = index > 0 && subtype.subtypeCode === "A";
+            const firstSegment = index === 0;
+            const lastSegment = index === subtypeSegments.length - 1;
 
             return (
               <div
                 class:list={[
-                  "relative h-3 overflow-hidden rounded-[2px] border",
-                  unknown ? "border-dashed border-ink/40 text-ink/30" : "border-ink/20",
-                  majorTypeStart && "ml-1",
+                  "relative h-3 overflow-hidden border-y border-r border-ink/25",
+                  firstSegment && "rounded-l-full border-l",
+                  lastSegment && "rounded-r-full",
+                  unknown && "text-ink/30",
                 ]}
                 role={unknown ? "img" : "meter"}
                 aria-label={
@@ -102,13 +104,11 @@ const originRows = [
             </a>
           ))}
         </div>
-        <p class="mt-3 text-xs leading-5 text-ink/65">
-          Fill intensity is an editorial estimate, not suitability. Dashed = unknown; empty = 0.
-        </p>
         <p class="sr-only">
           Estimates describe how closely defining features can be achieved with ordinary cutting and styling while
-          preserving the natural curl pattern, assuming sufficient length. They are not promises or eligibility
-          guidance. Each segment is labeled for screen readers with its subtype and resolved score.
+          preserving the natural curl pattern, assuming sufficient length. They are not personal suitability scores,
+          promises, or eligibility guidance. Each segment is labeled for screen readers with its subtype and resolved
+          score.
         </p>
       </dd>
     </div>

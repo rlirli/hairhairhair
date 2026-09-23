@@ -1,0 +1,66 @@
+---
+import { Image } from "astro:assets";
+import { getMedia } from "../data/media";
+import type { StyleExample } from "../data/hairstyles";
+import { styleExamplePath } from "../lib/routes";
+
+interface Props {
+  example: StyleExample;
+  styleSlug: string;
+  eager?: boolean;
+}
+
+const { example, styleSlug, eager = false } = Astro.props;
+const media = getMedia(example.imageId);
+const href = styleExamplePath(styleSlug, example.id);
+const imageClass =
+  media?.provenance.kind === "generated" && media.provenance.background === "transparent"
+    ? "bg-hairstyle-image-bg"
+    : "";
+---
+
+{media && (
+  <article class="group border border-ink/25 p-3 transition-colors hover:border-ink/60">
+    <a
+      class="focus-ring grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)] items-end gap-3"
+      href={href}
+      aria-label={`Read ${example.title}`}
+    >
+      <figure>
+        <Image
+          src={media.src}
+          widths={[240, 400, 800]}
+          sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+          format="webp"
+          alt={media.alt}
+          loading={eager ? "eager" : "lazy"}
+          class:list={["aspect-square w-full object-cover", imageClass]}
+        />
+      </figure>
+      <div class="pb-1">
+        <h3 class="text-base font-bold leading-snug transition-colors group-hover:text-ink sm:text-lg">
+          {example.title}
+        </h3>
+        <p class="mt-2 text-sm leading-5 text-ink/60 transition-colors group-hover:text-ink">{example.caption}</p>
+        <p class="mt-2 text-xs leading-5 text-ink/60 transition-colors group-hover:text-ink">
+          {example.patternDescription}
+        </p>
+        <p class="mt-2 text-xs leading-5 text-ink/60 transition-colors group-hover:text-ink">
+          {example.lengthDescription}
+        </p>
+      </div>
+    </a>
+    {media.provenance.kind === "photograph" && (
+      <p class="mt-3 text-xs leading-5 text-ink/60">
+        {media.provenance.creator} ·{" "}
+        <a class="underline" href={media.provenance.sourceUrl} target="_blank" rel="noreferrer">
+          Source
+        </a>
+        {" · "}
+        <a class="underline" href={media.provenance.licenseUrl} target="_blank" rel="noreferrer">
+          {media.provenance.licenseName}
+        </a>
+      </p>
+    )}
+  </article>
+)}

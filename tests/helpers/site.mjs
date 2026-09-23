@@ -2,7 +2,7 @@ import { readdirSync, readFileSync } from "node:fs";
 import { extname, join, relative } from "node:path";
 
 import { hairSubtypes, hairTypes } from "../../src/data/hair-types.ts";
-import { publishedHairstyles } from "../../src/data/hairstyles.ts";
+import { getExamplesForHairstyle, publishedHairstyles } from "../../src/data/hairstyles.ts";
 import { hairstylesForPerson } from "../../src/data/people-relations.ts";
 import { appearances, people, personPhotographs } from "../../src/data/people.ts";
 
@@ -57,6 +57,9 @@ export function publicRoutes() {
       `/hairstyles/${style.slug}/examples/`,
       `/hairstyles/${style.slug}/appearances/`,
     ]),
+    ...publishedHairstyles.flatMap((style) =>
+      getExamplesForHairstyle(style.id).map((example) => `/hairstyles/${style.slug}/examples/${example.id}/`),
+    ),
     ...people.map((person) => `/people/${person.slug}/`),
     ...people.map((person) => `/people/${person.slug}/appearances/`),
     ...appearances.map((appearance) => {

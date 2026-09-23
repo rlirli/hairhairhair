@@ -2,6 +2,7 @@
 import Layout from "../../components/Layout.astro";
 import HairstyleCard from "../../components/HairstyleCard.astro";
 import StyleMedia from "../../components/StyleMedia.astro";
+import StyleExampleCard from "../../components/StyleExampleCard.astro";
 import { getImage } from "astro:assets";
 import { publishedHairstyles, sources, getExamplesForHairstyle } from "../../data/hairstyles";
 import { publishedRelatedHairstyles } from "../../data/hairstyle-relations";
@@ -81,16 +82,9 @@ const ogImage = heroMedia
           More
         </a>
       </div>
-      <div class="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="mt-5 grid gap-5 sm:grid-cols-2">
         {examples.slice(0, 4).map((example, index) => (
-          <StyleMedia
-            mediaId={example.imageId}
-            title={example.title}
-            caption={example.caption}
-            patternDescription={example.patternDescription}
-            lengthDescription={example.lengthDescription}
-            eager={index === 0}
-          />
+          <StyleExampleCard example={example} styleSlug={style.slug} eager={index === 0} />
         ))}
       </div>
     </section>

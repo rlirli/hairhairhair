@@ -1,6 +1,6 @@
 ---
 import Layout from "../../../components/Layout.astro";
-import StyleMedia from "../../../components/StyleMedia.astro";
+import StyleExampleCard from "../../../components/StyleExampleCard.astro";
 import { getExamplesForHairstyle, publishedHairstyles } from "../../../data/hairstyles";
 
 export function getStaticPaths() {
@@ -32,16 +32,9 @@ const examples = getExamplesForHairstyle(style.id);
     <p class="mt-4 max-w-2xl text-lg leading-7">
       Different visual references for the same hairstyle idea. These are examples, not fixed specifications.
     </p>
-    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    <div class="mt-10 grid gap-6 sm:grid-cols-2">
       {examples.map((example, index) => (
-        <StyleMedia
-          mediaId={example.imageId}
-          title={example.title}
-          caption={example.caption}
-          patternDescription={example.patternDescription}
-          lengthDescription={example.lengthDescription}
-          eager={index === 0}
-        />
+        <StyleExampleCard example={example} styleSlug={style.slug} eager={index === 0} />
       ))}
     </div>
   </main>

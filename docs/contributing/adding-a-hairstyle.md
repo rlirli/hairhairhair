@@ -2,7 +2,7 @@
 
 This checklist describes the current repository contract. A published hairstyle needs at least one style example. Compatibility information may remain unknown.
 
-Each published hairstyle automatically receives `/hairstyles/:slug/examples/` and `/hairstyles/:slug/appearances/` pages. The detail page previews up to four style examples and six dated appearance photographs, with a “More” link to each complete collection. Keep appearance associations attached to dated, sourced records in the people data; do not use a generated hairstyle illustration as a celebrity appearance.
+Each published hairstyle automatically receives `/hairstyles/:slug/examples/`, an individual `/hairstyles/:slug/examples/:exampleId/` page for every style example, and `/hairstyles/:slug/appearances/`. The detail page previews up to four linked style-example cards and six dated appearance photographs, with a “More” link to each complete collection. Example cards link to their detail pages; each example detail page links back to the hairstyle and its examples archive. Keep appearance associations attached to dated, sourced records in the people data; do not use a generated hairstyle illustration as a celebrity appearance.
 
 ## Mandatory
 

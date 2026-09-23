@@ -1,0 +1,62 @@
+---
+import Layout from "../../../../components/Layout.astro";
+import StyleMedia from "../../../../components/StyleMedia.astro";
+import { getExamplesForHairstyle, publishedHairstyles } from "../../../../data/hairstyles";
+
+export function getStaticPaths() {
+  return publishedHairstyles.flatMap((style) =>
+    getExamplesForHairstyle(style.id).map((example) => ({
+      params: { slug: style.slug, exampleId: example.id },
+      props: { style, example },
+    })),
+  );
+}
+
+const { style, example } = Astro.props;
+const archivePath = `/hairstyles/${style.slug}/examples/`;
+---
+
+<Layout title={`${example.title} — ${style.name} example — hairhairhair.hair`} description={example.caption}>
+  <main class="mx-auto max-w-7xl px-5 pb-20 pt-12 sm:px-8">
+    <nav aria-label="Breadcrumb" class="text-sm font-bold uppercase tracking-[.12em]">
+      <a class="focus-ring text-orange" href="/hairstyles/">
+        Hairstyles
+      </a>
+      <span class="mx-2" aria-hidden="true">
+        /
+      </span>
+      <a class="focus-ring text-orange" href={`/hairstyles/${style.slug}/`}>
+        {style.name}
+      </a>
+      <span class="mx-2" aria-hidden="true">
+        /
+      </span>
+      <a class="focus-ring text-orange" href={archivePath}>
+        Examples
+      </a>
+      <span class="mx-2" aria-hidden="true">
+        /
+      </span>
+      <span>{example.title}</span>
+    </nav>
+    <h1 class="mt-10 font-display text-5xl tracking-[-.07em] sm:text-7xl">{example.title}</h1>
+    <h2 class="mt-4 font-display text-2xl tracking-[-.04em]">
+      <a class="focus-ring" href={`/hairstyles/${style.slug}/`}>
+        {style.name}
+      </a>
+    </h2>
+    <div class="mt-8 max-w-4xl">
+      <StyleMedia
+        mediaId={example.imageId}
+        title={example.title}
+        caption={example.caption}
+        patternDescription={example.patternDescription}
+        lengthDescription={example.lengthDescription}
+        eager
+      />
+    </div>
+    <a class="focus-ring mt-8 inline-block text-sm font-bold text-orange underline" href={archivePath}>
+      Back to {style.name} examples
+    </a>
+  </main>
+</Layout>

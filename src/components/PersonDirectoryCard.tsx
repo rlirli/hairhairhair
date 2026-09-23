@@ -3,14 +3,23 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from "./ui/hover-card";
 export interface PersonDirectoryCardItem {
   href: string;
   name: string;
+  subtitle?: string;
   imageSrc: string;
+  imageSrcSet?: string;
+  imageSizes?: string;
   imageAlt: string;
   profileValues: { hair: string[]; color: string; skin: string };
   description: string;
   profileRows: { label: string; value: string; href?: string }[];
 }
 
-export default function PersonDirectoryCard({ person }: { person: PersonDirectoryCardItem }) {
+export default function PersonDirectoryCard({
+  person,
+  subtitle,
+}: {
+  person: PersonDirectoryCardItem;
+  subtitle?: string;
+}) {
   return (
     <HoverCard openDelay={180} closeDelay={120}>
       <HoverCardTrigger asChild>
@@ -24,6 +33,8 @@ export default function PersonDirectoryCard({ person }: { person: PersonDirector
         >
           <img
             src={person.imageSrc}
+            srcSet={person.imageSrcSet}
+            sizes={person.imageSizes}
             alt={person.imageAlt}
             loading="lazy"
             className="aspect-[4/5] w-full border border-ink/25 object-cover transition group-hover:border-orange"
@@ -31,6 +42,7 @@ export default function PersonDirectoryCard({ person }: { person: PersonDirector
           <h2 className="mt-2 truncate font-display text-xl tracking-[-.03em] group-hover:text-orange">
             {person.name}
           </h2>
+          {subtitle && <p className="mt-1 text-xs text-ink/60">{subtitle}</p>}
         </a>
       </HoverCardTrigger>
       <HoverCardContent className="w-80">

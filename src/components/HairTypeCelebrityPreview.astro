@@ -1,15 +1,90 @@
 ---
-import { Image } from "astro:assets";
-import NaturalProfile from "./NaturalProfile.astro";
+import { getImage } from "astro:assets";
+import PersonDirectoryCard from "./PersonDirectoryCard";
+import { naturalProfileForPerson, resolvedHairTypeForNaturalProfile } from "../data/natural-profiles";
 import { peopleForHairTypeSlug } from "../data/hair-type-discovery";
 
 const { slug } = Astro.props as { slug: string };
 const people = peopleForHairTypeSlug(slug);
+const displayValue = (value: string | null, labels: Record<string, string>) =>
+  value ? (labels[value] ?? value) : null;
+const celebrityCards = await Promise.all(
+  people.slice(0, 7).map(async ({ person, photo, subtype }) => {
+    const profile = naturalProfileForPerson(person.id);
+    const resolvedType = profile ? resolvedHairTypeForNaturalProfile(profile) : undefined;
+    const image = await getImage({
+      src: photo.src,
+      widths: [180, 360],
+      sizes: "(min-width: 1024px) 14vw, 128px",
+      format: "webp",
+    });
+    const profileValues = {
+      hair: [profile?.hairTypeId.value, profile?.hairSubtypeId.value].filter((value): value is string =>
+        Boolean(value),
+      ),
+      color: profile?.naturalHairColor.value ?? "",
+      skin: profile?.naturalSkinTone.value ?? "",
+    };
+    const profileRows = profile
+      ? [
+          resolvedType && {
+            label: "Hair type",
+            value: `Type ${resolvedType.code} · ${resolvedType.name}`,
+            href: `/hair-types/${resolvedType.slug}/`,
+          },
+          profile.naturalHairColor.value && {
+            label: "Hair color",
+            value: displayValue(profile.naturalHairColor.value, {
+              black: "Black",
+              brown: "Brown",
+              blonde: "Blonde",
+              red: "Red",
+              gray: "Gray",
+              white: "White",
+            })!,
+          },
+          profile.naturalSkinTone.value && {
+            label: "Skin tone",
+            value: displayValue(profile.naturalSkinTone.value, {
+              "deep-brown": "Deep brown",
+              brown: "Brown",
+              medium: "Medium",
+              light: "Light",
+              fair: "Fair",
+            })!,
+          },
+          profile.hairThickness.value && {
+            label: "Hair thickness",
+            value: displayValue(profile.hairThickness.value, { fine: "Fine", medium: "Medium", coarse: "Coarse" })!,
+          },
+          profile.hairDensity.value && {
+            label: "Hair density",
+            value: displayValue(profile.hairDensity.value, { low: "Low", medium: "Medium", high: "High" })!,
+          },
+        ].filter((row): row is NonNullable<typeof row> => Boolean(row))
+      : [];
+
+    return {
+      subtitle: subtype ? `Type ${subtype.code}` : undefined,
+      person: {
+        href: `/people/${person.slug}/`,
+        name: person.name,
+        imageSrc: image.src,
+        imageSrcSet: image.srcSet.attribute,
+        imageSizes: image.attributes.sizes,
+        imageAlt: photo.alt,
+        profileValues,
+        description: person.description,
+        profileRows,
+      },
+    };
+  }),
+);
 ---
 
-{people.length > 0 && (
+{celebrityCards.length > 0 && (
   <section class="mx-auto max-w-7xl px-5 pb-16 sm:px-8" aria-label="People with this natural hair type">
-    <div class="flex items-baseline justify-between gap-4 border-t border-ink/30 pt-5">
+    <div class="flex items-baseline justify-between gap-4 border-b border-ink/30 pb-3">
       <h2 class="text-xs font-black uppercase tracking-[.16em] text-orange">Celebs with this hair type</h2>
       <a
         class="focus-ring text-xs font-normal uppercase tracking-[.12em] text-ink/60 transition hover:text-orange"
@@ -19,17 +94,8 @@ const people = peopleForHairTypeSlug(slug);
       </a>
     </div>
     <div class="mt-4 grid grid-flow-col auto-cols-[minmax(8rem,1fr)] gap-3 overflow-x-auto pb-3 lg:grid-flow-row lg:grid-cols-7 lg:auto-cols-auto lg:overflow-visible">
-      {people.slice(0, 7).map(({ person, photo, naturalProfile, subtype }) => (
-        <div class="group relative">
-          <a class="focus-ring block" href={`/people/${person.slug}/`}>
-            <Image src={photo.src} alt={photo.alt} width={180} height={180} class="aspect-[4/5] w-full object-cover" />
-            <span class="mt-2 block font-bold leading-tight">{person.name}</span>
-            {subtype && <span class="mt-1 block text-xs opacity-65">Type {subtype.code}</span>}
-          </a>
-          <div class="absolute bottom-14 left-0 z-20 hidden w-72 rounded-2xl bg-paper p-3 shadow-xl group-hover:block group-focus-within:block">
-            <NaturalProfile profile={naturalProfile} />
-          </div>
-        </div>
+      {celebrityCards.map(({ person, subtitle }) => (
+        <PersonDirectoryCard client:load person={person} subtitle={subtitle} />
       ))}
     </div>
   </section>

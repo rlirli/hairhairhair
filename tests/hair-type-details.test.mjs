@@ -33,6 +33,7 @@ test("celebrity preview is conditional and links to type-specific people archive
   assert.match(major, /Will Smith/);
   assert.match(major, /Mario Balotelli/);
   assert.match(major, /aspect-\[4\/5\]/);
+  assert.match(major, /data-slot="hover-card-trigger"/);
   assert.doesNotMatch(major, /pointer-events-none/);
 
   const exactSubtype = page("/hair-types/4a/");
@@ -40,6 +41,12 @@ test("celebrity preview is conditional and links to type-specific people archive
 
   const empty = page("/hair-types/3a/");
   assert.doesNotMatch(empty, /Celebs with this hair type/);
+  const previewSource = readFileSync(join(root, "src/components/HairTypeCelebrityPreview.astro"), "utf8");
+  assert.match(previewSource, /border-b border-ink\/30/);
+  assert.doesNotMatch(previewSource, /border-t border-ink\/30|group-hover:block|group-focus-within:block/);
+  const personCardSource = readFileSync(join(root, "src/components/PersonDirectoryCard.tsx"), "utf8");
+  assert.match(personCardSource, /<HoverCard/);
+  assert.match(personCardSource, /font-display text-xl/);
 });
 
 test("hair-type people archives are generated for every major type and subtype and included in sitemap", () => {

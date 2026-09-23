@@ -38,7 +38,8 @@ test("published hairstyle detail routes provide the requested previews and full 
     assert.match(examples, new RegExp(`${style.name} examples`));
     assert.equal((examples.match(/<figure>/g) ?? []).length, getExamplesForHairstyle(style.id).length);
     assert.match(appearances, new RegExp(`${style.name} worn by celebs`));
-    if (appearancesForStyle(style.id).length) assert.match(appearances, /opacity-75/);
+    if (appearancesForStyle(style.id).length) assert.match(appearances, /<img\b/);
+    assert.doesNotMatch(appearances, /<img\b[^>]*class="[^"]*rounded-/);
 
     assert.doesNotMatch(detail, /Data sheet|Pattern guidance|Related guides/);
     assert.match(detail, /Sources reviewed/);

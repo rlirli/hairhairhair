@@ -4,7 +4,6 @@ import Layout from "../../../../components/Layout.astro";
 import { buildPersonMedia } from "../../../../data/people-media";
 import { appearances, people, personPhotographs } from "../../../../data/people";
 import { observedStylesForAppearance } from "../../../../data/people-relations";
-import PersonPhotoAttribution from "../../../../components/PersonPhotoAttribution.astro";
 import { appearanceTitle, formatAppearanceDate } from "../../../../lib/appearance-formatting";
 
 export function getStaticPaths() {
@@ -76,12 +75,11 @@ const uniqueStyles = photoStyles.filter(
         sizes="(min-width: 1024px) 70vw, 100vw"
         format="webp"
         alt={photo.alt}
-        class="max-h-[75vh] w-full rounded-[2rem] object-contain"
+        class="max-h-[75vh] w-full object-contain"
         style={`object-position: ${photo.objectPosition}`}
       />
-      <PersonPhotoAttribution media={photo} density="default" linkLicense={true} />
       <figcaption class="mt-5 border-l-4 border-orange pl-4 text-sm leading-6">
-        <p class="font-bold">{photo.creator}</p>
+        <p>{photo.creator}</p>
         <p>{photo.rightsBasis}</p>
         <p class="mt-2 flex flex-wrap gap-x-3 gap-y-1">
           <a
@@ -110,7 +108,10 @@ const uniqueStyles = photoStyles.filter(
           </a>
         </p>
         <p class="mt-2 opacity-70">
-          Identifier: {photo.identifier} · {photo.derivativeStatus} image · {photo.licenseName}
+          Identifier: {photo.identifier} · {photo.derivativeStatus} image · License:{" "}
+          <a class="focus-ring underline" href={photo.licenseUrl} target="_blank" rel="noreferrer">
+            {photo.licenseName}
+          </a>
         </p>
       </figcaption>
     </figure>

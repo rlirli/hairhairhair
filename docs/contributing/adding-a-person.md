@@ -11,6 +11,8 @@ This checklist describes the current static-data workflow for a person with at l
 5. In `src/data/people-relations.ts`, add the person's desired editorial hairstyle order to `personHairstyleOrder` so observed hairstyle previews and detail routes are produced.
 6. Run `npm run verify`. The integrity tests derive people, photographs, appearances, and routes from the content data and asset directories; do not add parallel bookkeeping fixtures.
 
+Licensed-photo cards show the recorded creator, one linked license label, a source-record link, the supplied work identifier/title, and a visible change note such as “cropped” when applicable. Public-domain cards omit attribution text; the individual photograph record retains its full provenance. Keep the structured creator, license, source, rights, identifier, and derivative metadata accurate so both compact credits and detail records can be rendered from the same source data.
+
 ## Optional
 
 - Add a `NaturalProfile` in `src/data/natural-profiles.ts` only when there is enough evidence for at least one natural trait. Keep `hairTypeId` at the broad numbered type, and set `hairSubtypeId` to `null` unless the exact lettered subtype is supported. A documented subtype must belong to the broad type. Use the shared provenance helpers rather than adding person-specific helper functions. The profile powers the directory filters and hair-type people sections; the person page omits the table when no profile exists and hides null traits. Do not infer undocumented values.

@@ -76,25 +76,27 @@ const appearances = appearancesForPerson(person.id)
         {appearances.map(({ appearance, photo }) => (
           <article class="group" id={appearance.id}>
             <figure>
-              <a
-                class="group focus-ring block"
-                href={`/people/${person.slug}/appearances/${appearance.id}/`}
-                aria-label={`${appearance.taken.value}: ${appearance.event}`}
-              >
-                <Image
-                  src={photo.src}
-                  widths={[400, 700, 1000]}
-                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-                  format="webp"
-                  alt={photo.alt}
-                  class="aspect-square w-full rounded-[1.5rem] object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-                  style={`object-position: ${photo.objectPosition}`}
-                />
-              </a>
-              <PersonPhotoAttribution media={photo} density="compact" linkLicense={false} />
+              <div class="relative overflow-hidden">
+                <a
+                  class="group focus-ring block"
+                  href={`/people/${person.slug}/appearances/${appearance.id}/`}
+                  aria-label={`${appearance.taken.value}: ${appearance.event}`}
+                >
+                  <Image
+                    src={photo.src}
+                    widths={[400, 700, 1000]}
+                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                    format="webp"
+                    alt={photo.alt}
+                    class="aspect-square w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                    style={`object-position: ${photo.objectPosition}`}
+                  />
+                </a>
+                <PersonPhotoAttribution media={photo} density="compact" />
+              </div>
               <figcaption class="mt-4">
                 <p class="text-xs font-black uppercase tracking-[.14em] text-orange">{appearance.taken.value}</p>
-                <h3 class="mt-2 font-display text-2xl leading-[.95] tracking-[-.03em]">
+                <h3 class="mt-2 font-display text-xl leading-tight tracking-[-.02em]">
                   <a class="focus-ring" href={`/people/${person.slug}/appearances/${appearance.id}/`}>
                     {appearanceTitle(appearance.event)}
                   </a>

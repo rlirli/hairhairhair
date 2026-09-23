@@ -4,21 +4,54 @@ import type { PersonMedia } from "../data/people-media";
 interface Props {
   media: PersonMedia;
   density: "compact" | "default";
-  linkLicense: boolean;
 }
 
-const { media, density, linkLicense } = Astro.props;
+const { media, density } = Astro.props;
 ---
 
-<p class:list={["text-xs leading-5 opacity-75", density === "compact" ? "mt-2" : "mt-3"]}>
-  <span class="font-bold">{media.provenance.attribution}</span>
-  {media.provenance.derivativeStatus !== "original" && <> · {media.provenance.derivativeStatus} image</>}
-  {" · "}
-  {linkLicense ? (
-    <a class="underline" href={media.provenance.licenseUrl} target="_blank" rel="noreferrer">
-      {media.provenance.licenseName}
-    </a>
-  ) : (
-    <span>{media.provenance.licenseName}</span>
-  )}
-</p>
+{density === "compact"
+  ? media.provenance.kind === "licensed" && (
+      <div
+        class="absolute inset-x-0 bottom-0 z-10 bg-black/75 px-2 py-1.5 text-[.68rem] leading-[1.2] text-white"
+        data-photo-attribution
+        role="note"
+        aria-label="Photo attribution"
+      >
+        <span>{media.provenance.creator}</span>
+        {" · "}
+        <a
+          class="focus-ring underline decoration-white/70 underline-offset-2"
+          href={media.provenance.licenseUrl}
+          target="_blank"
+          rel="noreferrer"
+        >
+          {media.provenance.licenseName}
+        </a>
+        {" · "}
+        <a
+          class="focus-ring underline decoration-white/70 underline-offset-2"
+          href={media.sourceUrl}
+          target="_blank"
+          rel="noreferrer"
+        >
+          source
+        </a>
+        {media.provenance.derivativeStatus !== "original" && <> · {media.provenance.derivativeStatus}</>}
+        {" · "}
+        {media.identifier}
+      </div>
+    )
+  : media.provenance.kind === "licensed" && (
+      <p class="mt-3 text-sm leading-5" data-photo-attribution>
+        <span>{media.provenance.creator}</span>
+        {" · "}
+        <a class="focus-ring underline" href={media.provenance.licenseUrl} target="_blank" rel="noreferrer">
+          {media.provenance.licenseName}
+        </a>
+        {" · "}
+        <a class="focus-ring underline" href={media.sourceUrl} target="_blank" rel="noreferrer">
+          source
+        </a>
+        {media.provenance.derivativeStatus !== "original" && <> · {media.provenance.derivativeStatus}</>}
+      </p>
+    )}

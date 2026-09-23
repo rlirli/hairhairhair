@@ -22,21 +22,30 @@ const { appearances } = Astro.props;
 <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
   {appearances.map(({ id, personSlug, personName, date, event, media }) => (
     <article class="min-w-0">
-      <a class="focus-ring block" href={`/people/${personSlug}/appearances/${id}/`}>
-        <Image
-          src={media.src}
-          widths={[240, 480]}
-          sizes="(min-width: 1024px) 16vw, (min-width: 640px) 30vw, 45vw"
-          format="webp"
-          alt={media.alt}
-          class="aspect-[4/5] w-full rounded-2xl object-cover"
-          style={`object-position: ${media.objectPosition}`}
-        />
-        <span class="mt-2 block font-display text-lg leading-tight">{personName}</span>
-        <span class="mt-1 block text-xs leading-5">{date}</span>
+      <figure class="relative overflow-hidden">
+        <a class="focus-ring block" href={`/people/${personSlug}/appearances/${id}/`}>
+          <Image
+            src={media.src}
+            widths={[240, 480]}
+            sizes="(min-width: 1024px) 16vw, (min-width: 640px) 30vw, 45vw"
+            format="webp"
+            alt={media.alt}
+            class="aspect-[4/5] w-full object-cover"
+            style={`object-position: ${media.objectPosition}`}
+          />
+        </a>
+        <PersonPhotoAttribution media={media} density="compact" />
+      </figure>
+      <a
+        class="focus-ring mt-2 block font-display text-lg leading-tight"
+        href={`/people/${personSlug}/appearances/${id}/`}
+      >
+        {personName}
+      </a>
+      <a class="focus-ring mt-1 block text-xs leading-5" href={`/people/${personSlug}/appearances/${id}/`}>
+        {date}
         <span class="sr-only"> · {event}</span>
       </a>
-      <PersonPhotoAttribution media={media} density="compact" linkLicense={false} />
     </article>
   ))}
 </div>

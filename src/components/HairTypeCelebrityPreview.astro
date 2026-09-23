@@ -22,13 +22,7 @@ const people = peopleForHairTypeSlug(slug);
       {people.slice(0, 7).map(({ person, photo, naturalProfile, subtype }) => (
         <div class="group relative">
           <a class="focus-ring block" href={`/people/${person.slug}/`}>
-            <Image
-              src={photo.src}
-              alt={photo.alt}
-              width={180}
-              height={180}
-              class="aspect-[4/5] w-full rounded-2xl object-cover"
-            />
+            <Image src={photo.src} alt={photo.alt} width={180} height={180} class="aspect-[4/5] w-full object-cover" />
             <span class="mt-2 block font-bold leading-tight">{person.name}</span>
             {subtype && <span class="mt-1 block text-xs opacity-65">Type {subtype.code}</span>}
           </a>

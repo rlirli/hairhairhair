@@ -315,12 +315,15 @@ test("licensed people media exposes visible attribution metadata", () => {
     );
     assert.ok(owner);
     const markup = page(`/people/${owner.slug}/photographs/${photo.id}/`);
-    assert.ok(markup.includes(photo.attribution));
+    assert.ok(markup.includes(photo.creator));
     assert.ok(markup.includes(photo.licenseUrl));
+    assert.ok(markup.includes(photo.sourceUrl));
+    assert.match(markup, new RegExp(`Identifier: ${photo.identifier.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`));
+    assert.doesNotMatch(markup, new RegExp(`${photo.attribution.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}`));
   }
 });
 
-test("compact people grids keep each attribution inside its card", () => {
+test("compact people grids show linked, non-bold attribution overlays only for licensed photos", () => {
   for (const route of people.flatMap((person) => [
     `/people/${person.slug}/`,
     `/people/${person.slug}/appearances/`,
@@ -331,18 +334,65 @@ test("compact people grids keep each attribution inside its card", () => {
     for (const grid of grids) {
       const cards = grid.match(/<a class="group focus-ring block"/g) ?? [];
       assert.ok(cards.length, `${route} should render cards`);
-      assert.equal(
-        grid.match(/<p class="text-xs leading-5 opacity-75/g)?.length ?? 0,
-        cards.length,
-        `${route} should render one attribution per card`,
-      );
-      assert.doesNotMatch(
-        grid,
-        /<a class="group focus-ring block"[\s\S]*?<a class="underline"/,
-        `${route} must not put a license link inside a linked card`,
-      );
+      assert.doesNotMatch(grid, /text-xs leading-5 opacity-75/);
+      const credits = [...grid.matchAll(/data-photo-attribution[\s\S]*?>([\s\S]*?)<\/div>/g)].map(([, body]) => body);
+      assert.ok(credits.length <= cards.length, `${route} should not show more credits than cards`);
+      for (const credit of credits) {
+        assert.equal((credit.match(/<a\b/g) ?? []).length, 2, "each compact credit links the license and source");
+        assert.doesNotMatch(credit, /<b\b|<strong\b/);
+        assert.match(credit, /href="https:\/\/creativecommons\.org\//);
+        assert.match(credit, /href="https:\/\/commons\.wikimedia\.org\//);
+      }
+      assert.doesNotMatch(grid, /<a[^>]*>[^<]*<a\b/);
     }
   }
+  const willSmith = page("/people/will-smith/");
+  assert.doesNotMatch(willSmith, /Mass Communication Specialist 2nd Class Drae Parker/);
+  const mario = page("/people/mario-balotelli/");
+  assert.match(mario, /Bigmatbasket[\s\S]*?CC BY-SA 4\.0[\s\S]*?source[\s\S]*?cropped/);
+  const cropCard = page("/people/mario-balotelli/appearances/").match(
+    /data-photo-attribution[\s\S]*?cropped[\s\S]*?<\/div>/,
+  );
+  assert.ok(cropCard, "cropped CC photo keeps its change notice in the overlay");
+});
+
+test("person and appearance photographs render with square corners across profiles and archives", () => {
+  const routes = [
+    ...people.flatMap((person) => [
+      `/people/${person.slug}/`,
+      `/people/${person.slug}/appearances/`,
+      `/people/${person.slug}/hairstyles/`,
+      ...appearances
+        .filter((appearance) => appearance.personId === person.id)
+        .map((appearance) => `/people/${person.slug}/appearances/${appearance.id}/`),
+      ...hairstylesForPerson(person.id).map(({ style }) => `/people/${person.slug}/hairstyles/${style.slug}/`),
+      ...personPhotographs
+        .filter((photo) =>
+          appearances.some((appearance) => appearance.personId === person.id && appearance.imageId === photo.id),
+        )
+        .map((photo) => `/people/${person.slug}/photographs/${photo.id}/`),
+    ]),
+  ];
+  for (const route of routes) {
+    const markup = page(route);
+    assert.doesNotMatch(markup, /<img\b[^>]*class="[^"]*rounded-/);
+  }
+  for (const photo of personPhotographs) {
+    const owner = people.find((person) =>
+      appearances.some((appearance) => appearance.personId === person.id && appearance.imageId === photo.id),
+    );
+    if (owner)
+      assert.doesNotMatch(page(`/people/${owner.slug}/photographs/${photo.id}/`), /<img\b[^>]*class="[^"]*rounded-/);
+  }
+  const publicDomainRecord = page("/people/will-smith/photographs/will-smith-2012/");
+  const publicDomainPhoto = personPhotographs.find((photo) => photo.id === "will-smith-2012");
+  assert.ok(publicDomainPhoto);
+  assert.match(publicDomainRecord, /Mass Communication Specialist 2nd Class Drae Parker/);
+  assert.ok(publicDomainRecord.includes(publicDomainPhoto.rightsBasis));
+  assert.doesNotMatch(page("/people/will-smith/appearances/appearance-will-smith-2012/"), /data-photo-attribution/);
+  assert.doesNotMatch(readSource("src/components/HairTypeCelebrityPreview.astro"), /<Image[^>]*rounded-/);
+  assert.doesNotMatch(readSource("src/components/PersonDirectoryCard.tsx"), /className="[^"]*rounded-/);
+  assert.doesNotMatch(readSource("src/components/HairstyleAppearanceGrid.astro"), /<Image[^>]*rounded-/);
 });
 
 test("sitemap and canonical metadata include people routes", () => {

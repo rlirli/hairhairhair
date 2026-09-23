@@ -27,3 +27,9 @@ test("thin collection and profile hairlines remain intact", () => {
   assert.match(source("src/components/NaturalProfile.astro"), /border-b border-ink\/25/);
   assert.match(source("src/components/PersonDirectoryCard.tsx"), /border-t border-ink\/20/);
 });
+
+test("the footer has no top rule", () => {
+  const footerTag = source("src/components/Footer.astro").match(/<footer\b[^>]*>/)?.[0];
+  assert.ok(footerTag);
+  assert.doesNotMatch(footerTag, /\bborder-t(?:\s|["'])/);
+});

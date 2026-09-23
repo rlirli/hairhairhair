@@ -41,12 +41,8 @@ const imageClass =
         <h3 class="text-base font-bold leading-snug sm:text-lg">
           {example.title}
         </h3>
-        <p class="mt-1.5 text-xs leading-5 text-ink/60 transition-colors group-hover:text-ink">{example.caption}</p>
         <p class="mt-1.5 text-xs leading-5 text-ink/60 transition-colors group-hover:text-ink">
-          {example.patternDescription}
-        </p>
-        <p class="mt-1.5 text-xs leading-5 text-ink/60 transition-colors group-hover:text-ink">
-          {example.lengthDescription}
+          {example.caption} {example.patternDescription} {example.lengthDescription}
         </p>
       </div>
     </a>
@@ -72,11 +68,4 @@ const imageClass =
     -webkit-line-clamp: 6;
   }
 
-  .style-example-copy > :is(h3, p) {
-    display: -webkit-box;
-    overflow: hidden;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    text-overflow: ellipsis;
-  }
 </style>

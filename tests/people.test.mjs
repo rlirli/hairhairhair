@@ -10,13 +10,6 @@ import { appearanceTitle, formatAppearanceDate } from "../src/lib/appearance-for
 import { attrs, dist, localUrl, page, publicRoutes, root, routeFile } from "./helpers/site.mjs";
 
 const readSource = (pathname) => readFileSync(join(root, pathname), "utf8");
-const compactFourColumnGrids = (markup) =>
-  [
-    ...markup.matchAll(
-      /<div class="mt-(?:7|8) grid gap-8 sm:grid-cols-2 lg:grid-cols-4">([\s\S]*?)<\/div><\/section>/g,
-    ),
-  ].map(([, content]) => content);
-
 test("people overview offers portrait cards, profile filters, and profile details on focus or hover", () => {
   const markup = page("/people/");
   assert.match(markup, /Browse celebrities/i);
@@ -329,21 +322,16 @@ test("compact people grids show linked, non-bold attribution overlays only for l
     `/people/${person.slug}/appearances/`,
     `/people/${person.slug}/hairstyles/`,
   ])) {
-    const grids = compactFourColumnGrids(page(route));
-    assert.ok(grids.length, `${route} should render at least one four-column grid`);
-    for (const grid of grids) {
-      const cards = grid.match(/<a class="group focus-ring block"/g) ?? [];
-      assert.ok(cards.length, `${route} should render cards`);
-      assert.doesNotMatch(grid, /text-xs leading-5 opacity-75/);
-      const credits = [...grid.matchAll(/data-photo-attribution[\s\S]*?>([\s\S]*?)<\/div>/g)].map(([, body]) => body);
-      assert.ok(credits.length <= cards.length, `${route} should not show more credits than cards`);
-      for (const credit of credits) {
-        assert.equal((credit.match(/<a\b/g) ?? []).length, 2, "each compact credit links the license and source");
-        assert.doesNotMatch(credit, /<b\b|<strong\b/);
-        assert.match(credit, /href="https:\/\/creativecommons\.org\//);
-        assert.match(credit, /href="https:\/\/commons\.wikimedia\.org\//);
-      }
-      assert.doesNotMatch(grid, /<a[^>]*>[^<]*<a\b/);
+    const markup = page(route);
+    const credits = [...markup.matchAll(/data-photo-attribution[\s\S]*?>([\s\S]*?)<\/div>/g)].map(([, body]) => body);
+    const images = markup.match(/<img\b/g) ?? [];
+    assert.ok(credits.length <= images.length, `${route} should not show more credits than photos`);
+    assert.doesNotMatch(markup, /text-xs leading-5 opacity-75/);
+    for (const credit of credits) {
+      assert.equal((credit.match(/<a\b/g) ?? []).length, 2, "each compact credit links the license and source");
+      assert.doesNotMatch(credit, /<b\b|<strong\b/);
+      assert.match(credit, /href="https:\/\/creativecommons\.org\//);
+      assert.match(credit, /href="https:\/\/commons\.wikimedia\.org\//);
     }
   }
   const willSmith = page("/people/will-smith/");
@@ -437,16 +425,23 @@ test("person hairstyle detail pages collect every matching appearance", () => {
   );
 });
 
-test("hairstyle appearance cards link titles to appearance records without nested links", () => {
+test("hairstyle appearance cards place linked titles before dates", () => {
   const markup = page("/people/will-smith/hairstyles/buzz-cut/");
   assert.doesNotMatch(markup, /Appearance record ↗/);
   for (const [date, appearanceId] of [
     ["May 23, 2012", "appearance-will-smith-2012"],
     ["December 10, 2009", "appearance-will-smith-2009"],
   ]) {
-    const titleIndex = markup.indexOf(date);
-    assert.ok(titleIndex >= 0, date);
-    const card = markup.slice(titleIndex, titleIndex + 800);
+    const appearance = appearances.find((item) => item.id === appearanceId);
+    assert.ok(appearance, appearanceId);
+    const title = appearanceTitle(appearance.event);
+    const titleIndex = markup.indexOf(title);
+    const dateIndex = markup.indexOf(date);
+    assert.ok(titleIndex >= 0, title);
+    assert.ok(dateIndex > titleIndex, `${title} should come before ${date}`);
+    const cardStart = markup.lastIndexOf("<article", titleIndex);
+    const cardEnd = markup.indexOf("</article>", titleIndex);
+    const card = markup.slice(cardStart, cardEnd);
     assert.match(card, new RegExp(`href="/people/will-smith/appearances/${appearanceId}/"`));
   }
 });

@@ -15,9 +15,10 @@ interface Props {
   size?: "small" | "medium";
   className: string;
   hairTypeId?: string;
+  horizontalScroll?: boolean;
 }
 
-const { styles, size = "small", className, hairTypeId } = Astro.props;
+const { styles, size = "small", className, hairTypeId, horizontalScroll = false } = Astro.props;
 const imageSizes = size === "small" ? "(min-width: 1024px) 20vw, 40vw" : "(min-width: 1024px) 25vw, 50vw";
 const widths = size === "small" ? [240, 480] : [360, 720];
 const items = await Promise.all(
@@ -52,4 +53,10 @@ const items = await Promise.all(
 );
 ---
 
-<RelatedHairstyleGridIsland client:load items={items.filter((item) => item !== undefined)} {size} {className} />
+<RelatedHairstyleGridIsland
+  client:load
+  items={items.filter((item) => item !== undefined)}
+  {size}
+  {className}
+  {horizontalScroll}
+/>

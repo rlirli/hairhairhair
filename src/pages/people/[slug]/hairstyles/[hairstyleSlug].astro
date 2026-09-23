@@ -87,7 +87,7 @@ const records = appearancesForPersonStyle(person.id, style.id);
         </div>
       </div>
 
-      <div class="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="mt-6 grid gap-x-4 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
         {records.map((appearance) => {
           const photo = media.find((item) => item.id === appearance.imageId);
           const observation = appearance.observations.find((item) => item.hairstyleId === style.id);
@@ -108,16 +108,14 @@ const records = appearancesForPersonStyle(person.id, style.id);
                 </a>
                 <PersonPhotoAttribution media={photo} density="compact" />
               </figure>
-              <div class="mt-4">
-                <p class="text-xs font-black uppercase tracking-[.14em] text-orange">
-                  {formatAppearanceDate(appearance.taken.value)}
-                </p>
-                <h3 class="mt-2 font-display text-xl leading-tight tracking-[-.02em]">
+              <div class="mt-2">
+                <h3 class="font-display text-lg leading-tight tracking-[-.02em]">
                   <a class="focus-ring" href={`/people/${person.slug}/appearances/${appearance.id}/`}>
                     {appearanceTitle(appearance.event)}
                   </a>
                 </h3>
-                {observation && <p class="mt-3 text-sm leading-6">{observation.note}</p>}
+                <p class="mt-1 text-xs leading-tight text-muted">{formatAppearanceDate(appearance.taken.value)}</p>
+                {observation && <p class="mt-2 text-sm leading-5">{observation.note}</p>}
               </div>
             </article>
           ) : null;

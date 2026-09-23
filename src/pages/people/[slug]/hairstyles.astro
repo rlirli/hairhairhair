@@ -67,7 +67,7 @@ const styleRecords = hairstylesForPerson(person.id);
       </div>
 
       {styleRecords.length ? (
-        <div class="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="mt-6 grid gap-x-4 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
           {styleRecords.map(({ style, appearances }) => {
             const appearance = appearances[0];
             const photo = media.find((item) => item.id === appearance.imageId);
@@ -89,15 +89,16 @@ const styleRecords = hairstylesForPerson(person.id);
                     </a>
                     <PersonPhotoAttribution media={photo} density="compact" />
                   </div>
-                  <figcaption class="mt-4">
-                    <p class="text-xs font-black uppercase tracking-[.14em] text-orange">
-                      {formatAppearanceDate(appearance.taken.value, "short")} · {appearanceTitle(appearance.event)}
-                    </p>
-                    <h3 class="mt-2 font-display text-2xl leading-[.98] tracking-[-.03em]">
+                  <figcaption class="mt-2">
+                    <h3 class="font-display text-xl leading-tight tracking-[-.03em]">
                       <a class="focus-ring" href={`/people/${person.slug}/hairstyles/${style.slug}/`}>
                         {style.name}
                       </a>
                     </h3>
+                    <p class="mt-1 text-xs leading-tight text-muted">
+                      {formatAppearanceDate(appearance.taken.value, "short")}
+                      <span class="sr-only"> · {appearanceTitle(appearance.event)}</span>
+                    </p>
                   </figcaption>
                 </figure>
               </article>

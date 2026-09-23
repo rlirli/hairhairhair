@@ -34,5 +34,6 @@ test("style example cards use a square image beside bottom-aligned description",
   assert.match(archive, /grid-cols-\[minmax\(0,1fr\)_minmax\(0,1fr\)\]/);
   assert.match(archive, /aspect-square/);
   assert.match(archive, /items-end/);
-  assert.match(archive, /border border-ink\/25 p-3/);
+  assert.match(archive, /rounded-3xl border-2 border-ink p-3/);
+  assert.match(archive, /rounded-2xl object-cover/);
 });

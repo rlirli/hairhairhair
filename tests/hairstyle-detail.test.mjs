@@ -38,7 +38,7 @@ test("published hairstyle detail routes provide the requested previews and full 
       assert.ok((appearancePreview.match(/<article\b/g) ?? []).length <= 6);
       assert.equal((appearancePreview.match(/<img\b/g) ?? []).length, Math.min(6, appearanceCount));
       assert.match(appearancePreview, /<time\b[^>]*datetime="\d{4}-\d{2}-\d{2}"[^>]*data-local-date/);
-      assert.match(appearancePreview, /text-ink\/60/);
+      assert.match(appearancePreview, /text-muted/);
     } else {
       assert.doesNotMatch(detail, /Worn by celebs|No dated appearance photographs/);
     }
@@ -70,7 +70,7 @@ test("published hairstyle detail routes provide the requested previews and full 
     );
     if (appearanceCount) {
       assert.match(appearances, /<time\b[^>]*datetime="\d{4}-\d{2}-\d{2}"[^>]*data-local-date/);
-      assert.match(appearances, /text-ink\/60/);
+      assert.match(appearances, /text-muted/);
     }
     if (appearancesForStyle(style.id).length) assert.match(appearances, /<img\b/);
     assert.doesNotMatch(appearances, /<img\b[^>]*class="[^"]*rounded-/);

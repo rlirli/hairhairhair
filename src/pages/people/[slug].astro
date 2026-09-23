@@ -105,11 +105,16 @@ const naturalProfile = naturalProfileForPerson(person.id);
           More
         </a>
       </div>
-      <div class="mt-7 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-        {appearances.slice(0, 4).map((appearance) => {
+      <div
+        class="mt-5 flex gap-3 overflow-x-auto overscroll-x-contain pb-3"
+        role="region"
+        aria-labelledby="appearances-heading"
+        tabindex="0"
+      >
+        {appearances.slice(0, 6).map((appearance) => {
           const photo = media.find((item) => item.id === appearance.imageId);
           return photo ? (
-            <article class="group">
+            <article class="group w-[min(72vw,14rem)] min-w-0 shrink-0 lg:w-[calc((100%_-_3.75rem)/6)]">
               <figure>
                 <div class="relative overflow-hidden">
                   <a
@@ -129,15 +134,15 @@ const naturalProfile = naturalProfileForPerson(person.id);
                   </a>
                   <PersonPhotoAttribution media={photo} density="compact" />
                 </div>
-                <figcaption class="mt-4">
-                  <p class="text-xs font-black uppercase tracking-[.14em] text-orange">
-                    {formatAppearanceDate(appearance.taken.value, "short")}
-                  </p>
-                  <h3 class="mt-2 font-display text-xl leading-tight tracking-[-.02em]">
+                <figcaption class="mt-2">
+                  <h3 class="font-display text-lg leading-tight tracking-[-.02em]">
                     <a class="focus-ring" href={`/people/${person.slug}/appearances/${appearance.id}/`}>
                       {appearanceTitle(appearance.event)}
                     </a>
                   </h3>
+                  <p class="mt-1 text-xs leading-tight text-muted">
+                    {formatAppearanceDate(appearance.taken.value, "short")}
+                  </p>
                 </figcaption>
               </figure>
             </article>
@@ -157,12 +162,17 @@ const naturalProfile = naturalProfileForPerson(person.id);
           More
         </a>
       </div>
-      <div class="mt-7 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-        {hairstyleRecords.slice(0, 4).map(({ style, appearances: styleAppearances }) => {
+      <div
+        class="mt-5 flex gap-3 overflow-x-auto overscroll-x-contain pb-3"
+        role="region"
+        aria-labelledby="hairstyles-heading"
+        tabindex="0"
+      >
+        {hairstyleRecords.slice(0, 6).map(({ style, appearances: styleAppearances }) => {
           const appearance = styleAppearances[0];
           const photo = media.find((item) => item.id === appearance.imageId);
           return photo ? (
-            <article class="group">
+            <article class="group w-[min(72vw,14rem)] min-w-0 shrink-0 lg:w-[calc((100%_-_3.75rem)/6)]">
               <figure>
                 <div class="relative overflow-hidden">
                   <a
@@ -183,12 +193,16 @@ const naturalProfile = naturalProfileForPerson(person.id);
                   </a>
                   <PersonPhotoAttribution media={photo} density="compact" />
                 </div>
-                <figcaption class="mt-4">
-                  <h3 class="font-display text-2xl leading-[.98] tracking-[-.03em]">
+                <figcaption class="mt-2">
+                  <h3 class="font-display text-xl leading-tight tracking-[-.03em]">
                     <a class="focus-ring" href={`/people/${person.slug}/hairstyles/${style.slug}/`}>
                       {style.name}
                     </a>
                   </h3>
+                  <p class="mt-1 text-xs leading-tight text-muted">
+                    {formatAppearanceDate(appearance.taken.value, "short")}
+                    <span class="sr-only"> · {appearanceTitle(appearance.event)}</span>
+                  </p>
                 </figcaption>
               </figure>
             </article>

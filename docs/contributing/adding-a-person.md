@@ -11,6 +11,8 @@ This checklist describes the current static-data workflow for a person with at l
 5. In `src/data/people-relations.ts`, add the person's desired editorial hairstyle order to `personHairstyleOrder` so observed hairstyle previews and detail routes are produced.
 6. Run `npm run verify`. The integrity tests derive people, photographs, appearances, and routes from the content data and asset directories; do not add parallel bookkeeping fixtures.
 
+The person page shows up to six recent appearance cards and six hairstyle cards in separate horizontal strips. The person appearance and hairstyle archives retain every recorded entry in wrapping grids.
+
 Licensed-photo cards show the recorded creator, one linked license label, a source-record link, the supplied work identifier/title, and a visible change note such as “cropped” when applicable. Public-domain cards omit attribution text; the individual photograph record retains its full provenance. Keep the structured creator, license, source, rights, identifier, and derivative metadata accurate so both compact credits and detail records can be rendered from the same source data.
 
 ## Optional

@@ -37,9 +37,9 @@ export default function PersonDirectoryCard({
             sizes={person.imageSizes}
             alt={person.imageAlt}
             loading="lazy"
-            className="aspect-[4/5] w-full border border-ink/25 object-cover transition group-hover:border-orange"
+            className="aspect-[4/5] w-full object-cover transition"
           />
-          <h2 className="mt-2 truncate font-display text-xl tracking-[-.03em] group-hover:text-orange">
+          <h2 className="mt-1 truncate font-display text-xl tracking-[-.03em] group-hover:text-orange">
             {person.name}
           </h2>
           {subtitle && <p className="mt-1 text-xs text-ink/60">{subtitle}</p>}

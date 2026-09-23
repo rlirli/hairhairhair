@@ -24,7 +24,7 @@ const imageClass =
   data-hairstyle-card={filterable ? "" : undefined}
   data-hairstyle-kind={filterable ? style.kind : undefined}
   data-hairstyle-hair-types={filterable ? compatibleHairTypeIds.join(",") : undefined}
-  class={`hover-surface focus-ring group block rounded-3xl border-2 border-ink p-4 transition ${compact ? "" : "sm:p-6"}`}
+  class={`hover-surface focus-ring group block rounded-3xl border-2 border-ink p-3 transition ${compact ? "" : "sm:p-4"}`}
 >
   {media && (
     <Image
@@ -38,11 +38,11 @@ const imageClass =
     />
   )}
   {media?.provenance.kind === "photograph" && (
-    <p class="mt-2 text-xs font-bold uppercase tracking-[.12em] text-orange">
+    <p class="mt-1.5 text-xs font-bold uppercase tracking-[.12em] text-orange">
       Photographic reference · {media.provenance.creator} · {media.provenance.licenseName}
     </p>
   )}
-  <p class="mt-5 text-xs font-black uppercase tracking-[.16em] text-orange">{kindLabels[style.kind]}</p>
-  <h2 class="mt-2 font-display text-3xl tracking-[-.05em]">{style.name}</h2>
-  <p class="mt-1 text-sm leading-6">{style.summary}</p>
+  <p class="mt-3 text-xs font-black uppercase tracking-[.16em] text-orange">{kindLabels[style.kind]}</p>
+  <h2 class="mt-1.5 font-display text-2xl tracking-[-.05em]">{style.name}</h2>
+  <p class="mt-1 text-sm leading-5">{style.summary}</p>
 </a>

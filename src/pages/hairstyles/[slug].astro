@@ -86,7 +86,7 @@ const ogImage = heroMedia
           More
         </a>
       </div>
-      <div class="mt-5 grid gap-5 sm:grid-cols-2">
+      <div class="mt-4 grid gap-4 sm:grid-cols-2">
         {examples.slice(0, 4).map((example, index) => (
           <StyleExampleCard example={example} styleSlug={style.slug} eager={index === 0} />
         ))}
@@ -104,7 +104,7 @@ const ogImage = heroMedia
           </a>
         </div>
         <div class="mt-5">
-          <HairstyleAppearanceGrid appearances={documentedAppearances.slice(0, 6)} />
+          <HairstyleAppearanceGrid appearances={documentedAppearances.slice(0, 6)} layout="row" />
         </div>
       </section>
     )}
@@ -162,7 +162,8 @@ const ogImage = heroMedia
         <RelatedHairstyleGrid
           styles={related.slice(0, 6)}
           size="small"
-          className="mt-5 grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3 lg:grid-cols-6"
+          className="mt-5 flex gap-3 overflow-x-auto overscroll-x-contain pb-3"
+          horizontalScroll
         />
       </section>
     )}

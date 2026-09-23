@@ -22,6 +22,7 @@ export interface RelatedHairstyleHoverCardItem {
 
 interface Props extends RelatedHairstyleHoverCardItem {
   size: "small" | "medium";
+  horizontalScroll?: boolean;
 }
 
 export default function RelatedHairstyleHoverCard({
@@ -38,10 +39,13 @@ export default function RelatedHairstyleHoverCard({
   subtypeLabels = [],
   photoAttribution,
   size,
+  horizontalScroll = false,
 }: Props) {
   return (
     <HoverCard openDelay={180} closeDelay={120}>
-      <div className="relative min-w-0">
+      <div
+        className={`relative min-w-0 ${horizontalScroll ? "w-[min(72vw,14rem)] shrink-0 lg:w-[calc((100%_-_3.75rem)/6)]" : ""}`}
+      >
         <HoverCardTrigger asChild>
           <a href={href} className="focus-ring group block min-w-0">
             <img
@@ -53,7 +57,7 @@ export default function RelatedHairstyleHoverCard({
               className={`aspect-square w-full border border-ink/25 object-cover transition group-hover:border-orange ${transparentBackground ? "bg-hairstyle-image-bg" : ""} ${size === "small" ? "rounded-xl" : "rounded-2xl"}`}
             />
             <h3
-              className={`truncate font-display tracking-[-.03em] group-hover:text-orange ${size === "small" ? "mt-2 text-lg" : "mt-3 text-2xl"}`}
+              className={`truncate font-display tracking-[-.03em] group-hover:text-orange ${size === "small" ? "mt-1 text-lg" : "mt-2 text-2xl"}`}
             >
               {name}
             </h3>

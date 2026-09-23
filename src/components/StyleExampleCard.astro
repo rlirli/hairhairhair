@@ -20,7 +20,7 @@ const imageClass =
 ---
 
 {media && (
-  <article class="group border border-ink/25 p-3 transition-colors hover:border-ink/60">
+  <article class="group rounded-3xl border-2 border-ink p-3 transition-colors hover:border-ink/60 sm:p-4">
     <a
       class="focus-ring grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)] items-end gap-3"
       href={href}
@@ -34,18 +34,18 @@ const imageClass =
           format="webp"
           alt={media.alt}
           loading={eager ? "eager" : "lazy"}
-          class:list={["aspect-square w-full object-cover", imageClass]}
+          class:list={["aspect-square w-full rounded-2xl object-cover", imageClass]}
         />
       </figure>
       <div class="pb-1">
         <h3 class="text-base font-bold leading-snug transition-colors group-hover:text-ink sm:text-lg">
           {example.title}
         </h3>
-        <p class="mt-2 text-sm leading-5 text-ink/60 transition-colors group-hover:text-ink">{example.caption}</p>
-        <p class="mt-2 text-xs leading-5 text-ink/60 transition-colors group-hover:text-ink">
+        <p class="mt-1.5 text-sm leading-5 text-ink/60 transition-colors group-hover:text-ink">{example.caption}</p>
+        <p class="mt-1.5 text-xs leading-5 text-ink/60 transition-colors group-hover:text-ink">
           {example.patternDescription}
         </p>
-        <p class="mt-2 text-xs leading-5 text-ink/60 transition-colors group-hover:text-ink">
+        <p class="mt-1.5 text-xs leading-5 text-ink/60 transition-colors group-hover:text-ink">
           {example.lengthDescription}
         </p>
       </div>

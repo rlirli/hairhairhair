@@ -14,14 +14,26 @@ interface AppearanceCard {
 
 interface Props {
   appearances: AppearanceCard[];
+  layout?: "row" | "grid";
 }
 
-const { appearances } = Astro.props;
+const { appearances, layout = "grid" } = Astro.props;
 ---
 
-<div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
+<div
+  class:list={[
+    layout === "row"
+      ? "flex gap-3 overflow-x-auto overscroll-x-contain pb-3"
+      : "grid grid-cols-2 gap-x-3 gap-y-4 sm:grid-cols-3 lg:grid-cols-6",
+  ]}
+  role={layout === "row" ? "region" : undefined}
+  aria-label={layout === "row" ? "Celebrity appearance previews" : undefined}
+  tabindex={layout === "row" ? 0 : undefined}
+>
   {appearances.map(({ id, personSlug, personName, date, event, media }) => (
-    <article class="min-w-0">
+    <article
+      class:list={["min-w-0", layout === "row" && "w-[min(72vw,14rem)] shrink-0 lg:w-[calc((100%_-_3.75rem)/6)]"]}
+    >
       <figure class="relative overflow-hidden">
         <a class="focus-ring block" href={`/people/${personSlug}/appearances/${id}/`}>
           <Image
@@ -37,12 +49,12 @@ const { appearances } = Astro.props;
         <PersonPhotoAttribution media={media} density="compact" />
       </figure>
       <a
-        class="focus-ring mt-2 block font-display text-lg leading-tight"
+        class="focus-ring mt-1 block font-display text-lg leading-tight"
         href={`/people/${personSlug}/appearances/${id}/`}
       >
         {personName}
       </a>
-      <p class="mt-1 text-xs leading-5 text-ink/60">
+      <p class="mt-1 text-xs leading-tight text-muted">
         <time datetime={date} data-local-date>
           {date}
         </time>

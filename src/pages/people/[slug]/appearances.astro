@@ -74,7 +74,7 @@ const appearances = appearancesForPerson(person.id)
         </div>
       </div>
 
-      <div class="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="mt-6 grid gap-x-4 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
         {appearances.map(({ appearance, photo }) => (
           <article class="group" id={appearance.id}>
             <figure>
@@ -96,14 +96,14 @@ const appearances = appearancesForPerson(person.id)
                 </a>
                 <PersonPhotoAttribution media={photo} density="compact" />
               </div>
-              <figcaption class="mt-4">
-                <p class="text-xs font-black uppercase tracking-[.14em] text-orange">{appearance.taken.value}</p>
-                <h3 class="mt-2 font-display text-xl leading-tight tracking-[-.02em]">
+              <figcaption class="mt-2">
+                <h3 class="font-display text-lg leading-tight tracking-[-.02em]">
                   <a class="focus-ring" href={`/people/${person.slug}/appearances/${appearance.id}/`}>
                     {appearanceTitle(appearance.event)}
                   </a>
                 </h3>
-                <p class="mt-2 text-sm leading-6">{appearance.event}</p>
+                <p class="mt-1 text-xs leading-tight text-muted">{appearance.taken.value}</p>
+                <p class="mt-1.5 text-sm leading-5">{appearance.event}</p>
               </figcaption>
             </figure>
           </article>

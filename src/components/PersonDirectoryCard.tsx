@@ -57,7 +57,7 @@ export default function PersonDirectoryCard({
                   <dt className="font-bold tracking-[.08em] uppercase opacity-65">{row.label}</dt>
                   <dd className="text-right font-semibold">
                     {row.href ? (
-                      <a className="text-orange underline underline-offset-2" href={row.href}>
+                      <a className="text-ink underline decoration-ink underline-offset-2" href={row.href}>
                         {row.value}
                       </a>
                     ) : (

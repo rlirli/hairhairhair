@@ -33,7 +33,7 @@ const uniqueStyles = photoStyles.filter(
 ---
 
 <Layout
-  title={`${photo.identifier} photograph — ${person.name} — hairhairhair.hair`}
+  title={`${photo.identifier} photograph - ${person.name} - hairhairhair.hair`}
   description={`Source, license, and usage record for a photograph of ${person.name}.`}
   image={photo.src.src}
 >
@@ -88,7 +88,7 @@ const uniqueStyles = photoStyles.filter(
             target="_blank"
             rel="noreferrer"
           >
-            Source record ↗
+            Source record
           </a>
           <a
             class="focus-ring text-orange underline decoration-orange decoration-2 underline-offset-4"
@@ -96,7 +96,7 @@ const uniqueStyles = photoStyles.filter(
             target="_blank"
             rel="noreferrer"
           >
-            Original file ↗
+            Original file
           </a>
           <a
             class="focus-ring text-orange underline decoration-orange decoration-2 underline-offset-4"
@@ -104,7 +104,7 @@ const uniqueStyles = photoStyles.filter(
             target="_blank"
             rel="noreferrer"
           >
-            Rights evidence ↗
+            Rights evidence
           </a>
         </p>
         <p class="mt-2 opacity-70">
@@ -132,7 +132,7 @@ const uniqueStyles = photoStyles.filter(
                   class="focus-ring font-bold text-orange underline decoration-orange decoration-2 underline-offset-4"
                   href={`/people/${person.slug}/appearances/${appearance.id}/`}
                 >
-                  {formatAppearanceDate(appearance.taken.value)} · {appearanceTitle(appearance.event)} ↗
+                  {formatAppearanceDate(appearance.taken.value)} · {appearanceTitle(appearance.event)}
                 </a>
                 <p class="mt-1">{appearance.event}</p>
               </li>
@@ -149,14 +149,14 @@ const uniqueStyles = photoStyles.filter(
                     class="focus-ring font-bold text-orange underline decoration-orange decoration-2 underline-offset-4"
                     href={`/people/${person.slug}/hairstyles/${style.slug}/`}
                   >
-                    {style.name} — {person.name}'s record ↗
+                    {style.name} - {person.name}'s record
                   </a>
                   {style.guidePublicationStatus === "published" && (
                     <a
                       class="focus-ring ml-3 text-orange underline decoration-orange decoration-2 underline-offset-4"
                       href={`/hairstyles/${style.slug}/`}
                     >
-                      Hairstyle ↗
+                      Hairstyle
                     </a>
                   )}
                 </li>
@@ -173,7 +173,7 @@ const uniqueStyles = photoStyles.filter(
       class="focus-ring mt-14 inline-block font-bold text-orange underline decoration-orange decoration-2 underline-offset-4"
       href={`/people/${person.slug}/`}
     >
-      ← Back to {person.name}
+      Back to {person.name}
     </a>
   </article>
 </Layout>

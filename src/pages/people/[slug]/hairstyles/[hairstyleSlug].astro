@@ -25,11 +25,14 @@ const records = appearancesForPersonStyle(person.id, style.id);
 ---
 
 <Layout
-  title={`${style.name} worn by ${person.name} — people — hairhairhair.hair`}
+  title={`${style.name} worn by ${person.name} - people - hairhairhair.hair`}
   description={`Documented appearances where ${person.name} wore ${style.name}.`}
 >
   <article class="mx-auto max-w-7xl px-5 pb-20 pt-12 sm:px-8">
-    <nav aria-label="Breadcrumb" class="text-sm font-bold uppercase tracking-[.12em]">
+    <nav
+      aria-label="Breadcrumb"
+      class="mb-8 flex flex-wrap items-center gap-y-1 text-xs font-bold uppercase tracking-[.12em] sm:text-sm"
+    >
       <a class="focus-ring text-orange" href="/">
         Home
       </a>
@@ -59,19 +62,19 @@ const records = appearancesForPersonStyle(person.id, style.id);
 
     <header class="mt-12 max-w-3xl">
       <p class="text-xs font-black uppercase tracking-[.18em] text-orange">Person hairstyle record</p>
-      <h1 class="mt-4 font-display text-6xl leading-[.88] tracking-[-.08em] sm:text-8xl">{style.name}</h1>
+      <h1 class="mt-4 font-display text-6xl leading-[.88] tracking-[-.08em] sm:text-8xl">
+        {style.guidePublicationStatus === "published" ? (
+          <a class="focus-ring" href={`/hairstyles/${style.slug}/`}>
+            {style.name}
+          </a>
+        ) : (
+          style.name
+        )}
+      </h1>
       <p class="mt-6 text-lg leading-7">
         {person.name} wearing this hairstyle in {records.length} documented{" "}
         {records.length === 1 ? "appearance" : "appearances"}.
       </p>
-      {style.guidePublicationStatus === "published" && (
-        <a
-          class="focus-ring mt-5 inline-block font-bold text-orange underline decoration-orange decoration-2 underline-offset-4"
-          href={`/hairstyles/${style.slug}/`}
-        >
-          Explore {style.name} ↗
-        </a>
-      )}
     </header>
 
     <section class="mt-16" aria-labelledby="appearances-heading">
@@ -82,7 +85,6 @@ const records = appearancesForPersonStyle(person.id, style.id);
             All documented appearances
           </h2>
         </div>
-        <p class="text-right text-sm font-bold uppercase tracking-[.12em]">Newest first</p>
       </div>
 
       <div class="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -127,7 +129,7 @@ const records = appearancesForPersonStyle(person.id, style.id);
       class="focus-ring mt-14 inline-block font-bold text-orange underline decoration-orange decoration-2 underline-offset-4"
       href={`/people/${person.slug}/hairstyles/`}
     >
-      ← All hairstyles worn by {person.name}
+      All hairstyles worn by {person.name}
     </a>
   </article>
 </Layout>

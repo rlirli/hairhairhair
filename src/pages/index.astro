@@ -25,25 +25,22 @@ import { people } from "../data/people";
         class="action-primary focus-ring mt-8 inline-flex rounded-full border-2 border-ink px-6 py-3 text-sm font-black uppercase tracking-[.1em] transition"
       >
         <span>Explore hair types</span>{" "}
-        <span class="ml-3" aria-hidden="true">
-          ↗
-        </span>
       </a>
     </div>
   </section>
   <section class="mx-auto max-w-7xl px-5 py-16 sm:px-8" id="about">
-    <div class="mb-8 flex items-end justify-between gap-4">
+    <div class="mb-8 flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
       <div>
         <p class="text-xs font-black uppercase tracking-[.2em] text-orange">Natural hair</p>
         <h2 class="mt-2 font-display text-5xl tracking-[-.06em]">The four hair types</h2>
       </div>
-      <a href="/hair-types/" class="focus-ring text-sm font-normal opacity-60 transition hover:opacity-100">
+      <a href="/hair-types/" class="focus-ring text-sm font-normal text-muted transition hover:text-ink">
         See all types
       </a>
     </div>
     <p class="mb-8 max-w-2xl text-lg leading-7">
-      This Walker-inspired chart classifies visible natural hair patterns into four numbered types—straight, wavy,
-      curly, and coily—with lettered sub-types for more specific pattern descriptions.
+      This Walker-inspired chart classifies visible natural hair patterns into four numbered types - straight, wavy,
+      curly, and coily - with lettered sub-types for more specific pattern descriptions.
     </p>
     <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {hairTypes.map((hairType) => (
@@ -58,7 +55,7 @@ import { people } from "../data/people";
             <Pattern
               pattern={hairType.pattern}
               subtype="B"
-              label={`Simplified Type ${hairType.code} ${hairType.name.toLowerCase()} pattern illustration — not a diagnostic or photograph`}
+              label={`Simplified Type ${hairType.code} ${hairType.name.toLowerCase()} pattern illustration - not a diagnostic or photograph`}
               caption={false}
             />
           </div>

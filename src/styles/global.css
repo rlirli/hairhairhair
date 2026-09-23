@@ -3,6 +3,7 @@
 
 @theme {
   --color-ink: #181715;
+  --color-muted: color-mix(in srgb, var(--color-ink) 60%, transparent);
   --color-ivory: #f4f0e8;
   --color-hairstyle-image-bg: #e0d5c6;
   --color-orange: #b83e16;
@@ -47,6 +48,29 @@
 }
 html {
   scroll-behavior: smooth;
+}
+nav[aria-label="Breadcrumb"] {
+  display: block;
+  margin-top: -1rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.75rem;
+}
+nav[aria-label="Breadcrumb"] > a,
+nav[aria-label="Breadcrumb"] > span:not([aria-hidden="true"]) {
+  display: inline-block;
+  white-space: nowrap;
+}
+nav[aria-label="Breadcrumb"] > a::after {
+  content: "/";
+  margin: 0 0.5rem;
+}
+nav[aria-label="Breadcrumb"] > span[aria-hidden="true"] {
+  display: none;
+}
+@media (min-width: 640px) {
+  nav[aria-label="Breadcrumb"] {
+    font-size: 0.875rem;
+  }
 }
 .scrollbar-hidden {
   scrollbar-width: none;

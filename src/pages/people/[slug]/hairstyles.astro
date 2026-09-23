@@ -17,11 +17,14 @@ const styleRecords = hairstylesForPerson(person.id);
 ---
 
 <Layout
-  title={`${person.name} hairstyles — people — hairhairhair.hair`}
+  title={`${person.name} hairstyles - people - hairhairhair.hair`}
   description={`Hairstyles documented in ${person.name}'s public appearances.`}
 >
   <article class="mx-auto max-w-7xl px-5 pb-20 pt-12 sm:px-8">
-    <nav aria-label="Breadcrumb" class="text-sm font-bold uppercase tracking-[.12em]">
+    <nav
+      aria-label="Breadcrumb"
+      class="mb-8 flex flex-wrap items-center gap-y-1 text-xs font-bold uppercase tracking-[.12em] sm:text-sm"
+    >
       <a class="focus-ring text-orange" href="/">
         Home
       </a>

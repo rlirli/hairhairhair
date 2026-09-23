@@ -8,7 +8,7 @@ interface Props {
 const { pattern = "wavy", subtype = "B", label, caption } = Astro.props;
 const level = subtype === "A" ? 1 : subtype === "C" ? 3 : 2;
 const accessibleLabel =
-  label ?? `Simplified ${pattern} pattern illustration, subtype ${subtype} — not a diagnostic or photograph`;
+  label ?? `Simplified ${pattern} pattern illustration, subtype ${subtype} - not a diagnostic or photograph`;
 ---
 
 <div

@@ -28,7 +28,7 @@ const observedStyles = observedStylesForAppearance(appearance.id);
 ---
 
 <Layout
-  title={`${formatAppearanceDate(appearance.taken.value)} — ${appearance.event} — ${person.name}`}
+  title={`${formatAppearanceDate(appearance.taken.value)} - ${appearance.event} - ${person.name}`}
   description={`Appearance record for ${person.name} at ${appearance.event}.`}
   image={photo.src.src}
 >
@@ -88,7 +88,7 @@ const observedStyles = observedStylesForAppearance(appearance.id);
             class="focus-ring font-bold text-orange underline decoration-orange decoration-2 underline-offset-4"
             href={`/people/${person.slug}/photographs/${photo.id}/`}
           >
-            Photograph record ↗
+            Photograph record
           </a>
         </figcaption>
       </figure>
@@ -111,14 +111,14 @@ const observedStyles = observedStylesForAppearance(appearance.id);
                       class="focus-ring text-orange underline decoration-orange decoration-2 underline-offset-4"
                       href={`/hairstyles/${style.slug}/`}
                     >
-                      Hairstyle ↗
+                      Hairstyle
                     </a>
                   )}
                   <a
                     class="focus-ring text-orange underline decoration-orange decoration-2 underline-offset-4"
                     href={`/people/${person.slug}/hairstyles/${style.slug}/`}
                   >
-                    {person.name}'s record ↗
+                    {person.name}'s record
                   </a>
                 </div>
               </article>
@@ -139,7 +139,7 @@ const observedStyles = observedStylesForAppearance(appearance.id);
             target="_blank"
             rel="noreferrer"
           >
-            Open source record ↗
+            Open source record
           </a>
         </section>
       </aside>
@@ -150,13 +150,13 @@ const observedStyles = observedStylesForAppearance(appearance.id);
         class="focus-ring text-orange underline decoration-orange decoration-2 underline-offset-4"
         href={`/people/${person.slug}/`}
       >
-        ← Back to {person.name}
+        Back to {person.name}
       </a>
       <a
         class="focus-ring text-orange underline decoration-orange decoration-2 underline-offset-4"
         href={`/people/${person.slug}/appearances/`}
       >
-        All appearances ↗
+        All appearances
       </a>
     </nav>
   </article>

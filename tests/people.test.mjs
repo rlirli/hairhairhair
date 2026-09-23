@@ -211,7 +211,7 @@ test("Mario Balotelli is a complete second person record with five licensed appe
 test("appearance overview is newest-first and links back to the person record", () => {
   const markup = page("/people/will-smith/appearances/");
   assert.match(markup, /Appearance archive/);
-  assert.match(markup, /Newest first/);
+  assert.doesNotMatch(markup, /Newest first/);
   assert.ok(markup.indexOf("2012-05-23") < markup.indexOf("2011-04-24"));
   assert.ok(markup.indexOf("2011-04-24") < markup.indexOf("2009-12-10"));
   for (const appearance of appearances.filter((item) => item.personId === "person-will-smith")) {
@@ -425,7 +425,10 @@ test("person hairstyle detail pages collect every matching appearance", () => {
     assert.match(markup, /Person hairstyle record/);
     for (const date of dates) assert.match(markup, new RegExp(date));
     assert.doesNotMatch(markup, /Appearance record ↗/);
-    assert.match(markup, /Explore .* ↗/);
+    assert.match(
+      markup,
+      new RegExp(`<a[^>]+href="/hairstyles/${slug}/"[^>]*>${slug === "flat-top" ? "Flat top" : "Buzz cut"}</a>`),
+    );
     assert.match(markup, /href="\/people\/will-smith\/photographs\/will-smith-/);
   }
   assert.deepEqual(

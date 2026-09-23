@@ -22,12 +22,15 @@ const naturalProfile = naturalProfileForPerson(person.id);
 ---
 
 <Layout
-  title={`${person.name} — people — hairhairhair.hair`}
+  title={`${person.name} - people - hairhairhair.hair`}
   description={person.description}
   image={hero ? hero.src.src : undefined}
 >
   <article class="mx-auto max-w-7xl px-5 pb-20 pt-12 sm:px-8">
-    <nav aria-label="Breadcrumb" class="text-sm font-bold uppercase tracking-[.12em]">
+    <nav
+      aria-label="Breadcrumb"
+      class="mb-8 flex flex-wrap items-center gap-y-1 text-xs font-bold uppercase tracking-[.12em] sm:text-sm"
+    >
       <a class="focus-ring text-orange" href="/">
         Home
       </a>
@@ -49,18 +52,17 @@ const naturalProfile = naturalProfileForPerson(person.id);
           {person.name}
         </h1>
         <div class="mt-8">
-          <p class="text-xs font-black uppercase tracking-[.14em] opacity-60">Mini bio</p>
           <ExpandableBio id={`person-${person.slug}-bio`} text={person.description} />
         </div>
         <div class="mt-6 flex flex-wrap gap-x-4 gap-y-2 text-sm">
           {person.sources.map(({ url, kind }) => (
             <a
-              class="focus-ring font-bold text-orange underline decoration-orange decoration-2 underline-offset-4"
+              class="focus-ring font-normal text-muted underline decoration-muted underline-offset-4"
               href={url}
               target="_blank"
               rel="noreferrer"
             >
-              {kind === "photograph" ? "photo source" : "bio source"} ↗
+              {kind === "photograph" ? "photo source" : "bio source"}
             </a>
           ))}
         </div>
@@ -97,7 +99,7 @@ const naturalProfile = naturalProfileForPerson(person.id);
           Appearances
         </h2>
         <a
-          class="focus-ring text-xs font-normal uppercase tracking-[.14em] text-orange/70 transition hover:text-orange"
+          class="focus-ring text-xs font-normal uppercase tracking-[.14em] text-muted transition hover:text-ink"
           href={`/people/${person.slug}/appearances/`}
         >
           More
@@ -149,7 +151,7 @@ const naturalProfile = naturalProfileForPerson(person.id);
           Hairstyles worn
         </h2>
         <a
-          class="focus-ring text-xs font-normal uppercase tracking-[.14em] text-orange/70 transition hover:text-orange"
+          class="focus-ring text-xs font-normal uppercase tracking-[.14em] text-muted transition hover:text-ink"
           href={`/people/${person.slug}/hairstyles/`}
         >
           More

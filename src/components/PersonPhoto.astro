@@ -62,10 +62,10 @@ const { media, event, date, observations, anchor } = Astro.props;
           <p class="mt-4 text-lg leading-8">{note}</p>
           {guidePublished && (
             <a
-              class="focus-ring mt-5 inline-block font-bold text-orange underline decoration-orange decoration-2 underline-offset-4"
+              class="focus-ring mt-5 inline-block font-normal text-muted underline decoration-muted underline-offset-4"
               href={`/hairstyles/${styleSlug}/`}
             >
-              Explore {styleName} ↗
+              {styleName}
             </a>
           )}
         </div>

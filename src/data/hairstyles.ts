@@ -118,6 +118,7 @@ export const sources: EditorialSource[] = [
   {
     id: "andis-classic-clipper",
     title: "Essentials—Classic Clipper Cutting",
+    displayTitle: "Essentials - Classic Clipper Cutting",
     url: "https://andis.com/BarberStylistEducation/VideoDetail?EduItemID=1330",
     publisher: "Andis Education",
     reviewedAt: "2026-09-21",

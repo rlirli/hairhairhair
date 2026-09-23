@@ -5,8 +5,17 @@ import { hairSubtypes, hairTypes } from "../../data/hair-types";
 import { publishedHairstyles } from "../../data/hairstyles";
 import { compatibleHairstylesForHairType } from "../../data/hairstyle-compatibility";
 import { kindLabels } from "../../data/hairstyle-relations";
+import DirectoryFilters, { type FilterGroup } from "../../components/DirectoryFilters";
 
 const kinds = Object.entries(kindLabels).map(([id, label]) => ({ id, label }));
+const hairTypeParents = hairTypes.map((type) => ({
+  id: type.id,
+  label: `Type ${type.code}`,
+  children: hairSubtypes
+    .filter((subtype) => subtype.hairTypeId === type.id)
+    .sort((left, right) => left.sortOrder - right.sortOrder)
+    .map((subtype) => ({ id: subtype.id, label: `Type ${subtype.code}` })),
+}));
 const hairTypeOptions = [
   ...hairTypes.map((type) => ({ id: type.id, label: `Type ${type.code}` })),
   ...hairSubtypes.map((type) => ({ id: type.id, label: `Type ${type.code}` })),
@@ -18,9 +27,9 @@ const compatibleStylesByType = new Map(
 );
 const hairTypeIdsForStyle = (styleId: string) =>
   hairTypeOptions.filter((type) => compatibleStylesByType.get(type.id)?.has(styleId)).map((type) => type.id);
-const filterGroups = [
+const filterGroups: FilterGroup[] = [
   { key: "kind", label: "Kind", options: kinds },
-  { key: "hair-type", label: "Hair type", options: hairTypeOptions },
+  { key: "hair-type", label: "Hair type", parents: hairTypeParents },
 ];
 ---
 
@@ -40,36 +49,21 @@ const filterGroups = [
       the chair.
     </p>
     <div class="mt-10 border-b border-ink/30 pb-1.5 pr-1.5">
-      <div class="flex justify-end gap-3 text-xs font-normal text-ink/60 sm:gap-5" data-hairstyle-filters>
-        {filterGroups.map((group) => (
-          <details class="relative" data-hairstyle-filter={group.key}>
-            <summary class="focus-ring flex cursor-pointer list-none items-center gap-1 whitespace-nowrap uppercase">
-              <span data-filter-label data-default-label={group.label}>
-                {group.label}
-              </span>
-              <span aria-hidden="true" class="relative -top-0.75">
-                ⌄
-              </span>
-            </summary>
-            <fieldset class="absolute right-0 top-full z-30 mt-2 max-h-64 w-56 overflow-auto rounded-xl border border-ink/20 bg-ivory p-3 shadow-lg">
-              <legend class="sr-only">{group.label}</legend>
-              <div class="grid gap-2">
-                {group.options.map((option) => (
-                  <label class="flex cursor-pointer items-center gap-2 text-sm font-normal text-ink/60">
-                    <input class="accent-orange" type="checkbox" value={option.id} />
-                    <span>{option.label}</span>
-                  </label>
-                ))}
-              </div>
-            </fieldset>
-          </details>
-        ))}
-      </div>
+      <DirectoryFilters
+        client:load
+        groups={filterGroups}
+        cardSelector="[data-hairstyle-card]"
+        dataAttributes={{ kind: "hairstyleKind", "hair-type": "hairstyleHairTypes" }}
+        resultsSelector="[data-hairstyle-results]"
+        emptySelector="[data-hairstyle-empty]"
+        itemLabel="hairstyle"
+        pluralItemLabel="hairstyles"
+      />
     </div>
   </section>
   <p class="sr-only" data-hairstyle-results role="status" aria-live="polite"></p>
   <section
-    class="mx-auto grid max-w-7xl grid-cols-2 gap-5 px-5 pb-20 sm:px-8 md:grid-cols-3 lg:grid-cols-4"
+    class="mx-auto grid max-w-7xl grid-cols-2 gap-x-3 gap-y-5 px-5 pb-20 sm:gap-x-5 sm:px-8 md:grid-cols-3 lg:grid-cols-4"
     data-hairstyle-grid
   >
     {publishedHairstyles.map((style) => (
@@ -80,57 +74,3 @@ const filterGroups = [
     </p>
   </section>
 </Layout>
-
-<script>
-  const filters = [...document.querySelectorAll<HTMLDetailsElement>("[data-hairstyle-filter]")];
-  const cards = [...document.querySelectorAll<HTMLElement>("[data-hairstyle-card]")];
-  const results = document.querySelector<HTMLElement>("[data-hairstyle-results]");
-  const empty = document.querySelector<HTMLElement>("[data-hairstyle-empty]");
-
-  const update = () => {
-    let visible = 0;
-    for (const filter of filters) {
-      const selected = [...filter.querySelectorAll<HTMLInputElement>('input[type="checkbox"]:checked')];
-      const label = filter.querySelector<HTMLElement>("[data-filter-label]");
-      if (label) {
-        const fallback = label.dataset.defaultLabel ?? "";
-        label.textContent =
-          selected.length === 1 ? (selected[0].nextElementSibling?.textContent?.trim() ?? fallback) : fallback;
-      }
-    }
-    for (const card of cards) {
-      const matches = filters.every((filter) => {
-        const dimension = filter.dataset.hairstyleFilter;
-        const selected = [...filter.querySelectorAll<HTMLInputElement>('input[type="checkbox"]:checked')].map(
-          (input) => input.value,
-        );
-        if (selected.length === 0 || !dimension) return true;
-        const values =
-          dimension === "kind"
-            ? [card.dataset.hairstyleKind ?? ""]
-            : (card.dataset.hairstyleHairTypes ?? "").split(",");
-        return selected.some((value) => values.includes(value));
-      });
-      card.classList.toggle("hidden", !matches);
-      if (matches) visible += 1;
-    }
-    if (results) results.textContent = `${visible} ${visible === 1 ? "hairstyle" : "hairstyles"} shown`;
-    if (empty) empty.classList.toggle("hidden", visible !== 0);
-  };
-
-  for (const filter of filters) filter.addEventListener("change", update);
-  document.addEventListener("click", (event) => {
-    for (const filter of filters) {
-      if (event.target instanceof Node && !filter.contains(event.target)) filter.open = false;
-    }
-  });
-  document.addEventListener("keydown", (event) => {
-    if (event.key !== "Escape") return;
-    for (const filter of filters) {
-      if (!filter.open) continue;
-      filter.open = false;
-      filter.querySelector("summary")?.focus();
-    }
-  });
-  update();
-</script>

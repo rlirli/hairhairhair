@@ -13,6 +13,7 @@ These guides describe the repository as it works now. Update the relevant guide 
 
 - [`CONTEXT.md`](../CONTEXT.md) defines the shared domain language.
 - [`src/data/`](../src/data/) contains the current executable content model.
+- [Directory filters](reference/directory-filters.md) documents the shared filter controls and selection rules.
 
 ## Research
 

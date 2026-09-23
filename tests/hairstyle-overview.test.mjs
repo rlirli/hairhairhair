@@ -22,20 +22,19 @@ test("hairstyle overview keeps at least two columns across responsive sizes", ()
   }
 });
 
-test("hairstyle filters expose kind and thresholded major and subtype options", () => {
+test("hairstyle filters expose kind and hierarchical major and subtype controls", () => {
   const markup = page("/hairstyles/");
-  assert.match(markup, /data-hairstyle-filter="kind"/);
-  assert.match(markup, /data-hairstyle-filter="hair-type"/);
-  assert.match(markup, /data-default-label="Kind"/);
-  assert.match(markup, /data-default-label="Hair type"/);
-  assert.match(markup, /⌄/);
+  assert.match(markup, /data-slot="popover-trigger"/);
+  assert.match(markup, /aria-label="Kind filter/);
+  assert.match(markup, /aria-label="Hair type filter/);
+  assert.match(markup, /aria-haspopup="dialog"/);
   assert.doesNotMatch(markup, /<select|>\s*Any\s*</);
   assert.match(markup, /border-b border-ink\/30/);
   assert.match(markup, /data-hairstyle-results role="status" aria-live="polite"/);
   assert.match(markup, /No hairstyles match these filters\./);
 
   for (const type of [...hairTypes, ...hairSubtypes]) {
-    assert.match(markup, new RegExp(`value="${type.id}"`));
+    assert.ok(markup.includes(type.id), `expected filter data for ${type.code}`);
   }
 
   const cardMarkup = [...markup.matchAll(/<a\b[^>]*data-hairstyle-card[^>]*>/g)].map(([card]) => card);
@@ -53,14 +52,16 @@ test("hairstyle filters expose kind and thresholded major and subtype options", 
   }
 });
 
-test("hairstyle filters follow accessible people filter behavior without reordering cards", () => {
-  const source = readFileSync(join(root, "src/pages/hairstyles/index.astro"), "utf8");
-  assert.match(source, /selected\.length === 1/);
-  assert.match(source, /filters\.every\(/);
-  assert.match(source, /selected\.some\(/);
-  assert.match(source, /card\.classList\.toggle\("hidden", !matches\)/);
-  assert.match(source, /filter\.addEventListener\("change", update\)/);
-  assert.match(source, /if \(event\.key !== "Escape"\) return/);
-  assert.match(source, /filter\.querySelector\("summary"\)\?\.focus\(\)/);
-  assert.match(source, /filter\.contains\(event\.target\)/);
+test("hairstyle filter controls are hydrated without changing catalogue order", () => {
+  const markup = page("/hairstyles/");
+  const pageSource = readFileSync(join(root, "src/pages/hairstyles/index.astro"), "utf8");
+  assert.match(markup, /<astro-island[^>]+client="load"/);
+  assert.match(pageSource, /children: hairSubtypes/);
+  assert.match(pageSource, /subtype\.hairTypeId === type\.id/);
+
+  const cardMarkup = [...markup.matchAll(/<a\b[^>]*data-hairstyle-card[^>]*>/g)].map(([card]) => card);
+  assert.deepEqual(
+    cardMarkup.map((card) => card.match(/href="\/hairstyles\/([^/]+)\//)?.[1]),
+    publishedHairstyles.map((style) => style.slug),
+  );
 });

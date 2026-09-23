@@ -15,12 +15,6 @@ test("people overview offers portrait cards, profile filters, and profile detail
   assert.match(markup, /Browse celebrities/i);
   assert.match(markup, /A look at/);
   assert.doesNotMatch(markup, /People and appearances|Dated photographs can show|Person record/);
-  assert.match(markup, /data-profile-filter="hair"/);
-  assert.match(markup, /data-profile-filter="color"/);
-  assert.match(markup, /data-profile-filter="skin"/);
-  assert.match(markup, /data-default-label="Hair type"/);
-  assert.match(markup, /data-default-label="Color"/);
-  assert.match(markup, /data-default-label="Skin tone"/);
   assert.doesNotMatch(markup, /<select|>\s*Any\s*</);
   assert.match(markup, /data-profile-hair=/);
   assert.match(markup, /data-profile-color=/);
@@ -28,6 +22,10 @@ test("people overview offers portrait cards, profile filters, and profile detail
   assert.doesNotMatch(markup, /data-profile-values=/);
   assert.match(markup, /grid-cols-2[^\"]*sm:grid-cols-3[^\"]*lg:grid-cols-4[^\"]*xl:grid-cols-6/);
   assert.equal((markup.match(/data-slot="hover-card-trigger"/g) ?? []).length, people.length);
+  assert.equal((markup.match(/aria-haspopup="dialog"/g) ?? []).length, 3);
+  for (const filterName of ["Hair type", "Color", "Skin tone"]) {
+    assert.ok(markup.includes(`aria-label="${filterName} filter, selected: all options"`));
+  }
   for (const person of people) {
     assert.match(markup, new RegExp(`href="/people/${person.slug}/"`));
     assert.match(markup, new RegExp(`alt="${person.name}[^\"]*"`));
@@ -35,11 +33,7 @@ test("people overview offers portrait cards, profile filters, and profile detail
   assert.match(readSource("src/components/PersonDirectoryCard.tsx"), /Natural profile/);
   assert.match(readSource("src/components/PersonDirectoryCard.tsx"), /person\.description/);
   assert.match(markup, /data-profile-results/);
-  assert.match(readSource("src/pages/people/index.astro"), /card\.classList\.toggle\("hidden", !matches\)/);
-  const filters = readSource("src/pages/people/index.astro");
-  assert.match(filters, /selected\.some\(\(value\) => values\.includes\(value\)\)/);
-  assert.match(filters, /selected\.length === 1/);
-  assert.match(markup, /text-sm font-normal text-ink\/60/);
+  assert.match(readSource("src/pages/people/index.astro"), /DirectoryFilters/);
 });
 
 test("people, appearances, and photographs have closed stable records", () => {

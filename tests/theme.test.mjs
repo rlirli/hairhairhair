@@ -20,6 +20,12 @@ test("the icon theme menu lives beside the footer wordmark and offers all three 
   assert.doesNotMatch(header, /Choose color theme|Toggle dark mode/);
 });
 
+test("the footer wordmark links home and exposes the shared visible focus treatment", () => {
+  const footer = source("src/components/Footer.astro");
+
+  assert.match(footer, /<a href="\/" class="focus-ring font-black">[\s\S]*?hair[\s\S]*?<\/a>/);
+});
+
 test("primary navigation stays on one row and collapses behind an accessible menu", () => {
   const header = source("src/components/Header.astro");
 

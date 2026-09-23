@@ -29,11 +29,15 @@ test("style examples have linked cards and individual routes with hairstyle and 
   }
 });
 
-test("style example cards use a square image beside bottom-aligned description", () => {
+test("style example cards pair a square image with a height-matched description", () => {
   const archive = page(`/hairstyles/${publishedHairstyles[0].slug}/examples/`);
+  const [example] = getExamplesForHairstyle(publishedHairstyles[0].id);
   assert.match(archive, /grid-cols-\[minmax\(0,1fr\)_minmax\(0,1fr\)\]/);
   assert.match(archive, /aspect-square/);
-  assert.match(archive, /items-end/);
+  assert.match(archive, /items-stretch/);
+  assert.match(archive, /style-example-copy aspect-square/);
   assert.match(archive, /rounded-3xl border-2 border-ink p-3/);
   assert.match(archive, /rounded-2xl object-cover/);
+  assert.ok(archive.includes(`${example.caption} ${example.patternDescription} ${example.lengthDescription}`));
+  assert.doesNotMatch(archive, /-webkit-line-clamp:\s*2/);
 });

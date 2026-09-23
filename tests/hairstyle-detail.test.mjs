@@ -21,7 +21,7 @@ test("published hairstyle detail routes provide the requested previews and full 
 
     const previewGallery = detail.split(">Examples</")[1].split("Worn by celebs")[0];
     assert.equal(
-      (previewGallery.match(/<figure>/g) ?? []).length,
+      (previewGallery.match(/<figure\b/g) ?? []).length,
       Math.min(4, getExamplesForHairstyle(style.id).length),
     );
     assert.doesNotMatch(previewGallery, /More\s*↗/);
@@ -62,7 +62,7 @@ test("published hairstyle detail routes provide the requested previews and full 
     }
 
     assert.match(examples, new RegExp(`${style.name} examples`));
-    assert.equal((examples.match(/<figure>/g) ?? []).length, getExamplesForHairstyle(style.id).length);
+    assert.equal((examples.match(/<figure\b/g) ?? []).length, getExamplesForHairstyle(style.id).length);
     assert.match(appearances, new RegExp(`${style.name} worn by celebs`));
     assert.doesNotMatch(
       appearances,

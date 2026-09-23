@@ -15,6 +15,16 @@ export interface HairstyleCompatibility {
 // cutting and styling while preserving the natural curl pattern. They are not a
 // judgment of attractiveness, personal suitability, or an absolute limitation.
 export const hairstyleCompatibility: HairstyleCompatibility[] = [
+  { hairstyleId: "hairstyle-blunt-bob", hairTypeId: "hair-type-1", score: 0.95, provenance: "estimated" },
+  { hairstyleId: "hairstyle-blunt-bob", hairTypeId: "hair-type-2", score: 0.85, provenance: "estimated" },
+  { hairstyleId: "hairstyle-blunt-bob", hairTypeId: "hair-type-3", score: 0.55, provenance: "estimated" },
+  { hairstyleId: "hairstyle-blunt-bob", hairTypeId: "hair-type-4", score: 0.0, provenance: "estimated" },
+
+  { hairstyleId: "hairstyle-knotless-box-braids", hairTypeId: "hair-type-1", score: 0.9, provenance: "estimated" },
+  { hairstyleId: "hairstyle-knotless-box-braids", hairTypeId: "hair-type-2", score: 0.9, provenance: "estimated" },
+  { hairstyleId: "hairstyle-knotless-box-braids", hairTypeId: "hair-type-3", score: 0.9, provenance: "estimated" },
+  { hairstyleId: "hairstyle-knotless-box-braids", hairTypeId: "hair-type-4", score: 0.9, provenance: "estimated" },
+
   { hairstyleId: "hairstyle-taper-fade", hairTypeId: "hair-type-1", score: 0.9, provenance: "estimated" },
   { hairstyleId: "hairstyle-taper-fade", hairTypeId: "hair-type-2", score: 0.9, provenance: "estimated" },
   { hairstyleId: "hairstyle-taper-fade", hairTypeId: "hair-type-3", score: 0.9, provenance: "estimated" },

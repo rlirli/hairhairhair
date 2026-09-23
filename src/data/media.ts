@@ -1,9 +1,11 @@
+import bluntBobChin from "../assets/hairstyles/blunt-bob-chin.png";
 import buzzShort from "../assets/hairstyles/buzz-short.png";
 import buzzTextured from "../assets/hairstyles/buzz-textured.png";
 import croppedAfroCompact from "../assets/hairstyles/cropped-afro-compact.png";
 import croppedAfroFull from "../assets/hairstyles/cropped-afro-full.png";
 import flatTopCoily from "../assets/hairstyles/flat-top-coily.png";
 import flatTopStraight from "../assets/hairstyles/flat-top-straight.png";
+import knotlessBoxBraidsMedium from "../assets/hairstyles/knotless-box-braids-medium.png";
 import patternedMohawkCurved from "../assets/hairstyles/patterned-mohawk-curved.png";
 import patternedMohawkGeometric from "../assets/hairstyles/patterned-mohawk-geometric.png";
 import taperCoily from "../assets/hairstyles/taper-coily.png";
@@ -29,6 +31,23 @@ export type HairstyleMedia = {
 };
 
 export const hairstyleMedia: HairstyleMedia[] = [
+  {
+    id: "blunt-bob-chin",
+    src: bluntBobChin,
+    alt: "Transparent editorial reference showing a chin-length blunt bob with a strong single-length perimeter.",
+    provenance: { kind: "generated", provider: "OpenAI", promptKey: "blunt-bob-chin", background: "transparent" },
+  },
+  {
+    id: "knotless-box-braids-medium",
+    src: knotlessBoxBraidsMedium,
+    alt: "Transparent editorial reference showing medium knotless box braids with flat feed-in roots.",
+    provenance: {
+      kind: "generated",
+      provider: "OpenAI",
+      promptKey: "knotless-box-braids-medium",
+      background: "transparent",
+    },
+  },
   {
     id: "taper-coily",
     src: taperCoily,

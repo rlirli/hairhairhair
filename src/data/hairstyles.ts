@@ -159,6 +159,27 @@ export const sources: EditorialSource[] = [
     publisher: "Hair.com by L'Oréal",
     reviewedAt: "2026-09-22",
   },
+  {
+    id: "haircom-blunt-bob",
+    title: "Blunt Bob With Bangs: 19 Ways To Own The Look",
+    url: "https://www.hair.com/blunt-bob-with-bangs.html",
+    publisher: "Hair.com by L'Oréal",
+    reviewedAt: "2026-09-22",
+  },
+  {
+    id: "carols-daughter-knotless-braids",
+    title: "What Are Knotless Braids? A Complete Guide to Installation and Care",
+    url: "https://carolsdaughter.com/blogs/beauty-blog/what-are-knotless-braids",
+    publisher: "Carol's Daughter",
+    reviewedAt: "2026-09-22",
+  },
+  {
+    id: "essence-knotless-braids",
+    title: "Inside The Mystifying World Of Knotless Braids",
+    url: "https://www.essence.com/beauty/knotless-braids-summer-protective-styles/",
+    publisher: "Essence",
+    reviewedAt: "2026-09-22",
+  },
 ];
 
 export const hairstyles: Hairstyle[] = [
@@ -611,6 +632,105 @@ export const hairstyles: Hairstyle[] = [
     relatedStyleIds: [],
     guidePublicationStatus: "published",
   },
+  {
+    id: "hairstyle-blunt-bob",
+    slug: "blunt-bob",
+    name: "Blunt bob",
+    kind: "cut",
+    summary: "A short bob defined by a strong, nearly single-length perimeter with little or no visible layering.",
+    intro: [
+      "A blunt bob creates its shape through the perimeter: the ends read as one deliberate line rather than a stack of visible layers.",
+      "Jaw- and chin-length versions make the outline especially obvious, but the exact length can move slightly above or below the jaw. Natural wave, curl and coil can soften the visual line without changing the underlying cut.",
+    ],
+    variations: [
+      {
+        id: "blunt-bob-chin",
+        name: "Chin-length blunt bob",
+        description: "A compact version whose perimeter finishes around the jaw or chin.",
+      },
+      {
+        id: "blunt-bob-curly",
+        name: "Curly blunt bob",
+        description: "Keeps the blunt perimeter while allowing natural curl to create movement and volume above it.",
+      },
+      {
+        id: "blunt-bob-fringe",
+        name: "Blunt bob with fringe",
+        description: "Pairs the strong bob perimeter with a separate fringe or bang shape.",
+      },
+    ],
+    consultation: {
+      intro:
+        "Agree on the finished perimeter, dry length and amount of layering before cutting; those choices determine whether the result still reads as blunt.",
+      questions: [
+        "Where should the perimeter sit: above the jaw, at the chin, or slightly below it?",
+        "Should the line be completely one-length or include very subtle internal shaping?",
+        "Will the hair usually be worn straight, wavy, curly or coily?",
+        "Should the front remain level with the back or become slightly longer?",
+      ],
+      sampleRequest:
+        "“I’d like a chin-length blunt bob with a strong single-length perimeter, no visible layers, and enough length that it still lands around my jaw when worn naturally.”",
+    },
+    considerations: [
+      "Natural curl and coil can make an identical underlying perimeter appear less geometrically straight, so dry-state length matters.",
+      "A very precise blunt edge becomes visibly softer as it grows, making maintenance frequency part of the consultation.",
+      "Removing too much internal weight changes the silhouette toward a layered bob even if the outer perimeter remains short.",
+    ],
+    sourceIds: ["haircom-blunt-bob"],
+    relatedStyleIds: [],
+    guidePublicationStatus: "published",
+  },
+  {
+    id: "hairstyle-knotless-box-braids",
+    slug: "knotless-box-braids",
+    name: "Knotless box braids",
+    kind: "styling-technique",
+    summary:
+      "Individual braids that begin with natural hair at the root, with extension hair gradually fed in for a flatter, less bulky base.",
+    intro: [
+      "Knotless box braids use the same individual sectioning associated with box braids, but omit the extension knot at the scalp.",
+      "The braider starts with the wearer’s own hair and progressively feeds in extension hair. This produces a flatter transition from scalp to braid and can reduce root tension compared with conventional knotted box braids.",
+    ],
+    variations: [
+      {
+        id: "knotless-box-braids-medium",
+        name: "Medium knotless box braids",
+        description:
+          "Moderately sized individual braids balancing visible sectioning, installation time and overall braid density.",
+      },
+      {
+        id: "knotless-box-braids-small",
+        name: "Small knotless box braids",
+        description: "Finer sections and narrower braids creating a denser, more flexible finished set.",
+      },
+      {
+        id: "knotless-box-braids-jumbo",
+        name: "Jumbo knotless box braids",
+        description: "Larger sections and thicker individual braids for a more graphic, lower-count braid pattern.",
+      },
+    ],
+    consultation: {
+      intro: "Agree on braid size, finished length, parting pattern and extension weight before installation.",
+      questions: [
+        "How small or large should each braid be?",
+        "What finished length do you want?",
+        "Should the sections form a regular box grid or a softer staggered pattern?",
+        "How much extension hair should be added to each braid?",
+        "How light should the front and hairline sections remain?",
+      ],
+      sampleRequest:
+        "“I’d like medium knotless box braids around mid-back length, with neat square sections, a flat natural-looking root and light tension around the hairline.”",
+    },
+    considerations: [
+      "Knotless describes the feed-in starting technique, not a guarantee of low tension; section size, extension weight and braider technique still matter.",
+      "Longer or thicker extensions add more suspended weight to each section.",
+      "The natural-hair root remains more exposed than with a conventional extension knot, so new growth and frizz become visible at the base.",
+      "Installation generally takes longer than conventional box braids because extension hair is introduced incrementally.",
+    ],
+    sourceIds: ["carols-daughter-knotless-braids", "essence-knotless-braids"],
+    relatedStyleIds: [],
+    guidePublicationStatus: "published",
+  },
 ];
 
 export function isPublishedGuide(hairstyle: Pick<Hairstyle, "guidePublicationStatus">): boolean {
@@ -620,6 +740,28 @@ export function isPublishedGuide(hairstyle: Pick<Hairstyle, "guidePublicationSta
 export const publishedHairstyles = hairstyles.filter(isPublishedGuide);
 
 export const styleExamples: StyleExample[] = [
+  {
+    id: "style-example-blunt-bob-chin",
+    hairstyleIds: ["hairstyle-blunt-bob"],
+    imageId: "blunt-bob-chin",
+    title: "Chin-length blunt bob",
+    caption: "Notice the strong jaw-length perimeter and the absence of visible layering.",
+    patternDescription:
+      "The hair falls into one compact outer line, with the front and side lengths reading as part of the same blunt shape.",
+    lengthDescription:
+      "The perimeter finishes at approximately chin level; confirm the exact dry length and whether any subtle internal shaping is wanted.",
+  },
+  {
+    id: "style-example-knotless-box-braids-medium",
+    hairstyleIds: ["hairstyle-knotless-box-braids"],
+    imageId: "knotless-box-braids-medium",
+    title: "Medium knotless box braids",
+    caption: "Notice how each braid emerges flat from the section before gradually reaching its full thickness.",
+    patternDescription:
+      "Clean individual sections expose the scalp while each three-strand braid begins narrowly at the root and thickens subtly as extension hair is fed in.",
+    lengthDescription:
+      "Long braids continue beyond the shoulders; finished length and extension weight should be agreed before installation.",
+  },
   {
     id: "style-example-patterned-mohawk-curved",
     hairstyleIds: ["hairstyle-patterned-mohawk"],

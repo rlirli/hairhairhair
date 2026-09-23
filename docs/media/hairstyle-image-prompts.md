@@ -82,6 +82,22 @@ Prompt intent: square transparent editorial reference portraits of fictional adu
 
 <!-- Manual additions below -->
 
+## Inbox hairstyle additions — 2026-09-23
+
+Generated with OpenAI's built-in image generation tool. These fictional editorial references use transparent backgrounds and are not photographs of real people.
+
+### blunt-bob-chin
+
+Asset: `src/assets/hairstyles/blunt-bob-chin.png`
+
+One square original editorial hairstyle reference portrait for hairhairhair.hair. Fictional adult woman with medium-brown skin and dense straight-to-very-slightly-wavy dark brown hair cut into a CLASSIC CHIN-LENGTH BLUNT BOB. Strong single-length perimeter terminating cleanly at the jaw/chin, essentially no visible layers, no graduation, no stacked nape, no lob, no pixie, no shag. Center-to-slight-off-center part. Three-quarter side portrait at eye level clearly showing the jaw-length outer line, temple, ear area and nape. Cream T-shirt, soft neutral daylight, realistic individual hair strands and natural skin pores, understated editorial photography. Shoulder-up composition with full crown and ALL hair inside frame with space around the silhouette. Transparent background / clean RGBA alpha; no baked-in studio backdrop. Single portrait, no split panels. No celebrity likeness, text, watermarks, logos, jewelry, hats or props. Hair silhouette anatomically plausible and the blunt perimeter must be immediately legible.
+
+### knotless-box-braids-medium
+
+Asset: `src/assets/hairstyles/knotless-box-braids-medium.png`
+
+One square original editorial hairstyle reference portrait for hairhairhair.hair. Fictional adult Black woman with deep brown skin wearing MEDIUM KNOTLESS BOX BRAIDS in natural black. Clearly visible clean square-to-slightly-staggered scalp sections. CRITICAL TECHNIQUE DETAIL: every braid begins narrowly with her natural hair directly at the scalp, lying flat with NO BULKY KNOT, then becomes subtly thicker within the first few centimeters as extension hair is gradually fed in. Long individual three-strand braids fall past the shoulders. No cornrows, no locs, no twists, no conventional knotted box-braid bulbs at the roots, no boho loose curls. Three-quarter side/back portrait at eye level so the crown, temple, parting grid, flat braid roots and hanging braid structure are all clearly visible. Cream T-shirt, neutral soft daylight, realistic skin pores and realistic braided-hair fibers, understated editorial photography. Full crown and all root sections inside frame; braids may continue beyond the lower crop because their length is intentionally long. Transparent RGBA background with clean natural hair edges. Single portrait. No celebrity likeness, text, watermark, logo, jewelry, hat or props.
+
 ## wolf-cut-curly-medium
 
 Asset: `src/assets/hairstyles/wolf-cut-curly-medium.png`

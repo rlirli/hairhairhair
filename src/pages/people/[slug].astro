@@ -128,7 +128,7 @@ const naturalProfile = naturalProfileForPerson(person.id);
                       sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
                       format="webp"
                       alt={photo.alt}
-                      class="aspect-square w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                      class="aspect-[4/5] w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                       style={`object-position: ${photo.objectPosition}`}
                     />
                   </a>
@@ -187,7 +187,7 @@ const naturalProfile = naturalProfileForPerson(person.id);
                       format="webp"
                       loading="lazy"
                       alt={`${person.name} wearing ${style.name}`}
-                      class="aspect-square w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                      class="aspect-[4/5] w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                       style={`object-position: ${photo.objectPosition}`}
                     />
                   </a>

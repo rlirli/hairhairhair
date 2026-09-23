@@ -1,0 +1,272 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hairhairhair.hair/schemas/hairstyle-package.schema.json",
+  "title": "Hairstyle contribution package",
+  "description": "Content and metadata for one hairstyle. The generated PNG is supplied separately and must match media.fileName.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "sources",
+    "hairstyle",
+    "styleExamples",
+    "compatibility",
+    "media",
+    "imagePrompts"
+  ],
+  "properties": {
+    "sources": {
+      "type": "array",
+      "description": "Editorial sources cited by the hairstyle.",
+      "items": { "$ref": "#/$defs/editorialSource" }
+    },
+    "hairstyle": {
+      "$ref": "#/$defs/hairstyle"
+    },
+    "styleExamples": {
+      "type": "array",
+      "description": "At least one example is required before publishing a hairstyle.",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/styleExample" }
+    },
+    "compatibility": {
+      "type": "array",
+      "description": "Optional editorial estimates. An empty array means no estimates are being supplied.",
+      "items": { "$ref": "#/$defs/compatibility" }
+    },
+    "media": {
+      "type": "array",
+      "description": "Media records for the separately supplied PNGs. Each example imageId must match a media id.",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/media" }
+    },
+    "imagePrompts": {
+      "type": "array",
+      "description": "Verbatim generation prompts, keyed to generated media records.",
+      "items": { "$ref": "#/$defs/imagePrompt" }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "editorialSource": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "url",
+        "publisher",
+        "reviewedAt"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string", "minLength": 1 },
+        "displayTitle": { "type": "string", "minLength": 1 },
+        "url": { "type": "string", "format": "uri" },
+        "publisher": { "type": "string", "minLength": 1 },
+        "reviewedAt": { "type": "string", "format": "date" }
+      }
+    },
+    "hairstyle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "slug",
+        "name",
+        "kind",
+        "summary",
+        "intro",
+        "variations",
+        "consultation",
+        "considerations",
+        "sourceIds",
+        "relatedStyleIds",
+        "guidePublicationStatus"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "slug": { "$ref": "#/$defs/id" },
+        "name": { "type": "string", "minLength": 1 },
+        "kind": {
+          "type": "string",
+          "enum": ["cut", "finishing-technique", "styling-technique"]
+        },
+        "summary": { "type": "string", "minLength": 1 },
+        "intro": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "variations": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/variation" }
+        },
+        "consultation": { "$ref": "#/$defs/consultation" },
+        "considerations": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "sourceIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/id" }
+        },
+        "relatedStyleIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "description": "Use existing hairstyle IDs. The repository script should add reciprocal relationships.",
+          "items": { "$ref": "#/$defs/id" }
+        },
+        "guidePublicationStatus": {
+          "type": "string",
+          "enum": ["draft", "published"]
+        },
+        "inventedAt": { "$ref": "#/$defs/originDate" },
+        "inventor": { "$ref": "#/$defs/inventor" }
+      }
+    },
+    "variation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "name", "description"],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "name": { "type": "string", "minLength": 1 },
+        "description": { "type": "string", "minLength": 1 }
+      }
+    },
+    "consultation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["intro", "questions", "sampleRequest"],
+      "properties": {
+        "intro": { "type": "string", "minLength": 1 },
+        "questions": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "sampleRequest": { "type": "string", "minLength": 1 }
+      }
+    },
+    "originDate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["year", "precision", "sourceId"],
+      "properties": {
+        "year": { "type": "integer", "minimum": 1 },
+        "precision": { "type": "string", "enum": ["year", "decade"] },
+        "sourceId": { "$ref": "#/$defs/id" }
+      }
+    },
+    "inventor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "sourceId"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "sourceId": { "$ref": "#/$defs/id" }
+      }
+    },
+    "styleExample": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "hairstyleIds",
+        "imageId",
+        "title",
+        "caption",
+        "patternDescription",
+        "lengthDescription"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "hairstyleIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/id" }
+        },
+        "imageId": { "$ref": "#/$defs/id" },
+        "title": { "type": "string", "minLength": 1 },
+        "caption": { "type": "string", "minLength": 1 },
+        "patternDescription": { "type": "string", "minLength": 1 },
+        "lengthDescription": { "type": "string", "minLength": 1 }
+      }
+    },
+    "compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "hairstyleId",
+        "hairTypeId",
+        "score",
+        "provenance"
+      ],
+      "properties": {
+        "hairstyleId": { "$ref": "#/$defs/id" },
+        "hairTypeId": {
+          "type": "string",
+          "pattern": "^hair-type-[1-4](?:[abc])?$"
+        },
+        "score": {
+          "description": "Editorial estimate from 0 to 1; null means unknown.",
+          "oneOf": [
+            { "type": "number", "minimum": 0, "maximum": 1 },
+            { "type": "null" }
+          ]
+        },
+        "provenance": { "const": "estimated" },
+        "variationId": { "$ref": "#/$defs/id" }
+      }
+    },
+    "media": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "fileName",
+        "alt",
+        "provenance"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "fileName": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*\\.png$"
+        },
+        "alt": { "type": "string", "minLength": 1 },
+        "provenance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "provider",
+            "promptKey",
+            "background"
+          ],
+          "properties": {
+            "kind": { "const": "generated" },
+            "provider": { "const": "OpenAI" },
+            "promptKey": { "$ref": "#/$defs/id" },
+            "background": { "type": "string", "enum": ["opaque", "transparent"] }
+          }
+        }
+      }
+    },
+    "imagePrompt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mediaId", "prompt"],
+      "properties": {
+        "mediaId": { "$ref": "#/$defs/id" },
+        "prompt": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

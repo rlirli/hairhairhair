@@ -137,9 +137,23 @@ export const sources: EditorialSource[] = [
     reviewedAt: "2026-09-22",
   },
   {
+    id: "haircom-classic-men",
+    title: "The Trendiest Classic Hairstyles For Men To Try",
+    url: "https://www.hair.com/classic-hairstyles-for-men.html",
+    publisher: "Hair.com by L'Oréal",
+    reviewedAt: "2026-09-24",
+  },
+  {
     id: "haircom-curtain-hairstyle",
     title: "This Iconic ‘90s Look For Men Is Making A Serious Comeback On Tik Tok",
     url: "https://www.hair.com/e-boy-curtain-hairstyle.html",
+    publisher: "Hair.com by L'Oréal",
+    reviewedAt: "2026-09-24",
+  },
+  {
+    id: "haircom-low-maintenance-men",
+    title: "18 Trending Low Maintenance Haircuts For Men",
+    url: "https://www.hair.com/low-maintenance-haircuts-for-men.html",
     publisher: "Hair.com by L'Oréal",
     reviewedAt: "2026-09-24",
   },
@@ -163,6 +177,20 @@ export const sources: EditorialSource[] = [
     url: "https://www.mancity.com/news/first-team/first-team-news/archive/2011/november/mario-balotelli-blond-bombshell",
     publisher: "Manchester City",
     reviewedAt: "2026-09-22",
+  },
+  {
+    id: "menshealth-barber-haircuts",
+    title: "Get the Perfect Barber Haircut: How to Talk to Your Barber",
+    url: "https://www.menshealth.com/grooming/a42363964/how-to-ask-barber-for-haircuts/",
+    publisher: "Men's Health",
+    reviewedAt: "2026-09-24",
+  },
+  {
+    id: "menshealth-french-crop",
+    title: "The 10 Best Summer Hairstyles for Men",
+    url: "https://www.menshealth.com/grooming/a27079237/summer-hairstyles-for-men/",
+    publisher: "Men's Health",
+    reviewedAt: "2026-09-24",
   },
   {
     id: "milady-natural-hair",
@@ -454,6 +482,67 @@ export const hairstyles: Hairstyle[] = [
       "wahl-flat-top-guide",
     ],
     relatedStyleIds: ["hairstyle-buzz-cut", "hairstyle-taper-fade"],
+    guidePublicationStatus: "published",
+  },
+  {
+    id: "hairstyle-french-crop",
+    slug: "french-crop",
+    name: "French crop",
+    kind: "cut",
+    summary:
+      "A compact short haircut with short back and sides, a slightly longer textured top, and a short fringe deliberately styled forward over the forehead.",
+    intro: [
+      "The French crop is defined less by a particular fade and more by the relationship between its compact sides, textured top and forward-facing fringe.",
+      "Classic versions keep the fringe short and relatively blunt, while modern versions often break up the edge with texture for a softer, less geometric finish.",
+      "The top normally stays short enough to remain compact but long enough to show texture and direction rather than reading as a uniform buzz cut.",
+    ],
+    variations: [
+      {
+        id: "french-crop-classic",
+        name: "Classic French crop",
+        description:
+          "Short back and sides with a compact textured top and a short, relatively straight fringe worn forward.",
+      },
+      {
+        id: "french-crop-curly",
+        name: "Curly French crop",
+        description:
+          "Adapts the compact crop and forward fringe to naturally curly hair, producing a fuller and less linear front edge.",
+      },
+      {
+        id: "french-crop-textured",
+        name: "Textured French crop",
+        description:
+          "Uses more separation and irregularity through the top and fringe while preserving the forward direction.",
+      },
+    ],
+    consultation: {
+      intro:
+        "The main choices are fringe length and shape, top texture, side length, and whether the sides should be simply short, tapered, or faded.",
+      questions: [
+        "How short should the fringe sit on the forehead?",
+        "Should the fringe edge look blunt and graphic or broken and textured?",
+        "How much length should remain on top for texture?",
+        "Should the sides and back be clipper-short, tapered, or faded?",
+        "Do you want a compact natural finish or stronger separation through the top?",
+      ],
+      sampleRequest:
+        "“I’d like a textured French crop with a short broken fringe pushed forward, about a few centimeters of texture on top, and short natural sides without taking the fade down to skin.”",
+    },
+    considerations: [
+      "The forward fringe is a defining feature; without it, the result may read as a generic textured crop.",
+      "Very straight hair may need texturizing and matte product to keep the top from appearing flat or helmet-like.",
+      "Wavy hair naturally creates separation and movement through the short top.",
+      "Curly hair can support the same cut geometry, but stronger curl patterns soften the straight horizontal character of the classic fringe.",
+      "The haircut does not inherently require a skin fade; keeping the sides simply short or softly tapered can preserve a more balanced, less fade-dominant silhouette.",
+    ],
+    sourceIds: [
+      "haircom-classic-men",
+      "haircom-low-maintenance-men",
+      "menshealth-barber-haircuts",
+      "menshealth-french-crop",
+    ],
+    relatedStyleIds: [],
     guidePublicationStatus: "published",
   },
   {
@@ -890,6 +979,18 @@ export const styleExamples: StyleExample[] = [
     patternDescription: "The top forms a small upright plane with a sharper graphic outline than the low example.",
     lengthDescription:
       "Short sides support a compact upright shape; ask about the hold and maintenance needed to keep the plane visible.",
+  },
+  {
+    id: "style-example-french-crop-textured-2a",
+    hairstyleIds: ["hairstyle-french-crop"],
+    imageId: "french-crop-textured-2a",
+    title: "Textured French crop",
+    caption:
+      "Notice the compact textured top, short broken fringe directed forward, and restrained sides without a dramatic skin fade.",
+    patternDescription:
+      "Slight natural bend creates separation through the top while the short fringe remains visibly directed toward the forehead.",
+    lengthDescription:
+      "The top retains a few centimeters of length for texture, while the sides and back are kept substantially shorter and the fringe finishes high on the forehead.",
   },
   {
     id: "style-example-knotless-box-braids-medium",

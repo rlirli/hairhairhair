@@ -6,6 +6,7 @@ import croppedAfroFull from "../assets/hairstyles/cropped-afro-full.png";
 import curtainHaircutStraight1b from "../assets/hairstyles/curtain-haircut-straight-1b.png";
 import flatTopCoily from "../assets/hairstyles/flat-top-coily.png";
 import flatTopStraight from "../assets/hairstyles/flat-top-straight.png";
+import frenchCropTextured2a from "../assets/hairstyles/french-crop-textured-2a.png";
 import knotlessBoxBraidsMedium from "../assets/hairstyles/knotless-box-braids-medium.png";
 import patternedMohawkCurved from "../assets/hairstyles/patterned-mohawk-curved.png";
 import patternedMohawkGeometric from "../assets/hairstyles/patterned-mohawk-geometric.png";
@@ -84,6 +85,17 @@ export const hairstyleMedia: HairstyleMedia[] = [
     src: flatTopStraight,
     alt: "Generated editorial reference showing an upright compact flat top with squared corners above short graduated sides on a fictional adult.",
     provenance: { kind: "generated", provider: "OpenAI", promptKey: "flat-top-straight", background: "opaque" },
+  },
+  {
+    id: "french-crop-textured-2a",
+    src: frenchCropTextured2a,
+    alt: "Editorial reference showing a fair-skinned white man with dark-blond wavy hair in a textured French crop with a short forward fringe.",
+    provenance: {
+      kind: "generated",
+      provider: "OpenAI",
+      promptKey: "french-crop-textured-2a",
+      background: "transparent",
+    },
   },
   {
     id: "knotless-box-braids-medium",

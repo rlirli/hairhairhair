@@ -22,11 +22,11 @@ const imageClass =
 {media && (
   <article class="group rounded-3xl border-2 border-ink p-3 transition-colors hover:border-ink/60 sm:p-4">
     <a
-      class="focus-ring grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)] items-end gap-3"
+      class="focus-ring grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)] items-stretch gap-3"
       href={href}
       aria-label={`Read ${example.title}`}
     >
-      <figure>
+      <figure class="min-h-0 aspect-square">
         <Image
           src={media.src}
           widths={[240, 400, 800]}
@@ -37,11 +37,11 @@ const imageClass =
           class:list={["aspect-square w-full rounded-2xl object-cover", imageClass]}
         />
       </figure>
-      <div class="pb-1">
-        <h3 class="text-base font-bold leading-snug transition-colors group-hover:text-ink sm:text-lg">
+      <div class="style-example-copy min-h-0 max-h-full overflow-hidden pb-1">
+        <h3 class="text-base font-bold leading-snug sm:text-lg">
           {example.title}
         </h3>
-        <p class="mt-1.5 text-sm leading-5 text-ink/60 transition-colors group-hover:text-ink">{example.caption}</p>
+        <p class="mt-1.5 text-xs leading-5 text-ink/60 transition-colors group-hover:text-ink">{example.caption}</p>
         <p class="mt-1.5 text-xs leading-5 text-ink/60 transition-colors group-hover:text-ink">
           {example.patternDescription}
         </p>
@@ -64,3 +64,13 @@ const imageClass =
     )}
   </article>
 )}
+
+<style>
+  .style-example-copy > :is(h3, p) {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+  }
+</style>

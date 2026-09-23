@@ -4,4 +4,6 @@ dist/
 .DS_Store
 .env
 .env.*
-IMPLEMENTATION_PLAN.md
+IMPLEMENTATION_PLAN*.md
+/inbox*
+*__private__*

@@ -7,8 +7,10 @@ import { getMedia } from "../data/media";
 interface Props {
   style: Hairstyle;
   compact?: boolean;
+  filterable?: boolean;
+  compatibleHairTypeIds?: string[];
 }
-const { style, compact = false } = Astro.props;
+const { style, compact = false, filterable = false, compatibleHairTypeIds = [] } = Astro.props;
 const example = styleExamples.find((item) => item.hairstyleIds.includes(style.id));
 const media = getMedia(example?.imageId ?? "");
 const imageClass =
@@ -19,6 +21,9 @@ const imageClass =
 
 <a
   href={`/hairstyles/${style.slug}/`}
+  data-hairstyle-card={filterable ? "" : undefined}
+  data-hairstyle-kind={filterable ? style.kind : undefined}
+  data-hairstyle-hair-types={filterable ? compatibleHairTypeIds.join(",") : undefined}
   class={`hover-surface focus-ring group block rounded-3xl border-2 border-ink p-4 transition ${compact ? "" : "sm:p-6"}`}
 >
   {media && (

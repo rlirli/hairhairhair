@@ -25,6 +25,8 @@ npm run verify
 - [Add a person](docs/contributing/adding-a-person.md)
 - [Browse all project documentation](docs/README.md)
 
+Sort supported data collections with `npm run sort:hairstyles`. Preview changes with `npm run sort:hairstyles -- --dry-run`; target specific collections with `--only <name>`.
+
 The domain vocabulary is defined in [`CONTEXT.md`](CONTEXT.md). Keep content records, media metadata, research, and tests consistent in the same commit.
 
 ## Deployment

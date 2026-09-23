@@ -16,7 +16,8 @@ The hairstyle detail page keeps collection separators as thin hairlines and pres
 4. Add every referenced image under `src/assets/hairstyles/`. The current collection uses PNG files.
 5. In `src/data/media.ts`, statically import each image and add its `HairstyleMedia` record. Keep the media ID, filename, and `StyleExample.imageId` aligned.
 6. For generated images, record the prompts in `docs/media/hairstyle-image-prompts.md` and keep each `promptKey` aligned with the media record.
-7. Run `npm run verify`. The integrity tests derive the expected media and routes from the content data and asset directories; do not add parallel bookkeeping lists.
+7. Run `npm run sort:hairstyles`.
+8. Run `npm run verify`. The integrity tests derive the expected media and routes from the content data and asset directories; do not add parallel bookkeeping lists.
 
 Set `guidePublicationStatus` to `draft` until the hairstyle page is ready. Draft hairstyles may be referenced by appearance observations but do not get a public hairstyle page.
 

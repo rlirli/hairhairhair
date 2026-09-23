@@ -64,9 +64,12 @@ const ogImage = heroMedia
       <span>{style.name}</span>
     </nav>
     <div class="mt-10 grid gap-10 lg:grid-cols-[.9fr_1.1fr] lg:items-center">
-      <div>
+      <div class="lg:col-start-1 lg:row-start-1">
         <p class="text-xs font-black uppercase tracking-[.18em]">{kindLabel}</p>
         <h1 class="mt-5 font-display text-6xl leading-[.84] tracking-[-.08em] sm:text-8xl">{style.name}</h1>
+      </div>
+      <div class="lg:col-start-2 lg:row-start-1 lg:row-span-2">{heroMedia && <StyleMedia mediaId={heroMedia} eager />}</div>
+      <div class="lg:col-start-1 lg:row-start-2">
         {style.intro.map((paragraph: string) => (
           <p class="mt-6 max-w-xl text-lg leading-7">{paragraph}</p>
         ))}
@@ -74,7 +77,6 @@ const ogImage = heroMedia
           <HairstyleFactSheet style={style} sources={sources} />
         </div>
       </div>
-      <div>{heroMedia && <StyleMedia mediaId={heroMedia} eager />}</div>
     </div>
     <section class="mt-16 pt-10">
       <div class="flex items-baseline justify-between gap-4 border-b border-ink/30 pb-3">

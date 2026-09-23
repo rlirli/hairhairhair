@@ -6,6 +6,8 @@ Each published hairstyle automatically receives `/hairstyles/:slug/examples/`, a
 
 The detail-page style notes resolve broad and subtype hair-type compatibility from `src/data/hairstyle-compatibility.ts`. Each of the twelve subtype marks represents the resolved score for that subtype, including inherited major-type estimates; unknown scores stay visibly distinct from zero. These editorial estimates describe how closely the defining features can be achieved through ordinary cutting and styling while preserving natural curl pattern, assuming sufficient length. They are not personal suitability scores, promises, or listing eligibility. Source-backed `inventedAt` and `inventor` rows are shown only when supplied, with their source links.
 
+The hairstyle detail page keeps collection separators as thin hairlines and presents reviewed sources in muted text. Source review dates retain an ISO server-rendered fallback and are formatted in the viewer's browser locale using UTC to avoid shifting the calendar date.
+
 ## Mandatory
 
 1. In `src/data/hairstyles.ts`, add the `Hairstyle` record and any `EditorialSource` records it cites. Use unique, stable IDs and a unique slug. Preserve the source's exact `title`; use optional `displayTitle` for a distinct, neutral website label when needed.

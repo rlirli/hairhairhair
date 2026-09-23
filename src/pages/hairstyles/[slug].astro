@@ -76,7 +76,7 @@ const ogImage = heroMedia
       </div>
       <div>{heroMedia && <StyleMedia mediaId={heroMedia} eager />}</div>
     </div>
-    <section class="mt-16 border-t-2 border-ink pt-10">
+    <section class="mt-16 pt-10">
       <div class="flex items-baseline justify-between gap-4 border-b border-ink/30 pb-3">
         <h2 class="font-display text-3xl tracking-[-.06em]">Examples</h2>
         <a
@@ -93,7 +93,7 @@ const ogImage = heroMedia
       </div>
     </section>
     {documentedAppearances.length > 0 && (
-      <section class="mt-16 border-t-2 border-ink pt-8">
+      <section class="mt-16 pt-8">
         <div class="flex items-baseline justify-between gap-4 border-b border-ink/30 pb-3">
           <h2 class="text-xs font-black uppercase tracking-[.18em] text-orange">Worn by celebs</h2>
           <a
@@ -108,7 +108,7 @@ const ogImage = heroMedia
         </div>
       </section>
     )}
-    <section class="mt-16 grid gap-10 border-t-2 border-ink pt-10 lg:grid-cols-[1fr_1fr]">
+    <section class="mt-16 grid gap-10 pt-10 lg:grid-cols-[1fr_1fr]">
       <div>
         <p class="text-xs font-black uppercase tracking-[.18em] text-orange">Variations</p>
         <h2 class="mt-2 font-display text-4xl tracking-[-.06em]">Choose the details</h2>
@@ -134,7 +134,7 @@ const ogImage = heroMedia
         <p class="mt-6 border-t border-current/30 pt-5 text-base leading-7">{style.consultation.sampleRequest}</p>
       </div>
     </section>
-    <section class="mt-16 grid gap-10 border-t-2 border-ink pt-10 lg:grid-cols-[1fr_1fr]">
+    <section class="mt-16 grid gap-10 pt-10 lg:grid-cols-[1fr_1fr]">
       <div>
         <p class="text-xs font-black uppercase tracking-[.18em] text-orange">What changes the result</p>
         <h2 class="mt-2 font-display text-4xl tracking-[-.06em]">Bring these variables</h2>
@@ -166,23 +166,38 @@ const ogImage = heroMedia
         />
       </section>
     )}
-    <section class="mt-16 border-t-2 border-ink pt-8">
-      <p class="text-xs font-black uppercase tracking-[.18em] text-orange">Sources reviewed</p>
-      <div class="mt-4 space-y-2 text-sm leading-6">
+    <section class="mt-16 pt-8">
+      <h2 class="text-xs font-normal uppercase tracking-[.18em] text-ink/60">Sources reviewed</h2>
+      <div class="mt-4 space-y-2 text-sm leading-6 text-ink/65">
         {referencedSources.map((source) => (
           <p>
             <a
-              class="focus-ring underline decoration-orange decoration-2 underline-offset-4"
+              class="focus-ring text-ink/70 underline decoration-ink/35 underline-offset-4 transition hover:text-orange hover:decoration-orange"
               href={source.url}
               target="_blank"
               rel="noreferrer"
             >
               {source.displayTitle ?? source.title}
             </a>{" "}
-            · {source.publisher} · reviewed {source.reviewedAt}
+            · {source.publisher} · reviewed{" "}
+            <time datetime={source.reviewedAt} data-source-review-date>
+              {source.reviewedAt}
+            </time>
           </p>
         ))}
       </div>
     </section>
   </article>
+  <script>
+    document.querySelectorAll<HTMLTimeElement>("time[data-source-review-date]").forEach((element) => {
+      const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(element.dateTime);
+      if (!match) return;
+
+      const utcDate = new Date(Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3])));
+      element.textContent = new Intl.DateTimeFormat(navigator.language, {
+        dateStyle: "medium",
+        timeZone: "UTC",
+      }).format(utcDate);
+    });
+  </script>
 </Layout>

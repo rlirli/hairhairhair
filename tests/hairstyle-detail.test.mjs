@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { existsSync } from "node:fs";
 import test from "node:test";
 
-import { getExamplesForHairstyle, publishedHairstyles } from "../src/data/hairstyles.ts";
+import { getExamplesForHairstyle, publishedHairstyles, sources } from "../src/data/hairstyles.ts";
 import { appearancesForStyle } from "../src/data/people-relations.ts";
 import { page, routeFile } from "./helpers/site.mjs";
 
@@ -76,6 +76,17 @@ test("published hairstyle detail routes provide the requested previews and full 
     assert.doesNotMatch(appearances, /<img\b[^>]*class="[^"]*rounded-/);
 
     assert.doesNotMatch(detail, /Data sheet|Pattern guidance|Related guides/);
-    assert.match(detail, /Sources reviewed/);
+    const sourceSection = detail.split("Sources reviewed")[1];
+    assert.ok(sourceSection);
+    assert.doesNotMatch(detail, /border-t-2 border-ink/);
+    assert.match(detail, /<h2 class="text-xs font-normal uppercase tracking-\[\.18em\] text-ink\/60">Sources reviewed/);
+    assert.match(sourceSection, /text-ink\/65/);
+    assert.match(sourceSection, /text-ink\/70 underline decoration-ink\/35/);
+    assert.match(sourceSection, /data-source-review-date/);
+    for (const source of sources.filter((item) => style.sourceIds.includes(item.id))) {
+      assert.ok(sourceSection.includes(`href="${source.url}"`));
+      assert.ok(sourceSection.includes(`datetime="${source.reviewedAt}" data-source-review-date`));
+      assert.ok(sourceSection.includes(`>${source.reviewedAt}</time>`));
+    }
   }
 });

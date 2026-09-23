@@ -1,6 +1,10 @@
 import { publishedHairstyles, styleExamples } from "../src/data/hairstyles.ts";
 
-const imageFiles = import.meta.glob("../src/assets/hairstyles/*.png", { eager: true, query: "?url", import: "default" });
+const imageFiles = import.meta.glob("../src/assets/hairstyles/*.png", {
+  eager: true,
+  query: "?url",
+  import: "default",
+});
 const images = Object.fromEntries(
   Object.entries(imageFiles).map(([path, url]) => [path.split("/").at(-1).replace(".png", ""), url]),
 );
@@ -43,7 +47,7 @@ function draw() {
   const height = Math.max(570, bounds.height);
   svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
   if (!nodes.some((node) => node.x)) {
-    const cols = Math.ceil(Math.sqrt(nodes.length * width / height));
+    const cols = Math.ceil(Math.sqrt((nodes.length * width) / height));
     const rows = Math.ceil(nodes.length / cols);
     const gapX = width / (cols + 1);
     const gapY = height / (rows + 1);
@@ -66,14 +70,27 @@ function draw() {
     const clip = element("clipPath", { id: clipId });
     clip.append(element("circle", { cx: 0, cy: 0, r: radius }));
     group.append(clip, element("circle", { cx: 0, cy: 0, r: radius + 2 }));
-    if (node.image) group.append(element("image", { href: node.image, x: -radius, y: -radius, width: radius * 2, height: radius * 2, preserveAspectRatio: "xMidYMid slice", "clip-path": `url(#${clipId})` }));
+    if (node.image)
+      group.append(
+        element("image", {
+          href: node.image,
+          x: -radius,
+          y: -radius,
+          width: radius * 2,
+          height: radius * 2,
+          preserveAspectRatio: "xMidYMid slice",
+          "clip-path": `url(#${clipId})`,
+        }),
+      );
     else group.append(element("circle", { cx: 0, cy: 0, r: radius, fill: "#e5ddd0" }));
     const label = element("text", { y: radius + 17 });
     label.textContent = node.name;
     group.append(label);
     group.addEventListener("pointerdown", (event) => startDrag(event, node));
     group.addEventListener("click", () => select(node));
-    group.addEventListener("keydown", (event) => { if (event.key === "Enter" || event.key === " ") select(node); });
+    group.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") select(node);
+    });
     nodeLayer.append(group);
     node.el = group;
     node.label = label;
@@ -94,29 +111,41 @@ function runSimulation() {
     }
     for (let i = 0; i < nodes.length; i++) {
       for (let j = i + 1; j < nodes.length; j++) {
-        const a = nodes[i], b = nodes[j];
-        let dx = b.x - a.x, dy = b.y - a.y;
+        const a = nodes[i],
+          b = nodes[j];
+        let dx = b.x - a.x,
+          dy = b.y - a.y;
         const d2 = dx * dx + dy * dy || 1;
         const distance = Math.sqrt(d2);
         const force = Math.min(1.4, 1800 / d2) * alpha;
-        const fx = dx / distance * force, fy = dy / distance * force;
-        a.vx -= fx; a.vy -= fy; b.vx += fx; b.vy += fy;
+        const fx = (dx / distance) * force,
+          fy = (dy / distance) * force;
+        a.vx -= fx;
+        a.vy -= fy;
+        b.vx += fx;
+        b.vy += fy;
         if (distance < 108) {
           const push = (108 - distance) * 0.012 * alpha;
-          a.vx -= dx / distance * push; a.vy -= dy / distance * push;
-          b.vx += dx / distance * push; b.vy += dy / distance * push;
+          a.vx -= (dx / distance) * push;
+          a.vy -= (dy / distance) * push;
+          b.vx += (dx / distance) * push;
+          b.vy += (dy / distance) * push;
         }
       }
     }
     for (const { source, target } of links) {
-      const dx = target.x - source.x, dy = target.y - source.y;
+      const dx = target.x - source.x,
+        dy = target.y - source.y;
       const distance = Math.hypot(dx, dy) || 1;
       const force = (distance - 155) * 0.0023 * alpha;
-      source.vx += dx / distance * force; source.vy += dy / distance * force;
-      target.vx -= dx / distance * force; target.vy -= dy / distance * force;
+      source.vx += (dx / distance) * force;
+      source.vy += (dy / distance) * force;
+      target.vx -= (dx / distance) * force;
+      target.vy -= (dy / distance) * force;
     }
     for (const node of nodes) {
-      node.vx *= 0.87; node.vy *= 0.87;
+      node.vx *= 0.87;
+      node.vy *= 0.87;
       node.x = Math.max(55, Math.min(width - 55, node.x + node.vx));
       node.y = Math.max(60, Math.min(height - 35, node.y + node.vy));
     }
@@ -126,8 +155,10 @@ function runSimulation() {
 
 function paint() {
   for (const { source, target, el } of links) {
-    el?.setAttribute("x1", source.x); el?.setAttribute("y1", source.y);
-    el?.setAttribute("x2", target.x); el?.setAttribute("y2", target.y);
+    el?.setAttribute("x1", source.x);
+    el?.setAttribute("y1", source.y);
+    el?.setAttribute("x2", target.x);
+    el?.setAttribute("y2", target.y);
   }
   for (const node of nodes) node.el?.setAttribute("transform", `translate(${node.x} ${node.y})`);
 }
@@ -137,12 +168,14 @@ function select(node) {
   selected = node;
   for (const item of nodes) item.el.classList.toggle("selected", item === node);
   const relations = node.relatedStyleIds.map((id) => byId.get(id)).filter(Boolean);
-  details.innerHTML = `<img class="profile-img" src="${node.image ?? ""}" alt=""/><span class="kind-label">${node.kind.replaceAll("-", " ")}</span><h2>${node.name}</h2><p>${node.summary}</p><div class="relations-title">Connected styles · ${relations.length}</div>${relations.length ? relations.map((related) => `<a class="relation" data-id="${related.id}"><img src="${related.image ?? ""}" alt=""/><span>${related.name}</span></a>`).join("") : '<p>No connected styles yet.</p>'}`;
-  details.querySelectorAll(".relation").forEach((link) => link.addEventListener("click", () => {
-    const related = byId.get(link.dataset.id);
-    related.el.scrollIntoView({ block: "nearest", inline: "nearest" });
-    select(related);
-  }));
+  details.innerHTML = `<img class="profile-img" src="${node.image ?? ""}" alt=""/><span class="kind-label">${node.kind.replaceAll("-", " ")}</span><h2>${node.name}</h2><p>${node.summary}</p><div class="relations-title">Connected styles · ${relations.length}</div>${relations.length ? relations.map((related) => `<a class="relation" data-id="${related.id}"><img src="${related.image ?? ""}" alt=""/><span>${related.name}</span></a>`).join("") : "<p>No connected styles yet.</p>"}`;
+  details.querySelectorAll(".relation").forEach((link) =>
+    link.addEventListener("click", () => {
+      const related = byId.get(link.dataset.id);
+      related.el.scrollIntoView({ block: "nearest", inline: "nearest" });
+      select(related);
+    }),
+  );
   const relatedIds = new Set([node.id, ...node.relatedStyleIds]);
   for (const item of nodes) item.el.classList.toggle("dim", !relatedIds.has(item.id));
 }
@@ -154,10 +187,24 @@ function startDrag(event, node) {
   const point = (e) => {
     const rect = svg.getBoundingClientRect();
     const vb = svg.viewBox.baseVal;
-    return { x: (e.clientX - rect.left) * vb.width / rect.width, y: (e.clientY - rect.top) * vb.height / rect.height };
+    return {
+      x: ((e.clientX - rect.left) * vb.width) / rect.width,
+      y: ((e.clientY - rect.top) * vb.height) / rect.height,
+    };
   };
-  const move = (e) => { const p = point(e); node.x = p.x; node.y = p.y; node.vx = 0; node.vy = 0; paint(); };
-  const up = () => { window.removeEventListener("pointermove", move); window.removeEventListener("pointerup", up); runSimulation(); };
+  const move = (e) => {
+    const p = point(e);
+    node.x = p.x;
+    node.y = p.y;
+    node.vx = 0;
+    node.vy = 0;
+    paint();
+  };
+  const up = () => {
+    window.removeEventListener("pointermove", move);
+    window.removeEventListener("pointerup", up);
+    runSimulation();
+  };
   window.addEventListener("pointermove", move);
   window.addEventListener("pointerup", up, { once: true });
 }
@@ -169,14 +216,21 @@ document.querySelector("#search").addEventListener("input", (event) => {
 document.querySelector("#connected").addEventListener("click", (event) => {
   const active = event.currentTarget.getAttribute("aria-pressed") !== "true";
   event.currentTarget.setAttribute("aria-pressed", String(active));
-  for (const node of nodes) node.el.style.display = active && !node.relatedStyleIds.some((id) => byId.has(id)) ? "none" : "";
+  for (const node of nodes)
+    node.el.style.display = active && !node.relatedStyleIds.some((id) => byId.has(id)) ? "none" : "";
   updateCounter();
 });
 document.querySelector("#reset").addEventListener("click", () => {
-  for (const node of nodes) { node.x = 0; node.y = 0; node.vx = 0; node.vy = 0; }
+  for (const node of nodes) {
+    node.x = 0;
+    node.y = 0;
+    node.vx = 0;
+    node.vy = 0;
+  }
   selected?.el.classList.remove("selected", "dim");
   selected = undefined;
-  details.innerHTML = '<div class="empty"><span class="spark">✳</span><p>Pick a hairstyle to see its connections.</p></div>';
+  details.innerHTML =
+    '<div class="empty"><span class="spark">✳</span><p>Pick a hairstyle to see its connections.</p></div>';
   draw();
 });
 function updateCounter() {
@@ -187,14 +241,29 @@ let pan;
 svg.addEventListener("pointerdown", (event) => {
   if (event.target.closest(".node")) return;
   pan = { x: event.clientX, y: event.clientY, tx: 0, ty: 0 };
-  const move = (e) => { pan.tx += e.clientX - pan.x; pan.ty += e.clientY - pan.y; pan.x = e.clientX; pan.y = e.clientY; world.setAttribute("transform", `translate(${pan.tx} ${pan.ty})`); };
-  const up = () => { window.removeEventListener("pointermove", move); window.removeEventListener("pointerup", up); };
-  window.addEventListener("pointermove", move); window.addEventListener("pointerup", up, { once: true });
+  const move = (e) => {
+    pan.tx += e.clientX - pan.x;
+    pan.ty += e.clientY - pan.y;
+    pan.x = e.clientX;
+    pan.y = e.clientY;
+    world.setAttribute("transform", `translate(${pan.tx} ${pan.ty})`);
+  };
+  const up = () => {
+    window.removeEventListener("pointermove", move);
+    window.removeEventListener("pointerup", up);
+  };
+  window.addEventListener("pointermove", move);
+  window.addEventListener("pointerup", up, { once: true });
 });
 let scale = 1;
-svg.addEventListener("wheel", (event) => {
-  event.preventDefault(); scale = Math.max(.6, Math.min(2, scale * (event.deltaY < 0 ? 1.08 : .92)));
-  world.setAttribute("transform", `scale(${scale})`);
-}, { passive: false });
+svg.addEventListener(
+  "wheel",
+  (event) => {
+    event.preventDefault();
+    scale = Math.max(0.6, Math.min(2, scale * (event.deltaY < 0 ? 1.08 : 0.92)));
+    world.setAttribute("transform", `scale(${scale})`);
+  },
+  { passive: false },
+);
 new ResizeObserver(draw).observe(wrap);
 draw();

@@ -11,6 +11,8 @@ npm run dev
 
 Astro prints the local URL after startup.
 
+Explore hairstyle connections at `/hairstyle-map/` while the development server is running. The map uses the same published hairstyle records and example images as the hairstyle directory.
+
 Before committing, run:
 
 ```sh

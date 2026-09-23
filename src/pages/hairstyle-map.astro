@@ -1,0 +1,51 @@
+---
+import { getImage } from "astro:assets";
+import HairstyleRelationMap from "../components/HairstyleRelationMap";
+import Layout from "../components/Layout.astro";
+import { kindLabels } from "../data/hairstyle-relations";
+import { publishedHairstyles, styleExamples } from "../data/hairstyles";
+import { getMedia } from "../data/media";
+
+const styles = await Promise.all(
+  publishedHairstyles.map(async (style) => {
+    const example = styleExamples.find((item) => item.hairstyleIds.includes(style.id));
+    const media = getMedia(example?.imageId ?? "");
+    if (!media) return undefined;
+    const image = await getImage({ src: media.src, width: 240, format: "webp" });
+    return {
+      id: style.id,
+      name: style.name,
+      summary: style.summary,
+      kindLabel: kindLabels[style.kind],
+      href: `/hairstyles/${style.slug}/`,
+      imageSrc: image.src,
+      imageAlt: media.alt,
+      transparentBackground: media.provenance.kind === "generated" && media.provenance.background === "transparent",
+      relatedStyleIds: style.relatedStyleIds,
+    };
+  }),
+);
+---
+
+<Layout
+  title="Hairstyle map - hairhairhair.hair"
+  description="Explore how hairstyles relate to each other in an interactive map."
+>
+  <section class="mx-auto max-w-7xl px-5 pb-20 pt-12 sm:px-8 sm:pt-16">
+    <nav aria-label="Breadcrumb" class="text-sm">
+      <a class="focus-ring hover:text-orange" href="/hairstyles/">
+        Hairstyles
+      </a>
+      <span>Hairstyle map</span>
+    </nav>
+    <p class="mt-2 text-xs font-black uppercase tracking-[.2em] text-orange">Explore the collection</p>
+    <h1 class="mt-3 max-w-4xl font-display text-6xl leading-[.9] tracking-[-.08em] sm:text-8xl">
+      See how styles <span class="text-orange">connect.</span>
+    </h1>
+    <p class="mt-7 max-w-2xl text-base leading-7 sm:text-lg">
+      Related hairstyles pull together. Drag the styles to find a shape that makes sense to you, then open any profile
+      for the full guide.
+    </p>
+    <HairstyleRelationMap client:load styles={styles.filter((style) => style !== undefined)} />
+  </section>
+</Layout>

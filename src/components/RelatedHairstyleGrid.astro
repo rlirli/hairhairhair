@@ -38,6 +38,15 @@ const items = await Promise.all(
       summary: style.summary,
       compatibleLabels: compatibilityLabelsForHairstyle(style.id),
       subtypeLabels: hairTypeId ? subtypeLabelsForHairstyleInMajorType(style.id, hairTypeId) : [],
+      photoAttribution:
+        media.provenance.kind === "photograph"
+          ? {
+              creator: media.provenance.creator,
+              sourceUrl: media.provenance.sourceUrl,
+              licenseName: media.provenance.licenseName,
+              licenseUrl: media.provenance.licenseUrl,
+            }
+          : undefined,
     };
   }),
 );

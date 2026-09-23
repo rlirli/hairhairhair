@@ -56,6 +56,7 @@ export function publicRoutes() {
     ...publishedHairstyles.flatMap((style) => [
       `/hairstyles/${style.slug}/examples/`,
       `/hairstyles/${style.slug}/appearances/`,
+      `/hairstyles/${style.slug}/related-hairstyles/`,
     ]),
     ...publishedHairstyles.flatMap((style) =>
       getExamplesForHairstyle(style.id).map((example) => `/hairstyles/${style.slug}/examples/${example.id}/`),

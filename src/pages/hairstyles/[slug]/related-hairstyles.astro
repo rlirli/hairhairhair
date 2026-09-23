@@ -1,0 +1,46 @@
+---
+import Layout from "../../../components/Layout.astro";
+import RelatedHairstyleGrid from "../../../components/RelatedHairstyleGrid.astro";
+import { publishedHairstyles } from "../../../data/hairstyles";
+import { publishedRelatedHairstyles } from "../../../data/hairstyle-relations";
+
+export function getStaticPaths() {
+  return publishedHairstyles.map((style) => ({ params: { slug: style.slug }, props: { style } }));
+}
+
+const { style } = Astro.props;
+const related = publishedRelatedHairstyles(style.relatedStyleIds);
+---
+
+<Layout
+  title={`${style.name} related hairstyles — hairhairhair.hair`}
+  description={`Hairstyles related to ${style.name}.`}
+>
+  <main class="mx-auto max-w-7xl px-5 pb-20 pt-12 sm:px-8">
+    <nav aria-label="Breadcrumb" class="text-sm font-bold uppercase tracking-[.12em]">
+      <a class="focus-ring text-orange" href="/hairstyles/">
+        Hairstyles
+      </a>
+      <span class="mx-2" aria-hidden="true">
+        /
+      </span>
+      <a class="focus-ring text-orange" href={`/hairstyles/${style.slug}/`}>
+        {style.name}
+      </a>
+      <span class="mx-2" aria-hidden="true">
+        /
+      </span>
+      <span>Related hairstyles</span>
+    </nav>
+    <h1 class="mt-10 font-display text-5xl tracking-[-.07em] sm:text-7xl">{style.name} related hairstyles</h1>
+    {related.length ? (
+      <RelatedHairstyleGrid
+        styles={related}
+        size="small"
+        className="mt-10 grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3 lg:grid-cols-6"
+      />
+    ) : (
+      <p class="mt-10 rounded-2xl border-2 border-ink p-6">No related hairstyles are currently listed.</p>
+    )}
+  </main>
+</Layout>

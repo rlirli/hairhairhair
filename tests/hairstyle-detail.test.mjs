@@ -11,9 +11,11 @@ test("published hairstyle detail routes provide the requested previews and full 
     const detail = page(`/hairstyles/${style.slug}/`);
     const examples = page(`/hairstyles/${style.slug}/examples/`);
     const appearances = page(`/hairstyles/${style.slug}/appearances/`);
+    const relatedArchive = page(`/hairstyles/${style.slug}/related-hairstyles/`);
 
     assert.ok(existsSync(routeFile(`/hairstyles/${style.slug}/examples/`)));
     assert.ok(existsSync(routeFile(`/hairstyles/${style.slug}/appearances/`)));
+    assert.ok(existsSync(routeFile(`/hairstyles/${style.slug}/related-hairstyles/`)));
     assert.match(detail, />Examples</);
     assert.match(detail, new RegExp(`href="/hairstyles/${style.slug}/examples/">More</a>`));
 
@@ -39,6 +41,24 @@ test("published hairstyle detail routes provide the requested previews and full 
       assert.match(appearancePreview, /text-ink\/60/);
     } else {
       assert.doesNotMatch(detail, /Worn by celebs|No dated appearance photographs/);
+    }
+
+    const relatedStyles = style.relatedStyleIds
+      .map((id) => publishedHairstyles.find((candidate) => candidate.id === id))
+      .filter(Boolean);
+    assert.match(relatedArchive, new RegExp(`${style.name} related hairstyles`));
+    if (relatedStyles.length) {
+      assert.match(detail, new RegExp(`href="/hairstyles/${style.slug}/related-hairstyles/">More</a>`));
+      const relatedPreview = detail.split("Related Hairstyles")[1].split("Sources reviewed")[0];
+      assert.equal(
+        (relatedPreview.match(/data-slot="hover-card-trigger"/g) ?? []).length,
+        Math.min(6, relatedStyles.length),
+      );
+      assert.doesNotMatch(relatedPreview, /<p class="mt-2 text-sm leading-5/);
+      assert.equal((relatedArchive.match(/data-slot="hover-card-trigger"/g) ?? []).length, relatedStyles.length);
+    } else {
+      assert.doesNotMatch(detail, /Related Hairstyles|related-hairstyles/);
+      assert.match(relatedArchive, /No related hairstyles are currently listed/);
     }
 
     assert.match(examples, new RegExp(`${style.name} examples`));

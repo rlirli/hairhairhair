@@ -18,6 +18,7 @@ export const GET: APIRoute = () => {
     ...publishedHairstyles.flatMap((item) => [
       `hairstyles/${item.slug}/examples/`,
       `hairstyles/${item.slug}/appearances/`,
+      `hairstyles/${item.slug}/related-hairstyles/`,
     ]),
     ...publishedHairstyles.flatMap((item) =>
       getExamplesForHairstyle(item.id).map((example) => styleExamplePath(item.slug, example.id).slice(1)),

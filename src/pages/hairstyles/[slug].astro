@@ -1,6 +1,6 @@
 ---
 import Layout from "../../components/Layout.astro";
-import HairstyleCard from "../../components/HairstyleCard.astro";
+import RelatedHairstyleGrid from "../../components/RelatedHairstyleGrid.astro";
 import StyleMedia from "../../components/StyleMedia.astro";
 import StyleExampleCard from "../../components/StyleExampleCard.astro";
 import { getImage } from "astro:assets";
@@ -145,13 +145,21 @@ const ogImage = heroMedia
       </div>
     </section>
     {related.length > 0 && (
-      <section class="mt-16 border-t-2 border-ink pt-10">
-        <p class="text-xs font-black uppercase tracking-[.18em] text-orange">Related Hairstyles</p>
-        <div class="mt-5 grid gap-4 md:grid-cols-3">
-          {related.map((item) => (
-            <HairstyleCard style={item} compact />
-          ))}
+      <section class="mt-16 pt-8">
+        <div class="flex items-baseline justify-between gap-4 border-b border-ink/30 pb-3">
+          <h2 class="text-xs font-black uppercase tracking-[.18em] text-orange">Related Hairstyles</h2>
+          <a
+            class="focus-ring text-xs font-normal uppercase tracking-[.12em] text-ink/60 transition hover:text-orange"
+            href={`/hairstyles/${style.slug}/related-hairstyles/`}
+          >
+            More
+          </a>
         </div>
+        <RelatedHairstyleGrid
+          styles={related.slice(0, 6)}
+          size="small"
+          className="mt-5 grid grid-cols-2 gap-x-4 gap-y-6 sm:grid-cols-3 lg:grid-cols-6"
+        />
       </section>
     )}
     <section class="mt-16 border-t-2 border-ink pt-8">

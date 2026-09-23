@@ -15,10 +15,7 @@ test("published hairstyle detail routes provide the requested previews and full 
     assert.ok(existsSync(routeFile(`/hairstyles/${style.slug}/examples/`)));
     assert.ok(existsSync(routeFile(`/hairstyles/${style.slug}/appearances/`)));
     assert.match(detail, />Examples</);
-    assert.match(detail, /Worn by celebs/);
-    assert.ok(detail.indexOf("Worn by celebs") < detail.indexOf("Variations"));
     assert.match(detail, new RegExp(`href="/hairstyles/${style.slug}/examples/">More</a>`));
-    assert.match(detail, new RegExp(`href="/hairstyles/${style.slug}/appearances/">More</a>`));
 
     const previewGallery = detail.split(">Examples</")[1].split("Worn by celebs")[0];
     assert.equal(
@@ -30,14 +27,31 @@ test("published hairstyle detail routes provide the requested previews and full 
     const hero = detail.split("<h1")[1].split(">Examples</")[0];
     assert.doesNotMatch(hero, /figcaption|<title>|Photographic reference/);
 
-    const appearancePreview = detail.split("Worn by celebs")[1].split("Variations")[0];
-    assert.ok((appearancePreview.match(/<article\b/g) ?? []).length <= 6);
-    assert.equal((appearancePreview.match(/<img\b/g) ?? []).length, Math.min(6, appearancesForStyle(style.id).length));
-    if (appearancesForStyle(style.id).length) assert.match(appearancePreview, /<img\b/);
+    const appearanceCount = appearancesForStyle(style.id).length;
+    if (appearanceCount) {
+      assert.match(detail, /Worn by celebs/);
+      assert.ok(detail.indexOf("Worn by celebs") < detail.indexOf("Variations"));
+      assert.match(detail, new RegExp(`href="/hairstyles/${style.slug}/appearances/">More</a>`));
+      const appearancePreview = detail.split("Worn by celebs")[1].split("Variations")[0];
+      assert.ok((appearancePreview.match(/<article\b/g) ?? []).length <= 6);
+      assert.equal((appearancePreview.match(/<img\b/g) ?? []).length, Math.min(6, appearanceCount));
+      assert.match(appearancePreview, /<time\b[^>]*datetime="\d{4}-\d{2}-\d{2}"[^>]*data-local-date/);
+      assert.match(appearancePreview, /text-ink\/60/);
+    } else {
+      assert.doesNotMatch(detail, /Worn by celebs|No dated appearance photographs/);
+    }
 
     assert.match(examples, new RegExp(`${style.name} examples`));
     assert.equal((examples.match(/<figure>/g) ?? []).length, getExamplesForHairstyle(style.id).length);
     assert.match(appearances, new RegExp(`${style.name} worn by celebs`));
+    assert.doesNotMatch(
+      appearances,
+      /Dated appearance photographs where this style has been visually documented|Each record is a moment in time, not a definition of the style/,
+    );
+    if (appearanceCount) {
+      assert.match(appearances, /<time\b[^>]*datetime="\d{4}-\d{2}-\d{2}"[^>]*data-local-date/);
+      assert.match(appearances, /text-ink\/60/);
+    }
     if (appearancesForStyle(style.id).length) assert.match(appearances, /<img\b/);
     assert.doesNotMatch(appearances, /<img\b[^>]*class="[^"]*rounded-/);
 

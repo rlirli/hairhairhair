@@ -88,27 +88,22 @@ const ogImage = heroMedia
         ))}
       </div>
     </section>
-    <section class="mt-16 border-t-2 border-ink pt-8">
-      <div class="flex items-baseline justify-between gap-4 border-b border-ink/30 pb-3">
-        <h2 class="text-xs font-black uppercase tracking-[.18em] text-orange">Worn by celebs</h2>
-        <a
-          class="focus-ring text-xs font-normal uppercase tracking-[.12em] text-ink/60 transition hover:text-orange"
-          href={`/hairstyles/${style.slug}/appearances/`}
-        >
-          More
-        </a>
-      </div>
-      <p class="mt-3 max-w-2xl text-sm leading-6">
-        Dated appearance photographs where this style has been visually documented.
-      </p>
-      {documentedAppearances.length > 0 ? (
+    {documentedAppearances.length > 0 && (
+      <section class="mt-16 border-t-2 border-ink pt-8">
+        <div class="flex items-baseline justify-between gap-4 border-b border-ink/30 pb-3">
+          <h2 class="text-xs font-black uppercase tracking-[.18em] text-orange">Worn by celebs</h2>
+          <a
+            class="focus-ring text-xs font-normal uppercase tracking-[.12em] text-ink/60 transition hover:text-orange"
+            href={`/hairstyles/${style.slug}/appearances/`}
+          >
+            More
+          </a>
+        </div>
         <div class="mt-5">
           <HairstyleAppearanceGrid appearances={documentedAppearances.slice(0, 6)} />
         </div>
-      ) : (
-        <p class="mt-5 text-sm leading-6">No dated appearance photographs are currently documented for this style.</p>
-      )}
-    </section>
+      </section>
+    )}
     <section class="mt-16 grid gap-10 border-t-2 border-ink pt-10 lg:grid-cols-[1fr_1fr]">
       <div>
         <p class="text-xs font-black uppercase tracking-[.18em] text-orange">Variations</p>

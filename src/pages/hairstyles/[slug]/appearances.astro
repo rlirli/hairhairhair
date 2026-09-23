@@ -51,10 +51,6 @@ const appearanceCards = appearancesForStyle(style.id)
       <span>Worn by celebs</span>
     </nav>
     <h1 class="mt-10 font-display text-5xl tracking-[-.07em] sm:text-7xl">{style.name} worn by celebs</h1>
-    <p class="mt-4 max-w-2xl text-lg leading-7">
-      Dated appearance photographs where this style has been visually documented. Each record is a moment in time, not a
-      definition of the style.
-    </p>
     {appearanceCards.length ? (
       <div class="mt-10">
         <HairstyleAppearanceGrid appearances={appearanceCards} />

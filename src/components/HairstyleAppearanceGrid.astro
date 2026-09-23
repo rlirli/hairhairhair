@@ -42,10 +42,26 @@ const { appearances } = Astro.props;
       >
         {personName}
       </a>
-      <a class="focus-ring mt-1 block text-xs leading-5" href={`/people/${personSlug}/appearances/${id}/`}>
-        {date}
+      <p class="mt-1 text-xs leading-5 text-ink/60">
+        <time datetime={date} data-local-date>
+          {date}
+        </time>
         <span class="sr-only"> · {event}</span>
-      </a>
+      </p>
     </article>
   ))}
 </div>
+
+<script>
+  document.querySelectorAll<HTMLTimeElement>("time[data-local-date]").forEach((element) => {
+    const date = element.dateTime;
+    const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(date);
+    if (!match) return;
+
+    const utcDate = new Date(Date.UTC(Number(match[1]), Number(match[2]) - 1, Number(match[3])));
+    element.textContent = new Intl.DateTimeFormat(navigator.language, {
+      dateStyle: "medium",
+      timeZone: "UTC",
+    }).format(utcDate);
+  });
+</script>

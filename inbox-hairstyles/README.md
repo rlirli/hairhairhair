@@ -41,6 +41,11 @@ Create one complete hairstyle package for hairhairhair.hair. Use web research an
 
 ## FINAL OUTPUT
 
-14. Re-open and validate the final payload against the full JSON Schema at https://hairhairhair.hair/schemas/hairstyle-package.schema.json. Return one valid JSON object only, with no Markdown fences or prose around it, ready to save as payload.json. Include all schema-required fields. Ensure the hairstyle ID and slug are unique, the output folder name equals the slug, every example's imageId matches a media id, every source reference resolves, and all IDs use the schema's format. Set guidePublicationStatus to "draft" unless I explicitly ask for "published".
+14. Re-open and validate the final payload against the full JSON Schema at https://hairhairhair.hair/schemas/hairstyle-package.schema.json. Return the complete payload as exactly one fenced `json` code block; do not split it across blocks or offer it as a JSON file download. Include all schema-required fields. Ensure the hairstyle ID and slug are unique, the output folder name equals the slug, every example's imageId matches a media id, every source reference resolves, and all IDs use the schema's format. Set guidePublicationStatus to "draft" unless I explicitly ask for "published".
 15. Provide the PNG as a separate downloadable image attachment. Preserve the complete image-generation prompt verbatim in imagePrompts and match its mediaId to the generated image's media id.
+16. Finish your response with this folder listing, replacing the placeholders with the actual names. Include every generated PNG filename and `payload.json`; put nothing after the listing, but with a clear instruction to the user to place the files as displayed.
+    inbox-hairstyles/
+        <slug>/
+            payload.json
+            <media[].fileName>
 ```

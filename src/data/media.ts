@@ -8,6 +8,7 @@ import flatTopCoily from "../assets/hairstyles/flat-top-coily.png";
 import flatTopStraight from "../assets/hairstyles/flat-top-straight.png";
 import frenchCropTextured2a from "../assets/hairstyles/french-crop-textured-2a.png";
 import knotlessBoxBraidsMedium from "../assets/hairstyles/knotless-box-braids-medium.png";
+import longLayeredCutBrunette from "../assets/hairstyles/long-layered-cut-brunette.png";
 import patternedMohawkCurved from "../assets/hairstyles/patterned-mohawk-curved.png";
 import patternedMohawkGeometric from "../assets/hairstyles/patterned-mohawk-geometric.png";
 import shortFeatheredShagCopper from "../assets/hairstyles/short-feathered-shag-copper.png";
@@ -106,6 +107,17 @@ export const hairstyleMedia: HairstyleMedia[] = [
       kind: "generated",
       provider: "OpenAI",
       promptKey: "knotless-box-braids-medium",
+      background: "transparent",
+    },
+  },
+  {
+    id: "long-layered-cut-brunette",
+    src: longLayeredCutBrunette,
+    alt: "Editorial reference showing an adult woman with long dark brunette hair, soft face-framing layers, curtain fringe, and loose waves.",
+    provenance: {
+      kind: "generated",
+      provider: "OpenAI",
+      promptKey: "long-layered-cut-brunette",
       background: "transparent",
     },
   },

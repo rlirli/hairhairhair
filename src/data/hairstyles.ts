@@ -158,9 +158,23 @@ export const sources: EditorialSource[] = [
     reviewedAt: "2026-09-24",
   },
   {
+    id: "haircom-face-framing-layers",
+    title: "35 Face-Framing Layers Ideas That’ll Have You Gunning It to the Salon",
+    url: "https://www.hair.com/face-framing-layers.html",
+    publisher: "Hair.com by L'Oréal",
+    reviewedAt: "2026-09-24",
+  },
+  {
     id: "haircom-feathered-hair",
     title: "Feathered Hair Is Back: Here’s How To Pull It Off",
     url: "https://www.hair.com/feathered-hair.html",
+    publisher: "Hair.com by L'Oréal",
+    reviewedAt: "2026-09-24",
+  },
+  {
+    id: "haircom-layered-hair",
+    title: "Why You Need to Try Layered Hair + 15 Gorgeous Styles To Inspire Your Next Chop",
+    url: "https://www.hair.com/layered-hair.html",
     publisher: "Hair.com by L'Oréal",
     reviewedAt: "2026-09-24",
   },
@@ -226,6 +240,13 @@ export const sources: EditorialSource[] = [
     url: "https://www.oxfordlearnersdictionaries.com/us/definition/english/flat-top",
     publisher: "Oxford Learner’s Dictionaries",
     reviewedAt: "2026-09-21",
+  },
+  {
+    id: "vogue-emrata-bangs-2024",
+    title: "EmRata's New Bangs Are What Dreams Are Made Of",
+    url: "https://www.vogue.com/article/emratas-new-bangs-2024",
+    publisher: "Vogue",
+    reviewedAt: "2026-09-24",
   },
   {
     id: "wahl-cut-guide",
@@ -618,6 +639,61 @@ export const hairstyles: Hairstyle[] = [
     guidePublicationStatus: "published",
   },
   {
+    id: "hairstyle-long-layered-cut",
+    slug: "long-layered-cut",
+    name: "Long layered cut",
+    kind: "cut",
+    summary:
+      "A long haircut that preserves substantial overall length while using graduated layers to create movement, reduce weight, and frame the face.",
+    intro: [
+      "A long layered cut keeps the overall silhouette distinctly long while introducing shorter sections through the interior and perimeter so the hair moves more freely than a one-length cut.",
+      "Face-framing layers are shorter pieces cut strategically around the face and then graduated into the longer lengths. They can be subtle or pronounced and may exist with or without extensive layering through the rest of the hair.",
+      "A common modern variation combines long layers with cheekbone-length curtain fringe or soft bangs, root volume, and a textured or softly wavy finish.",
+    ],
+    variations: [
+      {
+        id: "long-layered-cut-face-framing",
+        name: "Face-framing long layers",
+        description: "Uses shorter pieces around the face that gradually connect into the retained long perimeter.",
+      },
+      {
+        id: "long-layered-cut-curtain-fringe",
+        name: "Long layers with curtain fringe",
+        description:
+          "Pairs long graduated layers with a parted fringe that opens away from the center and blends into the face frame.",
+      },
+      {
+        id: "long-layered-cut-soft",
+        name: "Soft long layers",
+        description:
+          "Keeps the shortest layers relatively long and blended for movement without a strongly stepped silhouette.",
+      },
+    ],
+    consultation: {
+      intro:
+        "The defining choices are retained overall length, where the shortest layers begin, how strongly the face frame is cut, and whether fringe is part of the shape.",
+      questions: [
+        "How much overall length do you want to keep?",
+        "Where should the shortest face-framing pieces begin: cheekbone, jaw, or lower?",
+        "Should the layers remain soft and blended or create more visible separation and volume?",
+        "Do you want curtain bangs or no dedicated fringe?",
+        "Will you usually wear the hair straight, naturally textured, or styled with waves?",
+      ],
+      sampleRequest:
+        "“I’d like to keep the hair long, add soft layers throughout for movement, start the face-framing pieces around my cheekbones, and add a long curtain fringe that blends into the sides rather than a heavy blunt bang.”",
+    },
+    considerations: [
+      "The shortest layer establishes much of the visible shape, so reference points such as cheekbone, jaw, collarbone, and shoulder are more useful than asking for layers generically.",
+      "Face-framing layers can exist without extensive layering through the rest of the haircut, so the amount of internal layering should be discussed separately.",
+      "Layers can remove weight from dense hair and create movement, but excessive layering can make fine or low-density ends appear thinner.",
+      "Straight hair shows the graduation between layer lengths clearly, while waves and curls create a softer and more voluminous interpretation of the same underlying structure.",
+      "Curtain fringe changes the front silhouette substantially and should be treated as an optional variation rather than a defining requirement of the long layered cut.",
+    ],
+    sourceIds: ["haircom-face-framing-layers", "haircom-layered-hair", "vogue-emrata-bangs-2024"],
+    relatedStyleIds: ["hairstyle-wolf-cut"],
+    guidePublicationStatus: "draft",
+  },
+  {
     id: "hairstyle-patterned-mohawk",
     slug: "patterned-mohawk",
     name: "Patterned mohawk",
@@ -963,7 +1039,7 @@ export const hairstyles: Hairstyle[] = [
       "Curly and coily hair can shrink substantially, so the intended dry silhouette and layer placement should be assessed in the natural state.",
     ],
     sourceIds: ["allure-wolf-cut-2026", "haircom-wolf-cut"],
-    relatedStyleIds: ["hairstyle-short-feathered-shag"],
+    relatedStyleIds: ["hairstyle-long-layered-cut", "hairstyle-short-feathered-shag"],
     guidePublicationStatus: "published",
   },
 ];
@@ -1079,6 +1155,18 @@ export const styleExamples: StyleExample[] = [
       "Clean individual sections expose the scalp while each three-strand braid begins narrowly at the root and thickens subtly as extension hair is fed in.",
     lengthDescription:
       "Long braids continue beyond the shoulders; finished length and extension weight should be agreed before installation.",
+  },
+  {
+    id: "style-example-long-layered-cut-brunette",
+    hairstyleIds: ["hairstyle-long-layered-cut"],
+    imageId: "long-layered-cut-brunette",
+    title: "Long brunette layers with curtain fringe",
+    caption:
+      "Notice the retained long perimeter, shorter cheekbone-level face frame, soft graduated layers, and curtain fringe opening away from the center.",
+    patternDescription:
+      "Soft natural waves make the graduated layers visible through movement and separation while the front pieces curve away from the face.",
+    lengthDescription:
+      "The longest hair extends well below the shoulders, while shorter face-framing pieces begin around the cheekbones and connect gradually into the longer lengths.",
   },
   {
     id: "style-example-patterned-mohawk-curved",

@@ -68,7 +68,9 @@ const ogImage = heroMedia
         <p class="text-xs font-black uppercase tracking-[.18em]">{kindLabel}</p>
         <h1 class="mt-5 font-display text-6xl leading-[.84] tracking-[-.08em] sm:text-8xl">{style.name}</h1>
       </div>
-      <div class="lg:col-start-2 lg:row-start-1 lg:row-span-2">{heroMedia && <StyleMedia mediaId={heroMedia} eager />}</div>
+      <div class="lg:col-start-2 lg:row-start-1 lg:row-span-2">
+        {heroMedia && <StyleMedia mediaId={heroMedia} eager />}
+      </div>
       <div class="lg:col-start-1 lg:row-start-2">
         {style.intro.map((paragraph: string) => (
           <p class="mt-6 max-w-xl text-lg leading-7">{paragraph}</p>

@@ -51,7 +51,10 @@ const appearanceCards = appearancesForStyle(style.id)
       <span>Worn by celebs</span>
     </nav>
     <h1 class="mt-10 font-display text-5xl tracking-[-.07em] sm:text-7xl">
-      <a class="focus-ring" href={`/hairstyles/${style.slug}/`}>{style.name}</a> worn by celebs
+      <a class="focus-ring" href={`/hairstyles/${style.slug}/`}>
+        {style.name}
+      </a>{" "}
+      worn by celebs
     </h1>
     {appearanceCards.length ? (
       <div class="mt-8">

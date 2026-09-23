@@ -73,8 +73,8 @@ const originRows = [
                     ? `Type ${subtype.code}: compatibility estimate unknown`
                     : `Type ${subtype.code}: editorial compatibility estimate ${score}`
                 }
-                aria-valuemin="0"
-                aria-valuemax="1"
+                aria-valuemin={unknown ? undefined : "0"}
+                aria-valuemax={unknown ? undefined : "1"}
                 aria-valuenow={unknown ? undefined : score}
                 data-hairstyle-compatibility={subtype.id}
                 data-score={unknown ? "unknown" : score}

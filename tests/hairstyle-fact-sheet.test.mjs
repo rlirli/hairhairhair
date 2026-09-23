@@ -39,7 +39,7 @@ test("hairstyle fact sheets render resolved subtype estimates without implying s
       if (score === null) {
         assert.match(segment, /role="img"/);
         assert.match(segment, new RegExp(`aria-label="Type ${subtype.code}: compatibility estimate unknown"`));
-        assert.doesNotMatch(segment, /aria-valuenow=/);
+        assert.doesNotMatch(segment, /aria-valuemin=|aria-valuemax=|aria-valuenow=/);
       } else {
         assert.match(segment, /role="meter"/);
         assert.match(segment, new RegExp(`aria-valuenow="${score}"`));

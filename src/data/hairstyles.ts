@@ -691,7 +691,7 @@ export const hairstyles: Hairstyle[] = [
     ],
     sourceIds: ["haircom-face-framing-layers", "haircom-layered-hair", "vogue-emrata-bangs-2024"],
     relatedStyleIds: ["hairstyle-wolf-cut"],
-    guidePublicationStatus: "draft",
+    guidePublicationStatus: "published",
   },
   {
     id: "hairstyle-patterned-mohawk",
@@ -794,7 +794,7 @@ export const hairstyles: Hairstyle[] = [
     ],
     sourceIds: ["allure-shag-haircut-ideas", "haircom-feathered-hair", "haircom-short-haircuts-older-women"],
     relatedStyleIds: ["hairstyle-wolf-cut"],
-    guidePublicationStatus: "draft",
+    guidePublicationStatus: "published",
   },
   {
     id: "hairstyle-taper-fade",

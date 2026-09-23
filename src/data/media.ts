@@ -10,6 +10,7 @@ import frenchCropTextured2a from "../assets/hairstyles/french-crop-textured-2a.p
 import knotlessBoxBraidsMedium from "../assets/hairstyles/knotless-box-braids-medium.png";
 import patternedMohawkCurved from "../assets/hairstyles/patterned-mohawk-curved.png";
 import patternedMohawkGeometric from "../assets/hairstyles/patterned-mohawk-geometric.png";
+import shortFeatheredShagCopper from "../assets/hairstyles/short-feathered-shag-copper.png";
 import taperCoily from "../assets/hairstyles/taper-coily.png";
 import taperWavy from "../assets/hairstyles/taper-wavy.png";
 import thinMohawkBlond from "../assets/hairstyles/thin-mohawk-blond.png";
@@ -127,6 +128,17 @@ export const hairstyleMedia: HairstyleMedia[] = [
       kind: "generated",
       provider: "OpenAI",
       promptKey: "patterned-mohawk-geometric",
+      background: "transparent",
+    },
+  },
+  {
+    id: "short-feathered-shag-copper",
+    src: shortFeatheredShagCopper,
+    alt: "Editorial reference showing a tanned 60-year-old woman with short copper hair in a soft feathered shag.",
+    provenance: {
+      kind: "generated",
+      provider: "OpenAI",
+      promptKey: "short-feathered-shag-copper",
       background: "transparent",
     },
   },

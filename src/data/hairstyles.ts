@@ -66,6 +66,13 @@ export const sources: EditorialSource[] = [
     reviewedAt: "2026-09-20",
   },
   {
+    id: "allure-shag-haircut-ideas",
+    title: "31 Cute Shag Haircut Ideas for Any Length and Texture — See Photos",
+    url: "https://www.allure.com/gallery/shag-haircut-ideas-trend",
+    publisher: "Allure",
+    reviewedAt: "2026-09-24",
+  },
+  {
     id: "allure-wolf-cut-2026",
     title: "The Wolf Cut Won't Ever Go Out of Style",
     url: "https://www.allure.com/story/wolf-cut-trend-haircut-tips-2026",
@@ -151,9 +158,23 @@ export const sources: EditorialSource[] = [
     reviewedAt: "2026-09-24",
   },
   {
+    id: "haircom-feathered-hair",
+    title: "Feathered Hair Is Back: Here’s How To Pull It Off",
+    url: "https://www.hair.com/feathered-hair.html",
+    publisher: "Hair.com by L'Oréal",
+    reviewedAt: "2026-09-24",
+  },
+  {
     id: "haircom-low-maintenance-men",
     title: "18 Trending Low Maintenance Haircuts For Men",
     url: "https://www.hair.com/low-maintenance-haircuts-for-men.html",
+    publisher: "Hair.com by L'Oréal",
+    reviewedAt: "2026-09-24",
+  },
+  {
+    id: "haircom-short-haircuts-older-women",
+    title: "9 Short Cuts And Styles For Older Women That Look Totally Polished",
+    url: "https://www.hair.com/short-haircuts-for-older-women.html",
     publisher: "Hair.com by L'Oréal",
     reviewedAt: "2026-09-24",
   },
@@ -644,6 +665,62 @@ export const hairstyles: Hairstyle[] = [
     guidePublicationStatus: "published",
   },
   {
+    id: "hairstyle-short-feathered-shag",
+    slug: "short-feathered-shag",
+    name: "Short feathered shag",
+    kind: "cut",
+    summary:
+      "A short layered shag built around crown lift, airy feathered sections, face framing, and a light broken perimeter around the ears and nape.",
+    intro: [
+      "A short feathered shag combines the layered structure of a shag with deliberately airy, feathered movement through the ends.",
+      "The defining shape uses shorter layers through the crown to create lift, while the sides and perimeter break into lighter face-framing and nape pieces rather than forming a solid bob line.",
+      "Feathering describes how strategically placed layers and styling create lightness, separation, and movement; it is not simply another word for layering.",
+    ],
+    variations: [
+      {
+        id: "short-feathered-shag-curly",
+        name: "Curly short shag",
+        description:
+          "Adapts the short shag structure to curls with customized crown and face-framing layers while retaining natural curl definition.",
+      },
+      {
+        id: "short-feathered-shag-wispy-fringe",
+        name: "Short feathered shag with wispy fringe",
+        description:
+          "Adds a light broken fringe that connects into feathered face-framing layers around the temples and cheeks.",
+      },
+      {
+        id: "short-feathered-shag-soft",
+        name: "Soft feathered shag",
+        description:
+          "Keeps the crown layering blended and the perimeter airy for a softer, less choppy interpretation.",
+      },
+    ],
+    consultation: {
+      intro:
+        "Agree on crown height, fringe shape, ear and nape length, and how pronounced the feathered movement should be before cutting.",
+      questions: [
+        "How short should the crown layers be, and how much lift do you want there?",
+        "Should the fringe be wispy, fuller, side-swept, or omitted?",
+        "Should the sides expose the ears or retain soft pieces around them?",
+        "How much length should remain at the nape?",
+        "Do you want the ends styled with a visible outward feather or left closer to their natural texture?",
+      ],
+      sampleRequest:
+        "“I’d like a short feathered shag with airy crown layers, a soft wispy fringe, feathered pieces around my ears and cheeks, and a little length left at the nape. Keep it soft and blended rather than giving me a strongly disconnected wolf cut.”",
+    },
+    considerations: [
+      "The haircut should show visible crown layering and a broken, lightweight perimeter; without that structure it can read as a generic short layered cut.",
+      "Feathering is partly a styling result. Blow-drying or shaping the ends away from the face can make the airy layered structure more pronounced.",
+      "Fine hair can benefit from strategically placed crown layers, but excessive thinning can reduce the visual density of the perimeter.",
+      "Curly and coily textures can support a shag structure, but layer length should be customized for shrinkage and curl behavior rather than copied directly from a straight or wavy reference.",
+      "Shorter, choppier feathered cuts generally need more frequent reshaping than longer, more uniform layers.",
+    ],
+    sourceIds: ["allure-shag-haircut-ideas", "haircom-feathered-hair", "haircom-short-haircuts-older-women"],
+    relatedStyleIds: ["hairstyle-wolf-cut"],
+    guidePublicationStatus: "draft",
+  },
+  {
     id: "hairstyle-taper-fade",
     slug: "taper-fade",
     name: "Taper fade",
@@ -886,7 +963,7 @@ export const hairstyles: Hairstyle[] = [
       "Curly and coily hair can shrink substantially, so the intended dry silhouette and layer placement should be assessed in the natural state.",
     ],
     sourceIds: ["allure-wolf-cut-2026", "haircom-wolf-cut"],
-    relatedStyleIds: [],
+    relatedStyleIds: ["hairstyle-short-feathered-shag"],
     guidePublicationStatus: "published",
   },
 ];
@@ -1022,6 +1099,18 @@ export const styleExamples: StyleExample[] = [
     patternDescription: "Hard side lines make the central crest read more graphic and deliberate.",
     lengthDescription:
       "Close sides contrast with a short upright center; the shaved detail will need regular refreshing.",
+  },
+  {
+    id: "style-example-short-feathered-shag-copper",
+    hairstyleIds: ["hairstyle-short-feathered-shag"],
+    imageId: "short-feathered-shag-copper",
+    title: "Copper short feathered shag",
+    caption:
+      "Notice the lifted crown, wispy fringe, airy face-framing layers, and softly feathered pieces around the ears and nape.",
+    patternDescription:
+      "Loose natural movement gives the short layers separation while the ends feather outward rather than collapsing into a solid perimeter.",
+    lengthDescription:
+      "The cut sits around ear-to-nape length, with shorter crown and fringe layers and slightly longer pieces retained around the sides and back.",
   },
   {
     id: "style-example-taper-coily",

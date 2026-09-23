@@ -208,7 +208,11 @@ test("hair-type pages use a compact, five-card hairstyle preview with a more lin
     assert.doesNotMatch(markup, /More →/);
     assert.match(markup, /data-slot="hover-card-trigger"/);
     assert.match(markup, new RegExp(`href="/hair-types/${type.slug}/hairstyles/"`));
-    assert.equal((markup.match(/data-slot="hover-card-trigger"/g) ?? []).length, Math.min(5, relatedStyles.length));
+    const hairstylePreview = markup.split("Hairstyles for this type")[1].split("</section>")[0];
+    assert.equal(
+      (hairstylePreview.match(/data-slot="hover-card-trigger"/g) ?? []).length,
+      Math.min(5, relatedStyles.length),
+    );
     assert.doesNotMatch(markup, /Pattern is one part of the picture|not a guaranteed result/i);
     assert.doesNotMatch(markup, /Pattern illustration/);
   }

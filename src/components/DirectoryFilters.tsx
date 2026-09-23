@@ -45,6 +45,7 @@ export default function DirectoryFilters({
   pluralItemLabel,
 }: Props) {
   const [selections, setSelections] = React.useState<Record<string, Set<string>>>({});
+  const [openGroup, setOpenGroup] = React.useState<string | null>(null);
 
   React.useEffect(() => {
     const cards = [...document.querySelectorAll<HTMLElement>(cardSelector)];
@@ -99,12 +100,18 @@ export default function DirectoryFilters({
         const accessibleSelection = selectedLabels.length > 0 ? selectedLabels.join(", ") : "all options";
 
         return (
-          <Popover key={group.key}>
+          <Popover
+            key={group.key}
+            open={openGroup === group.key}
+            onOpenChange={(open) => setOpenGroup(open ? group.key : null)}
+          >
             <PopoverTrigger asChild>
               <button
                 type="button"
                 className="focus-ring flex cursor-pointer items-center gap-1 whitespace-nowrap uppercase"
                 aria-label={`${group.label} filter, selected: ${accessibleSelection}`}
+                aria-expanded={openGroup === group.key}
+                onClick={() => setOpenGroup((current) => (current === group.key ? null : group.key))}
               >
                 <span>{triggerLabel}</span>
                 <span aria-hidden="true" className="relative -top-0.75">

@@ -99,29 +99,50 @@ export default function DirectoryFilters({
         const triggerLabel = selectedLabels.length === 1 ? selectedLabels[0] : group.label;
         const accessibleSelection = selectedLabels.length > 0 ? selectedLabels.join(", ") : "all options";
 
+        const isOpen = openGroup === group.key;
+
         return (
           <Popover
             key={group.key}
-            open={openGroup === group.key}
-            onOpenChange={(open) => setOpenGroup(open ? group.key : null)}
+            open={isOpen}
+            onOpenChange={(open, eventDetails) => {
+              if (open) {
+                setOpenGroup(group.key);
+                return;
+              }
+
+              const target = eventDetails.event.target;
+              const switchingToAnotherFilter =
+                eventDetails.reason === "outside-press" &&
+                target instanceof Element &&
+                Boolean(target.closest("[data-filter-trigger]"));
+              if (switchingToAnotherFilter) return;
+
+              setOpenGroup((current) => (current === group.key ? null : current));
+            }}
           >
-            <PopoverTrigger asChild>
-              <button
-                type="button"
-                className="focus-ring flex cursor-pointer items-center gap-1 whitespace-nowrap uppercase"
-                aria-label={`${group.label} filter, selected: ${accessibleSelection}`}
-                aria-expanded={openGroup === group.key}
-                onClick={() => setOpenGroup((current) => (current === group.key ? null : group.key))}
-              >
-                <span>{triggerLabel}</span>
-                <span aria-hidden="true" className="relative -top-0.75">
-                  ⌄
-                </span>
-              </button>
+            <PopoverTrigger
+              data-filter-trigger={group.key}
+              render={
+                <button
+                  type="button"
+                  className="focus-ring flex cursor-pointer items-center gap-1 whitespace-nowrap uppercase"
+                  aria-label={`${group.label} filter, selected: ${accessibleSelection}`}
+                  aria-controls={`filter-${group.key}-options`}
+                />
+              }
+            >
+              <span>{triggerLabel}</span>
+              <span aria-hidden="true" className="relative -top-0.75">
+                ⌄
+              </span>
             </PopoverTrigger>
             <PopoverContent
+              key={`${group.key}-options`}
+              id={`filter-${group.key}-options`}
+              data-filter-popover={group.key}
               aria-label={`${group.label} options`}
-              className="grid gap-2 text-sm font-normal text-ink/70"
+              className="text-sm font-normal text-ink/70"
             >
               {plainOptions.map((option) => (
                 <label key={option.id} className="flex cursor-pointer items-start gap-2">

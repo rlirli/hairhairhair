@@ -31,6 +31,7 @@ function usage() {
     "                 Names: " + names.join(", "),
     "  --descending   Sort selected structures in descending order.",
     "  --random       Shuffle selected structures.",
+    "  --dry-run      Report planned file changes without writing them.",
     "  --help         Show this help.",
     "",
     "Default: sort all supported structures in ascending order.",
@@ -43,11 +44,14 @@ function optionsFrom(args) {
   const selected = new Set();
   let hasSelection = false;
   let order = "ascending";
+  let dryRun = false;
 
   for (let i = 0; i < args.length; i += 1) {
     const arg = args[i];
     if (arg === "--help" || arg === "-h") return { help: true };
-    if (arg === "--descending") {
+    if (arg === "--dry-run") {
+      dryRun = true;
+    } else if (arg === "--descending") {
       if (order === "random") throw new Error("Use either --descending or --random, not both.");
       order = "descending";
     } else if (arg === "--random") {
@@ -71,7 +75,7 @@ function optionsFrom(args) {
   }
 
   if (hasSelection && selected.size === 0) throw new Error("--only requires at least one structure name.");
-  return { selected: hasSelection ? selected : new Set(names), order };
+  return { selected: hasSelection ? selected : new Set(names), order, dryRun };
 }
 
 function nodeName(node) {
@@ -103,37 +107,58 @@ function arrayProperty(object, name) {
     : undefined;
 }
 
-function recordKey(node, key, file) {
-  if (!ts.isObjectLiteralExpression(node)) throw new Error("Expected an object in " + file.fileName + ".");
+function recordKey(node, key, file, structure) {
+  if (!ts.isObjectLiteralExpression(node)) {
+    throw new Error('Sort structure "' + structure + '" in "' + file.fileName + '" contains a non-object record.');
+  }
   const property = node.properties.find((item) => ts.isPropertyAssignment(item) && nodeName(item.name) === key);
   if (!property || !ts.isPropertyAssignment(property) || !ts.isStringLiteralLike(property.initializer)) {
-    throw new Error('Expected string sort key "' + key + '" in ' + node.getText(file) + ".");
+    throw new Error(
+      'Sort structure "' +
+        structure +
+        '" in "' +
+        file.fileName +
+        '" is missing string key "' +
+        key +
+        '":\n' +
+        node.getText(file),
+    );
   }
   return property.initializer.text;
 }
 
 const compare = (left, right) => left.localeCompare(right, "en", { sensitivity: "base" });
 
-function recordComparator(file, key, tieKey) {
+function recordComparator(file, key, tieKey, structure) {
   return (left, right) => {
-    const primary = compare(recordKey(left, key, file), recordKey(right, key, file));
-    return primary || (tieKey ? compare(recordKey(left, tieKey, file), recordKey(right, tieKey, file)) : 0);
+    const primary = compare(recordKey(left, key, file, structure), recordKey(right, key, file, structure));
+    return (
+      primary ||
+      (tieKey ? compare(recordKey(left, tieKey, file, structure), recordKey(right, tieKey, file, structure)) : 0)
+    );
   };
 }
 
-function stringComparator(file) {
+function stringComparator(file, structure) {
   return (left, right) => {
     if (!ts.isStringLiteralLike(left) || !ts.isStringLiteralLike(right)) {
-      throw new Error("Expected string IDs in " + file.fileName + ".");
+      throw new Error('Sort structure "' + structure + '" in "' + file.fileName + '" contains a non-string ID.');
     }
     return compare(left.text, right.text);
   };
 }
 
 function compatibilityComparator(file) {
+  const structure = "hairstyleCompatibility";
   return (left, right) => {
-    const hairstyle = compare(recordKey(left, "hairstyleId", file), recordKey(right, "hairstyleId", file));
-    return hairstyle || compare(recordKey(left, "hairTypeId", file), recordKey(right, "hairTypeId", file));
+    const hairstyle = compare(
+      recordKey(left, "hairstyleId", file, structure),
+      recordKey(right, "hairstyleId", file, structure),
+    );
+    return (
+      hairstyle ||
+      compare(recordKey(left, "hairTypeId", file, structure), recordKey(right, "hairTypeId", file, structure))
+    );
   };
 }
 
@@ -175,10 +200,27 @@ function nestedEdits(source, fileName, selected, order) {
   const file = ts.createSourceFile(fileName, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
   const edits = [];
   const specs = [
-    { collection: "hairstyles", property: "variations", name: "variations", key: "name", tie: "id" },
-    { collection: "hairstyles", property: "sourceIds", name: "source-ids" },
-    { collection: "hairstyles", property: "relatedStyleIds", name: "related-style-ids" },
-    { collection: "styleExamples", property: "hairstyleIds", name: "example-hairstyle-ids" },
+    {
+      collection: "hairstyles",
+      property: "variations",
+      name: "variations",
+      key: "name",
+      tie: "id",
+      context: "hairstyles.variations",
+    },
+    { collection: "hairstyles", property: "sourceIds", name: "source-ids", context: "hairstyles.sourceIds" },
+    {
+      collection: "hairstyles",
+      property: "relatedStyleIds",
+      name: "related-style-ids",
+      context: "hairstyles.relatedStyleIds",
+    },
+    {
+      collection: "styleExamples",
+      property: "hairstyleIds",
+      name: "example-hairstyle-ids",
+      context: "styleExamples.hairstyleIds",
+    },
   ];
 
   for (const spec of specs) {
@@ -187,7 +229,9 @@ function nestedEdits(source, fileName, selected, order) {
     for (const record of collection.elements) {
       const array = arrayProperty(record, spec.property);
       if (!array) continue;
-      const comparator = spec.key ? recordComparator(file, spec.key, spec.tie) : stringComparator(file);
+      const comparator = spec.key
+        ? recordComparator(file, spec.key, spec.tie, spec.context)
+        : stringComparator(file, spec.context);
       edits.push(editArray(source, file, array, comparator, order));
     }
   }
@@ -197,9 +241,9 @@ function nestedEdits(source, fileName, selected, order) {
 function collectionEdits(source, fileName, selected, order) {
   const file = ts.createSourceFile(fileName, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
   const specs = [
-    ["sources", "sources", recordComparator(file, "id")],
-    ["hairstyles", "hairstyles", recordComparator(file, "name", "id")],
-    ["styleExamples", "style-examples", recordComparator(file, "id")],
+    ["sources", "sources", recordComparator(file, "id", undefined, "sources")],
+    ["hairstyles", "hairstyles", recordComparator(file, "name", "id", "hairstyles")],
+    ["styleExamples", "style-examples", recordComparator(file, "id", undefined, "styleExamples")],
   ];
   const edits = [];
   for (const [variable, name, comparator] of specs) {
@@ -262,7 +306,13 @@ async function main() {
     } else if (key === "media") {
       const file = ts.createSourceFile(path, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
       source = applyEdits(source, [
-        editArray(source, file, arrayVariable(file, "hairstyleMedia"), recordComparator(file, "id"), options.order),
+        editArray(
+          source,
+          file,
+          arrayVariable(file, "hairstyleMedia"),
+          recordComparator(file, "id", undefined, "hairstyleMedia"),
+          options.order,
+        ),
       ]);
     }
     outputs.set(path, await formatSource(source, path));
@@ -272,6 +322,15 @@ async function main() {
   for (const [path, output] of outputs) {
     if (output !== (await readFile(path, "utf8"))) changes.push([path, output]);
   }
+  if (options.dryRun) {
+    process.stdout.write(
+      changes.length
+        ? "Dry run: would update " + changes.map(([path]) => path.slice(root.length + 1)).join(", ") + ".\n"
+        : "Dry run: selected hairstyle data is already sorted.\n",
+    );
+    return;
+  }
+
   for (const [path, output] of changes) await writeAtomically(path, output);
 
   process.stdout.write(

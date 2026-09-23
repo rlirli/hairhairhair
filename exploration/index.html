@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f3efe7" />
+    <title>Hairstyle relations · hairhairhair</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="topbar">
+        <a class="wordmark" href="/">hairhairhair<span> / playground</span></a>
+        <div class="tools">
+          <label class="search"><span>Find a style</span><input id="search" type="search" placeholder="Try “wolf cut”" autocomplete="off" /></label>
+          <button id="connected" class="toggle" type="button" aria-pressed="false">Connected only</button>
+          <button id="reset" class="reset" type="button">Reset layout</button>
+        </div>
+      </header>
+      <section class="intro">
+        <div><p class="eyebrow">A little map of the haircut universe</p><h1>Hairstyle relations</h1></div>
+        <p class="hint">Drag styles to explore. Related styles pull together. Scroll to zoom; drag the background to pan.</p>
+      </section>
+      <section class="workspace">
+        <div class="canvas-wrap" id="canvas-wrap">
+          <svg id="map" role="img" aria-label="Interactive map of hairstyle relations"><g id="world"><g id="edges"></g><g id="nodes"></g></g></svg>
+          <div class="legend"><i></i> Related styles</div>
+          <div class="counter" id="counter"></div>
+        </div>
+        <aside class="details" id="details"><div class="empty"><span class="spark">✳</span><p>Pick a hairstyle to see its connections.</p></div></aside>
+      </section>
+      <footer>Relation data comes from <code>Hairstyle.relatedStyleIds</code>. This playground runs separately from the site.</footer>
+    </main>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

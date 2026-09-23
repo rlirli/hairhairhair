@@ -137,6 +137,20 @@ export const sources: EditorialSource[] = [
     reviewedAt: "2026-09-22",
   },
   {
+    id: "haircom-curtain-hairstyle",
+    title: "This Iconic ‘90s Look For Men Is Making A Serious Comeback On Tik Tok",
+    url: "https://www.hair.com/e-boy-curtain-hairstyle.html",
+    publisher: "Hair.com by L'Oréal",
+    reviewedAt: "2026-09-24",
+  },
+  {
+    id: "haircom-type-1b",
+    title: "1B Hair: What Is It and How to Care For It",
+    url: "https://www.hair.com/1b-hair.html",
+    publisher: "Hair.com by L'Oréal",
+    reviewedAt: "2026-09-24",
+  },
+  {
     id: "haircom-wolf-cut",
     title: "What You Need To Know About The Wolf Cut Hair Trend",
     url: "https://www.hair.com/wolf-cut-hair.html",
@@ -326,6 +340,61 @@ export const hairstyles: Hairstyle[] = [
     ],
     sourceIds: ["guardian-balotelli-hair-obituary"],
     relatedStyleIds: ["hairstyle-patterned-mohawk", "hairstyle-thin-mohawk", "hairstyle-top-knot"],
+    guidePublicationStatus: "published",
+  },
+  {
+    id: "hairstyle-curtain-haircut",
+    slug: "curtain-haircut",
+    name: "Curtain haircut",
+    kind: "cut",
+    summary:
+      "A medium-length cut built around a center or near-center part, with longer front sections falling away from the forehead to frame both sides of the face.",
+    intro: [
+      "The curtain haircut is defined by its split front silhouette: longer hair is parted through the center or close to it and falls to either side of the forehead.",
+      "Classic versions commonly keep enough length around the front and sides to reach roughly ear level, while modern versions range from sleek and controlled to softer, more textured interpretations.",
+      "The haircut is especially recognizable on straight and wavy hair, where the two front sections can form the characteristic loose C-shaped sweep.",
+    ],
+    variations: [
+      {
+        id: "curtain-haircut-classic",
+        name: "Classic curtains",
+        description:
+          "Medium-length hair with a clear center part and smooth front sections falling symmetrically to either side.",
+      },
+      {
+        id: "curtain-haircut-curly",
+        name: "Curly curtains",
+        description:
+          "A curl-specific interpretation that preserves the center split and face-framing front while allowing the hair to form a fuller rounded silhouette.",
+      },
+      {
+        id: "curtain-haircut-textured",
+        name: "Textured curtains",
+        description:
+          "A looser version with more separation, movement and visible natural texture through the front and crown.",
+      },
+    ],
+    consultation: {
+      intro:
+        "Agree on front length, part position, side length and how strongly the hair should sweep away from the face before cutting.",
+      questions: [
+        "Should the part sit exactly in the center or slightly off-center?",
+        "Where should the front sections finish when dry: eyebrow, cheekbone, ear or lower?",
+        "Should the sides remain full around the ears or be tapered shorter?",
+        "Do you want a sleek classic finish or more natural texture and separation?",
+        "How much daily styling are you willing to do to maintain volume and the outward sweep?",
+      ],
+      sampleRequest:
+        "“I’d like medium-length curtains with a clean center part, enough length in front to sweep toward my cheekbones, full sides around the ears, and a soft natural bend rather than a hard-styled finish.”",
+    },
+    considerations: [
+      "The style needs sufficient front length for the hair to divide and fall to both sides of the face.",
+      "Very straight or fine hair may need blow-drying or light styling product to create lift and an outward bend instead of lying flat.",
+      "Natural waves can create the curtain movement with less styling, while stronger curls increasingly produce a curl-specific interpretation rather than the sleek classic silhouette.",
+      "Density affects how exposed the center part appears and how much volume the two front sections can hold.",
+    ],
+    sourceIds: ["haircom-curtain-hairstyle", "haircom-type-1b"],
+    relatedStyleIds: [],
     guidePublicationStatus: "published",
   },
   {
@@ -789,6 +858,18 @@ export const styleExamples: StyleExample[] = [
     caption: "Notice the rounded silhouette and visible coily texture through the top and sides.",
     patternDescription: "The shape stays compact but full enough for texture to define the outline.",
     lengthDescription: "Short textured length remains through the crown; assess the result after dry shrinkage.",
+  },
+  {
+    id: "style-example-curtain-haircut-straight-1b",
+    hairstyleIds: ["hairstyle-curtain-haircut"],
+    imageId: "curtain-haircut-straight-1b",
+    title: "Classic straight curtains",
+    caption:
+      "Notice the clean center split, retained ear-level length and soft outward bend of the two front sections.",
+    patternDescription:
+      "Dense predominantly straight hair separates from the center into two smooth face-framing panels with subtle volume and a gentle C-shaped sweep.",
+    lengthDescription:
+      "The front reaches approximately cheekbone-to-ear level, with similar medium length through the sides and enough crown length to keep the silhouette soft rather than cropped.",
   },
   {
     id: "style-example-flat-top-coily",

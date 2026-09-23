@@ -3,6 +3,7 @@ import buzzShort from "../assets/hairstyles/buzz-short.png";
 import buzzTextured from "../assets/hairstyles/buzz-textured.png";
 import croppedAfroCompact from "../assets/hairstyles/cropped-afro-compact.png";
 import croppedAfroFull from "../assets/hairstyles/cropped-afro-full.png";
+import curtainHaircutStraight1b from "../assets/hairstyles/curtain-haircut-straight-1b.png";
 import flatTopCoily from "../assets/hairstyles/flat-top-coily.png";
 import flatTopStraight from "../assets/hairstyles/flat-top-straight.png";
 import knotlessBoxBraidsMedium from "../assets/hairstyles/knotless-box-braids-medium.png";
@@ -60,6 +61,17 @@ export const hairstyleMedia: HairstyleMedia[] = [
     src: croppedAfroFull,
     alt: "Transparent editorial reference showing a short cropped afro with rounded coily texture.",
     provenance: { kind: "generated", provider: "OpenAI", promptKey: "cropped-afro-full", background: "transparent" },
+  },
+  {
+    id: "curtain-haircut-straight-1b",
+    src: curtainHaircutStraight1b,
+    alt: "Editorial reference showing a mid-20s East Asian man with dense black straight hair in a medium-length center-parted curtain haircut.",
+    provenance: {
+      kind: "generated",
+      provider: "OpenAI",
+      promptKey: "curtain-haircut-straight-1b",
+      background: "transparent",
+    },
   },
   {
     id: "flat-top-coily",

@@ -8,6 +8,10 @@ The detail-page style notes resolve broad and subtype hair-type compatibility fr
 
 The hairstyle detail page keeps collection separators as thin hairlines and presents reviewed sources in muted text. Source review dates retain an ISO server-rendered fallback and are formatted in the viewer's browser locale using UTC to avoid shifting the calendar date.
 
+## Import a hairstyle package
+
+Place one folder per hairstyle in `inbox-hairstyles/` with `payload.json` and its referenced PNG files. Run `npm run import:hairstyles` to preview; use `npm run import:hairstyles -- --apply` to import and archive validated packages. The importer updates data, image prompts, reciprocal relationships, and alphabetical order.
+
 ## Mandatory
 
 1. In `src/data/hairstyles.ts`, add the `Hairstyle` record and any `EditorialSource` records it cites. Use unique, stable IDs and a unique slug. Preserve the source's exact `title`; use optional `displayTitle` for a distinct, neutral website label when needed.

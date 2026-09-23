@@ -27,6 +27,8 @@ npm run verify
 
 Sort supported data collections with `npm run sort:hairstyles`. Preview changes with `npm run sort:hairstyles -- --dry-run`; target specific collections with `--only <name>`.
 
+Import hairstyle packages from `inbox-hairstyles/` with `npm run import:hairstyles` to preview, or add `-- --apply` to write changes and archive imported folders.
+
 The domain vocabulary is defined in [`CONTEXT.md`](CONTEXT.md). Keep content records, media metadata, research, and tests consistent in the same commit.
 
 ## Deployment

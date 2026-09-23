@@ -1,3 +1,27 @@
+/**
+ * Sort hairstyle data arrays in their destination files.
+ *
+ * Usage
+ *   npm run sort:hairstyles
+ *   npm run sort:hairstyles -- --only hairstyles,compatibility --descending
+ *
+ * Options
+ *   --only <name>  Sort selected structures; repeat the flag or use a
+ *                 comma-separated list. Names: sources, hairstyles,
+ *                 variations, source-ids, related-style-ids, style-examples,
+ *                 example-hairstyle-ids, compatibility, media.
+ *   --descending   Sort selected structures in reverse alphabetical order.
+ *   --random       Shuffle selected structures.
+ *   --dry-run      Show which files would change without writing them.
+ *   --help         Show command usage.
+ *
+ * How it works
+ *   By default, sorts every supported structure in ascending alphabetical
+ *   order. It parses TypeScript arrays, checks required sort keys, reorders the
+ *   selected records, formats changed files, and writes them atomically. The
+ *   media records are sorted; media import statements and the prompt document
+ *   are not.
+ */
 import { readFile, rename, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -5,22 +29,56 @@ import * as prettier from "prettier";
 import ts from "typescript";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const names = [
-  "sources",
-  "hairstyles",
-  "variations",
-  "source-ids",
-  "related-style-ids",
-  "style-examples",
-  "example-hairstyle-ids",
-  "compatibility",
-  "media",
-];
-const paths = {
+
+const HAIRSTYLE_SORT_FILES_BY_STRUCTURE = {
+  sources: "hairstyles",
+  hairstyles: "hairstyles",
+  variations: "hairstyles",
+  "source-ids": "hairstyles",
+  "related-style-ids": "hairstyles",
+  "style-examples": "hairstyles",
+  "example-hairstyle-ids": "hairstyles",
+  compatibility: "compatibility",
+  media: "media",
+};
+
+const HAIRSTYLE_SORT_STRUCTURES = Object.keys(HAIRSTYLE_SORT_FILES_BY_STRUCTURE);
+
+const HAIRSTYLE_DATA_PATHS = {
   hairstyles: "src/data/hairstyles.ts",
   compatibility: "src/data/hairstyle-compatibility.ts",
   media: "src/data/media.ts",
 };
+
+const NESTED_ARRAYS = [
+  {
+    collection: "hairstyles",
+    property: "variations",
+    name: "variations",
+    context: "hairstyles.variations",
+    key: "name",
+    tie: "id",
+  },
+  { collection: "hairstyles", property: "sourceIds", name: "source-ids", context: "hairstyles.sourceIds" },
+  {
+    collection: "hairstyles",
+    property: "relatedStyleIds",
+    name: "related-style-ids",
+    context: "hairstyles.relatedStyleIds",
+  },
+  {
+    collection: "styleExamples",
+    property: "hairstyleIds",
+    name: "example-hairstyle-ids",
+    context: "styleExamples.hairstyleIds",
+  },
+];
+
+const COLLECTION_ARRAYS = [
+  { variable: "sources", name: "sources", key: "id" },
+  { variable: "hairstyles", name: "hairstyles", key: "name", tie: "id" },
+  { variable: "styleExamples", name: "style-examples", key: "id" },
+];
 
 function usage() {
   return [
@@ -28,7 +86,7 @@ function usage() {
     "",
     "Options:",
     "  --only <name>  Sort one structure; repeat or comma-separate names.",
-    "                 Names: " + names.join(", "),
+    "                 Names: " + HAIRSTYLE_SORT_STRUCTURES.join(", "),
     "  --descending   Sort selected structures in descending order.",
     "  --random       Shuffle selected structures.",
     "  --dry-run      Report planned file changes without writing them.",
@@ -46,8 +104,8 @@ function optionsFrom(args) {
   let order = "ascending";
   let dryRun = false;
 
-  for (let i = 0; i < args.length; i += 1) {
-    const arg = args[i];
+  for (let index = 0; index < args.length; index += 1) {
+    const arg = args[index];
     if (arg === "--help" || arg === "-h") return { help: true };
     if (arg === "--dry-run") {
       dryRun = true;
@@ -59,14 +117,17 @@ function optionsFrom(args) {
       order = "random";
     } else if (arg === "--only" || arg.startsWith("--only=")) {
       hasSelection = true;
-      const value = arg === "--only" ? args[++i] : arg.slice(7);
+      const value = arg === "--only" ? args[++index] : arg.slice(7);
       if (!value || value.startsWith("--")) throw new Error("--only requires one or more structure names.");
       for (const name of value
         .split(",")
         .map((part) => part.trim())
         .filter(Boolean)) {
-        if (!names.includes(name))
-          throw new Error('Unknown structure "' + name + '". Choose from: ' + names.join(", ") + ".");
+        if (!HAIRSTYLE_SORT_STRUCTURES.includes(name)) {
+          throw new Error(
+            'Unknown structure "' + name + '". Choose from: ' + HAIRSTYLE_SORT_STRUCTURES.join(", ") + ".",
+          );
+        }
         selected.add(name);
       }
     } else {
@@ -75,7 +136,20 @@ function optionsFrom(args) {
   }
 
   if (hasSelection && selected.size === 0) throw new Error("--only requires at least one structure name.");
-  return { selected: hasSelection ? selected : new Set(names), order, dryRun };
+  return {
+    selected: hasSelection ? selected : new Set(HAIRSTYLE_SORT_STRUCTURES),
+    order,
+    dryRun,
+  };
+}
+
+function hairstyleSortFiles(selected) {
+  const files = new Set();
+  for (const structure of selected) {
+    const file = HAIRSTYLE_SORT_FILES_BY_STRUCTURE[structure];
+    if (file) files.add(file);
+  }
+  return files;
 }
 
 function nodeName(node) {
@@ -165,9 +239,9 @@ function compatibilityComparator(file) {
 function orderItems(items, comparator, order) {
   if (order === "random") {
     const shuffled = [...items];
-    for (let i = shuffled.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    for (let index = shuffled.length - 1; index > 0; index -= 1) {
+      const other = Math.floor(Math.random() * (index + 1));
+      [shuffled[index], shuffled[other]] = [shuffled[other], shuffled[index]];
     }
     return shuffled;
   }
@@ -175,12 +249,11 @@ function orderItems(items, comparator, order) {
   return [...items].sort((left, right) => direction * comparator(left, right));
 }
 
-function editArray(source, file, array, comparator, order) {
+function arrayEdit(source, file, array, comparator, order) {
   const sorted = orderItems([...array.elements], comparator, order);
   if (sorted.every((item, index) => item === array.elements[index])) return undefined;
   const open = source.indexOf("[", array.getStart(file));
-  const close = array.end - 1;
-  if (open < 0 || source[close] !== "]") throw new Error("Could not locate array in " + file.fileName + ".");
+  if (open < 0 || source[array.end - 1] !== "]") throw new Error("Could not locate array in " + file.fileName + ".");
   return {
     start: open,
     end: array.end,
@@ -190,7 +263,7 @@ function editArray(source, file, array, comparator, order) {
 
 function applyEdits(source, edits) {
   let result = source;
-  for (const edit of edits.filter(Boolean).sort((a, b) => b.start - a.start)) {
+  for (const edit of edits.filter(Boolean).sort((left, right) => right.start - left.start)) {
     result = result.slice(0, edit.start) + edit.text + result.slice(edit.end);
   }
   return result;
@@ -199,40 +272,17 @@ function applyEdits(source, edits) {
 function nestedEdits(source, fileName, selected, order) {
   const file = ts.createSourceFile(fileName, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
   const edits = [];
-  const specs = [
-    {
-      collection: "hairstyles",
-      property: "variations",
-      name: "variations",
-      key: "name",
-      tie: "id",
-      context: "hairstyles.variations",
-    },
-    { collection: "hairstyles", property: "sourceIds", name: "source-ids", context: "hairstyles.sourceIds" },
-    {
-      collection: "hairstyles",
-      property: "relatedStyleIds",
-      name: "related-style-ids",
-      context: "hairstyles.relatedStyleIds",
-    },
-    {
-      collection: "styleExamples",
-      property: "hairstyleIds",
-      name: "example-hairstyle-ids",
-      context: "styleExamples.hairstyleIds",
-    },
-  ];
-
-  for (const spec of specs) {
+  for (const spec of NESTED_ARRAYS) {
     if (!selected.has(spec.name)) continue;
-    const collection = arrayVariable(file, spec.collection);
-    for (const record of collection.elements) {
+    const records = arrayVariable(file, spec.collection);
+    for (const record of records.elements) {
       const array = arrayProperty(record, spec.property);
       if (!array) continue;
+      const context = spec.context;
       const comparator = spec.key
-        ? recordComparator(file, spec.key, spec.tie, spec.context)
-        : stringComparator(file, spec.context);
-      edits.push(editArray(source, file, array, comparator, order));
+        ? recordComparator(file, spec.key, spec.tie, context)
+        : stringComparator(file, context);
+      edits.push(arrayEdit(source, file, array, comparator, order));
     }
   }
   return applyEdits(source, edits);
@@ -240,16 +290,56 @@ function nestedEdits(source, fileName, selected, order) {
 
 function collectionEdits(source, fileName, selected, order) {
   const file = ts.createSourceFile(fileName, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
-  const specs = [
-    ["sources", "sources", recordComparator(file, "id", undefined, "sources")],
-    ["hairstyles", "hairstyles", recordComparator(file, "name", "id", "hairstyles")],
-    ["styleExamples", "style-examples", recordComparator(file, "id", undefined, "styleExamples")],
-  ];
   const edits = [];
-  for (const [variable, name, comparator] of specs) {
-    if (selected.has(name)) edits.push(editArray(source, file, arrayVariable(file, variable), comparator, order));
+  for (const spec of COLLECTION_ARRAYS) {
+    if (!selected.has(spec.name)) continue;
+    edits.push(
+      arrayEdit(
+        source,
+        file,
+        arrayVariable(file, spec.variable),
+        recordComparator(file, spec.key, spec.tie, spec.variable),
+        order,
+      ),
+    );
   }
   return applyEdits(source, edits);
+}
+
+function sortHairstyleDataSources(contents, selected = new Set(HAIRSTYLE_SORT_STRUCTURES), order = "ascending") {
+  const sorted = { ...contents };
+  if (hairstyleSortFiles(selected).has("hairstyles")) {
+    const path = HAIRSTYLE_DATA_PATHS.hairstyles;
+    let source = nestedEdits(sorted.hairstyles, path, selected, order);
+    sorted.hairstyles = collectionEdits(source, path, selected, order);
+  }
+  if (selected.has("compatibility")) {
+    const path = HAIRSTYLE_DATA_PATHS.compatibility;
+    const file = ts.createSourceFile(path, sorted.compatibility, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
+    sorted.compatibility = applyEdits(sorted.compatibility, [
+      arrayEdit(
+        sorted.compatibility,
+        file,
+        arrayVariable(file, "hairstyleCompatibility"),
+        compatibilityComparator(file),
+        order,
+      ),
+    ]);
+  }
+  if (selected.has("media")) {
+    const path = HAIRSTYLE_DATA_PATHS.media;
+    const file = ts.createSourceFile(path, sorted.media, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
+    sorted.media = applyEdits(sorted.media, [
+      arrayEdit(
+        sorted.media,
+        file,
+        arrayVariable(file, "hairstyleMedia"),
+        recordComparator(file, "id", undefined, "hairstyleMedia"),
+        order,
+      ),
+    ]);
+  }
+  return sorted;
 }
 
 async function formatSource(source, path) {
@@ -270,58 +360,19 @@ async function main() {
     return;
   }
 
-  const selected = options.selected;
-  const touched = new Set();
-  const hairstyleCollections = [
-    "sources",
-    "hairstyles",
-    "variations",
-    "source-ids",
-    "related-style-ids",
-    "style-examples",
-    "example-hairstyle-ids",
-  ];
-  if (hairstyleCollections.some((name) => selected.has(name))) touched.add("hairstyles");
-  if (selected.has("compatibility")) touched.add("compatibility");
-  if (selected.has("media")) touched.add("media");
-
-  const outputs = new Map();
-  for (const key of touched) {
-    const path = resolve(root, paths[key]);
-    let source = await readFile(path, "utf8");
-    if (key === "hairstyles") {
-      source = nestedEdits(source, path, selected, options.order);
-      source = collectionEdits(source, path, selected, options.order);
-    } else if (key === "compatibility") {
-      const file = ts.createSourceFile(path, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
-      source = applyEdits(source, [
-        editArray(
-          source,
-          file,
-          arrayVariable(file, "hairstyleCompatibility"),
-          compatibilityComparator(file),
-          options.order,
-        ),
-      ]);
-    } else if (key === "media") {
-      const file = ts.createSourceFile(path, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TS);
-      source = applyEdits(source, [
-        editArray(
-          source,
-          file,
-          arrayVariable(file, "hairstyleMedia"),
-          recordComparator(file, "id", undefined, "hairstyleMedia"),
-          options.order,
-        ),
-      ]);
-    }
-    outputs.set(path, await formatSource(source, path));
+  const targets = hairstyleSortFiles(options.selected);
+  const inputs = {};
+  for (const key of targets) {
+    inputs[key] = await readFile(resolve(root, HAIRSTYLE_DATA_PATHS[key]), "utf8");
   }
-
+  const sorted = sortHairstyleDataSources(inputs, options.selected, options.order);
   const changes = [];
-  for (const [path, output] of outputs) {
+  for (const key of targets) {
+    const path = resolve(root, HAIRSTYLE_DATA_PATHS[key]);
+    const output = await formatSource(sorted[key], path);
     if (output !== (await readFile(path, "utf8"))) changes.push([path, output]);
   }
+
   if (options.dryRun) {
     process.stdout.write(
       changes.length

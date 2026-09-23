@@ -40,15 +40,15 @@ const originRows = [
 ].filter((row): row is NonNullable<typeof row> => Boolean(row));
 ---
 
-<section class="rounded-[1.5rem] border border-ink/25 p-5" aria-labelledby={`${style.id}-fact-sheet-title`}>
+<section class="rounded-3xl border border-ink/25 p-5" aria-labelledby={`${style.id}-fact-sheet-title`}>
   <div class="border-b border-ink/25 pb-3">
     <h2 id={`${style.id}-fact-sheet-title`} class="text-xs font-black uppercase tracking-[.16em] text-orange">
       Style notes
     </h2>
   </div>
-  <dl class="mt-2">
-    <div class="border-b border-ink/10 py-3">
-      <dt class="text-xs font-bold uppercase tracking-[.08em] opacity-65">Curl-pattern compatibility</dt>
+  <dl class="mt-2 divide-y divide-ink/10">
+    <div class="pt-3 pb-1">
+      <dt class="text-xs font-bold uppercase tracking-[.08em] opacity-65">Hair Type Compatibility</dt>
       <dd class="mt-3">
         <div
           class="grid grid-cols-12"
@@ -113,7 +113,7 @@ const originRows = [
       </dd>
     </div>
     {originRows.map((row) => (
-      <div class="grid grid-cols-[minmax(0,1fr)_minmax(0,auto)] items-baseline gap-x-4 border-b border-ink/10 py-3 last:border-b-0">
+      <div class="grid grid-cols-[minmax(0,1fr)_minmax(0,auto)] items-baseline gap-x-4 py-3">
         <dt class="text-xs font-bold uppercase tracking-[.08em] opacity-65">{row.label}</dt>
         <dd class="text-right text-sm font-bold">
           {row.value}

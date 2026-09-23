@@ -11,6 +11,7 @@
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "preview": "astro preview",
+    "sort:hairstyles": "node scripts/sort-hairstyle-data.mjs",
     "test": "npm run build:clean && npm run test:content",
     "test:content": "node --test tests/*.test.mjs",
     "verify": "npm run format:check && npm run check && npm test"

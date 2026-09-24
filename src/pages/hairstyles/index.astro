@@ -37,7 +37,7 @@ const filterGroups: FilterGroup[] = [
   title="Hairstyles - hairhairhair.hair"
   description="Research-backed hairstyle profiles for naming a look and preparing for a consultation."
 >
-  <section class="mx-auto max-w-7xl px-5 pb-14 pt-14 sm:px-8">
+  <section class="mx-auto max-w-7xl px-5 pb-3 pt-14 sm:px-8">
     <p class="text-xs font-black uppercase tracking-[.2em] text-orange">The hairstyle collection</p>
     <h1 class="mt-3 max-w-4xl font-display text-6xl leading-[.88] tracking-[-.08em] sm:text-8xl">
       Name the look.
@@ -54,7 +54,9 @@ const filterGroups: FilterGroup[] = [
     >
       Explore the hairstyle map <span aria-hidden="true">↗</span>
     </a>
-    <div class="mt-10 border-b border-ink/30 pb-1.5 pr-1.5">
+  </section>
+  <section class="mx-auto max-w-7xl px-5 pt-16 sm:pt-2 pb-20 sm:px-8">
+    <div class="border-b border-taupe pb-1.5 pr-1.5">
       <DirectoryFilters
         client:load
         groups={filterGroups}
@@ -66,17 +68,14 @@ const filterGroups: FilterGroup[] = [
         pluralItemLabel="hairstyles"
       />
     </div>
-  </section>
-  <p class="sr-only" data-hairstyle-results role="status" aria-live="polite"></p>
-  <section
-    class="mx-auto grid max-w-7xl grid-cols-2 gap-x-3 gap-y-5 px-5 pb-20 sm:gap-x-5 sm:px-8 md:grid-cols-3 lg:grid-cols-4"
-    data-hairstyle-grid
-  >
-    {publishedHairstyles.map((style) => (
-      <HairstyleCard style={style} filterable compatibleHairTypeIds={hairTypeIdsForStyle(style.id)} />
-    ))}
-    <p class="col-span-full mt-4 hidden text-sm text-ink/60" data-hairstyle-empty>
-      No hairstyles match these filters.
-    </p>
+    <p class="sr-only" data-hairstyle-results role="status" aria-live="polite"></p>
+    <div class="mt-6 grid gap-x-3 sm:gap-x-3.5 gap-y-5 grid-cols-2 md:grid-cols-3 lg:grid-cols-4" data-hairstyle-grid>
+      {publishedHairstyles.map((style) => (
+        <HairstyleCard style={style} filterable compatibleHairTypeIds={hairTypeIdsForStyle(style.id)} />
+      ))}
+      <p class="col-span-full mt-4 hidden text-sm text-ink/60" data-hairstyle-empty>
+        No hairstyles match these filters.
+      </p>
+    </div>
   </section>
 </Layout>

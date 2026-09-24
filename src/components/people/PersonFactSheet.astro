@@ -56,22 +56,19 @@ const traits = [
 ].filter((trait) => trait.value !== null);
 ---
 
-<section class="rounded-[1.5rem] border border-ink/25 p-5" aria-labelledby={headingId}>
+<section class="rounded-xl border border-ink/25 p-5 pb-2" aria-labelledby={headingId}>
   <div class="border-b border-ink/25 pb-3">
     <h2 id={headingId} class="text-xs font-black uppercase tracking-[.16em] text-orange">
       Natural profile
     </h2>
   </div>
-  <dl class="mt-2">
+  <dl class="divide-y divide-ink/10">
     {traits.map((trait) => (
-      <div class="grid grid-cols-[minmax(0,1fr)_minmax(0,auto)] items-baseline gap-x-4 border-b border-ink/10 py-3 last:border-b-0">
+      <div class="grid grid-cols-[minmax(0,1fr)_minmax(0,auto)] items-baseline gap-x-4 border-ink/10 py-3">
         <dt class="text-xs font-bold uppercase tracking-[.08em] opacity-65">{trait.label}</dt>
         <dd class={cn("text-right text-sm", trait.value === "Not documented" ? "font-normal opacity-70" : "font-bold")}>
           {trait.href ? (
-            <a
-              class="focus-ring font-normal text-ink underline decoration-ink decoration-2 underline-offset-4"
-              href={trait.href}
-            >
+            <a class="focus-ring text-ink underline decoration-1.5 underline-offset-4" href={trait.href}>
               {trait.value}
             </a>
           ) : (

@@ -4,6 +4,7 @@ import { styleExamples } from "../../data/hairstyles";
 import type { Hairstyle } from "../../data/hairstyles";
 import { kindLabels } from "../../data/hairstyle-relations";
 import { getMedia } from "../../data/media";
+import PhotoAttribution from "../shared/PhotoAttribution";
 interface Props {
   style: Hairstyle;
   compact?: boolean;
@@ -13,28 +14,28 @@ const example = styleExamples.find((item) => item.hairstyleIds.includes(style.id
 const media = getMedia(example?.imageId ?? "");
 ---
 
-<a
-  href={`/hairstyles/${style.slug}/`}
-  class={`hover-surface focus-ring group block h-full rounded-3xl border-2 border-ink p-3 transition ${compact ? "" : "sm:p-4"}`}
+<div
+  class={`hover-surface group flex h-full flex-col rounded-3xl border-2 border-ink p-3 transition ${compact ? "" : "sm:p-4"}`}
 >
   {media && (
-    <Image
-      src={media.image}
-      widths={[400, 800]}
-      sizes="(min-width: 1024px) 25vw, 100vw"
-      format="webp"
-      loading="lazy"
-      alt={media.alt}
-      class="aspect-square w-full rounded-2xl object-cover bg-hairstyle-image-bg"
-    />
+    <figure class="relative aspect-square overflow-hidden rounded-2xl">
+      <a href={`/hairstyles/${style.slug}/`} class="focus-ring block">
+        <Image
+          src={media.image}
+          widths={[400, 800]}
+          sizes="(min-width: 1024px) 25vw, 100vw"
+          format="webp"
+          loading="lazy"
+          alt={media.alt}
+          class="aspect-square w-full rounded-2xl object-cover bg-hairstyle-image-bg"
+        />
+      </a>
+      <PhotoAttribution provenance={media.provenance} density="compact" />
+    </figure>
   )}
-  {media?.provenance.licenseType === "licensed" && (
-    <p class="mt-1.5 text-xs font-bold uppercase tracking-[.12em] text-orange">
-      {media.provenance.attribution ||
-        `Photographic reference${media.provenance.creator ? ` · ${media.provenance.creator}` : ""}${media.provenance.licenseName ? ` · ${media.provenance.licenseName}` : ""}`}
-    </p>
-  )}
-  <p class="mt-3 text-xs font-black uppercase tracking-[.16em] text-orange">{kindLabels[style.kind]}</p>
-  <h2 class="mt-1.5 font-display text-2xl tracking-[-.05em]">{style.name}</h2>
-  <p class="mt-1 text-sm leading-5">{style.summary}</p>
-</a>
+  <a href={`/hairstyles/${style.slug}/`} class="focus-ring flex flex-1 flex-col rounded-2xl">
+    <p class="mt-3 text-xs font-black uppercase tracking-[.16em] text-orange">{kindLabels[style.kind]}</p>
+    <h2 class="mt-1.5 font-display text-2xl tracking-[-.05em]">{style.name}</h2>
+    <p class="mt-1 text-sm leading-5">{style.summary}</p>
+  </a>
+</div>

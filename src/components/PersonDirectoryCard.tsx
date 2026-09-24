@@ -4,10 +4,10 @@ export interface PersonDirectoryCardItem {
   href: string;
   name: string;
   subtitle?: string;
-  imageSrc: string;
+  imageSrc?: string;
   imageSrcSet?: string;
   imageSizes?: string;
-  imageAlt: string;
+  imageAlt?: string;
   profileValues: { hair: string[]; color: string; skin: string };
   description: string;
   profileRows: { label: string; value: string; href?: string }[];
@@ -31,14 +31,23 @@ export default function PersonDirectoryCard({
           data-profile-color={person.profileValues.color}
           data-profile-skin={person.profileValues.skin}
         >
-          <img
-            src={person.imageSrc}
-            srcSet={person.imageSrcSet}
-            sizes={person.imageSizes}
-            alt={person.imageAlt}
-            loading="lazy"
-            className="aspect-[4/5] w-full object-cover transition"
-          />
+          {person.imageSrc ? (
+            <img
+              src={person.imageSrc}
+              srcSet={person.imageSrcSet}
+              sizes={person.imageSizes}
+              alt={person.imageAlt ?? ""}
+              loading="lazy"
+              className="aspect-[4/5] w-full object-cover transition"
+            />
+          ) : (
+            <div
+              className="flex aspect-[4/5] w-full items-center justify-center bg-taupe/30 font-display text-5xl"
+              aria-hidden="true"
+            >
+              {person.name.charAt(0)}
+            </div>
+          )}
           <h2 className="mt-1 truncate font-display text-xl tracking-[-.03em] group-hover:text-orange">
             {person.name}
           </h2>

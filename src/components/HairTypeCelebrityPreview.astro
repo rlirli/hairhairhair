@@ -1,23 +1,27 @@
 ---
 import { getImage } from "astro:assets";
 import PersonDirectoryCard from "./PersonDirectoryCard";
-import { naturalProfileForPerson, resolvedHairTypeForNaturalProfile } from "../data/natural-profiles";
-import { peopleForHairTypeSlug } from "../data/hair-type-discovery";
+import { resolvedHairTypeForNaturalProfile } from "../data/natural-profiles";
+import type { HairTypePerson } from "../data/hair-type-discovery";
 
-const { slug } = Astro.props as { slug: string };
-const people = peopleForHairTypeSlug(slug);
+const { moreHref, people } = Astro.props as { moreHref: string; people: HairTypePerson[] };
+
 const displayValue = (value: string | null, labels: Record<string, string>) =>
   value ? (labels[value] ?? value) : null;
+
 const celebrityCards = await Promise.all(
-  people.slice(0, 7).map(async ({ person, photo, subtype }) => {
-    const profile = naturalProfileForPerson(person.id);
-    const resolvedType = profile ? resolvedHairTypeForNaturalProfile(profile) : undefined;
-    const image = await getImage({
-      src: photo.src,
-      widths: [180, 360],
-      sizes: "(min-width: 1024px) 14vw, 128px",
-      format: "webp",
-    });
+  people.map(async ({ person, photo, naturalProfile: profile, subtype }) => {
+    const resolvedType = resolvedHairTypeForNaturalProfile(profile);
+
+    const image = photo
+      ? await getImage({
+          src: photo.src,
+          widths: [180, 360],
+          sizes: "(min-width: 1024px) 14vw, 128px",
+          format: "webp",
+        })
+      : undefined;
+
     const profileValues = {
       hair: [profile?.hairTypeId.value, profile?.hairSubtypeId.value].filter((value): value is string =>
         Boolean(value),
@@ -25,6 +29,7 @@ const celebrityCards = await Promise.all(
       color: profile?.naturalHairColor.value ?? "",
       skin: profile?.naturalSkinTone.value ?? "",
     };
+
     const profileRows = profile
       ? [
           resolvedType && {
@@ -69,10 +74,10 @@ const celebrityCards = await Promise.all(
       person: {
         href: `/people/${person.slug}/`,
         name: person.name,
-        imageSrc: image.src,
-        imageSrcSet: image.srcSet.attribute,
-        imageSizes: image.attributes.sizes,
-        imageAlt: photo.alt,
+        imageSrc: image?.src,
+        imageSrcSet: image?.srcSet.attribute,
+        imageSizes: image?.attributes.sizes,
+        imageAlt: photo?.alt,
         profileValues,
         description: person.description,
         profileRows,
@@ -82,21 +87,23 @@ const celebrityCards = await Promise.all(
 );
 ---
 
-{celebrityCards.length > 0 && (
-  <section class="mx-auto max-w-7xl px-5 pb-16 sm:px-8" aria-label="People with this natural hair type">
-    <div class="flex items-baseline justify-between gap-4 border-b border-taupe pb-3 sm:pb-2">
-      <h2 class="text-xs font-black uppercase tracking-[.16em] text-orange">Celebs with this hair type</h2>
-      <a
-        class="focus-ring text-xs font-normal uppercase tracking-[.12em] text-muted transition hover:text-ink"
-        href={`/hair-types/${slug}/people/`}
-      >
-        More
-      </a>
-    </div>
-    <div class="mt-2.5 sm:mt-4 grid grid-flow-col auto-cols-[minmax(8rem,1fr)] gap-3 overflow-x-auto pb-3 lg:grid-flow-row lg:grid-cols-7 lg:auto-cols-auto lg:overflow-visible">
-      {celebrityCards.map(({ person, subtitle }) => (
-        <PersonDirectoryCard client:load person={person} subtitle={subtitle} />
-      ))}
-    </div>
-  </section>
-)}
+<section
+  class="mx-auto max-w-7xl px-5 pb-16 sm:px-8"
+  aria-label="People with this natural hair type"
+  data-testid="hair-type-celebrity-preview"
+>
+  <div class="flex items-baseline justify-between gap-4 border-b border-taupe pb-3 sm:pb-2">
+    <h2 class="text-xs font-black uppercase tracking-[.16em] text-orange">Celebs with this hair type</h2>
+    <a
+      class="focus-ring text-xs font-normal uppercase tracking-[.12em] text-muted transition hover:text-ink"
+      href={moreHref}
+    >
+      More
+    </a>
+  </div>
+  <div class="mt-2.5 sm:mt-4 grid grid-flow-col auto-cols-[minmax(8rem,1fr)] gap-3 overflow-x-auto pb-3 lg:grid-flow-row lg:grid-cols-7 lg:auto-cols-auto lg:overflow-visible">
+    {celebrityCards.map(({ person, subtitle }) => (
+      <PersonDirectoryCard client:load person={person} subtitle={subtitle} />
+    ))}
+  </div>
+</section>

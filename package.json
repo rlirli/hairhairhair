@@ -14,7 +14,8 @@
     "import:hairstyles": "node scripts/import-hairstyles.mjs",
     "preview": "astro preview",
     "sort:hairstyles": "node scripts/sort-hairstyle-data.mjs",
-    "test": "npm run build:clean && npm run test:content",
+    "test": "npm run build:clean && npm run test:component && npm run test:content",
+    "test:component": "vitest run --config vitest.config.ts",
     "test:content": "node --test tests/*.test.mjs",
     "verify": "npm run format:check && npm run check && npm test"
   },
@@ -47,6 +48,7 @@
     "prettier-plugin-astro": "^1.0.1",
     "prettier-plugin-multiline-arrays": "^4.1.11",
     "prettier-plugin-organize-imports": "^4.3.0",
-    "prettier-plugin-tailwindcss": "^0.8.1"
+    "prettier-plugin-tailwindcss": "^0.8.1",
+    "vitest": "^5.0.1"
   }
 }

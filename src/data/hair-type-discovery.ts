@@ -1,7 +1,7 @@
 import { hairSubtypes, hairTypes } from "./hair-types";
 import { compatibleHairstylesForHairType, subtypeLabelsForHairstyleInMajorType } from "./hairstyle-compatibility";
-import { naturalProfileForPerson, naturalProfilesForHairType } from "./natural-profiles";
-import { people, personPhotographs } from "./people";
+import { naturalProfileMatchesHairType, naturalProfiles, type NaturalProfile } from "./natural-profiles";
+import { people, personPhotographs, type Person } from "./people";
 import { buildPersonMedia } from "./people-media";
 
 export function parentHairTypeId(slug: string) {
@@ -20,19 +20,45 @@ export function subtypeLabelsForHairstyleOnMajorTypePage(styleId: string, slug: 
   return major ? subtypeLabelsForHairstyleInMajorType(styleId, major.id) : [];
 }
 
-export function peopleForHairTypeSlug(slug: string) {
+export type HairTypePerson = {
+  person: Person;
+  photo?: ReturnType<typeof buildPersonMedia>[number];
+  naturalProfile: NaturalProfile;
+  subtype: (typeof hairSubtypes)[number] | undefined;
+};
+
+type HairTypePersonWithPhoto = HairTypePerson & { photo: NonNullable<HairTypePerson["photo"]> };
+type PeopleForHairTypeOptions = { requireHeroImage?: boolean; limit?: number };
+
+export function peopleForHairTypeSlug(slug: string): HairTypePersonWithPhoto[];
+export function peopleForHairTypeSlug(
+  slug: string,
+  options: PeopleForHairTypeOptions & { requireHeroImage: false },
+): HairTypePerson[];
+export function peopleForHairTypeSlug(
+  slug: string,
+  options: PeopleForHairTypeOptions & { requireHeroImage?: true },
+): HairTypePersonWithPhoto[];
+export function peopleForHairTypeSlug(slug: string, options: PeopleForHairTypeOptions = {}) {
   const target = hairTypes.find((item) => item.slug === slug) ?? hairSubtypes.find((item) => item.slug === slug);
   if (!target) return [];
-  const profiles = naturalProfilesForHairType(target.id);
-  const mediaById = new Map(buildPersonMedia(personPhotographs).map((photo) => [photo.id, photo]));
-  return profiles.flatMap((profile) => {
-    const person = people.find((item) => item.id === profile.personId);
-    const photo = person && mediaById.get(person.heroImageId);
-    if (!person || !photo) return [];
-    const naturalProfile = naturalProfileForPerson(person.id);
-    const subtype = naturalProfile?.hairSubtypeId.value
-      ? hairSubtypes.find((item) => item.id === naturalProfile.hairSubtypeId.value)
+  const limit = Math.max(0, options.limit ?? Infinity);
+  if (limit === 0) return [];
+  const peopleById = new Map(people.map((person) => [person.id, person]));
+  const photographsById = new Map(personPhotographs.map((photo) => [photo.id, photo]));
+  const result: HairTypePerson[] = [];
+  for (const profile of naturalProfiles) {
+    if (result.length >= limit) break;
+    if (!naturalProfileMatchesHairType(profile, target.id)) continue;
+    const person = peopleById.get(profile.personId);
+    if (!person) continue;
+    const heroPhotograph = photographsById.get(person.heroImageId);
+    const photo = heroPhotograph ? buildPersonMedia([heroPhotograph])[0] : undefined;
+    if (options.requireHeroImage !== false && !photo) continue;
+    const subtype = profile.hairSubtypeId.value
+      ? hairSubtypes.find((item) => item.id === profile.hairSubtypeId.value)
       : undefined;
-    return [{ person, photo, naturalProfile: naturalProfile!, subtype }];
-  });
+    result.push({ person, photo, naturalProfile: profile, subtype });
+  }
+  return result;
 }

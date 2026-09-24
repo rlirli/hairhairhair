@@ -5,7 +5,7 @@ import RelatedHairstyleGrid from "../../components/RelatedHairstyleGrid.astro";
 import HairTypeCelebrityPreview from "../../components/HairTypeCelebrityPreview.astro";
 import HairTypeNavigator from "../../components/HairTypeNavigator.astro";
 import { hairSubtypes, hairTypes } from "../../data/hair-types";
-import { stylesForHairTypeSlug } from "../../data/hair-type-discovery";
+import { peopleForHairTypeSlug, stylesForHairTypeSlug } from "../../data/hair-type-discovery";
 
 export function getStaticPaths() {
   return [
@@ -23,6 +23,7 @@ const hairSubtype = Astro.props.hairSubtype!;
 const subtypes = kind === "hairType" ? hairSubtypes.filter((item) => item.hairTypeId === hairType.id) : [];
 const selected = kind === "hairType" ? hairType : hairSubtype;
 const styles = stylesForHairTypeSlug(selected.slug).slice(0, 5);
+const previewPeople = peopleForHairTypeSlug(selected.slug, { requireHeroImage: false, limit: 7 });
 const label =
   kind === "hairType" ? `Type ${hairType.code}: ${hairType.name}` : `Type ${hairSubtype.code}: ${hairSubtype.name}`;
 ---
@@ -100,5 +101,7 @@ const label =
       className="mt-2.5 sm:mt-4 grid grid-flow-col auto-cols-[minmax(8rem,1fr)] gap-4 overflow-x-auto pb-3 lg:grid-flow-row lg:grid-cols-5 lg:auto-cols-auto lg:overflow-visible"
     />
   </section>
-  <HairTypeCelebrityPreview slug={selected.slug} />
+  {previewPeople.length > 0 && (
+    <HairTypeCelebrityPreview moreHref={`/hair-types/${selected.slug}/people/`} people={previewPeople} />
+  )}
 </Layout>

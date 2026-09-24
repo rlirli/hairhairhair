@@ -3,7 +3,9 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import test from "node:test";
 import { hairSubtypes, hairTypes } from "../src/data/hair-types.ts";
-import { dist, page, publicRoutes, root } from "./helpers/site.mjs";
+import { naturalProfileMatchesHairType, naturalProfiles } from "../src/data/natural-profiles.ts";
+import { people } from "../src/data/people.ts";
+import { dist, page, publicRoutes } from "./helpers/site.mjs";
 
 test("detail pages show one-line names and a grouped hair-type navigator", () => {
   const subtypeMarkup = page("/hair-types/3a/");
@@ -26,27 +28,16 @@ test("detail pages show one-line names and a grouped hair-type navigator", () =>
   }
 });
 
-test("celebrity preview is conditional and links to type-specific people archives", () => {
-  const major = page("/hair-types/4/");
-  assert.match(major, /Celebs with this hair type/);
-  assert.match(major, /href="\/hair-types\/4\/people\/"/);
-  assert.match(major, /Will Smith/);
-  assert.match(major, /Mario Balotelli/);
-  assert.match(major, /aspect-\[4\/5\]/);
-  assert.match(major, /data-slot="hover-card-trigger"/);
-  assert.doesNotMatch(major, /pointer-events-none/);
-
-  const exactSubtype = page("/hair-types/4a/");
-  assert.doesNotMatch(exactSubtype, /Celebs with this hair type|Will Smith|Mario Balotelli/);
-
-  const empty = page("/hair-types/3a/");
-  assert.doesNotMatch(empty, /Celebs with this hair type/);
-  const previewSource = readFileSync(join(root, "src/components/HairTypeCelebrityPreview.astro"), "utf8");
-  assert.match(previewSource, /border-b border-taupe pb-3 sm:pb-2/);
-  assert.doesNotMatch(previewSource, /border-t border-taupe|group-hover:block|group-focus-within:block/);
-  const personCardSource = readFileSync(join(root, "src/components/PersonDirectoryCard.tsx"), "utf8");
-  assert.match(personCardSource, /<HoverCard/);
-  assert.match(personCardSource, /font-display text-xl/);
+test("built hair-type pages show a preview only when matching people exist", () => {
+  for (const type of [...hairTypes, ...hairSubtypes]) {
+    const markup = page(`/hair-types/${type.slug}/`);
+    const hasMatches = naturalProfiles.some(
+      (profile) =>
+        naturalProfileMatchesHairType(profile, type.id) && people.some((person) => person.id === profile.personId),
+    );
+    assert.equal(markup.includes('data-testid="hair-type-celebrity-preview"'), hasMatches);
+    if (hasMatches) assert.ok(markup.includes(`href="/hair-types/${type.slug}/people/"`));
+  }
 });
 
 test("hair-type people archives are generated for every major type and subtype and included in sitemap", () => {
@@ -64,10 +55,5 @@ test("hair-type people archives use passport portrait proportions", () => {
   assert.match(archive, /aspect-\[4\/5\]/);
   const headingIds = [...archive.matchAll(/id="(natural-profile-[^"]+)"/g)].map(([, id]) => id);
   assert.equal(new Set(headingIds).size, headingIds.length);
-  assert.equal(headingIds.length, 2);
-  assert.match(readFileSync(join(root, "src/data/hair-type-discovery.ts"), "utf8"), /return profiles[\s\S]*?\}\);/);
-  assert.match(
-    readFileSync(join(root, "src/components/HairTypeCelebrityPreview.astro"), "utf8"),
-    /people\.slice\(0, 7\)/,
-  );
+  assert.ok(headingIds.length > 0);
 });

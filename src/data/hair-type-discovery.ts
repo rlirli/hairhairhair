@@ -1,8 +1,8 @@
 import { hairSubtypes, hairTypes } from "./hair-types";
 import { compatibleHairstylesForHairType, subtypeLabelsForHairstyleInMajorType } from "./hairstyle-compatibility";
+import type { ImageMedia } from "./media-types";
 import { naturalProfileMatchesHairType, naturalProfiles, type NaturalProfile } from "./natural-profiles";
 import { people, personPhotographs, type Person } from "./people";
-import { buildPersonMedia } from "./people-media";
 
 export function parentHairTypeId(slug: string) {
   return (
@@ -22,7 +22,7 @@ export function subtypeLabelsForHairstyleOnMajorTypePage(styleId: string, slug: 
 
 export type HairTypePerson = {
   person: Person;
-  photo?: ReturnType<typeof buildPersonMedia>[number];
+  photo?: ImageMedia;
   naturalProfile: NaturalProfile;
   subtype: (typeof hairSubtypes)[number] | undefined;
 };
@@ -53,7 +53,7 @@ export function peopleForHairTypeSlug(slug: string, options: PeopleForHairTypeOp
     const person = peopleById.get(profile.personId);
     if (!person) continue;
     const heroPhotograph = photographsById.get(person.heroImageId);
-    const photo = heroPhotograph ? buildPersonMedia([heroPhotograph])[0] : undefined;
+    const photo = heroPhotograph ? heroPhotograph : undefined;
     if (options.requireHeroImage !== false && !photo) continue;
     const subtype = profile.hairSubtypeId.value
       ? hairSubtypes.find((item) => item.id === profile.hairSubtypeId.value)

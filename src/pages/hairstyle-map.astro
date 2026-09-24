@@ -11,7 +11,7 @@ const styles = await Promise.all(
     const example = styleExamples.find((item) => item.hairstyleIds.includes(style.id));
     const media = getMedia(example?.imageId ?? "");
     if (!media) return undefined;
-    const image = await getImage({ src: media.src, width: 240, format: "webp" });
+    const image = await getImage({ src: media.image, width: 240, format: "webp" });
     return {
       id: style.id,
       name: style.name,
@@ -20,7 +20,7 @@ const styles = await Promise.all(
       href: `/hairstyles/${style.slug}/`,
       imageSrc: image.src,
       imageAlt: media.alt,
-      transparentBackground: media.provenance.kind === "generated" && media.provenance.background === "transparent",
+      transparentBackground: media.transparentBackground === true,
       relatedStyleIds: style.relatedStyleIds,
     };
   }),

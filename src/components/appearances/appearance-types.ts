@@ -1,4 +1,4 @@
-import type { PhotographMedia } from "../../data/media-types";
+import type { ImageMedia } from "../../data/media-types";
 
 export interface AppearanceCardData {
   id: string;
@@ -6,5 +6,5 @@ export interface AppearanceCardData {
   personName: string;
   date: string;
   event: string;
-  media: PhotographMedia;
+  media: ImageMedia;
 }

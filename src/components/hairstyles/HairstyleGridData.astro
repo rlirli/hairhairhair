@@ -27,13 +27,13 @@ const items = await Promise.all(
     const example = styleExamples.find((item) => item.hairstyleIds.includes(style.id));
     const media = getMedia(example?.imageId ?? "");
     if (!media) return undefined;
-    const image = await getImage({ src: media.src, widths, sizes: imageSizes, format: "webp" });
+    const image = await getImage({ src: media.image, widths, sizes: imageSizes, format: "webp" });
     return {
       href: `/hairstyles/${style.slug}/`,
       imageSrc: image.src,
       imageSrcSet: image.srcSet.attribute,
       imageAlt: media.alt,
-      transparentBackground: media.provenance.kind === "generated" && media.provenance.background === "transparent",
+      transparentBackground: media.transparentBackground === true,
       imageSizes,
       kindLabel: kindLabels[style.kind],
       name: style.name,
@@ -41,7 +41,11 @@ const items = await Promise.all(
       compatibleLabels: compatibilityLabelsForHairstyle(style.id),
       subtypeLabels: hairTypeId ? subtypeLabelsForHairstyleInMajorType(style.id, hairTypeId) : [],
       photoAttribution:
-        media.provenance.kind === "photograph"
+        media.provenance.licenseType === "licensed" &&
+        media.provenance.creator &&
+        media.provenance.sourceUrl &&
+        media.provenance.licenseName &&
+        media.provenance.licenseUrl
           ? {
               creator: media.provenance.creator,
               sourceUrl: media.provenance.sourceUrl,

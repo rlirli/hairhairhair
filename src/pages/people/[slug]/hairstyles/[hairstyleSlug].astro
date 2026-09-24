@@ -1,7 +1,6 @@
 ---
 import { Image } from "astro:assets";
 import Layout from "../../../../components/shared/Layout.astro";
-import { buildPersonMedia } from "../../../../data/people-media";
 import { appearancesForPersonStyle, hairstylesForPerson } from "../../../../data/people-relations";
 import { getHairstyle } from "../../../../data/hairstyles";
 import { people, personPhotographs } from "../../../../data/people";
@@ -20,7 +19,7 @@ export function getStaticPaths() {
 const { person, style: pathStyle } = Astro.props;
 const style = pathStyle ?? getHairstyle(Astro.params.hairstyleSlug ?? "");
 if (!style) throw new Error(`Unknown hairstyle: ${Astro.params.hairstyleSlug}`);
-const media = buildPersonMedia(personPhotographs);
+const media = personPhotographs;
 const records = appearancesForPersonStyle(person.id, style.id);
 ---
 
@@ -94,7 +93,7 @@ const records = appearancesForPersonStyle(person.id, style.id);
               <figure class="relative overflow-hidden">
                 <a class="focus-ring block" href={`/people/${person.slug}/photographs/${photo.id}/`}>
                   <Image
-                    src={photo.src}
+                    src={photo.image}
                     widths={[400, 700, 1000]}
                     sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
                     format="webp"

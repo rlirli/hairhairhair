@@ -10,7 +10,7 @@ const celebrityCards = await Promise.all(
   people.map(async ({ person, photo, naturalProfile, subtype }) => {
     const image = photo
       ? await getImage({
-          src: photo.src,
+          src: photo.image,
           widths: [180, 360],
           sizes: "(min-width: 1024px) 14vw, 128px",
           format: "webp",

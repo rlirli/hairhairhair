@@ -1,14 +1,13 @@
 ---
 import { Image } from "astro:assets";
 import Layout from "../../../../components/shared/Layout.astro";
-import { buildPersonMedia } from "../../../../data/people-media";
 import { appearances, people, personPhotographs } from "../../../../data/people";
 import { observedStylesForAppearance } from "../../../../data/people-relations";
 import PhotoAttribution from "../../../../components/shared/PhotoAttribution.astro";
 import { formatAppearanceDate } from "../../../../lib/appearance-formatting";
 
 export function getStaticPaths() {
-  const media = buildPersonMedia(personPhotographs);
+  const media = personPhotographs;
   return appearances.flatMap((appearance) => {
     const person = people.find((item) => item.id === appearance.personId);
     const photo = media.find((item) => item.id === appearance.imageId);
@@ -30,7 +29,7 @@ const observedStyles = observedStylesForAppearance(appearance.id);
 <Layout
   title={`${formatAppearanceDate(appearance.taken.value)} - ${appearance.event} - ${person.name}`}
   description={`Appearance record for ${person.name} at ${appearance.event}.`}
-  image={photo.src.src}
+  image={photo.image.src}
 >
   <article class="mx-auto max-w-6xl px-5 pb-20 pt-12 sm:px-8">
     <nav aria-label="Breadcrumb" class="text-sm font-bold uppercase tracking-[.12em]">
@@ -73,7 +72,7 @@ const observedStyles = observedStylesForAppearance(appearance.id);
       <figure>
         <a class="focus-ring group block" href={`/people/${person.slug}/photographs/${photo.id}/`}>
           <Image
-            src={photo.src}
+            src={photo.image}
             widths={[600, 1000, 1400]}
             sizes="(min-width: 1024px) 60vw, 100vw"
             format="webp"

@@ -12,16 +12,13 @@ interface Props {
 }
 const { mediaId, title, caption, patternDescription, lengthDescription, eager = false } = Astro.props;
 const media = getMedia(mediaId);
-const imageClass =
-  media?.provenance.kind === "generated" && media.provenance.background === "transparent"
-    ? "bg-hairstyle-image-bg"
-    : "";
+const imageClass = media?.transparentBackground === true ? "bg-hairstyle-image-bg" : "";
 ---
 
 {media && (
   <figure>
     <Image
-      src={media.src}
+      src={media.image}
       widths={[400, 800, 1120]}
       sizes="(min-width: 1024px) 50vw, 100vw"
       format="webp"
@@ -29,25 +26,42 @@ const imageClass =
       loading={eager ? "eager" : "lazy"}
       class={cn("w-full rounded-[2rem] object-cover", imageClass)}
     />
-    {(title || caption || patternDescription || lengthDescription || media.provenance.kind === "photograph") && (
+    {(title || caption || patternDescription || lengthDescription || media.provenance.licenseType === "licensed") && (
       <figcaption class="mt-3 text-sm leading-6">
-        {media.provenance.kind === "photograph" && (
+        {media.provenance.licenseType === "licensed" && (
           <>
-            <span class="font-bold">Photographic reference</span> · {media.provenance.creator};{" "}
-            <a class="underline" href={media.provenance.sourceUrl} target="_blank" rel="noreferrer">
-              {media.provenance.licenseName}
-            </a>{" "}
-            ·{" "}
-            <a class="underline" href={media.provenance.licenseUrl} target="_blank" rel="noreferrer">
-              license
-            </a>
-            {title && <> · {title}</>}
+            <span class="font-bold">
+              {media.provenance.creator || media.provenance.attribution || "Photographic reference"}
+            </span>
+            {media.provenance.sourceUrl && (
+              <>
+                {" "}
+                ·{" "}
+                <a class="underline" href={media.provenance.sourceUrl} target="_blank" rel="noreferrer">
+                  Source
+                </a>
+              </>
+            )}
+            {media.provenance.licenseUrl && (
+              <>
+                {" "}
+                ·{" "}
+                <a class="underline" href={media.provenance.licenseUrl} target="_blank" rel="noreferrer">
+                  {media.provenance.licenseName || "License"}
+                </a>
+              </>
+            )}
           </>
         )}
-        {media.provenance.kind === "generated" && title}
+        {title && (
+          <>
+            {media.provenance.licenseType === "licensed" && <> · </>}
+            {title}
+          </>
+        )}
         {caption && (
           <>
-            {title || media.provenance.kind === "photograph" ? " · " : ""}
+            {title || media.provenance.licenseType === "licensed" ? " · " : ""}
             {caption}
           </>
         )}

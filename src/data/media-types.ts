@@ -1,47 +1,26 @@
-/** Source record for a photograph used by the site. */
-export interface Photograph {
+export interface ImageMedia {
   id: string;
-  fileName: string;
+  kind: "image";
+  image: ImageMetadata;
   alt: string;
-  creator: string;
-  licenseName: string;
-  licenseUrl: string;
-  attribution: string;
-  derivativeStatus: "original" | "cropped" | "edited";
-  sourceUrl: string;
-  originalUrl: string;
-  rightsEvidenceUrl: string;
-  rightsBasis: string;
-  jurisdiction: string;
-  identifier: string;
-  objectPosition: string;
+  objectPosition?: string;
+  transparentBackground?: boolean;
+  provenance: MediaProvenance;
 }
 
-export type PhotographProvenance = {
-  kind: "public-domain" | "licensed";
-  creator: string;
-  licenseName: string;
-  licenseUrl: string;
-  attribution: string;
-  derivativeStatus: Photograph["derivativeStatus"];
-  sourceUrl: string;
-  originalUrl: string;
-  rightsEvidenceUrl: string;
-  rightsBasis: string;
-  jurisdiction: string;
-  identifier: string;
+export type MediaProvenance = {
+  origin?: string; // for example 'user-upload' | 'system'
+  aiGeneration?: { provider?: string; promptKey?: string };
+  licenseType?: "public-domain" | "licensed";
+  creator?: string;
+  licenseName?: string;
+  licenseUrl?: string;
+  attribution?: string;
+  sourceUrl?: string;
+  originalUrl?: string;
+  rightsEvidenceUrl?: string;
+  rightsBasis?: string;
+  jurisdiction?: string;
+  identifier?: string;
+  derivativeStatus?: "original" | "cropped" | "edited";
 };
-
-export type MediaProvenance =
-  | { kind: "generated"; provider: "OpenAI"; promptKey: string; background: "opaque" | "transparent" }
-  | { kind: "photograph"; creator: string; sourceUrl: string; licenseName: string; licenseUrl: string }
-  | PhotographProvenance;
-
-export type Media<TProvenance extends MediaProvenance = MediaProvenance> = {
-  id: string;
-  src: ImageMetadata;
-  alt: string;
-  provenance: TProvenance;
-};
-
-export type PhotographMedia = Photograph & Media<PhotographProvenance>;

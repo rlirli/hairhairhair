@@ -10,7 +10,7 @@ The hairstyle detail page keeps collection separators as thin hairlines and pres
 
 ## Import a hairstyle package
 
-Place one folder per hairstyle in `inbox-hairstyles/` with `payload.json` and its referenced PNG files. Run `npm run import:hairstyles` to preview; use `npm run import:hairstyles -- --apply` to import and archive validated packages. The importer updates data, image prompts, reciprocal relationships, and alphabetical order.
+Place one folder per hairstyle in `inbox-hairstyles/` with `payload.json` and its referenced PNG files. Run `npm run import:hairstyles` to preview; use `npm run import:hairstyles -- --apply` to import and archive validated packages. The importer writes `ImageMedia` records using `image`, `aiGeneration`, and `transparentBackground`, and updates prompts, reciprocal relationships, and alphabetical order.
 
 ## Mandatory
 
@@ -18,7 +18,7 @@ Place one folder per hairstyle in `inbox-hairstyles/` with `payload.json` and it
 2. In the same file, add at least one `StyleExample` record. Each `imageId` must resolve to hairstyle media, and each example must include the new hairstyle ID.
 3. If the hairstyle has related styles, add both directions of every relationship in `relatedStyleIds`.
 4. Add every referenced image under `src/assets/hairstyles/`. The current collection uses PNG files.
-5. In `src/data/media.ts`, statically import each image and add its `HairstyleMedia` record. Keep the media ID, filename, and `StyleExample.imageId` aligned.
+5. In `src/data/media.ts`, statically import each image and add its `HairstyleMedia` (`ImageMedia`) record with `kind: "image"`, the imported metadata in `image`, alt text, and provenance. Generated images use `provenance.aiGeneration` and set `transparentBackground` when the PNG has transparency. Keep the media ID and `StyleExample.imageId` aligned.
 6. For generated images, record the prompts in `docs/media/hairstyle-image-prompts.md` and keep each `promptKey` aligned with the media record.
 7. Run `npm run sort:hairstyles`.
 8. Run `npm run verify`. The integrity tests derive the expected media and routes from the content data and asset directories; do not add parallel bookkeeping lists.

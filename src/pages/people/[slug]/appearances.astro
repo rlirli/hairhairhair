@@ -2,7 +2,6 @@
 import { Image } from "astro:assets";
 import Layout from "../../../components/shared/Layout.astro";
 import { appearancesForPerson } from "../../../data/people-relations";
-import { buildPersonMedia } from "../../../data/people-media";
 import { people, personPhotographs } from "../../../data/people";
 import PhotoAttribution from "../../../components/shared/PhotoAttribution.astro";
 import { appearanceTitle } from "../../../lib/appearance-formatting";
@@ -12,7 +11,7 @@ export function getStaticPaths() {
 }
 
 const { person } = Astro.props;
-const media = buildPersonMedia(personPhotographs);
+const media = personPhotographs;
 const appearances = appearancesForPerson(person.id)
   .flatMap((appearance) => {
     const photo = media.find((photo) => photo.id === appearance.imageId);
@@ -83,7 +82,7 @@ const appearances = appearancesForPerson(person.id)
                   aria-label={`${appearance.taken.value}: ${appearance.event}`}
                 >
                   <Image
-                    src={photo.src}
+                    src={photo.image}
                     widths={[400, 700, 1000]}
                     sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
                     format="webp"

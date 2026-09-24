@@ -1,7 +1,6 @@
 ---
 import { Image } from "astro:assets";
 import Layout from "../../../components/shared/Layout.astro";
-import { buildPersonMedia } from "../../../data/people-media";
 import { hairstylesForPerson } from "../../../data/people-relations";
 import { people, personPhotographs } from "../../../data/people";
 import PhotoAttribution from "../../../components/shared/PhotoAttribution.astro";
@@ -12,7 +11,7 @@ export function getStaticPaths() {
 }
 
 const { person } = Astro.props;
-const media = buildPersonMedia(personPhotographs);
+const media = personPhotographs;
 const styleRecords = hairstylesForPerson(person.id);
 ---
 
@@ -74,7 +73,7 @@ const styleRecords = hairstylesForPerson(person.id);
                   <div class="relative overflow-hidden">
                     <a class="group focus-ring block" href={`/people/${person.slug}/hairstyles/${style.slug}/`}>
                       <Image
-                        src={photo.src}
+                        src={photo.image}
                         widths={[400, 700, 1000]}
                         sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
                         format="webp"

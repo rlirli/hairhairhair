@@ -495,7 +495,7 @@ function safeIdentifier(id) {
 }
 
 function tsValue(value, rawPaths = new Map(), key = "") {
-  if (key === "src" && typeof value === "string" && rawPaths.has(value)) return rawPaths.get(value);
+  if (key === "image" && typeof value === "string" && rawPaths.has(value)) return rawPaths.get(value);
   if (value === null || typeof value !== "object") return JSON.stringify(value);
   if (Array.isArray(value)) return "[" + value.map((item) => tsValue(item, rawPaths)).join(", ") + "]";
   return (
@@ -629,9 +629,17 @@ async function buildOutputs(existing, plan) {
       tsValue(
         {
           id: item.id,
-          src: item.id,
+          kind: "image",
+          image: item.id,
           alt: item.alt,
-          provenance: item.provenance,
+          provenance: {
+            origin: "system",
+            aiGeneration: {
+              provider: item.provenance.provider,
+              promptKey: item.provenance.promptKey,
+            },
+          },
+          transparentBackground: item.provenance.background === "transparent",
         },
         rawPaths,
       ),

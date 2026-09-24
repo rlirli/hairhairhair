@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import PhotoAttribution from "../shared/PhotoAttribution.astro";
-import type { PersonMedia } from "../../data/people-media";
+import type { PhotographMedia } from "../../data/media-types";
 
 interface AppearanceCard {
   id: string;
@@ -9,7 +9,7 @@ interface AppearanceCard {
   personName: string;
   date: string;
   event: string;
-  media: PersonMedia;
+  media: PhotographMedia;
 }
 
 interface Props {

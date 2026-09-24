@@ -1,3 +1,5 @@
+import type { Photograph } from "./media-types";
+
 export interface Person {
   id: string;
   slug: string;
@@ -28,24 +30,6 @@ export interface Appearance {
     sourceUrl: string;
   };
   observations: AppearanceObservation[];
-}
-
-export interface PersonPhotograph {
-  id: string;
-  fileName: string;
-  alt: string;
-  creator: string;
-  licenseName: string;
-  licenseUrl: string;
-  attribution: string;
-  derivativeStatus: "original" | "cropped" | "edited";
-  sourceUrl: string;
-  originalUrl: string;
-  rightsEvidenceUrl: string;
-  rightsBasis: string;
-  jurisdiction: string;
-  identifier: string;
-  objectPosition: string;
 }
 
 const obamaFindingAid =
@@ -203,7 +187,7 @@ export const appearances: Appearance[] = [
   },
 ];
 
-export const personPhotographs: PersonPhotograph[] = [
+export const personPhotographs: Photograph[] = [
   {
     id: "will-smith-2009",
     fileName: "will-smith-2009.jpg",

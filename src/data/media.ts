@@ -26,17 +26,9 @@ import twistsLong from "../assets/hairstyles/twists-long.png";
 import twistsShort from "../assets/hairstyles/twists-short.png";
 import wolfCutCurlyMedium from "../assets/hairstyles/wolf-cut-curly-medium.png";
 import wolfCutWavyMedium from "../assets/hairstyles/wolf-cut-wavy-medium.png";
+import type { Media, MediaProvenance } from "./media-types";
 
-export type MediaProvenance =
-  | { kind: "generated"; provider: "OpenAI"; promptKey: string; background: "opaque" | "transparent" }
-  | { kind: "photograph"; creator: string; sourceUrl: string; licenseName: string; licenseUrl: string };
-
-export type HairstyleMedia = {
-  id: string;
-  src: ImageMetadata;
-  alt: string;
-  provenance: MediaProvenance;
-};
+export type HairstyleMedia = Media<Extract<MediaProvenance, { kind: "generated" | "photograph" }>>;
 
 export const hairstyleMedia: HairstyleMedia[] = [
   {

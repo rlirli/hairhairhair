@@ -6,29 +6,9 @@ import marioBalotelli2019 from "../assets/people/mario-balotelli-2019-marseille.
 import willSmith2009 from "../assets/people/will-smith-2009.jpg";
 import willSmith2011 from "../assets/people/will-smith-2011.jpg";
 import willSmith2012 from "../assets/people/will-smith-2012.jpg";
-import type { PersonPhotograph } from "./people";
+import type { Photograph, PhotographMedia, PhotographProvenance } from "./media-types";
 
-export type PersonMediaProvenance = {
-  kind: "public-domain" | "licensed";
-  creator: string;
-  licenseName: string;
-  licenseUrl: string;
-  attribution: string;
-  derivativeStatus: "original" | "cropped" | "edited";
-  sourceUrl: string;
-  originalUrl: string;
-  rightsEvidenceUrl: string;
-  rightsBasis: string;
-  jurisdiction: string;
-  identifier: string;
-};
-
-export type PersonMedia = PersonPhotograph & {
-  src: ImageMetadata;
-  provenance: PersonMediaProvenance;
-};
-
-const provenance = (photo: PersonPhotograph): PersonMediaProvenance => ({
+const provenance = (photo: Photograph): PhotographProvenance => ({
   kind: photo.licenseName === "Public domain" ? "public-domain" : "licensed",
   creator: photo.creator,
   licenseName: photo.licenseName,
@@ -43,7 +23,7 @@ const provenance = (photo: PersonPhotograph): PersonMediaProvenance => ({
   identifier: photo.identifier,
 });
 
-export function buildPersonMedia(photographs: PersonPhotograph[]): PersonMedia[] {
+export function buildPersonMedia(photographs: Photograph[]): PhotographMedia[] {
   const sources: Record<string, ImageMetadata> = {
     "will-smith-2009.jpg": willSmith2009,
     "will-smith-2011.jpg": willSmith2011,

@@ -48,7 +48,7 @@ const naturalProfile = naturalProfileForPerson(person.id);
     <header class="mt-10 grid gap-10 lg:grid-cols-[minmax(0,.95fr)_minmax(0,1.2fr)_minmax(15rem,.85fr)] lg:items-start lg:gap-8 xl:gap-12">
       <div class="lg:pt-3">
         <p class="text-xs font-black uppercase tracking-[.18em] text-orange">Person record</p>
-        <h1 class="mt-5 font-display text-6xl leading-[.84] tracking-[-.08em] sm:text-8xl xl:text-9xl">
+        <h1 class="mt-4 font-display text-6xl leading-[.84] tracking-[-.08em] sm:text-8xl xl:text-9xl">
           {person.name}
         </h1>
         <div class="mt-8">
@@ -80,7 +80,7 @@ const naturalProfile = naturalProfileForPerson(person.id);
               sizes="(min-width: 1280px) 38vw, (min-width: 768px) 40vw, 100vw"
               format="webp"
               alt={hero.alt}
-              class="aspect-[4/3] w-full object-cover transition-transform duration-300 group-hover:scale-[1.015]"
+              class="aspect-4/3 w-full object-cover transition-transform duration-300 group-hover:scale-[1.015]"
               style={`object-position: ${hero.objectPosition}`}
             />
           </a>
@@ -94,7 +94,7 @@ const naturalProfile = naturalProfileForPerson(person.id);
       )}
     </header>
     <section class="mt-20" aria-labelledby="appearances-heading">
-      <div class="flex items-end justify-between gap-5 border-b border-ink pb-3">
+      <div class="flex items-end justify-between gap-5 border-b border-ink pb-3 sm:pb-2">
         <h2 id="appearances-heading" class="text-xs font-black uppercase tracking-[.18em] text-orange">
           Appearances
         </h2>
@@ -105,16 +105,15 @@ const naturalProfile = naturalProfileForPerson(person.id);
           More
         </a>
       </div>
-      <div
-        class="mt-5 flex gap-3 overflow-x-auto overscroll-x-contain pb-3"
-        role="region"
+      <ul
+        class="mt-2.5 sm:mt-4 flex gap-2 sm:gap-2.5 overflow-x-auto overscroll-x-contain pb-3 scrollbar-hidden"
         aria-labelledby="appearances-heading"
         tabindex="0"
       >
         {appearances.slice(0, 6).map((appearance) => {
           const photo = media.find((item) => item.id === appearance.imageId);
           return photo ? (
-            <article class="group w-[min(72vw,14rem)] min-w-0 shrink-0 lg:w-[calc((100%_-_3.75rem)/6)]">
+            <li class="group min-w-0 shrink-0 w-42">
               <figure>
                 <div class="relative overflow-hidden">
                   <a
@@ -128,30 +127,30 @@ const naturalProfile = naturalProfileForPerson(person.id);
                       sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
                       format="webp"
                       alt={photo.alt}
-                      class="aspect-[4/5] w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                      class="aspect-7/9 w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                       style={`object-position: ${photo.objectPosition}`}
                     />
                   </a>
                   <PersonPhotoAttribution media={photo} density="compact" />
                 </div>
-                <figcaption class="mt-2">
-                  <h3 class="font-display text-lg leading-tight tracking-[-.02em]">
+                <figcaption class="mt-1.5">
+                  <h3 class="font-display text-base leading-tight tracking-[-.02em]">
                     <a class="focus-ring" href={`/people/${person.slug}/appearances/${appearance.id}/`}>
                       {appearanceTitle(appearance.event)}
                     </a>
                   </h3>
-                  <p class="mt-1 text-xs leading-tight text-muted">
+                  <p class="mt-0.5 text-xs leading-tight text-muted">
                     {formatAppearanceDate(appearance.taken.value, "short")}
                   </p>
                 </figcaption>
               </figure>
-            </article>
+            </li>
           ) : null;
         })}
-      </div>
+      </ul>
     </section>
     <section class="mt-20" aria-labelledby="hairstyles-heading">
-      <div class="flex items-end justify-between gap-5 border-b border-ink pb-3">
+      <div class="flex items-end justify-between gap-5 border-b border-ink pb-3 sm:pb-2">
         <h2 id="hairstyles-heading" class="text-xs font-black uppercase tracking-[.18em] text-orange">
           Hairstyles worn
         </h2>
@@ -162,23 +161,24 @@ const naturalProfile = naturalProfileForPerson(person.id);
           More
         </a>
       </div>
-      <div
-        class="mt-5 flex gap-3 overflow-x-auto overscroll-x-contain pb-3"
-        role="region"
+      <ul
+        class="mt-2.5 sm:mt-4 flex gap-2 sm:gap-2.5 overflow-x-auto overscroll-x-contain pb-3 scrollbar-hidden"
         aria-labelledby="hairstyles-heading"
         tabindex="0"
       >
         {hairstyleRecords.slice(0, 6).map(({ style, appearances: styleAppearances }) => {
           const appearance = styleAppearances[0];
+          if (!appearance) return null;
+
           const photo = media.find((item) => item.id === appearance.imageId);
           return photo ? (
-            <article class="group w-[min(72vw,14rem)] min-w-0 shrink-0 lg:w-[calc((100%_-_3.75rem)/6)]">
+            <li class="group min-w-0 shrink-0 w-42">
               <figure>
                 <div class="relative overflow-hidden">
                   <a
                     class="group focus-ring block"
                     href={`/people/${person.slug}/hairstyles/${style.slug}/`}
-                    aria-label={`${person.name} wearing ${style.name}`}
+                    aria-label={`${person.name} wearing ${style.name}, ${appearanceTitle(appearance.event)}`}
                   >
                     <Image
                       src={photo.src}
@@ -187,28 +187,27 @@ const naturalProfile = naturalProfileForPerson(person.id);
                       format="webp"
                       loading="lazy"
                       alt={`${person.name} wearing ${style.name}`}
-                      class="aspect-[4/5] w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                      class="aspect-7/9 w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                       style={`object-position: ${photo.objectPosition}`}
                     />
                   </a>
                   <PersonPhotoAttribution media={photo} density="compact" />
                 </div>
-                <figcaption class="mt-2">
-                  <h3 class="font-display text-xl leading-tight tracking-[-.03em]">
+                <figcaption class="mt-1.5">
+                  <h3 class="font-display text-base leading-tight tracking-[-.03em]">
                     <a class="focus-ring" href={`/people/${person.slug}/hairstyles/${style.slug}/`}>
                       {style.name}
                     </a>
                   </h3>
-                  <p class="mt-1 text-xs leading-tight text-muted">
+                  <p class="mt-0.5 text-xs leading-tight text-muted">
                     {formatAppearanceDate(appearance.taken.value, "short")}
-                    <span class="sr-only"> · {appearanceTitle(appearance.event)}</span>
                   </p>
                 </figcaption>
               </figure>
-            </article>
+            </li>
           ) : null;
         })}
-      </div>
+      </ul>
     </section>
   </article>
 </Layout>

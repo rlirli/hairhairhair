@@ -23,7 +23,7 @@ test("public section and header separators outside hairstyle details are one pix
 });
 
 test("thin collection and profile hairlines remain intact", () => {
-  assert.match(source("src/pages/people/[slug].astro"), /border-b border-ink pb-3/);
+  assert.match(source("src/pages/people/[slug].astro"), /border-b border-taupe pb-3 sm:pb-2/);
   assert.match(source("src/components/NaturalProfile.astro"), /border-b border-ink\/25/);
   assert.match(source("src/components/PersonDirectoryCard.tsx"), /border-t border-ink\/20/);
 });

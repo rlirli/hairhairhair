@@ -29,7 +29,7 @@ test("hairstyle filters expose kind and hierarchical major and subtype controls"
   assert.match(markup, /aria-label="Hair type filter/);
   assert.match(markup, /aria-haspopup="dialog"/);
   assert.doesNotMatch(markup, /<select|>\s*Any\s*</);
-  assert.match(markup, /border-b border-ink\/30/);
+  assert.match(markup, /border-b border-taupe/);
   assert.match(markup, /data-hairstyle-results role="status" aria-live="polite"/);
   assert.match(markup, /No hairstyles match these filters\./);
 

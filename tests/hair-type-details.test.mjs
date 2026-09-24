@@ -42,8 +42,8 @@ test("celebrity preview is conditional and links to type-specific people archive
   const empty = page("/hair-types/3a/");
   assert.doesNotMatch(empty, /Celebs with this hair type/);
   const previewSource = readFileSync(join(root, "src/components/HairTypeCelebrityPreview.astro"), "utf8");
-  assert.match(previewSource, /border-b border-ink\/30/);
-  assert.doesNotMatch(previewSource, /border-t border-ink\/30|group-hover:block|group-focus-within:block/);
+  assert.match(previewSource, /border-b border-taupe pb-3 sm:pb-2/);
+  assert.doesNotMatch(previewSource, /border-t border-taupe|group-hover:block|group-focus-within:block/);
   const personCardSource = readFileSync(join(root, "src/components/PersonDirectoryCard.tsx"), "utf8");
   assert.match(personCardSource, /<HoverCard/);
   assert.match(personCardSource, /font-display text-xl/);

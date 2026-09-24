@@ -6,15 +6,12 @@ interface Props {
   size: "small" | "medium";
   className: string;
   horizontalScroll?: boolean;
+  ariaLabel?: string;
 }
 
-export default function HairstyleGrid({ items, size, className, horizontalScroll = false }: Props) {
+export default function HairstyleGrid({ items, size, className, horizontalScroll = false, ariaLabel }: Props) {
   return (
-    <ul
-      className={cn(className)}
-      aria-label={horizontalScroll ? "Related hairstyle previews" : undefined}
-      tabIndex={horizontalScroll ? 0 : undefined}
-    >
+    <ul className={cn(className)} aria-label={ariaLabel} tabIndex={horizontalScroll ? 0 : undefined}>
       {items.map((item) => (
         <li
           key={item.href}

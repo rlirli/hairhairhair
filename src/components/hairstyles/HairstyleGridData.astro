@@ -53,10 +53,4 @@ const items = await Promise.all(
 );
 ---
 
-<HairstyleGrid
-  client:load
-  items={items.filter((item) => item !== undefined)}
-  {size}
-  {className}
-  {horizontalScroll}
-/>
+<HairstyleGrid client:load items={items.filter((item) => item !== undefined)} {size} {className} {horizontalScroll} />

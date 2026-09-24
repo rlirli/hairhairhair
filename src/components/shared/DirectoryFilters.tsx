@@ -31,11 +31,7 @@ interface Props {
 const toHierarchy = (group: FilterGroup): HierarchicalOption[] =>
   (group.parents ?? []).map((parent) => ({ id: parent.id, children: parent.children.map((child) => child.id) }));
 
-export default function DirectoryFilters({
-  groups,
-  itemLabel,
-  pluralItemLabel,
-}: Props) {
+export default function DirectoryFilters({ groups, itemLabel, pluralItemLabel }: Props) {
   const [selections, setSelections] = React.useState<Record<string, Set<string>>>({});
   const [openGroup, setOpenGroup] = React.useState<string | null>(null);
 

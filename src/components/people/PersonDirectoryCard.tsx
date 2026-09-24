@@ -11,10 +11,7 @@ export default function PersonDirectoryCard({
   return (
     <HoverCard openDelay={180} closeDelay={120}>
       <HoverCardTrigger asChild>
-        <a
-          href={person.href}
-          className="focus-ring group block min-w-0"
-        >
+        <a href={person.href} className="focus-ring group block min-w-0">
           {person.imageSrc ? (
             <img
               src={person.imageSrc}

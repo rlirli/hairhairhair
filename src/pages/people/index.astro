@@ -64,12 +64,7 @@ const filterGroups: FilterGroup[] = [
   </section>
   <section class="mx-auto max-w-7xl px-5 pt-16 sm:pt-2 pb-20 sm:px-8">
     <div class="border-b border-taupe pb-1.5 pr-1.5">
-      <DirectoryFilters
-        client:load
-        groups={filterGroups}
-        itemLabel="celebrity"
-        pluralItemLabel="celebrities"
-      />
+      <DirectoryFilters client:load groups={filterGroups} itemLabel="celebrity" pluralItemLabel="celebrities" />
     </div>
     <p class="sr-only" data-directory-results role="status" aria-live="polite"></p>
     <ul

@@ -7,7 +7,7 @@ import { dist, page, publicRoutes, root } from "./helpers/site.mjs";
 
 test("detail pages show one-line names and a grouped hair-type navigator", () => {
   const subtypeMarkup = page("/hair-types/3a/");
-  assert.match(subtypeMarkup, /<h1[^>]*>Type 3A Loose spiral curl<\/h1>/);
+  assert.match(subtypeMarkup, /<h1[^>]*>Type 3A: Loose spiral curl<\/h1>/);
   assert.match(subtypeMarkup, /aria-label="Hair type navigator"/);
   assert.match(subtypeMarkup, /aria-label="Type 3 curly"/);
   assert.match(subtypeMarkup, /href="\/hair-types\/3a\/"[^>]*aria-current="page"/);

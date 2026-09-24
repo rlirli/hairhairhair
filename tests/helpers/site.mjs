@@ -47,6 +47,7 @@ export function publicRoutes() {
     "/",
     "/hair-types/",
     "/hairstyles/",
+    "/hairstyle-map/",
     "/people/",
     ...hairTypes.map((type) => `/hair-types/${type.slug}/`),
     ...hairSubtypes.map((type) => `/hair-types/${type.slug}/`),

@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import { cn } from "../../lib/utils";
 import { getMedia } from "../../data/media";
 interface Props {
   mediaId: string;
@@ -26,7 +27,7 @@ const imageClass =
       format="webp"
       alt={media.alt}
       loading={eager ? "eager" : "lazy"}
-      class:list={["w-full rounded-[2rem] object-cover", imageClass]}
+      class={cn("w-full rounded-[2rem] object-cover", imageClass)}
     />
     {(title || caption || patternDescription || lengthDescription || media.provenance.kind === "photograph") && (
       <figcaption class="mt-3 text-sm leading-6">

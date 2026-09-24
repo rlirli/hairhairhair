@@ -1,4 +1,5 @@
 ---
+import { cn } from "../../lib/utils";
 import { hairSubtypes, hairTypes, type HairSubtype, type HairType } from "../../data/hair-types";
 
 interface Props {
@@ -23,20 +24,20 @@ const currentSubtypeSlug = kind === "hairSubtype" ? hairSubtype?.slug : undefine
         return (
           <li class="min-w-max flex-1">
             <section
-              class:list={[
+              class={cn(
                 "px-2 pt-0 pb-1 text-center transition-colors sm:px-3",
                 isCurrentGroup && "relative z-10 -mx-px -my-px rounded-xl border border-ink/15 bg-clip-padding",
                 isCurrentGroup && (isCurrentTypePage ? "bg-orange/[.13]" : "bg-orange/[.055]"),
-              ]}
+              )}
               aria-label={`Type ${type.code} ${type.pattern}`}
             >
               <a
                 href={`/hair-types/${type.slug}/`}
                 aria-current={isCurrentTypePage ? "page" : undefined}
-                class:list={[
+                class={cn(
                   "focus-ring inline-flex items-baseline justify-center gap-1 whitespace-nowrap font-sans text-[10px] leading-none tracking-[.1em] text-ink/45 transition-colors hover:text-orange sm:gap-1.5",
                   isCurrentTypePage && "text-orange",
-                ]}
+                )}
               >
                 <span>TYPE {type.code}</span>
                 <span class="hidden uppercase sm:inline">{type.pattern}</span>
@@ -50,10 +51,10 @@ const currentSubtypeSlug = kind === "hairSubtype" ? hairSubtype?.slug : undefine
                         href={`/hair-types/${subtype.slug}/`}
                         aria-current={isCurrent ? "page" : undefined}
                         aria-label={`Type ${subtype.code}`}
-                        class:list={[
+                        class={cn(
                           "focus-ring rounded px-1 py-1 font-sans text-[10px] font-normal leading-none tracking-[.1em] text-ink/60 transition-colors hover:bg-ink/[.06] hover:text-ink sm:px-1.5",
                           isCurrent && "bg-orange/[.15] font-medium text-orange hover:bg-orange/[.2]",
-                        ]}
+                        )}
                       >
                         {subtype.code}
                       </a>

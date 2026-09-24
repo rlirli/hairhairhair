@@ -1,4 +1,6 @@
 ---
+import { cn } from "../../lib/utils";
+
 interface Props {
   title: string;
   href: string;
@@ -18,7 +20,7 @@ const {
 } = Astro.props;
 ---
 
-<div class:list={["flex justify-between border-b border-taupe pb-3 sm:pb-2", containerClass]}>
+<div class={cn("flex justify-between border-b border-taupe pb-3 sm:pb-2", containerClass)}>
   <h2 id={headingId} class={headingClass}>
     {title}
   </h2>

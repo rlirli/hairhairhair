@@ -1,4 +1,5 @@
 ---
+import { cn } from "../../lib/utils";
 import { hairSubtypes, hairTypes } from "../../data/hair-types";
 import { compatibilityForHairstyle } from "../../data/hairstyle-compatibility";
 import type { EditorialSource, Hairstyle } from "../../data/hairstyles";
@@ -63,12 +64,12 @@ const originRows = [
 
             return (
               <div
-                class:list={[
+                class={cn(
                   "relative h-3 overflow-hidden border-y border-r border-ink/25",
                   firstSegment && "rounded-l-full border-l",
                   lastSegment && "rounded-r-full",
                   unknown && "text-ink/30",
-                ]}
+                )}
                 role={unknown ? "img" : "meter"}
                 aria-label={
                   unknown

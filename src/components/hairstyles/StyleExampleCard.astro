@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import { cn } from "../../lib/utils";
 import { getMedia } from "../../data/media";
 import type { StyleExample } from "../../data/hairstyles";
 import { styleExamplePath } from "../../lib/routes";
@@ -34,7 +35,7 @@ const imageClass =
           format="webp"
           alt={media.alt}
           loading={eager ? "eager" : "lazy"}
-          class:list={["aspect-square w-full rounded-2xl object-cover", imageClass]}
+          class={cn("aspect-square w-full rounded-2xl object-cover", imageClass)}
         />
       </figure>
       <div class="style-example-copy aspect-square min-w-0 overflow-hidden pb-1">

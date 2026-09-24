@@ -1,26 +1,29 @@
 ---
+import { cn } from "../../lib/utils";
 import AppearanceCard from "./AppearanceCard.astro";
 import type { AppearanceCardData } from "./appearance-types";
 
 interface Props {
   appearances: AppearanceCardData[];
   layout?: "row" | "grid";
+  className?: string;
 }
 
-const { appearances, layout = "grid" } = Astro.props;
+const { appearances, layout = "grid", className } = Astro.props;
 ---
 
 <ul
-  class:list={[
+  class={cn(
     layout === "row"
       ? "flex gap-3 overflow-x-auto overscroll-x-contain pb-3"
       : "grid grid-cols-2 gap-x-3 gap-y-4 sm:grid-cols-3 lg:grid-cols-6",
-  ]}
+    className,
+  )}
   aria-label={layout === "row" ? "Celebrity appearance previews" : undefined}
   tabindex={layout === "row" ? 0 : undefined}
 >
   {appearances.map((appearance) => (
-    <li class:list={["min-w-0", layout === "row" && "w-[min(72vw,14rem)] shrink-0 lg:w-[calc((100%_-_3.75rem)/6)]"]}>
+    <li class={cn("min-w-0", layout === "row" && "w-[min(72vw,14rem)] shrink-0 lg:w-[calc((100%_-_3.75rem)/6)]")}>
       <AppearanceCard {...appearance} />
     </li>
   ))}

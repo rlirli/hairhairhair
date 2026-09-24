@@ -59,6 +59,27 @@ export interface EditorialSource {
 
 export const sources: EditorialSource[] = [
   {
+    id: "aad-alopecia-self-care",
+    title: "Hair loss types: Alopecia areata self-care",
+    url: "https://www.aad.org/public/diseases/hair-loss/types/alopecia/self-care",
+    publisher: "American Academy of Dermatology",
+    reviewedAt: "2026-09-25",
+  },
+  {
+    id: "aad-how-to-shave",
+    title: "Hair removal: How to shave",
+    url: "https://www.aad.org/public/everyday-care/skin-care-basics/hair/how-to-shave",
+    publisher: "American Academy of Dermatology",
+    reviewedAt: "2026-09-25",
+  },
+  {
+    id: "aad-remove-unwanted-hair",
+    title: "6 ways to remove unwanted hair",
+    url: "https://www.aad.org/public/everyday-care/skin-care-basics/hair/remove-unwanted-hair",
+    publisher: "American Academy of Dermatology",
+    reviewedAt: "2026-09-25",
+  },
+  {
     id: "aad-traction",
     title: "Hairstyles that pull can lead to hair loss",
     url: "https://www.aad.org/public/diseases/hair-loss/causes/hairstyles",
@@ -450,6 +471,58 @@ export const sources: EditorialSource[] = [
 
 export const hairstyles: Hairstyle[] = [
   {
+    id: "hairstyle-bald",
+    slug: "bald",
+    name: "Bald / clean-shaven head",
+    kind: "cut",
+    summary:
+      "An intentionally hairless scalp produced by shaving visible scalp hair down to skin level, leaving the head shape and scalp itself as the defining silhouette.",
+    intro: [
+      "A clean-shaven head removes visible scalp hair rather than shaping the remaining hair into a particular length or texture.",
+      "Because shaving cuts hair at the skin surface rather than changing the follicle, the clean bald finish is temporary and visible regrowth can appear quickly.",
+      "The look is independent of natural curl pattern, density and hair color once the hair has been shaved sufficiently close.",
+      "This entry describes an intentionally shaved hairstyle. Naturally occurring baldness or medically caused hair loss may produce a visually similar scalp but is not itself a haircut.",
+    ],
+    variations: [
+      {
+        id: "bald-close-electric",
+        name: "Close electric shave",
+        description:
+          "Uses an electric shaver to leave an almost hairless appearance while potentially retaining a faint trace of extremely short stubble.",
+      },
+      {
+        id: "bald-razor-smooth",
+        name: "Razor-smooth shave",
+        description:
+          "Removes hair extremely close to the skin for the least visible stubble and smoothest scalp appearance.",
+      },
+    ],
+    consultation: {
+      intro:
+        "The main choices are how close the scalp should be shaved, how often the look will be maintained, and how sensitive the scalp is to repeated shaving.",
+      questions: [
+        "Do you want a razor-smooth scalp or is extremely short electric-shaver stubble acceptable?",
+        "How frequently are you prepared to shave to keep visible regrowth minimal?",
+        "Does your scalp tend to develop razor irritation, bumps or ingrown hairs?",
+        "Are there scars, moles, bumps or other areas the barber should work around carefully?",
+        "Do you also want the sideburn and neckline areas removed completely so the scalp transitions cleanly into the face and neck?",
+      ],
+      sampleRequest:
+        "“I want my head completely clean-shaven with no visible hair left on the scalp. Keep the finish even from the forehead through the crown and nape, and use a method that gives me the closest comfortable shave without irritating my skin.”",
+    },
+    considerations: [
+      "The clean-shaven result is temporary because shaving removes hair at the skin surface rather than preventing future growth.",
+      "Visible stubble may return quickly, so maintaining a consistently smooth appearance can require frequent shaving.",
+      "Repeated shaving can cause cuts, razor burn, irritation or ingrown hairs, particularly when shaving too closely or against the direction of growth.",
+      "A completely exposed scalp receives more direct ultraviolet exposure than a scalp covered by hair, so sun protection becomes more important.",
+      "Scalp shape, scars, pigmentation, moles and other skin features become considerably more visible once the hair is removed.",
+      "Natural hair type does not meaningfully constrain the finished appearance because the defining style removes the visible hair itself.",
+    ],
+    sourceIds: ["aad-alopecia-self-care", "aad-how-to-shave", "aad-remove-unwanted-hair"],
+    relatedStyleIds: ["hairstyle-buzz-cut"],
+    guidePublicationStatus: "published",
+  },
+  {
     id: "hairstyle-blunt-bob",
     slug: "blunt-bob",
     name: "Blunt bob",
@@ -542,7 +615,7 @@ export const hairstyles: Hairstyle[] = [
       "The visible result can differ between dry and damp hair and between straight, wavy, curly, and coily patterns; the cut should be assessed in the state in which it will usually be worn.",
     ],
     sourceIds: ["andis-buzz-cut", "wahl-cut-guide"],
-    relatedStyleIds: ["hairstyle-flat-top", "hairstyle-taper-fade", "hairstyle-twists"],
+    relatedStyleIds: ["hairstyle-bald", "hairstyle-flat-top", "hairstyle-taper-fade", "hairstyle-twists"],
     guidePublicationStatus: "published",
   },
   {
@@ -1640,6 +1713,29 @@ export function isPublishedGuide(hairstyle: Pick<Hairstyle, "guidePublicationSta
 export const publishedHairstyles = hairstyles.filter(isPublishedGuide);
 
 export const styleExamples: StyleExample[] = [
+  {
+    id: "bald-mongolian-elder-woman",
+    hairstyleIds: ["hairstyle-bald"],
+    imageId: "bald-mongolian-elder-woman",
+    title: "Clean-shaven head on elderly woman",
+    caption:
+      "A fictional Mongolian woman in her late 90s wearing a fully clean-shaven scalp, showing how the style leaves the natural head shape completely visible.",
+    patternDescription:
+      "No visible hair pattern remains because the scalp is shaved to skin level; the model's underlying natural hair subtype is intentionally unspecified.",
+    lengthDescription: "Bald, with visible scalp hair removed to skin level across the entire head.",
+  },
+  {
+    id: "bald-young-white-man",
+    hairstyleIds: ["hairstyle-bald"],
+    imageId: "bald-young-white-man",
+    title: "Clean-shaven head on young man",
+    caption:
+      "A fictional white man in his mid-20s wearing a completely shaved head with an even scalp finish and no visible hairstyle perimeter.",
+    patternDescription:
+      "No visible hair pattern remains because the scalp is shaved to skin level; the model's underlying natural hair subtype is intentionally unspecified.",
+    lengthDescription:
+      "Bald, with scalp hair removed evenly to skin level from the hairline through the crown and nape.",
+  },
   {
     id: "farrah-fawcett-cut-black",
     hairstyleIds: ["hairstyle-farrah-fawcett-cut"],

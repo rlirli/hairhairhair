@@ -1,3 +1,5 @@
+import baldMongolianElderWoman from "../assets/hairstyles/bald-mongolian-elder-woman.png";
+import baldYoungWhiteMan from "../assets/hairstyles/bald-young-white-man.png";
 import bluntBobChin from "../assets/hairstyles/blunt-bob-chin.png";
 import buzzShort from "../assets/hairstyles/buzz-short.png";
 import buzzTextured from "../assets/hairstyles/buzz-textured.png";
@@ -41,6 +43,22 @@ import type { ImageMedia } from "./media-types";
 export type HairstyleMedia = ImageMedia;
 
 export const hairstyleMedia: HairstyleMedia[] = [
+  {
+    id: "bald-mongolian-elder-woman",
+    kind: "image",
+    image: baldMongolianElderWoman,
+    alt: "Fictional Mongolian woman in her late 90s with a completely clean-shaven scalp.",
+    provenance: { origin: "system", aiGeneration: { provider: "OpenAI", promptKey: "bald-mongolian-elder-woman" } },
+    transparentBackground: true,
+  },
+  {
+    id: "bald-young-white-man",
+    kind: "image",
+    image: baldYoungWhiteMan,
+    alt: "Fictional white man in his mid-20s with a completely clean-shaven scalp.",
+    provenance: { origin: "system", aiGeneration: { provider: "OpenAI", promptKey: "bald-young-white-man" } },
+    transparentBackground: true,
+  },
   {
     id: "blunt-bob-chin",
     kind: "image",

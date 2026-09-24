@@ -228,11 +228,11 @@ test("each photograph has a dedicated provenance page and existing cards reach i
     assert.match(markup, new RegExp(`href="/people/${owner.slug}/"`));
   }
   const profile = page("/people/will-smith/");
-  assert.doesNotMatch(profile, /Appearance record ↗/);
+  assert.doesNotMatch(profile, /Appearance record ↗︎/);
   assert.match(profile, /href="\/people\/will-smith\/appearances\/appearance-will-smith-2011\/"/);
   const archive = page("/people/will-smith/appearances/");
   assert.match(archive, /\/people\/will-smith\/appearances\/appearance-will-smith-2011\//);
-  assert.doesNotMatch(archive, /Appearance record ↗/);
+  assert.doesNotMatch(archive, /Appearance record ↗︎/);
   assert.match(archive, /<h3[^>]*>\s*<a[^>]*href="\/people\/will-smith\/appearances\/appearance-will-smith-2011\/"/);
 });
 
@@ -406,7 +406,7 @@ test("person hairstyle detail pages collect every matching appearance", () => {
     const markup = page(`/people/will-smith/hairstyles/${slug}/`);
     assert.match(markup, /Person hairstyle record/);
     for (const date of dates) assert.match(markup, new RegExp(date));
-    assert.doesNotMatch(markup, /Appearance record ↗/);
+    assert.doesNotMatch(markup, /Appearance record ↗︎/);
     assert.match(
       markup,
       new RegExp(`<a[^>]+href="/hairstyles/${slug}/"[^>]*>${slug === "flat-top" ? "Flat top" : "Buzz cut"}</a>`),
@@ -421,7 +421,7 @@ test("person hairstyle detail pages collect every matching appearance", () => {
 
 test("hairstyle appearance cards place linked titles before dates", () => {
   const markup = page("/people/will-smith/hairstyles/buzz-cut/");
-  assert.doesNotMatch(markup, /Appearance record ↗/);
+  assert.doesNotMatch(markup, /Appearance record ↗︎/);
   for (const [date, appearanceId] of [
     ["May 23, 2012", "appearance-will-smith-2012"],
     ["December 10, 2009", "appearance-will-smith-2009"],

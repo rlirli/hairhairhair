@@ -378,7 +378,7 @@ export default function HairstyleRelationMap({ styles }: Props) {
                   </h2>
                   <p className="relation-summary">{selected.summary}</p>
                   <a className="relation-profile-link focus-ring" href={selected.href}>
-                    Explore this hairstyle <span aria-hidden="true">↗</span>
+                    Explore this hairstyle <span aria-hidden="true">↗︎</span>
                   </a>
                 </div>
               </div>
@@ -392,7 +392,7 @@ export default function HairstyleRelationMap({ styles }: Props) {
                       <button className="relation-related-button" onClick={() => setSelectedId(style.id)} type="button">
                         <img alt="" src={style.imageSrc} />
                         <span>{style.name}</span>
-                        <span aria-hidden="true">↗</span>
+                        <span aria-hidden="true">↗︎</span>
                       </button>
                     </li>
                   ))}
@@ -403,9 +403,9 @@ export default function HairstyleRelationMap({ styles }: Props) {
             </>
           ) : (
             <div className="relation-empty">
-              <svg aria-hidden="true" viewBox="0 0 32 32">
-                <path d="m16 1.5 2.5 10 8.8-5.7-5.7 8.8 10 2.4-10 2.5 5.7 8.8-8.8-5.7-2.5 10-2.4-10-8.8 5.7 5.7-8.8-10-2.5 10-2.4-5.7-8.8 8.8 5.7z" />
-              </svg>
+              <span className="text-xl text-orange" aria-hidden="true">
+                ✳︎
+              </span>
               <p>Select a hairstyle to see its connections.</p>
             </div>
           )}

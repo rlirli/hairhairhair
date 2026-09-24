@@ -230,7 +230,7 @@ document.querySelector("#reset").addEventListener("click", () => {
   selected?.el.classList.remove("selected", "dim");
   selected = undefined;
   details.innerHTML =
-    '<div class="empty"><span class="spark">✳</span><p>Pick a hairstyle to see its connections.</p></div>';
+    '<div class="empty"><span class="spark">✳︎</span><p>Pick a hairstyle to see its connections.</p></div>';
   draw();
 });
 function updateCounter() {

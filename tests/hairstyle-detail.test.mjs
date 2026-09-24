@@ -24,7 +24,7 @@ test("published hairstyle detail routes provide the requested previews and full 
       (previewGallery.match(/<figure\b/g) ?? []).length,
       Math.min(4, getExamplesForHairstyle(style.id).length),
     );
-    assert.doesNotMatch(previewGallery, /More\s*↗/);
+    assert.doesNotMatch(previewGallery, /More\s*↗︎/);
 
     const hero = detail.split("<h1")[1].split(">Examples</")[0];
     assert.doesNotMatch(hero, /figcaption|<title>|Photographic reference/);

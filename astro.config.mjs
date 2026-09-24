@@ -6,5 +6,8 @@ export default defineConfig({
   site: "https://hairhairhair.hair",
   trailingSlash: "always",
   integrations: [react()],
-  vite: { plugins: [tailwindcss()] },
+  vite: {
+    plugins: [tailwindcss()],
+    resolve: { dedupe: ["react", "react-dom"] },
+  },
 });

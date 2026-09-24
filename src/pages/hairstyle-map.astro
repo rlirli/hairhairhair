@@ -3,13 +3,13 @@ import { getImage } from "astro:assets";
 import HairstyleRelationMap from "../components/hairstyle-map/HairstyleRelationMap";
 import Layout from "../components/shared/Layout.astro";
 import { kindLabels } from "../data/hairstyle-relations";
-import { publishedHairstyles, styleExamples } from "../data/hairstyles";
-import { getMedia } from "../data/media";
+import { publishedHairstyles } from "../data/hairstyles";
+import { representativeHairstyleMedia } from "../data/hairstyle-representative-media";
 
 const styles = await Promise.all(
   publishedHairstyles.map(async (style) => {
-    const example = styleExamples.find((item) => item.hairstyleIds.includes(style.id));
-    const media = getMedia(example?.imageId ?? "");
+    const representative = representativeHairstyleMedia(style.id);
+    const media = representative?.media;
     if (!media) return undefined;
     const image = await getImage({ src: media.image, width: 240, format: "webp" });
     return {

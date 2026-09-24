@@ -1,13 +1,12 @@
 ---
 import { getImage } from "astro:assets";
 import type { Hairstyle } from "../../data/hairstyles";
-import { styleExamples } from "../../data/hairstyles";
 import {
   compatibilityLabelsForHairstyle,
   kindLabels,
   subtypeLabelsForHairstyleInMajorType,
 } from "../../data/hairstyle-relations";
-import { getMedia } from "../../data/media";
+import { representativeHairstyleMedia } from "../../data/hairstyle-representative-media";
 import HairstyleGrid from "./HairstyleGrid";
 
 interface Props {
@@ -24,8 +23,8 @@ const imageSizes = size === "small" ? "(min-width: 1024px) 20vw, 40vw" : "(min-w
 const widths = size === "small" ? [240, 480] : [360, 720];
 const items = await Promise.all(
   styles.map(async (style) => {
-    const example = styleExamples.find((item) => item.hairstyleIds.includes(style.id));
-    const media = getMedia(example?.imageId ?? "");
+    const representative = representativeHairstyleMedia(style.id);
+    const media = representative?.media;
     if (!media) return undefined;
     const image = await getImage({ src: media.image, widths, sizes: imageSizes, format: "webp" });
     return {

@@ -52,18 +52,20 @@ const label =
             People
           </a>
         </div>
-        <div class="mt-5 grid gap-4 md:grid-cols-3">
+        <ul class="mt-5 grid gap-4 md:grid-cols-3">
           {subtypes.map((item) => (
-            <a
-              href={`/hair-types/${item.slug}/`}
-              class="hover-surface focus-ring rounded-3xl border-2 border-ink p-5 transition"
-            >
-              <Pattern pattern={item.pattern} subtype={item.subtypeCode} />
-              <h3 class="mt-4 font-display text-2xl">Type {item.code}</h3>
-              <p class="mt-1">{item.name}</p>
-            </a>
+            <li>
+              <a
+                href={`/hair-types/${item.slug}/`}
+                class="hover-surface focus-ring group block rounded-3xl border-2 border-ink p-5 transition"
+              >
+                <Pattern pattern={item.pattern} subtype={item.subtypeCode} />
+                <h3 class="mt-4 font-display text-2xl group-hover:underline">Type {item.code}</h3>
+                <p class="mt-1">{item.name}</p>
+              </a>
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
     ) : (
       <div class="mt-7 grid gap-8 md:grid-cols-[1.2fr_.8fr]">

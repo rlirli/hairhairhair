@@ -64,12 +64,12 @@ const styleRecords = hairstylesForPerson(person.id);
       </div>
 
       {styleRecords.length ? (
-        <div class="mt-2.5 sm:mt-4 grid gap-x-4 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
+        <ul class="mt-2.5 sm:mt-4 grid gap-x-4 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
           {styleRecords.map(({ style, appearances }) => {
             const appearance = appearances[0];
             const photo = media.find((item) => item.id === appearance.imageId);
             return photo ? (
-              <article class="group">
+              <li class="group">
                 <figure>
                   <div class="relative overflow-hidden">
                     <a class="group focus-ring block" href={`/people/${person.slug}/hairstyles/${style.slug}/`}>
@@ -98,10 +98,10 @@ const styleRecords = hairstylesForPerson(person.id);
                     </p>
                   </figcaption>
                 </figure>
-              </article>
+              </li>
             ) : null;
           })}
-        </div>
+        </ul>
       ) : (
         <p class="mt-8 text-lg leading-7">No hairstyle records are available yet.</p>
       )}

@@ -27,10 +27,10 @@ const people = peopleForHairTypeSlug(item.slug);
       </h1>
     </header>
     {people.length > 0 ? (
-      <section class="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <ul class="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {people.map(({ person, photo, naturalProfile, subtype }) => (
-          <article class="rounded-3xl border border-ink/25 p-4">
-            <a class="focus-ring" href={`/people/${person.slug}/`}>
+          <li class="rounded-3xl border border-ink/25 p-4">
+            <a class="focus-ring block" href={`/people/${person.slug}/`}>
               <Image
                 src={photo.src}
                 alt={photo.alt}
@@ -44,9 +44,9 @@ const people = peopleForHairTypeSlug(item.slug);
             <div class="mt-4">
               <PersonFactSheet profile={naturalProfile} />
             </div>
-          </article>
+          </li>
         ))}
-      </section>
+      </ul>
     ) : (
       <p class="mt-8">No people have a matching natural profile yet.</p>
     )}

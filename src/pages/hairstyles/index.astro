@@ -1,11 +1,11 @@
 ---
-import Layout from "../../components/Layout.astro";
-import HairstyleCard from "../../components/HairstyleCard.astro";
+import Layout from "../../components/shared/Layout.astro";
+import HairstyleCard from "../../components/hairstyles/HairstyleCard.astro";
 import { hairSubtypes, hairTypes } from "../../data/hair-types";
 import { publishedHairstyles } from "../../data/hairstyles";
 import { compatibleHairstylesForHairType } from "../../data/hairstyle-compatibility";
 import { kindLabels } from "../../data/hairstyle-relations";
-import DirectoryFilters, { type FilterGroup } from "../../components/DirectoryFilters";
+import DirectoryFilters, { type FilterGroup } from "../../components/shared/DirectoryFilters";
 
 const kinds = Object.entries(kindLabels).map(([id, label]) => ({ id, label }));
 const hairTypeParents = hairTypes.map((type) => ({

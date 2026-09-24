@@ -2,7 +2,7 @@ import { drag } from "d3-drag";
 import { select } from "d3-selection";
 import { zoom, zoomIdentity, type ZoomBehavior } from "d3-zoom";
 import { useEffect, useMemo, useRef, useState } from "react";
-import "../styles/hairstyle-relation-map.css";
+import "../../styles/hairstyle-relation-map.css";
 
 export interface RelationMapStyle {
   id: string;

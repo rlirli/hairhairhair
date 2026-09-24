@@ -1,6 +1,6 @@
 ---
-import Layout from "../../../components/Layout.astro";
-import NaturalProfile from "../../../components/NaturalProfile.astro";
+import Layout from "../../../components/shared/Layout.astro";
+import PersonFactSheet from "../../../components/people/PersonFactSheet.astro";
 import { Image } from "astro:assets";
 import { hairSubtypes, hairTypes } from "../../../data/hair-types";
 import { peopleForHairTypeSlug } from "../../../data/hair-type-discovery";
@@ -42,7 +42,7 @@ const people = peopleForHairTypeSlug(item.slug);
               {subtype && <p class="text-sm opacity-70">Type {subtype.code}</p>}
             </a>
             <div class="mt-4">
-              <NaturalProfile profile={naturalProfile} />
+              <PersonFactSheet profile={naturalProfile} />
             </div>
           </article>
         ))}

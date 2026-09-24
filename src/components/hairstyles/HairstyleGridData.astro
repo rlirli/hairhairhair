@@ -1,14 +1,14 @@
 ---
 import { getImage } from "astro:assets";
-import type { Hairstyle } from "../data/hairstyles";
-import { styleExamples } from "../data/hairstyles";
+import type { Hairstyle } from "../../data/hairstyles";
+import { styleExamples } from "../../data/hairstyles";
 import {
   compatibilityLabelsForHairstyle,
   kindLabels,
   subtypeLabelsForHairstyleInMajorType,
-} from "../data/hairstyle-relations";
-import { getMedia } from "../data/media";
-import RelatedHairstyleGridIsland from "./RelatedHairstyleGrid";
+} from "../../data/hairstyle-relations";
+import { getMedia } from "../../data/media";
+import HairstyleGrid from "./HairstyleGrid";
 
 interface Props {
   styles: Hairstyle[];
@@ -53,7 +53,7 @@ const items = await Promise.all(
 );
 ---
 
-<RelatedHairstyleGridIsland
+<HairstyleGrid
   client:load
   items={items.filter((item) => item !== undefined)}
   {size}

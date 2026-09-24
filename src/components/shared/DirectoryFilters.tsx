@@ -6,9 +6,9 @@ import {
   toggleGroup,
   toggleOption,
   type HierarchicalOption,
-} from "../lib/directory-filters";
-import { Checkbox } from "./ui/checkbox";
-import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+} from "../../lib/directory-filters";
+import { Checkbox } from "../ui/checkbox";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 
 export interface FilterOption {
   id: string;

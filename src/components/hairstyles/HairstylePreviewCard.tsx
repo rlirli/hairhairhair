@@ -1,6 +1,6 @@
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "./ui/hover-card";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/hover-card";
 
-export interface RelatedHairstyleHoverCardItem {
+export interface HairstylePreviewCardItem {
   href: string;
   imageSrc: string;
   imageSrcSet: string;
@@ -20,12 +20,12 @@ export interface RelatedHairstyleHoverCardItem {
   };
 }
 
-interface Props extends RelatedHairstyleHoverCardItem {
+interface Props extends HairstylePreviewCardItem {
   size: "small" | "medium";
   horizontalScroll?: boolean;
 }
 
-export default function RelatedHairstyleHoverCard({
+export default function HairstylePreviewCard({
   href,
   imageSrc,
   imageSrcSet,

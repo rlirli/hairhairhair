@@ -1,13 +1,13 @@
 ---
-import Layout from "../../components/Layout.astro";
-import ExpandableBio from "../../components/ExpandableBio.astro";
-import NaturalProfile from "../../components/NaturalProfile.astro";
+import Layout from "../../components/shared/Layout.astro";
+import ExpandableBio from "../../components/people/ExpandableBio.astro";
+import PersonFactSheet from "../../components/people/PersonFactSheet.astro";
 import { Image } from "astro:assets";
 import { people, personPhotographs } from "../../data/people";
 import { appearancesForPerson, hairstylesForPerson } from "../../data/people-relations";
 import { buildPersonMedia } from "../../data/people-media";
 import { naturalProfileForPerson } from "../../data/natural-profiles";
-import PersonPhotoAttribution from "../../components/PersonPhotoAttribution.astro";
+import PhotoAttribution from "../../components/shared/PhotoAttribution.astro";
 import { appearanceTitle, formatAppearanceDate } from "../../lib/appearance-formatting";
 
 export function getStaticPaths() {
@@ -84,12 +84,12 @@ const naturalProfile = naturalProfileForPerson(person.id);
               style={`object-position: ${hero.objectPosition}`}
             />
           </a>
-          <PersonPhotoAttribution media={hero} density="compact" />
+          <PhotoAttribution media={hero} density="compact" />
         </figure>
       )}
       {naturalProfile && (
         <div class="lg:pt-3">
-          <NaturalProfile profile={naturalProfile} />
+          <PersonFactSheet profile={naturalProfile} />
         </div>
       )}
     </header>
@@ -131,7 +131,7 @@ const naturalProfile = naturalProfileForPerson(person.id);
                       style={`object-position: ${photo.objectPosition}`}
                     />
                   </a>
-                  <PersonPhotoAttribution media={photo} density="compact" />
+                  <PhotoAttribution media={photo} density="compact" />
                 </div>
                 <figcaption class="mt-1.5">
                   <h3 class="font-display text-base leading-tight tracking-[-.02em]">
@@ -191,7 +191,7 @@ const naturalProfile = naturalProfileForPerson(person.id);
                       style={`object-position: ${photo.objectPosition}`}
                     />
                   </a>
-                  <PersonPhotoAttribution media={photo} density="compact" />
+                  <PhotoAttribution media={photo} density="compact" />
                 </div>
                 <figcaption class="mt-1.5">
                   <h3 class="font-display text-base leading-tight tracking-[-.03em]">

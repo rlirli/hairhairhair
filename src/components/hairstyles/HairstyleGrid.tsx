@@ -1,13 +1,13 @@
-import RelatedHairstyleHoverCard, { type RelatedHairstyleHoverCardItem } from "./RelatedHairstyleHoverCard";
+import HairstylePreviewCard, { type HairstylePreviewCardItem } from "./HairstylePreviewCard";
 
 interface Props {
-  items: RelatedHairstyleHoverCardItem[];
+  items: HairstylePreviewCardItem[];
   size: "small" | "medium";
   className: string;
   horizontalScroll?: boolean;
 }
 
-export default function RelatedHairstyleGrid({ items, size, className, horizontalScroll = false }: Props) {
+export default function HairstyleGrid({ items, size, className, horizontalScroll = false }: Props) {
   return (
     <div
       className={className}
@@ -16,7 +16,7 @@ export default function RelatedHairstyleGrid({ items, size, className, horizonta
       tabIndex={horizontalScroll ? 0 : undefined}
     >
       {items.map((item) => (
-        <RelatedHairstyleHoverCard key={item.href} {...item} size={size} horizontalScroll={horizontalScroll} />
+        <HairstylePreviewCard key={item.href} {...item} size={size} horizontalScroll={horizontalScroll} />
       ))}
     </div>
   );

@@ -3,7 +3,7 @@ import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import { loadRenderers } from "astro:container";
 import { expect, test, vi } from "vitest";
 
-import HairTypeCelebrityPreview from "../../src/components/HairTypeCelebrityPreview.astro";
+import HairTypeCelebrityPreview from "../../src/components/people/HairTypeCelebrityPreview.astro";
 import { hairTypes } from "../../src/data/hair-types";
 import HairTypePage from "../../src/pages/hair-types/[slug].astro";
 

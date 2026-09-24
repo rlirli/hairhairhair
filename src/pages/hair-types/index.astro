@@ -1,6 +1,6 @@
 ---
-import Layout from "../../components/Layout.astro";
-import HairStrand from "../../components/HairStrand.astro";
+import Layout from "../../components/shared/Layout.astro";
+import HairStrand from "../../components/hair-types/HairStrand.astro";
 import { hairSubtypes, hairTypes } from "../../data/hair-types";
 
 const subtypesFor = (typeId: string) => hairSubtypes.filter((subtype) => subtype.hairTypeId === typeId);

@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
-import PersonPhotoAttribution from "./PersonPhotoAttribution.astro";
-import type { PersonMedia } from "../data/people-media";
+import PhotoAttribution from "../shared/PhotoAttribution.astro";
+import type { PersonMedia } from "../../data/people-media";
 
 interface AppearanceCard {
   id: string;
@@ -46,7 +46,7 @@ const { appearances, layout = "grid" } = Astro.props;
             style={`object-position: ${media.objectPosition}`}
           />
         </a>
-        <PersonPhotoAttribution media={media} density="compact" />
+        <PhotoAttribution media={media} density="compact" />
       </figure>
       <a
         class="focus-ring mt-1 block font-display text-lg leading-tight"

@@ -1,10 +1,10 @@
 ---
 import { Image } from "astro:assets";
-import Layout from "../../../components/Layout.astro";
+import Layout from "../../../components/shared/Layout.astro";
 import { buildPersonMedia } from "../../../data/people-media";
 import { hairstylesForPerson } from "../../../data/people-relations";
 import { people, personPhotographs } from "../../../data/people";
-import PersonPhotoAttribution from "../../../components/PersonPhotoAttribution.astro";
+import PhotoAttribution from "../../../components/shared/PhotoAttribution.astro";
 import { appearanceTitle, formatAppearanceDate } from "../../../lib/appearance-formatting";
 
 export function getStaticPaths() {
@@ -84,7 +84,7 @@ const styleRecords = hairstylesForPerson(person.id);
                         style={`object-position: ${photo.objectPosition}`}
                       />
                     </a>
-                    <PersonPhotoAttribution media={photo} density="compact" />
+                    <PhotoAttribution media={photo} density="compact" />
                   </div>
                   <figcaption class="mt-2">
                     <h3 class="font-display text-xl leading-tight tracking-[-.03em]">

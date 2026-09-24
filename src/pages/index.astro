@@ -1,7 +1,7 @@
 ---
-import Layout from "../components/Layout.astro";
-import Pattern from "../components/Pattern.astro";
-import RelatedHairstyleGrid from "../components/RelatedHairstyleGrid.astro";
+import Layout from "../components/shared/Layout.astro";
+import Pattern from "../components/hair-types/Pattern.astro";
+import HairstyleGridData from "../components/hairstyles/HairstyleGridData.astro";
 import { hairTypes } from "../data/hair-types";
 import { publishedHairstyles } from "../data/hairstyles";
 import { people } from "../data/people";
@@ -77,7 +77,7 @@ import { people } from "../data/people";
         Browse all hairstyles
       </a>
     </div>
-    <RelatedHairstyleGrid
+    <HairstyleGridData
       styles={publishedHairstyles.slice(0, 4)}
       size="medium"
       className="mt-2.5 sm:mt-4 grid grid-cols-2 gap-4 md:grid-cols-4"

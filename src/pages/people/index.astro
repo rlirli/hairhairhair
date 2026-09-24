@@ -1,11 +1,11 @@
 ---
-import Layout from "../../components/Layout.astro";
-import PersonDirectoryCard from "../../components/PersonDirectoryCard";
+import Layout from "../../components/shared/Layout.astro";
+import PersonDirectoryCard from "../../components/people/PersonDirectoryCard";
 import { hairSubtypes, hairTypes } from "../../data/hair-types";
 import { people, personPhotographs } from "../../data/people";
 import { naturalProfileForPerson, resolvedHairTypeForNaturalProfile } from "../../data/natural-profiles";
 import { buildPersonMedia } from "../../data/people-media";
-import DirectoryFilters, { type FilterGroup } from "../../components/DirectoryFilters";
+import DirectoryFilters, { type FilterGroup } from "../../components/shared/DirectoryFilters";
 
 const mediaById = new Map(buildPersonMedia(personPhotographs).map((photo) => [photo.id, photo]));
 const profileLabel = (value: string | null, labels: Record<string, string>) =>

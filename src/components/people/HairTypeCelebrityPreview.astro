@@ -1,8 +1,8 @@
 ---
 import { getImage } from "astro:assets";
 import PersonDirectoryCard from "./PersonDirectoryCard";
-import { resolvedHairTypeForNaturalProfile } from "../data/natural-profiles";
-import type { HairTypePerson } from "../data/hair-type-discovery";
+import { resolvedHairTypeForNaturalProfile } from "../../data/natural-profiles";
+import type { HairTypePerson } from "../../data/hair-type-discovery";
 
 const { moreHref, people } = Astro.props as { moreHref: string; people: HairTypePerson[] };
 

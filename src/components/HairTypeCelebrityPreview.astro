@@ -84,7 +84,7 @@ const celebrityCards = await Promise.all(
 
 {celebrityCards.length > 0 && (
   <section class="mx-auto max-w-7xl px-5 pb-16 sm:px-8" aria-label="People with this natural hair type">
-    <div class="flex items-baseline justify-between gap-4 border-b border-ink/30 pb-3">
+    <div class="flex items-baseline justify-between gap-4 border-b border-taupe pb-3 sm:pb-2">
       <h2 class="text-xs font-black uppercase tracking-[.16em] text-orange">Celebs with this hair type</h2>
       <a
         class="focus-ring text-xs font-normal uppercase tracking-[.12em] text-muted transition hover:text-ink"
@@ -93,7 +93,7 @@ const celebrityCards = await Promise.all(
         More
       </a>
     </div>
-    <div class="mt-4 grid grid-flow-col auto-cols-[minmax(8rem,1fr)] gap-3 overflow-x-auto pb-3 lg:grid-flow-row lg:grid-cols-7 lg:auto-cols-auto lg:overflow-visible">
+    <div class="mt-2.5 sm:mt-4 grid grid-flow-col auto-cols-[minmax(8rem,1fr)] gap-3 overflow-x-auto pb-3 lg:grid-flow-row lg:grid-cols-7 lg:auto-cols-auto lg:overflow-visible">
       {celebrityCards.map(({ person, subtitle }) => (
         <PersonDirectoryCard client:load person={person} subtitle={subtitle} />
       ))}

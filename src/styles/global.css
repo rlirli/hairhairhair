@@ -4,6 +4,7 @@
 @theme {
   --color-ink: #181715;
   --color-muted: color-mix(in srgb, var(--color-ink) 60%, transparent);
+  --color-taupe: #b2afa9;
   --color-ivory: #f4f0e8;
   --color-hairstyle-image-bg: #e0d5c6;
   --color-orange: #b83e16;
@@ -31,6 +32,7 @@
 :root.dark {
   color-scheme: dark;
   --color-ink: #f6efdf;
+  --color-taupe: #656059;
   --color-ivory: #25231f;
   --color-hairstyle-image-bg: #323127;
   --color-orange: #e27c49;

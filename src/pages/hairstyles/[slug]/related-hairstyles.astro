@@ -32,12 +32,14 @@ const related = publishedRelatedHairstyles(style.relatedStyleIds);
       </span>
       <span>Related hairstyles</span>
     </nav>
-    <h1 class="mt-10 font-display text-5xl tracking-[-.07em] sm:text-7xl">{style.name} related hairstyles</h1>
+    <header class="mt-10 border-b border-taupe pb-3 sm:pb-2">
+      <h1 class="font-display text-5xl tracking-[-.07em] sm:text-7xl">{style.name} related hairstyles</h1>
+    </header>
     {related.length ? (
       <RelatedHairstyleGrid
         styles={related}
         size="small"
-        className="mt-8 grid grid-cols-2 gap-x-3 gap-y-5 sm:grid-cols-3 lg:grid-cols-6"
+        className="mt-2.5 sm:mt-4 grid grid-cols-2 gap-x-3 gap-y-5 sm:grid-cols-3 lg:grid-cols-6"
       />
     ) : (
       <p class="mt-10 rounded-2xl border-2 border-ink p-6">No related hairstyles are currently listed.</p>

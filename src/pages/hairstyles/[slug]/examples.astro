@@ -28,11 +28,13 @@ const examples = getExamplesForHairstyle(style.id);
       </span>
       <span>Examples</span>
     </nav>
-    <h1 class="mt-10 font-display text-5xl tracking-[-.07em] sm:text-7xl">{style.name} examples</h1>
-    <p class="mt-4 max-w-2xl text-lg leading-7">
-      Different visual references for the same hairstyle idea. These are examples, not fixed specifications.
-    </p>
-    <div class="mt-10 grid gap-6 sm:grid-cols-2">
+    <header class="mt-10 border-b border-taupe pb-3 sm:pb-2">
+      <h1 class="font-display text-5xl tracking-[-.07em] sm:text-7xl">{style.name} examples</h1>
+      <p class="mt-4 max-w-2xl text-lg leading-7">
+        Different visual references for the same hairstyle idea. These are examples, not fixed specifications.
+      </p>
+    </header>
+    <div class="mt-2.5 sm:mt-4 grid gap-6 sm:grid-cols-2">
       {examples.map((example, index) => (
         <StyleExampleCard example={example} styleSlug={style.slug} eager={index === 0} />
       ))}

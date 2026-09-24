@@ -1,26 +1,16 @@
 ---
-import { Image } from "astro:assets";
-import PhotoAttribution from "../shared/PhotoAttribution.astro";
-import type { PhotographMedia } from "../../data/media-types";
-
-interface AppearanceCard {
-  id: string;
-  personSlug: string;
-  personName: string;
-  date: string;
-  event: string;
-  media: PhotographMedia;
-}
+import AppearanceCard from "./AppearanceCard.astro";
+import type { AppearanceCardData } from "./appearance-types";
 
 interface Props {
-  appearances: AppearanceCard[];
+  appearances: AppearanceCardData[];
   layout?: "row" | "grid";
 }
 
 const { appearances, layout = "grid" } = Astro.props;
 ---
 
-<div
+<ul
   class:list={[
     layout === "row"
       ? "flex gap-3 overflow-x-auto overscroll-x-contain pb-3"
@@ -30,39 +20,12 @@ const { appearances, layout = "grid" } = Astro.props;
   aria-label={layout === "row" ? "Celebrity appearance previews" : undefined}
   tabindex={layout === "row" ? 0 : undefined}
 >
-  {appearances.map(({ id, personSlug, personName, date, event, media }) => (
-    <article
-      class:list={["min-w-0", layout === "row" && "w-[min(72vw,14rem)] shrink-0 lg:w-[calc((100%_-_3.75rem)/6)]"]}
-    >
-      <figure class="relative overflow-hidden">
-        <a class="focus-ring block" href={`/people/${personSlug}/appearances/${id}/`}>
-          <Image
-            src={media.src}
-            widths={[240, 480]}
-            sizes="(min-width: 1024px) 16vw, (min-width: 640px) 30vw, 45vw"
-            format="webp"
-            alt={media.alt}
-            class="aspect-[4/5] w-full object-cover"
-            style={`object-position: ${media.objectPosition}`}
-          />
-        </a>
-        <PhotoAttribution media={media} density="compact" />
-      </figure>
-      <a
-        class="focus-ring mt-1 block font-display text-lg leading-tight"
-        href={`/people/${personSlug}/appearances/${id}/`}
-      >
-        {personName}
-      </a>
-      <p class="mt-1 text-xs leading-tight text-muted">
-        <time datetime={date} data-local-date>
-          {date}
-        </time>
-        <span class="sr-only"> · {event}</span>
-      </p>
-    </article>
+  {appearances.map((appearance) => (
+    <li class:list={["min-w-0", layout === "row" && "w-[min(72vw,14rem)] shrink-0 lg:w-[calc((100%_-_3.75rem)/6)]"]}>
+      <AppearanceCard {...appearance} />
+    </li>
   ))}
-</div>
+</ul>
 
 <script>
   document.querySelectorAll<HTMLTimeElement>("time[data-local-date]").forEach((element) => {

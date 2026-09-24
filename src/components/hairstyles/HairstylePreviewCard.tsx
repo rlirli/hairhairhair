@@ -22,7 +22,6 @@ export interface HairstylePreviewCardItem {
 
 interface Props extends HairstylePreviewCardItem {
   size: "small" | "medium";
-  horizontalScroll?: boolean;
 }
 
 export default function HairstylePreviewCard({
@@ -39,13 +38,10 @@ export default function HairstylePreviewCard({
   subtypeLabels = [],
   photoAttribution,
   size,
-  horizontalScroll = false,
 }: Props) {
   return (
     <HoverCard openDelay={180} closeDelay={120}>
-      <div
-        className={`relative min-w-0 ${horizontalScroll ? "w-[min(72vw,14rem)] shrink-0 lg:w-[calc((100%_-_3.75rem)/6)]" : ""}`}
-      >
+      <div className="relative min-w-0">
         <HoverCardTrigger asChild>
           <a href={href} className="focus-ring group block min-w-0">
             <img

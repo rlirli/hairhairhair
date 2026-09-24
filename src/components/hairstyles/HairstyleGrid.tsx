@@ -1,4 +1,5 @@
 import HairstylePreviewCard, { type HairstylePreviewCardItem } from "./HairstylePreviewCard";
+import { cn } from "../../lib/utils";
 
 interface Props {
   items: HairstylePreviewCardItem[];
@@ -9,15 +10,23 @@ interface Props {
 
 export default function HairstyleGrid({ items, size, className, horizontalScroll = false }: Props) {
   return (
-    <div
-      className={className}
+    <ul
+      className={cn(className)}
       role={horizontalScroll ? "region" : undefined}
       aria-label={horizontalScroll ? "Related hairstyle previews" : undefined}
       tabIndex={horizontalScroll ? 0 : undefined}
     >
       {items.map((item) => (
-        <HairstylePreviewCard key={item.href} {...item} size={size} horizontalScroll={horizontalScroll} />
+        <li
+          key={item.href}
+          className={cn(
+            "min-w-0",
+            horizontalScroll && "w-[min(72vw,14rem)] shrink-0 lg:w-[calc((100%_-_3.75rem)/6)]",
+          )}
+        >
+          <HairstylePreviewCard {...item} size={size} />
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }

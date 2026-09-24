@@ -286,9 +286,6 @@ export default function HairstyleRelationMap({ styles }: Props) {
           <input checked={connectedOnly} onChange={(event) => setConnectedOnly(event.target.checked)} type="checkbox" />
           <span>Connected styles</span>
         </label>
-        <button className="relation-reset focus-ring" onClick={reset} type="button">
-          Reset map
-        </button>
       </div>
 
       <div className="relation-layout">
@@ -370,7 +367,7 @@ export default function HairstyleRelationMap({ styles }: Props) {
                     className={
                       style.transparentBackground ? "relation-image-backdrop is-transparent" : "relation-image-backdrop"
                     }
-                    r={nodeRadius + 3}
+                    r={nodeRadius}
                   />
                   <image
                     clipPath={`url(#${style.id}-map-clip)`}
@@ -381,7 +378,7 @@ export default function HairstyleRelationMap({ styles }: Props) {
                     x={-nodeRadius}
                     y={-nodeRadius}
                   />
-                  <circle className="relation-node-ring" r={nodeRadius + 2} />
+                  <circle className="relation-node-ring" r={nodeRadius} />
                   <text className="relation-node-label" y={nodeRadius + 19}>
                     {style.name}
                   </text>
@@ -389,7 +386,13 @@ export default function HairstyleRelationMap({ styles }: Props) {
               ))}
             </g>
           </svg>
-          <div className="relation-map-hint">Drag a style · scroll to zoom · drag the background to pan</div>
+          <div className="relation-map-footer">
+            <button className="relation-reset focus-ring" onClick={reset} type="button">
+              Reset map
+            </button>
+            <span aria-hidden="true">|</span>
+            <span className="relation-map-hint">Drag a style · scroll to zoom · drag the background to pan</span>
+          </div>
           <div className="relation-map-count">
             {styles.filter(isShown).length} of {styles.length} styles <span aria-hidden="true">·</span> {links.length}{" "}
             connections
@@ -401,7 +404,7 @@ export default function HairstyleRelationMap({ styles }: Props) {
             <>
               <img
                 alt={selected.imageAlt}
-                className={`relation-detail-image${selected.transparentBackground ? "is-transparent" : ""}`}
+                className={`relation-detail-image${selected.transparentBackground ? " is-transparent" : ""}`}
                 src={selected.imageSrc}
               />
               <p className="relation-kind">{selected.kindLabel}</p>

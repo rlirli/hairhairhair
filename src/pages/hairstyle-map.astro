@@ -32,10 +32,16 @@ const styles = await Promise.all(
   description="Explore how hairstyles relate to each other in an interactive map."
 >
   <section class="mx-auto max-w-7xl px-5 pb-20 pt-12 sm:px-8 sm:pt-16">
-    <nav aria-label="Breadcrumb" class="text-sm">
-      <a class="focus-ring hover:text-orange" href="/hairstyles/">
+    <nav
+      aria-label="Breadcrumb"
+      class="mb-8 flex flex-wrap items-center gap-y-1 text-xs font-bold uppercase tracking-[.12em] sm:text-sm"
+    >
+      <a class="focus-ring text-orange" href="/hairstyles/">
         Hairstyles
       </a>
+      <span class="mx-2" aria-hidden="true">
+        /
+      </span>
       <span>Hairstyle map</span>
     </nav>
     <p class="mt-2 text-xs font-black uppercase tracking-[.2em] text-orange">Explore the collection</p>

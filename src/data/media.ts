@@ -4,20 +4,30 @@ import buzzTextured from "../assets/hairstyles/buzz-textured.png";
 import croppedAfroCompact from "../assets/hairstyles/cropped-afro-compact.png";
 import croppedAfroFull from "../assets/hairstyles/cropped-afro-full.png";
 import curtainHaircutStraight1b from "../assets/hairstyles/curtain-haircut-straight-1b.png";
+import farrahFawcettCutBlack from "../assets/hairstyles/farrah-fawcett-cut-black.png";
+import farrahFawcettCutClassicFeathered from "../assets/hairstyles/farrah-fawcett-cut-classic-feathered.png";
+import fivePointCutGeometricBlack from "../assets/hairstyles/five-point-cut-geometric-black.png";
+import fivePointCutGeometricDark from "../assets/hairstyles/five-point-cut-geometric-dark.png";
 import flatTopCoily from "../assets/hairstyles/flat-top-coily.png";
 import flatTopStraight from "../assets/hairstyles/flat-top-straight.png";
 import freeformLocsLong from "../assets/hairstyles/freeform-locs-long.png";
 import frenchCropTextured2a from "../assets/hairstyles/french-crop-textured-2a.png";
 import knotlessBoxBraidsMedium from "../assets/hairstyles/knotless-box-braids-medium.png";
 import longLayeredCutBrunette from "../assets/hairstyles/long-layered-cut-brunette.png";
+import naturalAfroDeepSkinMan from "../assets/hairstyles/natural-afro-deep-skin-man.png";
+import naturalAfroRoundedCoily from "../assets/hairstyles/natural-afro-rounded-coily.png";
 import patternedMohawkCurved from "../assets/hairstyles/patterned-mohawk-curved.png";
 import patternedMohawkGeometric from "../assets/hairstyles/patterned-mohawk-geometric.png";
+import sculptedSphericalAfroClassic from "../assets/hairstyles/sculpted-spherical-afro-classic.png";
+import sculptedSphericalAfroOlderMan from "../assets/hairstyles/sculpted-spherical-afro-older-man.png";
 import shortFeatheredShagCopper from "../assets/hairstyles/short-feathered-shag-copper.png";
 import sleekLongCutBlonde from "../assets/hairstyles/sleek-long-cut-blonde.png";
 import sleekLongCutSilverGray from "../assets/hairstyles/sleek-long-cut-silver-gray.png";
 import sleekLongCutStraightBlack from "../assets/hairstyles/sleek-long-cut-straight-black.png";
 import taperCoily from "../assets/hairstyles/taper-coily.png";
 import taperWavy from "../assets/hairstyles/taper-wavy.png";
+import theRachelClassicLayered from "../assets/hairstyles/the-rachel-classic-layered.png";
+import theRachelSoftWave from "../assets/hairstyles/the-rachel-soft-wave.png";
 import thinMohawkBlond from "../assets/hairstyles/thin-mohawk-blond.png";
 import thinMohawkDark from "../assets/hairstyles/thin-mohawk-dark.png";
 import topKnotCurly from "../assets/hairstyles/top-knot-curly.png";
@@ -73,6 +83,50 @@ export const hairstyleMedia: HairstyleMedia[] = [
     },
   },
   {
+    id: "farrah-fawcett-cut-black",
+    src: farrahFawcettCutBlack,
+    alt: "A fictional Indian woman in her 20s wearing long black hair in a Farrah-style feathered cut with broad face-opening layers and outward-flipped lower sections.",
+    provenance: {
+      kind: "generated",
+      provider: "OpenAI",
+      promptKey: "farrah-fawcett-cut-black",
+      background: "transparent",
+    },
+  },
+  {
+    id: "farrah-fawcett-cut-classic-feathered",
+    src: farrahFawcettCutClassicFeathered,
+    alt: "Fictional blonde woman with long heavily layered hair styled into large outward feathered sections around the face and shoulders.",
+    provenance: {
+      kind: "generated",
+      provider: "OpenAI",
+      promptKey: "farrah-fawcett-cut-classic-feathered",
+      background: "transparent",
+    },
+  },
+  {
+    id: "five-point-cut-geometric-black",
+    src: fivePointCutGeometricBlack,
+    alt: "Fictional woman shown three-quarter view with a glossy black geometric Five Point-style short haircut and pronounced pointed side perimeter.",
+    provenance: {
+      kind: "generated",
+      provider: "OpenAI",
+      promptKey: "five-point-cut-geometric-black",
+      background: "transparent",
+    },
+  },
+  {
+    id: "five-point-cut-geometric-dark",
+    src: fivePointCutGeometricDark,
+    alt: "Fictional woman shown three-quarter view with a glossy dark geometric Five Point-style short haircut and pronounced pointed side perimeter.",
+    provenance: {
+      kind: "generated",
+      provider: "OpenAI",
+      promptKey: "five-point-cut-geometric-dark",
+      background: "transparent",
+    },
+  },
+  {
     id: "flat-top-coily",
     src: flatTopCoily,
     alt: "Generated editorial reference showing a low flat plane above short graduated sides on a fictional adult with coily texture.",
@@ -124,6 +178,28 @@ export const hairstyleMedia: HairstyleMedia[] = [
     },
   },
   {
+    id: "natural-afro-deep-skin-man",
+    src: naturalAfroDeepSkinMan,
+    alt: "Fictional Black man in his early 40s with very deep brown skin, no beard, and a full softly rounded natural Afro with visible coily texture.",
+    provenance: {
+      kind: "generated",
+      provider: "OpenAI",
+      promptKey: "natural-afro-deep-skin-man",
+      background: "transparent",
+    },
+  },
+  {
+    id: "natural-afro-rounded-coily",
+    src: naturalAfroRoundedCoily,
+    alt: "Fictional Black woman with a large softly rounded natural Afro showing visible coily texture and an organic perimeter.",
+    provenance: {
+      kind: "generated",
+      provider: "OpenAI",
+      promptKey: "natural-afro-rounded-coily",
+      background: "transparent",
+    },
+  },
+  {
     id: "patterned-mohawk-curved",
     src: patternedMohawkCurved,
     alt: "Transparent editorial reference showing a patterned mohawk with a curved raised crest.",
@@ -142,6 +218,28 @@ export const hairstyleMedia: HairstyleMedia[] = [
       kind: "generated",
       provider: "OpenAI",
       promptKey: "patterned-mohawk-geometric",
+      background: "transparent",
+    },
+  },
+  {
+    id: "sculpted-spherical-afro-classic",
+    src: sculptedSphericalAfroClassic,
+    alt: "Fictional Black woman with a large dense black Afro shaped into a nearly spherical silhouette.",
+    provenance: {
+      kind: "generated",
+      provider: "OpenAI",
+      promptKey: "sculpted-spherical-afro-classic",
+      background: "transparent",
+    },
+  },
+  {
+    id: "sculpted-spherical-afro-older-man",
+    src: sculptedSphericalAfroOlderMan,
+    alt: "Fictional dark-skinned African man in his late 60s with a large dense black Afro shaped into a near-spherical silhouette.",
+    provenance: {
+      kind: "generated",
+      provider: "OpenAI",
+      promptKey: "sculpted-spherical-afro-older-man",
       background: "transparent",
     },
   },
@@ -200,6 +298,23 @@ export const hairstyleMedia: HairstyleMedia[] = [
     src: taperWavy,
     alt: "Editorial reference showing a low taper with a wavy top and soft perimeter.",
     provenance: { kind: "generated", provider: "OpenAI", promptKey: "taper-wavy", background: "opaque" },
+  },
+  {
+    id: "the-rachel-classic-layered",
+    src: theRachelClassicLayered,
+    alt: "Fictional South Asian woman with a shoulder-length heavily layered Rachel-style haircut, rounded face framing and flicked lower ends.",
+    provenance: {
+      kind: "generated",
+      provider: "OpenAI",
+      promptKey: "the-rachel-classic-layered",
+      background: "transparent",
+    },
+  },
+  {
+    id: "the-rachel-soft-wave",
+    src: theRachelSoftWave,
+    alt: "Fictional middle-aged Black or mixed-race woman with a softer shoulder-length Rachel-style layered haircut and visible curved face framing.",
+    provenance: { kind: "generated", provider: "OpenAI", promptKey: "the-rachel-soft-wave", background: "transparent" },
   },
   {
     id: "thin-mohawk-blond",

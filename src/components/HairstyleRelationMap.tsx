@@ -437,17 +437,21 @@ export default function HairstyleRelationMap({ styles }: Props) {
         <aside aria-live="polite" className="relation-detail">
           {selected ? (
             <>
-              <img
-                alt={selected.imageAlt}
-                className={`relation-detail-image${selected.transparentBackground ? "is-transparent" : ""}`}
-                src={selected.imageSrc}
-              />
-              <p className="relation-kind">{selected.kindLabel}</p>
-              <h2>{selected.name}</h2>
-              <p className="relation-summary">{selected.summary}</p>
-              <a className="relation-profile-link focus-ring" href={selected.href}>
-                Explore this hairstyle <span aria-hidden="true">↗</span>
-              </a>
+              <div className="relation-detail-main">
+                <img
+                  alt={selected.imageAlt}
+                  className={`relation-detail-image${selected.transparentBackground ? "is-transparent" : ""}`}
+                  src={selected.imageSrc}
+                />
+                <div className="relation-detail-copy">
+                  <p className="relation-kind">{selected.kindLabel}</p>
+                  <h2>{selected.name}</h2>
+                  <p className="relation-summary">{selected.summary}</p>
+                  <a className="relation-profile-link focus-ring" href={selected.href}>
+                    Explore this hairstyle <span aria-hidden="true">↗</span>
+                  </a>
+                </div>
+              </div>
               <h3 className="relation-related-heading">
                 Connected styles <span>{related.length}</span>
               </h3>

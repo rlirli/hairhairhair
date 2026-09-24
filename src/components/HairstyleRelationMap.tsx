@@ -221,8 +221,6 @@ export default function HairstyleRelationMap({ styles }: Props) {
   const related = selected?.relatedStyleIds.map((id) => styles[idToIndex.get(id) ?? -1]).filter(Boolean) ?? [];
   const queryMatch = (style: RelationMapStyle) =>
     !query || style.name.toLowerCase().includes(query.trim().toLowerCase());
-  const isShown = (style: RelationMapStyle) => queryMatch(style);
-
   function paintPositions(next: PositionedStyle[]) {
     const nodeElements = svgRef.current?.querySelectorAll<SVGGElement>(".relation-node");
     const edgeElements = svgRef.current?.querySelectorAll<SVGLineElement>(".relation-edge");
@@ -363,12 +361,6 @@ export default function HairstyleRelationMap({ styles }: Props) {
             <button className="relation-reset focus-ring" onClick={reset} type="button">
               Reset map
             </button>
-            <span aria-hidden="true">|</span>
-            <span className="relation-map-hint">Drag a style · scroll to zoom · drag the background to pan</span>
-          </div>
-          <div className="relation-map-count">
-            {styles.filter(isShown).length} of {styles.length} styles <span aria-hidden="true">·</span> {links.length}{" "}
-            connections
           </div>
         </div>
 
@@ -379,7 +371,11 @@ export default function HairstyleRelationMap({ styles }: Props) {
                 <img alt={selected.imageAlt} className="relation-detail-image" src={selected.imageSrc} />
                 <div className="relation-detail-copy">
                   <p className="relation-kind">{selected.kindLabel}</p>
-                  <h2>{selected.name}</h2>
+                  <h2>
+                    <a className="relation-title-link focus-ring" href={selected.href}>
+                      {selected.name}
+                    </a>
+                  </h2>
                   <p className="relation-summary">{selected.summary}</p>
                   <a className="relation-profile-link focus-ring" href={selected.href}>
                     Explore this hairstyle <span aria-hidden="true">↗</span>
@@ -407,7 +403,9 @@ export default function HairstyleRelationMap({ styles }: Props) {
             </>
           ) : (
             <div className="relation-empty">
-              <span aria-hidden="true">✳</span>
+              <svg aria-hidden="true" viewBox="0 0 32 32">
+                <path d="m16 1.5 2.5 10 8.8-5.7-5.7 8.8 10 2.4-10 2.5 5.7 8.8-8.8-5.7-2.5 10-2.4-10-8.8 5.7 5.7-8.8-10-2.5 10-2.4-5.7-8.8 8.8 5.7z" />
+              </svg>
               <p>Select a hairstyle to see its connections.</p>
             </div>
           )}

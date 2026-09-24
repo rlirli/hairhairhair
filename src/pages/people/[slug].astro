@@ -6,7 +6,7 @@ import { Image } from "astro:assets";
 import { people, personPhotographs } from "../../data/people";
 import { appearancesForPerson, hairstylesForPerson } from "../../data/people-relations";
 import { naturalProfileForPerson } from "../../data/natural-profiles";
-import PhotoAttribution from "../../components/shared/PhotoAttribution.astro";
+import PhotoAttribution from "../../components/shared/PhotoAttribution";
 import CollectionHeader from "../../components/shared/CollectionHeader.astro";
 import { appearanceTitle, formatAppearanceDate } from "../../lib/appearance-formatting";
 
@@ -84,7 +84,7 @@ const naturalProfile = naturalProfileForPerson(person.id);
               style={`object-position: ${hero.objectPosition}`}
             />
           </a>
-          <PhotoAttribution media={hero} density="compact" />
+          <PhotoAttribution provenance={hero.provenance} density="compact" />
         </figure>
       )}
       {naturalProfile && (
@@ -128,7 +128,7 @@ const naturalProfile = naturalProfileForPerson(person.id);
                       style={`object-position: ${photo.objectPosition}`}
                     />
                   </a>
-                  <PhotoAttribution media={photo} density="compact" />
+                  <PhotoAttribution provenance={photo.provenance} density="compact" />
                 </div>
                 <figcaption class="mt-1.5">
                   <h3 class="font-display text-base leading-tight tracking-[-.02em]">
@@ -185,7 +185,7 @@ const naturalProfile = naturalProfileForPerson(person.id);
                       style={`object-position: ${photo.objectPosition}`}
                     />
                   </a>
-                  <PhotoAttribution media={photo} density="compact" />
+                  <PhotoAttribution provenance={photo.provenance} density="compact" />
                 </div>
                 <figcaption class="mt-1.5">
                   <h3 class="font-display text-base leading-tight tracking-[-.03em]">

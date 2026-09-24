@@ -4,7 +4,7 @@ import Layout from "../../../../components/shared/Layout.astro";
 import { appearancesForPersonStyle, hairstylesForPerson } from "../../../../data/people-relations";
 import { getHairstyle } from "../../../../data/hairstyles";
 import { people, personPhotographs } from "../../../../data/people";
-import PhotoAttribution from "../../../../components/shared/PhotoAttribution.astro";
+import PhotoAttribution from "../../../../components/shared/PhotoAttribution";
 import { appearanceTitle, formatAppearanceDate } from "../../../../lib/appearance-formatting";
 
 export function getStaticPaths() {
@@ -103,7 +103,7 @@ const records = appearancesForPersonStyle(person.id, style.id);
                     style={`object-position: ${photo.objectPosition}`}
                   />
                 </a>
-                <PhotoAttribution media={photo} density="compact" />
+                <PhotoAttribution provenance={photo.provenance} density="compact" />
               </figure>
               <div class="mt-2">
                 <h3 class="font-display text-lg leading-tight tracking-[-.02em]">

@@ -33,26 +33,13 @@ const items = await Promise.all(
       imageSrc: image.src,
       imageSrcSet: image.srcSet.attribute,
       imageAlt: media.alt,
-      transparentBackground: media.transparentBackground === true,
       imageSizes,
       kindLabel: kindLabels[style.kind],
       name: style.name,
       summary: style.summary,
       compatibleLabels: compatibilityLabelsForHairstyle(style.id),
       subtypeLabels: hairTypeId ? subtypeLabelsForHairstyleInMajorType(style.id, hairTypeId) : [],
-      photoAttribution:
-        media.provenance.licenseType === "licensed" &&
-        media.provenance.creator &&
-        media.provenance.sourceUrl &&
-        media.provenance.licenseName &&
-        media.provenance.licenseUrl
-          ? {
-              creator: media.provenance.creator,
-              sourceUrl: media.provenance.sourceUrl,
-              licenseName: media.provenance.licenseName,
-              licenseUrl: media.provenance.licenseUrl,
-            }
-          : undefined,
+      photoAttribution: media.provenance,
     };
   }),
 );

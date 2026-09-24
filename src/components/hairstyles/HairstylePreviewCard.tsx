@@ -1,3 +1,5 @@
+import type { MediaProvenance } from "../../data/media-types";
+import PhotoAttribution from "../shared/PhotoAttribution";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/hover-card";
 
 export interface HairstylePreviewCardItem {
@@ -5,19 +7,13 @@ export interface HairstylePreviewCardItem {
   imageSrc: string;
   imageSrcSet: string;
   imageAlt: string;
-  transparentBackground: boolean;
   imageSizes: string;
   kindLabel: string;
   name: string;
   summary: string;
   compatibleLabels?: string[];
   subtypeLabels?: string[];
-  photoAttribution?: {
-    creator: string;
-    sourceUrl: string;
-    licenseName: string;
-    licenseUrl: string;
-  };
+  photoAttribution: MediaProvenance;
 }
 
 interface Props extends HairstylePreviewCardItem {
@@ -29,7 +25,6 @@ export default function HairstylePreviewCard({
   imageSrc,
   imageSrcSet,
   imageAlt,
-  transparentBackground,
   imageSizes,
   kindLabel,
   name,
@@ -50,7 +45,7 @@ export default function HairstylePreviewCard({
               sizes={imageSizes}
               loading="lazy"
               alt={imageAlt}
-              className={`aspect-square w-full border border-ink/25 object-cover transition group-hover:border-orange ${transparentBackground ? "bg-hairstyle-image-bg" : ""} ${size === "small" ? "rounded-xl" : "rounded-2xl"}`}
+              className={`aspect-square w-full border border-ink/25 bg-hairstyle-image-bg object-cover transition group-hover:border-orange ${size === "small" ? "rounded-xl" : "rounded-2xl"}`}
             />
             <h3
               className={`truncate font-display tracking-[-.03em] group-hover:text-orange ${size === "small" ? "mt-1 text-lg" : "mt-2 text-2xl"}`}
@@ -62,32 +57,7 @@ export default function HairstylePreviewCard({
             )}
           </a>
         </HoverCardTrigger>
-        {photoAttribution && (
-          <div
-            className="absolute inset-x-0 bottom-[2.5rem] z-10 bg-black/75 px-2 py-1.5 text-[.68rem] leading-[1.2] text-white"
-            role="note"
-            aria-label="Photo attribution"
-          >
-            <span>{photoAttribution.creator}</span> ·{" "}
-            <a
-              className="focus-ring underline decoration-white/70 underline-offset-2"
-              href={photoAttribution.licenseUrl}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {photoAttribution.licenseName}
-            </a>{" "}
-            ·{" "}
-            <a
-              className="focus-ring underline decoration-white/70 underline-offset-2"
-              href={photoAttribution.sourceUrl}
-              target="_blank"
-              rel="noreferrer"
-            >
-              source
-            </a>
-          </div>
-        )}
+        <PhotoAttribution provenance={photoAttribution} density="compact" className="bottom-[2.5rem]" />
       </div>
       <HoverCardContent>
         <p className="text-xs font-black tracking-[.14em] text-orange uppercase">{kindLabel}</p>

@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import Layout from "../../../components/shared/Layout.astro";
 import { appearancesForPerson } from "../../../data/people-relations";
 import { people, personPhotographs } from "../../../data/people";
-import PhotoAttribution from "../../../components/shared/PhotoAttribution.astro";
+import PhotoAttribution from "../../../components/shared/PhotoAttribution";
 import { appearanceTitle } from "../../../lib/appearance-formatting";
 
 export function getStaticPaths() {
@@ -91,7 +91,7 @@ const appearances = appearancesForPerson(person.id)
                     style={`object-position: ${photo.objectPosition}`}
                   />
                 </a>
-                <PhotoAttribution media={photo} density="compact" />
+                <PhotoAttribution provenance={photo.provenance} density="compact" />
               </div>
               <figcaption class="mt-2">
                 <h3 class="font-display text-lg leading-tight tracking-[-.02em]">

@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import PhotoAttribution from "../shared/PhotoAttribution.astro";
+import PhotoAttribution from "../shared/PhotoAttribution";
 import type { AppearanceCardData } from "./appearance-types";
 
 interface Props extends AppearanceCardData {}
@@ -22,7 +22,7 @@ const href = `/people/${personSlug}/appearances/${id}/`;
         style={`object-position: ${media.objectPosition}`}
       />
     </a>
-    <PhotoAttribution media={media} density="compact" />
+    <PhotoAttribution provenance={media.provenance} density="compact" />
   </figure>
   <a class="focus-ring mt-1 block font-display text-lg leading-tight" href={href}>
     {personName}

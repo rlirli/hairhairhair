@@ -1,6 +1,5 @@
 ---
 import { Image } from "astro:assets";
-import { cn } from "../../lib/utils";
 import { getMedia } from "../../data/media";
 import type { StyleExample } from "../../data/hairstyles";
 import { styleExamplePath } from "../../lib/routes";
@@ -14,7 +13,6 @@ interface Props {
 const { example, styleSlug, eager = false } = Astro.props;
 const media = getMedia(example.imageId);
 const href = styleExamplePath(styleSlug, example.id);
-const imageClass = media?.transparentBackground === true ? "bg-hairstyle-image-bg" : "";
 ---
 
 {media && (
@@ -32,7 +30,7 @@ const imageClass = media?.transparentBackground === true ? "bg-hairstyle-image-b
           format="webp"
           alt={media.alt}
           loading={eager ? "eager" : "lazy"}
-          class={cn("aspect-square w-full rounded-2xl object-cover", imageClass)}
+          class="aspect-square w-full rounded-2xl object-cover bg-hairstyle-image-bg"
         />
       </figure>
       <div class="style-example-copy aspect-square min-w-0 overflow-hidden pb-1">

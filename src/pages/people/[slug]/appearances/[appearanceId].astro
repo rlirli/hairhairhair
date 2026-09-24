@@ -3,7 +3,7 @@ import { Image } from "astro:assets";
 import Layout from "../../../../components/shared/Layout.astro";
 import { appearances, people, personPhotographs } from "../../../../data/people";
 import { observedStylesForAppearance } from "../../../../data/people-relations";
-import PhotoAttribution from "../../../../components/shared/PhotoAttribution.astro";
+import PhotoAttribution from "../../../../components/shared/PhotoAttribution";
 import { formatAppearanceDate } from "../../../../lib/appearance-formatting";
 
 export function getStaticPaths() {
@@ -81,7 +81,7 @@ const observedStyles = observedStylesForAppearance(appearance.id);
             style={`object-position: ${photo.objectPosition}`}
           />
         </a>
-        <PhotoAttribution media={photo} density="default" />
+        <PhotoAttribution provenance={photo.provenance} density="default" />
         <figcaption class="mt-4 flex flex-wrap items-baseline justify-between gap-3 text-sm leading-6">
           <a
             class="focus-ring font-bold text-orange underline decoration-orange decoration-2 underline-offset-4"

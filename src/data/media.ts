@@ -13,6 +13,9 @@ import longLayeredCutBrunette from "../assets/hairstyles/long-layered-cut-brunet
 import patternedMohawkCurved from "../assets/hairstyles/patterned-mohawk-curved.png";
 import patternedMohawkGeometric from "../assets/hairstyles/patterned-mohawk-geometric.png";
 import shortFeatheredShagCopper from "../assets/hairstyles/short-feathered-shag-copper.png";
+import sleekLongCutBlonde from "../assets/hairstyles/sleek-long-cut-blonde.png";
+import sleekLongCutSilverGray from "../assets/hairstyles/sleek-long-cut-silver-gray.png";
+import sleekLongCutStraightBlack from "../assets/hairstyles/sleek-long-cut-straight-black.png";
 import taperCoily from "../assets/hairstyles/taper-coily.png";
 import taperWavy from "../assets/hairstyles/taper-wavy.png";
 import thinMohawkBlond from "../assets/hairstyles/thin-mohawk-blond.png";
@@ -158,6 +161,39 @@ export const hairstyleMedia: HairstyleMedia[] = [
       kind: "generated",
       provider: "OpenAI",
       promptKey: "short-feathered-shag-copper",
+      background: "transparent",
+    },
+  },
+  {
+    id: "sleek-long-cut-blonde",
+    src: sleekLongCutBlonde,
+    alt: "Fictional tanned white woman in her 40s with long sleek highlighted blonde hair and a full continuous perimeter.",
+    provenance: {
+      kind: "generated",
+      provider: "OpenAI",
+      promptKey: "sleek-long-cut-blonde",
+      background: "transparent",
+    },
+  },
+  {
+    id: "sleek-long-cut-silver-gray",
+    src: sleekLongCutSilverGray,
+    alt: "Fictional white woman in her 60s with long sleek center-parted silver-gray hair and a softly blunt perimeter.",
+    provenance: {
+      kind: "generated",
+      provider: "OpenAI",
+      promptKey: "sleek-long-cut-silver-gray",
+      background: "transparent",
+    },
+  },
+  {
+    id: "sleek-long-cut-straight-black",
+    src: sleekLongCutStraightBlack,
+    alt: "Fictional East Asian woman in her 30s with long sleek center-parted black hair and a dense straight perimeter.",
+    provenance: {
+      kind: "generated",
+      provider: "OpenAI",
+      promptKey: "sleek-long-cut-straight-black",
       background: "transparent",
     },
   },

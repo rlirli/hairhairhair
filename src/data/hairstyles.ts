@@ -109,6 +109,13 @@ export const sources: EditorialSource[] = [
     reviewedAt: "2026-09-20",
   },
   {
+    id: "british-vogue-70s-summer-haircuts",
+    title: "These ’70s Haircuts Have Become Summer’s Most Sought-After Styles",
+    url: "https://www.vogue.co.uk/article/70s-summer-haircuts",
+    publisher: "British Vogue",
+    reviewedAt: "2026-09-24",
+  },
+  {
     id: "cambridge-flattop",
     title: "flattop",
     url: "https://dictionary.cambridge.org/us/dictionary/english/flattop",
@@ -263,10 +270,31 @@ export const sources: EditorialSource[] = [
     reviewedAt: "2026-09-24",
   },
   {
+    id: "vogue-cher-hair-2014",
+    title: "Elizabeth Olsen's New Miu Miu Campaign: Why We Are Obsessed with Her 1970s Cher Hair",
+    url: "https://www.vogue.com/article/elizabeth-olsens-new-miu-miu-campaign-why-we-are-obsessed-with-her-1970s-cher-hair",
+    publisher: "Vogue",
+    reviewedAt: "2026-09-24",
+  },
+  {
     id: "vogue-emrata-bangs-2024",
     title: "EmRata's New Bangs Are What Dreams Are Made Of",
     url: "https://www.vogue.com/article/emratas-new-bangs-2024",
     publisher: "Vogue",
+    reviewedAt: "2026-09-24",
+  },
+  {
+    id: "vogue-germany-liquid-hair",
+    title: "Liquid Hair: So bekommen Sie ultraglänzendes Haar wie Kim Kardashian, Jennifer Lopez & Co.",
+    url: "https://www.vogue.de/beauty/artikel/liquid-hair-glaenzendes-haar-kim-kardashian-jennifer-lopez",
+    publisher: "Vogue Germany",
+    reviewedAt: "2026-09-24",
+  },
+  {
+    id: "vogue-india-volumising-haircuts-straight-hair",
+    title: "10 volumising haircuts to try for straight hair, according to experts",
+    url: "https://www.vogue.in/content/10-volumising-haircuts-to-try-for-straight-hair-according-to-experts",
+    publisher: "Vogue India",
     reviewedAt: "2026-09-24",
   },
   {
@@ -767,7 +795,7 @@ export const hairstyles: Hairstyle[] = [
       "Curtain fringe changes the front silhouette substantially and should be treated as an optional variation rather than a defining requirement of the long layered cut.",
     ],
     sourceIds: ["haircom-face-framing-layers", "haircom-layered-hair", "vogue-emrata-bangs-2024"],
-    relatedStyleIds: ["hairstyle-wolf-cut"],
+    relatedStyleIds: ["hairstyle-sleek-long-cut", "hairstyle-wolf-cut"],
     guidePublicationStatus: "published",
   },
   {
@@ -871,6 +899,67 @@ export const hairstyles: Hairstyle[] = [
     ],
     sourceIds: ["allure-shag-haircut-ideas", "haircom-feathered-hair", "haircom-short-haircuts-older-women"],
     relatedStyleIds: ["hairstyle-wolf-cut"],
+    guidePublicationStatus: "published",
+  },
+  {
+    id: "hairstyle-sleek-long-cut",
+    slug: "sleek-long-cut",
+    name: "Sleek long cut",
+    kind: "cut",
+    summary:
+      "A long, near-one-length cut with a dense clean perimeter and minimal visible layering, worn with a smooth straight finish that emphasizes length, shine, and an uninterrupted silhouette.",
+    intro: [
+      "The sleek long cut keeps the hair distinctly long and visually continuous from roots to ends, with little or no visible graduation through the lengths. Its strongest identifying feature is a substantial, clean perimeter rather than the movement and stepped graduation of a long layered cut.",
+      "Long, center-parted, poker-straight hair became an especially recognizable fashion image in the 1970s, with Cher's long straight black hair repeatedly cited as emblematic of the era. Contemporary versions retain that uninterrupted length but often push the finish toward greater smoothness and reflectivity.",
+      "The haircut and the finish should be discussed separately: the underlying cut can be maintained as a one-length or nearly one-length shape, while the sleek appearance depends on the hair's natural pattern, drying method, smoothing technique, condition, and desired level of shine.",
+    ],
+    variations: [
+      {
+        id: "sleek-long-cut-center-part",
+        name: "Center-part sleek long cut",
+        description:
+          "Keeps a central part and an uninterrupted long silhouette, emphasizing symmetry and the clean perimeter.",
+      },
+      {
+        id: "sleek-long-cut-liquid-finish",
+        name: "Liquid-finish sleek long cut",
+        description:
+          "Uses a highly smooth, glossy finish with more fluid movement through the long lengths rather than the stiffer polished effect associated with short glass-hair looks.",
+      },
+      {
+        id: "sleek-long-cut-soft-perimeter",
+        name: "Soft-perimeter sleek long cut",
+        description:
+          "Retains the one-length visual impression but lightly softens or point-cuts the ends so the perimeter is less severe while still reading as dense and continuous.",
+      },
+    ],
+    consultation: {
+      intro:
+        "Agree on retained length, perimeter density, how strictly one-length the shape should remain, parting, and the amount of daily smoothing required to achieve the intended finish.",
+      questions: [
+        "What finished length do you want to keep: chest, mid-back, waist, or longer?",
+        "Should the bottom edge read as sharply blunt or slightly softened while still looking one-length?",
+        "Do you want absolutely no visible layers, or only minimal invisible/internal weight removal?",
+        "Will you usually wear a center part, side part, or switch between both?",
+        "Do you want the sleek finish to follow your natural texture as closely as possible, or are you comfortable using blow-drying or heat-styling to make it straighter?",
+      ],
+      sampleRequest:
+        "“I want to keep the hair long and make it look sleek and dense, with a clean one-length perimeter and no visible face-framing or graduated layers. Keep the center part and soften the very ends only enough that the line does not look harsh.”",
+    },
+    considerations: [
+      "The dense perimeter is a defining part of the look. Removing too much weight or adding visible graduation can shift the result toward a long layered cut instead.",
+      "A sleek finish is not produced by the haircut alone. Natural pattern, humidity, hair condition, blow-drying, heat styling, and finishing products all affect how straight and reflective the surface appears.",
+      "Fine or lower-density hair can benefit visually from the strong one-length perimeter because the ends are not thinned by extensive layering.",
+      "Very dense hair may feel heavy in a strict one-length shape; discreet internal weight removal can improve manageability, but it should not create obvious surface layers if the sleek uninterrupted silhouette is the goal.",
+      "Frequent high-heat straightening can increase damage risk, so the desired finish and realistic maintenance routine should be discussed separately from the cut itself.",
+    ],
+    sourceIds: [
+      "british-vogue-70s-summer-haircuts",
+      "vogue-cher-hair-2014",
+      "vogue-germany-liquid-hair",
+      "vogue-india-volumising-haircuts-straight-hair",
+    ],
+    relatedStyleIds: ["hairstyle-long-layered-cut"],
     guidePublicationStatus: "published",
   },
   {
@@ -1128,6 +1217,39 @@ export function isPublishedGuide(hairstyle: Pick<Hairstyle, "guidePublicationSta
 export const publishedHairstyles = hairstyles.filter(isPublishedGuide);
 
 export const styleExamples: StyleExample[] = [
+  {
+    id: "sleek-long-cut-blonde",
+    hairstyleIds: ["hairstyle-sleek-long-cut"],
+    imageId: "sleek-long-cut-blonde",
+    title: "Sleek long cut on blonde straight hair",
+    caption:
+      "A fictional tanned white woman in her 40s wearing highlighted blonde hair in a smooth long cut with a strong continuous perimeter.",
+    patternDescription:
+      "Type 1B straight appearance: predominantly straight lengths with slightly more body than 1A while remaining sleek and smooth.",
+    lengthDescription: "Long, extending below the shoulders to the upper chest with a full nearly one-length edge.",
+  },
+  {
+    id: "sleek-long-cut-silver-gray",
+    hairstyleIds: ["hairstyle-sleek-long-cut"],
+    imageId: "sleek-long-cut-silver-gray",
+    title: "Sleek long cut on silver-gray hair",
+    caption:
+      "A fictional white woman in her 60s wearing long silver-gray hair in a smooth, center-parted, near-one-length cut.",
+    patternDescription:
+      "Type 1A straight appearance: smooth straight silver-gray lengths with minimal visible wave and a continuous surface.",
+    lengthDescription: "Long, falling below the shoulders with a dense softly blunted perimeter.",
+  },
+  {
+    id: "sleek-long-cut-straight-black",
+    hairstyleIds: ["hairstyle-sleek-long-cut"],
+    imageId: "sleek-long-cut-straight-black",
+    title: "Sleek long cut on straight black hair",
+    caption:
+      "A fictional East Asian woman in her 30s wearing a center-parted sleek long cut with a dense, nearly one-length perimeter.",
+    patternDescription:
+      "Type 1A straight appearance: very straight, smooth lengths with minimal visible bend and no visible layered graduation.",
+    lengthDescription: "Long, extending well below the shoulders toward the chest with a full straight perimeter.",
+  },
   {
     id: "style-example-blunt-bob-chin",
     hairstyleIds: ["hairstyle-blunt-bob"],

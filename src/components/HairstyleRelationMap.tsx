@@ -1,4 +1,4 @@
-import type { PointerEvent, WheelEvent } from "react";
+import type { PointerEvent } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import "../styles/hairstyle-relation-map.css";
 
@@ -83,8 +83,13 @@ function relax(nodes: PositionedStyle[], links: Array<[number, number]>, width: 
 export default function HairstyleRelationMap({ styles }: Props) {
   const canvasRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
+  const worldRef = useRef<SVGGElement>(null);
   const dragRef = useRef<{ index: number; pointerId: number } | null>(null);
   const panRef = useRef<{ pointerId: number; x: number; y: number; tx: number; ty: number } | null>(null);
+  const positionsRef = useRef<PositionedStyle[]>([]);
+  const pendingPositionsRef = useRef<PositionedStyle[] | null>(null);
+  const dragFrameRef = useRef<number | null>(null);
+  const viewportRef = useRef({ x: 0, y: 0, scale: 1 });
   const [dimensions, setDimensions] = useState({ width: 860, height: 630 });
   const [positions, setPositions] = useState<PositionedStyle[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
@@ -123,6 +128,29 @@ export default function HairstyleRelationMap({ styles }: Props) {
   }, []);
 
   useEffect(() => {
+    const svg = svgRef.current;
+    if (!svg) return;
+    const onWheel = (event: WheelEvent) => {
+      event.preventDefault();
+      event.stopPropagation();
+      const rect = svg.getBoundingClientRect();
+      const px = ((event.clientX - rect.left) * dimensions.width) / rect.width;
+      const py = ((event.clientY - rect.top) * dimensions.height) / rect.height;
+      const current = viewportRef.current;
+      const scale = Math.max(0.65, Math.min(2, current.scale * (event.deltaY < 0 ? 1.08 : 0.92)));
+      viewportRef.current = {
+        scale,
+        x: px - ((px - current.x) * scale) / current.scale,
+        y: py - ((py - current.y) * scale) / current.scale,
+      };
+      paintViewport(viewportRef.current);
+      setViewport(viewportRef.current);
+    };
+    svg.addEventListener("wheel", onWheel, { passive: false });
+    return () => svg.removeEventListener("wheel", onWheel);
+  }, [dimensions.height, dimensions.width]);
+
+  useEffect(() => {
     const columns = Math.ceil(Math.sqrt((styles.length * dimensions.width) / dimensions.height));
     const rows = Math.ceil(styles.length / columns);
     const gapX = dimensions.width / (columns + 1),
@@ -134,7 +162,9 @@ export default function HairstyleRelationMap({ styles }: Props) {
       vx: 0,
       vy: 0,
     }));
-    setPositions(relax(start, links, dimensions.width, dimensions.height));
+    const next = relax(start, links, dimensions.width, dimensions.height);
+    positionsRef.current = next;
+    setPositions(next);
   }, [dimensions, links, styles]);
 
   const selected = styles.find((style) => style.id === selectedId);
@@ -158,61 +188,86 @@ export default function HairstyleRelationMap({ styles }: Props) {
     if (dragRef.current?.pointerId === event.pointerId) {
       const { index } = dragRef.current;
       const position = point(event);
-      setPositions((current) =>
-        current.map((node, i) => (i === index ? { ...node, ...position, vx: 0, vy: 0 } : node)),
+      positionsRef.current = positionsRef.current.map((node, i) =>
+        i === index ? { ...node, ...position, vx: 0, vy: 0 } : node,
       );
+      pendingPositionsRef.current = positionsRef.current;
+      if (dragFrameRef.current === null) {
+        dragFrameRef.current = requestAnimationFrame(() => {
+          if (pendingPositionsRef.current) paintPositions(pendingPositionsRef.current);
+          pendingPositionsRef.current = null;
+          dragFrameRef.current = null;
+        });
+      }
     } else if (panRef.current?.pointerId === event.pointerId) {
       const pan = panRef.current;
-      setViewport((current) => ({ ...current, x: pan.tx + event.clientX - pan.x, y: pan.ty + event.clientY - pan.y }));
+      viewportRef.current = {
+        ...viewportRef.current,
+        x: pan.tx + event.clientX - pan.x,
+        y: pan.ty + event.clientY - pan.y,
+      };
+      paintViewport(viewportRef.current);
     }
   }
 
   function onPointerUp(event: PointerEvent<SVGSVGElement>) {
     if (dragRef.current?.pointerId === event.pointerId) {
       dragRef.current = null;
-      setPositions((current) => relax(current, links, dimensions.width, dimensions.height, 170));
+      if (dragFrameRef.current !== null) cancelAnimationFrame(dragFrameRef.current);
+      dragFrameRef.current = null;
+      pendingPositionsRef.current = null;
+      const next = relax(positionsRef.current, links, dimensions.width, dimensions.height, 170);
+      positionsRef.current = next;
+      setPositions(next);
     }
-    if (panRef.current?.pointerId === event.pointerId) panRef.current = null;
+    if (panRef.current?.pointerId === event.pointerId) {
+      panRef.current = null;
+      setViewport(viewportRef.current);
+    }
   }
 
-  function onWheel(event: WheelEvent<SVGSVGElement>) {
-    event.preventDefault();
-    const rect = svgRef.current!.getBoundingClientRect();
-    const px = ((event.clientX - rect.left) * dimensions.width) / rect.width;
-    const py = ((event.clientY - rect.top) * dimensions.height) / rect.height;
-    setViewport((current) => {
-      const scale = Math.max(0.65, Math.min(2, current.scale * (event.deltaY < 0 ? 1.08 : 0.92)));
-      return {
-        scale,
-        x: px - ((px - current.x) * scale) / current.scale,
-        y: py - ((py - current.y) * scale) / current.scale,
-      };
+  function paintPositions(next: PositionedStyle[]) {
+    const nodeElements = svgRef.current?.querySelectorAll<SVGGElement>(".relation-node");
+    const edgeElements = svgRef.current?.querySelectorAll<SVGLineElement>(".relation-edge");
+    next.forEach((node, index) => nodeElements?.[index]?.setAttribute("transform", `translate(${node.x} ${node.y})`));
+    links.forEach(([source, target], index) => {
+      const edge = edgeElements?.[index];
+      if (!edge) return;
+      edge.setAttribute("x1", String(next[source].x));
+      edge.setAttribute("y1", String(next[source].y));
+      edge.setAttribute("x2", String(next[target].x));
+      edge.setAttribute("y2", String(next[target].y));
     });
+  }
+
+  function paintViewport(next: { x: number; y: number; scale: number }) {
+    worldRef.current?.setAttribute("transform", `translate(${next.x} ${next.y}) scale(${next.scale})`);
   }
 
   function reset() {
     setSelectedId(null);
     setQuery("");
     setConnectedOnly(false);
-    setViewport({ x: 0, y: 0, scale: 1 });
+    viewportRef.current = { x: 0, y: 0, scale: 1 };
+    setViewport(viewportRef.current);
     const columns = Math.ceil(Math.sqrt((styles.length * dimensions.width) / dimensions.height));
     const rows = Math.ceil(styles.length / columns);
     const gapX = dimensions.width / (columns + 1),
       gapY = dimensions.height / (rows + 1);
-    setPositions(
-      relax(
-        styles.map((style, index) => ({
-          ...style,
-          x: gapX * ((index % columns) + 1),
-          y: gapY * (Math.floor(index / columns) + 1),
-          vx: 0,
-          vy: 0,
-        })),
-        links,
-        dimensions.width,
-        dimensions.height,
-      ),
+    const next = relax(
+      styles.map((style, index) => ({
+        ...style,
+        x: gapX * ((index % columns) + 1),
+        y: gapY * (Math.floor(index / columns) + 1),
+        vx: 0,
+        vy: 0,
+      })),
+      links,
+      dimensions.width,
+      dimensions.height,
     );
+    positionsRef.current = next;
+    setPositions(next);
   }
 
   return (
@@ -255,12 +310,11 @@ export default function HairstyleRelationMap({ styles }: Props) {
             onPointerMove={onPointerMove}
             onPointerUp={onPointerUp}
             onPointerCancel={onPointerUp}
-            onWheel={onWheel}
             ref={svgRef}
             role="group"
             viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
           >
-            <g transform={`translate(${viewport.x} ${viewport.y}) scale(${viewport.scale})`}>
+            <g ref={worldRef} transform={`translate(${viewport.x} ${viewport.y}) scale(${viewport.scale})`}>
               <defs>
                 {styles.map((style) => (
                   <clipPath clipPathUnits="userSpaceOnUse" id={`${style.id}-map-clip`} key={`${style.id}-map-clip`}>

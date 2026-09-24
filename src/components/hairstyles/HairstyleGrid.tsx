@@ -12,7 +12,6 @@ export default function HairstyleGrid({ items, size, className, horizontalScroll
   return (
     <ul
       className={cn(className)}
-      role={horizontalScroll ? "region" : undefined}
       aria-label={horizontalScroll ? "Related hairstyle previews" : undefined}
       tabIndex={horizontalScroll ? 0 : undefined}
     >

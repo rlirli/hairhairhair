@@ -1,4 +1,6 @@
-import type { PointerEvent } from "react";
+import { drag } from "d3-drag";
+import { select } from "d3-selection";
+import { zoom, zoomIdentity, type ZoomBehavior } from "d3-zoom";
 import { useEffect, useMemo, useRef, useState } from "react";
 import "../styles/hairstyle-relation-map.css";
 
@@ -23,6 +25,10 @@ interface PositionedStyle extends RelationMapStyle {
   y: number;
   vx: number;
   vy: number;
+}
+
+interface DragSubject extends PositionedStyle {
+  index: number;
 }
 
 const nodeRadius = 36;
@@ -84,25 +90,12 @@ export default function HairstyleRelationMap({ styles }: Props) {
   const canvasRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const worldRef = useRef<SVGGElement>(null);
-  const dragRef = useRef<{
-    index: number;
-    pointerId: number;
-    startX: number;
-    startY: number;
-    moved: boolean;
-  } | null>(null);
-  const suppressNodeClickRef = useRef<string | null>(null);
-  const panRef = useRef<{ pointerId: number; x: number; y: number; tx: number; ty: number } | null>(null);
   const positionsRef = useRef<PositionedStyle[]>([]);
-  const pendingPositionsRef = useRef<PositionedStyle[] | null>(null);
-  const dragFrameRef = useRef<number | null>(null);
-  const viewportRef = useRef({ x: 0, y: 0, scale: 1 });
+  const zoomBehaviorRef = useRef<ZoomBehavior<SVGSVGElement, unknown> | null>(null);
   const [dimensions, setDimensions] = useState({ width: 860, height: 630 });
   const [positions, setPositions] = useState<PositionedStyle[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [query, setQuery] = useState("");
-  const [connectedOnly, setConnectedOnly] = useState(false);
-  const [viewport, setViewport] = useState({ x: 0, y: 0, scale: 1 });
 
   const idToIndex = useMemo(() => new Map(styles.map((style, index) => [style.id, index])), [styles]);
   const links = useMemo(() => {
@@ -136,26 +129,31 @@ export default function HairstyleRelationMap({ styles }: Props) {
 
   useEffect(() => {
     const svg = svgRef.current;
-    if (!svg) return;
-    const onWheel = (event: WheelEvent) => {
-      event.preventDefault();
-      event.stopPropagation();
-      const rect = svg.getBoundingClientRect();
-      const px = ((event.clientX - rect.left) * dimensions.width) / rect.width;
-      const py = ((event.clientY - rect.top) * dimensions.height) / rect.height;
-      const current = viewportRef.current;
-      const scale = Math.max(0.65, Math.min(2, current.scale * (event.deltaY < 0 ? 1.08 : 0.92)));
-      viewportRef.current = {
-        scale,
-        x: px - ((px - current.x) * scale) / current.scale,
-        y: py - ((py - current.y) * scale) / current.scale,
-      };
-      paintViewport(viewportRef.current);
-      setViewport(viewportRef.current);
+    const world = worldRef.current;
+    if (!svg || !world) return;
+
+    const behavior = zoom<SVGSVGElement, unknown>()
+      .scaleExtent([0.65, 2])
+      .filter((event) => {
+        if (event.type === "mousedown") {
+          return !event.button && !(event.target as Element).closest(".relation-node");
+        }
+        return !event.ctrlKey || event.type === "wheel";
+      })
+      .on("zoom", (event) => {
+        world.setAttribute("transform", event.transform.toString());
+      });
+
+    zoomBehaviorRef.current = behavior;
+    const selection = select(svg);
+    selection.call(behavior);
+    selection.on("dblclick.zoom", null);
+
+    return () => {
+      selection.on(".zoom", null);
+      zoomBehaviorRef.current = null;
     };
-    svg.addEventListener("wheel", onWheel, { passive: false });
-    return () => svg.removeEventListener("wheel", onWheel);
-  }, [dimensions.height, dimensions.width]);
+  }, []);
 
   useEffect(() => {
     const columns = Math.ceil(Math.sqrt((styles.length * dimensions.width) / dimensions.height));
@@ -174,74 +172,56 @@ export default function HairstyleRelationMap({ styles }: Props) {
     setPositions(next);
   }, [dimensions, links, styles]);
 
+  useEffect(() => {
+    const world = worldRef.current;
+    if (!world || !positions.length) return;
+
+    let startPoint: { x: number; y: number } | null = null;
+    let moved = false;
+    const behavior = drag<SVGGElement, number, DragSubject>()
+      .container(() => world)
+      .filter((event) => event.type === "mousedown" && !event.button)
+      .subject((_event, index) => {
+        return { ...positionsRef.current[index]!, index };
+      })
+      .clickDistance(3)
+      .on("start", (event) => {
+        startPoint = { x: event.x, y: event.y };
+        moved = false;
+      })
+      .on("drag", (event) => {
+        if (!startPoint) return;
+        if (!moved && Math.hypot(event.x - startPoint.x, event.y - startPoint.y) < 3) return;
+        moved = true;
+        const next = positionsRef.current.map((node, index) =>
+          index === event.subject.index ? { ...node, x: event.x, y: event.y, vx: 0, vy: 0 } : node,
+        );
+        positionsRef.current = next;
+        paintPositions(next);
+      })
+      .on("end", (event) => {
+        startPoint = null;
+        if (!moved) return;
+        setSelectedId(event.subject.id);
+        const next = relax(positionsRef.current, links, dimensions.width, dimensions.height, 170);
+        positionsRef.current = next;
+        setPositions(next);
+      });
+
+    const selection = select(world)
+      .selectAll<SVGGElement, number>(".relation-node")
+      .data(positions.map((_, i) => i));
+    selection.call(behavior);
+    return () => {
+      selection.on(".drag", null);
+    };
+  }, [dimensions, links, positions]);
+
   const selected = styles.find((style) => style.id === selectedId);
   const related = selected?.relatedStyleIds.map((id) => styles[idToIndex.get(id) ?? -1]).filter(Boolean) ?? [];
   const queryMatch = (style: RelationMapStyle) =>
     !query || style.name.toLowerCase().includes(query.trim().toLowerCase());
-  const hasConnection = (style: RelationMapStyle) => style.relatedStyleIds.some((id) => idToIndex.has(id));
-  const isShown = (style: RelationMapStyle) => queryMatch(style) && (!connectedOnly || hasConnection(style));
-
-  function point(event: PointerEvent<SVGElement>) {
-    const rect = svgRef.current!.getBoundingClientRect();
-    const scaleX = dimensions.width / rect.width,
-      scaleY = dimensions.height / rect.height;
-    return {
-      x: ((event.clientX - rect.left) * scaleX - viewport.x) / viewport.scale,
-      y: ((event.clientY - rect.top) * scaleY - viewport.y) / viewport.scale,
-    };
-  }
-
-  function onPointerMove(event: PointerEvent<SVGSVGElement>) {
-    if (dragRef.current?.pointerId === event.pointerId) {
-      const drag = dragRef.current;
-      const { index } = drag;
-      if (!drag.moved) {
-        if (Math.hypot(event.clientX - drag.startX, event.clientY - drag.startY) < 3) return;
-        drag.moved = true;
-        setSelectedId(positionsRef.current[index]?.id ?? null);
-        suppressNodeClickRef.current = positionsRef.current[index]?.id ?? null;
-      }
-      const position = point(event);
-      positionsRef.current = positionsRef.current.map((node, i) =>
-        i === index ? { ...node, ...position, vx: 0, vy: 0 } : node,
-      );
-      pendingPositionsRef.current = positionsRef.current;
-      if (dragFrameRef.current === null) {
-        dragFrameRef.current = requestAnimationFrame(() => {
-          if (pendingPositionsRef.current) paintPositions(pendingPositionsRef.current);
-          pendingPositionsRef.current = null;
-          dragFrameRef.current = null;
-        });
-      }
-    } else if (panRef.current?.pointerId === event.pointerId) {
-      const pan = panRef.current;
-      viewportRef.current = {
-        ...viewportRef.current,
-        x: pan.tx + event.clientX - pan.x,
-        y: pan.ty + event.clientY - pan.y,
-      };
-      paintViewport(viewportRef.current);
-    }
-  }
-
-  function onPointerUp(event: PointerEvent<SVGSVGElement>) {
-    if (dragRef.current?.pointerId === event.pointerId) {
-      const drag = dragRef.current;
-      dragRef.current = null;
-      if (dragFrameRef.current !== null) cancelAnimationFrame(dragFrameRef.current);
-      dragFrameRef.current = null;
-      pendingPositionsRef.current = null;
-      if (drag.moved) {
-        const next = relax(positionsRef.current, links, dimensions.width, dimensions.height, 170);
-        positionsRef.current = next;
-        setPositions(next);
-      }
-    }
-    if (panRef.current?.pointerId === event.pointerId) {
-      panRef.current = null;
-      setViewport(viewportRef.current);
-    }
-  }
+  const isShown = (style: RelationMapStyle) => queryMatch(style);
 
   function paintPositions(next: PositionedStyle[]) {
     const nodeElements = svgRef.current?.querySelectorAll<SVGGElement>(".relation-node");
@@ -257,16 +237,12 @@ export default function HairstyleRelationMap({ styles }: Props) {
     });
   }
 
-  function paintViewport(next: { x: number; y: number; scale: number }) {
-    worldRef.current?.setAttribute("transform", `translate(${next.x} ${next.y}) scale(${next.scale})`);
-  }
-
   function reset() {
     setSelectedId(null);
     setQuery("");
-    setConnectedOnly(false);
-    viewportRef.current = { x: 0, y: 0, scale: 1 };
-    setViewport(viewportRef.current);
+    if (svgRef.current && zoomBehaviorRef.current) {
+      select(svgRef.current).call(zoomBehaviorRef.current.transform, zoomIdentity);
+    }
     const columns = Math.ceil(Math.sqrt((styles.length * dimensions.width) / dimensions.height));
     const rows = Math.ceil(styles.length / columns);
     const gapX = dimensions.width / (columns + 1),
@@ -299,10 +275,6 @@ export default function HairstyleRelationMap({ styles }: Props) {
             type="search"
           />
         </label>
-        <label className="relation-filter">
-          <input checked={connectedOnly} onChange={(event) => setConnectedOnly(event.target.checked)} type="checkbox" />
-          <span>Connected styles</span>
-        </label>
       </div>
 
       <div className="relation-layout">
@@ -313,25 +285,11 @@ export default function HairstyleRelationMap({ styles }: Props) {
             onClick={(event) => {
               if (!(event.target as Element).closest(".relation-node")) setSelectedId(null);
             }}
-            onPointerDown={(event) => {
-              if ((event.target as Element).closest(".relation-node")) return;
-              panRef.current = {
-                pointerId: event.pointerId,
-                x: event.clientX,
-                y: event.clientY,
-                tx: viewport.x,
-                ty: viewport.y,
-              };
-              event.currentTarget.setPointerCapture(event.pointerId);
-            }}
-            onPointerMove={onPointerMove}
-            onPointerUp={onPointerUp}
-            onPointerCancel={onPointerUp}
             ref={svgRef}
             role="group"
             viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
           >
-            <g ref={worldRef} transform={`translate(${viewport.x} ${viewport.y}) scale(${viewport.scale})`}>
+            <g ref={worldRef}>
               <defs>
                 {styles.map((style) => (
                   <clipPath clipPathUnits="userSpaceOnUse" id={`${style.id}-map-clip`} key={`${style.id}-map-clip`}>
@@ -351,14 +309,13 @@ export default function HairstyleRelationMap({ styles }: Props) {
                   />
                 ))}
               </g>
-              {positions.map((style, index) => (
+              {positions.map((style) => (
                 <g
                   aria-label={style.name}
                   aria-pressed={selectedId === style.id}
                   className={[
                     "relation-node",
                     selectedId === style.id && "is-selected",
-                    connectedOnly && !hasConnection(style) && "is-hidden",
                     (!queryMatch(style) ||
                       (selectedId !== null &&
                         selectedId !== style.id &&
@@ -368,31 +325,12 @@ export default function HairstyleRelationMap({ styles }: Props) {
                     .filter(Boolean)
                     .join(" ")}
                   key={style.id}
-                  onClick={() => {
-                    if (suppressNodeClickRef.current === style.id) {
-                      suppressNodeClickRef.current = null;
-                      return;
-                    }
-                    setSelectedId((current) => (current === style.id ? null : style.id));
-                  }}
+                  onClick={() => setSelectedId((current) => (current === style.id ? null : style.id))}
                   onKeyDown={(event) => {
                     if (event.key === "Enter" || event.key === " ") {
                       event.preventDefault();
                       setSelectedId((current) => (current === style.id ? null : style.id));
                     }
-                  }}
-                  onPointerDown={(event) => {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    suppressNodeClickRef.current = null;
-                    dragRef.current = {
-                      index,
-                      pointerId: event.pointerId,
-                      startX: event.clientX,
-                      startY: event.clientY,
-                      moved: false,
-                    };
-                    event.currentTarget.setPointerCapture(event.pointerId);
                   }}
                   role="button"
                   tabIndex={0}
@@ -438,11 +376,7 @@ export default function HairstyleRelationMap({ styles }: Props) {
           {selected ? (
             <>
               <div className="relation-detail-main">
-                <img
-                  alt={selected.imageAlt}
-                  className={`relation-detail-image${selected.transparentBackground ? "is-transparent" : ""}`}
-                  src={selected.imageSrc}
-                />
+                <img alt={selected.imageAlt} className="relation-detail-image" src={selected.imageSrc} />
                 <div className="relation-detail-copy">
                   <p className="relation-kind">{selected.kindLabel}</p>
                   <h2>{selected.name}</h2>

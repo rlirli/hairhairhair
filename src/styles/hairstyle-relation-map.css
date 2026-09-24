@@ -27,33 +27,9 @@
   opacity: 1;
 }
 .relation-search input:focus-visible,
-.relation-reset:focus-visible,
-.relation-filter input:focus-visible {
+.relation-reset:focus-visible {
   outline: 3px solid #e85d2a;
   outline-offset: 3px;
-}
-.relation-filter {
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-  color: var(--color-muted);
-  font-size: 0.875rem;
-  cursor: pointer;
-}
-.relation-filter input {
-  appearance: none;
-  box-sizing: border-box;
-  flex: none;
-  width: 2.65rem;
-  height: 2.65rem;
-  margin: 0;
-  border: 1.5px solid var(--relation-line);
-  border-radius: 50%;
-  background: transparent;
-  cursor: pointer;
-}
-.relation-filter input:checked {
-  background: radial-gradient(circle, var(--color-orange) 0 27%, transparent 30%);
 }
 .relation-reset {
   margin-left: auto;
@@ -85,12 +61,16 @@
   height: var(--relation-canvas-height);
   overflow: hidden;
   overscroll-behavior: contain;
+  user-select: none;
+  -webkit-user-select: none;
 }
 .relation-svg {
   display: block;
   width: 100%;
   height: 100%;
   touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
 .relation-edge {
   stroke: var(--color-orange);
@@ -111,14 +91,10 @@
 .relation-node.is-dimmed {
   opacity: 0.18;
 }
-.relation-node.is-hidden {
-  display: none;
-}
 .relation-image-backdrop {
   fill: var(--color-hairstyle-image-bg);
 }
-.relation-image-backdrop.is-transparent,
-.relation-detail-image.is-transparent {
+.relation-image-backdrop.is-transparent {
   background-color: var(--color-hairstyle-image-bg);
 }
 .relation-node image {
@@ -197,6 +173,7 @@
   width: 100%;
   aspect-ratio: 1;
   border-radius: 50%;
+  clip-path: circle(50%);
   object-fit: cover;
   background: var(--color-hairstyle-image-bg);
 }

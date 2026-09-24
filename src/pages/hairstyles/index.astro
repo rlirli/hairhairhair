@@ -60,22 +60,24 @@ const filterGroups: FilterGroup[] = [
       <DirectoryFilters
         client:load
         groups={filterGroups}
-        cardSelector="[data-hairstyle-card]"
-        dataAttributes={{ kind: "hairstyleKind", "hair-type": "hairstyleHairTypes" }}
-        resultsSelector="[data-hairstyle-results]"
-        emptySelector="[data-hairstyle-empty]"
         itemLabel="hairstyle"
         pluralItemLabel="hairstyles"
       />
     </div>
-    <p class="sr-only" data-hairstyle-results role="status" aria-live="polite"></p>
-    <div class="mt-6 grid gap-x-3 sm:gap-x-3.5 gap-y-5 grid-cols-2 md:grid-cols-3 lg:grid-cols-4" data-hairstyle-grid>
+    <p class="sr-only" data-directory-results role="status" aria-live="polite"></p>
+    <ul class="mt-6 grid list-none gap-x-3 gap-y-5 grid-cols-2 sm:gap-x-3.5 md:grid-cols-3 lg:grid-cols-4" data-hairstyle-grid>
       {publishedHairstyles.map((style) => (
-        <HairstyleCard style={style} filterable compatibleHairTypeIds={hairTypeIdsForStyle(style.id)} />
+        <li
+          data-directory-item
+          data-filter-kind={style.kind}
+          data-filter-hair-type={hairTypeIdsForStyle(style.id).join(",")}
+        >
+          <HairstyleCard style={style} />
+        </li>
       ))}
-      <p class="col-span-full mt-4 hidden text-sm text-ink/60" data-hairstyle-empty>
-        No hairstyles match these filters.
-      </p>
-    </div>
+    </ul>
+    <p class="mt-4 hidden text-sm text-ink/60" data-directory-empty>
+      No hairstyles match these filters.
+    </p>
   </section>
 </Layout>

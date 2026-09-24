@@ -67,25 +67,28 @@ const filterGroups: FilterGroup[] = [
       <DirectoryFilters
         client:load
         groups={filterGroups}
-        cardSelector="[data-person-card]"
-        dataAttributes={{ hair: "profileHair", color: "profileColor", skin: "profileSkin" }}
-        resultsSelector="[data-profile-results]"
-        emptySelector="[data-profile-empty]"
         itemLabel="celebrity"
         pluralItemLabel="celebrities"
       />
     </div>
-    <p class="sr-only" data-profile-results role="status" aria-live="polite"></p>
-    <div
-      class="mt-6 grid gap-x-3 sm:gap-x-3.5 gap-y-5 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6"
+    <p class="sr-only" data-directory-results role="status" aria-live="polite"></p>
+    <ul
+      class="mt-6 grid list-none gap-x-3 gap-y-5 grid-cols-2 sm:gap-x-3.5 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6"
       data-people-grid
     >
       {peopleCards.map((person) => (
-        <PersonDirectoryCard client:load person={person} />
+        <li
+          data-directory-item
+          data-filter-hair={person.profileValues.hair.join(",")}
+          data-filter-color={person.profileValues.color}
+          data-filter-skin={person.profileValues.skin}
+        >
+          <PersonDirectoryCard client:load person={person} />
+        </li>
       ))}
-      <p class="col-span-full mt-4 hidden text-sm text-ink/60" data-profile-empty>
-        No celebrities match these filters.
-      </p>
-    </div>
+    </ul>
+    <p class="mt-4 hidden text-sm text-ink/60" data-directory-empty>
+      No celebrities match these filters.
+    </p>
   </section>
 </Layout>

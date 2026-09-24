@@ -14,10 +14,6 @@ export default function PersonDirectoryCard({
         <a
           href={person.href}
           className="focus-ring group block min-w-0"
-          data-person-card
-          data-profile-hair={person.profileValues.hair.join(",")}
-          data-profile-color={person.profileValues.color}
-          data-profile-skin={person.profileValues.skin}
         >
           {person.imageSrc ? (
             <img

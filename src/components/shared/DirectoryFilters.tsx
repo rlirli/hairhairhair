@@ -24,10 +24,6 @@ export interface FilterGroup {
 
 interface Props {
   groups: FilterGroup[];
-  cardSelector: string;
-  dataAttributes: Record<string, string>;
-  resultsSelector: string;
-  emptySelector: string;
   itemLabel: string;
   pluralItemLabel: string;
 }
@@ -37,10 +33,6 @@ const toHierarchy = (group: FilterGroup): HierarchicalOption[] =>
 
 export default function DirectoryFilters({
   groups,
-  cardSelector,
-  dataAttributes,
-  resultsSelector,
-  emptySelector,
   itemLabel,
   pluralItemLabel,
 }: Props) {
@@ -48,27 +40,26 @@ export default function DirectoryFilters({
   const [openGroup, setOpenGroup] = React.useState<string | null>(null);
 
   React.useEffect(() => {
-    const cards = [...document.querySelectorAll<HTMLElement>(cardSelector)];
-    const status = document.querySelector<HTMLElement>(resultsSelector);
-    const empty = document.querySelector<HTMLElement>(emptySelector);
+    const items = [...document.querySelectorAll<HTMLElement>("[data-directory-item]")];
+    const status = document.querySelector<HTMLElement>("[data-directory-results]");
+    const empty = document.querySelector<HTMLElement>("[data-directory-empty]");
     const groupsByFilter = Object.fromEntries(groups.map((group) => [group.key, toHierarchy(group)]));
     let visible = 0;
 
-    for (const card of cards) {
+    for (const item of items) {
       const values = Object.fromEntries(
         groups.map((group) => {
-          const attribute = dataAttributes[group.key];
-          return [group.key, (attribute ? (card.dataset[attribute] ?? "") : "").split(",").filter(Boolean)];
+          return [group.key, (item.getAttribute(`data-filter-${group.key}`) ?? "").split(",").filter(Boolean)];
         }),
       );
       const matches = matchesFilters(values, selections, groupsByFilter);
-      card.classList.toggle("hidden", !matches);
+      item.classList.toggle("hidden", !matches);
       if (matches) visible += 1;
     }
 
     if (status) status.textContent = `${visible} ${visible === 1 ? itemLabel : pluralItemLabel} shown`;
     if (empty) empty.classList.toggle("hidden", visible !== 0);
-  }, [cardSelector, dataAttributes, emptySelector, groups, itemLabel, resultsSelector, selections]);
+  }, [groups, itemLabel, pluralItemLabel, selections]);
 
   const updateOption = (key: string, id: string) => {
     setSelections((current) => ({ ...current, [key]: toggleOption(current[key] ?? new Set(), id) }));

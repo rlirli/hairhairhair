@@ -1,17 +1,5 @@
+import type { PersonDirectoryCardItem } from "../../data/person-directory";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/hover-card";
-
-export interface PersonDirectoryCardItem {
-  href: string;
-  name: string;
-  subtitle?: string;
-  imageSrc?: string;
-  imageSrcSet?: string;
-  imageSizes?: string;
-  imageAlt?: string;
-  profileValues: { hair: string[]; color: string; skin: string };
-  description: string;
-  profileRows: { label: string; value: string; href?: string }[];
-}
 
 export default function PersonDirectoryCard({
   person,

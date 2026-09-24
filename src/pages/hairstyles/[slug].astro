@@ -13,6 +13,7 @@ import { buildPersonMedia } from "../../data/people-media";
 import { personPhotographs } from "../../data/people";
 import HairstyleAppearanceGrid from "../../components/appearances/HairstyleAppearanceGrid.astro";
 import HairstyleFactSheet from "../../components/hairstyles/HairstyleFactSheet.astro";
+import CollectionHeader from "../../components/shared/CollectionHeader.astro";
 
 export function getStaticPaths() {
   return publishedHairstyles.map((style) => ({ params: { slug: style.slug }, props: { style } }));
@@ -81,15 +82,11 @@ const ogImage = heroMedia
       </div>
     </div>
     <section class="mt-16 pt-10">
-      <div class="flex items-baseline justify-between gap-4 border-b border-taupe pb-3 sm:pb-2">
-        <h2 class="text-xs font-black uppercase tracking-[.18em] text-orange">Examples</h2>
-        <a
-          class="focus-ring text-xs font-normal uppercase tracking-[.12em] text-muted transition hover:text-ink"
-          href={`/hairstyles/${style.slug}/examples/`}
-        >
-          More
-        </a>
-      </div>
+      <CollectionHeader
+        title="Examples"
+        href={`/hairstyles/${style.slug}/examples/`}
+        headingClass="text-xs font-black uppercase tracking-[.18em] text-orange"
+      />
       <div class="mt-2.5 sm:mt-4 grid gap-4 sm:grid-cols-2">
         {examples.slice(0, 4).map((example, index) => (
           <StyleExampleCard example={example} styleSlug={style.slug} eager={index === 0} />
@@ -98,15 +95,11 @@ const ogImage = heroMedia
     </section>
     {documentedAppearances.length > 0 && (
       <section class="mt-16 pt-8">
-        <div class="flex items-baseline justify-between gap-4 border-b border-taupe pb-3 sm:pb-2">
-          <h2 class="text-xs font-black uppercase tracking-[.18em] text-orange">Worn by celebs</h2>
-          <a
-            class="focus-ring text-xs font-normal uppercase tracking-[.12em] text-muted transition hover:text-ink"
-            href={`/hairstyles/${style.slug}/appearances/`}
-          >
-            More
-          </a>
-        </div>
+        <CollectionHeader
+          title="Worn by celebs"
+          href={`/hairstyles/${style.slug}/appearances/`}
+          headingClass="text-xs font-black uppercase tracking-[.18em] text-orange"
+        />
         <div class="mt-2.5 sm:mt-4">
           <HairstyleAppearanceGrid appearances={documentedAppearances.slice(0, 6)} layout="row" />
         </div>
@@ -154,15 +147,11 @@ const ogImage = heroMedia
     </section>
     {related.length > 0 && (
       <section class="mt-16 pt-8">
-        <div class="flex items-baseline justify-between gap-4 border-b border-taupe pb-3 sm:pb-2">
-          <h2 class="text-xs font-black uppercase tracking-[.18em] text-orange">Related Hairstyles</h2>
-          <a
-            class="focus-ring text-xs font-normal uppercase tracking-[.12em] text-muted transition hover:text-ink"
-            href={`/hairstyles/${style.slug}/related-hairstyles/`}
-          >
-            More
-          </a>
-        </div>
+        <CollectionHeader
+          title="Related Hairstyles"
+          href={`/hairstyles/${style.slug}/related-hairstyles/`}
+          headingClass="text-xs font-black uppercase tracking-[.18em] text-orange"
+        />
         <HairstyleGridData
           styles={related.slice(0, 6)}
           size="small"

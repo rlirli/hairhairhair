@@ -2,8 +2,9 @@
 import Layout from "../../components/shared/Layout.astro";
 import Pattern from "../../components/hair-types/Pattern.astro";
 import HairstyleGridData from "../../components/hairstyles/HairstyleGridData.astro";
-import HairTypeCelebrityPreview from "../../components/people/HairTypeCelebrityPreview.astro";
+import CelebrityGrid from "../../components/people/CelebrityGrid.astro";
 import HairTypeNavigator from "../../components/hair-types/HairTypeNavigator.astro";
+import CollectionHeader from "../../components/shared/CollectionHeader.astro";
 import { hairSubtypes, hairTypes } from "../../data/hair-types";
 import { peopleForHairTypeSlug, stylesForHairTypeSlug } from "../../data/hair-type-discovery";
 
@@ -86,15 +87,12 @@ const label =
   </article>
 
   <section class="mx-auto max-w-7xl px-5 pb-14 sm:px-8" aria-label={`Hairstyles for ${label}`}>
-    <div class="flex items-center justify-between gap-4 border-b border-taupe pb-3 sm:pb-2">
-      <h2 class="text-xs font-black uppercase tracking-[.16em] text-orange">Hairstyles for this type</h2>
-      <a
-        class="focus-ring text-xs font-normal uppercase tracking-[.16em] text-muted transition hover:text-ink"
-        href={`/hair-types/${selected.slug}/hairstyles/`}
-      >
-        More
-      </a>
-    </div>
+    <CollectionHeader
+      title="Hairstyles for this type"
+      href={`/hair-types/${selected.slug}/hairstyles/`}
+      containerClass="items-center gap-4"
+      linkClass="focus-ring text-xs font-normal uppercase tracking-[.16em] text-muted transition hover:text-ink"
+    />
     <HairstyleGridData
       styles={styles}
       hairTypeId={kind === "hairType" ? hairType.id : undefined}
@@ -102,6 +100,13 @@ const label =
     />
   </section>
   {previewPeople.length > 0 && (
-    <HairTypeCelebrityPreview moreHref={`/hair-types/${selected.slug}/people/`} people={previewPeople} />
+    <section
+      class="mx-auto max-w-7xl px-5 pb-16 sm:px-8"
+      aria-label="People with this natural hair type"
+      data-testid="hair-type-celebrity-preview"
+    >
+      <CollectionHeader title="Celebs with this hair type" href={`/hair-types/${selected.slug}/people/`} />
+      <CelebrityGrid people={previewPeople} />
+    </section>
   )}
 </Layout>

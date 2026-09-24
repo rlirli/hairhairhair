@@ -1,0 +1,28 @@
+---
+interface Props {
+  title: string;
+  href: string;
+  headingId?: string;
+  containerClass?: string;
+  headingClass?: string;
+  linkClass?: string;
+}
+
+const {
+  title,
+  href,
+  headingId,
+  containerClass = "items-baseline gap-4",
+  headingClass = "text-xs font-black uppercase tracking-[.16em] text-orange",
+  linkClass = "focus-ring text-xs font-normal uppercase tracking-[.12em] text-muted transition hover:text-ink",
+} = Astro.props;
+---
+
+<div class:list={["flex justify-between border-b border-taupe pb-3 sm:pb-2", containerClass]}>
+  <h2 id={headingId} class={headingClass}>
+    {title}
+  </h2>
+  <a class={linkClass} href={href}>
+    More
+  </a>
+</div>

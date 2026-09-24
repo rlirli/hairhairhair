@@ -1,78 +1,17 @@
 ---
 import Layout from "../../components/shared/Layout.astro";
 import PersonDirectoryCard from "../../components/people/PersonDirectoryCard";
+import { personDirectoryCardData } from "../../data/person-directory";
 import { hairSubtypes, hairTypes } from "../../data/hair-types";
 import { people, personPhotographs } from "../../data/people";
-import { naturalProfileForPerson, resolvedHairTypeForNaturalProfile } from "../../data/natural-profiles";
 import { buildPersonMedia } from "../../data/people-media";
 import DirectoryFilters, { type FilterGroup } from "../../components/shared/DirectoryFilters";
 
 const mediaById = new Map(buildPersonMedia(personPhotographs).map((photo) => [photo.id, photo]));
-const profileLabel = (value: string | null, labels: Record<string, string>) =>
-  value ? (labels[value] ?? value) : null;
 const peopleCards = people.flatMap((person) => {
   const image = mediaById.get(person.heroImageId);
   if (!image) return [];
-
-  const profile = naturalProfileForPerson(person.id);
-  const resolvedType = profile ? resolvedHairTypeForNaturalProfile(profile) : undefined;
-  const majorTypeId = profile?.hairTypeId.value;
-  const subtypeId = profile?.hairSubtypeId.value;
-  const hairValues = [majorTypeId, subtypeId].filter((value): value is string => Boolean(value));
-  const profileRows = profile
-    ? [
-        resolvedType && {
-          label: "Hair type",
-          value: `Type ${resolvedType.code} · ${resolvedType.name}`,
-          href: `/hair-types/${resolvedType.slug}/`,
-        },
-        profile.naturalHairColor.value && {
-          label: "Hair color",
-          value: profileLabel(profile.naturalHairColor.value, {
-            black: "Black",
-            brown: "Brown",
-            blonde: "Blonde",
-            red: "Red",
-            gray: "Gray",
-            white: "White",
-          })!,
-        },
-        profile.naturalSkinTone.value && {
-          label: "Skin tone",
-          value: profileLabel(profile.naturalSkinTone.value, {
-            "deep-brown": "Deep brown",
-            brown: "Brown",
-            medium: "Medium",
-            light: "Light",
-            fair: "Fair",
-          })!,
-        },
-        profile.hairThickness.value && {
-          label: "Hair thickness",
-          value: profileLabel(profile.hairThickness.value, { fine: "Fine", medium: "Medium", coarse: "Coarse" })!,
-        },
-        profile.hairDensity.value && {
-          label: "Hair density",
-          value: profileLabel(profile.hairDensity.value, { low: "Low", medium: "Medium", high: "High" })!,
-        },
-      ].filter((row): row is NonNullable<typeof row> => Boolean(row))
-    : [];
-
-  return [
-    {
-      href: `/people/${person.slug}/`,
-      name: person.name,
-      imageSrc: image.src.src,
-      imageAlt: image.alt,
-      description: person.description,
-      profileValues: {
-        hair: hairValues,
-        color: profile?.naturalHairColor.value ?? "",
-        skin: profile?.naturalSkinTone.value ?? "",
-      },
-      profileRows,
-    },
-  ];
+  return [personDirectoryCardData(person, { src: image.src.src, alt: image.alt })];
 });
 const observedHairTypes = new Set(peopleCards.flatMap((person) => person.profileValues.hair));
 const observedColors = [...new Set(peopleCards.map((person) => person.profileValues.color).filter(Boolean))];

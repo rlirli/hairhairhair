@@ -1,0 +1,43 @@
+---
+import { getImage } from "astro:assets";
+import PersonDirectoryCard from "./PersonDirectoryCard";
+import { personDirectoryCardData } from "../../data/person-directory";
+import type { HairTypePerson } from "../../data/hair-type-discovery";
+
+const { people } = Astro.props as { people: HairTypePerson[] };
+
+const celebrityCards = await Promise.all(
+  people.map(async ({ person, photo, naturalProfile, subtype }) => {
+    const image = photo
+      ? await getImage({
+          src: photo.src,
+          widths: [180, 360],
+          sizes: "(min-width: 1024px) 14vw, 128px",
+          format: "webp",
+        })
+      : undefined;
+
+    return {
+      person: personDirectoryCardData(
+        person,
+        {
+          src: image?.src,
+          srcSet: image?.srcSet.attribute,
+          sizes: image?.attributes.sizes,
+          alt: photo?.alt,
+        },
+        naturalProfile,
+      ),
+      subtitle: subtype ? `Type ${subtype.code}` : undefined,
+    };
+  }),
+);
+---
+
+<ul class="mt-2.5 grid grid-flow-col auto-cols-[minmax(8rem,1fr)] gap-3 overflow-x-auto pb-3 sm:mt-4 lg:grid-flow-row lg:grid-cols-7 lg:auto-cols-auto lg:overflow-visible">
+  {celebrityCards.map(({ person, subtitle }) => (
+    <li class="min-w-0">
+      <PersonDirectoryCard client:load person={person} subtitle={subtitle} />
+    </li>
+  ))}
+</ul>

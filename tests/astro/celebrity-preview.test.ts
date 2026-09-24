@@ -3,7 +3,7 @@ import { experimental_AstroContainer as AstroContainer } from "astro/container";
 import { loadRenderers } from "astro:container";
 import { expect, test, vi } from "vitest";
 
-import HairTypeCelebrityPreview from "../../src/components/people/HairTypeCelebrityPreview.astro";
+import CelebrityGrid from "../../src/components/people/CelebrityGrid.astro";
 import { hairTypes } from "../../src/data/hair-types";
 import HairTypePage from "../../src/pages/hair-types/[slug].astro";
 
@@ -73,12 +73,9 @@ test("the hair-type page shows the preview exactly when matching people exist", 
   ]);
 });
 
-test("the gallery can render an empty list when its caller wants it visible", async () => {
+test("the celebrity grid renders when it has no people", async () => {
   const container = await AstroContainer.create();
-  const html = await container.renderToString(HairTypeCelebrityPreview, {
-    props: { moreHref: "/people/", people: [] },
-  });
+  const html = await container.renderToString(CelebrityGrid, { props: { people: [] } });
 
-  expect(html).toContain(previewMarker);
-  expect(html).toContain('href="/people/"');
+  expect(html).toContain("<ul");
 });

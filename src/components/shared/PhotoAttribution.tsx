@@ -14,7 +14,7 @@ export default function PhotoAttribution({ provenance, density, className }: Pro
   const creator = provenance.creator || provenance.attribution;
   const isCompact = density === "compact";
   const textClass = isCompact
-    ? "absolute inset-x-0 bottom-0 z-10 bg-black/75 px-2 py-1.5 text-[.68rem] leading-[1.2] text-white"
+    ? "absolute inset-x-0 bottom-0 z-10 bg-black/75 px-2 py-1.5 text-[.68rem] leading-[1.2] text-white opacity-40 transition-opacity hover:opacity-100"
     : "mt-3 text-sm leading-5";
   const parts: ReactNode[] = [];
   if (creator) parts.push(creator);

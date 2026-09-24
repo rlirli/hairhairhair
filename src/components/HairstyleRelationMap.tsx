@@ -84,7 +84,14 @@ export default function HairstyleRelationMap({ styles }: Props) {
   const canvasRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const worldRef = useRef<SVGGElement>(null);
-  const dragRef = useRef<{ index: number; pointerId: number } | null>(null);
+  const dragRef = useRef<{
+    index: number;
+    pointerId: number;
+    startX: number;
+    startY: number;
+    moved: boolean;
+  } | null>(null);
+  const suppressNodeClickRef = useRef<string | null>(null);
   const panRef = useRef<{ pointerId: number; x: number; y: number; tx: number; ty: number } | null>(null);
   const positionsRef = useRef<PositionedStyle[]>([]);
   const pendingPositionsRef = useRef<PositionedStyle[] | null>(null);
@@ -186,7 +193,14 @@ export default function HairstyleRelationMap({ styles }: Props) {
 
   function onPointerMove(event: PointerEvent<SVGSVGElement>) {
     if (dragRef.current?.pointerId === event.pointerId) {
-      const { index } = dragRef.current;
+      const drag = dragRef.current;
+      const { index } = drag;
+      if (!drag.moved) {
+        if (Math.hypot(event.clientX - drag.startX, event.clientY - drag.startY) < 3) return;
+        drag.moved = true;
+        setSelectedId(positionsRef.current[index]?.id ?? null);
+        suppressNodeClickRef.current = positionsRef.current[index]?.id ?? null;
+      }
       const position = point(event);
       positionsRef.current = positionsRef.current.map((node, i) =>
         i === index ? { ...node, ...position, vx: 0, vy: 0 } : node,
@@ -212,13 +226,16 @@ export default function HairstyleRelationMap({ styles }: Props) {
 
   function onPointerUp(event: PointerEvent<SVGSVGElement>) {
     if (dragRef.current?.pointerId === event.pointerId) {
+      const drag = dragRef.current;
       dragRef.current = null;
       if (dragFrameRef.current !== null) cancelAnimationFrame(dragFrameRef.current);
       dragFrameRef.current = null;
       pendingPositionsRef.current = null;
-      const next = relax(positionsRef.current, links, dimensions.width, dimensions.height, 170);
-      positionsRef.current = next;
-      setPositions(next);
+      if (drag.moved) {
+        const next = relax(positionsRef.current, links, dimensions.width, dimensions.height, 170);
+        positionsRef.current = next;
+        setPositions(next);
+      }
     }
     if (panRef.current?.pointerId === event.pointerId) {
       panRef.current = null;
@@ -293,6 +310,9 @@ export default function HairstyleRelationMap({ styles }: Props) {
           <svg
             aria-label="Interactive map of hairstyle connections"
             className="relation-svg"
+            onClick={(event) => {
+              if (!(event.target as Element).closest(".relation-node")) setSelectedId(null);
+            }}
             onPointerDown={(event) => {
               if ((event.target as Element).closest(".relation-node")) return;
               panRef.current = {
@@ -348,15 +368,30 @@ export default function HairstyleRelationMap({ styles }: Props) {
                     .filter(Boolean)
                     .join(" ")}
                   key={style.id}
-                  onClick={() => setSelectedId(style.id)}
+                  onClick={() => {
+                    if (suppressNodeClickRef.current === style.id) {
+                      suppressNodeClickRef.current = null;
+                      return;
+                    }
+                    setSelectedId((current) => (current === style.id ? null : style.id));
+                  }}
                   onKeyDown={(event) => {
-                    if (event.key === "Enter" || event.key === " ") setSelectedId(style.id);
+                    if (event.key === "Enter" || event.key === " ") {
+                      event.preventDefault();
+                      setSelectedId((current) => (current === style.id ? null : style.id));
+                    }
                   }}
                   onPointerDown={(event) => {
                     event.preventDefault();
                     event.stopPropagation();
-                    dragRef.current = { index, pointerId: event.pointerId };
-                    setSelectedId(style.id);
+                    suppressNodeClickRef.current = null;
+                    dragRef.current = {
+                      index,
+                      pointerId: event.pointerId,
+                      startX: event.clientX,
+                      startY: event.clientY,
+                      moved: false,
+                    };
                     event.currentTarget.setPointerCapture(event.pointerId);
                   }}
                   role="button"
@@ -404,7 +439,7 @@ export default function HairstyleRelationMap({ styles }: Props) {
             <>
               <img
                 alt={selected.imageAlt}
-                className={`relation-detail-image${selected.transparentBackground ? " is-transparent" : ""}`}
+                className={`relation-detail-image${selected.transparentBackground ? "is-transparent" : ""}`}
                 src={selected.imageSrc}
               />
               <p className="relation-kind">{selected.kindLabel}</p>

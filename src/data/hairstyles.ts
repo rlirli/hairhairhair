@@ -66,6 +66,13 @@ export const sources: EditorialSource[] = [
     reviewedAt: "2026-09-20",
   },
   {
+    id: "allure-protective-styles-history",
+    title: "Protective Styles Are the Armor Black Women Have Worn for Centuries",
+    url: "https://www.allure.com/story/protective-styles-meaning-history-michaela-angela-davis",
+    publisher: "Allure",
+    reviewedAt: "2026-09-24",
+  },
+  {
     id: "allure-shag-haircut-ideas",
     title: "31 Cute Shag Haircut Ideas for Any Length and Texture — See Photos",
     url: "https://www.allure.com/gallery/shag-haircut-ideas-trend",
@@ -121,6 +128,13 @@ export const sources: EditorialSource[] = [
     url: "https://carolsdaughter.com/blogs/beauty-blog/what-are-knotless-braids",
     publisher: "Carol's Daughter",
     reviewedAt: "2026-09-22",
+  },
+  {
+    id: "dreadlockulture-freeform-locs",
+    title: "What Are Freeform Locs?",
+    url: "https://dreadlockulture.com/what-are-freeform-locs/",
+    publisher: "DreadlocKulture",
+    reviewedAt: "2026-09-24",
   },
   {
     id: "essence-knotless-braids",
@@ -240,6 +254,13 @@ export const sources: EditorialSource[] = [
     url: "https://www.oxfordlearnersdictionaries.com/us/definition/english/flat-top",
     publisher: "Oxford Learner’s Dictionaries",
     reviewedAt: "2026-09-21",
+  },
+  {
+    id: "smithsonian-dread-history",
+    title: "Dread History: The African Diaspora, Ethiopianism, and Rastafari",
+    url: "https://www.smithsonianeducation.org/migrations/rasta/pic07.html",
+    publisher: "Smithsonian Institution",
+    reviewedAt: "2026-09-24",
   },
   {
     id: "vogue-emrata-bangs-2024",
@@ -524,6 +545,62 @@ export const hairstyles: Hairstyle[] = [
       "wahl-flat-top-guide",
     ],
     relatedStyleIds: ["hairstyle-buzz-cut", "hairstyle-taper-fade"],
+    guidePublicationStatus: "published",
+  },
+  {
+    id: "hairstyle-freeform-locs",
+    slug: "freeform-locs",
+    name: "Freeform locs",
+    kind: "styling-technique",
+    summary:
+      "Locs allowed to develop organically with little manipulation, producing irregular sections, varied thickness, and a less uniformly maintained root structure.",
+    intro: [
+      "Freeform locs develop by allowing hair to tangle, mat, and lock with little manipulation rather than establishing a precise parting grid and repeatedly retwisting each section.",
+      "Because the hair determines much of its own sectioning, mature freeform locs commonly vary in diameter and shape, and neighboring locs may naturally join as they develop.",
+      "Locs have particular historical and spiritual significance within Rastafari, where uncombed and uncut locked hair has been worn as an expression of African identity and religious commitment. Freeform locs are not limited to Rastafari wearers, and the hairstyle should not be treated as a costume or shorthand for reggae culture.",
+    ],
+    variations: [
+      {
+        id: "freeform-locs-congo",
+        name: "Joined freeform locs",
+        description:
+          "Allows some neighboring locs to merge into broader sections rather than routinely separating every root.",
+      },
+      {
+        id: "freeform-locs-mature-long",
+        name: "Long mature freeform locs",
+        description:
+          "Well-developed locs with substantial hanging length, visible differences in thickness, organic roots, and a naturally irregular overall silhouette.",
+      },
+      {
+        id: "freeform-locs-semi-freeform",
+        name: "Semi-freeform locs",
+        description:
+          "Preserves an organic freeform appearance while using occasional root separation or limited maintenance to influence how extensively sections join.",
+      },
+    ],
+    consultation: {
+      intro:
+        "Discuss how much intervention is desired, whether naturally joining sections should be separated, and how much control the wearer wants over loc size and root structure.",
+      questions: [
+        "Do you want the hair to form almost entirely on its own, or should some sections be separated as they begin to join?",
+        "Are you comfortable with locs developing at visibly different thicknesses and with irregular root sections?",
+        "Should larger joined sections be preserved or gently separated?",
+        "What finished length are you working toward, and how much shrinkage should be expected while the locs mature?",
+        "Do you want to maintain a completely freeform root appearance or use occasional semi-freeform maintenance?",
+      ],
+      sampleRequest:
+        "“I want mature freeform locs with natural irregular sectioning and varied thickness. I don't want a clean part grid or routine retwists; only separate sections occasionally if several locs start joining more than I want.”",
+    },
+    considerations: [
+      "Freeform describes the low-manipulation locking method rather than neglect: regular cleansing and scalp care remain compatible with freeforming.",
+      "The final number, thickness, and placement of locs are inherently less predictable than with deliberately sectioned starter-loc methods.",
+      "Locs may join together naturally at the roots, so deciding whether and how often to separate them materially affects the mature silhouette.",
+      "Tightly curled and coily hair generally locks readily with minimal intervention, while straighter textures may take longer or require more assistance to establish stable locs.",
+      "Length changes during maturation because loose hair compacts as it tangles and locks, so apparent growth and hanging length do not correspond directly to unloc'd hair length.",
+    ],
+    sourceIds: ["allure-protective-styles-history", "dreadlockulture-freeform-locs", "smithsonian-dread-history"],
+    relatedStyleIds: ["hairstyle-twists"],
     guidePublicationStatus: "published",
   },
   {
@@ -986,7 +1063,7 @@ export const hairstyles: Hairstyle[] = [
       "Extensions, long lengths, and tight installation add weight or pull. AAD advises loosening styles that hurt, sting, crust, or visibly pull the scalp; persistent hair loss needs a dermatologist’s assessment.",
     ],
     sourceIds: ["aad-traction", "carols-daughter-braids-twists", "milady-natural-hair"],
-    relatedStyleIds: ["hairstyle-buzz-cut", "hairstyle-taper-fade"],
+    relatedStyleIds: ["hairstyle-buzz-cut", "hairstyle-freeform-locs", "hairstyle-taper-fade"],
     guidePublicationStatus: "published",
   },
   {
@@ -1132,6 +1209,18 @@ export const styleExamples: StyleExample[] = [
     patternDescription: "The top forms a small upright plane with a sharper graphic outline than the low example.",
     lengthDescription:
       "Short sides support a compact upright shape; ask about the hold and maintenance needed to keep the plane visible.",
+  },
+  {
+    id: "style-example-freeform-locs-long",
+    hairstyleIds: ["hairstyle-freeform-locs"],
+    imageId: "freeform-locs-long",
+    title: "Long mature freeform locs",
+    caption:
+      "Notice the irregular root structure, naturally varied loc thickness, loose texture around the roots, and long organic silhouette.",
+    patternDescription:
+      "The locs emerge without a uniform parting grid and vary visibly in diameter, with loose coily texture and irregular joining around the crown and roots.",
+    lengthDescription:
+      "Mature locs extend well beyond the shoulders, with individual sections reaching different lengths and forming an intentionally uneven perimeter.",
   },
   {
     id: "style-example-french-crop-textured-2a",

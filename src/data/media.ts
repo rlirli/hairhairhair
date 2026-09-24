@@ -6,6 +6,7 @@ import croppedAfroFull from "../assets/hairstyles/cropped-afro-full.png";
 import curtainHaircutStraight1b from "../assets/hairstyles/curtain-haircut-straight-1b.png";
 import flatTopCoily from "../assets/hairstyles/flat-top-coily.png";
 import flatTopStraight from "../assets/hairstyles/flat-top-straight.png";
+import freeformLocsLong from "../assets/hairstyles/freeform-locs-long.png";
 import frenchCropTextured2a from "../assets/hairstyles/french-crop-textured-2a.png";
 import knotlessBoxBraidsMedium from "../assets/hairstyles/knotless-box-braids-medium.png";
 import longLayeredCutBrunette from "../assets/hairstyles/long-layered-cut-brunette.png";
@@ -87,6 +88,12 @@ export const hairstyleMedia: HairstyleMedia[] = [
     src: flatTopStraight,
     alt: "Generated editorial reference showing an upright compact flat top with squared corners above short graduated sides on a fictional adult.",
     provenance: { kind: "generated", provider: "OpenAI", promptKey: "flat-top-straight", background: "opaque" },
+  },
+  {
+    id: "freeform-locs-long",
+    src: freeformLocsLong,
+    alt: "Editorial reference showing a Black man with long mature freeform locs of varied thickness and irregular natural roots.",
+    provenance: { kind: "generated", provider: "OpenAI", promptKey: "freeform-locs-long", background: "transparent" },
   },
   {
     id: "french-crop-textured-2a",

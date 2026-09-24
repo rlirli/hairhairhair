@@ -1,8 +1,8 @@
+import type { HairTypePerson, HairTypePersonWithPhoto, PeopleForHairTypeOptions } from "../types";
 import { hairSubtypes, hairTypes } from "./hair-types";
 import { compatibleHairstylesForHairType, subtypeLabelsForHairstyleInMajorType } from "./hairstyle-compatibility";
-import type { ImageMedia } from "./media-types";
-import { naturalProfileMatchesHairType, naturalProfiles, type NaturalProfile } from "./natural-profiles";
-import { people, personPhotographs, type Person } from "./people";
+import { naturalProfileMatchesHairType, naturalProfiles } from "./natural-profiles";
+import { people, personPhotographs } from "./people";
 
 export function parentHairTypeId(slug: string) {
   return (
@@ -19,16 +19,6 @@ export function subtypeLabelsForHairstyleOnMajorTypePage(styleId: string, slug: 
   const major = hairTypes.find((item) => item.slug === slug);
   return major ? subtypeLabelsForHairstyleInMajorType(styleId, major.id) : [];
 }
-
-export type HairTypePerson = {
-  person: Person;
-  photo?: ImageMedia;
-  naturalProfile: NaturalProfile;
-  subtype: (typeof hairSubtypes)[number] | undefined;
-};
-
-type HairTypePersonWithPhoto = HairTypePerson & { photo: NonNullable<HairTypePerson["photo"]> };
-type PeopleForHairTypeOptions = { requireHeroImage?: boolean; limit?: number };
 
 export function peopleForHairTypeSlug(slug: string): HairTypePersonWithPhoto[];
 export function peopleForHairTypeSlug(

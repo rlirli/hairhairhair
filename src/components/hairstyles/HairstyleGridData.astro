@@ -1,12 +1,12 @@
 ---
 import { getImage } from "astro:assets";
-import type { Hairstyle } from "../../data/hairstyles";
 import {
   compatibilityLabelsForHairstyle,
   kindLabels,
   subtypeLabelsForHairstyleInMajorType,
 } from "../../data/hairstyle-relations";
 import { representativeHairstyleMedia } from "../../data/hairstyle-representative-media";
+import type { Hairstyle } from "../../types";
 import HairstyleGrid from "./HairstyleGrid";
 
 interface Props {

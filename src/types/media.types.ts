@@ -24,3 +24,5 @@ export type MediaProvenance = {
   identifier?: string;
   derivativeStatus?: "original" | "cropped" | "edited";
 };
+
+export type HairstyleMedia = ImageMedia;

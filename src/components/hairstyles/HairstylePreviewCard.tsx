@@ -1,4 +1,4 @@
-import type { MediaProvenance } from "../../data/media-types";
+import type { MediaProvenance } from "../../types";
 import PhotoAttribution from "../shared/PhotoAttribution";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/hover-card";
 

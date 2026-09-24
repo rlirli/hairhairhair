@@ -38,9 +38,7 @@ import twistsLong from "../assets/hairstyles/twists-long.png";
 import twistsShort from "../assets/hairstyles/twists-short.png";
 import wolfCutCurlyMedium from "../assets/hairstyles/wolf-cut-curly-medium.png";
 import wolfCutWavyMedium from "../assets/hairstyles/wolf-cut-wavy-medium.png";
-import type { ImageMedia } from "./media-types";
-
-export type HairstyleMedia = ImageMedia;
+import type { HairstyleMedia } from "../types";
 
 export const hairstyleMedia: HairstyleMedia[] = [
   {

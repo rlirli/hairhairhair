@@ -1,6 +1,6 @@
 import { Fragment, type ReactNode } from "react";
-import type { MediaProvenance } from "../../data/media-types";
 import { cn } from "../../lib/utils";
+import type { MediaProvenance } from "../../types";
 
 interface Props {
   provenance: MediaProvenance;

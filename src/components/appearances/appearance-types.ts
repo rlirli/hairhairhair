@@ -1,4 +1,4 @@
-import type { ImageMedia } from "../../data/media-types";
+import type { ImageMedia } from "../../types";
 
 export interface AppearanceCardData {
   id: string;

@@ -1,4 +1,4 @@
-import type { PersonDirectoryCardItem } from "../../data/person-directory";
+import type { PersonDirectoryCardItem } from "../../types";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/hover-card";
 
 export default function PersonDirectoryCard({

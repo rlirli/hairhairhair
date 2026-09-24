@@ -1,10 +1,6 @@
 // Parked editorial notes concern styling approaches and cannot establish compatibility scores.
 // Preserved for possible future editorial reconsideration; this archive has no runtime effect.
-export interface HairTypeSpecificHairstyleAdvice {
-  hairstyleId: string;
-  hairTypeId: string;
-  note: string;
-}
+import type { HairTypeSpecificHairstyleAdvice } from "../../types";
 
 export const hairTypeSpecificHairstyleAdvice: HairTypeSpecificHairstyleAdvice[] = [
   {

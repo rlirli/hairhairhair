@@ -1,15 +1,8 @@
+import type { HairstyleCompatibility } from "../types";
 import { hairSubtypes, hairTypes } from "./hair-types.ts";
 import { publishedHairstyles } from "./hairstyles.ts";
 
 export const MIN_COMPATIBILITY_FOR_LISTING = 0.5;
-
-export interface HairstyleCompatibility {
-  hairstyleId: string;
-  hairTypeId: string;
-  score: number | null;
-  provenance: "estimated";
-  variationId?: string;
-}
 
 // Scores estimate how fully the defining features can be achieved through ordinary
 // cutting and styling while preserving the natural curl pattern. They are not a

@@ -6,39 +6,7 @@ import marioBalotelli2019 from "../assets/people/mario-balotelli-2019-marseille.
 import willSmith2009 from "../assets/people/will-smith-2009.jpg";
 import willSmith2011 from "../assets/people/will-smith-2011.jpg";
 import willSmith2012 from "../assets/people/will-smith-2012.jpg";
-import type { ImageMedia } from "./media-types";
-
-export interface Person {
-  id: string;
-  slug: string;
-  name: string;
-  description: string;
-  heroImageId: string;
-  sources: PersonSource[];
-}
-
-export interface PersonSource {
-  kind: "photograph" | "biography";
-  url: string;
-}
-
-export interface AppearanceObservation {
-  hairstyleId: string;
-  note: string;
-}
-
-export interface Appearance {
-  id: string;
-  personId: string;
-  imageId: string;
-  event: string;
-  taken: {
-    value: string;
-    precision: "day" | "year";
-    sourceUrl: string;
-  };
-  observations: AppearanceObservation[];
-}
+import type { Appearance, ImageMedia, Person } from "../types";
 
 const obamaFindingAid =
   "https://www.obamalibrary.gov/digital-research-room/finding-aids/photographs-will-smith-22-64503-f";

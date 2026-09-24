@@ -1,24 +1,5 @@
+import type { Person, PersonDirectoryCardImage, PersonDirectoryCardItem } from "../types";
 import { naturalProfileForPerson, resolvedHairTypeForNaturalProfile } from "./natural-profiles";
-import type { Person } from "./people";
-
-export interface PersonDirectoryCardImage {
-  src?: string;
-  srcSet?: string;
-  sizes?: string;
-  alt?: string;
-}
-
-export interface PersonDirectoryCardItem {
-  href: string;
-  name: string;
-  imageSrc?: string;
-  imageSrcSet?: string;
-  imageSizes?: string;
-  imageAlt?: string;
-  profileValues: { hair: string[]; color: string; skin: string };
-  description: string;
-  profileRows: { label: string; value: string; href?: string }[];
-}
 
 const displayValue = (value: string | null, labels: Record<string, string>) =>
   value ? (labels[value] ?? value) : null;

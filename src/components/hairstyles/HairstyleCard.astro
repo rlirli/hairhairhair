@@ -1,9 +1,9 @@
 ---
 import { Image } from "astro:assets";
-import type { Hairstyle } from "../../data/hairstyles";
 import { kindLabels } from "../../data/hairstyle-relations";
 import { representativeHairstyleMedia } from "../../data/hairstyle-representative-media";
 import PhotoAttribution from "../shared/PhotoAttribution";
+import type { Hairstyle } from "../../types";
 interface Props {
   style: Hairstyle;
   compact?: boolean;

@@ -142,11 +142,32 @@ export const sources: EditorialSource[] = [
     reviewedAt: "2026-09-22",
   },
   {
+    id: "catholic-encyclopedia-celtic-rite",
+    title: "The Celtic Rite",
+    url: "https://www.newadvent.org/cathen/03493a.htm",
+    publisher: "The Catholic Encyclopedia / New Advent",
+    reviewedAt: "2026-09-25",
+  },
+  {
+    id: "catholic-encyclopedia-tonsure",
+    title: "Tonsure",
+    url: "https://www.newadvent.org/cathen/14779a.htm",
+    publisher: "The Catholic Encyclopedia / New Advent",
+    reviewedAt: "2026-09-25",
+  },
+  {
     id: "dreadlockulture-freeform-locs",
     title: "What Are Freeform Locs?",
     url: "https://dreadlockulture.com/what-are-freeform-locs/",
     publisher: "DreadlocKulture",
     reviewedAt: "2026-09-24",
+  },
+  {
+    id: "encyclopedia-com-tonsure",
+    title: "Tonsure",
+    url: "https://www.encyclopedia.com/philosophy-and-religion/christianity/christianity-general/tonsure",
+    publisher: "Encyclopedia.com",
+    reviewedAt: "2026-09-25",
   },
   {
     id: "essence-knotless-braids",
@@ -203,6 +224,13 @@ export const sources: EditorialSource[] = [
     url: "https://www.hair.com/feathered-hair.html",
     publisher: "Hair.com by L'Oréal",
     reviewedAt: "2026-09-24",
+  },
+  {
+    id: "haircom-hime-cut",
+    title: "The Centuries-Old Hime Cut Is Now Trending: Here’s How to Make It Work for You",
+    url: "https://www.hair.com/hime-cut.html",
+    publisher: "Hair.com by L'Oréal",
+    reviewedAt: "2026-09-25",
   },
   {
     id: "haircom-layered-hair",
@@ -287,6 +315,13 @@ export const sources: EditorialSource[] = [
     url: "https://www.menshealth.com/grooming/a27079237/summer-hairstyles-for-men/",
     publisher: "Men's Health",
     reviewedAt: "2026-09-24",
+  },
+  {
+    id: "met-heian-court-woman",
+    title: "Dish in Shape of Japanese Court Woman",
+    url: "https://www.metmuseum.org/art/collection/search/46509",
+    publisher: "The Metropolitan Museum of Art",
+    reviewedAt: "2026-09-25",
   },
   {
     id: "milady-natural-hair",
@@ -415,6 +450,13 @@ export const sources: EditorialSource[] = [
     url: "https://www.washingtonpost.com/archive/lifestyle/1979/02/17/short-cut-to-celebrity/0dba282e-fdca-4660-9f33-58e08126555a/",
     publisher: "The Washington Post",
     reviewedAt: "2026-09-24",
+  },
+  {
+    id: "yokohama-belle-hime-cut",
+    title: "姫カットとは？顔型別の似合わせ・最新スタイル・魅力を解説",
+    url: "https://www.ybe.ac.jp/archives/1661",
+    publisher: "横浜ベルエポック美容専門学校",
+    reviewedAt: "2026-09-25",
   },
 ];
 
@@ -564,7 +606,13 @@ export const hairstyles: Hairstyle[] = [
       "The visible result can differ between dry and damp hair and between straight, wavy, curly, and coily patterns; the cut should be assessed in the state in which it will usually be worn.",
     ],
     sourceIds: ["andis-buzz-cut", "wahl-cut-guide"],
-    relatedStyleIds: ["hairstyle-bald", "hairstyle-flat-top", "hairstyle-taper-fade", "hairstyle-twists"],
+    relatedStyleIds: [
+      "hairstyle-bald",
+      "hairstyle-flat-top",
+      "hairstyle-monastic-tonsure",
+      "hairstyle-taper-fade",
+      "hairstyle-twists",
+    ],
     guidePublicationStatus: "published",
   },
   {
@@ -960,6 +1008,64 @@ export const hairstyles: Hairstyle[] = [
     guidePublicationStatus: "published",
   },
   {
+    id: "hairstyle-hime-cut",
+    slug: "hime-cut",
+    name: "Hime cut",
+    kind: "cut",
+    summary:
+      "A long Japanese haircut defined by sharply separated blunt side sections around cheek-to-jaw length, contrasted against substantially longer hair behind them.",
+    intro: [
+      "The Hime cut creates its identity through abrupt differences in length rather than blended face framing. Short, dense side panels sit beside the face while the rear hair remains much longer.",
+      "A straight-across fringe commonly accompanies the classic version, but the shorter side sections are the more essential structural feature; modern versions can omit the fringe while retaining the recognizable stepped silhouette.",
+      "The hairstyle is associated historically with Japanese court-hair traditions extending back to the Heian period. Modern sources connect it with practices in which selected hair near the sides of the face was cut shorter while the remaining hair continued to grow long.",
+      "The name Hime cut is a later label meaning princess cut; it should not be interpreted as evidence that one identifiable historical person invented the hairstyle.",
+    ],
+    variations: [
+      {
+        id: "hime-cut-classic-fringe",
+        name: "Classic Hime with blunt fringe",
+        description:
+          "Combines long straight rear hair with cheek-to-jaw-length blunt side panels and a straight fringe across the forehead.",
+      },
+      {
+        id: "hime-cut-no-fringe",
+        name: "Fringe-free Hime",
+        description:
+          "Keeps the abrupt blunt side sections and long rear lengths while opening the forehead with a center or near-center part.",
+      },
+      {
+        id: "hime-cut-long-side-panels",
+        name: "Long-panel Hime",
+        description:
+          "Places the blunt side sections closer to jaw or upper-neck length for a softer step while retaining a clear separation from the long rear hair.",
+      },
+    ],
+    consultation: {
+      intro:
+        "The key choices are the exact length, width and density of the short side panels, whether a fringe is included, and how starkly the short sections should contrast with the long rear hair.",
+      questions: [
+        "Should the blunt side panels end around the cheekbone, jaw, or slightly below the jaw?",
+        "How wide should each short side section be when viewed from the front?",
+        "Do you want a straight blunt fringe, a lighter fringe, or no dedicated fringe?",
+        "Should the side panels form a very hard horizontal edge or be softened slightly at the ends?",
+        "Will you usually wear the long rear hair straight enough for the stepped geometry to remain clearly visible?",
+      ],
+      sampleRequest:
+        "“I want a Hime cut with long straight hair at the back, dense blunt side sections ending around my jaw, and a very clear step between those panels and the long lengths. Keep the lines sharp rather than blending them into ordinary face-framing layers.”",
+    },
+    considerations: [
+      "The side panels are the defining element; blending them gradually into the rear length can make the result read as ordinary face framing instead of a Hime cut.",
+      "Small amounts of growth noticeably change the position of the blunt side edge, so those panels need more frequent trimming than the long rear lengths.",
+      "Straight hair displays the stepped geometry most clearly. Waves and curls can soften or visually fragment the horizontal line.",
+      "Using frequent heat to maintain a pin-straight finish can increase damage risk, particularly on previously lightened or heavily colored hair.",
+      "Very fine hair may produce thinner-looking side panels, while dense hair can create a more graphic and substantial block of short hair beside the face.",
+      "Bleached or highly processed hair should be assessed for condition before combining repeated straightening with a highly polished Hime finish.",
+    ],
+    sourceIds: ["haircom-hime-cut", "met-heian-court-woman", "yokohama-belle-hime-cut"],
+    relatedStyleIds: ["hairstyle-sleek-long-cut"],
+    guidePublicationStatus: "draft",
+  },
+  {
     id: "hairstyle-knotless-box-braids",
     slug: "knotless-box-braids",
     name: "Knotless box braids",
@@ -1069,6 +1175,64 @@ export const hairstyles: Hairstyle[] = [
       "hairstyle-wolf-cut",
     ],
     guidePublicationStatus: "published",
+  },
+  {
+    id: "hairstyle-monastic-tonsure",
+    slug: "monastic-tonsure",
+    name: "Monastic tonsure",
+    kind: "cut",
+    summary:
+      "A family of historically religious haircuts in which selected areas of the scalp are deliberately shaved or closely cut to create a symbolic clerical or monastic pattern.",
+    intro: [
+      "Tonsure refers to deliberate removal or close cutting of scalp hair as a religious marker. In Christian history, several visually distinct forms developed rather than one universal haircut.",
+      "The Roman or St. Peter form leaves a ring of hair around a shaved crown. The Eastern or St. Paul form removes the hair across the whole head. The Celtic or St. John form removes the front portion of the hair, historically described in Britain as shaving the area in front of a line running from ear to ear.",
+      "The names associated with Peter, Paul and John are traditional labels rather than verified inventor attributions. Historical sources explicitly note that the different forms cannot securely claim apostolic origin.",
+      "Because the geometry is created by shaving or cutting selected areas rather than by exploiting a particular curl pattern, the basic forms can be produced on any natural hair type.",
+    ],
+    variations: [
+      {
+        id: "monastic-tonsure-celtic",
+        name: "Celtic / St. John tonsure",
+        description:
+          "Removes the hair across the front portion of the head, historically described as shaving forward of an ear-to-ear boundary while leaving hair behind it.",
+      },
+      {
+        id: "monastic-tonsure-eastern",
+        name: "Eastern / St. Paul tonsure",
+        description:
+          "Removes or closely cuts the hair across the entire scalp rather than preserving a crown or rear section.",
+      },
+      {
+        id: "monastic-tonsure-roman",
+        name: "Roman / St. Peter tonsure",
+        description:
+          "Shaves the crown while retaining a continuous ring or corona of hair around the sides and back of the head.",
+      },
+    ],
+    consultation: {
+      intro:
+        "A tonsure request must identify the historical form first because Roman, Celtic and Eastern tonsures create fundamentally different scalp patterns.",
+      questions: [
+        "Which form do you want: Roman crown, Celtic front-shaved, or Eastern fully shorn?",
+        "For a Roman tonsure, how wide should the remaining ring of hair be?",
+        "For a Celtic tonsure, where should the ear-to-ear transition between shaved and retained hair sit?",
+        "Should the shaved area be razor-smooth or left with very short visible stubble?",
+        "How long should any retained hair remain, and should its perimeter be sharply defined or softer?",
+      ],
+      sampleRequest:
+        "“I want a Roman-style monastic tonsure: shave the crown clean while leaving a continuous, clearly defined ring of short hair around the sides and back. Keep the ring even in width and make the contrast with the shaved crown obvious.”",
+    },
+    considerations: [
+      "The three historical forms should not be treated as interchangeable styling variations because each removes hair from a different part of the scalp.",
+      "A Roman tonsure depends on a continuous surviving ring of hair; natural balding patterns can therefore affect how faithfully that geometry can be reproduced.",
+      "The Celtic form is historically less familiar today and can easily be mistaken for an accidental or fantasy shave pattern unless the front-to-back division is deliberate and clearly defined.",
+      "The Eastern form can look visually similar to an ordinary shaved or bald head even though its historical meaning and context are different.",
+      "Visible regrowth quickly softens the boundary between shaved and retained sections, so sharply defined tonsures require regular maintenance.",
+      "The hairstyle has strong religious and historical associations; using the name accurately is preferable to treating every partially shaved head as a tonsure.",
+    ],
+    sourceIds: ["catholic-encyclopedia-celtic-rite", "catholic-encyclopedia-tonsure", "encyclopedia-com-tonsure"],
+    relatedStyleIds: ["hairstyle-buzz-cut"],
+    guidePublicationStatus: "draft",
   },
   {
     id: "hairstyle-natural-afro",
@@ -1345,7 +1509,7 @@ export const hairstyles: Hairstyle[] = [
       "vogue-germany-liquid-hair",
       "vogue-india-volumising-haircuts-straight-hair",
     ],
-    relatedStyleIds: ["hairstyle-long-layered-cut"],
+    relatedStyleIds: ["hairstyle-hime-cut", "hairstyle-long-layered-cut"],
     guidePublicationStatus: "published",
   },
   {
@@ -1726,6 +1890,54 @@ export const styleExamples: StyleExample[] = [
       "Presented with a smooth straight Type 1B-like finish so the geometric perimeter remains clearly visible; the image does not establish the fictional model's natural hair subtype.",
     lengthDescription:
       "Short, with the back finishing above the jaw and the perimeter lengthening toward pointed sections beside the face.",
+  },
+  {
+    id: "hime-cut-dark-red",
+    hairstyleIds: ["hairstyle-hime-cut"],
+    imageId: "hime-cut-dark-red",
+    title: "Dark red classic Hime cut",
+    caption:
+      "A fictional Korean woman in her 20s wearing a classic Hime cut in medium-dark red, with blunt bangs, jaw-length side panels and substantially longer straight hair behind them.",
+    patternDescription:
+      "Presented with a smooth Type 1B-like straight finish so the abrupt blunt steps remain highly legible; the image does not establish the fictional model's natural subtype.",
+    lengthDescription:
+      "Long overall, with rear hair extending well below the shoulders and dense blunt side sections ending around the jaw.",
+  },
+  {
+    id: "hime-cut-platinum-blonde",
+    hairstyleIds: ["hairstyle-hime-cut"],
+    imageId: "hime-cut-platinum-blonde",
+    title: "Platinum blonde fringe-free Hime cut",
+    caption:
+      "A fictional Korean woman in her 30s wearing a platinum blonde Hime cut with a center part, blunt jaw-length side panels and long straight rear lengths.",
+    patternDescription:
+      "Presented with a Type 1A-like straight finish that emphasizes the sharp separation between the short panels and long hair; the image does not establish the fictional model's natural subtype.",
+    lengthDescription:
+      "Long overall, with the main lengths falling below the shoulders while the front side panels terminate in a dense blunt line near the jaw.",
+  },
+  {
+    id: "monastic-tonsure-celtic",
+    hairstyleIds: ["hairstyle-monastic-tonsure"],
+    imageId: "monastic-tonsure-celtic",
+    title: "Celtic front-shaved tonsure",
+    caption:
+      "A fictional young fair-skinned man wearing a Celtic-style tonsure with the front portion of the scalp shaved and longer hair retained behind the transition.",
+    patternDescription:
+      "The retained hair is shown with a loose wavy texture; the defining feature is the placement of the shaved front section rather than the curl pattern.",
+    lengthDescription:
+      "The front and upper-forward scalp are shaved closely, while substantially longer hair remains behind the ear-to-ear transition.",
+  },
+  {
+    id: "monastic-tonsure-roman",
+    hairstyleIds: ["hairstyle-monastic-tonsure"],
+    imageId: "monastic-tonsure-roman",
+    title: "Roman crown tonsure",
+    caption:
+      "A fictional older white man wearing a Roman-style tonsure with a cleanly shaved crown surrounded by a continuous ring of short hair.",
+    patternDescription:
+      "The retained hair is presented with a straight-to-slightly-wavy texture, but the tonsure geometry itself does not depend on a particular natural hair type.",
+    lengthDescription:
+      "The crown is shaved to skin level while a short, even ring of hair remains around the sides and rear of the head.",
   },
   {
     id: "natural-afro-deep-skin-man",

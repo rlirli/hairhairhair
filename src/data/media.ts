@@ -14,8 +14,12 @@ import flatTopCoily from "../assets/hairstyles/flat-top-coily.png";
 import flatTopStraight from "../assets/hairstyles/flat-top-straight.png";
 import freeformLocsLong from "../assets/hairstyles/freeform-locs-long.png";
 import frenchCropTextured2a from "../assets/hairstyles/french-crop-textured-2a.png";
+import himeCutDarkRed from "../assets/hairstyles/hime-cut-dark-red.png";
+import himeCutPlatinumBlonde from "../assets/hairstyles/hime-cut-platinum-blonde.png";
 import knotlessBoxBraidsMedium from "../assets/hairstyles/knotless-box-braids-medium.png";
 import longLayeredCutBrunette from "../assets/hairstyles/long-layered-cut-brunette.png";
+import monasticTonsureCeltic from "../assets/hairstyles/monastic-tonsure-celtic.png";
+import monasticTonsureRoman from "../assets/hairstyles/monastic-tonsure-roman.png";
 import naturalAfroDeepSkinMan from "../assets/hairstyles/natural-afro-deep-skin-man.png";
 import naturalAfroRoundedCoily from "../assets/hairstyles/natural-afro-rounded-coily.png";
 import patternedMohawkCurved from "../assets/hairstyles/patterned-mohawk-curved.png";
@@ -173,6 +177,22 @@ export const hairstyleMedia: HairstyleMedia[] = [
     transparentBackground: true,
   },
   {
+    id: "hime-cut-dark-red",
+    kind: "image",
+    image: himeCutDarkRed,
+    alt: "Fictional Korean woman with long medium-dark red straight hair, blunt bangs and jaw-length Hime side panels.",
+    provenance: { origin: "system", aiGeneration: { provider: "OpenAI", promptKey: "hime-cut-dark-red" } },
+    transparentBackground: true,
+  },
+  {
+    id: "hime-cut-platinum-blonde",
+    kind: "image",
+    image: himeCutPlatinumBlonde,
+    alt: "Fictional Korean woman with long platinum blonde straight hair and blunt jaw-length Hime side panels framing a center part.",
+    provenance: { origin: "system", aiGeneration: { provider: "OpenAI", promptKey: "hime-cut-platinum-blonde" } },
+    transparentBackground: true,
+  },
+  {
     id: "knotless-box-braids-medium",
     kind: "image",
     image: knotlessBoxBraidsMedium,
@@ -186,6 +206,22 @@ export const hairstyleMedia: HairstyleMedia[] = [
     image: longLayeredCutBrunette,
     alt: "Editorial reference showing an adult woman with long dark brunette hair, soft face-framing layers, curtain fringe, and loose waves.",
     provenance: { origin: "system", aiGeneration: { provider: "OpenAI", promptKey: "long-layered-cut-brunette" } },
+    transparentBackground: true,
+  },
+  {
+    id: "monastic-tonsure-celtic",
+    kind: "image",
+    image: monasticTonsureCeltic,
+    alt: "Fictional young fair-skinned man with a Celtic tonsure, showing a shaved front scalp and longer hair retained behind it.",
+    provenance: { origin: "system", aiGeneration: { provider: "OpenAI", promptKey: "monastic-tonsure-celtic" } },
+    transparentBackground: true,
+  },
+  {
+    id: "monastic-tonsure-roman",
+    kind: "image",
+    image: monasticTonsureRoman,
+    alt: "Fictional older white man with a Roman monastic tonsure, showing a shaved crown surrounded by a continuous ring of short hair.",
+    provenance: { origin: "system", aiGeneration: { provider: "OpenAI", promptKey: "monastic-tonsure-roman" } },
     transparentBackground: true,
   },
   {

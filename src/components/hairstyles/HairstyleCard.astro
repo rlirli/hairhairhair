@@ -7,8 +7,9 @@ import type { Hairstyle } from "../../types";
 interface Props {
   style: Hairstyle;
   compact?: boolean;
+  eager?: boolean;
 }
-const { style, compact = false } = Astro.props;
+const { style, compact = false, eager = false } = Astro.props;
 const representative = getRepresentativeHairstyleMedia(style.id);
 const media = representative?.media;
 ---
@@ -24,7 +25,7 @@ const media = representative?.media;
           widths={[400, 800]}
           sizes="(min-width: 1024px) 25vw, 100vw"
           format="webp"
-          loading="lazy"
+          loading={eager ? "eager" : "lazy"}
           alt={media.alt}
           class="aspect-square w-full rounded-2xl object-cover bg-hairstyle-image-bg"
         />

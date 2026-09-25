@@ -310,7 +310,6 @@ export default function HairstyleRelationMap({ styles }: Props) {
               {positions.map((style) => (
                 <g
                   aria-label={style.name}
-                  aria-pressed={selectedId === style.id}
                   className={[
                     "relation-node",
                     selectedId === style.id && "is-selected",
@@ -324,14 +323,6 @@ export default function HairstyleRelationMap({ styles }: Props) {
                     .join(" ")}
                   key={style.id}
                   onClick={() => setSelectedId((current) => (current === style.id ? null : style.id))}
-                  onKeyDown={(event) => {
-                    if (event.key === "Enter" || event.key === " ") {
-                      event.preventDefault();
-                      setSelectedId((current) => (current === style.id ? null : style.id));
-                    }
-                  }}
-                  role="button"
-                  tabIndex={0}
                   transform={`translate(${style.x} ${style.y})`}
                 >
                   <circle

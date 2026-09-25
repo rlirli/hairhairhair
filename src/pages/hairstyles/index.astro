@@ -31,6 +31,7 @@ const filterGroups: FilterGroup[] = [
   { key: "kind", label: "Kind", options: kinds },
   { key: "hair-type", label: "Hair type", parents: hairTypeParents },
 ];
+const EAGER_GRID_IMAGE_COUNT = 8;
 ---
 
 <Layout
@@ -64,13 +65,13 @@ const filterGroups: FilterGroup[] = [
       class="mt-6 grid list-none gap-x-3 gap-y-5 grid-cols-2 sm:gap-x-3.5 md:grid-cols-3 lg:grid-cols-4"
       data-hairstyle-grid
     >
-      {publishedHairstyles.map((style) => (
+      {publishedHairstyles.map((style, index) => (
         <li
           data-directory-item
           data-filter-kind={style.kind}
           data-filter-hair-type={hairTypeIdsForStyle(style.id).join(",")}
         >
-          <HairstyleCard style={style} />
+          <HairstyleCard style={style} eager={index < EAGER_GRID_IMAGE_COUNT} />
         </li>
       ))}
     </ul>

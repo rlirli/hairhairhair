@@ -1063,7 +1063,7 @@ export const hairstyles: Hairstyle[] = [
     ],
     sourceIds: ["haircom-hime-cut", "met-heian-court-woman", "yokohama-belle-hime-cut"],
     relatedStyleIds: ["hairstyle-sleek-long-cut"],
-    guidePublicationStatus: "draft",
+    guidePublicationStatus: "published",
   },
   {
     id: "hairstyle-knotless-box-braids",
@@ -1232,7 +1232,7 @@ export const hairstyles: Hairstyle[] = [
     ],
     sourceIds: ["catholic-encyclopedia-celtic-rite", "catholic-encyclopedia-tonsure", "encyclopedia-com-tonsure"],
     relatedStyleIds: ["hairstyle-buzz-cut"],
-    guidePublicationStatus: "draft",
+    guidePublicationStatus: "published",
   },
   {
     id: "hairstyle-natural-afro",

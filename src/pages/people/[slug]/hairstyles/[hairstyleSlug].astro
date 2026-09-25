@@ -1,16 +1,15 @@
 ---
 import { Image } from "astro:assets";
-import Layout from "../../../../components/Layout.astro";
-import { buildPersonMedia } from "../../../../data/people-media";
-import { appearancesForPersonStyle, hairstylesForPerson } from "../../../../data/people-relations";
-import { getHairstyle } from "../../../../data/hairstyles";
+import Layout from "../../../../components/shared/Layout.astro";
+import { getAppearancesForPersonAndHairstyle, getHairstyleAppearancesForPerson } from "../../../../data";
+import { getHairstyleBySlug } from "../../../../data";
 import { people, personPhotographs } from "../../../../data/people";
-import PersonPhotoAttribution from "../../../../components/PersonPhotoAttribution.astro";
+import PhotoAttribution from "../../../../components/shared/PhotoAttribution";
 import { appearanceTitle, formatAppearanceDate } from "../../../../lib/appearance-formatting";
 
 export function getStaticPaths() {
   return people.flatMap((person) =>
-    hairstylesForPerson(person.id).map(({ style }) => ({
+    getHairstyleAppearancesForPerson(person.id).map(({ style }) => ({
       params: { slug: person.slug, hairstyleSlug: style.slug },
       props: { person, style },
     })),
@@ -18,10 +17,10 @@ export function getStaticPaths() {
 }
 
 const { person, style: pathStyle } = Astro.props;
-const style = pathStyle ?? getHairstyle(Astro.params.hairstyleSlug ?? "");
+const style = pathStyle ?? getHairstyleBySlug(Astro.params.hairstyleSlug ?? "");
 if (!style) throw new Error(`Unknown hairstyle: ${Astro.params.hairstyleSlug}`);
-const media = buildPersonMedia(personPhotographs);
-const records = appearancesForPersonStyle(person.id, style.id);
+const media = personPhotographs;
+const records = getAppearancesForPersonAndHairstyle(person.id, style.id);
 ---
 
 <Layout
@@ -85,16 +84,16 @@ const records = appearancesForPersonStyle(person.id, style.id);
         </h2>
       </div>
 
-      <div class="mt-2.5 sm:mt-4 grid gap-x-4 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
+      <ul class="mt-2.5 sm:mt-4 grid gap-x-4 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
         {records.map((appearance) => {
           const photo = media.find((item) => item.id === appearance.imageId);
           const observation = appearance.observations.find((item) => item.hairstyleId === style.id);
           return photo ? (
-            <article class="group">
+            <li class="group">
               <figure class="relative overflow-hidden">
                 <a class="focus-ring block" href={`/people/${person.slug}/photographs/${photo.id}/`}>
                   <Image
-                    src={photo.src}
+                    src={photo.image}
                     widths={[400, 700, 1000]}
                     sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
                     format="webp"
@@ -104,7 +103,7 @@ const records = appearancesForPersonStyle(person.id, style.id);
                     style={`object-position: ${photo.objectPosition}`}
                   />
                 </a>
-                <PersonPhotoAttribution media={photo} density="compact" />
+                <PhotoAttribution provenance={photo.provenance} density="compact" />
               </figure>
               <div class="mt-2">
                 <h3 class="font-display text-lg leading-tight tracking-[-.02em]">
@@ -115,10 +114,10 @@ const records = appearancesForPersonStyle(person.id, style.id);
                 <p class="mt-1 text-xs leading-tight text-muted">{formatAppearanceDate(appearance.taken.value)}</p>
                 {observation && <p class="mt-2 text-sm leading-5">{observation.note}</p>}
               </div>
-            </article>
+            </li>
           ) : null;
         })}
-      </div>
+      </ul>
     </section>
 
     <a

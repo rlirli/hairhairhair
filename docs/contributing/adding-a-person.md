@@ -5,15 +5,15 @@ This checklist describes the current static-data workflow for a person with at l
 ## Mandatory
 
 1. In `src/data/people.ts`, add a `Person` with a unique stable ID and slug, a concise description, source links, and a `heroImageId`.
-2. Add each local photograph to `src/assets/people/`. Preserve the original file and record its creator, source and original URLs, license, attribution, rights evidence, derivative status, and crop position in `personPhotographs`.
-3. In `src/data/people-media.ts`, add a static import and a filename-to-image entry for every photograph.
+2. Add each local photograph to `src/assets/people/`, then statically import it in `src/data/people.ts`. Add an `ImageMedia` record to `personPhotographs` with `kind: "image"`, the imported file in `image`, useful alt text, and crop position when needed.
+3. Keep rights data under `provenance`: record `licenseType`, creator, license name and URL, attribution, source and original URLs, rights evidence, derivative status, and any identifier or jurisdiction that applies.
 4. In `src/data/people.ts`, add each dated `Appearance`. Its `personId` and `imageId` must resolve, and every hairstyle observation must use an existing hairstyle ID. The current tests require every registered person photograph to be used by an appearance.
 5. In `src/data/people-relations.ts`, add the person's desired editorial hairstyle order to `personHairstyleOrder` so observed hairstyle previews and detail routes are produced.
 6. Run `npm run verify`. The integrity tests derive people, photographs, appearances, and routes from the content data and asset directories; do not add parallel bookkeeping fixtures.
 
 The person page shows up to six recent appearance cards and six hairstyle cards in separate horizontal strips. The person appearance and hairstyle archives retain every recorded entry in wrapping grids.
 
-Licensed-photo cards show the recorded creator, one linked license label, a source-record link, the supplied work identifier/title, and a visible change note such as “cropped” when applicable. Public-domain cards omit attribution text; the individual photograph record retains its full provenance. Keep the structured creator, license, source, rights, identifier, and derivative metadata accurate so both compact credits and detail records can be rendered from the same source data.
+Licensed-photo cards show attribution from `provenance`; public-domain records omit attribution text. Keep creator, license, source, rights, identifier, and derivative metadata accurate so compact credits and detail records use the same `ImageMedia` record.
 
 ## Optional
 

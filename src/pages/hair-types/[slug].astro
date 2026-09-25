@@ -1,11 +1,12 @@
 ---
-import Layout from "../../components/Layout.astro";
-import Pattern from "../../components/Pattern.astro";
-import RelatedHairstyleGrid from "../../components/RelatedHairstyleGrid.astro";
-import HairTypeCelebrityPreview from "../../components/HairTypeCelebrityPreview.astro";
-import HairTypeNavigator from "../../components/HairTypeNavigator.astro";
+import Layout from "../../components/shared/Layout.astro";
+import Pattern from "../../components/hair-types/Pattern.astro";
+import HairstyleGridData from "../../components/hairstyles/HairstyleGridData.astro";
+import CelebrityGrid from "../../components/people/CelebrityGrid.astro";
+import HairTypeNavigator from "../../components/hair-types/HairTypeNavigator.astro";
+import CollectionHeader from "../../components/shared/CollectionHeader.astro";
 import { hairSubtypes, hairTypes } from "../../data/hair-types";
-import { peopleForHairTypeSlug, stylesForHairTypeSlug } from "../../data/hair-type-discovery";
+import { getPeopleByHairTypeSlug, getCompatibleHairstylesForHairTypeSlug } from "../../data";
 
 export function getStaticPaths() {
   return [
@@ -22,8 +23,8 @@ const hairType = Astro.props.hairType!;
 const hairSubtype = Astro.props.hairSubtype!;
 const subtypes = kind === "hairType" ? hairSubtypes.filter((item) => item.hairTypeId === hairType.id) : [];
 const selected = kind === "hairType" ? hairType : hairSubtype;
-const styles = stylesForHairTypeSlug(selected.slug).slice(0, 5);
-const previewPeople = peopleForHairTypeSlug(selected.slug, { requireHeroImage: false, limit: 7 });
+const styles = getCompatibleHairstylesForHairTypeSlug(selected.slug).slice(0, 5);
+const previewPeople = getPeopleByHairTypeSlug(selected.slug, { requireHeroImage: false, limit: 7 });
 const label =
   kind === "hairType" ? `Type ${hairType.code}: ${hairType.name}` : `Type ${hairSubtype.code}: ${hairSubtype.name}`;
 ---
@@ -51,18 +52,20 @@ const label =
             People
           </a>
         </div>
-        <div class="mt-5 grid gap-4 md:grid-cols-3">
+        <ul class="mt-5 grid gap-4 md:grid-cols-3">
           {subtypes.map((item) => (
-            <a
-              href={`/hair-types/${item.slug}/`}
-              class="hover-surface focus-ring rounded-3xl border-2 border-ink p-5 transition"
-            >
-              <Pattern pattern={item.pattern} subtype={item.subtypeCode} />
-              <h3 class="mt-4 font-display text-2xl">Type {item.code}</h3>
-              <p class="mt-1">{item.name}</p>
-            </a>
+            <li>
+              <a
+                href={`/hair-types/${item.slug}/`}
+                class="hover-surface focus-ring group block rounded-3xl border-2 border-ink p-5 transition"
+              >
+                <Pattern pattern={item.pattern} subtype={item.subtypeCode} />
+                <h3 class="mt-4 font-display text-2xl group-hover:underline">Type {item.code}</h3>
+                <p class="mt-1">{item.name}</p>
+              </a>
+            </li>
           ))}
-        </div>
+        </ul>
       </section>
     ) : (
       <div class="mt-7 grid gap-8 md:grid-cols-[1.2fr_.8fr]">
@@ -86,22 +89,26 @@ const label =
   </article>
 
   <section class="mx-auto max-w-7xl px-5 pb-14 sm:px-8" aria-label={`Hairstyles for ${label}`}>
-    <div class="flex items-center justify-between gap-4 border-b border-taupe pb-3 sm:pb-2">
-      <h2 class="text-xs font-black uppercase tracking-[.16em] text-orange">Hairstyles for this type</h2>
-      <a
-        class="focus-ring text-xs font-normal uppercase tracking-[.16em] text-muted transition hover:text-ink"
-        href={`/hair-types/${selected.slug}/hairstyles/`}
-      >
-        More
-      </a>
-    </div>
-    <RelatedHairstyleGrid
+    <CollectionHeader
+      title="Hairstyles for this type"
+      href={`/hair-types/${selected.slug}/hairstyles/`}
+      containerClass="items-center gap-4"
+      linkClass="focus-ring text-xs font-normal uppercase tracking-[.16em] text-muted transition hover:text-ink"
+    />
+    <HairstyleGridData
       styles={styles}
       hairTypeId={kind === "hairType" ? hairType.id : undefined}
       className="mt-2.5 sm:mt-4 grid grid-flow-col auto-cols-[minmax(8rem,1fr)] gap-4 overflow-x-auto pb-3 lg:grid-flow-row lg:grid-cols-5 lg:auto-cols-auto lg:overflow-visible"
     />
   </section>
   {previewPeople.length > 0 && (
-    <HairTypeCelebrityPreview moreHref={`/hair-types/${selected.slug}/people/`} people={previewPeople} />
+    <section
+      class="mx-auto max-w-7xl px-5 pb-16 sm:px-8"
+      aria-label="People with this natural hair type"
+      data-testid="hair-type-celebrity-preview"
+    >
+      <CollectionHeader title="Celebs with this hair type" href={`/hair-types/${selected.slug}/people/`} />
+      <CelebrityGrid people={previewPeople} />
+    </section>
   )}
 </Layout>

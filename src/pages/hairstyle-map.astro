@@ -1,17 +1,17 @@
 ---
 import { getImage } from "astro:assets";
-import HairstyleRelationMap from "../components/HairstyleRelationMap";
-import Layout from "../components/Layout.astro";
-import { kindLabels } from "../data/hairstyle-relations";
-import { publishedHairstyles, styleExamples } from "../data/hairstyles";
-import { getMedia } from "../data/media";
+import HairstyleRelationMap from "../components/hairstyle-map/HairstyleRelationMap";
+import Layout from "../components/shared/Layout.astro";
+import { kindLabels } from "../data";
+import { publishedHairstyles } from "../data";
+import { getRepresentativeHairstyleMedia } from "../data";
 
 const styles = await Promise.all(
   publishedHairstyles.map(async (style) => {
-    const example = styleExamples.find((item) => item.hairstyleIds.includes(style.id));
-    const media = getMedia(example?.imageId ?? "");
+    const representative = getRepresentativeHairstyleMedia(style.id);
+    const media = representative?.media;
     if (!media) return undefined;
-    const image = await getImage({ src: media.src, width: 240, format: "webp" });
+    const image = await getImage({ src: media.image, width: 240, format: "webp" });
     return {
       id: style.id,
       name: style.name,
@@ -20,7 +20,7 @@ const styles = await Promise.all(
       href: `/hairstyles/${style.slug}/`,
       imageSrc: image.src,
       imageAlt: media.alt,
-      transparentBackground: media.provenance.kind === "generated" && media.provenance.background === "transparent",
+      transparentBackground: media.transparentBackground === true,
       relatedStyleIds: style.relatedStyleIds,
     };
   }),

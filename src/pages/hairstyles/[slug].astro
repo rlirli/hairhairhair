@@ -1,32 +1,37 @@
 ---
-import Layout from "../../components/Layout.astro";
-import RelatedHairstyleGrid from "../../components/RelatedHairstyleGrid.astro";
-import StyleMedia from "../../components/StyleMedia.astro";
-import StyleExampleCard from "../../components/StyleExampleCard.astro";
+import Layout from "../../components/shared/Layout.astro";
+import HairstyleGridData from "../../components/hairstyles/HairstyleGridData.astro";
+import StyleMedia from "../../components/hairstyles/StyleMedia.astro";
+import StyleExampleCard from "../../components/hairstyles/StyleExampleCard.astro";
 import { getImage } from "astro:assets";
-import { publishedHairstyles, sources, getExamplesForHairstyle } from "../../data/hairstyles";
-import { publishedRelatedHairstyles } from "../../data/hairstyle-relations";
-import { appearancesForStyle, personForAppearance } from "../../data/people-relations";
-import { kindLabels } from "../../data/hairstyle-relations";
-import { getMedia } from "../../data/media";
-import { buildPersonMedia } from "../../data/people-media";
+import { sources } from "../../data/hairstyles";
+import {
+  getAppearancesForHairstyle,
+  getHairstyleMediaById,
+  getPersonForAppearance,
+  getPublishedHairstylesByIds,
+  getStyleExamplesForHairstyle,
+  kindLabels,
+  publishedHairstyles,
+} from "../../data";
 import { personPhotographs } from "../../data/people";
-import HairstyleAppearanceGrid from "../../components/HairstyleAppearanceGrid.astro";
-import HairstyleFactSheet from "../../components/HairstyleFactSheet.astro";
+import HairstyleAppearanceGrid from "../../components/appearances/HairstyleAppearanceGrid.astro";
+import HairstyleFactSheet from "../../components/hairstyles/HairstyleFactSheet.astro";
+import CollectionHeader from "../../components/shared/CollectionHeader.astro";
 
 export function getStaticPaths() {
   return publishedHairstyles.map((style) => ({ params: { slug: style.slug }, props: { style } }));
 }
 const { style } = Astro.props;
-const examples = getExamplesForHairstyle(style.id);
+const examples = getStyleExamplesForHairstyle(style.id);
 const heroMedia = examples[0]?.imageId;
-const related = publishedRelatedHairstyles(style.relatedStyleIds);
+const related = getPublishedHairstylesByIds(style.relatedStyleIds);
 const referencedSources = sources.filter((source) => style.sourceIds.includes(source.id));
-const mediaById = new Map(buildPersonMedia(personPhotographs).map((media) => [media.id, media]));
-const documentedAppearances = appearancesForStyle(style.id)
+const mediaById = new Map(personPhotographs.map((media) => [media.id, media]));
+const documentedAppearances = getAppearancesForHairstyle(style.id)
   .sort((a, b) => b.taken.value.localeCompare(a.taken.value))
   .map((appearance) => {
-    const person = personForAppearance(appearance.id);
+    const person = getPersonForAppearance(appearance.id);
     const media = mediaById.get(appearance.imageId);
     return person && media
       ? {
@@ -42,7 +47,7 @@ const documentedAppearances = appearancesForStyle(style.id)
   .filter((item): item is NonNullable<typeof item> => Boolean(item));
 const kindLabel = kindLabels[style.kind];
 const ogImage = heroMedia
-  ? (await getImage({ src: getMedia(heroMedia)!.src, width: 1120, format: "jpg" })).src
+  ? (await getImage({ src: getHairstyleMediaById(heroMedia)!.image, width: 1120, format: "jpg" })).src
   : undefined;
 ---
 
@@ -81,32 +86,26 @@ const ogImage = heroMedia
       </div>
     </div>
     <section class="mt-16 pt-10">
-      <div class="flex items-baseline justify-between gap-4 border-b border-taupe pb-3 sm:pb-2">
-        <h2 class="text-xs font-black uppercase tracking-[.18em] text-orange">Examples</h2>
-        <a
-          class="focus-ring text-xs font-normal uppercase tracking-[.12em] text-muted transition hover:text-ink"
-          href={`/hairstyles/${style.slug}/examples/`}
-        >
-          More
-        </a>
-      </div>
-      <div class="mt-2.5 sm:mt-4 grid gap-4 sm:grid-cols-2">
+      <CollectionHeader
+        title="Examples"
+        href={`/hairstyles/${style.slug}/examples/`}
+        headingClass="text-xs font-black uppercase tracking-[.18em] text-orange"
+      />
+      <ul class="mt-2.5 sm:mt-4 grid gap-4 sm:grid-cols-2">
         {examples.slice(0, 4).map((example, index) => (
-          <StyleExampleCard example={example} styleSlug={style.slug} eager={index === 0} />
+          <li>
+            <StyleExampleCard example={example} styleSlug={style.slug} eager={index === 0} />
+          </li>
         ))}
-      </div>
+      </ul>
     </section>
     {documentedAppearances.length > 0 && (
       <section class="mt-16 pt-8">
-        <div class="flex items-baseline justify-between gap-4 border-b border-taupe pb-3 sm:pb-2">
-          <h2 class="text-xs font-black uppercase tracking-[.18em] text-orange">Worn by celebs</h2>
-          <a
-            class="focus-ring text-xs font-normal uppercase tracking-[.12em] text-muted transition hover:text-ink"
-            href={`/hairstyles/${style.slug}/appearances/`}
-          >
-            More
-          </a>
-        </div>
+        <CollectionHeader
+          title="Worn by celebs"
+          href={`/hairstyles/${style.slug}/appearances/`}
+          headingClass="text-xs font-black uppercase tracking-[.18em] text-orange"
+        />
         <div class="mt-2.5 sm:mt-4">
           <HairstyleAppearanceGrid appearances={documentedAppearances.slice(0, 6)} layout="row" />
         </div>
@@ -154,20 +153,17 @@ const ogImage = heroMedia
     </section>
     {related.length > 0 && (
       <section class="mt-16 pt-8">
-        <div class="flex items-baseline justify-between gap-4 border-b border-taupe pb-3 sm:pb-2">
-          <h2 class="text-xs font-black uppercase tracking-[.18em] text-orange">Related Hairstyles</h2>
-          <a
-            class="focus-ring text-xs font-normal uppercase tracking-[.12em] text-muted transition hover:text-ink"
-            href={`/hairstyles/${style.slug}/related-hairstyles/`}
-          >
-            More
-          </a>
-        </div>
-        <RelatedHairstyleGrid
+        <CollectionHeader
+          title="Related Hairstyles"
+          href={`/hairstyles/${style.slug}/related-hairstyles/`}
+          headingClass="text-xs font-black uppercase tracking-[.18em] text-orange"
+        />
+        <HairstyleGridData
           styles={related.slice(0, 6)}
           size="small"
           className="mt-2.5 sm:mt-4 flex gap-3 overflow-x-auto overscroll-x-contain pb-3"
           horizontalScroll
+          ariaLabel="Related hairstyles"
         />
       </section>
     )}

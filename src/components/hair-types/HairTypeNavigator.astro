@@ -1,0 +1,91 @@
+---
+import { cn } from "../../lib/utils";
+import { hairSubtypes, hairTypes } from "../../data/hair-types";
+import type { HairSubtype, HairType } from "../../types";
+
+interface Props {
+  kind: "hairType" | "hairSubtype";
+  hairType?: HairType;
+  hairSubtype?: HairSubtype;
+}
+
+const { kind, hairType, hairSubtype } = Astro.props;
+const currentTypeId = kind === "hairType" ? hairType?.id : hairSubtype?.hairTypeId;
+const currentSubtypeSlug = kind === "hairSubtype" ? hairSubtype?.slug : undefined;
+---
+
+<nav class="flex w-full items-center justify-center px-5 sm:px-8" aria-label="Hair type navigator">
+  <span aria-hidden="true" class="-ml-5 min-w-0 flex-1 border-t border-ink/15 sm:-ml-8"></span>
+  <div class="hair-type-navigator-scroll scrollbar-hidden w-fit max-w-full overflow-x-auto overflow-y-hidden rounded-xl border border-ink/15 bg-ink/[.015]">
+    <ol class="flex min-w-full w-max items-stretch">
+      {hairTypes.map((type) => {
+        const isCurrentGroup = currentTypeId === type.id;
+        const isCurrentTypePage = kind === "hairType" && isCurrentGroup;
+        const typeSubtypes = hairSubtypes.filter((subtype) => subtype.hairTypeId === type.id);
+        return (
+          <li class="min-w-max flex-1">
+            <div
+              data-hair-type-group
+              class={cn(
+                "px-2 pt-0 pb-1 text-center transition-colors sm:px-3",
+                isCurrentGroup && "relative z-10 -mx-px -my-px rounded-xl border border-ink/15 bg-clip-padding",
+                isCurrentGroup && (isCurrentTypePage ? "bg-orange/[.13]" : "bg-orange/[.055]"),
+              )}
+            >
+              <a
+                href={`/hair-types/${type.slug}/`}
+                aria-current={isCurrentTypePage ? "page" : undefined}
+                class={cn(
+                  "focus-ring inline-flex items-baseline justify-center gap-1 whitespace-nowrap font-sans text-[10px] leading-none tracking-[.1em] text-ink/45 transition-colors hover:text-orange sm:gap-1.5",
+                  isCurrentTypePage && "text-orange",
+                )}
+              >
+                <span>TYPE {type.code}</span>
+                <span class="hidden uppercase sm:inline">{type.pattern}</span>
+              </a>
+              <ol class="mt-0 flex items-center justify-center gap-0.5 sm:mt-0.5 sm:gap-1">
+                {typeSubtypes.map((subtype) => {
+                  const isCurrent = currentSubtypeSlug === subtype.slug;
+                  return (
+                    <li>
+                      <a
+                        href={`/hair-types/${subtype.slug}/`}
+                        aria-current={isCurrent ? "page" : undefined}
+                        aria-label={`Type ${subtype.code}`}
+                        class={cn(
+                          "focus-ring rounded px-1 py-1 font-sans text-[10px] font-normal leading-none tracking-[.1em] text-ink/60 transition-colors hover:bg-ink/[.06] hover:text-ink sm:px-1.5",
+                          isCurrent && "bg-orange/[.15] font-medium text-orange hover:bg-orange/[.2]",
+                        )}
+                      >
+                        {subtype.code}
+                      </a>
+                    </li>
+                  );
+                })}
+              </ol>
+            </div>
+          </li>
+        );
+      })}
+    </ol>
+  </div>
+  <span aria-hidden="true" class="-mr-5 min-w-0 flex-1 border-t border-ink/15 sm:-mr-8"></span>
+</nav>
+
+<script>
+  const scrollActiveHairTypeIntoView = () => {
+    const viewport = document.querySelector<HTMLElement>(".hair-type-navigator-scroll");
+    const activeLink = viewport?.querySelector<HTMLElement>('a[aria-current="page"]');
+    if (!viewport || !activeLink) return;
+
+    const activeTarget = activeLink.closest("[data-hair-type-group]") ?? activeLink;
+    const viewportRect = viewport.getBoundingClientRect();
+    const activeRect = activeTarget.getBoundingClientRect();
+    if (activeRect.left < viewportRect.left || activeRect.right > viewportRect.right) {
+      viewport.scrollLeft += activeRect.left - viewportRect.left - (viewport.clientWidth - activeRect.width) / 2;
+    }
+  };
+
+  requestAnimationFrame(scrollActiveHairTypeIntoView);
+  window.addEventListener("resize", scrollActiveHairTypeIntoView);
+</script>

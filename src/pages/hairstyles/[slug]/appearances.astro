@@ -1,18 +1,17 @@
 ---
-import Layout from "../../../components/Layout.astro";
-import HairstyleAppearanceGrid from "../../../components/HairstyleAppearanceGrid.astro";
+import Layout from "../../../components/shared/Layout.astro";
+import HairstyleAppearanceGrid from "../../../components/appearances/HairstyleAppearanceGrid.astro";
 import { people, personPhotographs } from "../../../data/people";
-import { buildPersonMedia } from "../../../data/people-media";
-import { appearancesForStyle } from "../../../data/people-relations";
-import { publishedHairstyles } from "../../../data/hairstyles";
+import { getAppearancesForHairstyle } from "../../../data";
+import { publishedHairstyles } from "../../../data";
 
 export function getStaticPaths() {
   return publishedHairstyles.map((style) => ({ params: { slug: style.slug }, props: { style } }));
 }
 
 const { style } = Astro.props;
-const mediaById = new Map(buildPersonMedia(personPhotographs).map((media) => [media.id, media]));
-const appearanceCards = appearancesForStyle(style.id)
+const mediaById = new Map(personPhotographs.map((media) => [media.id, media]));
+const appearanceCards = getAppearancesForHairstyle(style.id)
   .map((appearance) => {
     const person = people.find((item) => item.id === appearance.personId);
     const media = mediaById.get(appearance.imageId);

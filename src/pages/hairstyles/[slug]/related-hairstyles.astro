@@ -1,15 +1,15 @@
 ---
-import Layout from "../../../components/Layout.astro";
-import RelatedHairstyleGrid from "../../../components/RelatedHairstyleGrid.astro";
-import { publishedHairstyles } from "../../../data/hairstyles";
-import { publishedRelatedHairstyles } from "../../../data/hairstyle-relations";
+import Layout from "../../../components/shared/Layout.astro";
+import HairstyleGridData from "../../../components/hairstyles/HairstyleGridData.astro";
+import { publishedHairstyles } from "../../../data";
+import { getPublishedHairstylesByIds } from "../../../data";
 
 export function getStaticPaths() {
   return publishedHairstyles.map((style) => ({ params: { slug: style.slug }, props: { style } }));
 }
 
 const { style } = Astro.props;
-const related = publishedRelatedHairstyles(style.relatedStyleIds);
+const related = getPublishedHairstylesByIds(style.relatedStyleIds);
 ---
 
 <Layout
@@ -36,7 +36,7 @@ const related = publishedRelatedHairstyles(style.relatedStyleIds);
       <h1 class="font-display text-5xl tracking-[-.07em] sm:text-7xl">{style.name} related hairstyles</h1>
     </header>
     {related.length ? (
-      <RelatedHairstyleGrid
+      <HairstyleGridData
         styles={related}
         size="small"
         className="mt-2.5 sm:mt-4 grid grid-cols-2 gap-x-3 gap-y-5 sm:grid-cols-3 lg:grid-cols-6"

@@ -1,6 +1,6 @@
 ---
-import Layout from "../../components/Layout.astro";
-import HairStrand from "../../components/HairStrand.astro";
+import Layout from "../../components/shared/Layout.astro";
+import HairStrand from "../../components/hair-types/HairStrand.astro";
 import { hairSubtypes, hairTypes } from "../../data/hair-types";
 
 const subtypesFor = (typeId: string) => hairSubtypes.filter((subtype) => subtype.hairTypeId === typeId);
@@ -32,35 +32,39 @@ const subtypesFor = (typeId: string) => hairSubtypes.filter((subtype) => subtype
       </div>
     </div>
 
-    <div class="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
+    <ul class="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
       {hairTypes.map((hairType) => (
-        <section class="type-group rounded-[2rem] border-2 border-ink p-3 sm:p-4" data-type={hairType.code}>
-          <a href={`/hair-types/${hairType.slug}/`} class="focus-ring group block rounded-[1.35rem] px-2 py-2">
-            <span class="type-accent block text-xs font-black uppercase tracking-[.16em]">Type {hairType.code}</span>
-            <h3 class="mt-1 font-display text-3xl tracking-[-.06em] group-hover:underline">{hairType.name}</h3>
-          </a>
+        <li>
+          <section class="type-group h-full rounded-[2rem] border-2 border-ink p-3 sm:p-4" data-type={hairType.code}>
+            <a href={`/hair-types/${hairType.slug}/`} class="focus-ring group block rounded-[1.35rem] px-2 py-2">
+              <span class="type-accent block text-xs font-black uppercase tracking-[.16em]">Type {hairType.code}</span>
+              <h3 class="mt-1 font-display text-3xl tracking-[-.06em] group-hover:underline">{hairType.name}</h3>
+            </a>
 
-          <div class="mt-2 grid grid-cols-3 gap-2" aria-label={`Type ${hairType.code} hair shapes`}>
-            {subtypesFor(hairType.id).map((subtype) => (
-              <a
-                href={`/hair-types/${subtype.slug}/`}
-                class="hover-surface focus-ring group rounded-2xl p-1.5 transition sm:p-2"
-                aria-label={`${subtype.code}: ${subtype.name}`}
-              >
-                <HairStrand code={subtype.code} decorative />
-                <span class="mt-2 block text-center font-display text-xl leading-none group-hover:underline">
-                  {subtype.code}
-                </span>
-              </a>
-            ))}
-          </div>
-        </section>
+            <ul class="mt-2 grid grid-cols-3 gap-2" aria-label={`Type ${hairType.code} hair shapes`}>
+              {subtypesFor(hairType.id).map((subtype) => (
+                <li>
+                  <a
+                    href={`/hair-types/${subtype.slug}/`}
+                    class="hover-surface focus-ring group block rounded-2xl p-1.5 transition sm:p-2"
+                    aria-label={`${subtype.code}: ${subtype.name}`}
+                  >
+                    <HairStrand code={subtype.code} decorative />
+                    <span class="mt-2 block text-center font-display text-xl leading-none group-hover:underline">
+                      {subtype.code}
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        </li>
       ))}
-    </div>
+    </ul>
 
-    <div class="grid grid-cols-2 gap-x-3 gap-y-6 md:grid-cols-4 md:gap-x-4">
+    <ul class="grid grid-cols-2 gap-x-3 gap-y-6 md:grid-cols-4 md:gap-x-4">
       {hairTypes.map((hairType) => (
-        <div
+        <li
           class="type-column row-span-2 grid grid-rows-subgrid rounded-2xl gap-1"
           data-type={hairType.code}
           aria-labelledby={`type-${hairType.code}-heading`}
@@ -78,24 +82,26 @@ const subtypesFor = (typeId: string) => hairSubtypes.filter((subtype) => subtype
             <p class="mt-2 text-xs leading-4">{hairType.description}</p>
           </a>
 
-          <div
+          <ul
             class="grid gap-x-2 gap-y-1 px-2 pt-2 pb-3 sm:gap-x-3 sm:gap-y-2"
             aria-label={`Type ${hairType.code} sub-types`}
           >
             {subtypesFor(hairType.id).map((subtype) => (
-              <a
-                href={`/hair-types/${subtype.slug}/`}
-                class="hover-surface focus-ring group block rounded-xl border border-transparent px-2.5 py-1.5 transition hover:border-ink/35 focus-visible:border-ink/35 sm:px-3 sm:py-2.5"
-              >
-                <span class="block font-display text-xl leading-none group-hover:underline">{subtype.code}</span>
+              <li>
+                <a
+                  href={`/hair-types/${subtype.slug}/`}
+                  class="hover-surface focus-ring group block rounded-xl border border-transparent px-2.5 py-1.5 transition hover:border-ink/35 focus-visible:border-ink/35 sm:px-3 sm:py-2.5"
+                >
+                  <span class="block font-display text-xl leading-none group-hover:underline">{subtype.code}</span>
 
-                <span class="mt-1 block text-xs leading-4">{subtype.name}</span>
-              </a>
+                  <span class="mt-1 block text-xs leading-4">{subtype.name}</span>
+                </a>
+              </li>
             ))}
-          </div>
-        </div>
+          </ul>
+        </li>
       ))}
-    </div>
+    </ul>
   </section>
 </Layout>
 

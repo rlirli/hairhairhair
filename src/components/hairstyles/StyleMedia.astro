@@ -1,0 +1,45 @@
+---
+import { Image } from "astro:assets";
+import { getHairstyleMediaById } from "../../data";
+import PhotoAttribution from "../shared/PhotoAttribution";
+interface Props {
+  mediaId: string;
+  title?: string;
+  caption?: string;
+  patternDescription?: string;
+  lengthDescription?: string;
+  eager?: boolean;
+}
+const { mediaId, title, caption, patternDescription, lengthDescription, eager = false } = Astro.props;
+const media = getHairstyleMediaById(mediaId);
+---
+
+{media && (
+  <figure>
+    <div class="relative overflow-hidden rounded-4xl">
+      <Image
+        src={media.image}
+        widths={[400, 800, 1120]}
+        sizes="(min-width: 1024px) 50vw, 100vw"
+        format="webp"
+        alt={media.alt}
+        loading={eager ? "eager" : "lazy"}
+        class="w-full rounded-4xl object-cover bg-hairstyle-image-bg"
+      />
+      <PhotoAttribution provenance={media.provenance} density="compact" />
+    </div>
+    {(title || caption || patternDescription || lengthDescription) && (
+      <figcaption class="mt-3 text-sm leading-6">
+        {title && <span>{title}</span>}
+        {caption && (
+          <span>
+            {title ? " · " : ""}
+            {caption}
+          </span>
+        )}
+        {patternDescription && <span class="mt-1 block">{patternDescription}</span>}
+        {lengthDescription && <span class="mt-1 block">{lengthDescription}</span>}
+      </figcaption>
+    )}
+  </figure>
+)}

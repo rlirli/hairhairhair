@@ -1,63 +1,33 @@
-export interface HairstyleVariation {
-  id: string;
-  name: string;
-  description: string;
-}
+import type { EditorialSource, Hairstyle, StyleExample } from "../types";
 
-export interface HairstyleConsultation {
-  intro: string;
-  questions: string[];
-  sampleRequest: string;
-}
-
-export interface HairstyleOriginDate {
-  year: number;
-  precision: "year" | "decade";
-  sourceId: string;
-}
-
-export interface HairstyleInventor {
-  name: string;
-  sourceId: string;
-}
-
-export interface Hairstyle {
-  id: string;
-  slug: string;
-  name: string;
-  kind: "cut" | "finishing-technique" | "styling-technique";
-  summary: string;
-  intro: string[];
-  variations: HairstyleVariation[];
-  consultation: HairstyleConsultation;
-  considerations: string[];
-  sourceIds: string[];
-  relatedStyleIds: string[];
-  guidePublicationStatus: "draft" | "published";
-  inventedAt?: HairstyleOriginDate;
-  inventor?: HairstyleInventor;
-}
-
-export interface StyleExample {
-  id: string;
-  hairstyleIds: string[];
-  imageId: string;
-  title: string;
-  caption: string;
-  patternDescription: string;
-  lengthDescription: string;
-}
-
-export interface EditorialSource {
-  id: string;
-  title: string;
-  displayTitle?: string;
-  url: string;
-  publisher: string;
-  reviewedAt: string;
-}
+export const kindLabels = {
+  cut: "Cut",
+  "finishing-technique": "Finishing technique",
+  "styling-technique": "Styling technique",
+} as const;
 
 export const sources: EditorialSource[] = [
+  {
+    id: "aad-alopecia-self-care",
+    title: "Hair loss types: Alopecia areata self-care",
+    url: "https://www.aad.org/public/diseases/hair-loss/types/alopecia/self-care",
+    publisher: "American Academy of Dermatology",
+    reviewedAt: "2026-09-25",
+  },
+  {
+    id: "aad-how-to-shave",
+    title: "Hair removal: How to shave",
+    url: "https://www.aad.org/public/everyday-care/skin-care-basics/hair/how-to-shave",
+    publisher: "American Academy of Dermatology",
+    reviewedAt: "2026-09-25",
+  },
+  {
+    id: "aad-remove-unwanted-hair",
+    title: "6 ways to remove unwanted hair",
+    url: "https://www.aad.org/public/everyday-care/skin-care-basics/hair/remove-unwanted-hair",
+    publisher: "American Academy of Dermatology",
+    reviewedAt: "2026-09-25",
+  },
   {
     id: "aad-traction",
     title: "Hairstyles that pull can lead to hair loss",
@@ -66,9 +36,23 @@ export const sources: EditorialSource[] = [
     reviewedAt: "2026-09-20",
   },
   {
+    id: "allure-iconic-beauty-trends",
+    title: "25 Most Iconic Beauty Trends of All Time",
+    url: "https://www.allure.com/gallery/most-iconic-beauty-trends",
+    publisher: "Allure",
+    reviewedAt: "2026-09-24",
+  },
+  {
     id: "allure-protective-styles-history",
     title: "Protective Styles Are the Armor Black Women Have Worn for Centuries",
     url: "https://www.allure.com/story/protective-styles-meaning-history-michaela-angela-davis",
+    publisher: "Allure",
+    reviewedAt: "2026-09-24",
+  },
+  {
+    id: "allure-rachel-haircut-history",
+    title: '"The Rachel" Is the Best Worst Haircut I\'ve Had',
+    url: "https://www.allure.com/story/the-rachel-haircut-history",
     publisher: "Allure",
     reviewedAt: "2026-09-24",
   },
@@ -85,6 +69,13 @@ export const sources: EditorialSource[] = [
     url: "https://www.allure.com/story/wolf-cut-trend-haircut-tips-2026",
     publisher: "Allure",
     reviewedAt: "2026-09-22",
+  },
+  {
+    id: "american-salon-beauty-icon",
+    title: "Ode to a Beauty Icon",
+    url: "https://www.americansalon.com/news/ode-to-a-beauty-icon",
+    publisher: "American Salon",
+    reviewedAt: "2026-09-24",
   },
   {
     id: "andis-buzz-cut",
@@ -109,9 +100,23 @@ export const sources: EditorialSource[] = [
     reviewedAt: "2026-09-20",
   },
   {
+    id: "beauty-interviews-allen-edwards",
+    title: "Allen Edwards — Beauty Interviews",
+    url: "https://beautyinterviews.com/interview-with-allen-edwards/",
+    publisher: "Beauty Interviews",
+    reviewedAt: "2026-09-24",
+  },
+  {
     id: "british-vogue-70s-summer-haircuts",
     title: "These ’70s Haircuts Have Become Summer’s Most Sought-After Styles",
     url: "https://www.vogue.co.uk/article/70s-summer-haircuts",
+    publisher: "British Vogue",
+    reviewedAt: "2026-09-24",
+  },
+  {
+    id: "british-vogue-quant-sassoon",
+    title: "The Iconic Geometric Haircut Mary Quant Championed",
+    url: "https://www.vogue.co.uk/beauty/article/vidal-sassoon-haircut-mary-quant",
     publisher: "British Vogue",
     reviewedAt: "2026-09-24",
   },
@@ -149,6 +154,13 @@ export const sources: EditorialSource[] = [
     url: "https://www.essence.com/beauty/knotless-braids-summer-protective-styles/",
     publisher: "Essence",
     reviewedAt: "2026-09-22",
+  },
+  {
+    id: "glamour-modern-rachel",
+    title: "Everyone’s Getting the ‘Modern Rachel Haircut’ Right Now",
+    url: "https://www.glamour.com/story/modern-rachel-haircut",
+    publisher: "Glamour",
+    reviewedAt: "2026-09-24",
   },
   {
     id: "guardian-balotelli-hair-obituary",
@@ -228,6 +240,34 @@ export const sources: EditorialSource[] = [
     reviewedAt: "2026-09-22",
   },
   {
+    id: "hji-five-point-sassoon-cut",
+    title: "The Five Point - An Iconic Sassoon Cut",
+    url: "https://hji.co.uk/the-five-point-sassoon-cut",
+    publisher: "Hairdressers Journal International",
+    reviewedAt: "2026-09-24",
+  },
+  {
+    id: "latimes-fawcett-generation-x",
+    title: "Farrah Fawcett: forever Generation X's favorite pinup",
+    url: "https://www.latimes.com/fashion/alltherage/la-ig-farrah26-2009jun26-story.html",
+    publisher: "Los Angeles Times",
+    reviewedAt: "2026-09-24",
+  },
+  {
+    id: "latimes-hair-like-theirs",
+    title: "Hair Like Theirs",
+    url: "https://www.latimes.com/archives/la-xpm-1997-jul-24-ls-15600-story.html",
+    publisher: "Los Angeles Times",
+    reviewedAt: "2026-09-24",
+  },
+  {
+    id: "latimes-legacy-vidal-sassoon",
+    title: "The Legacy of Vidal Sassoon",
+    url: "https://www.latimes.com/archives/la-xpm-1999-dec-12-tm-42981-story.html",
+    publisher: "Los Angeles Times",
+    reviewedAt: "2026-09-24",
+  },
+  {
     id: "mancity-balotelli-blond-bombshell",
     title: "Mario Balotelli: Blond bombshell",
     url: "https://www.mancity.com/news/first-team/first-team-news/archive/2011/november/mario-balotelli-blond-bombshell",
@@ -256,6 +296,20 @@ export const sources: EditorialSource[] = [
     reviewedAt: "2026-09-20",
   },
   {
+    id: "nmaahc-black-is-beautiful",
+    title: "Black is Beautiful: The Emergence of Black Culture and Identity in the 60s and 70s",
+    url: "https://nmaahc.si.edu/explore/stories/black-beautiful-emergence-black-culture-and-identity-60s-and-70s",
+    publisher: "National Museum of African American History and Culture",
+    reviewedAt: "2026-09-24",
+  },
+  {
+    id: "nmaahc-strands-of-inspiration",
+    title: "Strands of Inspiration: Exploring Black Identities through Hair",
+    url: "https://nmaahc.si.edu/explore/stories/strands-of-inspiration",
+    publisher: "National Museum of African American History and Culture",
+    reviewedAt: "2026-09-24",
+  },
+  {
     id: "oxford-flat-top",
     title: "flat-top",
     url: "https://www.oxfordlearnersdictionaries.com/us/definition/english/flat-top",
@@ -263,10 +317,52 @@ export const sources: EditorialSource[] = [
     reviewedAt: "2026-09-21",
   },
   {
+    id: "sassoon-academy-heritage",
+    title: "Vidal Sassoon Heritage | The Story Behind Sassoon Academy",
+    url: "https://academy.sassoon-global.com/heritage.html",
+    publisher: "Sassoon Academy",
+    reviewedAt: "2026-09-24",
+  },
+  {
+    id: "smithsonian-afro-sheen",
+    title: "Johnson's Afro Sheen Blowout Kit for the Natural",
+    url: "https://americanhistory.si.edu/ar/collections/object/nmah_209542",
+    publisher: "National Museum of American History",
+    reviewedAt: "2026-09-24",
+  },
+  {
+    id: "smithsonian-black-hair-identity",
+    title: "It’s More Than “Just” Hair: Revitalization of Black Identity",
+    url: "https://folklife.si.edu/magazine/black-hair-identity",
+    publisher: "Smithsonian Center for Folklife and Cultural Heritage",
+    reviewedAt: "2026-09-24",
+  },
+  {
     id: "smithsonian-dread-history",
     title: "Dread History: The African Diaspora, Ethiopianism, and Rastafari",
     url: "https://www.smithsonianeducation.org/migrations/rasta/pic07.html",
     publisher: "Smithsonian Institution",
+    reviewedAt: "2026-09-24",
+  },
+  {
+    id: "smithsonian-look-talk-play",
+    title: "Look, Talk, Play",
+    url: "https://americanhistory.si.edu/sites/default/files/file-uploader/Look_Talk_Play.pdf",
+    publisher: "National Museum of American History",
+    reviewedAt: "2026-09-24",
+  },
+  {
+    id: "smithsonian-nathaniel-mathis",
+    title: "Nathaniel Mathis Collection of Barbering and Beauty Culture",
+    url: "https://www.si.edu/object/archives/sova-nmah-ac-0641",
+    publisher: "Smithsonian Institution",
+    reviewedAt: "2026-09-24",
+  },
+  {
+    id: "vogue-aniston-hair-products",
+    title: "The Hair Products Jennifer Aniston Swears By, According to Her Longtime Pros",
+    url: "https://www.vogue.com/article/jennifer-aniston-hair-products-color-styling-routine",
+    publisher: "Vogue",
     reviewedAt: "2026-09-24",
   },
   {
@@ -313,9 +409,68 @@ export const sources: EditorialSource[] = [
     publisher: "Wahl Professional",
     reviewedAt: "2026-09-21",
   },
+  {
+    id: "washington-post-jose-eber-1979",
+    title: "Short Cut to Celebrity",
+    url: "https://www.washingtonpost.com/archive/lifestyle/1979/02/17/short-cut-to-celebrity/0dba282e-fdca-4660-9f33-58e08126555a/",
+    publisher: "The Washington Post",
+    reviewedAt: "2026-09-24",
+  },
 ];
 
 export const hairstyles: Hairstyle[] = [
+  {
+    id: "hairstyle-bald",
+    slug: "bald",
+    name: "Bald / clean-shaven head",
+    kind: "cut",
+    summary:
+      "An intentionally hairless scalp produced by shaving visible scalp hair down to skin level, leaving the head shape and scalp itself as the defining silhouette.",
+    intro: [
+      "A clean-shaven head removes visible scalp hair rather than shaping the remaining hair into a particular length or texture.",
+      "Because shaving cuts hair at the skin surface rather than changing the follicle, the clean bald finish is temporary and visible regrowth can appear quickly.",
+      "The look is independent of natural curl pattern, density and hair color once the hair has been shaved sufficiently close.",
+      "This entry describes an intentionally shaved hairstyle. Naturally occurring baldness or medically caused hair loss may produce a visually similar scalp but is not itself a haircut.",
+    ],
+    variations: [
+      {
+        id: "bald-close-electric",
+        name: "Close electric shave",
+        description:
+          "Uses an electric shaver to leave an almost hairless appearance while potentially retaining a faint trace of extremely short stubble.",
+      },
+      {
+        id: "bald-razor-smooth",
+        name: "Razor-smooth shave",
+        description:
+          "Removes hair extremely close to the skin for the least visible stubble and smoothest scalp appearance.",
+      },
+    ],
+    consultation: {
+      intro:
+        "The main choices are how close the scalp should be shaved, how often the look will be maintained, and how sensitive the scalp is to repeated shaving.",
+      questions: [
+        "Do you want a razor-smooth scalp or is extremely short electric-shaver stubble acceptable?",
+        "How frequently are you prepared to shave to keep visible regrowth minimal?",
+        "Does your scalp tend to develop razor irritation, bumps or ingrown hairs?",
+        "Are there scars, moles, bumps or other areas the barber should work around carefully?",
+        "Do you also want the sideburn and neckline areas removed completely so the scalp transitions cleanly into the face and neck?",
+      ],
+      sampleRequest:
+        "“I want my head completely clean-shaven with no visible hair left on the scalp. Keep the finish even from the forehead through the crown and nape, and use a method that gives me the closest comfortable shave without irritating my skin.”",
+    },
+    considerations: [
+      "The clean-shaven result is temporary because shaving removes hair at the skin surface rather than preventing future growth.",
+      "Visible stubble may return quickly, so maintaining a consistently smooth appearance can require frequent shaving.",
+      "Repeated shaving can cause cuts, razor burn, irritation or ingrown hairs, particularly when shaving too closely or against the direction of growth.",
+      "A completely exposed scalp receives more direct ultraviolet exposure than a scalp covered by hair, so sun protection becomes more important.",
+      "Scalp shape, scars, pigmentation, moles and other skin features become considerably more visible once the hair is removed.",
+      "Natural hair type does not meaningfully constrain the finished appearance because the defining style removes the visible hair itself.",
+    ],
+    sourceIds: ["aad-alopecia-self-care", "aad-how-to-shave", "aad-remove-unwanted-hair"],
+    relatedStyleIds: ["hairstyle-buzz-cut"],
+    guidePublicationStatus: "published",
+  },
   {
     id: "hairstyle-blunt-bob",
     slug: "blunt-bob",
@@ -361,7 +516,7 @@ export const hairstyles: Hairstyle[] = [
       "Removing too much internal weight changes the silhouette toward a layered bob even if the outer perimeter remains short.",
     ],
     sourceIds: ["haircom-blunt-bob"],
-    relatedStyleIds: [],
+    relatedStyleIds: ["hairstyle-five-point-cut"],
     guidePublicationStatus: "published",
   },
   {
@@ -409,7 +564,7 @@ export const hairstyles: Hairstyle[] = [
       "The visible result can differ between dry and damp hair and between straight, wavy, curly, and coily patterns; the cut should be assessed in the state in which it will usually be worn.",
     ],
     sourceIds: ["andis-buzz-cut", "wahl-cut-guide"],
-    relatedStyleIds: ["hairstyle-flat-top", "hairstyle-taper-fade", "hairstyle-twists"],
+    relatedStyleIds: ["hairstyle-bald", "hairstyle-flat-top", "hairstyle-taper-fade", "hairstyle-twists"],
     guidePublicationStatus: "published",
   },
   {
@@ -458,7 +613,13 @@ export const hairstyles: Hairstyle[] = [
       "A cropped afro is distinct from a buzz cut by the visible textured fullness it retains; if you want a simpler uniform crop, explore the Buzz cut style.",
     ],
     sourceIds: ["guardian-balotelli-hair-obituary"],
-    relatedStyleIds: ["hairstyle-patterned-mohawk", "hairstyle-thin-mohawk", "hairstyle-top-knot"],
+    relatedStyleIds: [
+      "hairstyle-natural-afro",
+      "hairstyle-patterned-mohawk",
+      "hairstyle-sculpted-spherical-afro",
+      "hairstyle-thin-mohawk",
+      "hairstyle-top-knot",
+    ],
     guidePublicationStatus: "published",
   },
   {
@@ -515,6 +676,112 @@ export const hairstyles: Hairstyle[] = [
     sourceIds: ["haircom-curtain-hairstyle", "haircom-type-1b"],
     relatedStyleIds: [],
     guidePublicationStatus: "published",
+  },
+  {
+    id: "hairstyle-farrah-fawcett-cut",
+    slug: "farrah-fawcett-cut",
+    name: "Farrah Fawcett cut",
+    kind: "cut",
+    summary:
+      "A long, extensively layered haircut shaped into large face-opening feathers, with elevated volume around the crown and sides and lower sections that sweep away from the face.",
+    intro: [
+      "Allen Edwards recalled beginning Farrah Fawcett's transformation in 1974, when she arrived with largely one-length hair. He progressively introduced long layering as fuller, more mobile hair was becoming fashionable.",
+      "The hairstyle became inseparable from its blow-dried finish: shorter layers around the face are directed backward and outward, creating broad feathered sections beside the cheeks and temples, while longer layers continue the movement through the shoulders.",
+      "Edwards also associated the look with a blow-curl method in which most of the hair was dried first and the ends were then shaped with smaller brushes. That styling approach helped turn the layered cut into the expansive winged silhouette associated with Fawcett.",
+      "The historical attribution is not completely uncontested. José Eber later styled Fawcett extensively and contemporary reporting documents him changing and maintaining her hair; some later accounts credit Eber with the famous feathered look. The 1974 Edwards account is nevertheless the earliest specific creation narrative located for the layered cut.",
+    ],
+    variations: [
+      {
+        id: "farrah-fawcett-cut-classic-winged",
+        name: "Classic winged Farrah",
+        description:
+          "Uses pronounced face-framing layers, substantial side volume and strongly outward-directed feathering to create the broad 1970s silhouette.",
+      },
+      {
+        id: "farrah-fawcett-cut-soft-feathered",
+        name: "Soft feathered Farrah",
+        description:
+          "Keeps the long layered construction and outward movement but reduces crown height and separates the feathers less dramatically.",
+      },
+    ],
+    consultation: {
+      intro:
+        "Separate the underlying layer structure from the blowout: agree on overall length, where the shortest face frame begins, how much weight is removed through the sides, and how strongly the finished hair should sweep away from the face.",
+      questions: [
+        "How much overall length do you want to retain below the shoulders?",
+        "Where should the shortest face-framing layer begin: around the cheekbone, jaw, or lower?",
+        "How dramatic should the outward feathering around the temples and cheeks be?",
+        "Do you want substantial crown and side volume or a softer contemporary interpretation?",
+        "Are you willing to use a blow-dryer and round brush regularly to produce the classic winged shape?",
+      ],
+      sampleRequest:
+        "“I want a long Farrah-style feathered cut with lots of movement, shorter layers beginning around my cheekbones, longer layers through the shoulders, and enough layering around the sides that I can blow-dry them back and away from my face into large soft wings.”",
+    },
+    considerations: [
+      "The haircut alone does not automatically produce the familiar silhouette; directional blow-drying is a major part of the classic result.",
+      "The face-framing sections need enough length to sweep backward rather than falling like a short fringe.",
+      "Dense hair can support substantial feathered volume, but excessive bulk may need controlled weight removal so the layers separate rather than forming one heavy mass.",
+      "Very fine or low-density hair can lose fullness if the layering is too aggressive, particularly through the lower perimeter.",
+      "Straight hair generally needs styling to create the curved feathering, while gently wavy hair often supplies useful natural body for the shape.",
+      "Increasing curl tightness makes the canonical large, smooth feathered panels progressively harder to maintain while preserving the natural curl pattern.",
+      "The attribution to Allen Edwards is historically disputed because José Eber also styled Fawcett and has been credited with versions of her signature hair.",
+    ],
+    sourceIds: [
+      "american-salon-beauty-icon",
+      "beauty-interviews-allen-edwards",
+      "latimes-fawcett-generation-x",
+      "latimes-hair-like-theirs",
+      "washington-post-jose-eber-1979",
+    ],
+    relatedStyleIds: ["hairstyle-long-layered-cut", "hairstyle-short-feathered-shag"],
+    guidePublicationStatus: "published",
+    inventedAt: { year: 1974, precision: "year", sourceId: "beauty-interviews-allen-edwards" },
+    inventor: { name: "Allen Edwards", sourceId: "beauty-interviews-allen-edwards" },
+  },
+  {
+    id: "hairstyle-five-point-cut",
+    slug: "five-point-cut",
+    name: "Five Point Cut",
+    kind: "cut",
+    summary:
+      "Vidal Sassoon's short geometric 1963 cut, defined by two deliberate points at the sides and three at the nape, with blunt precision and length increasing from the short back toward the face.",
+    intro: [
+      "Vidal Sassoon created the Five Point in 1963 as part of his new architectural approach to haircutting. Sassoon Academy connects the method to his interest in Bauhaus design: removing the superfluous and making the cut itself determine how the hair falls rather than relying on rollers, back-combing or heavy setting products.",
+      "The five points are structural rather than decorative. Sassoon described the shape as covering the whole head, with two points at the sides and three through the nape, fitted to bone structure and the natural contours of the hair.",
+      "The nape is cut short and the shape gradually lengthens toward the face. Blunt ends preserve visual density and make the geometric outline legible, while the underlying precision was intended to let the hair move and then fall back into its designed shape.",
+    ],
+    variations: [],
+    consultation: {
+      intro:
+        "The Five Point is a highly specific geometric cut, so agree on the five-point perimeter, fringe, side length and degree of graduation rather than requesting only a short bob.",
+      questions: [
+        "Do you want the classic Five Point geometry with two pronounced side points and three distinct points through the nape?",
+        "Where should the two side points land relative to the cheekbone, jaw and ears?",
+        "How short should the central nape area be while retaining enough length to form the three rear points?",
+        "Should the fringe read as a strong blunt geometric line or be adapted slightly around the face?",
+        "How close to the original crisp Sassoon finish do you want the cut to remain when worn in your natural texture?",
+      ],
+      sampleRequest:
+        "“I'd like a classic Vidal Sassoon Five Point: short and graduated through the nape, two strong points at the sides, three defined points through the back, blunt dense edges and a precise geometric fringe. I want the shape fitted to my head rather than turned into a generic A-line bob.”",
+    },
+    considerations: [
+      "The five-point perimeter is the defining feature. If the side and nape points disappear, the result can read as a generic geometric or graduated bob instead.",
+      "The original concept depends heavily on precision cutting and head shape; Sassoon described it as one of his hardest cuts to execute.",
+      "Straight hair exposes the designed lines most clearly. Increasing natural wave, curl or coil progressively softens and interrupts the crisp five-point outline.",
+      "The cut is short at the nape and longer toward the face, so shrinkage and natural movement should be assessed before establishing the final dry perimeter.",
+      "Because small amounts of growth visibly soften geometric points, maintaining the original graphic shape generally requires relatively frequent reshaping.",
+      "Straightening a naturally curly or coily texture can reproduce more of the graphic finish, but the compatibility estimates here intentionally assess the hairstyle while preserving the natural curl pattern.",
+    ],
+    sourceIds: [
+      "british-vogue-quant-sassoon",
+      "hji-five-point-sassoon-cut",
+      "latimes-legacy-vidal-sassoon",
+      "sassoon-academy-heritage",
+    ],
+    relatedStyleIds: ["hairstyle-blunt-bob"],
+    guidePublicationStatus: "published",
+    inventedAt: { year: 1963, precision: "year", sourceId: "sassoon-academy-heritage" },
+    inventor: { name: "Vidal Sassoon", sourceId: "sassoon-academy-heritage" },
   },
   {
     id: "hairstyle-flat-top",
@@ -795,7 +1062,69 @@ export const hairstyles: Hairstyle[] = [
       "Curtain fringe changes the front silhouette substantially and should be treated as an optional variation rather than a defining requirement of the long layered cut.",
     ],
     sourceIds: ["haircom-face-framing-layers", "haircom-layered-hair", "vogue-emrata-bangs-2024"],
-    relatedStyleIds: ["hairstyle-sleek-long-cut", "hairstyle-wolf-cut"],
+    relatedStyleIds: [
+      "hairstyle-farrah-fawcett-cut",
+      "hairstyle-sleek-long-cut",
+      "hairstyle-the-rachel",
+      "hairstyle-wolf-cut",
+    ],
+    guidePublicationStatus: "published",
+  },
+  {
+    id: "hairstyle-natural-afro",
+    slug: "natural-afro",
+    name: "Natural afro",
+    kind: "cut",
+    summary:
+      "A full natural Afro that lets dense curls or coils expand outward into a broad rounded silhouette while preserving visible texture and a softer, less geometrically controlled perimeter.",
+    intro: [
+      "The natural afro uses the hair's own curl or coil structure to create substantial volume around the head rather than relying on straightening or a tightly controlled geometric outline.",
+      "Its silhouette is usually broadly rounded, but the perimeter can remain organic: individual curl clusters, slight asymmetry and natural variation in density are compatible with the look.",
+      "Afros became especially visible during the natural-hair and Black-is-Beautiful movements of the 1960s and 1970s, when wearing Black hair in its natural texture acquired strong cultural and political significance.",
+      "Afro picks and other wide-toothed tools can lift hair away from the scalp and increase volume while keeping the natural texture present. The result does not need to be trimmed into the near-perfect sphere associated with a more heavily sculpted Afro.",
+    ],
+    variations: [
+      {
+        id: "natural-afro-full-volume",
+        name: "Full-volume natural afro",
+        description:
+          "Uses greater retained length and picking for a larger silhouette without forcing the perimeter into a precise geometric sphere.",
+      },
+      {
+        id: "natural-afro-soft-rounded",
+        name: "Soft rounded natural afro",
+        description:
+          "Creates a broadly rounded silhouette while preserving visible texture, natural perimeter variation and moderate asymmetry.",
+      },
+    ],
+    consultation: {
+      intro:
+        "Agree on overall size, how much natural irregularity to preserve, and whether the perimeter should be lightly shaped or allowed to follow the hair's natural distribution.",
+      questions: [
+        "How large do you want the finished Afro to appear relative to your head and shoulders?",
+        "Should the outline be softly rounded or intentionally left more irregular and organic?",
+        "How much length do you want to retain through the crown, sides and lower perimeter?",
+        "Do you want the curl or coil clusters to remain visibly defined, or should the hair be picked out more fully for volume?",
+        "Should the stylist correct noticeable asymmetry or preserve more of the natural growth pattern?",
+      ],
+      sampleRequest:
+        "“I want a full natural Afro with a soft rounded shape, but not a perfectly sculpted sphere. Keep the natural texture visible, retain plenty of volume, and only refine the perimeter enough that the overall silhouette feels intentional.”",
+    },
+    considerations: [
+      "This style prioritizes natural texture and volume over a mathematically controlled outline, so some perimeter irregularity is part of the intended result.",
+      "Picking increases volume and can reduce the visual definition of individual curls or coils, so the desired balance between definition and expansion should be discussed.",
+      "Shrinkage can substantially change the apparent length and diameter of the finished Afro, so shaping should be assessed on dry hair in its intended worn state.",
+      "Greater density and tighter curl or coil patterns generally make it easier to support a large self-sustaining silhouette without the hair collapsing downward.",
+      "Looser curl patterns can still form rounded natural Afros, but they may hang more and create less radial volume than tighter coils.",
+      "Periodic trimming can maintain an intentional overall shape without converting the style into a highly sculpted spherical Afro.",
+    ],
+    sourceIds: [
+      "nmaahc-black-is-beautiful",
+      "nmaahc-strands-of-inspiration",
+      "smithsonian-afro-sheen",
+      "smithsonian-black-hair-identity",
+    ],
+    relatedStyleIds: ["hairstyle-cropped-afro"],
     guidePublicationStatus: "published",
   },
   {
@@ -843,6 +1172,63 @@ export const hairstyles: Hairstyle[] = [
     ],
     sourceIds: ["guardian-balotelli-hair-obituary", "mancity-balotelli-blond-bombshell"],
     relatedStyleIds: ["hairstyle-cropped-afro", "hairstyle-thin-mohawk", "hairstyle-top-knot"],
+    guidePublicationStatus: "published",
+  },
+  {
+    id: "hairstyle-sculpted-spherical-afro",
+    slug: "sculpted-spherical-afro",
+    name: "Sculpted spherical afro",
+    kind: "cut",
+    summary:
+      "A full Afro deliberately picked outward and trimmed into a dense, near-spherical silhouette with a controlled circular perimeter.",
+    intro: [
+      "The sculpted spherical afro is a specific full-Afro silhouette rather than simply any rounded natural style. Substantial coily length is lifted away from the scalp and distributed outward so the hair forms a broad three-dimensional mass around the head.",
+      "The defining feature is geometric control of the outer silhouette. The perimeter is shaped toward an almost circular profile from the front and a rounded volume from the side, rather than following every irregularity of the natural growth pattern.",
+      "Afros became especially prominent in the United States during the Black-is-Beautiful and Black Power era of the late 1960s and 1970s, when wearing natural Black hair at visible scale carried strong cultural significance.",
+      "Afro picks and related wide-toothed tools help lift and separate dense coily hair outward. The final spherical appearance then depends on both that expansion and careful trimming of the outer surface.",
+      "“Sculpted spherical afro” is an editorial label used in this collection to distinguish this highly geometric full Afro from shorter cropped Afros and softer, more naturally irregular rounded Afros.",
+    ],
+    variations: [
+      {
+        id: "sculpted-spherical-afro-perfect-round",
+        name: "Near-perfect sphere",
+        description: "Maximizes symmetry and trims the outer perimeter toward an almost continuous circular outline.",
+      },
+      {
+        id: "sculpted-spherical-afro-soft-round",
+        name: "Soft spherical shape",
+        description:
+          "Retains the broad spherical mass while allowing slightly more natural irregularity at the outer edge.",
+      },
+    ],
+    consultation: {
+      intro:
+        "The key decisions are overall diameter, how close to a true sphere the silhouette should be, how much natural surface texture remains visible, and how much length must be retained to support the desired volume.",
+      questions: [
+        "How large should the finished Afro read relative to your head and shoulders?",
+        "Do you want an almost mathematically round silhouette or a softer rounded shape?",
+        "Should the sides and crown carry equal visual radius, or should the top remain slightly higher?",
+        "How much natural irregularity should remain visible around the perimeter?",
+        "How frequently are you willing to pick, reshape and trim the style to maintain the spherical outline?",
+      ],
+      sampleRequest:
+        "“I want a large sculpted Afro with a nearly spherical silhouette. Keep enough length and density to build real outward volume, pick it evenly from the scalp, and trim the perimeter into a controlled round shape rather than a short cropped Afro.”",
+    },
+    considerations: [
+      "The spherical silhouette depends on sufficient density and shrinkage resistance to support hair outward from the scalp rather than letting it collapse or hang.",
+      "Picking changes the visible curl definition by separating and expanding the hair, so this style intentionally prioritizes silhouette over individually defined coils.",
+      "The geometric perimeter requires periodic reshaping because uneven growth gradually disrupts the sphere.",
+      "The style should be assessed in its fully picked-out dry state before perimeter trimming because shrinkage and expansion can change the final dimensions substantially.",
+      "Very tight, dense coils are especially effective because they can maintain a large unsupported rounded mass. Looser patterns increasingly need manipulation or structural assistance and may still fail to reproduce the defining sphere.",
+      "This entry describes the sculpted result rather than claiming every full Afro must be perfectly symmetrical; natural Afros also exist with softer and more irregular silhouettes.",
+    ],
+    sourceIds: [
+      "nmaahc-strands-of-inspiration",
+      "smithsonian-black-hair-identity",
+      "smithsonian-look-talk-play",
+      "smithsonian-nathaniel-mathis",
+    ],
+    relatedStyleIds: ["hairstyle-cropped-afro"],
     guidePublicationStatus: "published",
   },
   {
@@ -898,7 +1284,7 @@ export const hairstyles: Hairstyle[] = [
       "Shorter, choppier feathered cuts generally need more frequent reshaping than longer, more uniform layers.",
     ],
     sourceIds: ["allure-shag-haircut-ideas", "haircom-feathered-hair", "haircom-short-haircuts-older-women"],
-    relatedStyleIds: ["hairstyle-wolf-cut"],
+    relatedStyleIds: ["hairstyle-farrah-fawcett-cut", "hairstyle-the-rachel", "hairstyle-wolf-cut"],
     guidePublicationStatus: "published",
   },
   {
@@ -1011,6 +1397,65 @@ export const hairstyles: Hairstyle[] = [
     sourceIds: ["andis-low-taper", "wahl-cut-guide"],
     relatedStyleIds: ["hairstyle-buzz-cut", "hairstyle-flat-top", "hairstyle-twists"],
     guidePublicationStatus: "published",
+  },
+  {
+    id: "hairstyle-the-rachel",
+    slug: "the-rachel",
+    name: "The Rachel",
+    kind: "cut",
+    summary:
+      "A shoulder-skimming, heavily layered 1990s cut with pronounced face framing, rounded volume and a blow-dried finish that turns individual layers into visible curved sections around the face and neck.",
+    intro: [
+      "The Rachel emerged in 1994 after hairstylist Chris McMillan cut Jennifer Aniston’s hair during the first year of Friends. The version seen on Aniston became a mass-copied 1990s hairstyle and took its name from her character, Rachel Green.",
+      "Its structure sits between a bob and a mid-length shag: the overall length stays near the shoulders while numerous shorter layers build shape around the face and through the upper sections. The classic finish exaggerates those layers with lift and curved ends rather than pressing them flat.",
+      "McMillan has been clear that he did not invent the general idea of a mid-length layered shag. He recalled earlier related cuts on model Beri Smither, later adapted a similar idea for Cameron Diaz, and then cut the version on Aniston that became known specifically as The Rachel.",
+      "The haircut and its styling are tightly linked. The canonical look relies on a round-brush blowout to separate and bend the layers, so an unstyled version can look substantially less like the familiar 1990s silhouette.",
+    ],
+    variations: [
+      {
+        id: "the-rachel-classic",
+        name: "Classic Rachel",
+        description:
+          "Keeps the shoulder-skimming length, conspicuous face-framing layers, fuller crown and strongly curved blowout associated with the mid-1990s version.",
+      },
+      {
+        id: "the-rachel-reduced-crown",
+        name: "Reduced-crown Rachel",
+        description:
+          "Retains the layered face frame and rounded ends but uses less lift through the crown for a flatter, more contemporary silhouette.",
+      },
+    ],
+    consultation: {
+      intro:
+        "The key decisions are finished length, where the shortest face-framing layer begins, how much layering is carried through the crown and back, and how much daily blow-drying you are willing to do.",
+      questions: [
+        "Should the finished perimeter sit at the jaw, just above the shoulders, or brush the shoulders?",
+        "Where should the shortest face-framing layer start: around the cheekbone, mouth, or jaw?",
+        "Do you want the fuller 1990s crown shape or a lower-volume modern interpretation?",
+        "How strongly should the lower layers flick outward versus curve inward around the face?",
+        "Will you routinely use a round-brush blowout, or should the cut also work acceptably with your natural texture and minimal styling?",
+      ],
+      sampleRequest:
+        "“I want a classic Rachel-style cut around shoulder length, with lots of rounded face-framing layers starting near my cheekbones, visible layering through the crown and sides, and enough length at the bottom for the ends to flick outward when I blow-dry it.”",
+    },
+    considerations: [
+      "The recognizable shape comes from both cutting and styling; without lift and directional bending at the ends, the same layers can read as a more generic mid-length layered cut.",
+      "The classic finish is maintenance-heavy compared with a wash-and-go cut because the separate curved sections are usually created with a blow-dryer and round brush.",
+      "Regular reshaping helps preserve the distinction between the shorter face frame and the longer perimeter as the haircut grows.",
+      "Straight and gently wavy hair can display the rounded layer pattern with relatively ordinary styling. Stronger curls and coils substantially change the silhouette when their natural pattern is preserved.",
+      "Dense hair may need careful weight management so the upper layers create movement rather than excessive width, while very fine or sparse hair can lose visual density if too many short layers are added.",
+      "The original 1990s version used considerable volume through the upper head; lowering crown volume produces a more contemporary interpretation without changing the basic layered concept.",
+    ],
+    sourceIds: [
+      "allure-iconic-beauty-trends",
+      "allure-rachel-haircut-history",
+      "glamour-modern-rachel",
+      "vogue-aniston-hair-products",
+    ],
+    relatedStyleIds: ["hairstyle-long-layered-cut", "hairstyle-short-feathered-shag"],
+    guidePublicationStatus: "published",
+    inventedAt: { year: 1994, precision: "year", sourceId: "allure-iconic-beauty-trends" },
+    inventor: { name: "Chris McMillan", sourceId: "allure-iconic-beauty-trends" },
   },
   {
     id: "hairstyle-thin-mohawk",
@@ -1210,13 +1655,126 @@ export const hairstyles: Hairstyle[] = [
   },
 ];
 
-export function isPublishedGuide(hairstyle: Pick<Hairstyle, "guidePublicationStatus">): boolean {
-  return hairstyle.guidePublicationStatus === "published";
-}
-
-export const publishedHairstyles = hairstyles.filter(isPublishedGuide);
-
 export const styleExamples: StyleExample[] = [
+  {
+    id: "bald-mongolian-elder-woman",
+    hairstyleIds: ["hairstyle-bald"],
+    imageId: "bald-mongolian-elder-woman",
+    title: "Clean-shaven head on elderly woman",
+    caption:
+      "A fictional Mongolian woman in her late 90s wearing a fully clean-shaven scalp, showing how the style leaves the natural head shape completely visible.",
+    patternDescription:
+      "No visible hair pattern remains because the scalp is shaved to skin level; the model's underlying natural hair subtype is intentionally unspecified.",
+    lengthDescription: "Bald, with visible scalp hair removed to skin level across the entire head.",
+  },
+  {
+    id: "bald-young-white-man",
+    hairstyleIds: ["hairstyle-bald"],
+    imageId: "bald-young-white-man",
+    title: "Clean-shaven head on young man",
+    caption:
+      "A fictional white man in his mid-20s wearing a completely shaved head with an even scalp finish and no visible hairstyle perimeter.",
+    patternDescription:
+      "No visible hair pattern remains because the scalp is shaved to skin level; the model's underlying natural hair subtype is intentionally unspecified.",
+    lengthDescription:
+      "Bald, with scalp hair removed evenly to skin level from the hairline through the crown and nape.",
+  },
+  {
+    id: "farrah-fawcett-cut-black",
+    hairstyleIds: ["hairstyle-farrah-fawcett-cut"],
+    imageId: "farrah-fawcett-cut-black",
+    title: "Black-haired feathered Farrah cut",
+    caption:
+      "A fictional Indian woman in her 20s wearing long black hair in a Farrah-style feathered cut with broad face-opening layers and outward-flipped lower sections.",
+    patternDescription:
+      "Presented with a Type 1C-to-2A-like blow-dried finish that gives the black hair enough body for the large feathered sections; the image does not establish the fictional model's natural hair subtype.",
+    lengthDescription:
+      "Long, extending below the shoulders, with shorter graduated face-framing layers beginning around the cheekbones and progressively longer feathered sections through the sides and lower lengths.",
+  },
+  {
+    id: "farrah-fawcett-cut-classic-feathered",
+    hairstyleIds: ["hairstyle-farrah-fawcett-cut"],
+    imageId: "farrah-fawcett-cut-classic-feathered",
+    title: "Classic feathered Farrah cut",
+    caption:
+      "A fictional blonde woman wearing long, highly layered hair with broad face-opening feathers, elevated side volume and outward-flipped lower sections.",
+    patternDescription:
+      "Presented with a Type 1C-to-2A-like blow-dried finish that supplies enough body for the large feathered sections; the image does not establish the fictional model's natural hair subtype.",
+    lengthDescription:
+      "Long, extending below the shoulders, with progressively shorter layers around the face and upper sides.",
+  },
+  {
+    id: "five-point-cut-geometric-black",
+    hairstyleIds: ["hairstyle-five-point-cut"],
+    imageId: "five-point-cut-geometric-black",
+    title: "Black Five Point Cut in profile",
+    caption:
+      "A fictional younger adult woman with light-tan skin wearing a glossy black Five Point Cut, photographed from a stronger side angle to make the short sculpted nape and pointed front perimeter easier to read.",
+    patternDescription:
+      "Presented with a smooth straight Type 1B-like finish in jet-black hair so the geometric outline and directional length change remain highly legible; the image does not establish the fictional model's natural hair subtype.",
+    lengthDescription:
+      "Short and compact through the nape, with the perimeter progressively lengthening toward pronounced pointed sections beside the face.",
+  },
+  {
+    id: "five-point-cut-geometric-dark",
+    hairstyleIds: ["hairstyle-five-point-cut"],
+    imageId: "five-point-cut-geometric-dark",
+    title: "Dark geometric Five Point Cut",
+    caption:
+      "A fictional adult woman wearing a dark, glossy interpretation of the Five Point, with a strong geometric fringe, short shaped back and pointed side perimeter.",
+    patternDescription:
+      "Presented with a smooth straight Type 1B-like finish so the geometric perimeter remains clearly visible; the image does not establish the fictional model's natural hair subtype.",
+    lengthDescription:
+      "Short, with the back finishing above the jaw and the perimeter lengthening toward pointed sections beside the face.",
+  },
+  {
+    id: "natural-afro-deep-skin-man",
+    hairstyleIds: ["hairstyle-natural-afro"],
+    imageId: "natural-afro-deep-skin-man",
+    title: "Natural afro on deep-brown skin",
+    caption:
+      "A fictional Black man in his early 40s with very deep brown skin wearing a full natural Afro with visible coily texture, broad rounded volume and a softly irregular perimeter.",
+    patternDescription:
+      "Presented with a dense Type 4A-like coily texture whose curl clusters remain visible throughout the silhouette; the image should not be treated as evidence of a real person's natural subtype.",
+    lengthDescription:
+      "Medium-to-long coily length expanded outward from the scalp into substantial rounded volume while retaining an organic, non-spherical outer edge.",
+  },
+  {
+    id: "natural-afro-rounded-coily",
+    hairstyleIds: ["hairstyle-natural-afro"],
+    imageId: "natural-afro-rounded-coily",
+    title: "Soft rounded natural afro",
+    caption:
+      "A fictional Black woman wearing a full natural Afro with visible coily texture, broad rounded volume and an intentionally organic perimeter.",
+    patternDescription:
+      "Presented with a Type 4A-like coily texture whose visible curl clusters remain part of the silhouette; the image should not be treated as evidence of a real person's natural subtype.",
+    lengthDescription:
+      "Medium-to-long coily length expanded outward from the scalp into substantial volume around the crown, sides and lower perimeter.",
+  },
+  {
+    id: "sculpted-spherical-afro-classic",
+    hairstyleIds: ["hairstyle-sculpted-spherical-afro"],
+    imageId: "sculpted-spherical-afro-classic",
+    title: "Large sculpted spherical afro",
+    caption:
+      "A fictional Black woman wearing a large, dense Afro picked outward and shaped into a controlled near-spherical silhouette.",
+    patternDescription:
+      "Generated with a dense Type 4C-like coily texture whose tight pattern supports substantial picked-out volume; the image should not be treated as evidence of a real person's natural subtype.",
+    lengthDescription:
+      "Substantial coily length expanded outward from the scalp, creating a large silhouette extending well beyond the head in every direction.",
+  },
+  {
+    id: "sculpted-spherical-afro-older-man",
+    hairstyleIds: ["hairstyle-sculpted-spherical-afro"],
+    imageId: "sculpted-spherical-afro-older-man",
+    title: "Sculpted spherical afro on older man",
+    caption:
+      "A fictional dark-skinned African man in his late 60s wearing a large, dense Afro shaped into a controlled near-spherical silhouette.",
+    patternDescription:
+      "Generated with a dense Type 4C-like coily texture whose tight pattern supports substantial picked-out volume; the image should not be treated as evidence of a real person's natural subtype.",
+    lengthDescription:
+      "Substantial coily length expanded outward from the scalp, creating a broad rounded silhouette with balanced volume through the crown, sides and lower perimeter.",
+  },
   {
     id: "sleek-long-cut-blonde",
     hairstyleIds: ["hairstyle-sleek-long-cut"],
@@ -1511,12 +2069,28 @@ export const styleExamples: StyleExample[] = [
     lengthDescription:
       "Longest layers finish around the shoulders while substantially shorter layers sit through the crown and front.",
   },
+  {
+    id: "the-rachel-classic-layered",
+    hairstyleIds: ["hairstyle-the-rachel"],
+    imageId: "the-rachel-classic-layered",
+    title: "Classic layered Rachel",
+    caption:
+      "A fictional South Asian woman in her 30s wearing a shoulder-length Rachel interpretation with pronounced rounded face framing, crown volume and outward-turning lower layers.",
+    patternDescription:
+      "Presented with a Type 1B-like blow-dried finish: mostly straight through the strand with enough body to hold the rounded layer pattern; the image does not establish the model’s natural hair subtype.",
+    lengthDescription:
+      "Medium length, with the longest sections brushing the shoulders and progressively shorter layers framing the cheeks, jaw and upper neck.",
+  },
+  {
+    id: "the-rachel-soft-wave",
+    hairstyleIds: ["hairstyle-the-rachel"],
+    imageId: "the-rachel-soft-wave",
+    title: "Rachel cut with softer wave",
+    caption:
+      "A fictional Black or mixed-race woman in her 50s wearing a softer Rachel interpretation with shoulder-length layering, visible face framing and restrained 1990s volume.",
+    patternDescription:
+      "Presented with a Type 2A-like softly waved blowout: loose bends remain visible while the round-brush styling still separates the layered silhouette; the image does not establish the model’s natural hair subtype.",
+    lengthDescription:
+      "Medium length around the shoulders, with shorter curved sections through the face and upper sides and flicked ends at the lower perimeter.",
+  },
 ];
-
-export function getHairstyle(slug: string): Hairstyle | undefined {
-  return hairstyles.find((hairstyle) => hairstyle.slug === slug);
-}
-
-export function getExamplesForHairstyle(id: string): StyleExample[] {
-  return styleExamples.filter((example) => example.hairstyleIds.includes(id));
-}

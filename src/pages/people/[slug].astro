@@ -1,30 +1,30 @@
 ---
-import Layout from "../../components/Layout.astro";
-import ExpandableBio from "../../components/ExpandableBio.astro";
-import NaturalProfile from "../../components/NaturalProfile.astro";
+import Layout from "../../components/shared/Layout.astro";
+import ExpandableBio from "../../components/people/ExpandableBio.astro";
+import PersonFactSheet from "../../components/people/PersonFactSheet.astro";
 import { Image } from "astro:assets";
 import { people, personPhotographs } from "../../data/people";
-import { appearancesForPerson, hairstylesForPerson } from "../../data/people-relations";
-import { buildPersonMedia } from "../../data/people-media";
-import { naturalProfileForPerson } from "../../data/natural-profiles";
-import PersonPhotoAttribution from "../../components/PersonPhotoAttribution.astro";
+import { getAppearancesForPerson, getHairstyleAppearancesForPerson } from "../../data";
+import { getNaturalProfileForPerson } from "../../data";
+import PhotoAttribution from "../../components/shared/PhotoAttribution";
+import CollectionHeader from "../../components/shared/CollectionHeader.astro";
 import { appearanceTitle, formatAppearanceDate } from "../../lib/appearance-formatting";
 
 export function getStaticPaths() {
   return people.map((person) => ({ params: { slug: person.slug }, props: { person } }));
 }
 const { person } = Astro.props;
-const appearances = appearancesForPerson(person.id).sort((a, b) => b.taken.value.localeCompare(a.taken.value));
-const hairstyleRecords = hairstylesForPerson(person.id);
-const media = buildPersonMedia(personPhotographs);
+const appearances = getAppearancesForPerson(person.id).sort((a, b) => b.taken.value.localeCompare(a.taken.value));
+const hairstyleRecords = getHairstyleAppearancesForPerson(person.id);
+const media = personPhotographs;
 const hero = media.find((photo) => photo.id === person.heroImageId) ?? media[0];
-const naturalProfile = naturalProfileForPerson(person.id);
+const naturalProfile = getNaturalProfileForPerson(person.id);
 ---
 
 <Layout
   title={`${person.name} - people - hairhairhair.hair`}
   description={person.description}
-  image={hero ? hero.src.src : undefined}
+  image={hero ? hero.image.src : undefined}
 >
   <article class="mx-auto max-w-7xl px-5 pb-20 pt-12 sm:px-8">
     <nav
@@ -75,7 +75,7 @@ const naturalProfile = naturalProfileForPerson(person.id);
             aria-label={`View photograph details for ${person.name}`}
           >
             <Image
-              src={hero.src}
+              src={hero.image}
               widths={[400, 800, 1120]}
               sizes="(min-width: 1280px) 38vw, (min-width: 768px) 40vw, 100vw"
               format="webp"
@@ -84,27 +84,24 @@ const naturalProfile = naturalProfileForPerson(person.id);
               style={`object-position: ${hero.objectPosition}`}
             />
           </a>
-          <PersonPhotoAttribution media={hero} density="compact" />
+          <PhotoAttribution provenance={hero.provenance} density="compact" />
         </figure>
       )}
       {naturalProfile && (
         <div class="lg:pt-3">
-          <NaturalProfile profile={naturalProfile} />
+          <PersonFactSheet profile={naturalProfile} />
         </div>
       )}
     </header>
     <section class="mt-20" aria-labelledby="appearances-heading">
-      <div class="flex items-end justify-between gap-5 border-b border-taupe pb-3 sm:pb-2">
-        <h2 id="appearances-heading" class="text-xs font-black uppercase tracking-[.18em] text-orange">
-          Appearances
-        </h2>
-        <a
-          class="focus-ring text-xs font-normal uppercase tracking-[.14em] text-muted transition hover:text-ink"
-          href={`/people/${person.slug}/appearances/`}
-        >
-          More
-        </a>
-      </div>
+      <CollectionHeader
+        title="Appearances"
+        headingId="appearances-heading"
+        href={`/people/${person.slug}/appearances/`}
+        containerClass="items-end gap-5"
+        headingClass="text-xs font-black uppercase tracking-[.18em] text-orange"
+        linkClass="focus-ring text-xs font-normal uppercase tracking-[.14em] text-muted transition hover:text-ink"
+      />
       <ul
         class="mt-2.5 sm:mt-4 flex gap-2 sm:gap-2.5 overflow-x-auto overscroll-x-contain pb-3 scrollbar-hidden"
         aria-labelledby="appearances-heading"
@@ -122,7 +119,7 @@ const naturalProfile = naturalProfileForPerson(person.id);
                     aria-label={`${formatAppearanceDate(appearance.taken.value, "short")}: ${appearanceTitle(appearance.event)}`}
                   >
                     <Image
-                      src={photo.src}
+                      src={photo.image}
                       widths={[400, 700, 1000]}
                       sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
                       format="webp"
@@ -131,7 +128,7 @@ const naturalProfile = naturalProfileForPerson(person.id);
                       style={`object-position: ${photo.objectPosition}`}
                     />
                   </a>
-                  <PersonPhotoAttribution media={photo} density="compact" />
+                  <PhotoAttribution provenance={photo.provenance} density="compact" />
                 </div>
                 <figcaption class="mt-1.5">
                   <h3 class="font-display text-base leading-tight tracking-[-.02em]">
@@ -150,17 +147,14 @@ const naturalProfile = naturalProfileForPerson(person.id);
       </ul>
     </section>
     <section class="mt-20" aria-labelledby="hairstyles-heading">
-      <div class="flex items-end justify-between gap-5 border-b border-taupe pb-3 sm:pb-2">
-        <h2 id="hairstyles-heading" class="text-xs font-black uppercase tracking-[.18em] text-orange">
-          Hairstyles worn
-        </h2>
-        <a
-          class="focus-ring text-xs font-normal uppercase tracking-[.14em] text-muted transition hover:text-ink"
-          href={`/people/${person.slug}/hairstyles/`}
-        >
-          More
-        </a>
-      </div>
+      <CollectionHeader
+        title="Hairstyles worn"
+        headingId="hairstyles-heading"
+        href={`/people/${person.slug}/hairstyles/`}
+        containerClass="items-end gap-5"
+        headingClass="text-xs font-black uppercase tracking-[.18em] text-orange"
+        linkClass="focus-ring text-xs font-normal uppercase tracking-[.14em] text-muted transition hover:text-ink"
+      />
       <ul
         class="mt-2.5 sm:mt-4 flex gap-2 sm:gap-2.5 overflow-x-auto overscroll-x-contain pb-3 scrollbar-hidden"
         aria-labelledby="hairstyles-heading"
@@ -181,7 +175,7 @@ const naturalProfile = naturalProfileForPerson(person.id);
                     aria-label={`${person.name} wearing ${style.name}, ${appearanceTitle(appearance.event)}`}
                   >
                     <Image
-                      src={photo.src}
+                      src={photo.image}
                       widths={[400, 700, 1000]}
                       sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
                       format="webp"
@@ -191,7 +185,7 @@ const naturalProfile = naturalProfileForPerson(person.id);
                       style={`object-position: ${photo.objectPosition}`}
                     />
                   </a>
-                  <PersonPhotoAttribution media={photo} density="compact" />
+                  <PhotoAttribution provenance={photo.provenance} density="compact" />
                 </div>
                 <figcaption class="mt-1.5">
                   <h3 class="font-display text-base leading-tight tracking-[-.03em]">

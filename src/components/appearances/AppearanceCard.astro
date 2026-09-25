@@ -1,0 +1,36 @@
+---
+import { Image } from "astro:assets";
+import PhotoAttribution from "../shared/PhotoAttribution";
+import type { AppearanceCardData } from "./appearance-types";
+
+interface Props extends AppearanceCardData {}
+
+const { id, personSlug, personName, date, event, media } = Astro.props;
+const href = `/people/${personSlug}/appearances/${id}/`;
+---
+
+<div class="min-w-0">
+  <figure class="relative overflow-hidden">
+    <a class="focus-ring block" href={href}>
+      <Image
+        src={media.image}
+        widths={[240, 480]}
+        sizes="(min-width: 1024px) 16vw, (min-width: 640px) 30vw, 45vw"
+        format="webp"
+        alt={media.alt}
+        class="aspect-[4/5] w-full object-cover"
+        style={`object-position: ${media.objectPosition}`}
+      />
+    </a>
+    <PhotoAttribution provenance={media.provenance} density="compact" />
+  </figure>
+  <a class="focus-ring mt-1 block font-display text-lg leading-tight" href={href}>
+    {personName}
+  </a>
+  <p class="mt-1 text-xs leading-tight text-muted">
+    <time datetime={date} data-local-date>
+      {date}
+    </time>
+    <span class="sr-only"> · {event}</span>
+  </p>
+</div>

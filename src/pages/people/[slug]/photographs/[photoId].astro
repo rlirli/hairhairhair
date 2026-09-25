@@ -1,13 +1,12 @@
 ---
 import { Image } from "astro:assets";
-import Layout from "../../../../components/Layout.astro";
-import { buildPersonMedia } from "../../../../data/people-media";
+import Layout from "../../../../components/shared/Layout.astro";
 import { appearances, people, personPhotographs } from "../../../../data/people";
-import { observedStylesForAppearance } from "../../../../data/people-relations";
+import { getResolvedHairstyleObservationsForAppearance } from "../../../../data";
 import { appearanceTitle, formatAppearanceDate } from "../../../../lib/appearance-formatting";
 
 export function getStaticPaths() {
-  const media = buildPersonMedia(personPhotographs);
+  const media = personPhotographs;
   return people.flatMap((person) =>
     media
       .filter((photo) =>
@@ -25,7 +24,7 @@ const photoAppearances = appearances
   .filter((appearance) => appearance.personId === person.id && appearance.imageId === photo.id)
   .sort((a, b) => b.taken.value.localeCompare(a.taken.value));
 const photoStyles = photoAppearances.flatMap((appearance) =>
-  observedStylesForAppearance(appearance.id).map(({ style }) => style),
+  getResolvedHairstyleObservationsForAppearance(appearance.id).map(({ style }) => style),
 );
 const uniqueStyles = photoStyles.filter(
   (style, index) => photoStyles.findIndex((item) => item.id === style.id) === index,
@@ -33,9 +32,9 @@ const uniqueStyles = photoStyles.filter(
 ---
 
 <Layout
-  title={`${photo.identifier} photograph - ${person.name} - hairhairhair.hair`}
+  title={`${photo.provenance.identifier || photo.id} photograph - ${person.name} - hairhairhair.hair`}
   description={`Source, license, and usage record for a photograph of ${person.name}.`}
-  image={photo.src.src}
+  image={photo.image.src}
 >
   <article class="mx-auto max-w-5xl px-5 pb-20 pt-12 sm:px-8">
     <nav aria-label="Breadcrumb" class="text-sm font-bold uppercase tracking-[.12em]">
@@ -63,56 +62,74 @@ const uniqueStyles = photoStyles.filter(
     <header class="mt-10 max-w-3xl sm:mt-12">
       <p class="text-xs font-black uppercase tracking-[.18em] text-orange">Photograph record</p>
       <h1 class="mt-4 font-display text-4xl leading-[.95] tracking-[-.05em] sm:text-5xl sm:leading-[.92]">
-        {photo.identifier}
+        {photo.provenance.identifier || photo.id}
       </h1>
       <p class="mt-5 text-lg leading-7">A source and usage record for this image of {person.name}.</p>
     </header>
 
     <figure class="mt-12">
       <Image
-        src={photo.src}
+        src={photo.image}
         widths={[600, 1000, 1400]}
         sizes="(min-width: 1024px) 70vw, 100vw"
         format="webp"
         alt={photo.alt}
         class="max-h-[75vh] w-full object-contain"
-        style={`object-position: ${photo.objectPosition}`}
+        style={photo.objectPosition ? `object-position: ${photo.objectPosition}` : undefined}
       />
       <figcaption class="mt-5 border-l-4 border-orange pl-4 text-sm leading-6">
-        <p>{photo.creator}</p>
-        <p>{photo.rightsBasis}</p>
+        {photo.provenance.creator && <p>{photo.provenance.creator}</p>}
+        {photo.provenance.rightsBasis && <p>{photo.provenance.rightsBasis}</p>}
         <p class="mt-2 flex flex-wrap gap-x-3 gap-y-1">
-          <a
-            class="focus-ring text-orange underline decoration-orange decoration-2 underline-offset-4"
-            href={photo.sourceUrl}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Source record
-          </a>
-          <a
-            class="focus-ring text-orange underline decoration-orange decoration-2 underline-offset-4"
-            href={photo.originalUrl}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Original file
-          </a>
-          <a
-            class="focus-ring text-orange underline decoration-orange decoration-2 underline-offset-4"
-            href={photo.rightsEvidenceUrl}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Rights evidence
-          </a>
+          {photo.provenance.sourceUrl && (
+            <a
+              class="focus-ring text-orange underline decoration-orange decoration-2 underline-offset-4"
+              href={photo.provenance.sourceUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Source record
+            </a>
+          )}
+          {photo.provenance.originalUrl && (
+            <a
+              class="focus-ring text-orange underline decoration-orange decoration-2 underline-offset-4"
+              href={photo.provenance.originalUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Original file
+            </a>
+          )}
+          {photo.provenance.rightsEvidenceUrl && (
+            <a
+              class="focus-ring text-orange underline decoration-orange decoration-2 underline-offset-4"
+              href={photo.provenance.rightsEvidenceUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Rights evidence
+            </a>
+          )}
         </p>
-        <p class="mt-2 opacity-70">
-          Identifier: {photo.identifier} · {photo.derivativeStatus} image · License:{" "}
-          <a class="focus-ring underline" href={photo.licenseUrl} target="_blank" rel="noreferrer">
-            {photo.licenseName}
-          </a>
-        </p>
+        {(photo.provenance.identifier || photo.provenance.derivativeStatus || photo.provenance.licenseName) && (
+          <p class="mt-2 opacity-70">
+            {photo.provenance.identifier && <>Identifier: {photo.provenance.identifier}</>}
+            {photo.provenance.derivativeStatus && <> · {photo.provenance.derivativeStatus} image</>}
+            {photo.provenance.licenseName && (
+              <>
+                · License:{" "}
+                {photo.provenance.licenseUrl ? (
+                  <a class="focus-ring underline" href={photo.provenance.licenseUrl} target="_blank" rel="noreferrer">
+                    {photo.provenance.licenseName}
+                  </a>
+                ) : (
+                  photo.provenance.licenseName
+                )}
+              </>
+            )}
+          </p>
+        )}
       </figcaption>
     </figure>
 

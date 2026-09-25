@@ -1,15 +1,15 @@
 ---
-import Layout from "../../../components/Layout.astro";
-import NaturalProfile from "../../../components/NaturalProfile.astro";
+import Layout from "../../../components/shared/Layout.astro";
+import PersonFactSheet from "../../../components/people/PersonFactSheet.astro";
 import { Image } from "astro:assets";
 import { hairSubtypes, hairTypes } from "../../../data/hair-types";
-import { peopleForHairTypeSlug } from "../../../data/hair-type-discovery";
+import { getPeopleByHairTypeSlug } from "../../../data";
 
 export function getStaticPaths() {
   return [...hairTypes, ...hairSubtypes].map((item) => ({ params: { slug: item.slug }, props: { item } }));
 }
 const { item } = Astro.props;
-const people = peopleForHairTypeSlug(item.slug);
+const people = getPeopleByHairTypeSlug(item.slug);
 ---
 
 <Layout
@@ -27,12 +27,12 @@ const people = peopleForHairTypeSlug(item.slug);
       </h1>
     </header>
     {people.length > 0 ? (
-      <section class="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <ul class="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {people.map(({ person, photo, naturalProfile, subtype }) => (
-          <article class="rounded-3xl border border-ink/25 p-4">
-            <a class="focus-ring" href={`/people/${person.slug}/`}>
+          <li class="rounded-3xl border border-ink/25 p-4">
+            <a class="focus-ring block" href={`/people/${person.slug}/`}>
               <Image
-                src={photo.src}
+                src={photo.image}
                 alt={photo.alt}
                 width={480}
                 height={480}
@@ -42,11 +42,11 @@ const people = peopleForHairTypeSlug(item.slug);
               {subtype && <p class="text-sm opacity-70">Type {subtype.code}</p>}
             </a>
             <div class="mt-4">
-              <NaturalProfile profile={naturalProfile} />
+              <PersonFactSheet profile={naturalProfile} />
             </div>
-          </article>
+          </li>
         ))}
-      </section>
+      </ul>
     ) : (
       <p class="mt-8">No people have a matching natural profile yet.</p>
     )}

@@ -1,9 +1,9 @@
 ---
-import Layout from "../components/Layout.astro";
-import Pattern from "../components/Pattern.astro";
-import RelatedHairstyleGrid from "../components/RelatedHairstyleGrid.astro";
+import Layout from "../components/shared/Layout.astro";
+import Pattern from "../components/hair-types/Pattern.astro";
+import HairstyleGridData from "../components/hairstyles/HairstyleGridData.astro";
 import { hairTypes } from "../data/hair-types";
-import { publishedHairstyles } from "../data/hairstyles";
+import { publishedHairstyles } from "../data";
 import { people } from "../data/people";
 ---
 
@@ -42,27 +42,29 @@ import { people } from "../data/people";
       This Walker-inspired chart classifies visible natural hair patterns into four numbered types - straight, wavy,
       curly, and coily - with lettered sub-types for more specific pattern descriptions.
     </p>
-    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+    <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {hairTypes.map((hairType) => (
-        <a
-          href={`/hair-types/${hairType.slug}/`}
-          class="hover-surface focus-ring group rounded-3xl border-2 border-ink bg-white/30 p-5 transition hover:-translate-y-1"
-        >
-          <h3 class="font-display text-3xl tracking-[-.05em] group-hover:underline">
-            <strong>Type {hairType.code}:</strong> {hairType.name}
-          </h3>
-          <div class="mt-5">
-            <Pattern
-              pattern={hairType.pattern}
-              subtype="B"
-              label={`Simplified Type ${hairType.code} ${hairType.name.toLowerCase()} pattern illustration - not a diagnostic or photograph`}
-              caption={false}
-            />
-          </div>
-          <p class="mt-2 text-sm leading-5">{hairType.description}</p>
-        </a>
+        <li>
+          <a
+            href={`/hair-types/${hairType.slug}/`}
+            class="hover-surface focus-ring group block rounded-3xl border-2 border-ink bg-white/30 p-5 transition hover:-translate-y-1"
+          >
+            <h3 class="font-display text-3xl tracking-[-.05em] group-hover:underline">
+              <strong>Type {hairType.code}:</strong> {hairType.name}
+            </h3>
+            <div class="mt-5">
+              <Pattern
+                pattern={hairType.pattern}
+                subtype="B"
+                label={`Simplified Type ${hairType.code} ${hairType.name.toLowerCase()} pattern illustration - not a diagnostic or photograph`}
+                caption={false}
+              />
+            </div>
+            <p class="mt-2 text-sm leading-5">{hairType.description}</p>
+          </a>
+        </li>
       ))}
-    </div>
+    </ul>
   </section>
   <section class="mx-auto max-w-7xl px-5 py-16 sm:px-8">
     <div class="flex flex-col items-start justify-between gap-4 border-b border-taupe pb-3 sm:flex-row sm:items-end sm:pb-2">
@@ -77,7 +79,7 @@ import { people } from "../data/people";
         Browse all hairstyles
       </a>
     </div>
-    <RelatedHairstyleGrid
+    <HairstyleGridData
       styles={publishedHairstyles.slice(0, 4)}
       size="medium"
       className="mt-2.5 sm:mt-4 grid grid-cols-2 gap-4 md:grid-cols-4"
@@ -90,16 +92,18 @@ import { people } from "../data/people";
       <p class="mt-4 max-w-2xl text-lg leading-7">
         Browse celebrities who share your hair type or skin tone, and see the hairstyles they have worn.
       </p>
-      <div class="mt-6 flex flex-wrap gap-3">
+      <ul class="mt-6 flex flex-wrap gap-3">
         {people.slice(0, 8).map((person) => (
-          <a
-            href={`/people/${person.slug}/`}
-            class="hover-surface focus-ring rounded-full border border-ink/40 px-4 py-2 text-sm font-normal"
-          >
-            {person.name}
-          </a>
+          <li>
+            <a
+              href={`/people/${person.slug}/`}
+              class="hover-surface focus-ring inline-block rounded-full border border-ink/40 px-4 py-2 text-sm font-normal"
+            >
+              {person.name}
+            </a>
+          </li>
         ))}
-      </div>
+      </ul>
       <a
         href="/people/"
         class="focus-ring mt-6 inline-block text-sm font-normal opacity-60 transition hover:opacity-100"

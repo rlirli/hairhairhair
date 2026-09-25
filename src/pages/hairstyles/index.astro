@@ -1,11 +1,11 @@
 ---
-import Layout from "../../components/Layout.astro";
-import HairstyleCard from "../../components/HairstyleCard.astro";
+import Layout from "../../components/shared/Layout.astro";
+import HairstyleCard from "../../components/hairstyles/HairstyleCard.astro";
 import { hairSubtypes, hairTypes } from "../../data/hair-types";
-import { publishedHairstyles } from "../../data/hairstyles";
-import { compatibleHairstylesForHairType } from "../../data/hairstyle-compatibility";
-import { kindLabels } from "../../data/hairstyle-relations";
-import DirectoryFilters, { type FilterGroup } from "../../components/DirectoryFilters";
+import { publishedHairstyles } from "../../data";
+import { getCompatibleHairstylesForHairType } from "../../data";
+import { kindLabels } from "../../data";
+import DirectoryFilters, { type FilterGroup } from "../../components/shared/DirectoryFilters";
 
 const kinds = Object.entries(kindLabels).map(([id, label]) => ({ id, label }));
 const hairTypeParents = hairTypes.map((type) => ({
@@ -22,7 +22,7 @@ const hairTypeOptions = [
 ];
 const compatibleStylesByType = new Map(
   hairTypeOptions.map(
-    (type) => [type.id, new Set(compatibleHairstylesForHairType(type.id).map((style) => style.id))] as const,
+    (type) => [type.id, new Set(getCompatibleHairstylesForHairType(type.id).map((style) => style.id))] as const,
   ),
 );
 const hairTypeIdsForStyle = (styleId: string) =>
@@ -57,25 +57,25 @@ const filterGroups: FilterGroup[] = [
   </section>
   <section class="mx-auto max-w-7xl px-5 pt-16 sm:pt-2 pb-20 sm:px-8">
     <div class="border-b border-taupe pb-1.5 pr-1.5">
-      <DirectoryFilters
-        client:load
-        groups={filterGroups}
-        cardSelector="[data-hairstyle-card]"
-        dataAttributes={{ kind: "hairstyleKind", "hair-type": "hairstyleHairTypes" }}
-        resultsSelector="[data-hairstyle-results]"
-        emptySelector="[data-hairstyle-empty]"
-        itemLabel="hairstyle"
-        pluralItemLabel="hairstyles"
-      />
+      <DirectoryFilters client:load groups={filterGroups} itemLabel="hairstyle" pluralItemLabel="hairstyles" />
     </div>
-    <p class="sr-only" data-hairstyle-results role="status" aria-live="polite"></p>
-    <div class="mt-6 grid gap-x-3 sm:gap-x-3.5 gap-y-5 grid-cols-2 md:grid-cols-3 lg:grid-cols-4" data-hairstyle-grid>
+    <p class="sr-only" data-directory-results role="status" aria-live="polite"></p>
+    <ul
+      class="mt-6 grid list-none gap-x-3 gap-y-5 grid-cols-2 sm:gap-x-3.5 md:grid-cols-3 lg:grid-cols-4"
+      data-hairstyle-grid
+    >
       {publishedHairstyles.map((style) => (
-        <HairstyleCard style={style} filterable compatibleHairTypeIds={hairTypeIdsForStyle(style.id)} />
+        <li
+          data-directory-item
+          data-filter-kind={style.kind}
+          data-filter-hair-type={hairTypeIdsForStyle(style.id).join(",")}
+        >
+          <HairstyleCard style={style} />
+        </li>
       ))}
-      <p class="col-span-full mt-4 hidden text-sm text-ink/60" data-hairstyle-empty>
-        No hairstyles match these filters.
-      </p>
-    </div>
+    </ul>
+    <p class="mt-4 hidden text-sm text-ink/60" data-directory-empty>
+      No hairstyles match these filters.
+    </p>
   </section>
 </Layout>

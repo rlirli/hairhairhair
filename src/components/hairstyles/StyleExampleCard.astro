@@ -1,0 +1,54 @@
+---
+import { Image } from "astro:assets";
+import { getHairstyleMediaById } from "../../data";
+import { styleExamplePath } from "../../lib/routes";
+import PhotoAttribution from "../shared/PhotoAttribution";
+import type { StyleExample } from "../../types";
+
+interface Props {
+  example: StyleExample;
+  styleSlug: string;
+  eager?: boolean;
+}
+
+const { example, styleSlug, eager = false } = Astro.props;
+const media = getHairstyleMediaById(example.imageId);
+const href = styleExamplePath(styleSlug, example.id);
+---
+
+{media && (
+  <div class="group rounded-3xl border-2 border-ink p-3 transition-colors hover:border-ink/60 sm:p-4">
+    <div class="grid grid-cols-[minmax(0,1fr)_minmax(0,1fr)] items-stretch gap-3">
+      <figure class="relative min-w-0 aspect-square overflow-hidden rounded-2xl">
+        <a class="focus-ring block" href={href} aria-label={`Read ${example.title}`}>
+          <Image
+            src={media.image}
+            widths={[240, 400, 800]}
+            sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+            format="webp"
+            alt={media.alt}
+            loading={eager ? "eager" : "lazy"}
+            class="aspect-square w-full rounded-2xl object-cover bg-hairstyle-image-bg"
+          />
+        </a>
+        <PhotoAttribution provenance={media.provenance} density="compact" />
+      </figure>
+      <a class="focus-ring min-w-0" href={href} aria-label={`Read ${example.title}`}>
+        <div class="style-example-copy aspect-square overflow-hidden pb-1">
+          <h3 class="text-base font-bold leading-snug sm:text-lg">{example.title}</h3>
+          <p class="mt-1.5 text-xs leading-5 text-ink/60 transition-colors group-hover:text-ink">
+            {example.caption} {example.patternDescription} {example.lengthDescription}
+          </p>
+        </div>
+      </a>
+    </div>
+  </div>
+)}
+
+<style>
+  .style-example-copy {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 6;
+  }
+</style>

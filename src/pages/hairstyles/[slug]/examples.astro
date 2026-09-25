@@ -1,14 +1,14 @@
 ---
-import Layout from "../../../components/Layout.astro";
-import StyleExampleCard from "../../../components/StyleExampleCard.astro";
-import { getExamplesForHairstyle, publishedHairstyles } from "../../../data/hairstyles";
+import Layout from "../../../components/shared/Layout.astro";
+import StyleExampleCard from "../../../components/hairstyles/StyleExampleCard.astro";
+import { getStyleExamplesForHairstyle, publishedHairstyles } from "../../../data";
 
 export function getStaticPaths() {
   return publishedHairstyles.map((style) => ({ params: { slug: style.slug }, props: { style } }));
 }
 
 const { style } = Astro.props;
-const examples = getExamplesForHairstyle(style.id);
+const examples = getStyleExamplesForHairstyle(style.id);
 ---
 
 <Layout title={`${style.name} examples - hairhairhair.hair`} description={`Visual references for ${style.name}.`}>
@@ -34,10 +34,12 @@ const examples = getExamplesForHairstyle(style.id);
         Different visual references for the same hairstyle idea. These are examples, not fixed specifications.
       </p>
     </header>
-    <div class="mt-2.5 sm:mt-4 grid gap-6 sm:grid-cols-2">
+    <ul class="mt-2.5 sm:mt-4 grid gap-6 sm:grid-cols-2">
       {examples.map((example, index) => (
-        <StyleExampleCard example={example} styleSlug={style.slug} eager={index === 0} />
+        <li>
+          <StyleExampleCard example={example} styleSlug={style.slug} eager={index === 0} />
+        </li>
       ))}
-    </div>
+    </ul>
   </main>
 </Layout>

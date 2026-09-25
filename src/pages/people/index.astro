@@ -1,78 +1,16 @@
 ---
-import Layout from "../../components/Layout.astro";
-import PersonDirectoryCard from "../../components/PersonDirectoryCard";
+import Layout from "../../components/shared/Layout.astro";
+import PersonDirectoryCard from "../../components/people/PersonDirectoryCard";
+import { buildPersonDirectoryCardData } from "../../data";
 import { hairSubtypes, hairTypes } from "../../data/hair-types";
 import { people, personPhotographs } from "../../data/people";
-import { naturalProfileForPerson, resolvedHairTypeForNaturalProfile } from "../../data/natural-profiles";
-import { buildPersonMedia } from "../../data/people-media";
-import DirectoryFilters, { type FilterGroup } from "../../components/DirectoryFilters";
+import DirectoryFilters, { type FilterGroup } from "../../components/shared/DirectoryFilters";
 
-const mediaById = new Map(buildPersonMedia(personPhotographs).map((photo) => [photo.id, photo]));
-const profileLabel = (value: string | null, labels: Record<string, string>) =>
-  value ? (labels[value] ?? value) : null;
+const mediaById = new Map(personPhotographs.map((photo) => [photo.id, photo]));
 const peopleCards = people.flatMap((person) => {
   const image = mediaById.get(person.heroImageId);
   if (!image) return [];
-
-  const profile = naturalProfileForPerson(person.id);
-  const resolvedType = profile ? resolvedHairTypeForNaturalProfile(profile) : undefined;
-  const majorTypeId = profile?.hairTypeId.value;
-  const subtypeId = profile?.hairSubtypeId.value;
-  const hairValues = [majorTypeId, subtypeId].filter((value): value is string => Boolean(value));
-  const profileRows = profile
-    ? [
-        resolvedType && {
-          label: "Hair type",
-          value: `Type ${resolvedType.code} · ${resolvedType.name}`,
-          href: `/hair-types/${resolvedType.slug}/`,
-        },
-        profile.naturalHairColor.value && {
-          label: "Hair color",
-          value: profileLabel(profile.naturalHairColor.value, {
-            black: "Black",
-            brown: "Brown",
-            blonde: "Blonde",
-            red: "Red",
-            gray: "Gray",
-            white: "White",
-          })!,
-        },
-        profile.naturalSkinTone.value && {
-          label: "Skin tone",
-          value: profileLabel(profile.naturalSkinTone.value, {
-            "deep-brown": "Deep brown",
-            brown: "Brown",
-            medium: "Medium",
-            light: "Light",
-            fair: "Fair",
-          })!,
-        },
-        profile.hairThickness.value && {
-          label: "Hair thickness",
-          value: profileLabel(profile.hairThickness.value, { fine: "Fine", medium: "Medium", coarse: "Coarse" })!,
-        },
-        profile.hairDensity.value && {
-          label: "Hair density",
-          value: profileLabel(profile.hairDensity.value, { low: "Low", medium: "Medium", high: "High" })!,
-        },
-      ].filter((row): row is NonNullable<typeof row> => Boolean(row))
-    : [];
-
-  return [
-    {
-      href: `/people/${person.slug}/`,
-      name: person.name,
-      imageSrc: image.src.src,
-      imageAlt: image.alt,
-      description: person.description,
-      profileValues: {
-        hair: hairValues,
-        color: profile?.naturalHairColor.value ?? "",
-        skin: profile?.naturalSkinTone.value ?? "",
-      },
-      profileRows,
-    },
-  ];
+  return [buildPersonDirectoryCardData(person, { src: image.image.src, alt: image.alt })];
 });
 const observedHairTypes = new Set(peopleCards.flatMap((person) => person.profileValues.hair));
 const observedColors = [...new Set(peopleCards.map((person) => person.profileValues.color).filter(Boolean))];
@@ -125,28 +63,26 @@ const filterGroups: FilterGroup[] = [
   </section>
   <section class="mx-auto max-w-7xl px-5 pt-16 sm:pt-2 pb-20 sm:px-8">
     <div class="border-b border-taupe pb-1.5 pr-1.5">
-      <DirectoryFilters
-        client:load
-        groups={filterGroups}
-        cardSelector="[data-person-card]"
-        dataAttributes={{ hair: "profileHair", color: "profileColor", skin: "profileSkin" }}
-        resultsSelector="[data-profile-results]"
-        emptySelector="[data-profile-empty]"
-        itemLabel="celebrity"
-        pluralItemLabel="celebrities"
-      />
+      <DirectoryFilters client:load groups={filterGroups} itemLabel="celebrity" pluralItemLabel="celebrities" />
     </div>
-    <p class="sr-only" data-profile-results role="status" aria-live="polite"></p>
-    <div
-      class="mt-6 grid gap-x-3 sm:gap-x-3.5 gap-y-5 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6"
+    <p class="sr-only" data-directory-results role="status" aria-live="polite"></p>
+    <ul
+      class="mt-6 grid list-none gap-x-3 gap-y-5 grid-cols-2 sm:gap-x-3.5 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6"
       data-people-grid
     >
       {peopleCards.map((person) => (
-        <PersonDirectoryCard client:load person={person} />
+        <li
+          data-directory-item
+          data-filter-hair={person.profileValues.hair.join(",")}
+          data-filter-color={person.profileValues.color}
+          data-filter-skin={person.profileValues.skin}
+        >
+          <PersonDirectoryCard client:load person={person} />
+        </li>
       ))}
-      <p class="col-span-full mt-4 hidden text-sm text-ink/60" data-profile-empty>
-        No celebrities match these filters.
-      </p>
-    </div>
+    </ul>
+    <p class="mt-4 hidden text-sm text-ink/60" data-directory-empty>
+      No celebrities match these filters.
+    </p>
   </section>
 </Layout>

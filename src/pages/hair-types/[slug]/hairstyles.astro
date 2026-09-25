@@ -1,15 +1,15 @@
 ---
-import Layout from "../../../components/Layout.astro";
-import RelatedHairstyleGrid from "../../../components/RelatedHairstyleGrid.astro";
+import Layout from "../../../components/shared/Layout.astro";
+import HairstyleGridData from "../../../components/hairstyles/HairstyleGridData.astro";
 import { hairSubtypes, hairTypes } from "../../../data/hair-types";
-import { stylesForHairTypeSlug } from "../../../data/hair-type-discovery";
+import { getCompatibleHairstylesForHairTypeSlug } from "../../../data";
 
 export function getStaticPaths() {
   return [...hairTypes, ...hairSubtypes].map((item) => ({ params: { slug: item.slug }, props: { item } }));
 }
 const { item } = Astro.props;
 const title = `Hairstyles for Type ${item.code} - hairhairhair.hair`;
-const styles = stylesForHairTypeSlug(item.slug);
+const styles = getCompatibleHairstylesForHairTypeSlug(item.slug);
 const hairTypeId = hairTypes.some((type) => type.id === item.id) ? item.id : undefined;
 ---
 
@@ -25,7 +25,7 @@ const hairTypeId = hairTypes.some((type) => type.id === item.id) ? item.id : und
       </h1>
     </header>
     <section class="mt-7" aria-label={`Hairstyles for Type ${item.code}`}>
-      <RelatedHairstyleGrid
+      <HairstyleGridData
         styles={styles}
         {hairTypeId}
         size="medium"

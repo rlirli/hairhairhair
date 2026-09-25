@@ -1,0 +1,51 @@
+---
+import { getImage } from "astro:assets";
+import { getCompatibleHairTypeLabelsForHairstyle, getCompatibleSubtypeCodesForHairstyleInMajorType } from "../../data";
+import { kindLabels } from "../../data";
+import { getRepresentativeHairstyleMedia } from "../../data";
+import type { Hairstyle } from "../../types";
+import HairstyleGrid from "./HairstyleGrid";
+
+interface Props {
+  styles: Hairstyle[];
+  size?: "small" | "medium";
+  className: string;
+  hairTypeId?: string;
+  horizontalScroll?: boolean;
+  ariaLabel?: string;
+}
+
+const { styles, size = "small", className, hairTypeId, horizontalScroll = false, ariaLabel } = Astro.props;
+const imageSizes = size === "small" ? "(min-width: 1024px) 20vw, 40vw" : "(min-width: 1024px) 25vw, 50vw";
+const widths = size === "small" ? [240, 480] : [360, 720];
+const items = await Promise.all(
+  styles.map(async (style) => {
+    const representative = getRepresentativeHairstyleMedia(style.id);
+    const media = representative?.media;
+    if (!media) return undefined;
+    const image = await getImage({ src: media.image, widths, sizes: imageSizes, format: "webp" });
+    return {
+      href: `/hairstyles/${style.slug}/`,
+      imageSrc: image.src,
+      imageSrcSet: image.srcSet.attribute,
+      imageAlt: media.alt,
+      imageSizes,
+      kindLabel: kindLabels[style.kind],
+      name: style.name,
+      summary: style.summary,
+      compatibleLabels: getCompatibleHairTypeLabelsForHairstyle(style.id),
+      subtypeLabels: hairTypeId ? getCompatibleSubtypeCodesForHairstyleInMajorType(style.id, hairTypeId) : [],
+      photoAttribution: media.provenance,
+    };
+  }),
+);
+---
+
+<HairstyleGrid
+  client:load
+  items={items.filter((item) => item !== undefined)}
+  {size}
+  {className}
+  {horizontalScroll}
+  {ariaLabel}
+/>

@@ -1,0 +1,583 @@
+{
+  "note": "Complete distinct CSV cell values per column. Empty strings are retained.",
+  "tables": {
+    "fairface_taxonomy.csv": {
+      "rows": 1823,
+      "columns": {
+        "hair_type": [
+          "",
+          "curly_hair",
+          "no_hair_bald",
+          "not_visible",
+          "straight_hair",
+          "tightly_curled_hair",
+          "wavy_hair"
+        ],
+        "hair_type_front": [
+          "curly_hair",
+          "no_hair_bald",
+          "not_visible",
+          "straight_hair",
+          "tightly_curled_hair",
+          "wavy_hair"
+        ],
+        "hair_type_top": [
+          "curly_hair",
+          "no_hair_bald",
+          "not_visible",
+          "straight_hair",
+          "tightly_curled_hair",
+          "wavy_hair"
+        ],
+        "hair_type_side_left": [
+          "curly_hair",
+          "no_hair_bald",
+          "not_visible",
+          "straight_hair",
+          "tightly_curled_hair",
+          "wavy_hair"
+        ],
+        "hair_type_side_right": [
+          "curly_hair",
+          "no_hair_bald",
+          "not_visible",
+          "straight_hair",
+          "tightly_curled_hair",
+          "wavy_hair"
+        ],
+        "hair_type_temple_left": [
+          "curly_hair",
+          "no_hair_bald",
+          "not_visible",
+          "straight_hair",
+          "tightly_curled_hair",
+          "wavy_hair"
+        ],
+        "hair_type_temple_right": [
+          "curly_hair",
+          "no_hair_bald",
+          "not_visible",
+          "straight_hair",
+          "tightly_curled_hair",
+          "wavy_hair"
+        ],
+        "hair_type_crown": [
+          "curly_hair",
+          "no_hair_bald",
+          "not_visible",
+          "straight_hair",
+          "tightly_curled_hair",
+          "wavy_hair"
+        ],
+        "hair_type_nape": [
+          "curly_hair",
+          "no_hair_bald",
+          "not_visible",
+          "straight_hair",
+          "tightly_curled_hair",
+          "wavy_hair"
+        ],
+        "strand_styling": [
+          "braids",
+          "dreadlocks",
+          "hair_not_styled_into_strands",
+          "other",
+          "ringlets"
+        ],
+        "strand_styling_front": [
+          "braids",
+          "dreadlocks",
+          "hair_not_styled_into_strands",
+          "other",
+          "ringlets"
+        ],
+        "strand_styling_top": [
+          "braids",
+          "dreadlocks",
+          "hair_not_styled_into_strands",
+          "other",
+          "ringlets"
+        ],
+        "strand_styling_side_left": [
+          "braids",
+          "dreadlocks",
+          "hair_not_styled_into_strands",
+          "other",
+          "ringlets"
+        ],
+        "strand_styling_side_right": [
+          "braids",
+          "dreadlocks",
+          "hair_not_styled_into_strands",
+          "other",
+          "ringlets"
+        ],
+        "strand_styling_temple_left": [
+          "braids",
+          "dreadlocks",
+          "hair_not_styled_into_strands",
+          "other",
+          "ringlets"
+        ],
+        "strand_styling_temple_right": [
+          "braids",
+          "dreadlocks",
+          "hair_not_styled_into_strands",
+          "other",
+          "ringlets"
+        ],
+        "strand_styling_crown": [
+          "braids",
+          "dreadlocks",
+          "hair_not_styled_into_strands",
+          "other",
+          "ringlets"
+        ],
+        "strand_styling_nape": [
+          "braids",
+          "dreadlocks",
+          "hair_not_styled_into_strands",
+          "other",
+          "ringlets"
+        ],
+        "strand_styling_thickness": [
+          "",
+          "hair_not_styled_into_strands",
+          "medium",
+          "micro"
+        ],
+        "strand_styling_thickness_front": [
+          "hair_not_styled_into_strands",
+          "medium",
+          "micro"
+        ],
+        "strand_styling_thickness_top": [
+          "hair_not_styled_into_strands",
+          "medium",
+          "micro"
+        ],
+        "strand_styling_thickness_side_left": [
+          "hair_not_styled_into_strands",
+          "large",
+          "medium",
+          "micro"
+        ],
+        "strand_styling_thickness_side_right": [
+          "hair_not_styled_into_strands",
+          "large",
+          "medium",
+          "micro"
+        ],
+        "strand_styling_thickness_temple_left": [
+          "hair_not_styled_into_strands",
+          "large",
+          "medium",
+          "micro"
+        ],
+        "strand_styling_thickness_temple_right": [
+          "hair_not_styled_into_strands",
+          "large",
+          "medium",
+          "micro"
+        ],
+        "strand_styling_thickness_crown": [
+          "hair_not_styled_into_strands",
+          "large",
+          "medium",
+          "micro",
+          "not_visible"
+        ],
+        "strand_styling_thickness_nape": [
+          "hair_not_styled_into_strands",
+          "large",
+          "medium",
+          "micro",
+          "not_visible"
+        ],
+        "hair_length": [
+          "",
+          "0.5_no_hair_shaved_but_roots_visible",
+          "1_5_cm",
+          "armpit_length",
+          "chin_length",
+          "ear_length",
+          "midback_length",
+          "no_hair_bald",
+          "not_visible",
+          "shoulder_length",
+          "very_short_less_than_1cm"
+        ],
+        "hair_length_front": [
+          "0.5_no_hair_shaved_but_roots_visible",
+          "1_5_cm",
+          "above_eye_brows",
+          "armpit_length",
+          "below_eye_brows",
+          "chin_length",
+          "ear_length",
+          "midback_length",
+          "no_hair_bald",
+          "not_visible",
+          "shoulder_length",
+          "to_eye_brows",
+          "very_short_less_than_1cm"
+        ],
+        "hair_length_top": [
+          "0.5_no_hair_shaved_but_roots_visible",
+          "1_5_cm",
+          "armpit_length",
+          "chin_length",
+          "ear_length",
+          "midback_length",
+          "no_hair_bald",
+          "not_visible",
+          "shoulder_length",
+          "very_short_less_than_1cm"
+        ],
+        "hair_length_side_left": [
+          "0.5_no_hair_shaved_but_roots_visible",
+          "1_5_cm",
+          "armpit_length",
+          "chin_length",
+          "ear_length",
+          "midback_length",
+          "no_hair_bald",
+          "not_visible",
+          "shoulder_length",
+          "very_short_less_than_1cm"
+        ],
+        "hair_length_side_right": [
+          "0.5_no_hair_shaved_but_roots_visible",
+          "1_5_cm",
+          "armpit_length",
+          "chin_length",
+          "ear_length",
+          "midback_length",
+          "no_hair_bald",
+          "not_visible",
+          "shoulder_length",
+          "very_short_less_than_1cm"
+        ],
+        "hair_length_temple_left": [
+          "0.5_no_hair_shaved_but_roots_visible",
+          "1_5_cm",
+          "armpit_length",
+          "chin_length",
+          "ear_length",
+          "midback_length",
+          "no_hair_bald",
+          "not_visible",
+          "shoulder_length",
+          "very_short_less_than_1cm"
+        ],
+        "hair_length_temple_right": [
+          "0.5_no_hair_shaved_but_roots_visible",
+          "1_5_cm",
+          "armpit_length",
+          "chin_length",
+          "ear_length",
+          "midback_length",
+          "no_hair_bald",
+          "not_visible",
+          "shoulder_length",
+          "very_short_less_than_1cm"
+        ],
+        "hair_length_crown": [
+          "0.5_no_hair_shaved_but_roots_visible",
+          "1_5_cm",
+          "armpit_length",
+          "chin_length",
+          "ear_length",
+          "midback_length",
+          "no_hair_bald",
+          "not_visible",
+          "shoulder_length",
+          "very_short_less_than_1cm"
+        ],
+        "hair_length_nape": [
+          "0.5_no_hair_shaved_but_roots_visible",
+          "1_5_cm",
+          "armpit_length",
+          "chin_length",
+          "ear_length",
+          "midback_length",
+          "no_hair_bald",
+          "not_visible",
+          "shoulder_length",
+          "very_short_less_than_1cm",
+          "waist_length_or_longer"
+        ],
+        "layering": [
+          "",
+          "fade",
+          "layered_textured",
+          "not_visible",
+          "single_length",
+          "taper"
+        ],
+        "layering_front": [
+          "fade",
+          "layered_textured",
+          "not_visible",
+          "single_length",
+          "taper"
+        ],
+        "layering_top": [
+          "fade",
+          "layered_textured",
+          "not_visible",
+          "single_length",
+          "taper"
+        ],
+        "layering_side_left": [
+          "fade",
+          "layered_textured",
+          "not_visible",
+          "single_length",
+          "taper"
+        ],
+        "layering_side_right": [
+          "fade",
+          "layered_textured",
+          "not_visible",
+          "single_length",
+          "taper"
+        ],
+        "layering_temple_left": [
+          "fade",
+          "layered_textured",
+          "not_visible",
+          "single_length",
+          "taper"
+        ],
+        "layering_temple_right": [
+          "fade",
+          "layered_textured",
+          "not_visible",
+          "single_length",
+          "taper"
+        ],
+        "layering_crown": [
+          "fade",
+          "layered_textured",
+          "not_visible",
+          "single_length",
+          "taper"
+        ],
+        "layering_nape": [
+          "fade",
+          "layered_textured",
+          "not_visible",
+          "single_length",
+          "taper"
+        ],
+        "hair_direction": [
+          "",
+          "brushed_flowing_down",
+          "brushed_gathered_up",
+          "brushed_swept_to_the_side",
+          "pointing_out"
+        ],
+        "hair_direction_front": [
+          "",
+          "brushed_flowing_down",
+          "brushed_gathered_up",
+          "brushed_swept_to_the_side",
+          "not_visible",
+          "pointing_out"
+        ],
+        "hair_direction_top": [
+          "",
+          "brushed_flowing_down",
+          "brushed_gathered_up",
+          "brushed_swept_to_the_side",
+          "not_visible",
+          "pointing_out"
+        ],
+        "hair_direction_side_left": [
+          "",
+          "brushed_flowing_down",
+          "brushed_gathered_up",
+          "brushed_swept_to_the_side",
+          "not_visible",
+          "pointing_out"
+        ],
+        "hair_direction_side_right": [
+          "",
+          "brushed_flowing_down",
+          "brushed_gathered_up",
+          "brushed_swept_to_the_side",
+          "not_visible",
+          "pointing_out"
+        ],
+        "hair_direction_temple_left": [
+          "",
+          "brushed_flowing_down",
+          "brushed_gathered_up",
+          "brushed_swept_to_the_side",
+          "not_visible",
+          "pointing_out"
+        ],
+        "hair_direction_temple_right": [
+          "",
+          "brushed_flowing_down",
+          "brushed_gathered_up",
+          "brushed_swept_to_the_side",
+          "not_visible",
+          "pointing_out"
+        ],
+        "hair_direction_crown": [
+          "",
+          "brushed_flowing_down",
+          "brushed_gathered_up",
+          "brushed_swept_to_the_side",
+          "not_visible",
+          "pointing_out"
+        ],
+        "hair_direction_nape": [
+          "",
+          "brushed_flowing_down",
+          "brushed_gathered_up",
+          "brushed_swept_to_the_side",
+          "not_visible",
+          "pointing_out"
+        ],
+        "hair_gathered": [
+          "",
+          "attached_to_skin_cornrows_french_plaits",
+          "not_gathered"
+        ],
+        "hair_gathered_front": [
+          "attached_to_skin_cornrows_french_plaits",
+          "gathered_other",
+          "not_gathered",
+          "not_visible",
+          "tucked_behind_ear"
+        ],
+        "hair_gathered_top": [
+          "attached_to_skin_cornrows_french_plaits",
+          "bun_single",
+          "gathered_other",
+          "not_gathered",
+          "not_visible",
+          "pony_tail_single"
+        ],
+        "hair_gathered_side_left": [
+          "attached_to_skin_cornrows_french_plaits",
+          "bun_single",
+          "not_gathered",
+          "not_visible",
+          "pony_tail_single",
+          "tucked_behind_ear"
+        ],
+        "hair_gathered_side_right": [
+          "attached_to_skin_cornrows_french_plaits",
+          "bun_single",
+          "not_gathered",
+          "not_visible",
+          "pony_tail_single",
+          "tucked_behind_ear"
+        ],
+        "hair_gathered_temple_left": [
+          "attached_to_skin_cornrows_french_plaits",
+          "not_gathered",
+          "not_visible",
+          "tucked_behind_ear"
+        ],
+        "hair_gathered_temple_right": [
+          "attached_to_skin_cornrows_french_plaits",
+          "not_gathered",
+          "not_visible",
+          "tucked_behind_ear"
+        ],
+        "hair_gathered_crown": [
+          "attached_to_skin_cornrows_french_plaits",
+          "bun_single",
+          "gathered_not_visible",
+          "not_gathered",
+          "not_visible",
+          "pony_tail_multiple",
+          "pony_tail_single"
+        ],
+        "hair_gathered_nape": [
+          "attached_to_skin_cornrows_french_plaits",
+          "bun_single",
+          "gathered_not_visible",
+          "not_gathered",
+          "not_visible",
+          "pony_tail_multiple",
+          "pony_tail_single"
+        ],
+        "decorative_patterns": [
+          "no",
+          "yes"
+        ],
+        "flag_hair_attribute_changes": [
+          "no",
+          "yes"
+        ],
+        "hairline_type": [
+          "bell_shaped",
+          "dont_know",
+          "no_hairline_bald",
+          "receding_or_m_shape",
+          "straight",
+          "uneven_other",
+          "widows_peak"
+        ],
+        "hairline_position": [
+          "dont_know",
+          "high",
+          "low",
+          "middle"
+        ],
+        "baby_hair": [
+          "dont_know",
+          "no_baby_hair",
+          "unstyled"
+        ],
+        "hairline_visibility": [
+          "fully_visible",
+          "not_visible",
+          "partially_visible_left_covered",
+          "partially_visible_right_covered"
+        ],
+        "parting_location": [
+          "central",
+          "diagonal",
+          "left_side",
+          "no_parting",
+          "other",
+          "right_side",
+          "zigzag"
+        ],
+        "bang_style": [
+          "diagonal_top_left_to_bottom_right",
+          "diagonal_top_right_to_bottom_left",
+          "inverted_u_shaped",
+          "inverted_v_shaped",
+          "none",
+          "other",
+          "straight",
+          "u_shaped",
+          "v_shaped"
+        ],
+        "hair_surface_appearance": [
+          "matte",
+          "shiny",
+          "very_shiny_oiled",
+          "wet_look"
+        ],
+        "hair_accessories_multi": [
+          "beads",
+          "clips",
+          "elastic_hair_tie",
+          "headband",
+          "none",
+          "other",
+          "ribbons_and_cords"
+        ]
+      }
+    }
+  }
+}

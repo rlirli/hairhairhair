@@ -371,7 +371,3 @@ export const hairstyleMedia: HairstyleMedia[] = [
     transparentBackground: true,
   },
 ];
-
-export function getHairstyleMediaById(id: string) {
-  return hairstyleMedia.find((media) => media.id === id);
-}

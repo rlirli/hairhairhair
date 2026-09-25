@@ -1,6 +1,4 @@
 import type { HairstyleCompatibility } from "../types";
-import { hairSubtypes, hairTypes } from "./hair-types.ts";
-import { publishedHairstyles } from "./hairstyle-queries";
 
 export const MIN_COMPATIBILITY_FOR_LISTING = 0.5;
 
@@ -189,55 +187,3 @@ export const hairstyleCompatibility: HairstyleCompatibility[] = [
   { hairstyleId: "hairstyle-wolf-cut", hairTypeId: "hair-type-3", score: 0.85, provenance: "estimated" },
   { hairstyleId: "hairstyle-wolf-cut", hairTypeId: "hair-type-4", score: 0.75, provenance: "estimated" },
 ];
-
-export function getHairstyleCompatibility(styleId: string, hairTypeId: string) {
-  const subtype = hairSubtypes.find((item) => item.id === hairTypeId);
-  const majorId = subtype?.hairTypeId ?? hairTypeId;
-  const row =
-    hairstyleCompatibility.find((item) => item.hairstyleId === styleId && item.hairTypeId === hairTypeId) ??
-    hairstyleCompatibility.find((item) => item.hairstyleId === styleId && item.hairTypeId === majorId);
-  return row;
-}
-
-export function getCompatibleHairstylesForHairType(hairTypeId: string) {
-  return publishedHairstyles.filter((style) => {
-    const subtypes = hairSubtypes.filter((subtype) => subtype.hairTypeId === hairTypeId);
-    if (subtypes.length) {
-      return subtypes.some((subtype) => {
-        const resolved = getHairstyleCompatibility(style.id, subtype.id);
-        return resolved?.score != null && resolved.score >= MIN_COMPATIBILITY_FOR_LISTING;
-      });
-    }
-    const compatibility = getHairstyleCompatibility(style.id, hairTypeId);
-    return compatibility?.score != null && compatibility.score >= MIN_COMPATIBILITY_FOR_LISTING;
-  });
-}
-
-export function getCompatibleSubtypeCodesForHairstyleInMajorType(styleId: string, hairTypeId: string) {
-  const hasSubtypePrecision = hairstyleCompatibility.some(
-    (row) =>
-      row.hairstyleId === styleId &&
-      hairSubtypes.some((subtype) => subtype.id === row.hairTypeId && subtype.hairTypeId === hairTypeId),
-  );
-  if (!hasSubtypePrecision) return [];
-  return hairSubtypes
-    .filter((subtype) => subtype.hairTypeId === hairTypeId)
-    .filter((subtype) => {
-      const compatibility = getHairstyleCompatibility(styleId, subtype.id);
-      return compatibility?.score != null && compatibility.score >= MIN_COMPATIBILITY_FOR_LISTING;
-    })
-    .map((subtype) => subtype.code);
-}
-
-export function getCompatibleHairTypeLabelsForHairstyle(styleId: string) {
-  return hairTypes.flatMap((hairType) => {
-    const subtypes = hairSubtypes.filter((subtype) => subtype.hairTypeId === hairType.id);
-    const eligible = subtypes.filter((subtype) => {
-      const compatibility = getHairstyleCompatibility(styleId, subtype.id);
-      return compatibility?.score != null && compatibility.score >= MIN_COMPATIBILITY_FOR_LISTING;
-    });
-    if (eligible.length === subtypes.length && subtypes.length > 0) return [`Type ${hairType.code}`];
-    if (eligible.length === 0) return [];
-    return eligible.map((subtype) => `Type ${subtype.code}`);
-  });
-}

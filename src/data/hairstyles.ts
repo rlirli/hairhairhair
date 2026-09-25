@@ -1,5 +1,11 @@
 import type { EditorialSource, Hairstyle, StyleExample } from "../types";
 
+export const kindLabels = {
+  cut: "Cut",
+  "finishing-technique": "Finishing technique",
+  "styling-technique": "Styling technique",
+} as const;
+
 export const sources: EditorialSource[] = [
   {
     id: "aad-alopecia-self-care",

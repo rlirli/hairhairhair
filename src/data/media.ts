@@ -10,6 +10,8 @@ import edgarCutClassic from "../assets/hairstyles/edgar-cut-classic.png";
 import edgarCutFluffyWavy from "../assets/hairstyles/edgar-cut-fluffy-wavy.png";
 import farrahFawcettCutBlack from "../assets/hairstyles/farrah-fawcett-cut-black.png";
 import farrahFawcettCutClassicFeathered from "../assets/hairstyles/farrah-fawcett-cut-classic-feathered.png";
+import fingerWavesDeepSidePartSilver from "../assets/hairstyles/finger-waves-deep-side-part-silver.png";
+import fingerWavesDeepSidePart from "../assets/hairstyles/finger-waves-deep-side-part.png";
 import fivePointCutGeometricBlack from "../assets/hairstyles/five-point-cut-geometric-black.png";
 import fivePointCutGeometricDark from "../assets/hairstyles/five-point-cut-geometric-dark.png";
 import flatTopCoily from "../assets/hairstyles/flat-top-coily.png";
@@ -145,6 +147,25 @@ export const hairstyleMedia: HairstyleMedia[] = [
     provenance: {
       origin: "system",
       aiGeneration: { provider: "OpenAI", promptKey: "farrah-fawcett-cut-classic-feathered" },
+    },
+    transparentBackground: true,
+  },
+  {
+    id: "finger-waves-deep-side-part",
+    kind: "image",
+    image: fingerWavesDeepSidePart,
+    alt: "Three-quarter portrait of a fictional Black adult wearing glossy close-cropped finger waves with a deep side part on a transparent background.",
+    provenance: { origin: "system", aiGeneration: { provider: "OpenAI", promptKey: "finger-waves-deep-side-part" } },
+    transparentBackground: true,
+  },
+  {
+    id: "finger-waves-deep-side-part-silver",
+    kind: "image",
+    image: fingerWavesDeepSidePartSilver,
+    alt: "Three-quarter portrait of a fictional adult wearing glossy close-cropped finger waves with a deep side part on a transparent background.",
+    provenance: {
+      origin: "system",
+      aiGeneration: { provider: "OpenAI", promptKey: "finger-waves-deep-side-part-silver" },
     },
     transparentBackground: true,
   },

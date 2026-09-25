@@ -78,6 +78,13 @@ export const sources: EditorialSource[] = [
     reviewedAt: "2026-09-24",
   },
   {
+    id: "american-salon-finger-waves",
+    title: "How-To: Finger Waves",
+    url: "https://www.americansalon.com/step-by-steps/how-to-finger-waves",
+    publisher: "American Salon",
+    reviewedAt: "2026-09-25",
+  },
+  {
     id: "andis-buzz-cut",
     title: "Soft & Subtle Buzz Cut",
     url: "https://andis.com/BarberStylistEducation/VideoDetail?EduItemID=1439",
@@ -174,6 +181,13 @@ export const sources: EditorialSource[] = [
     title: "The 90s Long Bob: How to Get & Style the 90s Lob",
     url: "https://ca.davines.com/blogs/news/90s-long-bob",
     publisher: "Davines Canada",
+    reviewedAt: "2026-09-25",
+  },
+  {
+    id: "denver-library-bobbing-waving",
+    title: "Historic Hair: “Bobbing” and “Waving” in the 1920s",
+    url: "https://history.denverlibrary.org/comment/92",
+    publisher: "Denver Public Library Special Collections and Archives",
     reviewedAt: "2026-09-25",
   },
   {
@@ -294,6 +308,13 @@ export const sources: EditorialSource[] = [
     url: "https://www.hair.com/wolf-cut-hair.html",
     publisher: "Hair.com by L'Oréal",
     reviewedAt: "2026-09-22",
+  },
+  {
+    id: "harpers-bazaar-finger-waves",
+    title: "How to Do Finger Waves, According to a Celebrity Hairstylist",
+    url: "https://www.harpersbazaar.com/beauty/hair/a39229509/finger-waves/",
+    publisher: "Harper's BAZAAR",
+    reviewedAt: "2026-09-25",
   },
   {
     id: "hji-five-point-sassoon-cut",
@@ -420,6 +441,13 @@ export const sources: EditorialSource[] = [
     url: "https://www.smithsonianeducation.org/migrations/rasta/pic07.html",
     publisher: "Smithsonian Institution",
     reviewedAt: "2026-09-24",
+  },
+  {
+    id: "smithsonian-flapper-bob",
+    title: "The History of the Flapper, Part 4: Emboldened by the Bob",
+    url: "https://www.smithsonianmag.com/arts-culture/the-history-of-the-flapper-part-4-emboldened-by-the-bob-27361862/",
+    publisher: "Smithsonian Magazine",
+    reviewedAt: "2026-09-25",
   },
   {
     id: "smithsonian-look-talk-play",
@@ -900,6 +928,67 @@ export const hairstyles: Hairstyle[] = [
     guidePublicationStatus: "published",
     inventedAt: { year: 1974, precision: "year", sourceId: "beauty-interviews-allen-edwards" },
     inventor: { name: "Allen Edwards", sourceId: "beauty-interviews-allen-edwards" },
+  },
+  {
+    id: "hairstyle-finger-waves",
+    slug: "finger-waves",
+    name: "Finger waves",
+    kind: "styling-technique",
+    summary:
+      "A wet-setting technique that molds hair into connected S-shaped ridges close to the scalp using the fingers, a comb, and styling product.",
+    intro: [
+      "Finger waves are defined by a repeating S-shaped pattern molded into damp or wet hair with the fingers and a comb. The finished ridges usually sit close to the scalp and read as a deliberate continuous wave rather than loose curls.",
+      "The technique became strongly associated with short waved hairstyles in the later 1920s and 1930s. Historical sources distinguish finger waving from Marcel waving: finger waves are shaped on damp hair with fingers and a comb, while Marcel waves use heated irons.",
+      "Modern versions can cover the whole head or appear as a partial sculpted section combined with natural or otherwise styled lengths. A deep side part and glossy finish are common choices, but neither is mandatory.",
+    ],
+    variations: [
+      {
+        id: "finger-waves-classic-full-head",
+        name: "Classic full-head finger waves",
+        description:
+          "Carries a continuous sequence of close-set S-shaped ridges around most or all of the head for a compact, highly sculpted finish.",
+      },
+      {
+        id: "finger-waves-partial",
+        name: "Partial finger waves",
+        description:
+          "Sculpts one section, such as the front or temple area, while leaving the remaining hair in its natural texture or another finish.",
+      },
+      {
+        id: "finger-waves-soft",
+        name: "Soft finger waves",
+        description:
+          "Uses broader, less rigid ridges or gently brushes the dried set for a looser interpretation while retaining the underlying S-wave direction.",
+      },
+    ],
+    consultation: {
+      intro:
+        "Agree on how much of the head will be waved, the part position, ridge scale, finish, and how much product or set firmness is acceptable.",
+      questions: [
+        "Do you want a full-head finger-wave set or only a sculpted front or side section?",
+        "Should the part sit deep to one side, near the center, or follow your usual parting?",
+        "Do you want narrow, crisp ridges or broader, softer waves?",
+        "Should the result remain very glossy and firmly set, or be softened after drying for more movement?",
+        "Will the hair be worn close to the scalp throughout, or should longer sections remain natural or differently styled?",
+      ],
+      sampleRequest:
+        "“I want close, glossy finger waves with a deep side part and clear S-shaped ridges from the front hairline through the temples. Keep the set compact and sculpted rather than fluffy, and tell me how much product and drying time my texture will need.”",
+    },
+    considerations: [
+      "Finger waves are a temporary set: water, washing, humidity, friction, and repeated handling can soften or disrupt the molded ridges.",
+      "The classic technique depends on sufficient slip and hold while the hair is wet or damp, followed by drying without disturbing the shaped pattern.",
+      "Fine, straight, or relaxed hair is often easier to mold into the canonical smooth S-shape, but professional guidance notes that the technique can be adapted across hair types with differences in product, smoothing, and setting effort.",
+      "As natural curl or coil tightness increases, preserving the untouched natural pattern while also achieving a very flat, continuous classic wave becomes progressively more demanding; the compatibility scores below therefore estimate the defining look rather than general styling possibility.",
+      "Finger waves and Marcel waves can look similar, but the traditional methods differ: Marcel waving relies on heated irons, whereas finger waving is molded primarily with the fingers and comb.",
+    ],
+    sourceIds: [
+      "american-salon-finger-waves",
+      "denver-library-bobbing-waving",
+      "harpers-bazaar-finger-waves",
+      "smithsonian-flapper-bob",
+    ],
+    relatedStyleIds: [],
+    guidePublicationStatus: "published",
   },
   {
     id: "hairstyle-five-point-cut",
@@ -2064,6 +2153,30 @@ export const styleExamples: StyleExample[] = [
       "Presented with a Type 1C-to-2A-like blow-dried finish that supplies enough body for the large feathered sections; the image does not establish the fictional model's natural hair subtype.",
     lengthDescription:
       "Long, extending below the shoulders, with progressively shorter layers around the face and upper sides.",
+  },
+  {
+    id: "finger-waves-deep-side-part-example",
+    hairstyleIds: ["hairstyle-finger-waves"],
+    imageId: "finger-waves-deep-side-part",
+    title: "Close-cropped finger waves with deep side part",
+    caption:
+      "A fictional Black adult wearing glossy close-cropped finger waves with a deep side part and continuous sculpted ridges visible from the forehead through the temple and side of the head.",
+    patternDescription:
+      "The finished set shows compact, connected S-shaped ridges molded close to the scalp; the image does not establish the fictional model’s natural hair subtype.",
+    lengthDescription:
+      "Very short to short hair kept close enough to the scalp for the ridge pattern to remain continuous and clearly legible.",
+  },
+  {
+    id: "finger-waves-deep-side-part-silver-example",
+    hairstyleIds: ["hairstyle-finger-waves"],
+    imageId: "finger-waves-deep-side-part-silver",
+    title: "Close-cropped finger waves with deep side part gray hair",
+    caption:
+      "A fictional woman wearing glossy close-cropped finger waves with a deep side part and continuous sculpted ridges visible from the forehead through the temple and side of the head.",
+    patternDescription:
+      "The finished set shows compact, connected S-shaped ridges molded close to the scalp; the image does not establish the fictional model’s natural hair subtype.",
+    lengthDescription:
+      "Very short to short hair kept close enough to the scalp for the ridge pattern to remain continuous and clearly legible.",
   },
   {
     id: "five-point-cut-geometric-black",

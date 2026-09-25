@@ -291,3 +291,15 @@ Square PNG with a genuinely transparent RGBA background. Contemporary editorial 
 Asset: `src/assets/hairstyles/edgar-cut-fluffy-wavy.png`
 
 Square PNG with a genuinely transparent RGBA background. Contemporary editorial portrait photography of one fictional Latino man in his mid-20s with light-medium warm skin and dense very dark brown-to-black Type 2B-like wavy hair. Show a fluffy Edgar cut rather than a generic curly crop: tightly faded sides and back, a heavier rounded upper section, visibly wavy separated texture and lift through the crown, and a recognizable blunt forward fringe cut horizontally across the forehead. Let the natural waves interrupt the front edge slightly rather than forcing a ruler-perfect line. Use a different face and pose from the first example: narrower jaw, longer nose, heavier brows, subtle mustache and small goatee, with the head turned farther to the side and the eyes looking away from the camera. Keep photographic realism intentionally imperfect with fine sensor-like grain, natural skin pores, faint acne texture, minor tonal variation, slight hair flyaways and irregular strand grouping. Simple cream sweatshirt or crew-neck top. No celebrity likeness, jewelry, hats, props, text, logos or watermarks. No opaque backdrop or baked-in checkerboard. Clean genuine transparent alpha edges.
+
+## finger-waves-deep-side-part
+
+Asset: `src/assets/hairstyles/finger-waves-deep-side-part.png`
+
+Create one original square PNG style example for the hairstyle “Finger waves”. The image must have a genuinely transparent RGBA background with clean alpha edges; do not include a white, ivory, studio, checkerboard, or other baked-in background. Show one fictional Black adult in their late 30s with deep brown skin and an androgynous presentation, photographed shoulder-up at a three-quarter angle so both the front ridge pattern and side silhouette are easy to assess. Style the hair as close-cropped glossy finger waves with a deep side part: continuous, clearly legible S-shaped ridges molded close to the scalp from the forehead across the temple and around the head, with restrained styled edges. Use understated contemporary editorial portrait photography, soft neutral light, realistic individual hair strands, natural skin texture, simple cream clothing, and enough empty space around the entire hairstyle silhouette. No celebrity likeness, text, logos, watermarks, jewelry, hats, props, dramatic makeup, or distracting accessories. The model’s appearance must not imply that a precise natural hair subtype can be inferred from the finished set.
+
+## finger-waves-deep-side-part-silver
+
+Asset: `src/assets/hairstyles/finger-waves-deep-side-part-silver.png`
+
+...

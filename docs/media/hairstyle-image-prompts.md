@@ -253,3 +253,29 @@ Square PNG with a genuinely transparent RGBA background. Understated contemporar
 Asset: `src/assets/hairstyles/monastic-tonsure-celtic.png`
 
 Square PNG with a genuinely transparent RGBA background. Understated contemporary editorial portrait photography of one fictional fair-skinned man in his late 20s to early 30s with freckles and reddish-brown wavy hair. Show the historically described Celtic or St. John tonsure rather than a Roman crown tonsure: shave the entire front portion of the head from the forehead backward to a clear boundary running approximately from ear to ear, while leaving substantially longer natural hair on the rear half of the scalp. The retained rear hair should remain visibly wavy and extend backward/downward, making the front-versus-rear division unmistakable. Do not leave a circular ring around the crown and do not create a mohawk or isolated strip. Use a side-to-three-quarter head-and-shoulders angle that clearly exposes the shaved frontal scalp, one ear, the ear-to-ear transition line and the longer hair behind it. Natural skin texture, restrained expression, simple neutral brown or cream clothing. No celebrity likeness, jewelry, hats, props, text, logos or watermarks. No opaque studio background or baked-in checkerboard. Clean transparent alpha edges.
+
+## side-parted-flipped-lob-east-asian-28
+
+Asset: `src/assets/hairstyles/side-parted-flipped-lob-east-asian-28.png`
+
+Use case: photorealistic-natural
+Asset type: square transparent PNG style example for a hairstyle reference website
+Primary request: Create an original editorial portrait of one fictional adult East Asian woman in her late 20s wearing a side-parted flipped lob. Her dark straight hair reaches the collarbone, has a deep side part above one eyebrow, a softly lifted crown and smooth body, with the bottom ends clearly turned outward all around. Show a polished but believable blowout, not a heavily layered shag and not long hair.
+Style/medium: understated contemporary editorial portrait photography, realistic skin texture and individually defined hair strands
+Composition/framing: square canvas, shoulder-up three-quarter portrait, complete hair silhouette visible with generous clear space around it; face and hair are the focus
+Lighting/mood: soft neutral editorial light, natural expression
+Constraints: genuine transparent RGBA background with clean alpha edges; isolated subject cutout only; no background color, no studio wall, no floor, no halo; adult fictional person, not resembling a real individual
+Avoid: text, logos, watermark, jewelry, hats, props, cropped hair silhouette, inward-curled ends, bangs, center part
+
+## side-parted-flipped-lob-afrolatina-55
+
+Asset: `src/assets/hairstyles/side-parted-flipped-lob-afrolatina-55.png`
+
+Use case: photorealistic-natural
+Asset type: square transparent PNG style example for a hairstyle reference website
+Primary request: An original editorial portrait of a fictional adult Afro-Latina woman, approximately 55 years old, with deep brown skin and natural mature facial features. Her dark brown hair is styled in a smooth collarbone-length long bob. Give it a pronounced side part, soft lift at the crown, and outward flicked ends all around. Keep the outline clean and shoulder-grazing. This is a polished side-parted flipped lob, not a long feathered cut or a heavily layered shag.
+Style/medium: natural contemporary editorial portrait photography, realistic skin and individual hair strands
+Composition/framing: square, shoulder-up three-quarter portrait facing left, complete hairstyle visible with breathing room, opposite viewing angle from the companion example
+Lighting/mood: soft neutral light, relaxed self-assured expression
+Constraints: genuine transparent RGBA background, clean alpha edges, isolated cutout only, no backdrop or floor, fictional non-famous adult
+Avoid: text, logo, watermark, accessories, props, bangs, center part, inward-turned ends, cropped hair silhouette, resemblance to any known person

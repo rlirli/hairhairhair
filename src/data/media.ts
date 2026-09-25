@@ -27,6 +27,8 @@ import patternedMohawkGeometric from "../assets/hairstyles/patterned-mohawk-geom
 import sculptedSphericalAfroClassic from "../assets/hairstyles/sculpted-spherical-afro-classic.png";
 import sculptedSphericalAfroOlderMan from "../assets/hairstyles/sculpted-spherical-afro-older-man.png";
 import shortFeatheredShagCopper from "../assets/hairstyles/short-feathered-shag-copper.png";
+import sidePartedFlippedLobAfrolatina55 from "../assets/hairstyles/side-parted-flipped-lob-afrolatina-55.png";
+import sidePartedFlippedLobEastAsian28 from "../assets/hairstyles/side-parted-flipped-lob-east-asian-28.png";
 import sleekLongCutBlonde from "../assets/hairstyles/sleek-long-cut-blonde.png";
 import sleekLongCutSilverGray from "../assets/hairstyles/sleek-long-cut-silver-gray.png";
 import sleekLongCutStraightBlack from "../assets/hairstyles/sleek-long-cut-straight-black.png";
@@ -284,6 +286,28 @@ export const hairstyleMedia: HairstyleMedia[] = [
     image: shortFeatheredShagCopper,
     alt: "Editorial reference showing a tanned 60-year-old woman with short copper hair in a soft feathered shag.",
     provenance: { origin: "system", aiGeneration: { provider: "OpenAI", promptKey: "short-feathered-shag-copper" } },
+    transparentBackground: true,
+  },
+  {
+    id: "side-parted-flipped-lob-afrolatina-55",
+    kind: "image",
+    image: sidePartedFlippedLobAfrolatina55,
+    alt: "Fictional Afro-Latina woman in her mid-50s with a smooth shoulder-length lob, deep side part, and controlled outward-flicked ends.",
+    provenance: {
+      origin: "system",
+      aiGeneration: { provider: "OpenAI", promptKey: "side-parted-flipped-lob-afrolatina-55" },
+    },
+    transparentBackground: true,
+  },
+  {
+    id: "side-parted-flipped-lob-east-asian-28",
+    kind: "image",
+    image: sidePartedFlippedLobEastAsian28,
+    alt: "Fictional East Asian woman in her late 20s with a smooth collarbone-length lob, deep side part, and clearly flipped-out ends.",
+    provenance: {
+      origin: "system",
+      aiGeneration: { provider: "OpenAI", promptKey: "side-parted-flipped-lob-east-asian-28" },
+    },
     transparentBackground: true,
   },
   {

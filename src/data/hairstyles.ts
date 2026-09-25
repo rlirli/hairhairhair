@@ -156,6 +156,13 @@ export const sources: EditorialSource[] = [
     reviewedAt: "2026-09-25",
   },
   {
+    id: "davines-90s-long-bob-2026",
+    title: "The 90s Long Bob: How to Get & Style the 90s Lob",
+    url: "https://ca.davines.com/blogs/news/90s-long-bob",
+    publisher: "Davines Canada",
+    reviewedAt: "2026-09-25",
+  },
+  {
     id: "dreadlockulture-freeform-locs",
     title: "What Are Freeform Locs?",
     url: "https://dreadlockulture.com/what-are-freeform-locs/",
@@ -175,6 +182,13 @@ export const sources: EditorialSource[] = [
     url: "https://www.essence.com/beauty/knotless-braids-summer-protective-styles/",
     publisher: "Essence",
     reviewedAt: "2026-09-22",
+  },
+  {
+    id: "glamour-long-bob-style-2026",
+    title: "How To Style A Long Bob So It Always Looks Phenomenal",
+    url: "https://www.glamourmagazine.co.uk/gallery/how-to-style-a-long-bob",
+    publisher: "Glamour UK",
+    reviewedAt: "2026-09-25",
   },
   {
     id: "glamour-modern-rachel",
@@ -345,6 +359,13 @@ export const sources: EditorialSource[] = [
     reviewedAt: "2026-09-24",
   },
   {
+    id: "olivia-garden-flipped-bob",
+    title: "Flirty Flipped Out Bob",
+    url: "https://store.oliviagarden.com/blogs/get-the-look/flirtyflippedfoutbob",
+    publisher: "Olivia Garden",
+    reviewedAt: "2026-09-25",
+  },
+  {
     id: "oxford-flat-top",
     title: "flat-top",
     url: "https://www.oxfordlearnersdictionaries.com/us/definition/english/flat-top",
@@ -392,6 +413,13 @@ export const sources: EditorialSource[] = [
     url: "https://www.si.edu/object/archives/sova-nmah-ac-0641",
     publisher: "Smithsonian Institution",
     reviewedAt: "2026-09-24",
+  },
+  {
+    id: "tresemme-side-part-lob",
+    title: "Side Part Lob",
+    url: "https://www.tresemme.com/us/en/look-book/side-part-lob.html",
+    publisher: "TRESemmé",
+    reviewedAt: "2026-09-25",
   },
   {
     id: "vogue-aniston-hair-products",
@@ -1452,6 +1480,61 @@ export const hairstyles: Hairstyle[] = [
     guidePublicationStatus: "published",
   },
   {
+    id: "hairstyle-side-parted-flipped-lob",
+    slug: "side-parted-flipped-lob",
+    name: "Side-parted flipped lob",
+    kind: "cut",
+    summary:
+      "A shoulder- to collarbone-length long bob worn with a deep side part, soft crown lift, and ends styled to turn outward.",
+    intro: [
+      "A lob is a longer bob, commonly worn around collarbone length. This version pairs that length with a deep side part and a smooth, rounded blowout, then turns the ends outward for a clear flicked finish.",
+      "The side part shifts the balance of the front sections and can add a fuller sweep across the crown. Keep the outline near one length or use only light blending so the look stays a lob rather than becoming a heavily layered shag.",
+      "The flipped ends are a styling finish as much as a cut detail. A round brush or flatiron can curve the tips outward; the strength of the flick can range from a soft bend to a more pronounced turn.",
+    ],
+    variations: [
+      {
+        id: "side-parted-flipped-lob-pronounced-flick",
+        name: "Pronounced flipped lob",
+        description:
+          "Uses a stronger outward curve through the ends and more visible lift at the crown while retaining the clean lob perimeter.",
+      },
+      {
+        id: "side-parted-flipped-lob-soft-flick",
+        name: "Soft flipped lob",
+        description:
+          "Keeps the collarbone-length outline and deep side part, with only a small outward turn at the tips for a restrained finish.",
+      },
+    ],
+    consultation: {
+      intro:
+        "Agree on the finished length and the parting first, then describe how much crown lift, layering, and outward bend you want in the styled result.",
+      questions: [
+        "Should the perimeter land at the shoulders or closer to the collarbone?",
+        "Where do you naturally part your hair, and how deep should the side part sit?",
+        "Would you prefer a mostly one-length outline or light layers for movement?",
+        "Should the ends turn outward subtly or form a more pronounced flick?",
+        "How often are you comfortable using a round brush or hot tool to recreate the smooth flipped finish?",
+      ],
+      sampleRequest:
+        "“I’d like a collarbone-length lob with a deep side part, soft lift at the crown, and a clean outline. Please keep the layers light and show me how the ends look with a subtle outward flip that I can recreate with a round brush.”",
+    },
+    considerations: [
+      "The recognizable flip usually needs a round-brush blowout or hot-tool styling; the cut alone will not hold the same smooth outward curve on every texture.",
+      "Use heat protection and moderate heat when repeatedly shaping the ends with a dryer, hot brush, or flatiron.",
+      "Straight and gently wavy hair can show the smooth side sweep and defined flipped tips with less reshaping. Curlier and coiler patterns change the silhouette when worn naturally, so discuss whether the goal is a natural-texture variation or a heat-styled finish.",
+      "The parting, crown volume, and strength of the end flip can be adjusted independently; making every layer strongly feathered can shift the look toward a more extensively layered style.",
+      "A very deep part or high crown lift may need more daily styling to keep its intended balance as the hair grows.",
+    ],
+    sourceIds: [
+      "davines-90s-long-bob-2026",
+      "glamour-long-bob-style-2026",
+      "olivia-garden-flipped-bob",
+      "tresemme-side-part-lob",
+    ],
+    relatedStyleIds: ["hairstyle-the-rachel"],
+    guidePublicationStatus: "draft",
+  },
+  {
     id: "hairstyle-sleek-long-cut",
     slug: "sleek-long-cut",
     name: "Sleek long cut",
@@ -1616,7 +1699,11 @@ export const hairstyles: Hairstyle[] = [
       "glamour-modern-rachel",
       "vogue-aniston-hair-products",
     ],
-    relatedStyleIds: ["hairstyle-long-layered-cut", "hairstyle-short-feathered-shag"],
+    relatedStyleIds: [
+      "hairstyle-long-layered-cut",
+      "hairstyle-short-feathered-shag",
+      "hairstyle-side-parted-flipped-lob",
+    ],
     guidePublicationStatus: "published",
     inventedAt: { year: 1994, precision: "year", sourceId: "allure-iconic-beauty-trends" },
     inventor: { name: "Chris McMillan", sourceId: "allure-iconic-beauty-trends" },
@@ -1986,6 +2073,26 @@ export const styleExamples: StyleExample[] = [
       "Generated with a dense Type 4C-like coily texture whose tight pattern supports substantial picked-out volume; the image should not be treated as evidence of a real person's natural subtype.",
     lengthDescription:
       "Substantial coily length expanded outward from the scalp, creating a broad rounded silhouette with balanced volume through the crown, sides and lower perimeter.",
+  },
+  {
+    id: "side-parted-flipped-lob-afro-latina-example",
+    hairstyleIds: ["hairstyle-side-parted-flipped-lob"],
+    imageId: "side-parted-flipped-lob-afrolatina-55",
+    title: "Mature side-parted flipped lob",
+    caption:
+      "A fictional Afro-Latina woman in her mid-50s wears a polished shoulder-grazing lob with a pronounced side part and controlled flipped ends.",
+    patternDescription: "Smooth blowout with restrained volume at the crown and outward-curved tips.",
+    lengthDescription: "Shoulder-grazing lob with a compact, softly rounded outline.",
+  },
+  {
+    id: "side-parted-flipped-lob-east-asian-example",
+    hairstyleIds: ["hairstyle-side-parted-flipped-lob"],
+    imageId: "side-parted-flipped-lob-east-asian-28",
+    title: "Deep side part with outward flick",
+    caption:
+      "A fictional East Asian woman in her late 20s wears a smooth collarbone-length lob with a deep side part and outward-turned ends.",
+    patternDescription: "Straight, smooth lengths with soft crown lift and a defined outward curve through the ends.",
+    lengthDescription: "Collarbone-length lob with a clean perimeter and light blending.",
   },
   {
     id: "sleek-long-cut-blonde",

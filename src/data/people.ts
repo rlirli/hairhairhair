@@ -6,6 +6,7 @@ import marioBalotelli2019 from "../assets/people/mario-balotelli-2019-marseille.
 import willSmith2009 from "../assets/people/will-smith-2009.jpg";
 import willSmith2011 from "../assets/people/will-smith-2011.jpg";
 import willSmith2012 from "../assets/people/will-smith-2012.jpg";
+import zendayaParis2025 from "../assets/people/zendaya-paris-2025.jpg";
 import type { Appearance, ImageMedia, Person } from "../types";
 
 const obamaFindingAid =
@@ -34,6 +35,18 @@ export const people: Person[] = [
       "Mario Balotelli Barwuah (born August 12, 1990, in Palermo, Italy) is an Italian professional footballer.",
     heroImageId: "mario-balotelli-2012-training",
     sources: [{ kind: "biography", url: britannicaMarioBalotelli }],
+  },
+  {
+    id: "person-zendaya",
+    slug: "zendaya",
+    name: "Zendaya",
+    description:
+      "Zendaya is an American performer from Oakland, California, known for her Emmy-winning portrayal of Rue in Euphoria.",
+    heroImageId: "zendaya-paris-2025",
+    sources: [
+      { kind: "biography", url: "https://www.televisionacademy.com/bios/zendaya" },
+      { kind: "photograph", url: "https://commons.wikimedia.org/wiki/File:Zendaya_Paris_2025.jpg" },
+    ],
   },
 ];
 
@@ -160,6 +173,23 @@ export const appearances: Appearance[] = [
     observations: [
       { hairstyleId: "hairstyle-top-knot", note: "Very short sides frame a longer top gathered into a small topknot." },
     ],
+  },
+  {
+    id: "appearance-zendaya-paris-2025",
+    imageId: "zendaya-paris-2025",
+    event: "Paris Fashion Week 2025 Spring",
+    taken: {
+      value: "2025-09-20",
+      precision: "day",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Zendaya_Paris_2025.jpg",
+    },
+    observations: [
+      {
+        hairstyleId: "hairstyle-side-parted-flipped-lob",
+        note: "Zendaya wore a smooth shoulder-length lob with a deep side part, soft crown volume, and outward-flipped ends.",
+      },
+    ],
+    personId: "person-zendaya",
   },
 ];
 
@@ -350,6 +380,27 @@ export const personPhotographs: ImageMedia[] = [
       jurisdiction: "France",
       identifier: "Mario Balotelli OM (cropped)",
       derivativeStatus: "cropped",
+    },
+  },
+  {
+    id: "zendaya-paris-2025",
+    kind: "image",
+    image: zendayaParis2025,
+    alt: "Zendaya at Paris Fashion Week in September 2025 with a voluminous side-parted shoulder-length hairstyle and flipped ends.",
+    objectPosition: "50% 35%",
+    provenance: {
+      origin: "system",
+      licenseType: "licensed",
+      creator: "Itumeleng Kingsley",
+      licenseName: "CC BY 4.0",
+      licenseUrl: "https://creativecommons.org/licenses/by/4.0/",
+      attribution: "Itumeleng Kingsley, CC BY 4.0, via Wikimedia Commons",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Zendaya_Paris_2025.jpg",
+      originalUrl: "https://upload.wikimedia.org/wikipedia/commons/5/53/Zendaya_Paris_2025.jpg",
+      rightsEvidenceUrl: "https://commons.wikimedia.org/wiki/File:Zendaya_Paris_2025.jpg#Licensing",
+      rightsBasis:
+        "The photographer uploaded the file as own work on Wikimedia Commons and licensed it under Creative Commons Attribution 4.0 International, which permits sharing and adaptation, including commercial reuse, with attribution.",
+      derivativeStatus: "original",
     },
   },
 ];

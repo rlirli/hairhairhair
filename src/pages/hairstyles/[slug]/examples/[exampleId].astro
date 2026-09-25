@@ -1,7 +1,7 @@
 ---
 import Layout from "../../../../components/shared/Layout.astro";
 import StyleMedia from "../../../../components/hairstyles/StyleMedia.astro";
-import { getStyleExamplesForHairstyle, publishedHairstyles } from "../../../../data/hairstyle-queries";
+import { getStyleExamplesForHairstyle, publishedHairstyles } from "../../../../data";
 
 export function getStaticPaths() {
   return publishedHairstyles.flatMap((style) =>

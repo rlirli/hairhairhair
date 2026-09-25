@@ -1,7 +1,6 @@
 import type { APIRoute } from "astro";
-import { kindLabels } from "../../data/hairstyle-labels";
+import { getPublishedHairstylesByIds, kindLabels, publishedHairstyles } from "../../data";
 import { sources } from "../../data/hairstyles";
-import { getPublishedHairstylesByIds, publishedHairstyles } from "../../data/hairstyle-queries";
 
 const siteOrigin = "https://hairhairhair.hair";
 

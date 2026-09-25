@@ -2,7 +2,7 @@
 import Layout from "../../../components/shared/Layout.astro";
 import HairstyleGridData from "../../../components/hairstyles/HairstyleGridData.astro";
 import { hairSubtypes, hairTypes } from "../../../data/hair-types";
-import { getCompatibleHairstylesForHairTypeSlug } from "../../../data/hair-type-discovery";
+import { getCompatibleHairstylesForHairTypeSlug } from "../../../data";
 
 export function getStaticPaths() {
   return [...hairTypes, ...hairSubtypes].map((item) => ({ params: { slug: item.slug }, props: { item } }));

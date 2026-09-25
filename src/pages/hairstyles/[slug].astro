@@ -5,11 +5,15 @@ import StyleMedia from "../../components/hairstyles/StyleMedia.astro";
 import StyleExampleCard from "../../components/hairstyles/StyleExampleCard.astro";
 import { getImage } from "astro:assets";
 import { sources } from "../../data/hairstyles";
-import { getStyleExamplesForHairstyle, publishedHairstyles } from "../../data/hairstyle-queries";
-import { getPublishedHairstylesByIds, publishedHairstyles } from "../../data/hairstyle-queries";
-import { getAppearancesForHairstyle, getPersonForAppearance } from "../../data/people-relations";
-import { kindLabels } from "../../data/hairstyle-labels";
-import { getHairstyleMediaById } from "../../data/media";
+import {
+  getAppearancesForHairstyle,
+  getHairstyleMediaById,
+  getPersonForAppearance,
+  getPublishedHairstylesByIds,
+  getStyleExamplesForHairstyle,
+  kindLabels,
+  publishedHairstyles,
+} from "../../data";
 import { personPhotographs } from "../../data/people";
 import HairstyleAppearanceGrid from "../../components/appearances/HairstyleAppearanceGrid.astro";
 import HairstyleFactSheet from "../../components/hairstyles/HairstyleFactSheet.astro";

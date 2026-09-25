@@ -1,11 +1,8 @@
 ---
 import { getImage } from "astro:assets";
-import {
-  getCompatibleHairTypeLabelsForHairstyle,
-  getCompatibleSubtypeCodesForHairstyleInMajorType,
-} from "../../data/hairstyle-compatibility";
-import { kindLabels } from "../../data/hairstyle-labels";
-import { getRepresentativeHairstyleMedia } from "../../data/hairstyle-representative-media";
+import { getCompatibleHairTypeLabelsForHairstyle, getCompatibleSubtypeCodesForHairstyleInMajorType } from "../../data";
+import { kindLabels } from "../../data";
+import { getRepresentativeHairstyleMedia } from "../../data";
 import type { Hairstyle } from "../../types";
 import HairstyleGrid from "./HairstyleGrid";
 

@@ -9,11 +9,11 @@ import HairTypePage from "../../src/pages/hair-types/[slug].astro";
 
 const lookup = vi.hoisted(() => ({ people: [] as unknown[], calls: [] as unknown[][] }));
 
-vi.mock("../../src/data/hair-type-discovery", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("../../src/data/hair-type-discovery")>();
+vi.mock("../../src/data/index", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("../../src/data/index")>();
   return {
     ...actual,
-    peopleForHairTypeSlug: (...args: unknown[]) => {
+    getPeopleByHairTypeSlug: (...args: unknown[]) => {
       lookup.calls.push(args);
       return lookup.people;
     },

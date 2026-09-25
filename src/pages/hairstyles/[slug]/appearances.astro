@@ -2,8 +2,8 @@
 import Layout from "../../../components/shared/Layout.astro";
 import HairstyleAppearanceGrid from "../../../components/appearances/HairstyleAppearanceGrid.astro";
 import { people, personPhotographs } from "../../../data/people";
-import { getAppearancesForHairstyle } from "../../../data/people-relations";
-import { publishedHairstyles } from "../../../data/hairstyle-queries";
+import { getAppearancesForHairstyle } from "../../../data";
+import { publishedHairstyles } from "../../../data";
 
 export function getStaticPaths() {
   return publishedHairstyles.map((style) => ({ params: { slug: style.slug }, props: { style } }));

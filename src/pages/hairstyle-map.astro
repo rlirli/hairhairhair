@@ -2,9 +2,9 @@
 import { getImage } from "astro:assets";
 import HairstyleRelationMap from "../components/hairstyle-map/HairstyleRelationMap";
 import Layout from "../components/shared/Layout.astro";
-import { kindLabels } from "../data/hairstyle-labels";
-import { publishedHairstyles } from "../data/hairstyle-queries";
-import { getRepresentativeHairstyleMedia } from "../data/hairstyle-representative-media";
+import { kindLabels } from "../data";
+import { publishedHairstyles } from "../data";
+import { getRepresentativeHairstyleMedia } from "../data";
 
 const styles = await Promise.all(
   publishedHairstyles.map(async (style) => {

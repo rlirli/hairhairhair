@@ -1,8 +1,7 @@
 import type { APIRoute } from "astro";
+import { getHairstyleAppearancesForPerson, getStyleExamplesForHairstyle, publishedHairstyles } from "../data";
 import { hairSubtypes, hairTypes } from "../data/hair-types";
-import { getStyleExamplesForHairstyle, publishedHairstyles } from "../data/hairstyle-queries";
 import { appearances, people, personPhotographs } from "../data/people";
-import { getHairstyleAppearancesForPerson } from "../data/people-relations";
 import { styleExamplePath } from "../lib/routes";
 export const GET: APIRoute = () => {
   const urls = [

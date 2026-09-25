@@ -1,7 +1,11 @@
 import type {
   Hairstyle,
+  HairSubtype,
+  HairType,
   HairTypePerson,
   HairTypePersonWithPhoto,
+  NaturalProfile,
+  NaturalProfileTrait,
   PeopleForHairTypeOptions,
   Person,
   PersonDirectoryCardImage,
@@ -9,27 +13,29 @@ import type {
   StyleExample,
 } from "../types";
 import { hairSubtypes, hairTypes } from "./hair-types";
-import { MIN_COMPATIBILITY_FOR_LISTING } from "./hairstyle-compatibility";
+import { hairstyleCompatibility, MIN_COMPATIBILITY_FOR_LISTING } from "./hairstyle-compatibility";
 import { hairstyles, styleExamples } from "./hairstyles";
 import { hairstyleMedia } from "./media";
 import { naturalProfiles } from "./natural-profiles";
 import { people, personPhotographs } from "./people";
+
+export { kindLabels } from "./hairstyles";
 
 export function getCompatibleHairstylesForHairTypeSlug(slug: string) {
   const target = hairTypes.find((item) => item.slug === slug) ?? hairSubtypes.find((item) => item.slug === slug);
   return target ? getCompatibleHairstylesForHairType(target.id) : [];
 }
 
-export function getPeopleForHairTypeSlug(slug: string): HairTypePersonWithPhoto[];
-export function getPeopleForHairTypeSlug(
+export function getPeopleByHairTypeSlug(slug: string): HairTypePersonWithPhoto[];
+export function getPeopleByHairTypeSlug(
   slug: string,
   options: PeopleForHairTypeOptions & { requireHeroImage: false },
 ): HairTypePerson[];
-export function getPeopleForHairTypeSlug(
+export function getPeopleByHairTypeSlug(
   slug: string,
   options: PeopleForHairTypeOptions & { requireHeroImage?: true },
 ): HairTypePersonWithPhoto[];
-export function getPeopleForHairTypeSlug(slug: string, options: PeopleForHairTypeOptions = {}) {
+export function getPeopleByHairTypeSlug(slug: string, options: PeopleForHairTypeOptions = {}) {
   const target = hairTypes.find((item) => item.slug === slug) ?? hairSubtypes.find((item) => item.slug === slug);
   if (!target) return [];
   const limit = Math.max(0, options.limit ?? Infinity);

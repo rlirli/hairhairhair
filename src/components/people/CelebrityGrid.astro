@@ -1,7 +1,7 @@
 ---
 import { getImage } from "astro:assets";
 import PersonDirectoryCard from "./PersonDirectoryCard";
-import { buildPersonDirectoryCardData } from "../../data/person-directory";
+import { buildPersonDirectoryCardData } from "../../data";
 import type { HairTypePerson } from "../../types";
 
 const { people } = Astro.props as { people: HairTypePerson[] };

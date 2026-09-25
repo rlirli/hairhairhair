@@ -1,7 +1,7 @@
 ---
 import Layout from "../../../components/shared/Layout.astro";
 import StyleExampleCard from "../../../components/hairstyles/StyleExampleCard.astro";
-import { getStyleExamplesForHairstyle, publishedHairstyles } from "../../../data/hairstyle-queries";
+import { getStyleExamplesForHairstyle, publishedHairstyles } from "../../../data";
 
 export function getStaticPaths() {
   return publishedHairstyles.map((style) => ({ params: { slug: style.slug }, props: { style } }));

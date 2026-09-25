@@ -107,6 +107,13 @@ export const sources: EditorialSource[] = [
     reviewedAt: "2026-09-24",
   },
   {
+    id: "british-gq-edgar-guide",
+    title: "Introducing the Edgar haircut: the go-to style you've seen but couldn't name",
+    url: "https://www.gq-magazine.co.uk/article/edgar-haircut-men",
+    publisher: "British GQ",
+    reviewedAt: "2026-09-25",
+  },
+  {
     id: "british-vogue-70s-summer-haircuts",
     title: "These ’70s Haircuts Have Become Summer’s Most Sought-After Styles",
     url: "https://www.vogue.co.uk/article/70s-summer-haircuts",
@@ -119,6 +126,13 @@ export const sources: EditorialSource[] = [
     url: "https://www.vogue.co.uk/beauty/article/vidal-sassoon-haircut-mary-quant",
     publisher: "British Vogue",
     reviewedAt: "2026-09-24",
+  },
+  {
+    id: "cambridge-edgar",
+    title: "Edgar | English meaning",
+    url: "https://dictionary.cambridge.org/dictionary/english/edgar",
+    publisher: "Cambridge Dictionary",
+    reviewedAt: "2026-09-25",
   },
   {
     id: "cambridge-flattop",
@@ -289,6 +303,13 @@ export const sources: EditorialSource[] = [
     reviewedAt: "2026-09-24",
   },
   {
+    id: "latimes-edgar-haircut",
+    title: "The Edgar is all the rage among the foos",
+    url: "https://www.latimes.com/lifestyle/image/story/2023-08-10/the-edgar-haircut-all-the-rage-among-the-foos",
+    publisher: "Los Angeles Times",
+    reviewedAt: "2026-09-25",
+  },
+  {
     id: "latimes-fawcett-generation-x",
     title: "Farrah Fawcett: forever Generation X's favorite pinup",
     url: "https://www.latimes.com/fashion/alltherage/la-ig-farrah26-2009jun26-story.html",
@@ -413,6 +434,13 @@ export const sources: EditorialSource[] = [
     url: "https://www.si.edu/object/archives/sova-nmah-ac-0641",
     publisher: "Smithsonian Institution",
     reviewedAt: "2026-09-24",
+  },
+  {
+    id: "telemundo-edgar-origin",
+    title: "Cómo surgió y qué hay detrás del ‘Edgar’, el corte de cabello que se ha vuelto viral entre jóvenes latinos",
+    url: "https://www.telemundo.com/noticias/noticias-telemundo/cultura/como-surgio-y-que-hay-detras-de-el-edgar-el-corte-de-cabello-que-se-ha-rcna74085",
+    publisher: "Telemundo",
+    reviewedAt: "2026-09-25",
   },
   {
     id: "tresemme-side-part-lob",
@@ -754,6 +782,65 @@ export const hairstyles: Hairstyle[] = [
     guidePublicationStatus: "published",
   },
   {
+    id: "hairstyle-edgar-cut",
+    slug: "edgar-cut",
+    name: "Edgar cut",
+    kind: "cut",
+    summary:
+      "A compact short haircut defined by a blunt horizontal fringe, substantial hair across the top and tightly tapered or faded sides that create a strong geometric contrast.",
+    intro: [
+      "The Edgar is recognizable first by its deliberately blunt front edge. Hair is directed forward and cut into a strong horizontal fringe rather than softened into wispy bangs or swept away from the forehead.",
+      "The top retains noticeably more weight than the sides, often producing a compact rounded or bowl-like silhouette. A taper, fade or stronger disconnected transition keeps the perimeter tight and emphasizes the heavier upper section.",
+      "The style became especially visible among young Latino and Mexican-American communities in the southwestern United States during the 2010s and early 2020s and is closely associated with contemporary takuache culture.",
+      "The origin of the name is uncertain. One popular account links it to a haircut and design involving baseball player Edgar Martínez, while other reporting points to much older Indigenous hair traditions in the Jumano region. Neither establishes a documented inventor of the modern cut.",
+    ],
+    variations: [
+      {
+        id: "edgar-cut-classic",
+        name: "Classic Edgar",
+        description:
+          "Keeps the top relatively flat and dense, with a severe straight fringe and closely tapered or faded sides.",
+      },
+      {
+        id: "edgar-cut-fluffy",
+        name: "Fluffy Edgar",
+        description:
+          "Retains the blunt forward fringe but allows greater texture, wave and height through the top for a softer, more voluminous silhouette.",
+      },
+      {
+        id: "edgar-cut-high-fade",
+        name: "High-fade Edgar",
+        description:
+          "Raises the side fade substantially, increasing the contrast between the compact upper mass and the nearly bare lower perimeter.",
+      },
+    ],
+    consultation: {
+      intro:
+        "Agree on fringe height and sharpness, how much weight should remain on top, and whether the sides should use a taper, low fade, mid fade or higher skin fade.",
+      questions: [
+        "How high above the eyebrows should the blunt fringe sit?",
+        "Do you want the front edge extremely straight and sharp or slightly textured while retaining the Edgar shape?",
+        "Should the top lie relatively flat or keep more volume for a fluffy Edgar?",
+        "Do you want a taper, low fade, mid fade or high fade through the sides and back?",
+        "How much natural wave or curl do you want to preserve through the top?",
+      ],
+      sampleRequest:
+        "“I want an Edgar with a dense short top, a blunt straight fringe across my forehead and tightly faded sides. Keep the front line very clear, but leave enough natural texture on top that it does not look completely flat.”",
+    },
+    considerations: [
+      "The blunt fringe is the most important identifying feature; heavily softening or sweeping the front can make the result read closer to a French crop.",
+      "Maintaining a very sharp front line and fresh fade usually requires relatively frequent barber visits as both edges become visibly softer with growth.",
+      "Dense straight or slightly wavy hair naturally supports the compact upper shape and crisp fringe particularly well.",
+      "Wavier hair can produce a successful fluffy Edgar, but its front edge usually reads less mechanically straight than the classic version.",
+      "Increasing curl tightness changes the defining fringe and rounded top substantially when the natural pattern is preserved.",
+      "Cowlicks or strong changes in growth direction around the front hairline can make a perfectly horizontal fringe more difficult to maintain.",
+      "The Edgar has specific cultural associations with young Latino and Mexican-American communities, but those associations do not restrict who can technically wear the haircut.",
+    ],
+    sourceIds: ["british-gq-edgar-guide", "cambridge-edgar", "latimes-edgar-haircut", "telemundo-edgar-origin"],
+    relatedStyleIds: ["hairstyle-french-crop", "hairstyle-taper-fade"],
+    guidePublicationStatus: "draft",
+  },
+  {
     id: "hairstyle-farrah-fawcett-cut",
     slug: "farrah-fawcett-cut",
     name: "Farrah Fawcett cut",
@@ -1032,7 +1119,7 @@ export const hairstyles: Hairstyle[] = [
       "menshealth-barber-haircuts",
       "menshealth-french-crop",
     ],
-    relatedStyleIds: [],
+    relatedStyleIds: ["hairstyle-edgar-cut"],
     guidePublicationStatus: "published",
   },
   {
@@ -1642,7 +1729,7 @@ export const hairstyles: Hairstyle[] = [
       "Maintenance depends on how crisp you want the edge and how quickly your perimeter grows, not on a fixed hair-type rule.",
     ],
     sourceIds: ["andis-low-taper", "wahl-cut-guide"],
-    relatedStyleIds: ["hairstyle-buzz-cut", "hairstyle-flat-top", "hairstyle-twists"],
+    relatedStyleIds: ["hairstyle-buzz-cut", "hairstyle-edgar-cut", "hairstyle-flat-top", "hairstyle-twists"],
     guidePublicationStatus: "published",
   },
   {
@@ -1929,6 +2016,30 @@ export const styleExamples: StyleExample[] = [
       "No visible hair pattern remains because the scalp is shaved to skin level; the model's underlying natural hair subtype is intentionally unspecified.",
     lengthDescription:
       "Bald, with scalp hair removed evenly to skin level from the hairline through the crown and nape.",
+  },
+  {
+    id: "edgar-cut-classic",
+    hairstyleIds: ["hairstyle-edgar-cut"],
+    imageId: "edgar-cut-classic",
+    title: "Classic dense Edgar",
+    caption:
+      "A fictional young Latino man wearing a compact Edgar with dense dark hair, a blunt horizontal fringe and tightly faded sides.",
+    patternDescription:
+      "Presented with a dense Type 1C-like texture whose slight natural body supports the rounded top while allowing the blunt fringe to remain sharply visible; the image does not establish a real person's natural subtype.",
+    lengthDescription:
+      "Short overall, with closely faded sides and back and several centimeters of dense hair retained through the top and forward fringe.",
+  },
+  {
+    id: "edgar-cut-fluffy-wavy",
+    hairstyleIds: ["hairstyle-edgar-cut"],
+    imageId: "edgar-cut-fluffy-wavy",
+    title: "Fluffy wavy Edgar",
+    caption:
+      "A fictional young Latino man wearing a fuller Edgar with a blunt fringe, tight faded sides and visibly wavy volume through the upper section.",
+    patternDescription:
+      "Presented with a Type 2B-like wavy texture that creates more lift and separation through the top while retaining a recognizable blunt Edgar fringe.",
+    lengthDescription:
+      "Short through the faded sides and back, with moderately longer hair retained through the top to create a fuller textured silhouette.",
   },
   {
     id: "farrah-fawcett-cut-black",

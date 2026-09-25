@@ -279,3 +279,15 @@ Composition/framing: square, shoulder-up three-quarter portrait facing left, com
 Lighting/mood: soft neutral light, relaxed self-assured expression
 Constraints: genuine transparent RGBA background, clean alpha edges, isolated cutout only, no backdrop or floor, fictional non-famous adult
 Avoid: text, logo, watermark, accessories, props, bangs, center part, inward-turned ends, cropped hair silhouette, resemblance to any known person
+
+## edgar-cut-classic
+
+Asset: `src/assets/hairstyles/edgar-cut-classic.png`
+
+Square PNG with a genuinely transparent RGBA background. Contemporary editorial portrait photography of one fictional Mexican-American or Latino man in his early 20s with warm medium olive-brown skin and very dense black Type 1C-like hair. Show a clearly recognizable classic Edgar cut: substantial short hair retained across the top, a compact rounded-to-bowl-like upper silhouette, a deliberately blunt straight horizontal fringe sitting high across the forehead, and tightly faded sides and back. Keep the fringe dense and graphic without turning it into an unnaturally perfect synthetic line; allow tiny real-world irregularities, flyaways and individual strands along the edge. Use a three-quarter angle that clearly shows the fringe, temple transition and fade. Make the portrait feel photographed rather than AI-polished: subtle photographic grain, micro-variation in skin tone, visible pores, minor blemishes, natural asymmetry, slightly uneven individual hair fibers and restrained non-glamorous grooming. Simple off-white crew-neck shirt. No celebrity likeness, jewelry, hats, props, text, logos or watermarks. No opaque backdrop or baked-in checkerboard. Clean genuine transparent alpha edges.
+
+## edgar-cut-fluffy-wavy
+
+Asset: `src/assets/hairstyles/edgar-cut-fluffy-wavy.png`
+
+Square PNG with a genuinely transparent RGBA background. Contemporary editorial portrait photography of one fictional Latino man in his mid-20s with light-medium warm skin and dense very dark brown-to-black Type 2B-like wavy hair. Show a fluffy Edgar cut rather than a generic curly crop: tightly faded sides and back, a heavier rounded upper section, visibly wavy separated texture and lift through the crown, and a recognizable blunt forward fringe cut horizontally across the forehead. Let the natural waves interrupt the front edge slightly rather than forcing a ruler-perfect line. Use a different face and pose from the first example: narrower jaw, longer nose, heavier brows, subtle mustache and small goatee, with the head turned farther to the side and the eyes looking away from the camera. Keep photographic realism intentionally imperfect with fine sensor-like grain, natural skin pores, faint acne texture, minor tonal variation, slight hair flyaways and irregular strand grouping. Simple cream sweatshirt or crew-neck top. No celebrity likeness, jewelry, hats, props, text, logos or watermarks. No opaque backdrop or baked-in checkerboard. Clean genuine transparent alpha edges.

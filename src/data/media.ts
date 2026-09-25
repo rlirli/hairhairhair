@@ -6,6 +6,8 @@ import buzzTextured from "../assets/hairstyles/buzz-textured.png";
 import croppedAfroCompact from "../assets/hairstyles/cropped-afro-compact.png";
 import croppedAfroFull from "../assets/hairstyles/cropped-afro-full.png";
 import curtainHaircutStraight1b from "../assets/hairstyles/curtain-haircut-straight-1b.png";
+import edgarCutClassic from "../assets/hairstyles/edgar-cut-classic.png";
+import edgarCutFluffyWavy from "../assets/hairstyles/edgar-cut-fluffy-wavy.png";
 import farrahFawcettCutBlack from "../assets/hairstyles/farrah-fawcett-cut-black.png";
 import farrahFawcettCutClassicFeathered from "../assets/hairstyles/farrah-fawcett-cut-classic-feathered.png";
 import fivePointCutGeometricBlack from "../assets/hairstyles/five-point-cut-geometric-black.png";
@@ -109,6 +111,22 @@ export const hairstyleMedia: HairstyleMedia[] = [
     image: curtainHaircutStraight1b,
     alt: "Editorial reference showing a mid-20s East Asian man with dense black straight hair in a medium-length center-parted curtain haircut.",
     provenance: { origin: "system", aiGeneration: { provider: "OpenAI", promptKey: "curtain-haircut-straight-1b" } },
+    transparentBackground: true,
+  },
+  {
+    id: "edgar-cut-classic",
+    kind: "image",
+    image: edgarCutClassic,
+    alt: "Fictional young Latino man with a classic Edgar haircut featuring a blunt straight fringe, dense dark top and closely faded sides.",
+    provenance: { origin: "system", aiGeneration: { provider: "OpenAI", promptKey: "edgar-cut-classic" } },
+    transparentBackground: true,
+  },
+  {
+    id: "edgar-cut-fluffy-wavy",
+    kind: "image",
+    image: edgarCutFluffyWavy,
+    alt: "Fictional young Latino man with a fluffy wavy Edgar haircut, blunt fringe and tightly faded sides.",
+    provenance: { origin: "system", aiGeneration: { provider: "OpenAI", promptKey: "edgar-cut-fluffy-wavy" } },
     transparentBackground: true,
   },
   {

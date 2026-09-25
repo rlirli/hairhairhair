@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import { getMedia } from "../../data/media";
+import { getHairstyleMediaById } from "../../data/media";
 import { styleExamplePath } from "../../lib/routes";
 import PhotoAttribution from "../shared/PhotoAttribution";
 import type { StyleExample } from "../../types";
@@ -12,7 +12,7 @@ interface Props {
 }
 
 const { example, styleSlug, eager = false } = Astro.props;
-const media = getMedia(example.imageId);
+const media = getHairstyleMediaById(example.imageId);
 const href = styleExamplePath(styleSlug, example.id);
 ---
 

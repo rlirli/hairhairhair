@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import Layout from "../../../components/shared/Layout.astro";
-import { appearancesForPerson } from "../../../data/people-relations";
+import { getAppearancesForPerson } from "../../../data/people-relations";
 import { people, personPhotographs } from "../../../data/people";
 import PhotoAttribution from "../../../components/shared/PhotoAttribution";
 import { appearanceTitle } from "../../../lib/appearance-formatting";
@@ -12,7 +12,7 @@ export function getStaticPaths() {
 
 const { person } = Astro.props;
 const media = personPhotographs;
-const appearances = appearancesForPerson(person.id)
+const appearances = getAppearancesForPerson(person.id)
   .flatMap((appearance) => {
     const photo = media.find((photo) => photo.id === appearance.imageId);
     return photo ? [{ appearance, photo }] : [];

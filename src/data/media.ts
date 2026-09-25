@@ -372,6 +372,6 @@ export const hairstyleMedia: HairstyleMedia[] = [
   },
 ];
 
-export function getMedia(id: string) {
+export function getHairstyleMediaById(id: string) {
   return hairstyleMedia.find((media) => media.id === id);
 }

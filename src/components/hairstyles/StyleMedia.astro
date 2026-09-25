@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import { getMedia } from "../../data/media";
+import { getHairstyleMediaById } from "../../data/media";
 import PhotoAttribution from "../shared/PhotoAttribution";
 interface Props {
   mediaId: string;
@@ -11,7 +11,7 @@ interface Props {
   eager?: boolean;
 }
 const { mediaId, title, caption, patternDescription, lengthDescription, eager = false } = Astro.props;
-const media = getMedia(mediaId);
+const media = getHairstyleMediaById(mediaId);
 ---
 
 {media && (

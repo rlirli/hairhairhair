@@ -2,9 +2,9 @@
 import Layout from "../../components/shared/Layout.astro";
 import HairstyleCard from "../../components/hairstyles/HairstyleCard.astro";
 import { hairSubtypes, hairTypes } from "../../data/hair-types";
-import { publishedHairstyles } from "../../data/hairstyles";
-import { compatibleHairstylesForHairType } from "../../data/hairstyle-compatibility";
-import { kindLabels } from "../../data/hairstyle-relations";
+import { publishedHairstyles } from "../../data/hairstyle-queries";
+import { getCompatibleHairstylesForHairType } from "../../data/hairstyle-compatibility";
+import { kindLabels } from "../../data/hairstyle-labels";
 import DirectoryFilters, { type FilterGroup } from "../../components/shared/DirectoryFilters";
 
 const kinds = Object.entries(kindLabels).map(([id, label]) => ({ id, label }));
@@ -22,7 +22,7 @@ const hairTypeOptions = [
 ];
 const compatibleStylesByType = new Map(
   hairTypeOptions.map(
-    (type) => [type.id, new Set(compatibleHairstylesForHairType(type.id).map((style) => style.id))] as const,
+    (type) => [type.id, new Set(getCompatibleHairstylesForHairType(type.id).map((style) => style.id))] as const,
   ),
 );
 const hairTypeIdsForStyle = (styleId: string) =>

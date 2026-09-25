@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
-import { kindLabels } from "../../data/hairstyle-relations";
-import { representativeHairstyleMedia } from "../../data/hairstyle-representative-media";
+import { kindLabels } from "../../data/hairstyle-labels";
+import { getRepresentativeHairstyleMedia } from "../../data/hairstyle-representative-media";
 import PhotoAttribution from "../shared/PhotoAttribution";
 import type { Hairstyle } from "../../types";
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
   compact?: boolean;
 }
 const { style, compact = false } = Astro.props;
-const representative = representativeHairstyleMedia(style.id);
+const representative = getRepresentativeHairstyleMedia(style.id);
 const media = representative?.media;
 ---
 

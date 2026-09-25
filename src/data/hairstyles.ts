@@ -1649,12 +1649,6 @@ export const hairstyles: Hairstyle[] = [
   },
 ];
 
-export function isPublishedGuide(hairstyle: Pick<Hairstyle, "guidePublicationStatus">): boolean {
-  return hairstyle.guidePublicationStatus === "published";
-}
-
-export const publishedHairstyles = hairstyles.filter(isPublishedGuide);
-
 export const styleExamples: StyleExample[] = [
   {
     id: "bald-mongolian-elder-woman",
@@ -2094,11 +2088,3 @@ export const styleExamples: StyleExample[] = [
       "Medium length around the shoulders, with shorter curved sections through the face and upper sides and flicked ends at the lower perimeter.",
   },
 ];
-
-export function getHairstyle(slug: string): Hairstyle | undefined {
-  return hairstyles.find((hairstyle) => hairstyle.slug === slug);
-}
-
-export function getExamplesForHairstyle(id: string): StyleExample[] {
-  return styleExamples.filter((example) => example.hairstyleIds.includes(id));
-}

@@ -1,35 +1,24 @@
 import type { HairTypePerson, HairTypePersonWithPhoto, PeopleForHairTypeOptions } from "../types";
 import { hairSubtypes, hairTypes } from "./hair-types";
-import { compatibleHairstylesForHairType, subtypeLabelsForHairstyleInMajorType } from "./hairstyle-compatibility";
-import { naturalProfileMatchesHairType, naturalProfiles } from "./natural-profiles";
+import { getCompatibleHairstylesForHairType, getCompatibleSubtypeCodesForHairstyleInMajorType } from "./hairstyle-compatibility";
+import { naturalProfileMatchesHairTypeId, naturalProfiles } from "./natural-profiles";
 import { people, personPhotographs } from "./people";
 
-export function parentHairTypeId(slug: string) {
-  return (
-    hairTypes.find((item) => item.slug === slug)?.id ?? hairSubtypes.find((item) => item.slug === slug)?.hairTypeId
-  );
-}
-
-export function stylesForHairTypeSlug(slug: string) {
+export function getCompatibleHairstylesForHairTypeSlug(slug: string) {
   const target = hairTypes.find((item) => item.slug === slug) ?? hairSubtypes.find((item) => item.slug === slug);
-  return target ? compatibleHairstylesForHairType(target.id) : [];
+  return target ? getCompatibleHairstylesForHairType(target.id) : [];
 }
 
-export function subtypeLabelsForHairstyleOnMajorTypePage(styleId: string, slug: string) {
-  const major = hairTypes.find((item) => item.slug === slug);
-  return major ? subtypeLabelsForHairstyleInMajorType(styleId, major.id) : [];
-}
-
-export function peopleForHairTypeSlug(slug: string): HairTypePersonWithPhoto[];
-export function peopleForHairTypeSlug(
+export function getPeopleForHairTypeSlug(slug: string): HairTypePersonWithPhoto[];
+export function getPeopleForHairTypeSlug(
   slug: string,
   options: PeopleForHairTypeOptions & { requireHeroImage: false },
 ): HairTypePerson[];
-export function peopleForHairTypeSlug(
+export function getPeopleForHairTypeSlug(
   slug: string,
   options: PeopleForHairTypeOptions & { requireHeroImage?: true },
 ): HairTypePersonWithPhoto[];
-export function peopleForHairTypeSlug(slug: string, options: PeopleForHairTypeOptions = {}) {
+export function getPeopleForHairTypeSlug(slug: string, options: PeopleForHairTypeOptions = {}) {
   const target = hairTypes.find((item) => item.slug === slug) ?? hairSubtypes.find((item) => item.slug === slug);
   if (!target) return [];
   const limit = Math.max(0, options.limit ?? Infinity);
@@ -39,7 +28,7 @@ export function peopleForHairTypeSlug(slug: string, options: PeopleForHairTypeOp
   const result: HairTypePerson[] = [];
   for (const profile of naturalProfiles) {
     if (result.length >= limit) break;
-    if (!naturalProfileMatchesHairType(profile, target.id)) continue;
+    if (!naturalProfileMatchesHairTypeId(profile, target.id)) continue;
     const person = peopleById.get(profile.personId);
     if (!person) continue;
     const heroPhotograph = photographsById.get(person.heroImageId);

@@ -6,7 +6,7 @@ import CelebrityGrid from "../../components/people/CelebrityGrid.astro";
 import HairTypeNavigator from "../../components/hair-types/HairTypeNavigator.astro";
 import CollectionHeader from "../../components/shared/CollectionHeader.astro";
 import { hairSubtypes, hairTypes } from "../../data/hair-types";
-import { peopleForHairTypeSlug, stylesForHairTypeSlug } from "../../data/hair-type-discovery";
+import { getPeopleForHairTypeSlug, getCompatibleHairstylesForHairTypeSlug } from "../../data/hair-type-discovery";
 
 export function getStaticPaths() {
   return [
@@ -23,8 +23,8 @@ const hairType = Astro.props.hairType!;
 const hairSubtype = Astro.props.hairSubtype!;
 const subtypes = kind === "hairType" ? hairSubtypes.filter((item) => item.hairTypeId === hairType.id) : [];
 const selected = kind === "hairType" ? hairType : hairSubtype;
-const styles = stylesForHairTypeSlug(selected.slug).slice(0, 5);
-const previewPeople = peopleForHairTypeSlug(selected.slug, { requireHeroImage: false, limit: 7 });
+const styles = getCompatibleHairstylesForHairTypeSlug(selected.slug).slice(0, 5);
+const previewPeople = getPeopleForHairTypeSlug(selected.slug, { requireHeroImage: false, limit: 7 });
 const label =
   kind === "hairType" ? `Type ${hairType.code}: ${hairType.name}` : `Type ${hairSubtype.code}: ${hairSubtype.name}`;
 ---

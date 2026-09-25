@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 import Layout from "../../../../components/shared/Layout.astro";
 import { appearances, people, personPhotographs } from "../../../../data/people";
-import { observedStylesForAppearance } from "../../../../data/people-relations";
+import { getResolvedHairstyleObservationsForAppearance } from "../../../../data/people-relations";
 import { appearanceTitle, formatAppearanceDate } from "../../../../lib/appearance-formatting";
 
 export function getStaticPaths() {
@@ -24,7 +24,7 @@ const photoAppearances = appearances
   .filter((appearance) => appearance.personId === person.id && appearance.imageId === photo.id)
   .sort((a, b) => b.taken.value.localeCompare(a.taken.value));
 const photoStyles = photoAppearances.flatMap((appearance) =>
-  observedStylesForAppearance(appearance.id).map(({ style }) => style),
+  getResolvedHairstyleObservationsForAppearance(appearance.id).map(({ style }) => style),
 );
 const uniqueStyles = photoStyles.filter(
   (style, index) => photoStyles.findIndex((item) => item.id === style.id) === index,

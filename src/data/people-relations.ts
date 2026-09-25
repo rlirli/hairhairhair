@@ -1,13 +1,13 @@
 import { hairstyles } from "./hairstyles.ts";
 import { appearances, people } from "./people.ts";
 
-export function appearancesForPerson(personId: string) {
+export function getAppearancesForPerson(personId: string) {
   return appearances
     .filter((appearance) => appearance.personId === personId)
     .sort((a, b) => a.taken.value.localeCompare(b.taken.value));
 }
 
-export function observedStylesForAppearance(appearanceId: string) {
+export function getResolvedHairstyleObservationsForAppearance(appearanceId: string) {
   const appearance = appearances.find((item) => item.id === appearanceId);
   return (
     appearance?.observations
@@ -21,7 +21,7 @@ export function observedStylesForAppearance(appearanceId: string) {
   );
 }
 
-export function appearancesForStyle(styleId: string) {
+export function getAppearancesForHairstyle(styleId: string) {
   return appearances.filter((appearance) =>
     appearance.observations.some((observation) => observation.hairstyleId === styleId),
   );
@@ -38,7 +38,7 @@ export const personHairstyleOrder: Record<string, string[]> = {
   ],
 };
 
-export function appearancesForPersonStyle(personId: string, styleId: string) {
+export function getAppearancesForPersonAndHairstyle(personId: string, styleId: string) {
   return appearances
     .filter(
       (appearance) =>
@@ -48,23 +48,19 @@ export function appearancesForPersonStyle(personId: string, styleId: string) {
     .sort((a, b) => b.taken.value.localeCompare(a.taken.value));
 }
 
-export function hairstylesForPerson(personId: string) {
+export function getHairstyleAppearancesForPerson(personId: string) {
   const orderedIds = personHairstyleOrder[personId] ?? [];
   return orderedIds
     .map((styleId) => ({
       style: hairstyles.find((style) => style.id === styleId),
-      appearances: appearancesForPersonStyle(personId, styleId),
+      appearances: getAppearancesForPersonAndHairstyle(personId, styleId),
     }))
     .filter((item): item is { style: NonNullable<typeof item.style>; appearances: typeof item.appearances } =>
       Boolean(item.style && item.appearances.length),
     );
 }
 
-export function personForAppearance(appearanceId: string) {
+export function getPersonForAppearance(appearanceId: string) {
   const appearance = appearances.find((item) => item.id === appearanceId);
   return appearance ? people.find((person) => person.id === appearance.personId) : undefined;
-}
-
-export function personBySlug(slug: string) {
-  return people.find((person) => person.slug === slug);
 }

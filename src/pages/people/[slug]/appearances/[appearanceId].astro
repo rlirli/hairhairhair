@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 import Layout from "../../../../components/shared/Layout.astro";
 import { appearances, people, personPhotographs } from "../../../../data/people";
-import { observedStylesForAppearance } from "../../../../data/people-relations";
+import { getResolvedHairstyleObservationsForAppearance } from "../../../../data/people-relations";
 import PhotoAttribution from "../../../../components/shared/PhotoAttribution";
 import { formatAppearanceDate } from "../../../../lib/appearance-formatting";
 
@@ -23,7 +23,7 @@ export function getStaticPaths() {
 }
 
 const { person, appearance, photo } = Astro.props;
-const observedStyles = observedStylesForAppearance(appearance.id);
+const observedStyles = getResolvedHairstyleObservationsForAppearance(appearance.id);
 ---
 
 <Layout

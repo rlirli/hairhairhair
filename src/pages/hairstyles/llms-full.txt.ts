@@ -1,6 +1,7 @@
 import type { APIRoute } from "astro";
-import { kindLabels, publishedRelatedHairstyles } from "../../data/hairstyle-relations";
-import { publishedHairstyles, sources } from "../../data/hairstyles";
+import { kindLabels } from "../../data/hairstyle-labels";
+import { sources } from "../../data/hairstyles";
+import { getPublishedHairstylesByIds, publishedHairstyles } from "../../data/hairstyle-queries";
 
 const siteOrigin = "https://hairhairhair.hair";
 
@@ -39,7 +40,7 @@ function renderHairstyle(style: (typeof publishedHairstyles)[number]): string {
     lines.push("");
   }
 
-  const related = publishedRelatedHairstyles(style.relatedStyleIds);
+  const related = getPublishedHairstylesByIds(style.relatedStyleIds);
   if (related.length > 0) {
     lines.push("### Related hairstyles", "");
     for (const relatedStyle of related) {

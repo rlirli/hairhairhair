@@ -1,8 +1,8 @@
 import type { APIRoute } from "astro";
 import { hairSubtypes, hairTypes } from "../data/hair-types";
-import { getExamplesForHairstyle, publishedHairstyles } from "../data/hairstyles";
+import { getStyleExamplesForHairstyle, publishedHairstyles } from "../data/hairstyle-queries";
 import { appearances, people, personPhotographs } from "../data/people";
-import { hairstylesForPerson } from "../data/people-relations";
+import { getHairstyleAppearancesForPerson } from "../data/people-relations";
 import { styleExamplePath } from "../lib/routes";
 export const GET: APIRoute = () => {
   const urls = [
@@ -22,7 +22,7 @@ export const GET: APIRoute = () => {
       `hairstyles/${item.slug}/related-hairstyles/`,
     ]),
     ...publishedHairstyles.flatMap((item) =>
-      getExamplesForHairstyle(item.id).map((example) => styleExamplePath(item.slug, example.id).slice(1)),
+      getStyleExamplesForHairstyle(item.id).map((example) => styleExamplePath(item.slug, example.id).slice(1)),
     ),
     ...people.map((item) => `people/${item.slug}/`),
     ...people.map((item) => `people/${item.slug}/appearances/`),
@@ -34,7 +34,7 @@ export const GET: APIRoute = () => {
       .filter((url): url is string => Boolean(url)),
     ...people.map((person) => `people/${person.slug}/hairstyles/`),
     ...people.flatMap((person) =>
-      hairstylesForPerson(person.id).map(({ style }) => `people/${person.slug}/hairstyles/${style.slug}/`),
+      getHairstyleAppearancesForPerson(person.id).map(({ style }) => `people/${person.slug}/hairstyles/${style.slug}/`),
     ),
     ...people.flatMap((person) =>
       personPhotographs

@@ -4,8 +4,8 @@ import ExpandableBio from "../../components/people/ExpandableBio.astro";
 import PersonFactSheet from "../../components/people/PersonFactSheet.astro";
 import { Image } from "astro:assets";
 import { people, personPhotographs } from "../../data/people";
-import { appearancesForPerson, hairstylesForPerson } from "../../data/people-relations";
-import { naturalProfileForPerson } from "../../data/natural-profiles";
+import { getAppearancesForPerson, getHairstyleAppearancesForPerson } from "../../data/people-relations";
+import { getNaturalProfileForPerson } from "../../data/natural-profiles";
 import PhotoAttribution from "../../components/shared/PhotoAttribution";
 import CollectionHeader from "../../components/shared/CollectionHeader.astro";
 import { appearanceTitle, formatAppearanceDate } from "../../lib/appearance-formatting";
@@ -14,11 +14,11 @@ export function getStaticPaths() {
   return people.map((person) => ({ params: { slug: person.slug }, props: { person } }));
 }
 const { person } = Astro.props;
-const appearances = appearancesForPerson(person.id).sort((a, b) => b.taken.value.localeCompare(a.taken.value));
-const hairstyleRecords = hairstylesForPerson(person.id);
+const appearances = getAppearancesForPerson(person.id).sort((a, b) => b.taken.value.localeCompare(a.taken.value));
+const hairstyleRecords = getHairstyleAppearancesForPerson(person.id);
 const media = personPhotographs;
 const hero = media.find((photo) => photo.id === person.heroImageId) ?? media[0];
-const naturalProfile = naturalProfileForPerson(person.id);
+const naturalProfile = getNaturalProfileForPerson(person.id);
 ---
 
 <Layout

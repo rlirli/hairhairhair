@@ -1,14 +1,14 @@
 ---
 import Layout from "../../../components/shared/Layout.astro";
 import StyleExampleCard from "../../../components/hairstyles/StyleExampleCard.astro";
-import { getExamplesForHairstyle, publishedHairstyles } from "../../../data/hairstyles";
+import { getStyleExamplesForHairstyle, publishedHairstyles } from "../../../data/hairstyle-queries";
 
 export function getStaticPaths() {
   return publishedHairstyles.map((style) => ({ params: { slug: style.slug }, props: { style } }));
 }
 
 const { style } = Astro.props;
-const examples = getExamplesForHairstyle(style.id);
+const examples = getStyleExamplesForHairstyle(style.id);
 ---
 
 <Layout title={`${style.name} examples - hairhairhair.hair`} description={`Visual references for ${style.name}.`}>

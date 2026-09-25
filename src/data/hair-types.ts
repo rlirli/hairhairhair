@@ -218,7 +218,3 @@ export const hairTypes: HairType[] = [
     description: "Compact patterns of coils, curves, or angles whose scale and visibility shift across subtypes.",
   },
 ];
-
-export function getHairSubtype(slug: string): HairSubtype | undefined {
-  return hairSubtypes.find((hairType) => hairType.slug === slug);
-}

@@ -3,13 +3,13 @@ import Layout from "../../../components/shared/Layout.astro";
 import PersonFactSheet from "../../../components/people/PersonFactSheet.astro";
 import { Image } from "astro:assets";
 import { hairSubtypes, hairTypes } from "../../../data/hair-types";
-import { peopleForHairTypeSlug } from "../../../data/hair-type-discovery";
+import { getPeopleForHairTypeSlug } from "../../../data/hair-type-discovery";
 
 export function getStaticPaths() {
   return [...hairTypes, ...hairSubtypes].map((item) => ({ params: { slug: item.slug }, props: { item } }));
 }
 const { item } = Astro.props;
-const people = peopleForHairTypeSlug(item.slug);
+const people = getPeopleForHairTypeSlug(item.slug);
 ---
 
 <Layout

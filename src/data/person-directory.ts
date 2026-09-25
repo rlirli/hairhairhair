@@ -1,15 +1,15 @@
 import type { Person, PersonDirectoryCardImage, PersonDirectoryCardItem } from "../types";
-import { naturalProfileForPerson, resolvedHairTypeForNaturalProfile } from "./natural-profiles";
+import { getNaturalProfileForPerson, resolveHairTypeForNaturalProfile } from "./natural-profiles";
 
-const displayValue = (value: string | null, labels: Record<string, string>) =>
+const formatLabeledValue = (value: string | null, labels: Record<string, string>) =>
   value ? (labels[value] ?? value) : null;
 
-export function personDirectoryCardData(
+export function buildPersonDirectoryCardData(
   person: Person,
   image: PersonDirectoryCardImage = {},
-  profile = naturalProfileForPerson(person.id),
+  profile = getNaturalProfileForPerson(person.id),
 ): PersonDirectoryCardItem {
-  const resolvedType = profile ? resolvedHairTypeForNaturalProfile(profile) : undefined;
+  const resolvedType = profile ? resolveHairTypeForNaturalProfile(profile) : undefined;
   const hairValues = [profile?.hairTypeId.value, profile?.hairSubtypeId.value].filter((value): value is string =>
     Boolean(value),
   );
@@ -22,7 +22,7 @@ export function personDirectoryCardData(
         },
         profile.naturalHairColor.value && {
           label: "Hair color",
-          value: displayValue(profile.naturalHairColor.value, {
+          value: formatLabeledValue(profile.naturalHairColor.value, {
             black: "Black",
             brown: "Brown",
             blonde: "Blonde",
@@ -33,7 +33,7 @@ export function personDirectoryCardData(
         },
         profile.naturalSkinTone.value && {
           label: "Skin tone",
-          value: displayValue(profile.naturalSkinTone.value, {
+          value: formatLabeledValue(profile.naturalSkinTone.value, {
             "deep-brown": "Deep brown",
             brown: "Brown",
             medium: "Medium",
@@ -43,11 +43,11 @@ export function personDirectoryCardData(
         },
         profile.hairThickness.value && {
           label: "Hair thickness",
-          value: displayValue(profile.hairThickness.value, { fine: "Fine", medium: "Medium", coarse: "Coarse" })!,
+          value: formatLabeledValue(profile.hairThickness.value, { fine: "Fine", medium: "Medium", coarse: "Coarse" })!,
         },
         profile.hairDensity.value && {
           label: "Hair density",
-          value: displayValue(profile.hairDensity.value, { low: "Low", medium: "Medium", high: "High" })!,
+          value: formatLabeledValue(profile.hairDensity.value, { low: "Low", medium: "Medium", high: "High" })!,
         },
       ].filter((row): row is NonNullable<typeof row> => Boolean(row))
     : [];

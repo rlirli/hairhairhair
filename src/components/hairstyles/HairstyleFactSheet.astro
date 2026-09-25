@@ -1,7 +1,7 @@
 ---
 import { cn } from "../../lib/utils";
 import { hairSubtypes, hairTypes } from "../../data/hair-types";
-import { compatibilityForHairstyle } from "../../data/hairstyle-compatibility";
+import { getHairstyleCompatibility } from "../../data/hairstyle-compatibility";
 import type { EditorialSource, Hairstyle } from "../../types";
 
 interface Props {
@@ -17,7 +17,7 @@ const subtypeGroups = hairTypes.map((hairType) => ({
     .sort((left, right) => left.sortOrder - right.sortOrder)
     .map((subtype) => ({
       subtype,
-      compatibility: compatibilityForHairstyle(style.id, subtype.id),
+      compatibility: getHairstyleCompatibility(style.id, subtype.id),
     })),
 }));
 const subtypeSegments = subtypeGroups.flatMap(({ hairType, subtypes }) =>

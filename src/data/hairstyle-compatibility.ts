@@ -1,6 +1,6 @@
 import type { HairstyleCompatibility } from "../types";
 import { hairSubtypes, hairTypes } from "./hair-types.ts";
-import { publishedHairstyles } from "./hairstyles.ts";
+import { publishedHairstyles } from "./hairstyle-queries";
 
 export const MIN_COMPATIBILITY_FOR_LISTING = 0.5;
 
@@ -190,7 +190,7 @@ export const hairstyleCompatibility: HairstyleCompatibility[] = [
   { hairstyleId: "hairstyle-wolf-cut", hairTypeId: "hair-type-4", score: 0.75, provenance: "estimated" },
 ];
 
-export function compatibilityForHairstyle(styleId: string, hairTypeId: string) {
+export function getHairstyleCompatibility(styleId: string, hairTypeId: string) {
   const subtype = hairSubtypes.find((item) => item.id === hairTypeId);
   const majorId = subtype?.hairTypeId ?? hairTypeId;
   const row =
@@ -199,31 +199,21 @@ export function compatibilityForHairstyle(styleId: string, hairTypeId: string) {
   return row;
 }
 
-export function compatibilityScoreForHairstyle(styleId: string, hairTypeId: string): number | null {
-  return compatibilityForHairstyle(styleId, hairTypeId)?.score ?? null;
-}
-
-export function compatibleHairstylesForHairType(hairTypeId: string) {
+export function getCompatibleHairstylesForHairType(hairTypeId: string) {
   return publishedHairstyles.filter((style) => {
     const subtypes = hairSubtypes.filter((subtype) => subtype.hairTypeId === hairTypeId);
     if (subtypes.length) {
       return subtypes.some((subtype) => {
-        const resolved = compatibilityForHairstyle(style.id, subtype.id);
+        const resolved = getHairstyleCompatibility(style.id, subtype.id);
         return resolved?.score != null && resolved.score >= MIN_COMPATIBILITY_FOR_LISTING;
       });
     }
-    const compatibility = compatibilityForHairstyle(style.id, hairTypeId);
+    const compatibility = getHairstyleCompatibility(style.id, hairTypeId);
     return compatibility?.score != null && compatibility.score >= MIN_COMPATIBILITY_FOR_LISTING;
   });
 }
 
-export function compatibleMajorHairTypesForHairstyle(styleId: string) {
-  return hairTypes.filter((hairType) =>
-    compatibleHairstylesForHairType(hairType.id).some((style) => style.id === styleId),
-  );
-}
-
-export function subtypeLabelsForHairstyleInMajorType(styleId: string, hairTypeId: string) {
+export function getCompatibleSubtypeCodesForHairstyleInMajorType(styleId: string, hairTypeId: string) {
   const hasSubtypePrecision = hairstyleCompatibility.some(
     (row) =>
       row.hairstyleId === styleId &&
@@ -233,29 +223,21 @@ export function subtypeLabelsForHairstyleInMajorType(styleId: string, hairTypeId
   return hairSubtypes
     .filter((subtype) => subtype.hairTypeId === hairTypeId)
     .filter((subtype) => {
-      const compatibility = compatibilityForHairstyle(styleId, subtype.id);
+      const compatibility = getHairstyleCompatibility(styleId, subtype.id);
       return compatibility?.score != null && compatibility.score >= MIN_COMPATIBILITY_FOR_LISTING;
     })
     .map((subtype) => subtype.code);
 }
 
-export function compatibilityLabelsForHairstyle(styleId: string) {
+export function getCompatibleHairTypeLabelsForHairstyle(styleId: string) {
   return hairTypes.flatMap((hairType) => {
     const subtypes = hairSubtypes.filter((subtype) => subtype.hairTypeId === hairType.id);
     const eligible = subtypes.filter((subtype) => {
-      const compatibility = compatibilityForHairstyle(styleId, subtype.id);
+      const compatibility = getHairstyleCompatibility(styleId, subtype.id);
       return compatibility?.score != null && compatibility.score >= MIN_COMPATIBILITY_FOR_LISTING;
     });
     if (eligible.length === subtypes.length && subtypes.length > 0) return [`Type ${hairType.code}`];
     if (eligible.length === 0) return [];
     return eligible.map((subtype) => `Type ${subtype.code}`);
   });
-}
-
-export function compatibilityLabelsForHairTypeSlug(slug: string) {
-  const major = hairTypes.find((item) => item.slug === slug);
-  const subtype = hairSubtypes.find((item) => item.slug === slug);
-  const id = major?.id ?? subtype?.id;
-  if (!id) return [];
-  return compatibleHairstylesForHairType(id).map((style) => style.name);
 }

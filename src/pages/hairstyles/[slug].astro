@@ -4,11 +4,12 @@ import HairstyleGridData from "../../components/hairstyles/HairstyleGridData.ast
 import StyleMedia from "../../components/hairstyles/StyleMedia.astro";
 import StyleExampleCard from "../../components/hairstyles/StyleExampleCard.astro";
 import { getImage } from "astro:assets";
-import { publishedHairstyles, sources, getExamplesForHairstyle } from "../../data/hairstyles";
-import { publishedRelatedHairstyles } from "../../data/hairstyle-relations";
-import { appearancesForStyle, personForAppearance } from "../../data/people-relations";
-import { kindLabels } from "../../data/hairstyle-relations";
-import { getMedia } from "../../data/media";
+import { sources } from "../../data/hairstyles";
+import { getStyleExamplesForHairstyle, publishedHairstyles } from "../../data/hairstyle-queries";
+import { getPublishedHairstylesByIds, publishedHairstyles } from "../../data/hairstyle-queries";
+import { getAppearancesForHairstyle, getPersonForAppearance } from "../../data/people-relations";
+import { kindLabels } from "../../data/hairstyle-labels";
+import { getHairstyleMediaById } from "../../data/media";
 import { personPhotographs } from "../../data/people";
 import HairstyleAppearanceGrid from "../../components/appearances/HairstyleAppearanceGrid.astro";
 import HairstyleFactSheet from "../../components/hairstyles/HairstyleFactSheet.astro";
@@ -18,15 +19,15 @@ export function getStaticPaths() {
   return publishedHairstyles.map((style) => ({ params: { slug: style.slug }, props: { style } }));
 }
 const { style } = Astro.props;
-const examples = getExamplesForHairstyle(style.id);
+const examples = getStyleExamplesForHairstyle(style.id);
 const heroMedia = examples[0]?.imageId;
-const related = publishedRelatedHairstyles(style.relatedStyleIds);
+const related = getPublishedHairstylesByIds(style.relatedStyleIds);
 const referencedSources = sources.filter((source) => style.sourceIds.includes(source.id));
 const mediaById = new Map(personPhotographs.map((media) => [media.id, media]));
-const documentedAppearances = appearancesForStyle(style.id)
+const documentedAppearances = getAppearancesForHairstyle(style.id)
   .sort((a, b) => b.taken.value.localeCompare(a.taken.value))
   .map((appearance) => {
-    const person = personForAppearance(appearance.id);
+    const person = getPersonForAppearance(appearance.id);
     const media = mediaById.get(appearance.imageId);
     return person && media
       ? {
@@ -42,7 +43,7 @@ const documentedAppearances = appearancesForStyle(style.id)
   .filter((item): item is NonNullable<typeof item> => Boolean(item));
 const kindLabel = kindLabels[style.kind];
 const ogImage = heroMedia
-  ? (await getImage({ src: getMedia(heroMedia)!.image, width: 1120, format: "jpg" })).src
+  ? (await getImage({ src: getHairstyleMediaById(heroMedia)!.image, width: 1120, format: "jpg" })).src
   : undefined;
 ---
 

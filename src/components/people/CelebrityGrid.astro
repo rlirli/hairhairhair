@@ -1,7 +1,7 @@
 ---
 import { getImage } from "astro:assets";
 import PersonDirectoryCard from "./PersonDirectoryCard";
-import { personDirectoryCardData } from "../../data/person-directory";
+import { buildPersonDirectoryCardData } from "../../data/person-directory";
 import type { HairTypePerson } from "../../types";
 
 const { people } = Astro.props as { people: HairTypePerson[] };
@@ -18,7 +18,7 @@ const celebrityCards = await Promise.all(
       : undefined;
 
     return {
-      person: personDirectoryCardData(
+      person: buildPersonDirectoryCardData(
         person,
         {
           src: image?.src,

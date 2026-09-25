@@ -1,15 +1,15 @@
 ---
 import Layout from "../../../components/shared/Layout.astro";
 import HairstyleGridData from "../../../components/hairstyles/HairstyleGridData.astro";
-import { publishedHairstyles } from "../../../data/hairstyles";
-import { publishedRelatedHairstyles } from "../../../data/hairstyle-relations";
+import { publishedHairstyles } from "../../../data/hairstyle-queries";
+import { getPublishedHairstylesByIds } from "../../../data/hairstyle-queries";
 
 export function getStaticPaths() {
   return publishedHairstyles.map((style) => ({ params: { slug: style.slug }, props: { style } }));
 }
 
 const { style } = Astro.props;
-const related = publishedRelatedHairstyles(style.relatedStyleIds);
+const related = getPublishedHairstylesByIds(style.relatedStyleIds);
 ---
 
 <Layout

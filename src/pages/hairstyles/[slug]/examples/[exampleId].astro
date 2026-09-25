@@ -1,11 +1,11 @@
 ---
 import Layout from "../../../../components/shared/Layout.astro";
 import StyleMedia from "../../../../components/hairstyles/StyleMedia.astro";
-import { getExamplesForHairstyle, publishedHairstyles } from "../../../../data/hairstyles";
+import { getStyleExamplesForHairstyle, publishedHairstyles } from "../../../../data/hairstyle-queries";
 
 export function getStaticPaths() {
   return publishedHairstyles.flatMap((style) =>
-    getExamplesForHairstyle(style.id).map((example) => ({
+    getStyleExamplesForHairstyle(style.id).map((example) => ({
       params: { slug: style.slug, exampleId: example.id },
       props: { style, example },
     })),

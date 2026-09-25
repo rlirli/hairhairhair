@@ -1,7 +1,7 @@
 ---
 import Layout from "../../components/shared/Layout.astro";
 import PersonDirectoryCard from "../../components/people/PersonDirectoryCard";
-import { personDirectoryCardData } from "../../data/person-directory";
+import { buildPersonDirectoryCardData } from "../../data/person-directory";
 import { hairSubtypes, hairTypes } from "../../data/hair-types";
 import { people, personPhotographs } from "../../data/people";
 import DirectoryFilters, { type FilterGroup } from "../../components/shared/DirectoryFilters";
@@ -10,7 +10,7 @@ const mediaById = new Map(personPhotographs.map((photo) => [photo.id, photo]));
 const peopleCards = people.flatMap((person) => {
   const image = mediaById.get(person.heroImageId);
   if (!image) return [];
-  return [personDirectoryCardData(person, { src: image.image.src, alt: image.alt })];
+  return [buildPersonDirectoryCardData(person, { src: image.image.src, alt: image.alt })];
 });
 const observedHairTypes = new Set(peopleCards.flatMap((person) => person.profileValues.hair));
 const observedColors = [...new Set(peopleCards.map((person) => person.profileValues.color).filter(Boolean))];

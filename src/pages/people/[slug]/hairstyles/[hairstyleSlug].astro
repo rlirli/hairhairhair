@@ -1,15 +1,15 @@
 ---
 import { Image } from "astro:assets";
 import Layout from "../../../../components/shared/Layout.astro";
-import { appearancesForPersonStyle, hairstylesForPerson } from "../../../../data/people-relations";
-import { getHairstyle } from "../../../../data/hairstyles";
+import { getAppearancesForPersonAndHairstyle, getHairstyleAppearancesForPerson } from "../../../../data/people-relations";
+import { getHairstyleBySlug } from "../../../../data/hairstyle-queries";
 import { people, personPhotographs } from "../../../../data/people";
 import PhotoAttribution from "../../../../components/shared/PhotoAttribution";
 import { appearanceTitle, formatAppearanceDate } from "../../../../lib/appearance-formatting";
 
 export function getStaticPaths() {
   return people.flatMap((person) =>
-    hairstylesForPerson(person.id).map(({ style }) => ({
+    getHairstyleAppearancesForPerson(person.id).map(({ style }) => ({
       params: { slug: person.slug, hairstyleSlug: style.slug },
       props: { person, style },
     })),
@@ -17,10 +17,10 @@ export function getStaticPaths() {
 }
 
 const { person, style: pathStyle } = Astro.props;
-const style = pathStyle ?? getHairstyle(Astro.params.hairstyleSlug ?? "");
+const style = pathStyle ?? getHairstyleBySlug(Astro.params.hairstyleSlug ?? "");
 if (!style) throw new Error(`Unknown hairstyle: ${Astro.params.hairstyleSlug}`);
 const media = personPhotographs;
-const records = appearancesForPersonStyle(person.id, style.id);
+const records = getAppearancesForPersonAndHairstyle(person.id, style.id);
 ---
 
 <Layout

@@ -1532,7 +1532,7 @@ export const hairstyles: Hairstyle[] = [
       "tresemme-side-part-lob",
     ],
     relatedStyleIds: ["hairstyle-the-rachel"],
-    guidePublicationStatus: "draft",
+    guidePublicationStatus: "published",
   },
   {
     id: "hairstyle-sleek-long-cut",

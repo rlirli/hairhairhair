@@ -1,22 +1,19 @@
 # Add a person
 
-This checklist describes the current static-data workflow for a person with at least one source-attributed appearance.
+Use `inbox-people/` to stage a complete person package. The importer previews by default and applies only after every record, photograph, right, and reference passes preflight.
 
-## Mandatory
+## Package requirements
 
-1. In `src/data/people.ts`, add a `Person` with a unique stable ID and slug, a concise description, source links, and a `heroImageId`.
-2. Add each local photograph to `src/assets/people/`, then statically import it in `src/data/people.ts`. Add an `ImageMedia` record to `personPhotographs` with `kind: "image"`, the imported file in `image`, useful alt text, and crop position when needed.
-3. Keep rights data under `provenance`: record `licenseType`, creator, license name and URL, attribution, source and original URLs, rights evidence, derivative status, and any identifier or jurisdiction that applies.
-4. In `src/data/people.ts`, add each dated `Appearance`. Its `personId` and `imageId` must resolve, and every hairstyle observation must use an existing hairstyle ID. The current tests require every registered person photograph to be used by an appearance.
-5. In `src/data/people-relations.ts`, add the person's desired editorial hairstyle order to `personHairstyleOrder` so observed hairstyle previews and detail routes are produced.
-6. Run `npm run verify`. The integrity tests derive people, photographs, appearances, and routes from the content data and asset directories; do not add parallel bookkeeping fixtures.
+1. Create `inbox-people/<person-slug>/payload.json` and add each named photograph beside it. The folder name must match `person.slug`.
+2. Include one `person`, a required `naturalProfile`, one or more `photographs`, and one or more dated `appearances`. Give the profile values for natural hair type, natural hair color, and natural skin tone. Use image analysis to estimate these values; use `null` only when the photographs do not support a reliable estimate. Record confidence and explain uncertainty for each trait.
+3. Use `hairSubtypeId.value: null` when the broad hair type is supported but an exact subtype is not. Other natural traits may be `null` when genuinely uncertain. Do not present visual estimates as self-reported facts.
+4. Prefer clear, cost-free photographs with a public-domain or free license. Licensed photos are allowed when reuse and derivatives are permitted. Include creator, license name and URL, exact attribution text, source/original URLs, rights evidence and basis, and derivative status. Do not import images with unclear rights or a non-commercial/no-derivatives restriction.
+5. Give each appearance a date or year, event, source URL, and hairstyle observations. Use an existing hairstyle ID when it matches. For a clearly distinct missing style, use a `PROPOSED-<kebab-case-name>` label and describe it in the note; the importer reports and keeps proposals in the archived package without adding them as confirmed IDs. The hero photo must be one of the package photographs, and every package photograph must appear in an appearance.
 
-The person page shows up to six recent appearance cards and six hairstyle cards in separate horizontal strips. The person appearance and hairstyle archives retain every recorded entry in wrapping grids.
+## Import
 
-Licensed-photo cards show attribution from `provenance`; public-domain records omit attribution text. Keep creator, license, source, rights, identifier, and derivative metadata accurate so compact credits and detail records use the same `ImageMedia` record.
+- `npm run import:people` previews packages and reports planned files.
+- `npm run import:people -- --apply` imports all valid direct child folders and moves them to `inbox-people/archive/`.
+- `npm run import:people -- --help` shows options.
 
-## Optional
-
-- Add a `NaturalProfile` in `src/data/natural-profiles.ts` only when there is enough evidence for at least one natural trait. Keep `hairTypeId` at the broad numbered type, and set `hairSubtypeId` to `null` unless the exact lettered subtype is supported. A documented subtype must belong to the broad type. Use the shared provenance helpers rather than adding person-specific helper functions. The profile powers the directory filters and hair-type people sections; the person page omits the table when no profile exists and hides null traits. Do not infer undocumented values.
-- Add a research note under `docs/research/people/` when source selection or rights decisions need an audit trail.
-- Add more appearances and photographs after the first complete record; follow the same provenance requirements for each one.
+The importer checks the package schema, uniqueness, dates, hairstyle references, photo files, image use, profile values, and license attribution before writing. It updates `people.ts`, `natural-profiles.ts`, and `src/assets/people/`; it does not infer or invent source data.

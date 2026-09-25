@@ -12,6 +12,7 @@
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "import:hairstyles": "node scripts/import-hairstyles.mjs",
+    "import:people": "node scripts/import-people.mjs",
     "preview": "astro preview",
     "sort:hairstyles": "node scripts/sort-hairstyle-data.mjs",
     "test": "npm run build:clean && npm run test:component && npm run test:content",

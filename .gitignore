@@ -10,4 +10,7 @@ IMPLEMENTATION_PLAN*.md
 !/inbox-hairstyles/
 /inbox-hairstyles/*
 !/inbox-hairstyles/README.md
+!/inbox-people/
+/inbox-people/*
+!/inbox-people/README.md
 *__private__*

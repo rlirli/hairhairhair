@@ -24,7 +24,7 @@ const records = getAppearancesForPersonAndHairstyle(person.id, style.id);
 ---
 
 <Layout
-  title={`${style.name} worn by ${person.name} - people - hairhairhair.hair`}
+  title={`${person.name} wearing ${style.name}`}
   description={`Documented appearances where ${person.name} wore ${style.name}.`}
 >
   <article class="mx-auto max-w-7xl px-5 pb-20 pt-12 sm:px-8">
@@ -59,16 +59,15 @@ const records = getAppearancesForPersonAndHairstyle(person.id, style.id);
       <span>{style.name}</span>
     </nav>
 
-    <header class="mt-12 max-w-3xl">
-      <p class="text-xs font-black uppercase tracking-[.18em] text-orange">Person hairstyle record</p>
+    <header class="mt-12">
       <h1 class="mt-4 font-display text-6xl leading-[.88] tracking-[-.08em] sm:text-8xl">
-        {style.guidePublicationStatus === "published" ? (
-          <a class="focus-ring" href={`/hairstyles/${style.slug}/`}>
-            {style.name}
-          </a>
-        ) : (
-          style.name
-        )}
+        <a class="focus-ring hover:underline" href={`/people/${person.slug}/`}>
+          {person.name}
+        </a>{" "}
+        wearing{" "}
+        <a class="focus-ring hover:underline" href={`/hairstyles/${style.slug}/`}>
+          {style.name}
+        </a>
       </h1>
       <p class="mt-6 text-lg leading-7">
         {person.name} wearing this hairstyle in {records.length} documented{" "}
@@ -120,11 +119,25 @@ const records = getAppearancesForPersonAndHairstyle(person.id, style.id);
       </ul>
     </section>
 
-    <a
-      class="focus-ring mt-14 inline-block font-bold text-orange underline decoration-orange decoration-2 underline-offset-4"
-      href={`/people/${person.slug}/hairstyles/`}
-    >
-      All hairstyles worn by {person.name}
-    </a>
+    <nav aria-label="Related pages" class="mt-14 flex flex-wrap gap-x-6 gap-y-2 font-bold text-orange">
+      <a
+        class="focus-ring underline decoration-orange decoration-2 underline-offset-4"
+        href={`/people/${person.slug}/hairstyles/`}
+      >
+        All hairstyles worn by {person.name}
+      </a>
+      <a
+        class="focus-ring underline decoration-orange decoration-2 underline-offset-4"
+        href={`/people/${person.slug}/`}
+      >
+        {person.name}&apos;s profile
+      </a>
+      <a
+        class="focus-ring underline decoration-orange decoration-2 underline-offset-4"
+        href={`/hairstyles/${style.slug}/`}
+      >
+        {style.name}
+      </a>
+    </nav>
   </article>
 </Layout>

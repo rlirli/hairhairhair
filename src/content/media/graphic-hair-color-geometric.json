@@ -1,0 +1,13 @@
+{
+  "id": "graphic-hair-color-geometric",
+  "alt": "Generated fictional man with a two-tone copper and cream geometric motif colored into a close crop.",
+  "kind": "image",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "graphic-hair-color-geometric"
+    }
+  },
+  "asset": "assets/hairstyles/graphic-hair-color-geometric.png"
+}

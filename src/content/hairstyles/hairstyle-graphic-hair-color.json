@@ -1,0 +1,56 @@
+{
+  "id": "hairstyle-graphic-hair-color",
+  "slug": "graphic-hair-color",
+  "name": "Graphic hair color",
+  "kind": "finishing-technique",
+  "summary": "A short haircut becomes a canvas for a clearly defined colored motif, symbol, or graphic pattern applied to the hair.",
+  "intro": [
+    "Graphic hair color places a deliberate image or pattern on the hair itself. It can be painted freehand or applied with a stencil; on very short hair, the colored crop makes the design read clearly. The technique is distinct from shaving a design into the hair and from tattooing the scalp.",
+    "Dennis Rodman's 1997 smiley look is a documented example: contemporary reporting described a yellow base with a black face on the back and red and green color along the hairline. The reference is historical context, not a claim that every graphic color design uses the same method or colors.",
+    "Plan the design around the head's curve and the direction of the hair. Temporary color can make a short-lived test; longer-lasting color may require lightening first, depending on the base hair color and chosen pigment."
+  ],
+  "variations": [
+    {
+      "id": "graphic-hair-color-emblem",
+      "name": "Single emblem",
+      "description": "Uses a compact, recognizable symbol such as a face, icon, or simple mark on a close-cut section."
+    },
+    {
+      "id": "graphic-hair-color-stencil",
+      "name": "Stencil pattern",
+      "description": "Uses a stencil to apply a repeated, geometric, or sharply edged color shape to the hair."
+    },
+    {
+      "id": "graphic-hair-color-freehand",
+      "name": "Freehand graphic",
+      "description": "Builds an asymmetric illustration or flowing color motif directly on a short base."
+    }
+  ],
+  "consultation": {
+    "intro": "Agree on the symbol, placement, colors, application method, and how long the result should last before applying color.",
+    "questions": [
+      "What exact motif should appear, and can you bring a simple front, side, and back sketch?",
+      "Where should the design sit, and how should it wrap around the head?",
+      "Do you want temporary color, or a longer-lasting result that may require lightening the base?",
+      "Should the cut be completed before the color is applied, and how short must the hair stay for the motif to read?",
+      "How should the design look as the hair grows out, and when will you refresh or remove it?"
+    ],
+    "sampleRequest": "“I want a small yellow smiley motif on the back-right of a very short dark crop. Please show me the stencil placement first, use temporary color if it will show on my base, and explain how it will fade as the hair grows.”"
+  },
+  "considerations": [
+    "Color visibility depends on the starting shade, product, hair length, and lightening plan; a temporary pigment may look different on dark hair than it does on a pale base.",
+    "Lightening and repeated color services can affect hair condition. Decide on the color process with a qualified colorist, especially for previously treated hair.",
+    "A stencil or repeated design needs secure placement over a curved scalp. Agree on scale and orientation before the color is applied.",
+    "The design softens as short hair grows. A longer-lasting color does not preserve crisp edges if the underlying cut grows out.",
+    "Graphic hair color changes the color of the hair; it is not a shaved hair tattoo or a scalp tattoo."
+  ],
+  "sourceIds": [
+    "spokesman-rodman-smiley-dye-1997",
+    "allure-hair-stencils",
+    "teen-vogue-hair-stencils"
+  ],
+  "relatedStyleIds": [
+    "hairstyle-buzz-cut"
+  ],
+  "guidePublicationStatus": "published"
+}

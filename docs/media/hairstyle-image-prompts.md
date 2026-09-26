@@ -321,3 +321,15 @@ Create one original square 1024x1024 PNG portrait for a hairstyle collection, wi
 Asset: `src/content/assets/hairstyles/ronaldo-2002-haircut-three-quarter.png`
 
 Create one original square 1024x1024 PNG portrait for a hairstyle collection, with a genuinely transparent RGBA background and clean alpha edges. Show a different fictional adult Black man in his late 40s, shoulder-up in a three-quarter view turned slightly to his left, wearing a simple cream crewneck. Soft neutral editorial light, realistic natural skin texture, calm expression. Haircut: the distinctive 2002 Ronaldo Nazário World Cup look, but do not resemble Ronaldo or any celebrity. Shave the whole scalp uniformly to very short dark stubble except for exactly one small, low half-circle patch of short dark hair at the center front hairline. From this angle, make the single rounded patch clearly visible projecting from the forehead; it must read as a curved half-circle, not a triangle or pointed wedge. No other hair strip, no long mohawk, no side tuft, no fringe across the whole forehead; all crown, sides, and back are shaved. Keep the entire head and haircut silhouette visible with generous transparent space. Understated contemporary editorial portrait photography. Transparent pixels only, no background, white/cream/gray studio, gradient, checkerboard, or cast shadow. No text, logos, watermarks, jewelry, hat, or props.
+
+## graphic-hair-color-smiley
+
+Asset: `src/content/assets/hairstyles/graphic-hair-color-smiley.png`
+
+Square photorealistic editorial hairstyle reference portrait. Fictional adult man with deep brown skin and close-cropped dark natural hair, three-quarter rear view showing the back and right side of head, ear, and hairline. Small crisp smiley motif colored vivid golden yellow into the very short hair against dark hair; visibly colored hair, not scalp ink, not shaved design, not mohawk. Plain warm ivory studio background, cream shirt, soft daylight, realistic texture. Full crown and all hair in frame. Single portrait; no text, logos, watermark, hats, or celebrity likeness. Illustrative generated example, not a real person's photograph.
+
+## graphic-hair-color-geometric
+
+Asset: `src/content/assets/hairstyles/graphic-hair-color-geometric.png`
+
+Square photorealistic editorial hairstyle reference portrait. Fictional adult man with medium warm olive skin and very short even dark-brown clipper-cut hair, three-quarter rear-left angle showing rear scalp, left ear, and silhouette. A sharp two-tone geometric lightning arc colored into the short hair in muted copper-red and pale cream against natural dark brown; follows hair strands, not ink on skin, not a shaved groove, not a mohawk. Plain warm ivory studio background, cream shirt, soft daylight, realistic short hair texture. Full crown and all hair in frame. Single portrait; no collage, text, watermark, logos, hats, or celebrity likeness. Illustrative generated example, not a real person's photograph.

@@ -1,0 +1,13 @@
+{
+  "id": "graphic-hair-color-smiley",
+  "alt": "Generated fictional man, viewed from behind, with a yellow smiley emblem colored into very short dark hair.",
+  "kind": "image",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "graphic-hair-color-smiley"
+    }
+  },
+  "asset": "assets/hairstyles/graphic-hair-color-smiley.png"
+}

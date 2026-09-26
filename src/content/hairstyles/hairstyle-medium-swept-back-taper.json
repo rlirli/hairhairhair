@@ -1,0 +1,49 @@
+{
+  "id": "hairstyle-medium-swept-back-taper",
+  "slug": "medium-swept-back-taper",
+  "name": "Medium swept-back taper",
+  "kind": "cut",
+  "summary": "A medium-length men's cut with a longer top brushed back over neatly tapered sides and nape, without a disconnected undercut.",
+  "intro": [
+    "The defining shape is a medium top that can be directed backward, paired with sides that shorten gradually around the ears and nape.",
+    "The taper can be cut with scissors or clippers and kept soft; this is not a skin fade or a disconnected undercut. A natural part may appear when the hair is swept back.",
+    "The brushed-back finish is a styling choice. The underlying cut can also be worn with a loose side part or left more natural."
+  ],
+  "variations": [
+    {
+      "id": "medium-swept-back-taper-soft",
+      "name": "Soft swept-back taper",
+      "description": "Keeps the side transition subtle and the top loose, with natural movement rather than a sharp glossy finish."
+    },
+    {
+      "id": "medium-swept-back-taper-defined",
+      "name": "Defined swept-back taper",
+      "description": "Uses a clearer side part and light styling product to hold the top back while preserving a tapered, connected outline."
+    }
+  ],
+  "consultation": {
+    "intro": "Agree on top length, side length, and how visible the taper should be; show the barber how far back you want the front directed.",
+    "questions": [
+      "How much length should remain at the front and crown?",
+      "Should the sides be scissor-tapered or gradually clipped, and how close should they finish?",
+      "Do you want a visible side part or a relaxed, natural sweep?",
+      "How much daily blow-drying or product are you comfortable using?"
+    ],
+    "sampleRequest": "“Keep a medium length on top so I can brush it back, taper the sides and nape softly with no skin fade or undercut, and leave enough movement that it does not look stiff.”"
+  },
+  "considerations": [
+    "The brushed-back finish usually needs enough length at the front and some styling direction; a shorter fringe will not sweep the same way.",
+    "Straight or wavy hair can follow the shape with different amounts of product, while curlier textures may need more length or a softer outline.",
+    "A strong disconnect changes the silhouette into an undercut, so ask for a connected taper if that is not the intended result."
+  ],
+  "sourceIds": [
+    "gq-brad-pitt-iconic-hairstyles",
+    "haircom-classic-men"
+  ],
+  "relatedStyleIds": [
+    "hairstyle-taper-fade",
+    "hairstyle-curtain-haircut",
+    "hairstyle-long-layered-cut"
+  ],
+  "guidePublicationStatus": "published"
+}

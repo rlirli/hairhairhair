@@ -1,0 +1,29 @@
+{
+  "id": "person-brad-pitt",
+  "slug": "brad-pitt",
+  "name": "Brad Pitt",
+  "description": "William Bradley Pitt (born December 18, 1963) is an American actor and film producer. His public and character looks span short swept-back cuts and loose, longer styles.",
+  "heroImageId": "brad-pitt-2022-bullet-train",
+  "sources": [
+    {
+      "kind": "biography",
+      "url": "https://www.britannica.com/biography/Brad-Pitt"
+    },
+    {
+      "kind": "hairstyle reporting",
+      "url": "https://www.gq.com/story/brad-pitt-most-iconic-hairstyles"
+    },
+    {
+      "kind": "photograph",
+      "url": "https://commons.wikimedia.org/wiki/File:Brad_Pitt_(15570818296).jpg"
+    },
+    {
+      "kind": "photograph",
+      "url": "https://commons.wikimedia.org/wiki/File:Rahm_Emanuel,_Aaron_Taylor-Johnson_and_Brad_Pitt_at_%27Bullet_Train%27_event_at_Tokyo_Station_2022-08-23_cropped.jpg"
+    },
+    {
+      "kind": "photograph",
+      "url": "https://commons.wikimedia.org/wiki/File:Brad_Pitt_at_NASA_HQ.jpg"
+    }
+  ]
+}

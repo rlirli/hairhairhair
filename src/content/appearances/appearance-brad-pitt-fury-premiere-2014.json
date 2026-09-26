@@ -1,0 +1,18 @@
+{
+  "id": "appearance-brad-pitt-fury-premiere-2014",
+  "personId": "person-brad-pitt",
+  "imageId": "brad-pitt-2014-fury-premiere",
+  "event": "Fury world premiere at the Newseum, Washington, D.C.",
+  "taken": {
+    "value": "2014-10-15",
+    "precision": "day",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brad_Pitt_(15570818296).jpg"
+  },
+  "observations": [
+    {
+      "hairstyleId": "hairstyle-medium-swept-back-taper",
+      "styleExampleId": "brad-pitt-swept-back-taper",
+      "note": "The portrait shows a medium top brushed back with soft volume and connected, tidy sides; there is no visible skin fade or disconnected undercut."
+    }
+  ]
+}

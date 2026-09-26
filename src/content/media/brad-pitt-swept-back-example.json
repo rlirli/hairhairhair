@@ -1,0 +1,13 @@
+{
+  "id": "brad-pitt-swept-back-example",
+  "kind": "image",
+  "alt": "Generated fictional male model with a classic medium-length swept-back taper.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "brad-pitt-swept-back-example"
+    }
+  },
+  "asset": "assets/hairstyles/brad-pitt-swept-back-example.png"
+}

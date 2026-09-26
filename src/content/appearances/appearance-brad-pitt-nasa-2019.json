@@ -1,0 +1,12 @@
+{
+  "id": "appearance-brad-pitt-nasa-2019",
+  "personId": "person-brad-pitt",
+  "imageId": "brad-pitt-nasa-hq-2019",
+  "event": "ISS downlink from NASA Headquarters",
+  "taken": {
+    "value": "2019-09-16",
+    "precision": "day",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Brad_Pitt_at_NASA_HQ.jpg"
+  },
+  "observations": []
+}

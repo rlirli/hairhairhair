@@ -1,0 +1,58 @@
+{
+  "id": "natural-profile-brad-pitt",
+  "personId": "person-brad-pitt",
+  "hairTypeId": {
+    "value": "hair-type-2",
+    "provenance": {
+      "source": "ai-prefill",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "The selected public photographs show loose waves to curls, but styling and limited views prevent a confident natural-texture classification."
+    }
+  },
+  "hairSubtypeId": {
+    "value": null,
+    "provenance": {
+      "source": "not-documented",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "No defensible natural subtype can be established from these photographs."
+    }
+  },
+  "naturalHairColor": {
+    "value": null,
+    "provenance": {
+      "source": "not-documented",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "Photographs show changing brown-to-blond shades; natural color is not established."
+    }
+  },
+  "naturalSkinTone": {
+    "value": null,
+    "provenance": {
+      "source": "not-documented",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "Not assessed for this hairstyle-focused profile."
+    }
+  },
+  "hairThickness": {
+    "value": null,
+    "provenance": {
+      "source": "not-documented",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "Individual strand thickness cannot be determined from the available images."
+    }
+  },
+  "hairDensity": {
+    "value": "high",
+    "provenance": {
+      "source": "ai-prefill",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "The visible styles look full, but styling and photographs cannot establish natural density."
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "id": "appearance-brad-pitt-bullet-train-2022",
+  "personId": "person-brad-pitt",
+  "imageId": "brad-pitt-2022-bullet-train",
+  "event": "Bullet Train event at Tokyo Station",
+  "taken": {
+    "value": "2022-08-23",
+    "precision": "day",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rahm_Emanuel,_Aaron_Taylor-Johnson_and_Brad_Pitt_at_%27Bullet_Train%27_event_at_Tokyo_Station_2022-08-23_cropped.jpg"
+  },
+  "observations": [
+    {
+      "hairstyleId": "hairstyle-long-layered-cut",
+      "styleExampleId": "brad-pitt-long-layered-waves",
+      "note": "The image shows grown-out, medium-long loose waves and curls brushed off the face with visible movement through the sides and back. Long layered cut is the closest catalog shape; the photo does not establish the exact internal layering."
+    }
+  ]
+}

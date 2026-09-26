@@ -1,0 +1,13 @@
+{
+  "id": "brad-pitt-long-waves-example",
+  "kind": "image",
+  "alt": "Generated fictional male model with medium-long loose waves brushed back from a near-center part.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "brad-pitt-long-waves-example"
+    }
+  },
+  "asset": "assets/hairstyles/brad-pitt-long-waves-example.png"
+}

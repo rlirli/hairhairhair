@@ -22,7 +22,7 @@ Classification systems and natural profiles are additional collections because t
 
 ## Relationships and compatibility
 
-Records refer to one another through stable IDs. For example, a style example refers to its media and one or more hairstyles; an appearance refers to a person, a photograph, and observed hairstyles. `npm run validate:content` checks that those IDs resolve.
+Records refer to one another through stable IDs. For example, a style example refers to its media and one or more hairstyles; an appearance refers to a person, an optional photograph, and observed hairstyles. An appearance observation may pin a `styleExampleId` for its representative hairstyle image. Source-verified appearances may be recorded without a reusable photo. Hairstyle indexes use a clearly labelled style-example image for those records; the photographic appearance archives continue to show only source photographs. `npm run validate:content` checks that those IDs resolve.
 
 Each `compatibility/<hairstyle-id>.json` stores assessments for that hairstyle. An assessment has one or more criteria, an optional variation, a provenance, and the existing score:
 

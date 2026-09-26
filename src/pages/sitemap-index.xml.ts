@@ -27,6 +27,7 @@ export const GET: APIRoute = () => {
     ...people.map((item) => `people/${item.slug}/appearances/`),
     ...appearances
       .map((appearance) => {
+        if (!appearance.imageId) return null;
         const person = people.find((item) => item.id === appearance.personId);
         return person ? `people/${person.slug}/appearances/${appearance.id}/` : null;
       })

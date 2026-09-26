@@ -31,6 +31,7 @@ export function validatePackages(packages, data, validatePayload) {
   const appearanceIds = new Set(data.appearanceIds);
   const profileIds = new Set(data.profileIds);
   const styleIds = data.styleIds;
+  const styleExamples = new Map((data.styleExamples ?? []).map((item) => [item.id, item]));
   const folders = new Set();
   const planned = [];
   const proposedHairstyles = [];
@@ -98,9 +99,11 @@ export function validatePackages(packages, data, validatePayload) {
       if (appearanceIds.has(appearance.id))
         errors.push(`${folderName}: appearance id ${appearance.id} already exists.`);
       appearanceIds.add(appearance.id);
-      if (!localPhotos.has(appearance.imageId))
-        errors.push(`${folderName}: appearance ${appearance.id} references unknown photo ${appearance.imageId}.`);
-      usedPhotos.add(appearance.imageId);
+      if (appearance.imageId) {
+        if (!localPhotos.has(appearance.imageId))
+          errors.push(`${folderName}: appearance ${appearance.id} references unknown photo ${appearance.imageId}.`);
+        usedPhotos.add(appearance.imageId);
+      }
       for (const observation of appearance.observations) {
         if (!observation.hairstyleId.startsWith("PROPOSED-") && !styleIds.has(observation.hairstyleId)) {
           errors.push(
@@ -114,6 +117,13 @@ export function validatePackages(packages, data, validatePayload) {
             id: observation.hairstyleId,
             note: observation.note,
           });
+        if (observation.styleExampleId) {
+          const example = styleExamples.get(observation.styleExampleId);
+          if (!example || !example.hairstyleIds.includes(observation.hairstyleId))
+            errors.push(
+              `${folderName}: appearance ${appearance.id} styleExampleId ${observation.styleExampleId} must reference an example for hairstyle ${observation.hairstyleId}.`,
+            );
+        }
       }
     }
     for (const id of localPhotos)
@@ -133,6 +143,7 @@ function planPackages(packages, validatePayload, data) {
   const appearances = new Map(data.appearances.map((item) => [item.id, item]));
   const media = new Map(data.media.map((item) => [item.id, item]));
   const hairstyles = new Map(data.hairstyles.map((item) => [item.id, item]));
+  const styleExamples = new Map((data.styleExamples ?? []).map((item) => [item.id, item]));
   const usedFolders = new Set();
   const proposals = [];
   for (const item of packages) {
@@ -217,11 +228,13 @@ function planPackages(packages, validatePayload, data) {
     for (const appearance of payload.appearances) {
       if (appearances.has(appearance.id))
         errors.push(`${folderName}: appearance id "${appearance.id}" already exists.`);
-      if (!localMedia.has(appearance.imageId))
-        errors.push(
-          `${folderName}: appearance "${appearance.id}" references unknown package media "${appearance.imageId}".`,
-        );
-      usedImages.add(appearance.imageId);
+      if (appearance.imageId) {
+        if (!localMedia.has(appearance.imageId))
+          errors.push(
+            `${folderName}: appearance "${appearance.id}" references unknown package media "${appearance.imageId}".`,
+          );
+        usedImages.add(appearance.imageId);
+      }
       const { value, precision } = appearance.taken;
       if (
         (precision === "year" && !/^\d{4}$/.test(value)) ||
@@ -232,6 +245,13 @@ function planPackages(packages, validatePayload, data) {
       )
         errors.push(`${folderName}: invalid date/precision in appearance "${appearance.id}".`);
       for (const observation of appearance.observations) {
+        if (observation.styleExampleId) {
+          const example = styleExamples.get(observation.styleExampleId);
+          if (!example || !example.hairstyleIds.includes(observation.hairstyleId))
+            errors.push(
+              `${folderName}: appearance "${appearance.id}" styleExampleId "${observation.styleExampleId}" must reference an example for hairstyle "${observation.hairstyleId}".`,
+            );
+        }
         if (observation.hairstyleId.startsWith("PROPOSED-"))
           proposals.push({
             folderName,
@@ -317,14 +337,22 @@ export async function main(args = process.argv.slice(2)) {
     return;
   }
   const validatePayload = await packageValidator(schemaPath);
-  const [people, naturalProfiles, appearances, media, hairstyles] = await Promise.all([
+  const [people, naturalProfiles, appearances, media, hairstyles, styleExamples] = await Promise.all([
     readCollection("people"),
     readCollection("natural-profiles"),
     readCollection("appearances"),
     readCollection("media"),
     readCollection("hairstyles"),
+    readCollection("style-examples"),
   ]);
-  const plan = planPackages(packages, validatePayload, { people, naturalProfiles, appearances, media, hairstyles });
+  const plan = planPackages(packages, validatePayload, {
+    people,
+    naturalProfiles,
+    appearances,
+    media,
+    hairstyles,
+    styleExamples,
+  });
   if (plan.errors.length) throw new Error(`Import preflight failed:\n- ${plan.errors.join("\n- ")}`);
   await assertDestinations(plan.outputs, plan.copies, packages, archive);
   console.log(`${options.apply ? "Apply" : "Dry run"} plan:`);

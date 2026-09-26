@@ -135,7 +135,6 @@
       "additionalProperties": false,
       "required": [
         "id",
-        "imageId",
         "event",
         "taken",
         "observations"
@@ -166,6 +165,7 @@
                 "type": "string",
                 "pattern": "^(?:hairstyle-[a-z0-9]+(?:-[a-z0-9]+)*|PROPOSED-[a-z0-9]+(?:-[a-z0-9]+)*)$"
               },
+              "styleExampleId": { "$ref": "#/$defs/id" },
               "note": { "type": "string", "minLength": 1 }
             },
             "additionalProperties": false

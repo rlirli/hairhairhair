@@ -59,8 +59,10 @@ export function getPeopleByHairTypeSlug(slug: string, options: PeopleForHairType
   return result;
 }
 
-export function getRepresentativeHairstyleMedia(hairstyleId: string) {
-  const example = styleExamples.find((item) => item.hairstyleIds.includes(hairstyleId));
+export function getRepresentativeHairstyleMedia(hairstyleId: string, exampleId?: string) {
+  const example =
+    styleExamples.find((item) => item.id === exampleId && item.hairstyleIds.includes(hairstyleId)) ??
+    styleExamples.find((item) => item.hairstyleIds.includes(hairstyleId));
   if (!example) return undefined;
 
   const media = getHairstyleMediaById(example.imageId);

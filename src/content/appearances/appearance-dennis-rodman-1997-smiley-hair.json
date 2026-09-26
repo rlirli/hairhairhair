@@ -1,0 +1,17 @@
+{
+  "id": "appearance-dennis-rodman-1997-smiley-hair",
+  "personId": "person-dennis-rodman",
+  "event": "Chicago Bulls vs Los Angeles Lakers at the United Center",
+  "taken": {
+    "value": "1997-12",
+    "precision": "month",
+    "sourceUrl": "https://www.alamy.com/chicago-bulls-dennis-rodman-sports-a-new-smiley-face-hair-style-during-warm-ups-prior-to-the-start-of-the-bulls-game-against-the-los-angeles-lakers-at-the-united-center-in-chicago-wednesday-dec-17-1997-ap-phototim-boyle-image543041650.html"
+  },
+  "observations": [
+    {
+      "hairstyleId": "hairstyle-graphic-hair-color",
+      "styleExampleId": "graphic-hair-color-smiley",
+      "note": "The Associated Press report from December 1997 describes Rodman's short-cropped hair with a yellow base, a black smiley on the back, and red and green color at the hairline. The source photograph is not included; this hairstyle card uses an explicitly labelled generated style example."
+    }
+  ]
+}

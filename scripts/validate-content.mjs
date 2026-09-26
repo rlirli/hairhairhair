@@ -151,11 +151,19 @@ for (const person of people.values())
 for (const appearance of collections.appearances) {
   if (!people.has(appearance.personId))
     errors.push(`appearances/${appearance.id}: unknown personId "${appearance.personId}"`);
-  if (!media.has(appearance.imageId))
+  if (appearance.imageId && !media.has(appearance.imageId))
     errors.push(`appearances/${appearance.id}: unknown imageId "${appearance.imageId}"`);
-  for (const observation of appearance.observations ?? [])
+  for (const observation of appearance.observations ?? []) {
     if (!styles.has(observation.hairstyleId))
       errors.push(`appearances/${appearance.id}: unknown hairstyleId "${observation.hairstyleId}"`);
+    if (observation.styleExampleId) {
+      const example = examples.get(observation.styleExampleId);
+      if (!example || !example.hairstyleIds.includes(observation.hairstyleId))
+        errors.push(
+          `appearances/${appearance.id}: styleExampleId "${observation.styleExampleId}" must reference an example for hairstyle "${observation.hairstyleId}"`,
+        );
+    }
+  }
 }
 for (const profile of profiles.values()) {
   if (!people.has(profile.personId))

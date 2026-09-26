@@ -1,0 +1,74 @@
+---
+import { Image } from "astro:assets";
+import { getRepresentativeHairstyleMedia } from "../../data";
+import { appearanceTitle, formatAppearanceDate } from "../../lib/appearance-formatting";
+import type { Appearance, Hairstyle, Person } from "../../types";
+
+interface Props {
+  person: Person;
+  records: Array<{ style: Hairstyle; appearances: Appearance[] }>;
+  layout?: "row" | "grid";
+}
+
+const { person, records, layout = "grid" } = Astro.props;
+const visibleRecords = layout === "row" ? records.slice(0, 6) : records;
+---
+
+<ul
+  class:list={[
+    "mt-2.5 sm:mt-4",
+    layout === "row"
+      ? "flex gap-2 sm:gap-2.5 overflow-x-auto overscroll-x-contain pb-3 scrollbar-hidden"
+      : "grid grid-cols-2 gap-x-4 gap-y-6 lg:grid-cols-4",
+  ]}
+  aria-label="Hairstyles worn"
+  tabindex={layout === "row" ? 0 : undefined}
+>
+  {visibleRecords.map(({ style, appearances }) => {
+    const appearance = appearances[0];
+    const observation = appearance?.observations.find((item) => item.hairstyleId === style.id);
+    const representative = getRepresentativeHairstyleMedia(style.id, observation?.styleExampleId);
+    if (!appearance || !representative) return null;
+
+    return (
+      <li class:list={["group min-w-0", layout === "row" && "w-42 shrink-0"]}>
+        <article
+          aria-label={`${style.name}; ${formatAppearanceDate(appearance.taken.value, "short")}; ${appearanceTitle(appearance.event)}`}
+        >
+          <figure class="overflow-hidden">
+            <div class="relative overflow-hidden">
+              <a
+                class="group focus-ring block"
+                href={`/people/${person.slug}/hairstyles/${style.slug}/`}
+                aria-label={`${person.name} wearing ${style.name}, shown with a hairstyle example`}
+              >
+                <Image
+                  src={representative.media.image}
+                  widths={[400, 700, 1000]}
+                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                  format="webp"
+                  loading="lazy"
+                  alt={representative.media.alt}
+                  class="aspect-[7/9] w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                />
+                <span class="absolute inset-x-0 bottom-0 bg-black/70 px-2 py-1.5 text-[.65rem] font-bold uppercase tracking-[.1em] text-white">
+                  Hairstyle example
+                </span>
+              </a>
+            </div>
+            <figcaption class="mt-2">
+              <h3 class="font-display text-xl leading-tight tracking-[-.03em]">
+                <a class="focus-ring" href={`/people/${person.slug}/hairstyles/${style.slug}/`}>
+                  {style.name}
+                </a>
+              </h3>
+              <p class="mt-1 text-xs leading-tight text-muted">
+                {formatAppearanceDate(appearance.taken.value, "short")}
+              </p>
+            </figcaption>
+          </figure>
+        </article>
+      </li>
+    );
+  })}
+</ul>

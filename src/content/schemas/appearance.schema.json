@@ -6,7 +6,6 @@
   "required": [
     "id",
     "personId",
-    "imageId",
     "event",
     "taken",
     "observations"
@@ -32,7 +31,11 @@
       "items": {
         "type": "object",
         "required": ["hairstyleId", "note"],
-        "properties": { "hairstyleId": { "type": "string" }, "note": { "type": "string" } },
+        "properties": {
+          "hairstyleId": { "type": "string" },
+          "styleExampleId": { "type": "string" },
+          "note": { "type": "string" }
+        },
         "additionalProperties": false
       }
     }

@@ -14,17 +14,18 @@ export interface PersonSource {
 
 export interface AppearanceObservation {
   hairstyleId: string;
+  styleExampleId?: string;
   note: string;
 }
 
 export interface Appearance {
   id: string;
   personId: string;
-  imageId: string;
+  imageId?: string;
   event: string;
   taken: {
     value: string;
-    precision: "day" | "year";
+    precision: "day" | "month" | "year" | "decade";
     sourceUrl: string;
   };
   observations: AppearanceObservation[];

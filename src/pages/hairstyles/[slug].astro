@@ -32,7 +32,7 @@ const documentedAppearances = getAppearancesForHairstyle(style.id)
   .sort((a, b) => b.taken.value.localeCompare(a.taken.value))
   .map((appearance) => {
     const person = getPersonForAppearance(appearance.id);
-    const media = mediaById.get(appearance.imageId);
+    const media = appearance.imageId ? mediaById.get(appearance.imageId) : undefined;
     return person && media
       ? {
           id: appearance.id,

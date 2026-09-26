@@ -14,7 +14,7 @@ const mediaById = new Map(personPhotographs.map((media) => [media.id, media]));
 const appearanceCards = getAppearancesForHairstyle(style.id)
   .map((appearance) => {
     const person = people.find((item) => item.id === appearance.personId);
-    const media = mediaById.get(appearance.imageId);
+    const media = appearance.imageId ? mediaById.get(appearance.imageId) : undefined;
     return person && media
       ? {
           id: appearance.id,

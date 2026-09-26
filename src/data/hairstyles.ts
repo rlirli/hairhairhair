@@ -1492,7 +1492,7 @@ export const hairstyles: Hairstyle[] = [
       "smithsonian-afro-sheen",
       "smithsonian-black-hair-identity",
     ],
-    relatedStyleIds: ["hairstyle-cropped-afro"],
+    relatedStyleIds: ["hairstyle-cropped-afro", "hairstyle-sculpted-spherical-afro"],
     guidePublicationStatus: "published",
   },
   {
@@ -1596,7 +1596,7 @@ export const hairstyles: Hairstyle[] = [
       "smithsonian-look-talk-play",
       "smithsonian-nathaniel-mathis",
     ],
-    relatedStyleIds: ["hairstyle-cropped-afro"],
+    relatedStyleIds: ["hairstyle-cropped-afro", "hairstyle-natural-afro"],
     guidePublicationStatus: "published",
   },
   {

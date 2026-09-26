@@ -9,7 +9,7 @@ const { id, personSlug, personName, date, event, media } = Astro.props;
 const href = `/people/${personSlug}/appearances/${id}/`;
 ---
 
-<div class="min-w-0">
+<article class="min-w-0" aria-label={`${personName}, ${event}, ${date}`}>
   <figure class="relative overflow-hidden">
     <a class="focus-ring block" href={href}>
       <Image
@@ -18,7 +18,7 @@ const href = `/people/${personSlug}/appearances/${id}/`;
         sizes="(min-width: 1024px) 16vw, (min-width: 640px) 30vw, 45vw"
         format="webp"
         alt={media.alt}
-        class="aspect-[4/5] w-full object-cover"
+        class="aspect-[7/9] w-full object-cover"
         style={`object-position: ${media.objectPosition}`}
       />
     </a>
@@ -31,6 +31,5 @@ const href = `/people/${personSlug}/appearances/${id}/`;
     <time datetime={date} data-local-date>
       {date}
     </time>
-    <span class="sr-only"> · {event}</span>
   </p>
-</div>
+</article>

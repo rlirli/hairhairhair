@@ -1,0 +1,17 @@
+{
+  "id": "appearance-dennis-rodman-2005-topo",
+  "personId": "person-dennis-rodman",
+  "imageId": "dennis-rodman-2005-topo",
+  "event": "Torpan Pojat game in Helsinki",
+  "taken": {
+    "value": "2005",
+    "precision": "year",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dennis_Rodman_ToPo.jpg"
+  },
+  "observations": [
+    {
+      "hairstyleId": "hairstyle-buzz-cut",
+      "note": "The photograph shows an evenly clipped, close cut bleached blond. The visible length and outline fit a buzz cut; the hair color is dyed."
+    }
+  ]
+}

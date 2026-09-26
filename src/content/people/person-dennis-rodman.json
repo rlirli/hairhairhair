@@ -1,0 +1,29 @@
+{
+  "id": "person-dennis-rodman",
+  "slug": "dennis-rodman",
+  "name": "Dennis Rodman",
+  "description": "Dennis Keith Rodman (born May 13, 1961) is an American former professional basketball player and Naismith Memorial Basketball Hall of Fame inductee. A five-time NBA champion, he was known for his rebounding and for changing his very short hairstyles with vivid dye and graphic designs. Contemporary reports describe cherry-red hair with a Bulls logo in 1995 and a smiley-face dye design in 1997.",
+  "heroImageId": "dennis-rodman-2005-topo",
+  "sources": [
+    {
+      "kind": "biography",
+      "url": "https://www.hoophall.com/hall-of-famers/dennis-rodman"
+    },
+    {
+      "kind": "hair history",
+      "url": "https://www.washingtonpost.com/archive/sports/1995/10/24/rodmans-arrival-sends-chicago-into-radio-daze/c664d781-17ae-4120-8696-e178167d3415/"
+    },
+    {
+      "kind": "hair history",
+      "url": "https://www.washingtonpost.com/archive/sports/1997/12/23/just-face-it-rodmans-happy/a17f0b0c-a94c-4fb6-aa22-30280546960d/"
+    },
+    {
+      "kind": "photograph",
+      "url": "https://commons.wikimedia.org/wiki/File:Dennis_Rodman,_2001.jpg"
+    },
+    {
+      "kind": "photograph",
+      "url": "https://commons.wikimedia.org/wiki/File:Dennis_Rodman_ToPo.jpg"
+    }
+  ]
+}

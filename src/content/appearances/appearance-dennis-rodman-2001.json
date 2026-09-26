@@ -1,0 +1,12 @@
+{
+  "id": "appearance-dennis-rodman-2001",
+  "personId": "person-dennis-rodman",
+  "imageId": "dennis-rodman-2001",
+  "event": "Portrait photographed in November 2001",
+  "taken": {
+    "value": "2001-11",
+    "precision": "month",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dennis_Rodman,_2001.jpg"
+  },
+  "observations": []
+}

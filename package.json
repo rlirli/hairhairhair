@@ -11,6 +11,8 @@
     "explore:relations": "vite --config exploration/vite.config.js",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
+    "import:hairstyles": "node scripts/import-hairstyles.mjs",
+    "import:people": "node scripts/import-people.mjs",
     "preview": "astro preview",
     "test": "npm run build:clean && npm run test:component && npm run test:content",
     "test:component": "vitest run --config vitest.config.ts",

@@ -47,9 +47,10 @@ Image originals live under `src/content/assets/` and are Git tracked. Each image
 
 ## Add or update content
 
-1. Edit or add the JSON file in the matching collection. Use the corresponding schema in `src/content/schemas/` as the record contract.
-2. Keep related records connected by IDs. Add media metadata and its asset together when introducing an image.
-3. Run `npm run validate:content`; fix schema errors, unresolved IDs, duplicate relations, or missing assets before committing.
-4. Run `npm run check` and `npm run build` when changing the content adapter or record shapes.
+For hand-authored editorial updates, edit the JSON file in the matching collection and use its schema in `src/content/schemas/`. For package-based additions, prepare one payload plus its images in `inbox-hairstyles/<slug>/` or `inbox-people/<slug>/`; the package-level schemas live under `public/schemas/`.
+
+Run `npm run import:hairstyles` or `npm run import:people` to validate and preview a package. After reviewing the plan, add `-- --apply` to write records/assets into the appropriate `src/content/` collections and move the package into its inbox `archive/`. Import is a local Git workflow; all resulting records and assets remain Git tracked. Then run `npm run validate:content`.
+
+Run `npm run check` and `npm run build` when changing the content adapter or record shapes.
 
 `src/data/content.ts` is the read adapter used by the application. The small files next to it preserve existing import paths for the UI; edit `src/content/` for editorial data, not the adapter or generated Astro output.

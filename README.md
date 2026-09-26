@@ -27,7 +27,7 @@ npm run verify
 - [Add a person](docs/contributing/adding-a-person.md)
 - [Browse all project documentation](docs/README.md)
 
-The canonical Git-tracked records and image assets live in `src/content/`. Validate record schemas, relationships, and image paths with `npm run validate:content`; `npm run check` runs this validation before Astro's type checks. See [the content model](docs/content-model.md) for the directory structure and contributor workflow.
+The canonical Git-tracked records and image assets live in `src/content/`. Add new hairstyles and people through package folders in `inbox-hairstyles/` and `inbox-people/`: `npm run import:hairstyles` and `npm run import:people` validate and preview by default; add `-- --apply` to write linked records/assets and archive the package. Package contracts are in `public/schemas/`. Validate records, relationships, and image paths with `npm run validate:content`; `npm run check` runs this before Astro's type checks. See [the content model](docs/content-model.md) for the directory structure and contributor workflow.
 
 The domain vocabulary is defined in [`CONTEXT.md`](CONTEXT.md). Keep content records, media metadata, research, and tests consistent in the same commit.
 

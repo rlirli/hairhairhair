@@ -1,0 +1,199 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hairhairhair.hair/schemas/hairstyle-package.schema.json",
+  "title": "Hairstyle package",
+  "description": "One JSON document with all primary records for one hairstyle. Image files are supplied beside payload.json.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "sources",
+    "hairstyle",
+    "styleExamples",
+    "compatibility",
+    "media",
+    "imagePrompts"
+  ],
+  "properties": {
+    "sources": { "type": "array", "items": { "$ref": "#/$defs/source" } },
+    "hairstyle": { "$ref": "#/$defs/hairstyle" },
+    "styleExamples": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/example" } },
+    "compatibility": { "type": "array", "items": { "$ref": "#/$defs/assessment" } },
+    "media": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/media" } },
+    "imagePrompts": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/imagePrompt" } }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "url",
+        "publisher",
+        "reviewedAt"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "title": { "type": "string", "minLength": 1 },
+        "displayTitle": { "type": "string" },
+        "url": { "type": "string", "format": "uri" },
+        "publisher": { "type": "string", "minLength": 1 },
+        "reviewedAt": { "type": "string", "format": "date" }
+      }
+    },
+    "hairstyle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "slug",
+        "name",
+        "kind",
+        "summary",
+        "intro",
+        "variations",
+        "consultation",
+        "considerations",
+        "sourceIds",
+        "relatedStyleIds",
+        "guidePublicationStatus"
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^hairstyle-[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "slug": { "$ref": "#/$defs/id" },
+        "name": { "type": "string", "minLength": 1 },
+        "kind": { "enum": ["cut", "finishing-technique", "styling-technique"] },
+        "summary": { "type": "string", "minLength": 1 },
+        "intro": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "variations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "name", "description"],
+            "properties": {
+              "id": { "$ref": "#/$defs/id" },
+              "name": { "type": "string" },
+              "description": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "consultation": {
+          "type": "object",
+          "required": ["intro", "questions", "sampleRequest"],
+          "properties": {
+            "intro": { "type": "string" },
+            "questions": { "type": "array", "items": { "type": "string" } },
+            "sampleRequest": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "considerations": { "type": "array", "items": { "type": "string" } },
+        "sourceIds": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
+        "relatedStyleIds": { "type": "array", "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
+        "guidePublicationStatus": { "enum": ["draft", "published"] },
+        "inventedAt": {
+          "type": "object",
+          "required": ["year", "precision", "sourceId"],
+          "properties": {
+            "year": { "type": "integer", "minimum": 1 },
+            "precision": { "enum": ["year", "decade"] },
+            "sourceId": { "$ref": "#/$defs/id" }
+          },
+          "additionalProperties": false
+        },
+        "inventor": {
+          "type": "object",
+          "required": ["name", "sourceId"],
+          "properties": { "name": { "type": "string" }, "sourceId": { "$ref": "#/$defs/id" } },
+          "additionalProperties": false
+        }
+      }
+    },
+    "example": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "hairstyleIds",
+        "imageId",
+        "title",
+        "caption",
+        "patternDescription",
+        "lengthDescription"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "hairstyleIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/id" } },
+        "imageId": { "$ref": "#/$defs/id" },
+        "title": { "type": "string", "minLength": 1 },
+        "caption": { "type": "string", "minLength": 1 },
+        "patternDescription": { "type": "string", "minLength": 1 },
+        "lengthDescription": { "type": "string", "minLength": 1 }
+      }
+    },
+    "assessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["criteria", "score", "provenance"],
+      "properties": {
+        "criteria": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["dimension", "valueId"],
+            "properties": {
+              "dimension": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" },
+              "valueId": { "$ref": "#/$defs/id" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "score": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+        "provenance": { "const": "estimated" },
+        "variationId": { "$ref": "#/$defs/id" }
+      }
+    },
+    "media": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "fileName",
+        "alt",
+        "provenance"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "fileName": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*\\.png$" },
+        "alt": { "type": "string", "minLength": 1 },
+        "objectPosition": { "type": "string" },
+        "transparentBackground": { "type": "boolean" },
+        "provenance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "provider",
+            "promptKey",
+            "background"
+          ],
+          "properties": {
+            "kind": { "const": "generated" },
+            "provider": { "type": "string", "minLength": 1 },
+            "promptKey": { "$ref": "#/$defs/id" },
+            "background": { "enum": ["opaque", "transparent"] }
+          }
+        }
+      }
+    },
+    "imagePrompt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mediaId", "prompt"],
+      "properties": { "mediaId": { "$ref": "#/$defs/id" }, "prompt": { "type": "string", "minLength": 1 } }
+    }
+  }
+}

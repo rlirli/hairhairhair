@@ -1,0 +1,177 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hairhairhair.hair/schemas/person-package.schema.json",
+  "title": "Person package",
+  "description": "One JSON document with a person, their natural profile, photographs as media records, and dated appearances. Image files are supplied beside payload.json.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "person",
+    "naturalProfile",
+    "photographs",
+    "appearances"
+  ],
+  "properties": {
+    "person": { "$ref": "#/$defs/person" },
+    "naturalProfile": { "$ref": "#/$defs/naturalProfile" },
+    "photographs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/photograph" } },
+    "appearances": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/appearance" } }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "trait": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["value", "provenance"],
+      "properties": {
+        "value": { "type": ["string", "null"] },
+        "provenance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "source",
+            "status",
+            "confidence",
+            "note"
+          ],
+          "properties": {
+            "source": { "type": "string" },
+            "status": { "type": "string" },
+            "confidence": { "enum": ["low", "medium", "high"] },
+            "note": { "type": "string", "minLength": 1 }
+          }
+        }
+      }
+    },
+    "person": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "slug",
+        "name",
+        "description",
+        "heroImageId",
+        "sources"
+      ],
+      "properties": {
+        "id": { "type": "string", "pattern": "^person-[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "slug": { "$ref": "#/$defs/id" },
+        "name": { "type": "string", "minLength": 1 },
+        "description": { "type": "string", "minLength": 1 },
+        "heroImageId": { "$ref": "#/$defs/id" },
+        "sources": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["kind", "url"],
+            "properties": { "kind": { "type": "string" }, "url": { "type": "string", "format": "uri" } },
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    "naturalProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "hairTypeId",
+        "hairSubtypeId",
+        "naturalHairColor",
+        "naturalSkinTone",
+        "hairThickness",
+        "hairDensity"
+      ],
+      "properties": {
+        "id": { "type": "string" },
+        "personId": { "type": "string" },
+        "hairTypeId": { "$ref": "#/$defs/trait" },
+        "hairSubtypeId": { "$ref": "#/$defs/trait" },
+        "naturalHairColor": { "$ref": "#/$defs/trait" },
+        "naturalSkinTone": { "$ref": "#/$defs/trait" },
+        "hairThickness": { "$ref": "#/$defs/trait" },
+        "hairDensity": { "$ref": "#/$defs/trait" }
+      }
+    },
+    "photograph": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "fileName",
+        "alt",
+        "provenance"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "fileName": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*\\.(?:jpg|jpeg|png|webp)$" },
+        "alt": { "type": "string", "minLength": 1 },
+        "objectPosition": { "type": "string" },
+        "provenance": {
+          "type": "object",
+          "properties": {
+            "licenseType": { "enum": ["public-domain", "licensed"] },
+            "costFree": { "type": "boolean" },
+            "commercialUse": { "type": "boolean" },
+            "derivativesAllowed": { "type": "boolean" },
+            "creator": { "type": "string" },
+            "licenseName": { "type": "string" },
+            "licenseUrl": { "type": "string", "format": "uri" },
+            "attribution": { "type": "string" },
+            "sourceUrl": { "type": "string", "format": "uri" },
+            "originalUrl": { "type": "string", "format": "uri" },
+            "rightsEvidenceUrl": { "type": "string", "format": "uri" },
+            "rightsBasis": { "type": "string" },
+            "identifier": { "type": "string" },
+            "derivativeStatus": { "enum": ["original", "cropped", "edited"] }
+          },
+          "additionalProperties": true
+        }
+      }
+    },
+    "appearance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "imageId",
+        "event",
+        "taken",
+        "observations"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/id" },
+        "personId": { "type": "string" },
+        "imageId": { "$ref": "#/$defs/id" },
+        "event": { "type": "string", "minLength": 1 },
+        "taken": {
+          "type": "object",
+          "required": ["value", "precision", "sourceUrl"],
+          "properties": { "value": { "type": "string" }, "precision": { "enum": [
+                "day",
+                "month",
+                "year",
+                "decade"
+              ] }, "sourceUrl": { "type": "string", "format": "uri" } },
+          "additionalProperties": false
+        },
+        "observations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["hairstyleId", "note"],
+            "properties": {
+              "hairstyleId": {
+                "type": "string",
+                "pattern": "^(?:hairstyle-[a-z0-9]+(?:-[a-z0-9]+)*|PROPOSED-[a-z0-9]+(?:-[a-z0-9]+)*)$"
+              },
+              "note": { "type": "string", "minLength": 1 }
+            },
+            "additionalProperties": false
+          }
+        }
+      }
+    }
+  }
+}

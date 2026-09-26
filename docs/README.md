@@ -27,6 +27,8 @@ Research files preserve evidence and editorial decisions. They are not step-by-s
 
 ## Machine-readable references
 
+- [Hairstyle package JSON schema](../public/schemas/hairstyle-package.schema.json)
+- [Person package JSON schema](../public/schemas/person-package.schema.json)
 - [Compact hairstyle reference](https://hairhairhair.hair/hairstyles/llms.txt)
 - [Full hairstyle reference](https://hairhairhair.hair/hairstyles/llms-full.txt)
 - [Compact people reference](https://hairhairhair.hair/people/llms.txt)

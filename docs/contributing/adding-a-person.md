@@ -1,11 +1,10 @@
 # Add a person
 
-Create one JSON record per entity under `src/content/`. See the [content model](../content-model.md) for paths, ID references, schemas, and validation.
+Prepare one package folder under `inbox-people/<slug>/` with a `payload.json` and its photographs. The public [person package schema](../../public/schemas/person-package.schema.json) describes the complete top-level payload. See the [content model](../content-model.md) for paths, ID references, and validation.
 
-1. Add `people/<id>.json` with a stable ID and unique slug. Keep biographical claims concise and sourced.
-2. Add `natural-profiles/<id>.json` when there is defensible evidence for natural hair traits. Record provenance and uncertainty for each trait; do not infer a precise subtype from a styled image.
-3. Add each photograph to `assets/people/` and create a `media/<id>.json` record with the matching `asset` path, alt text, credit, source, and reuse-rights evidence.
-4. Add one `appearances/<id>.json` per dated event. Point it to the person ID, media ID, and hairstyle IDs visible in the photograph. Use an existing hairstyle ID only when it is a reasonable match.
-5. Run `npm run validate:content`; it checks record schemas, references, IDs, and image files.
+1. Put the person in `person`, the optional-trait evidence in `naturalProfile`, source photographs in `photographs`, and dated records in `appearances`.
+2. Give every photograph a matching image file and media ID. Record its credit, source, license, and reuse-rights evidence; keep biographical claims concise and sourced.
+3. Do not infer a precise natural hair subtype from a styled image. Appearance observations may use `PROPOSED-<slug>` for a distinct hairstyle that is not in the catalog; these remain unconfirmed in the imported appearance record and are reported for review.
+4. Run `npm run import:people` to validate and preview. Review the listed outputs, then run `npm run import:people -- --apply` to write content records and assets and archive the package. Finish with `npm run validate:content`.
 
 Do not add a photograph with unclear reuse rights or a license that disallows the site's intended use. Keep source photographs distinct from generated hairstyle examples, and do not describe a generated model as a real person's appearance.

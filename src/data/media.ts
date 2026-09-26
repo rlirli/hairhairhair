@@ -30,6 +30,7 @@ import patternedMohawkCurved from "../assets/hairstyles/patterned-mohawk-curved.
 import patternedMohawkGeometric from "../assets/hairstyles/patterned-mohawk-geometric.png";
 import sculptedSphericalAfroClassic from "../assets/hairstyles/sculpted-spherical-afro-classic.png";
 import sculptedSphericalAfroOlderMan from "../assets/hairstyles/sculpted-spherical-afro-older-man.png";
+import shortCurlyShagExample from "../assets/hairstyles/short-curly-shag-example.png";
 import shortFeatheredShagCopper from "../assets/hairstyles/short-feathered-shag-copper.png";
 import sidePartedFlippedLobAfrolatina55 from "../assets/hairstyles/side-parted-flipped-lob-afrolatina-55.png";
 import sidePartedFlippedLobEastAsian28 from "../assets/hairstyles/side-parted-flipped-lob-east-asian-28.png";
@@ -317,6 +318,14 @@ export const hairstyleMedia: HairstyleMedia[] = [
       origin: "system",
       aiGeneration: { provider: "OpenAI", promptKey: "sculpted-spherical-afro-older-man" },
     },
+    transparentBackground: true,
+  },
+  {
+    id: "short-curly-shag-example",
+    kind: "image",
+    image: shortCurlyShagExample,
+    alt: "Fictional adult man with a short curly shag, rounded crown volume, close scissor-cut sides, and soft curls retained at the nape, shown in three-quarter view.",
+    provenance: { origin: "system", aiGeneration: { provider: "OpenAI", promptKey: "short-curly-shag-example" } },
     transparentBackground: true,
   },
   {

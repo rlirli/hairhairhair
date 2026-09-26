@@ -303,3 +303,9 @@ Create one original square PNG style example for the hairstyle â€œFinger wavesâ€
 Asset: `src/assets/hairstyles/finger-waves-deep-side-part-silver.png`
 
 ...
+
+## short-curly-shag-example
+
+Asset: `src/assets/hairstyles/short-curly-shag-example.png`
+
+Create one square 1024x1024 PNG portrait with a genuinely transparent RGBA background and clean alpha edges. Use the attached photo only as haircut reference, not for identity. Fictional adult Black man, late 20s, shoulder-up three-quarter view, soft neutral light, natural skin texture, simple cream shirt. Short curly shag haircut: dense loose natural curls, tousled crown volume, irregular short layers across top and front, sides scissor-cut close around temples and ears but not shaved or faded, soft curly length retained at nape. No hard line-up, no sharp fade, no long disconnected mullet tail, no rigid fringe. Full hairstyle silhouette visible with transparent breathing room all around. Contemporary understated editorial portrait photography, realistic hair strands and curls. Transparent pixels only; no background, white, cream, studio, checkerboard, gradient or shadow. No text, logos, watermark, jewelry, hat, props, or other person.

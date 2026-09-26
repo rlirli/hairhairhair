@@ -57,6 +57,13 @@ export const sources: EditorialSource[] = [
     reviewedAt: "2026-09-24",
   },
   {
+    id: "allure-shag-curly-hair",
+    title: "How to Achieve a Shag Cut on Wavy or Curly Hair",
+    url: "https://www.allure.com/story/joseph-maine-shag-bob-cut-bangs-curly-hair",
+    publisher: "Allure",
+    reviewedAt: "2026-09-26",
+  },
+  {
     id: "allure-shag-haircut-ideas",
     title: "31 Cute Shag Haircut Ideas for Any Length and Texture — See Photos",
     url: "https://www.allure.com/gallery/shag-haircut-ideas-trend",
@@ -76,6 +83,13 @@ export const sources: EditorialSource[] = [
     url: "https://www.americansalon.com/news/ode-to-a-beauty-icon",
     publisher: "American Salon",
     reviewedAt: "2026-09-24",
+  },
+  {
+    id: "american-salon-curly-shag",
+    title: "How To Cut a Curly Shag",
+    url: "https://www.americansalon.com/step-by-steps/how-to-cut-a-curly-hair-shag",
+    publisher: "American Salon",
+    reviewedAt: "2026-09-26",
   },
   {
     id: "american-salon-finger-waves",
@@ -490,6 +504,13 @@ export const sources: EditorialSource[] = [
     url: "https://www.vogue.com/article/elizabeth-olsens-new-miu-miu-campaign-why-we-are-obsessed-with-her-1970s-cher-hair",
     publisher: "Vogue",
     reviewedAt: "2026-09-24",
+  },
+  {
+    id: "vogue-curly-shag-2026",
+    title: "The Sterling Point Curly Shag Is Autumn’s Most-Wanted Hairstyle. Bo Bragason’s Hairstylist Breaks It Down",
+    url: "https://www.vogue.co.uk/article/sterling-point-curly-hair-bo-bragason",
+    publisher: "British Vogue",
+    reviewedAt: "2026-09-26",
   },
   {
     id: "vogue-emrata-bangs-2024",
@@ -1600,6 +1621,60 @@ export const hairstyles: Hairstyle[] = [
     guidePublicationStatus: "published",
   },
   {
+    id: "hairstyle-short-curly-shag",
+    slug: "short-curly-shag",
+    name: "Short curly shag",
+    kind: "cut",
+    summary:
+      "A short curl-aware layered cut with crown volume, irregular face-framing curls, and a softly tapered perimeter that retains a little length at the nape.",
+    intro: [
+      "A short curly shag uses shorter layers through the crown and front to build a rounded, tousled shape, while the sides and nape keep enough length for the curls to remain visible.",
+      "This reference has abundant natural curl volume, close scissor-cut sides, and a soft nape. The outline stays connected and relaxed rather than forming the stronger crown-to-back contrast of a pronounced wolf cut or mullet.",
+      "The final shape depends on how the hair curls and shrinks when dry. The same layer map can look taller or shorter on another head, so plan it around the wearer's own texture and usual styling routine.",
+    ],
+    variations: [
+      {
+        id: "short-curly-shag-longer-nape",
+        name: "Short curly shag with a longer nape",
+        description:
+          "Leaves a little extra curl length through the back for a subtle mullet influence without disconnecting the crown from the perimeter.",
+      },
+      {
+        id: "short-curly-shag-fringe",
+        name: "Short curly shag with a loose fringe",
+        description:
+          "Allows a few irregular curls to fall forward, with the dry fringe length planned for spring-up and natural separation rather than a blunt line.",
+      },
+      {
+        id: "short-curly-shag-soft-taper",
+        name: "Softly tapered short curly shag",
+        description:
+          "Keeps the sides and area around the ears compact with scissors while blending into the curl volume above and the softly retained nape; it does not use a skin fade.",
+      },
+    ],
+    consultation: {
+      intro:
+        "Bring the reference photo and agree on the dry silhouette before cutting: crown height, curl length around the temples and ears, and how much softness to leave at the nape.",
+      questions: [
+        "How full should the crown look, and how short can its layers sit after the curls dry?",
+        "Should the sides cover the top of the ears, sit close with scissors, or expose the ears?",
+        "How much curl length should remain at the nape, and should the outline stay connected rather than becoming a distinct mullet?",
+        "Will the curls usually be worn natural, diffused, or reshaped with product?",
+      ],
+      sampleRequest:
+        "“I’d like a short curly shag with loose volume through the crown, irregular face-framing curls, and softly shortened sides around the temples and ears. Keep the nape softly curly, avoid a skin fade and a blunt fringe, and plan the layers for how my curls sit when dry.”",
+    },
+    considerations: [
+      "Curls can spring up by different amounts in different sections, so check the intended crown, fringe, and nape lengths in the natural dry pattern before taking the layers shorter.",
+      "The look relies on movement and visible separation between curls; heavy products or over-defined styling can make it read more controlled and less shaggy.",
+      "Very short crown layers increase height and change the balance of the silhouette. Agree on the dry outline before removing substantial length.",
+      "This cut can be adapted to different curl patterns, but the reference image does not establish a precise natural hair subtype for another wearer or model.",
+    ],
+    sourceIds: ["allure-shag-curly-hair", "american-salon-curly-shag", "vogue-curly-shag-2026"],
+    relatedStyleIds: ["hairstyle-short-feathered-shag", "hairstyle-wolf-cut"],
+    guidePublicationStatus: "published",
+  },
+  {
     id: "hairstyle-short-feathered-shag",
     slug: "short-feathered-shag",
     name: "Short feathered shag",
@@ -1652,7 +1727,12 @@ export const hairstyles: Hairstyle[] = [
       "Shorter, choppier feathered cuts generally need more frequent reshaping than longer, more uniform layers.",
     ],
     sourceIds: ["allure-shag-haircut-ideas", "haircom-feathered-hair", "haircom-short-haircuts-older-women"],
-    relatedStyleIds: ["hairstyle-farrah-fawcett-cut", "hairstyle-the-rachel", "hairstyle-wolf-cut"],
+    relatedStyleIds: [
+      "hairstyle-farrah-fawcett-cut",
+      "hairstyle-short-curly-shag",
+      "hairstyle-the-rachel",
+      "hairstyle-wolf-cut",
+    ],
     guidePublicationStatus: "published",
   },
   {
@@ -2077,7 +2157,7 @@ export const hairstyles: Hairstyle[] = [
       "Curly and coily hair can shrink substantially, so the intended dry silhouette and layer placement should be assessed in the natural state.",
     ],
     sourceIds: ["allure-wolf-cut-2026", "haircom-wolf-cut"],
-    relatedStyleIds: ["hairstyle-long-layered-cut", "hairstyle-short-feathered-shag"],
+    relatedStyleIds: ["hairstyle-long-layered-cut", "hairstyle-short-curly-shag", "hairstyle-short-feathered-shag"],
     guidePublicationStatus: "published",
   },
 ];
@@ -2499,6 +2579,18 @@ export const styleExamples: StyleExample[] = [
     patternDescription: "Hard side lines make the central crest read more graphic and deliberate.",
     lengthDescription:
       "Close sides contrast with a short upright center; the shaved detail will need regular refreshing.",
+  },
+  {
+    id: "style-example-short-curly-shag-editorial",
+    hairstyleIds: ["hairstyle-short-curly-shag"],
+    imageId: "short-curly-shag-example",
+    title: "Short curly shag with soft sides",
+    caption:
+      "Notice the rounded crown volume, uneven natural curls, compact scissor-cut sides, and softly retained length at the nape.",
+    patternDescription:
+      "Loose-to-medium curls form irregular clumps and natural movement. The image presents a hairstyle example and does not establish the model’s natural curl subtype.",
+    lengthDescription:
+      "Short overall, with layered volume through the crown, sides kept close around the ears without a skin fade, and a little extra curl length at the nape.",
   },
   {
     id: "style-example-short-feathered-shag-copper",

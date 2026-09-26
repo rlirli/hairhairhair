@@ -29,6 +29,8 @@ npm run verify
 
 Sort supported data collections with `npm run sort:hairstyles`. Preview changes with `npm run sort:hairstyles -- --dry-run`; target specific collections with `--only <name>`.
 
+Generate a hairstyle candidate matrix with `pnpm generate:content -- --hairstyle <slug-or-id>`. The command writes JSON and a standalone matrix visualizer under `generated/content-matrices/`; see the [content-generation guide](docs/contributing/content-generation.md) for supported rubrics and scope.
+
 Import hairstyle packages from `inbox-hairstyles/` with `npm run import:hairstyles` to preview, or add `-- --apply` to write changes and archive imported folders.
 
 The domain vocabulary is defined in [`CONTEXT.md`](CONTEXT.md). Keep content records, media metadata, research, and tests consistent in the same commit.

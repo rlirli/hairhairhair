@@ -1,0 +1,1941 @@
+{
+  "schemaVersion": "1.0.0",
+  "snapshotId": "matrix-69d1ad61eccc",
+  "generatedAt": "2026-09-26T11:21:17.857Z",
+  "hairstyle": {
+    "id": "hairstyle-natural-afro",
+    "slug": "natural-afro",
+    "name": "Natural afro",
+    "summary": "A full natural Afro that lets dense curls or coils expand outward into a broad rounded silhouette while preserving visible texture and a softer, less geometrically controlled perimeter."
+  },
+  "rubric": {
+    "id": "natural-afro-profile-rubric",
+    "version": "1.0.0",
+    "method": "deterministic-editorial-rubric",
+    "thresholds": {
+      "plausible": 0.7,
+      "needsReview": 0.4
+    }
+  },
+  "dimensions": {
+    "pattern": [
+      "straight",
+      "wavy",
+      "curly",
+      "coily"
+    ],
+    "length": [
+      "short",
+      "medium",
+      "long"
+    ],
+    "coverage": [
+      "full",
+      "sparse"
+    ]
+  },
+  "candidateCount": 24,
+  "statusCounts": {
+    "needs-review": 10,
+    "challenging": 5,
+    "plausible": 9
+  },
+  "candidates": [
+    {
+      "candidateId": "natural-afro-straight-short-full",
+      "hairstyleId": "hairstyle-natural-afro",
+      "hairstyleSlug": "natural-afro",
+      "profile": {
+        "pattern": "straight",
+        "length": "short",
+        "coverage": "full"
+      },
+      "description": "Natural afro interpretation for straight hair at short length, with full scalp coverage. Keep a softly rounded silhouette, visible texture, and a natural rather than geometric perimeter.",
+      "realismAssessment": {
+        "score": 0.4,
+        "status": "needs-review",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "straight",
+            "weight": 0.55,
+            "score": 0.1,
+            "rationale": "Straight texture does not naturally create the defining curl or coil volume."
+          },
+          {
+            "dimension": "length",
+            "value": "short",
+            "weight": 0.2,
+            "score": 0.45,
+            "rationale": "Short length can form a compact Afro but limits its volume."
+          },
+          {
+            "dimension": "coverage",
+            "value": "full",
+            "weight": 0.25,
+            "score": 1,
+            "rationale": "Full coverage supports a continuous rounded outline."
+          }
+        ]
+      },
+      "feasibilityAssessment": {
+        "score": 0.46,
+        "status": "needs-review",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "straight",
+            "weight": 0.45,
+            "score": 0.1,
+            "rationale": "Straight texture does not naturally create the defining curl or coil volume."
+          },
+          {
+            "dimension": "length",
+            "value": "short",
+            "weight": 0.25,
+            "score": 0.45,
+            "rationale": "Short length can form a compact Afro but limits its volume."
+          },
+          {
+            "dimension": "coverage",
+            "value": "full",
+            "weight": 0.3,
+            "score": 1,
+            "rationale": "Full coverage supports a continuous rounded outline."
+          }
+        ]
+      },
+      "reviewStatus": "unreviewed",
+      "provenance": {
+        "method": "deterministic-editorial-rubric",
+        "rubricId": "natural-afro-profile-rubric",
+        "rubricVersion": "1.0.0",
+        "schemaVersion": "1.0.0",
+        "sourceSummary": "A full natural Afro that lets dense curls or coils expand outward into a broad rounded silhouette while preserving visible texture and a softer, less geometrically controlled perimeter.",
+        "sourceIds": [
+          "nmaahc-black-is-beautiful",
+          "nmaahc-strands-of-inspiration",
+          "smithsonian-afro-sheen",
+          "smithsonian-black-hair-identity"
+        ]
+      }
+    },
+    {
+      "candidateId": "natural-afro-straight-short-sparse",
+      "hairstyleId": "hairstyle-natural-afro",
+      "hairstyleSlug": "natural-afro",
+      "profile": {
+        "pattern": "straight",
+        "length": "short",
+        "coverage": "sparse"
+      },
+      "description": "Natural afro interpretation for straight hair at short length, with sparse scalp coverage. Keep a softly rounded silhouette, visible texture, and a natural rather than geometric perimeter.",
+      "realismAssessment": {
+        "score": 0.21,
+        "status": "challenging",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "straight",
+            "weight": 0.55,
+            "score": 0.1,
+            "rationale": "Straight texture does not naturally create the defining curl or coil volume."
+          },
+          {
+            "dimension": "length",
+            "value": "short",
+            "weight": 0.2,
+            "score": 0.45,
+            "rationale": "Short length can form a compact Afro but limits its volume."
+          },
+          {
+            "dimension": "coverage",
+            "value": "sparse",
+            "weight": 0.25,
+            "score": 0.25,
+            "rationale": "Sparse coverage can interrupt the continuous volume of a rounded Afro."
+          }
+        ]
+      },
+      "feasibilityAssessment": {
+        "score": 0.23,
+        "status": "challenging",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "straight",
+            "weight": 0.45,
+            "score": 0.1,
+            "rationale": "Straight texture does not naturally create the defining curl or coil volume."
+          },
+          {
+            "dimension": "length",
+            "value": "short",
+            "weight": 0.25,
+            "score": 0.45,
+            "rationale": "Short length can form a compact Afro but limits its volume."
+          },
+          {
+            "dimension": "coverage",
+            "value": "sparse",
+            "weight": 0.3,
+            "score": 0.25,
+            "rationale": "Sparse coverage can interrupt the continuous volume of a rounded Afro."
+          }
+        ]
+      },
+      "reviewStatus": "unreviewed",
+      "provenance": {
+        "method": "deterministic-editorial-rubric",
+        "rubricId": "natural-afro-profile-rubric",
+        "rubricVersion": "1.0.0",
+        "schemaVersion": "1.0.0",
+        "sourceSummary": "A full natural Afro that lets dense curls or coils expand outward into a broad rounded silhouette while preserving visible texture and a softer, less geometrically controlled perimeter.",
+        "sourceIds": [
+          "nmaahc-black-is-beautiful",
+          "nmaahc-strands-of-inspiration",
+          "smithsonian-afro-sheen",
+          "smithsonian-black-hair-identity"
+        ]
+      }
+    },
+    {
+      "candidateId": "natural-afro-straight-medium-full",
+      "hairstyleId": "hairstyle-natural-afro",
+      "hairstyleSlug": "natural-afro",
+      "profile": {
+        "pattern": "straight",
+        "length": "medium",
+        "coverage": "full"
+      },
+      "description": "Natural afro interpretation for straight hair at medium length, with full scalp coverage. Keep a softly rounded silhouette, visible texture, and a natural rather than geometric perimeter.",
+      "realismAssessment": {
+        "score": 0.47,
+        "status": "needs-review",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "straight",
+            "weight": 0.55,
+            "score": 0.1,
+            "rationale": "Straight texture does not naturally create the defining curl or coil volume."
+          },
+          {
+            "dimension": "length",
+            "value": "medium",
+            "weight": 0.2,
+            "score": 0.8,
+            "rationale": "Medium length supports a visible rounded shape and useful volume."
+          },
+          {
+            "dimension": "coverage",
+            "value": "full",
+            "weight": 0.25,
+            "score": 1,
+            "rationale": "Full coverage supports a continuous rounded outline."
+          }
+        ]
+      },
+      "feasibilityAssessment": {
+        "score": 0.55,
+        "status": "needs-review",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "straight",
+            "weight": 0.45,
+            "score": 0.1,
+            "rationale": "Straight texture does not naturally create the defining curl or coil volume."
+          },
+          {
+            "dimension": "length",
+            "value": "medium",
+            "weight": 0.25,
+            "score": 0.8,
+            "rationale": "Medium length supports a visible rounded shape and useful volume."
+          },
+          {
+            "dimension": "coverage",
+            "value": "full",
+            "weight": 0.3,
+            "score": 1,
+            "rationale": "Full coverage supports a continuous rounded outline."
+          }
+        ]
+      },
+      "reviewStatus": "unreviewed",
+      "provenance": {
+        "method": "deterministic-editorial-rubric",
+        "rubricId": "natural-afro-profile-rubric",
+        "rubricVersion": "1.0.0",
+        "schemaVersion": "1.0.0",
+        "sourceSummary": "A full natural Afro that lets dense curls or coils expand outward into a broad rounded silhouette while preserving visible texture and a softer, less geometrically controlled perimeter.",
+        "sourceIds": [
+          "nmaahc-black-is-beautiful",
+          "nmaahc-strands-of-inspiration",
+          "smithsonian-afro-sheen",
+          "smithsonian-black-hair-identity"
+        ]
+      }
+    },
+    {
+      "candidateId": "natural-afro-straight-medium-sparse",
+      "hairstyleId": "hairstyle-natural-afro",
+      "hairstyleSlug": "natural-afro",
+      "profile": {
+        "pattern": "straight",
+        "length": "medium",
+        "coverage": "sparse"
+      },
+      "description": "Natural afro interpretation for straight hair at medium length, with sparse scalp coverage. Keep a softly rounded silhouette, visible texture, and a natural rather than geometric perimeter.",
+      "realismAssessment": {
+        "score": 0.28,
+        "status": "challenging",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "straight",
+            "weight": 0.55,
+            "score": 0.1,
+            "rationale": "Straight texture does not naturally create the defining curl or coil volume."
+          },
+          {
+            "dimension": "length",
+            "value": "medium",
+            "weight": 0.2,
+            "score": 0.8,
+            "rationale": "Medium length supports a visible rounded shape and useful volume."
+          },
+          {
+            "dimension": "coverage",
+            "value": "sparse",
+            "weight": 0.25,
+            "score": 0.25,
+            "rationale": "Sparse coverage can interrupt the continuous volume of a rounded Afro."
+          }
+        ]
+      },
+      "feasibilityAssessment": {
+        "score": 0.32,
+        "status": "challenging",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "straight",
+            "weight": 0.45,
+            "score": 0.1,
+            "rationale": "Straight texture does not naturally create the defining curl or coil volume."
+          },
+          {
+            "dimension": "length",
+            "value": "medium",
+            "weight": 0.25,
+            "score": 0.8,
+            "rationale": "Medium length supports a visible rounded shape and useful volume."
+          },
+          {
+            "dimension": "coverage",
+            "value": "sparse",
+            "weight": 0.3,
+            "score": 0.25,
+            "rationale": "Sparse coverage can interrupt the continuous volume of a rounded Afro."
+          }
+        ]
+      },
+      "reviewStatus": "unreviewed",
+      "provenance": {
+        "method": "deterministic-editorial-rubric",
+        "rubricId": "natural-afro-profile-rubric",
+        "rubricVersion": "1.0.0",
+        "schemaVersion": "1.0.0",
+        "sourceSummary": "A full natural Afro that lets dense curls or coils expand outward into a broad rounded silhouette while preserving visible texture and a softer, less geometrically controlled perimeter.",
+        "sourceIds": [
+          "nmaahc-black-is-beautiful",
+          "nmaahc-strands-of-inspiration",
+          "smithsonian-afro-sheen",
+          "smithsonian-black-hair-identity"
+        ]
+      }
+    },
+    {
+      "candidateId": "natural-afro-straight-long-full",
+      "hairstyleId": "hairstyle-natural-afro",
+      "hairstyleSlug": "natural-afro",
+      "profile": {
+        "pattern": "straight",
+        "length": "long",
+        "coverage": "full"
+      },
+      "description": "Natural afro interpretation for straight hair at long length, with full scalp coverage. Keep a softly rounded silhouette, visible texture, and a natural rather than geometric perimeter.",
+      "realismAssessment": {
+        "score": 0.51,
+        "status": "needs-review",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "straight",
+            "weight": 0.55,
+            "score": 0.1,
+            "rationale": "Straight texture does not naturally create the defining curl or coil volume."
+          },
+          {
+            "dimension": "length",
+            "value": "long",
+            "weight": 0.2,
+            "score": 1,
+            "rationale": "Longer retained length supports the broad, full silhouette described for this style."
+          },
+          {
+            "dimension": "coverage",
+            "value": "full",
+            "weight": 0.25,
+            "score": 1,
+            "rationale": "Full coverage supports a continuous rounded outline."
+          }
+        ]
+      },
+      "feasibilityAssessment": {
+        "score": 0.59,
+        "status": "needs-review",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "straight",
+            "weight": 0.45,
+            "score": 0.1,
+            "rationale": "Straight texture does not naturally create the defining curl or coil volume."
+          },
+          {
+            "dimension": "length",
+            "value": "long",
+            "weight": 0.25,
+            "score": 1,
+            "rationale": "Longer retained length supports the broad, full silhouette described for this style."
+          },
+          {
+            "dimension": "coverage",
+            "value": "full",
+            "weight": 0.3,
+            "score": 1,
+            "rationale": "Full coverage supports a continuous rounded outline."
+          }
+        ]
+      },
+      "reviewStatus": "unreviewed",
+      "provenance": {
+        "method": "deterministic-editorial-rubric",
+        "rubricId": "natural-afro-profile-rubric",
+        "rubricVersion": "1.0.0",
+        "schemaVersion": "1.0.0",
+        "sourceSummary": "A full natural Afro that lets dense curls or coils expand outward into a broad rounded silhouette while preserving visible texture and a softer, less geometrically controlled perimeter.",
+        "sourceIds": [
+          "nmaahc-black-is-beautiful",
+          "nmaahc-strands-of-inspiration",
+          "smithsonian-afro-sheen",
+          "smithsonian-black-hair-identity"
+        ]
+      }
+    },
+    {
+      "candidateId": "natural-afro-straight-long-sparse",
+      "hairstyleId": "hairstyle-natural-afro",
+      "hairstyleSlug": "natural-afro",
+      "profile": {
+        "pattern": "straight",
+        "length": "long",
+        "coverage": "sparse"
+      },
+      "description": "Natural afro interpretation for straight hair at long length, with sparse scalp coverage. Keep a softly rounded silhouette, visible texture, and a natural rather than geometric perimeter.",
+      "realismAssessment": {
+        "score": 0.32,
+        "status": "challenging",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "straight",
+            "weight": 0.55,
+            "score": 0.1,
+            "rationale": "Straight texture does not naturally create the defining curl or coil volume."
+          },
+          {
+            "dimension": "length",
+            "value": "long",
+            "weight": 0.2,
+            "score": 1,
+            "rationale": "Longer retained length supports the broad, full silhouette described for this style."
+          },
+          {
+            "dimension": "coverage",
+            "value": "sparse",
+            "weight": 0.25,
+            "score": 0.25,
+            "rationale": "Sparse coverage can interrupt the continuous volume of a rounded Afro."
+          }
+        ]
+      },
+      "feasibilityAssessment": {
+        "score": 0.37,
+        "status": "challenging",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "straight",
+            "weight": 0.45,
+            "score": 0.1,
+            "rationale": "Straight texture does not naturally create the defining curl or coil volume."
+          },
+          {
+            "dimension": "length",
+            "value": "long",
+            "weight": 0.25,
+            "score": 1,
+            "rationale": "Longer retained length supports the broad, full silhouette described for this style."
+          },
+          {
+            "dimension": "coverage",
+            "value": "sparse",
+            "weight": 0.3,
+            "score": 0.25,
+            "rationale": "Sparse coverage can interrupt the continuous volume of a rounded Afro."
+          }
+        ]
+      },
+      "reviewStatus": "unreviewed",
+      "provenance": {
+        "method": "deterministic-editorial-rubric",
+        "rubricId": "natural-afro-profile-rubric",
+        "rubricVersion": "1.0.0",
+        "schemaVersion": "1.0.0",
+        "sourceSummary": "A full natural Afro that lets dense curls or coils expand outward into a broad rounded silhouette while preserving visible texture and a softer, less geometrically controlled perimeter.",
+        "sourceIds": [
+          "nmaahc-black-is-beautiful",
+          "nmaahc-strands-of-inspiration",
+          "smithsonian-afro-sheen",
+          "smithsonian-black-hair-identity"
+        ]
+      }
+    },
+    {
+      "candidateId": "natural-afro-wavy-short-full",
+      "hairstyleId": "hairstyle-natural-afro",
+      "hairstyleSlug": "natural-afro",
+      "profile": {
+        "pattern": "wavy",
+        "length": "short",
+        "coverage": "full"
+      },
+      "description": "Natural afro interpretation for wavy hair at short length, with full scalp coverage. Keep a softly rounded silhouette, visible texture, and a natural rather than geometric perimeter.",
+      "realismAssessment": {
+        "score": 0.48,
+        "status": "needs-review",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "wavy",
+            "weight": 0.55,
+            "score": 0.25,
+            "rationale": "A loose wave provides limited natural expansion for this silhouette."
+          },
+          {
+            "dimension": "length",
+            "value": "short",
+            "weight": 0.2,
+            "score": 0.45,
+            "rationale": "Short length can form a compact Afro but limits its volume."
+          },
+          {
+            "dimension": "coverage",
+            "value": "full",
+            "weight": 0.25,
+            "score": 1,
+            "rationale": "Full coverage supports a continuous rounded outline."
+          }
+        ]
+      },
+      "feasibilityAssessment": {
+        "score": 0.53,
+        "status": "needs-review",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "wavy",
+            "weight": 0.45,
+            "score": 0.25,
+            "rationale": "A loose wave provides limited natural expansion for this silhouette."
+          },
+          {
+            "dimension": "length",
+            "value": "short",
+            "weight": 0.25,
+            "score": 0.45,
+            "rationale": "Short length can form a compact Afro but limits its volume."
+          },
+          {
+            "dimension": "coverage",
+            "value": "full",
+            "weight": 0.3,
+            "score": 1,
+            "rationale": "Full coverage supports a continuous rounded outline."
+          }
+        ]
+      },
+      "reviewStatus": "unreviewed",
+      "provenance": {
+        "method": "deterministic-editorial-rubric",
+        "rubricId": "natural-afro-profile-rubric",
+        "rubricVersion": "1.0.0",
+        "schemaVersion": "1.0.0",
+        "sourceSummary": "A full natural Afro that lets dense curls or coils expand outward into a broad rounded silhouette while preserving visible texture and a softer, less geometrically controlled perimeter.",
+        "sourceIds": [
+          "nmaahc-black-is-beautiful",
+          "nmaahc-strands-of-inspiration",
+          "smithsonian-afro-sheen",
+          "smithsonian-black-hair-identity"
+        ]
+      }
+    },
+    {
+      "candidateId": "natural-afro-wavy-short-sparse",
+      "hairstyleId": "hairstyle-natural-afro",
+      "hairstyleSlug": "natural-afro",
+      "profile": {
+        "pattern": "wavy",
+        "length": "short",
+        "coverage": "sparse"
+      },
+      "description": "Natural afro interpretation for wavy hair at short length, with sparse scalp coverage. Keep a softly rounded silhouette, visible texture, and a natural rather than geometric perimeter.",
+      "realismAssessment": {
+        "score": 0.29,
+        "status": "challenging",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "wavy",
+            "weight": 0.55,
+            "score": 0.25,
+            "rationale": "A loose wave provides limited natural expansion for this silhouette."
+          },
+          {
+            "dimension": "length",
+            "value": "short",
+            "weight": 0.2,
+            "score": 0.45,
+            "rationale": "Short length can form a compact Afro but limits its volume."
+          },
+          {
+            "dimension": "coverage",
+            "value": "sparse",
+            "weight": 0.25,
+            "score": 0.25,
+            "rationale": "Sparse coverage can interrupt the continuous volume of a rounded Afro."
+          }
+        ]
+      },
+      "feasibilityAssessment": {
+        "score": 0.3,
+        "status": "challenging",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "wavy",
+            "weight": 0.45,
+            "score": 0.25,
+            "rationale": "A loose wave provides limited natural expansion for this silhouette."
+          },
+          {
+            "dimension": "length",
+            "value": "short",
+            "weight": 0.25,
+            "score": 0.45,
+            "rationale": "Short length can form a compact Afro but limits its volume."
+          },
+          {
+            "dimension": "coverage",
+            "value": "sparse",
+            "weight": 0.3,
+            "score": 0.25,
+            "rationale": "Sparse coverage can interrupt the continuous volume of a rounded Afro."
+          }
+        ]
+      },
+      "reviewStatus": "unreviewed",
+      "provenance": {
+        "method": "deterministic-editorial-rubric",
+        "rubricId": "natural-afro-profile-rubric",
+        "rubricVersion": "1.0.0",
+        "schemaVersion": "1.0.0",
+        "sourceSummary": "A full natural Afro that lets dense curls or coils expand outward into a broad rounded silhouette while preserving visible texture and a softer, less geometrically controlled perimeter.",
+        "sourceIds": [
+          "nmaahc-black-is-beautiful",
+          "nmaahc-strands-of-inspiration",
+          "smithsonian-afro-sheen",
+          "smithsonian-black-hair-identity"
+        ]
+      }
+    },
+    {
+      "candidateId": "natural-afro-wavy-medium-full",
+      "hairstyleId": "hairstyle-natural-afro",
+      "hairstyleSlug": "natural-afro",
+      "profile": {
+        "pattern": "wavy",
+        "length": "medium",
+        "coverage": "full"
+      },
+      "description": "Natural afro interpretation for wavy hair at medium length, with full scalp coverage. Keep a softly rounded silhouette, visible texture, and a natural rather than geometric perimeter.",
+      "realismAssessment": {
+        "score": 0.55,
+        "status": "needs-review",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "wavy",
+            "weight": 0.55,
+            "score": 0.25,
+            "rationale": "A loose wave provides limited natural expansion for this silhouette."
+          },
+          {
+            "dimension": "length",
+            "value": "medium",
+            "weight": 0.2,
+            "score": 0.8,
+            "rationale": "Medium length supports a visible rounded shape and useful volume."
+          },
+          {
+            "dimension": "coverage",
+            "value": "full",
+            "weight": 0.25,
+            "score": 1,
+            "rationale": "Full coverage supports a continuous rounded outline."
+          }
+        ]
+      },
+      "feasibilityAssessment": {
+        "score": 0.61,
+        "status": "needs-review",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "wavy",
+            "weight": 0.45,
+            "score": 0.25,
+            "rationale": "A loose wave provides limited natural expansion for this silhouette."
+          },
+          {
+            "dimension": "length",
+            "value": "medium",
+            "weight": 0.25,
+            "score": 0.8,
+            "rationale": "Medium length supports a visible rounded shape and useful volume."
+          },
+          {
+            "dimension": "coverage",
+            "value": "full",
+            "weight": 0.3,
+            "score": 1,
+            "rationale": "Full coverage supports a continuous rounded outline."
+          }
+        ]
+      },
+      "reviewStatus": "unreviewed",
+      "provenance": {
+        "method": "deterministic-editorial-rubric",
+        "rubricId": "natural-afro-profile-rubric",
+        "rubricVersion": "1.0.0",
+        "schemaVersion": "1.0.0",
+        "sourceSummary": "A full natural Afro that lets dense curls or coils expand outward into a broad rounded silhouette while preserving visible texture and a softer, less geometrically controlled perimeter.",
+        "sourceIds": [
+          "nmaahc-black-is-beautiful",
+          "nmaahc-strands-of-inspiration",
+          "smithsonian-afro-sheen",
+          "smithsonian-black-hair-identity"
+        ]
+      }
+    },
+    {
+      "candidateId": "natural-afro-wavy-medium-sparse",
+      "hairstyleId": "hairstyle-natural-afro",
+      "hairstyleSlug": "natural-afro",
+      "profile": {
+        "pattern": "wavy",
+        "length": "medium",
+        "coverage": "sparse"
+      },
+      "description": "Natural afro interpretation for wavy hair at medium length, with sparse scalp coverage. Keep a softly rounded silhouette, visible texture, and a natural rather than geometric perimeter.",
+      "realismAssessment": {
+        "score": 0.36,
+        "status": "challenging",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "wavy",
+            "weight": 0.55,
+            "score": 0.25,
+            "rationale": "A loose wave provides limited natural expansion for this silhouette."
+          },
+          {
+            "dimension": "length",
+            "value": "medium",
+            "weight": 0.2,
+            "score": 0.8,
+            "rationale": "Medium length supports a visible rounded shape and useful volume."
+          },
+          {
+            "dimension": "coverage",
+            "value": "sparse",
+            "weight": 0.25,
+            "score": 0.25,
+            "rationale": "Sparse coverage can interrupt the continuous volume of a rounded Afro."
+          }
+        ]
+      },
+      "feasibilityAssessment": {
+        "score": 0.39,
+        "status": "challenging",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "wavy",
+            "weight": 0.45,
+            "score": 0.25,
+            "rationale": "A loose wave provides limited natural expansion for this silhouette."
+          },
+          {
+            "dimension": "length",
+            "value": "medium",
+            "weight": 0.25,
+            "score": 0.8,
+            "rationale": "Medium length supports a visible rounded shape and useful volume."
+          },
+          {
+            "dimension": "coverage",
+            "value": "sparse",
+            "weight": 0.3,
+            "score": 0.25,
+            "rationale": "Sparse coverage can interrupt the continuous volume of a rounded Afro."
+          }
+        ]
+      },
+      "reviewStatus": "unreviewed",
+      "provenance": {
+        "method": "deterministic-editorial-rubric",
+        "rubricId": "natural-afro-profile-rubric",
+        "rubricVersion": "1.0.0",
+        "schemaVersion": "1.0.0",
+        "sourceSummary": "A full natural Afro that lets dense curls or coils expand outward into a broad rounded silhouette while preserving visible texture and a softer, less geometrically controlled perimeter.",
+        "sourceIds": [
+          "nmaahc-black-is-beautiful",
+          "nmaahc-strands-of-inspiration",
+          "smithsonian-afro-sheen",
+          "smithsonian-black-hair-identity"
+        ]
+      }
+    },
+    {
+      "candidateId": "natural-afro-wavy-long-full",
+      "hairstyleId": "hairstyle-natural-afro",
+      "hairstyleSlug": "natural-afro",
+      "profile": {
+        "pattern": "wavy",
+        "length": "long",
+        "coverage": "full"
+      },
+      "description": "Natural afro interpretation for wavy hair at long length, with full scalp coverage. Keep a softly rounded silhouette, visible texture, and a natural rather than geometric perimeter.",
+      "realismAssessment": {
+        "score": 0.59,
+        "status": "needs-review",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "wavy",
+            "weight": 0.55,
+            "score": 0.25,
+            "rationale": "A loose wave provides limited natural expansion for this silhouette."
+          },
+          {
+            "dimension": "length",
+            "value": "long",
+            "weight": 0.2,
+            "score": 1,
+            "rationale": "Longer retained length supports the broad, full silhouette described for this style."
+          },
+          {
+            "dimension": "coverage",
+            "value": "full",
+            "weight": 0.25,
+            "score": 1,
+            "rationale": "Full coverage supports a continuous rounded outline."
+          }
+        ]
+      },
+      "feasibilityAssessment": {
+        "score": 0.66,
+        "status": "needs-review",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "wavy",
+            "weight": 0.45,
+            "score": 0.25,
+            "rationale": "A loose wave provides limited natural expansion for this silhouette."
+          },
+          {
+            "dimension": "length",
+            "value": "long",
+            "weight": 0.25,
+            "score": 1,
+            "rationale": "Longer retained length supports the broad, full silhouette described for this style."
+          },
+          {
+            "dimension": "coverage",
+            "value": "full",
+            "weight": 0.3,
+            "score": 1,
+            "rationale": "Full coverage supports a continuous rounded outline."
+          }
+        ]
+      },
+      "reviewStatus": "unreviewed",
+      "provenance": {
+        "method": "deterministic-editorial-rubric",
+        "rubricId": "natural-afro-profile-rubric",
+        "rubricVersion": "1.0.0",
+        "schemaVersion": "1.0.0",
+        "sourceSummary": "A full natural Afro that lets dense curls or coils expand outward into a broad rounded silhouette while preserving visible texture and a softer, less geometrically controlled perimeter.",
+        "sourceIds": [
+          "nmaahc-black-is-beautiful",
+          "nmaahc-strands-of-inspiration",
+          "smithsonian-afro-sheen",
+          "smithsonian-black-hair-identity"
+        ]
+      }
+    },
+    {
+      "candidateId": "natural-afro-wavy-long-sparse",
+      "hairstyleId": "hairstyle-natural-afro",
+      "hairstyleSlug": "natural-afro",
+      "profile": {
+        "pattern": "wavy",
+        "length": "long",
+        "coverage": "sparse"
+      },
+      "description": "Natural afro interpretation for wavy hair at long length, with sparse scalp coverage. Keep a softly rounded silhouette, visible texture, and a natural rather than geometric perimeter.",
+      "realismAssessment": {
+        "score": 0.4,
+        "status": "needs-review",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "wavy",
+            "weight": 0.55,
+            "score": 0.25,
+            "rationale": "A loose wave provides limited natural expansion for this silhouette."
+          },
+          {
+            "dimension": "length",
+            "value": "long",
+            "weight": 0.2,
+            "score": 1,
+            "rationale": "Longer retained length supports the broad, full silhouette described for this style."
+          },
+          {
+            "dimension": "coverage",
+            "value": "sparse",
+            "weight": 0.25,
+            "score": 0.25,
+            "rationale": "Sparse coverage can interrupt the continuous volume of a rounded Afro."
+          }
+        ]
+      },
+      "feasibilityAssessment": {
+        "score": 0.44,
+        "status": "needs-review",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "wavy",
+            "weight": 0.45,
+            "score": 0.25,
+            "rationale": "A loose wave provides limited natural expansion for this silhouette."
+          },
+          {
+            "dimension": "length",
+            "value": "long",
+            "weight": 0.25,
+            "score": 1,
+            "rationale": "Longer retained length supports the broad, full silhouette described for this style."
+          },
+          {
+            "dimension": "coverage",
+            "value": "sparse",
+            "weight": 0.3,
+            "score": 0.25,
+            "rationale": "Sparse coverage can interrupt the continuous volume of a rounded Afro."
+          }
+        ]
+      },
+      "reviewStatus": "unreviewed",
+      "provenance": {
+        "method": "deterministic-editorial-rubric",
+        "rubricId": "natural-afro-profile-rubric",
+        "rubricVersion": "1.0.0",
+        "schemaVersion": "1.0.0",
+        "sourceSummary": "A full natural Afro that lets dense curls or coils expand outward into a broad rounded silhouette while preserving visible texture and a softer, less geometrically controlled perimeter.",
+        "sourceIds": [
+          "nmaahc-black-is-beautiful",
+          "nmaahc-strands-of-inspiration",
+          "smithsonian-afro-sheen",
+          "smithsonian-black-hair-identity"
+        ]
+      }
+    },
+    {
+      "candidateId": "natural-afro-curly-short-full",
+      "hairstyleId": "hairstyle-natural-afro",
+      "hairstyleSlug": "natural-afro",
+      "profile": {
+        "pattern": "curly",
+        "length": "short",
+        "coverage": "full"
+      },
+      "description": "Natural afro interpretation for curly hair at short length, with full scalp coverage. Keep a softly rounded silhouette, visible texture, and a natural rather than geometric perimeter.",
+      "realismAssessment": {
+        "score": 0.75,
+        "status": "plausible",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "curly",
+            "weight": 0.55,
+            "score": 0.75,
+            "rationale": "Curly texture can build volume, though the result differs from a coily Afro."
+          },
+          {
+            "dimension": "length",
+            "value": "short",
+            "weight": 0.2,
+            "score": 0.45,
+            "rationale": "Short length can form a compact Afro but limits its volume."
+          },
+          {
+            "dimension": "coverage",
+            "value": "full",
+            "weight": 0.25,
+            "score": 1,
+            "rationale": "Full coverage supports a continuous rounded outline."
+          }
+        ]
+      },
+      "feasibilityAssessment": {
+        "score": 0.75,
+        "status": "plausible",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "curly",
+            "weight": 0.45,
+            "score": 0.75,
+            "rationale": "Curly texture can build volume, though the result differs from a coily Afro."
+          },
+          {
+            "dimension": "length",
+            "value": "short",
+            "weight": 0.25,
+            "score": 0.45,
+            "rationale": "Short length can form a compact Afro but limits its volume."
+          },
+          {
+            "dimension": "coverage",
+            "value": "full",
+            "weight": 0.3,
+            "score": 1,
+            "rationale": "Full coverage supports a continuous rounded outline."
+          }
+        ]
+      },
+      "reviewStatus": "unreviewed",
+      "provenance": {
+        "method": "deterministic-editorial-rubric",
+        "rubricId": "natural-afro-profile-rubric",
+        "rubricVersion": "1.0.0",
+        "schemaVersion": "1.0.0",
+        "sourceSummary": "A full natural Afro that lets dense curls or coils expand outward into a broad rounded silhouette while preserving visible texture and a softer, less geometrically controlled perimeter.",
+        "sourceIds": [
+          "nmaahc-black-is-beautiful",
+          "nmaahc-strands-of-inspiration",
+          "smithsonian-afro-sheen",
+          "smithsonian-black-hair-identity"
+        ]
+      }
+    },
+    {
+      "candidateId": "natural-afro-curly-short-sparse",
+      "hairstyleId": "hairstyle-natural-afro",
+      "hairstyleSlug": "natural-afro",
+      "profile": {
+        "pattern": "curly",
+        "length": "short",
+        "coverage": "sparse"
+      },
+      "description": "Natural afro interpretation for curly hair at short length, with sparse scalp coverage. Keep a softly rounded silhouette, visible texture, and a natural rather than geometric perimeter.",
+      "realismAssessment": {
+        "score": 0.57,
+        "status": "needs-review",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "curly",
+            "weight": 0.55,
+            "score": 0.75,
+            "rationale": "Curly texture can build volume, though the result differs from a coily Afro."
+          },
+          {
+            "dimension": "length",
+            "value": "short",
+            "weight": 0.2,
+            "score": 0.45,
+            "rationale": "Short length can form a compact Afro but limits its volume."
+          },
+          {
+            "dimension": "coverage",
+            "value": "sparse",
+            "weight": 0.25,
+            "score": 0.25,
+            "rationale": "Sparse coverage can interrupt the continuous volume of a rounded Afro."
+          }
+        ]
+      },
+      "feasibilityAssessment": {
+        "score": 0.53,
+        "status": "needs-review",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "curly",
+            "weight": 0.45,
+            "score": 0.75,
+            "rationale": "Curly texture can build volume, though the result differs from a coily Afro."
+          },
+          {
+            "dimension": "length",
+            "value": "short",
+            "weight": 0.25,
+            "score": 0.45,
+            "rationale": "Short length can form a compact Afro but limits its volume."
+          },
+          {
+            "dimension": "coverage",
+            "value": "sparse",
+            "weight": 0.3,
+            "score": 0.25,
+            "rationale": "Sparse coverage can interrupt the continuous volume of a rounded Afro."
+          }
+        ]
+      },
+      "reviewStatus": "unreviewed",
+      "provenance": {
+        "method": "deterministic-editorial-rubric",
+        "rubricId": "natural-afro-profile-rubric",
+        "rubricVersion": "1.0.0",
+        "schemaVersion": "1.0.0",
+        "sourceSummary": "A full natural Afro that lets dense curls or coils expand outward into a broad rounded silhouette while preserving visible texture and a softer, less geometrically controlled perimeter.",
+        "sourceIds": [
+          "nmaahc-black-is-beautiful",
+          "nmaahc-strands-of-inspiration",
+          "smithsonian-afro-sheen",
+          "smithsonian-black-hair-identity"
+        ]
+      }
+    },
+    {
+      "candidateId": "natural-afro-curly-medium-full",
+      "hairstyleId": "hairstyle-natural-afro",
+      "hairstyleSlug": "natural-afro",
+      "profile": {
+        "pattern": "curly",
+        "length": "medium",
+        "coverage": "full"
+      },
+      "description": "Natural afro interpretation for curly hair at medium length, with full scalp coverage. Keep a softly rounded silhouette, visible texture, and a natural rather than geometric perimeter.",
+      "realismAssessment": {
+        "score": 0.82,
+        "status": "plausible",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "curly",
+            "weight": 0.55,
+            "score": 0.75,
+            "rationale": "Curly texture can build volume, though the result differs from a coily Afro."
+          },
+          {
+            "dimension": "length",
+            "value": "medium",
+            "weight": 0.2,
+            "score": 0.8,
+            "rationale": "Medium length supports a visible rounded shape and useful volume."
+          },
+          {
+            "dimension": "coverage",
+            "value": "full",
+            "weight": 0.25,
+            "score": 1,
+            "rationale": "Full coverage supports a continuous rounded outline."
+          }
+        ]
+      },
+      "feasibilityAssessment": {
+        "score": 0.84,
+        "status": "plausible",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "curly",
+            "weight": 0.45,
+            "score": 0.75,
+            "rationale": "Curly texture can build volume, though the result differs from a coily Afro."
+          },
+          {
+            "dimension": "length",
+            "value": "medium",
+            "weight": 0.25,
+            "score": 0.8,
+            "rationale": "Medium length supports a visible rounded shape and useful volume."
+          },
+          {
+            "dimension": "coverage",
+            "value": "full",
+            "weight": 0.3,
+            "score": 1,
+            "rationale": "Full coverage supports a continuous rounded outline."
+          }
+        ]
+      },
+      "reviewStatus": "unreviewed",
+      "provenance": {
+        "method": "deterministic-editorial-rubric",
+        "rubricId": "natural-afro-profile-rubric",
+        "rubricVersion": "1.0.0",
+        "schemaVersion": "1.0.0",
+        "sourceSummary": "A full natural Afro that lets dense curls or coils expand outward into a broad rounded silhouette while preserving visible texture and a softer, less geometrically controlled perimeter.",
+        "sourceIds": [
+          "nmaahc-black-is-beautiful",
+          "nmaahc-strands-of-inspiration",
+          "smithsonian-afro-sheen",
+          "smithsonian-black-hair-identity"
+        ]
+      }
+    },
+    {
+      "candidateId": "natural-afro-curly-medium-sparse",
+      "hairstyleId": "hairstyle-natural-afro",
+      "hairstyleSlug": "natural-afro",
+      "profile": {
+        "pattern": "curly",
+        "length": "medium",
+        "coverage": "sparse"
+      },
+      "description": "Natural afro interpretation for curly hair at medium length, with sparse scalp coverage. Keep a softly rounded silhouette, visible texture, and a natural rather than geometric perimeter.",
+      "realismAssessment": {
+        "score": 0.64,
+        "status": "needs-review",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "curly",
+            "weight": 0.55,
+            "score": 0.75,
+            "rationale": "Curly texture can build volume, though the result differs from a coily Afro."
+          },
+          {
+            "dimension": "length",
+            "value": "medium",
+            "weight": 0.2,
+            "score": 0.8,
+            "rationale": "Medium length supports a visible rounded shape and useful volume."
+          },
+          {
+            "dimension": "coverage",
+            "value": "sparse",
+            "weight": 0.25,
+            "score": 0.25,
+            "rationale": "Sparse coverage can interrupt the continuous volume of a rounded Afro."
+          }
+        ]
+      },
+      "feasibilityAssessment": {
+        "score": 0.61,
+        "status": "needs-review",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "curly",
+            "weight": 0.45,
+            "score": 0.75,
+            "rationale": "Curly texture can build volume, though the result differs from a coily Afro."
+          },
+          {
+            "dimension": "length",
+            "value": "medium",
+            "weight": 0.25,
+            "score": 0.8,
+            "rationale": "Medium length supports a visible rounded shape and useful volume."
+          },
+          {
+            "dimension": "coverage",
+            "value": "sparse",
+            "weight": 0.3,
+            "score": 0.25,
+            "rationale": "Sparse coverage can interrupt the continuous volume of a rounded Afro."
+          }
+        ]
+      },
+      "reviewStatus": "unreviewed",
+      "provenance": {
+        "method": "deterministic-editorial-rubric",
+        "rubricId": "natural-afro-profile-rubric",
+        "rubricVersion": "1.0.0",
+        "schemaVersion": "1.0.0",
+        "sourceSummary": "A full natural Afro that lets dense curls or coils expand outward into a broad rounded silhouette while preserving visible texture and a softer, less geometrically controlled perimeter.",
+        "sourceIds": [
+          "nmaahc-black-is-beautiful",
+          "nmaahc-strands-of-inspiration",
+          "smithsonian-afro-sheen",
+          "smithsonian-black-hair-identity"
+        ]
+      }
+    },
+    {
+      "candidateId": "natural-afro-curly-long-full",
+      "hairstyleId": "hairstyle-natural-afro",
+      "hairstyleSlug": "natural-afro",
+      "profile": {
+        "pattern": "curly",
+        "length": "long",
+        "coverage": "full"
+      },
+      "description": "Natural afro interpretation for curly hair at long length, with full scalp coverage. Keep a softly rounded silhouette, visible texture, and a natural rather than geometric perimeter.",
+      "realismAssessment": {
+        "score": 0.86,
+        "status": "plausible",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "curly",
+            "weight": 0.55,
+            "score": 0.75,
+            "rationale": "Curly texture can build volume, though the result differs from a coily Afro."
+          },
+          {
+            "dimension": "length",
+            "value": "long",
+            "weight": 0.2,
+            "score": 1,
+            "rationale": "Longer retained length supports the broad, full silhouette described for this style."
+          },
+          {
+            "dimension": "coverage",
+            "value": "full",
+            "weight": 0.25,
+            "score": 1,
+            "rationale": "Full coverage supports a continuous rounded outline."
+          }
+        ]
+      },
+      "feasibilityAssessment": {
+        "score": 0.89,
+        "status": "plausible",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "curly",
+            "weight": 0.45,
+            "score": 0.75,
+            "rationale": "Curly texture can build volume, though the result differs from a coily Afro."
+          },
+          {
+            "dimension": "length",
+            "value": "long",
+            "weight": 0.25,
+            "score": 1,
+            "rationale": "Longer retained length supports the broad, full silhouette described for this style."
+          },
+          {
+            "dimension": "coverage",
+            "value": "full",
+            "weight": 0.3,
+            "score": 1,
+            "rationale": "Full coverage supports a continuous rounded outline."
+          }
+        ]
+      },
+      "reviewStatus": "unreviewed",
+      "provenance": {
+        "method": "deterministic-editorial-rubric",
+        "rubricId": "natural-afro-profile-rubric",
+        "rubricVersion": "1.0.0",
+        "schemaVersion": "1.0.0",
+        "sourceSummary": "A full natural Afro that lets dense curls or coils expand outward into a broad rounded silhouette while preserving visible texture and a softer, less geometrically controlled perimeter.",
+        "sourceIds": [
+          "nmaahc-black-is-beautiful",
+          "nmaahc-strands-of-inspiration",
+          "smithsonian-afro-sheen",
+          "smithsonian-black-hair-identity"
+        ]
+      }
+    },
+    {
+      "candidateId": "natural-afro-curly-long-sparse",
+      "hairstyleId": "hairstyle-natural-afro",
+      "hairstyleSlug": "natural-afro",
+      "profile": {
+        "pattern": "curly",
+        "length": "long",
+        "coverage": "sparse"
+      },
+      "description": "Natural afro interpretation for curly hair at long length, with sparse scalp coverage. Keep a softly rounded silhouette, visible texture, and a natural rather than geometric perimeter.",
+      "realismAssessment": {
+        "score": 0.68,
+        "status": "needs-review",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "curly",
+            "weight": 0.55,
+            "score": 0.75,
+            "rationale": "Curly texture can build volume, though the result differs from a coily Afro."
+          },
+          {
+            "dimension": "length",
+            "value": "long",
+            "weight": 0.2,
+            "score": 1,
+            "rationale": "Longer retained length supports the broad, full silhouette described for this style."
+          },
+          {
+            "dimension": "coverage",
+            "value": "sparse",
+            "weight": 0.25,
+            "score": 0.25,
+            "rationale": "Sparse coverage can interrupt the continuous volume of a rounded Afro."
+          }
+        ]
+      },
+      "feasibilityAssessment": {
+        "score": 0.66,
+        "status": "needs-review",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "curly",
+            "weight": 0.45,
+            "score": 0.75,
+            "rationale": "Curly texture can build volume, though the result differs from a coily Afro."
+          },
+          {
+            "dimension": "length",
+            "value": "long",
+            "weight": 0.25,
+            "score": 1,
+            "rationale": "Longer retained length supports the broad, full silhouette described for this style."
+          },
+          {
+            "dimension": "coverage",
+            "value": "sparse",
+            "weight": 0.3,
+            "score": 0.25,
+            "rationale": "Sparse coverage can interrupt the continuous volume of a rounded Afro."
+          }
+        ]
+      },
+      "reviewStatus": "unreviewed",
+      "provenance": {
+        "method": "deterministic-editorial-rubric",
+        "rubricId": "natural-afro-profile-rubric",
+        "rubricVersion": "1.0.0",
+        "schemaVersion": "1.0.0",
+        "sourceSummary": "A full natural Afro that lets dense curls or coils expand outward into a broad rounded silhouette while preserving visible texture and a softer, less geometrically controlled perimeter.",
+        "sourceIds": [
+          "nmaahc-black-is-beautiful",
+          "nmaahc-strands-of-inspiration",
+          "smithsonian-afro-sheen",
+          "smithsonian-black-hair-identity"
+        ]
+      }
+    },
+    {
+      "candidateId": "natural-afro-coily-short-full",
+      "hairstyleId": "hairstyle-natural-afro",
+      "hairstyleSlug": "natural-afro",
+      "profile": {
+        "pattern": "coily",
+        "length": "short",
+        "coverage": "full"
+      },
+      "description": "Natural afro interpretation for coily hair at short length, with full scalp coverage. Keep a softly rounded silhouette, visible texture, and a natural rather than geometric perimeter.",
+      "realismAssessment": {
+        "score": 0.89,
+        "status": "plausible",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "coily",
+            "weight": 0.55,
+            "score": 1,
+            "rationale": "Coily texture closely supports the style's natural volume and visible texture."
+          },
+          {
+            "dimension": "length",
+            "value": "short",
+            "weight": 0.2,
+            "score": 0.45,
+            "rationale": "Short length can form a compact Afro but limits its volume."
+          },
+          {
+            "dimension": "coverage",
+            "value": "full",
+            "weight": 0.25,
+            "score": 1,
+            "rationale": "Full coverage supports a continuous rounded outline."
+          }
+        ]
+      },
+      "feasibilityAssessment": {
+        "score": 0.86,
+        "status": "plausible",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "coily",
+            "weight": 0.45,
+            "score": 1,
+            "rationale": "Coily texture closely supports the style's natural volume and visible texture."
+          },
+          {
+            "dimension": "length",
+            "value": "short",
+            "weight": 0.25,
+            "score": 0.45,
+            "rationale": "Short length can form a compact Afro but limits its volume."
+          },
+          {
+            "dimension": "coverage",
+            "value": "full",
+            "weight": 0.3,
+            "score": 1,
+            "rationale": "Full coverage supports a continuous rounded outline."
+          }
+        ]
+      },
+      "reviewStatus": "unreviewed",
+      "provenance": {
+        "method": "deterministic-editorial-rubric",
+        "rubricId": "natural-afro-profile-rubric",
+        "rubricVersion": "1.0.0",
+        "schemaVersion": "1.0.0",
+        "sourceSummary": "A full natural Afro that lets dense curls or coils expand outward into a broad rounded silhouette while preserving visible texture and a softer, less geometrically controlled perimeter.",
+        "sourceIds": [
+          "nmaahc-black-is-beautiful",
+          "nmaahc-strands-of-inspiration",
+          "smithsonian-afro-sheen",
+          "smithsonian-black-hair-identity"
+        ]
+      }
+    },
+    {
+      "candidateId": "natural-afro-coily-short-sparse",
+      "hairstyleId": "hairstyle-natural-afro",
+      "hairstyleSlug": "natural-afro",
+      "profile": {
+        "pattern": "coily",
+        "length": "short",
+        "coverage": "sparse"
+      },
+      "description": "Natural afro interpretation for coily hair at short length, with sparse scalp coverage. Keep a softly rounded silhouette, visible texture, and a natural rather than geometric perimeter.",
+      "realismAssessment": {
+        "score": 0.7,
+        "status": "plausible",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "coily",
+            "weight": 0.55,
+            "score": 1,
+            "rationale": "Coily texture closely supports the style's natural volume and visible texture."
+          },
+          {
+            "dimension": "length",
+            "value": "short",
+            "weight": 0.2,
+            "score": 0.45,
+            "rationale": "Short length can form a compact Afro but limits its volume."
+          },
+          {
+            "dimension": "coverage",
+            "value": "sparse",
+            "weight": 0.25,
+            "score": 0.25,
+            "rationale": "Sparse coverage can interrupt the continuous volume of a rounded Afro."
+          }
+        ]
+      },
+      "feasibilityAssessment": {
+        "score": 0.64,
+        "status": "needs-review",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "coily",
+            "weight": 0.45,
+            "score": 1,
+            "rationale": "Coily texture closely supports the style's natural volume and visible texture."
+          },
+          {
+            "dimension": "length",
+            "value": "short",
+            "weight": 0.25,
+            "score": 0.45,
+            "rationale": "Short length can form a compact Afro but limits its volume."
+          },
+          {
+            "dimension": "coverage",
+            "value": "sparse",
+            "weight": 0.3,
+            "score": 0.25,
+            "rationale": "Sparse coverage can interrupt the continuous volume of a rounded Afro."
+          }
+        ]
+      },
+      "reviewStatus": "unreviewed",
+      "provenance": {
+        "method": "deterministic-editorial-rubric",
+        "rubricId": "natural-afro-profile-rubric",
+        "rubricVersion": "1.0.0",
+        "schemaVersion": "1.0.0",
+        "sourceSummary": "A full natural Afro that lets dense curls or coils expand outward into a broad rounded silhouette while preserving visible texture and a softer, less geometrically controlled perimeter.",
+        "sourceIds": [
+          "nmaahc-black-is-beautiful",
+          "nmaahc-strands-of-inspiration",
+          "smithsonian-afro-sheen",
+          "smithsonian-black-hair-identity"
+        ]
+      }
+    },
+    {
+      "candidateId": "natural-afro-coily-medium-full",
+      "hairstyleId": "hairstyle-natural-afro",
+      "hairstyleSlug": "natural-afro",
+      "profile": {
+        "pattern": "coily",
+        "length": "medium",
+        "coverage": "full"
+      },
+      "description": "Natural afro interpretation for coily hair at medium length, with full scalp coverage. Keep a softly rounded silhouette, visible texture, and a natural rather than geometric perimeter.",
+      "realismAssessment": {
+        "score": 0.96,
+        "status": "plausible",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "coily",
+            "weight": 0.55,
+            "score": 1,
+            "rationale": "Coily texture closely supports the style's natural volume and visible texture."
+          },
+          {
+            "dimension": "length",
+            "value": "medium",
+            "weight": 0.2,
+            "score": 0.8,
+            "rationale": "Medium length supports a visible rounded shape and useful volume."
+          },
+          {
+            "dimension": "coverage",
+            "value": "full",
+            "weight": 0.25,
+            "score": 1,
+            "rationale": "Full coverage supports a continuous rounded outline."
+          }
+        ]
+      },
+      "feasibilityAssessment": {
+        "score": 0.95,
+        "status": "plausible",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "coily",
+            "weight": 0.45,
+            "score": 1,
+            "rationale": "Coily texture closely supports the style's natural volume and visible texture."
+          },
+          {
+            "dimension": "length",
+            "value": "medium",
+            "weight": 0.25,
+            "score": 0.8,
+            "rationale": "Medium length supports a visible rounded shape and useful volume."
+          },
+          {
+            "dimension": "coverage",
+            "value": "full",
+            "weight": 0.3,
+            "score": 1,
+            "rationale": "Full coverage supports a continuous rounded outline."
+          }
+        ]
+      },
+      "reviewStatus": "unreviewed",
+      "provenance": {
+        "method": "deterministic-editorial-rubric",
+        "rubricId": "natural-afro-profile-rubric",
+        "rubricVersion": "1.0.0",
+        "schemaVersion": "1.0.0",
+        "sourceSummary": "A full natural Afro that lets dense curls or coils expand outward into a broad rounded silhouette while preserving visible texture and a softer, less geometrically controlled perimeter.",
+        "sourceIds": [
+          "nmaahc-black-is-beautiful",
+          "nmaahc-strands-of-inspiration",
+          "smithsonian-afro-sheen",
+          "smithsonian-black-hair-identity"
+        ]
+      }
+    },
+    {
+      "candidateId": "natural-afro-coily-medium-sparse",
+      "hairstyleId": "hairstyle-natural-afro",
+      "hairstyleSlug": "natural-afro",
+      "profile": {
+        "pattern": "coily",
+        "length": "medium",
+        "coverage": "sparse"
+      },
+      "description": "Natural afro interpretation for coily hair at medium length, with sparse scalp coverage. Keep a softly rounded silhouette, visible texture, and a natural rather than geometric perimeter.",
+      "realismAssessment": {
+        "score": 0.77,
+        "status": "plausible",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "coily",
+            "weight": 0.55,
+            "score": 1,
+            "rationale": "Coily texture closely supports the style's natural volume and visible texture."
+          },
+          {
+            "dimension": "length",
+            "value": "medium",
+            "weight": 0.2,
+            "score": 0.8,
+            "rationale": "Medium length supports a visible rounded shape and useful volume."
+          },
+          {
+            "dimension": "coverage",
+            "value": "sparse",
+            "weight": 0.25,
+            "score": 0.25,
+            "rationale": "Sparse coverage can interrupt the continuous volume of a rounded Afro."
+          }
+        ]
+      },
+      "feasibilityAssessment": {
+        "score": 0.72,
+        "status": "plausible",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "coily",
+            "weight": 0.45,
+            "score": 1,
+            "rationale": "Coily texture closely supports the style's natural volume and visible texture."
+          },
+          {
+            "dimension": "length",
+            "value": "medium",
+            "weight": 0.25,
+            "score": 0.8,
+            "rationale": "Medium length supports a visible rounded shape and useful volume."
+          },
+          {
+            "dimension": "coverage",
+            "value": "sparse",
+            "weight": 0.3,
+            "score": 0.25,
+            "rationale": "Sparse coverage can interrupt the continuous volume of a rounded Afro."
+          }
+        ]
+      },
+      "reviewStatus": "unreviewed",
+      "provenance": {
+        "method": "deterministic-editorial-rubric",
+        "rubricId": "natural-afro-profile-rubric",
+        "rubricVersion": "1.0.0",
+        "schemaVersion": "1.0.0",
+        "sourceSummary": "A full natural Afro that lets dense curls or coils expand outward into a broad rounded silhouette while preserving visible texture and a softer, less geometrically controlled perimeter.",
+        "sourceIds": [
+          "nmaahc-black-is-beautiful",
+          "nmaahc-strands-of-inspiration",
+          "smithsonian-afro-sheen",
+          "smithsonian-black-hair-identity"
+        ]
+      }
+    },
+    {
+      "candidateId": "natural-afro-coily-long-full",
+      "hairstyleId": "hairstyle-natural-afro",
+      "hairstyleSlug": "natural-afro",
+      "profile": {
+        "pattern": "coily",
+        "length": "long",
+        "coverage": "full"
+      },
+      "description": "Natural afro interpretation for coily hair at long length, with full scalp coverage. Keep a softly rounded silhouette, visible texture, and a natural rather than geometric perimeter.",
+      "realismAssessment": {
+        "score": 1,
+        "status": "plausible",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "coily",
+            "weight": 0.55,
+            "score": 1,
+            "rationale": "Coily texture closely supports the style's natural volume and visible texture."
+          },
+          {
+            "dimension": "length",
+            "value": "long",
+            "weight": 0.2,
+            "score": 1,
+            "rationale": "Longer retained length supports the broad, full silhouette described for this style."
+          },
+          {
+            "dimension": "coverage",
+            "value": "full",
+            "weight": 0.25,
+            "score": 1,
+            "rationale": "Full coverage supports a continuous rounded outline."
+          }
+        ]
+      },
+      "feasibilityAssessment": {
+        "score": 1,
+        "status": "plausible",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "coily",
+            "weight": 0.45,
+            "score": 1,
+            "rationale": "Coily texture closely supports the style's natural volume and visible texture."
+          },
+          {
+            "dimension": "length",
+            "value": "long",
+            "weight": 0.25,
+            "score": 1,
+            "rationale": "Longer retained length supports the broad, full silhouette described for this style."
+          },
+          {
+            "dimension": "coverage",
+            "value": "full",
+            "weight": 0.3,
+            "score": 1,
+            "rationale": "Full coverage supports a continuous rounded outline."
+          }
+        ]
+      },
+      "reviewStatus": "unreviewed",
+      "provenance": {
+        "method": "deterministic-editorial-rubric",
+        "rubricId": "natural-afro-profile-rubric",
+        "rubricVersion": "1.0.0",
+        "schemaVersion": "1.0.0",
+        "sourceSummary": "A full natural Afro that lets dense curls or coils expand outward into a broad rounded silhouette while preserving visible texture and a softer, less geometrically controlled perimeter.",
+        "sourceIds": [
+          "nmaahc-black-is-beautiful",
+          "nmaahc-strands-of-inspiration",
+          "smithsonian-afro-sheen",
+          "smithsonian-black-hair-identity"
+        ]
+      }
+    },
+    {
+      "candidateId": "natural-afro-coily-long-sparse",
+      "hairstyleId": "hairstyle-natural-afro",
+      "hairstyleSlug": "natural-afro",
+      "profile": {
+        "pattern": "coily",
+        "length": "long",
+        "coverage": "sparse"
+      },
+      "description": "Natural afro interpretation for coily hair at long length, with sparse scalp coverage. Keep a softly rounded silhouette, visible texture, and a natural rather than geometric perimeter.",
+      "realismAssessment": {
+        "score": 0.81,
+        "status": "plausible",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "coily",
+            "weight": 0.55,
+            "score": 1,
+            "rationale": "Coily texture closely supports the style's natural volume and visible texture."
+          },
+          {
+            "dimension": "length",
+            "value": "long",
+            "weight": 0.2,
+            "score": 1,
+            "rationale": "Longer retained length supports the broad, full silhouette described for this style."
+          },
+          {
+            "dimension": "coverage",
+            "value": "sparse",
+            "weight": 0.25,
+            "score": 0.25,
+            "rationale": "Sparse coverage can interrupt the continuous volume of a rounded Afro."
+          }
+        ]
+      },
+      "feasibilityAssessment": {
+        "score": 0.77,
+        "status": "plausible",
+        "factors": [
+          {
+            "dimension": "pattern",
+            "value": "coily",
+            "weight": 0.45,
+            "score": 1,
+            "rationale": "Coily texture closely supports the style's natural volume and visible texture."
+          },
+          {
+            "dimension": "length",
+            "value": "long",
+            "weight": 0.25,
+            "score": 1,
+            "rationale": "Longer retained length supports the broad, full silhouette described for this style."
+          },
+          {
+            "dimension": "coverage",
+            "value": "sparse",
+            "weight": 0.3,
+            "score": 0.25,
+            "rationale": "Sparse coverage can interrupt the continuous volume of a rounded Afro."
+          }
+        ]
+      },
+      "reviewStatus": "unreviewed",
+      "provenance": {
+        "method": "deterministic-editorial-rubric",
+        "rubricId": "natural-afro-profile-rubric",
+        "rubricVersion": "1.0.0",
+        "schemaVersion": "1.0.0",
+        "sourceSummary": "A full natural Afro that lets dense curls or coils expand outward into a broad rounded silhouette while preserving visible texture and a softer, less geometrically controlled perimeter.",
+        "sourceIds": [
+          "nmaahc-black-is-beautiful",
+          "nmaahc-strands-of-inspiration",
+          "smithsonian-afro-sheen",
+          "smithsonian-black-hair-identity"
+        ]
+      }
+    }
+  ]
+}

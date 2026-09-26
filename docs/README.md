@@ -18,6 +18,7 @@ These guides describe the repository as it works now. Update the relevant guide 
 
 ## Research
 
+- [Content-generation matrix prototype](contributing/content-generation.md)
 - Hair types: [content and sources](research/hair-types/content-notes.md)
 - Hairstyles: [editorial overview](research/hairstyles/overview.md), [imagery](research/hairstyles/imagery.md), [flat top](research/hairstyles/flat-top.md), and [Mario Balotelli-inspired styles](research/hairstyles/mario-balotelli.md)
 - People: [Will Smith](research/people/will-smith.md) and [Mario Balotelli](research/people/mario-balotelli.md)

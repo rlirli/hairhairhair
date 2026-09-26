@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>Hairstyle candidate matrix</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family:
+          Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        color: #18211f;
+        background: #f4f5f0;
+        font-synthesis: none;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+      }
+      main {
+        width: min(1440px, calc(100% - 40px));
+        margin: 0 auto;
+        padding: 40px 0 64px;
+      }
+      header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 24px;
+        margin-bottom: 26px;
+      }
+      .eyebrow {
+        margin: 0 0 8px;
+        color: #52625d;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      h1 {
+        margin: 0;
+        font-size: clamp(30px, 4vw, 48px);
+        letter-spacing: -0.04em;
+        line-height: 1.05;
+      }
+      .summary {
+        max-width: 760px;
+        margin: 12px 0 0;
+        color: #52625d;
+        line-height: 1.6;
+      }
+      .meta {
+        color: #52625d;
+        font-size: 13px;
+        text-align: right;
+      }
+      .meta p {
+        margin: 4px 0;
+      }
+      .notice {
+        margin: 0 0 22px;
+        padding: 13px 16px;
+        border: 1px solid #d7c28a;
+        border-radius: 10px;
+        color: #55420c;
+        background: #fff8df;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+        margin-bottom: 22px;
+      }
+      .stat {
+        padding: 16px 18px;
+        border: 1px solid #e0e5df;
+        border-radius: 12px;
+        background: white;
+      }
+      .stat strong {
+        display: block;
+        font-size: 26px;
+        line-height: 1.15;
+      }
+      .stat span {
+        display: block;
+        margin-top: 5px;
+        color: #64716c;
+        font-size: 12px;
+      }
+      .toolbar {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(130px, 1fr)) minmax(180px, 1.4fr);
+        gap: 12px;
+        align-items: end;
+        padding: 16px;
+        border: 1px solid #e0e5df;
+        border-radius: 12px 12px 0 0;
+        background: white;
+      }
+      label {
+        display: grid;
+        gap: 6px;
+        color: #52625d;
+        font-size: 12px;
+        font-weight: 700;
+      }
+      select,
+      input {
+        width: 100%;
+        min-height: 40px;
+        padding: 8px 10px;
+        border: 1px solid #ccd5ce;
+        border-radius: 7px;
+        color: #18211f;
+        background: white;
+        font: inherit;
+        font-size: 14px;
+      }
+      .results {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 10px 16px;
+        border-right: 1px solid #e0e5df;
+        border-left: 1px solid #e0e5df;
+        background: #fafbf8;
+        color: #52625d;
+        font-size: 13px;
+      }
+      .table-wrap {
+        overflow: auto;
+        border: 1px solid #e0e5df;
+        border-radius: 0 0 12px 12px;
+        background: white;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+      }
+      th,
+      td {
+        padding: 13px 14px;
+        border-bottom: 1px solid #edf0eb;
+        vertical-align: top;
+      }
+      th {
+        position: sticky;
+        top: 0;
+        color: #52625d;
+        background: #f8f9f6;
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+      td {
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      tr:last-child td {
+        border-bottom: 0;
+      }
+      .candidate {
+        min-width: 185px;
+        font-weight: 700;
+      }
+      .description {
+        min-width: 320px;
+        max-width: 480px;
+        color: #52625d;
+      }
+      .score {
+        min-width: 190px;
+      }
+      .score-line {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        white-space: nowrap;
+      }
+      .meter {
+        width: 68px;
+        height: 7px;
+        overflow: hidden;
+        border-radius: 99px;
+        background: #e8ece7;
+      }
+      .meter i {
+        display: block;
+        height: 100%;
+        border-radius: inherit;
+        background: #28765f;
+      }
+      .badge {
+        display: inline-block;
+        margin-top: 5px;
+        padding: 2px 7px;
+        border-radius: 99px;
+        background: #edf3ef;
+        color: #315d4d;
+        font-size: 11px;
+      }
+      .badge.needs-review {
+        background: #fff3d6;
+        color: #76530d;
+      }
+      .badge.challenging {
+        background: #fbe8e6;
+        color: #8a3831;
+      }
+      details {
+        margin-top: 7px;
+        color: #64716c;
+        font-size: 12px;
+      }
+      details summary {
+        cursor: pointer;
+        font-weight: 600;
+      }
+      details ul {
+        padding-left: 18px;
+      }
+      details li + li {
+        margin-top: 3px;
+      }
+      .empty {
+        padding: 32px;
+        color: #64716c;
+        text-align: center;
+      }
+      footer {
+        margin-top: 20px;
+        color: #64716c;
+        font-size: 12px;
+      }
+      @media (max-width: 850px) {
+        .stats {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .toolbar {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .meta {
+          text-align: left;
+        }
+      }
+      @media (max-width: 520px) {
+        main {
+          width: min(100% - 24px, 1440px);
+          padding-top: 24px;
+        }
+        .stats {
+          gap: 8px;
+        }
+        .stat {
+          padding: 12px;
+        }
+        .toolbar {
+          grid-template-columns: 1fr 1fr;
+          padding: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <p class="eyebrow">Hairstyle content pipeline · candidate matrix</p>
+          <h1 id="title"></h1>
+          <p class="summary" id="summary"></p>
+        </div>
+        <div class="meta" id="meta"></div>
+      </header>
+      <p class="notice">
+        <strong>Prototype scores:</strong> deterministic editorial rubric estimates, not compatibility advice or
+        reviewed results. Every candidate remains visible; “challenging” is not a discard rule.
+      </p>
+      <section class="stats" id="stats" aria-label="Matrix summary"></section>
+      <section aria-label="Filter candidates">
+        <div class="toolbar">
+          <label
+            >Pattern<select id="pattern">
+              <option value="">All patterns</option>
+            </select></label
+          >
+          <label
+            >Length<select id="length">
+              <option value="">All lengths</option>
+            </select></label
+          >
+          <label
+            >Coverage<select id="coverage">
+              <option value="">All coverage</option>
+            </select></label
+          >
+          <label
+            >Assessment<select id="status">
+              <option value="">All assessments</option>
+              <option value="plausible">Plausible</option>
+              <option value="needs-review">Needs review</option>
+              <option value="challenging">Challenging</option>
+            </select></label
+          >
+          <label>Find a candidate<input id="search" type="search" placeholder="Search ID or description" /></label>
+        </div>
+        <div class="results"><span id="result-count"></span><span>Sorted by profile dimensions</span></div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Candidate</th>
+                <th>Pattern</th>
+                <th>Length</th>
+                <th>Coverage</th>
+                <th>Description</th>
+                <th>Realism</th>
+                <th>Feasibility</th>
+              </tr>
+            </thead>
+            <tbody id="rows"></tbody>
+          </table>
+          <p class="empty" id="empty" hidden>No candidates match these filters.</p>
+        </div>
+      </section>
+      <footer id="footer"></footer>
+    </main>
+    <script>
+      const matrix = __MATRIX_JSON__;
+      const byId = (id) => document.getElementById(id);
+      const esc = (value) =>
+        String(value).replace(
+          /[&<>"']/g,
+          (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char],
+        );
+      const titleCase = (value) => value.replaceAll("-", " ").replace(/\b\w/g, (letter) => letter.toUpperCase());
+      const options = (id, values) => {
+        for (const value of values) {
+          const option = document.createElement("option");
+          option.value = value;
+          option.textContent = titleCase(value);
+          byId(id).append(option);
+        }
+      };
+      const scoreCell = (assessment) =>
+        `<div class="score-line"><strong>${assessment.score.toFixed(2)}</strong><span class="meter"><i style="width:${assessment.score * 100}%"></i></span></div><span class="badge ${assessment.status}">${titleCase(assessment.status)}</span><details><summary>Scoring factors</summary><ul>${assessment.factors.map((factor) => `<li>${esc(titleCase(factor.dimension))}: ${esc(factor.value)} · ${factor.score.toFixed(2)} × ${factor.weight.toFixed(2)} — ${esc(factor.rationale)}</li>`).join("")}</ul></details>`;
+      const render = () => {
+        const filter = {
+          pattern: byId("pattern").value,
+          length: byId("length").value,
+          coverage: byId("coverage").value,
+          status: byId("status").value,
+          search: byId("search").value.trim().toLowerCase(),
+        };
+        const candidates = matrix.candidates.filter((candidate) => {
+          const haystack = `${candidate.candidateId} ${candidate.description}`.toLowerCase();
+          return (
+            (!filter.pattern || candidate.profile.pattern === filter.pattern) &&
+            (!filter.length || candidate.profile.length === filter.length) &&
+            (!filter.coverage || candidate.profile.coverage === filter.coverage) &&
+            (!filter.status || candidate.realismAssessment.status === filter.status) &&
+            (!filter.search || haystack.includes(filter.search))
+          );
+        });
+        byId("result-count").textContent = `${candidates.length} of ${matrix.candidateCount} candidates`;
+        byId("empty").hidden = candidates.length > 0;
+        byId("rows").innerHTML = candidates
+          .map(
+            (candidate) =>
+              `<tr><td class="candidate">${esc(candidate.candidateId)}<br/><span class="badge">${esc(candidate.reviewStatus)}</span></td><td>${esc(titleCase(candidate.profile.pattern))}</td><td>${esc(titleCase(candidate.profile.length))}</td><td>${esc(titleCase(candidate.profile.coverage))}</td><td class="description">${esc(candidate.description)}</td><td class="score">${scoreCell(candidate.realismAssessment)}</td><td class="score">${scoreCell(candidate.feasibilityAssessment)}</td></tr>`,
+          )
+          .join("");
+      };
+      byId("title").textContent = matrix.hairstyle.name;
+      byId("summary").textContent = matrix.hairstyle.summary;
+      byId("meta").innerHTML =
+        `<p><strong>${esc(matrix.snapshotId)}</strong></p><p>Generated ${esc(new Date(matrix.generatedAt).toLocaleString())}</p><p>Rubric ${esc(matrix.rubric.id)} v${esc(matrix.rubric.version)}</p>`;
+      byId("footer").textContent =
+        `Schema ${matrix.schemaVersion} · ${matrix.rubric.method} · Snapshot ${matrix.snapshotId}`;
+      for (const dimension of ["pattern", "length", "coverage"]) options(dimension, matrix.dimensions[dimension]);
+      for (const id of ["pattern", "length", "coverage", "status", "search"])
+        byId(id).addEventListener("input", render);
+      render();
+      byId("stats").innerHTML =
+        `<div class="stat"><strong>${matrix.candidateCount}</strong><span>candidate profiles</span></div><div class="stat"><strong>${matrix.statusCounts.plausible ?? 0}</strong><span>plausible · realism</span></div><div class="stat"><strong>${matrix.statusCounts["needs-review"] ?? 0}</strong><span>needs review · realism</span></div><div class="stat"><strong>${matrix.statusCounts.challenging ?? 0}</strong><span>challenging · realism</span></div>`;
+    </script>
+  </body>
+</html>

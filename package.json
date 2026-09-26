@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "packageManager": "pnpm@11.5.0",
   "scripts": {
     "build": "astro build",
     "build:clean": "node scripts/clean-dist.mjs && astro build",
@@ -13,6 +14,7 @@
     "format:check": "prettier . --check",
     "import:hairstyles": "node scripts/import-hairstyles.mjs",
     "import:people": "node scripts/import-people.mjs",
+    "generate:content": "node scripts/generate-content-matrix.mjs",
     "preview": "astro preview",
     "sort:hairstyles": "node scripts/sort-hairstyle-data.mjs",
     "test": "npm run build:clean && npm run test:component && npm run test:content",

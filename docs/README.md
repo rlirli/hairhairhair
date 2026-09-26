@@ -14,6 +14,7 @@ These guides describe the repository as it works now. Update the relevant guide 
 - [`CONTEXT.md`](../CONTEXT.md) defines the shared domain language.
 - [`src/data/`](../src/data/) contains the current executable content model.
 - [Directory filters](reference/directory-filters.md) documents the shared filter controls and selection rules.
+- [Hair texture images](reference/hair-texture-images.md) maps the generated close-ups to the hair types and their subtype cards.
 
 ## Research
 

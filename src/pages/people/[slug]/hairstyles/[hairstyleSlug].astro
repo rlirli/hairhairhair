@@ -25,6 +25,10 @@ const style = pathStyle ?? getHairstyleBySlug(Astro.params.hairstyleSlug ?? "");
 if (!style) throw new Error(`Unknown hairstyle: ${Astro.params.hairstyleSlug}`);
 const media = personPhotographs;
 const records = getAppearancesForPersonAndHairstyle(person.id, style.id);
+const recordsWithPhotos = records.filter(
+  (appearance) => appearance.imageId && media.some((photo) => photo.id === appearance.imageId),
+);
+const displayedRecords = recordsWithPhotos.length ? recordsWithPhotos : records;
 ---
 
 <Layout
@@ -74,8 +78,8 @@ const records = getAppearancesForPersonAndHairstyle(person.id, style.id);
         </a>
       </h1>
       <p class="mt-6 text-lg leading-7">
-        {person.name} wearing this hairstyle in {records.length} documented{" "}
-        {records.length === 1 ? "appearance" : "appearances"}.
+        {person.name} wearing this hairstyle in {displayedRecords.length} documented{" "}
+        {displayedRecords.length === 1 ? "appearance" : "appearances"}.
       </p>
     </header>
 
@@ -88,7 +92,7 @@ const records = getAppearancesForPersonAndHairstyle(person.id, style.id);
       </div>
 
       <ul class="mt-2.5 sm:mt-4 grid grid-cols-2 gap-x-4 gap-y-6 lg:grid-cols-4">
-        {records.map((appearance) => {
+        {displayedRecords.map((appearance) => {
           const photo = appearance.imageId ? media.find((item) => item.id === appearance.imageId) : undefined;
           const observation = appearance.observations.find((item) => item.hairstyleId === style.id);
           const example = getRepresentativeHairstyleMedia(style.id, observation?.styleExampleId);

@@ -1,6 +1,8 @@
 ---
 import { Image } from "astro:assets";
 import { getRepresentativeHairstyleMedia } from "../../data";
+import { personPhotographs } from "../../data/people";
+import PhotoAttribution from "../../components/shared/PhotoAttribution";
 import { appearanceTitle, formatAppearanceDate } from "../../lib/appearance-formatting";
 import type { Appearance, Hairstyle, Person } from "../../types";
 
@@ -25,10 +27,18 @@ const visibleRecords = layout === "row" ? records.slice(0, 6) : records;
   tabindex={layout === "row" ? 0 : undefined}
 >
   {visibleRecords.map(({ style, appearances }) => {
-    const appearance = appearances[0];
+    const appearanceWithPhoto = appearances
+      .map((appearance) => ({
+        appearance,
+        photo: personPhotographs.find((photo) => photo.id === appearance.imageId),
+      }))
+      .find((record) => record.photo);
+    const appearance = appearanceWithPhoto?.appearance ?? appearances[0];
+    const photo = appearanceWithPhoto?.photo;
     const observation = appearance?.observations.find((item) => item.hairstyleId === style.id);
-    const representative = getRepresentativeHairstyleMedia(style.id, observation?.styleExampleId);
-    if (!appearance || !representative) return null;
+    const representative = photo ? undefined : getRepresentativeHairstyleMedia(style.id, observation?.styleExampleId);
+    const image = photo ?? representative?.media;
+    if (!appearance || !image) return null;
 
     return (
       <li class:list={["group min-w-0", layout === "row" && "w-42 shrink-0"]}>
@@ -40,21 +50,29 @@ const visibleRecords = layout === "row" ? records.slice(0, 6) : records;
               <a
                 class="group focus-ring block"
                 href={`/people/${person.slug}/hairstyles/${style.slug}/`}
-                aria-label={`${person.name} wearing ${style.name}, shown with a hairstyle example`}
+                aria-label={
+                  photo
+                    ? `${person.name} wearing ${style.name}, ${appearanceTitle(appearance.event)}`
+                    : `${person.name} wearing ${style.name}, shown with a hairstyle example`
+                }
               >
                 <Image
-                  src={representative.media.image}
+                  src={image.image}
                   widths={[400, 700, 1000]}
                   sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
                   format="webp"
                   loading="lazy"
-                  alt={representative.media.alt}
+                  alt={image.alt}
                   class="aspect-[7/9] w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                  style={photo ? `object-position: ${photo.objectPosition}` : undefined}
                 />
-                <span class="absolute inset-x-0 bottom-0 bg-black/70 px-2 py-1.5 text-[.65rem] font-bold uppercase tracking-[.1em] text-white">
-                  Hairstyle example
-                </span>
+                {!photo && (
+                  <span class="absolute inset-x-0 bottom-0 bg-black/70 px-2 py-1.5 text-[.65rem] font-bold uppercase tracking-[.1em] text-white">
+                    Hairstyle example
+                  </span>
+                )}
               </a>
+              {photo && <PhotoAttribution provenance={photo.provenance} density="compact" />}
             </div>
             <figcaption class="mt-2">
               <h3 class="font-display text-xl leading-tight tracking-[-.03em]">

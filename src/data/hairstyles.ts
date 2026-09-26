@@ -866,7 +866,7 @@ export const hairstyles: Hairstyle[] = [
     ],
     sourceIds: ["british-gq-edgar-guide", "cambridge-edgar", "latimes-edgar-haircut", "telemundo-edgar-origin"],
     relatedStyleIds: ["hairstyle-french-crop", "hairstyle-taper-fade"],
-    guidePublicationStatus: "draft",
+    guidePublicationStatus: "published",
   },
   {
     id: "hairstyle-farrah-fawcett-cut",

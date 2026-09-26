@@ -31,6 +31,8 @@ The canonical Git-tracked records and image assets live in `src/content/`. Add n
 
 The domain vocabulary is defined in [`CONTEXT.md`](CONTEXT.md). Keep content records, media metadata, research, and tests consistent in the same commit.
 
+For local MCP-based content management in the ChatGPT desktop app or Codex, see [Local content MCP](docs/content-management-mcp.md). The server reads and writes the same Git-tracked records as the site and validates relationships before applying changes.
+
 ## Deployment
 
 Pushes to `main` are deployed to [hairhairhair.hair](https://hairhairhair.hair/) through GitHub Pages. The workflow in `.github/workflows/deploy.yml` installs dependencies, builds Astro, uploads `dist/`, and deploys it with the repository's `public/CNAME` configuration.

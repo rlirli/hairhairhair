@@ -9,11 +9,15 @@ export const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 export const contentRoot = join(root, "src/content");
 const execFileAsync = promisify(execFile);
 
-export async function readPackages(inboxPath) {
+export async function readPackages(inboxPath, onlyFolder = undefined) {
   const entries = await readdir(inboxPath, { withFileTypes: true });
-  const folders = entries
+  let folders = entries
     .filter((entry) => entry.isDirectory() && entry.name !== "archive")
     .sort((left, right) => left.name.localeCompare(right.name));
+  if (onlyFolder) {
+    folders = folders.filter((entry) => entry.name === onlyFolder);
+    if (!folders.length) throw new Error(`Package folder not found: ${onlyFolder}`);
+  }
   const packages = [];
   const skipped = [];
   for (const entry of folders) {

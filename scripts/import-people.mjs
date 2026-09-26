@@ -313,24 +313,30 @@ function planPackages(packages, validatePayload, data) {
 
 function parseArgs(args) {
   let apply = false;
-  for (const arg of args) {
+  let packageName;
+  for (let index = 0; index < args.length; index += 1) {
+    const arg = args[index];
     if (arg === "--apply") apply = true;
-    else if (arg === "--help" || arg === "-h") return { help: true };
+    else if (arg === "--package") {
+      packageName = args[index + 1];
+      if (!packageName || packageName.startsWith("--")) throw new Error("--package requires a folder name.");
+      index += 1;
+    } else if (arg === "--help" || arg === "-h") return { help: true };
     else if (arg !== "--dry-run") throw new Error(`Unknown option: ${arg}`);
   }
   if (args.includes("--apply") && args.includes("--dry-run")) throw new Error("Choose either --apply or --dry-run.");
-  return { apply };
+  return { apply, packageName };
 }
 
 export async function main(args = process.argv.slice(2)) {
   const options = parseArgs(args);
   if (options.help) {
     console.log(
-      "Usage: npm run import:people [-- --dry-run|--apply]\nDefault is a read-only dry run. Apply writes validated JSON records, copies photographs, and archives packages.",
+      "Usage: npm run import:people [-- --dry-run|--apply] [--package <folder>]\nDefault is a read-only dry run. Apply writes validated JSON records, copies photographs, and archives packages.",
     );
     return;
   }
-  const { packages, skipped } = await readPackages(inbox);
+  const { packages, skipped } = await readPackages(inbox, options.packageName);
   if (!packages.length) {
     console.log("No people packages found.");
     if (skipped.length) console.log(`Skipped: ${skipped.join(", ")}`);

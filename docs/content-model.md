@@ -1,6 +1,6 @@
 # Git-backed content model
 
-The authoritative editorial records live in `src/content/`. Each entity is one JSON file named after its stable ID. JSON Schema files document and validate each record shape; `npm run validate:content` also checks cross-file IDs, compatibility criteria, and image paths. Git is the source of truth. The app currently loads this content at build time; there is no database or MCP layer in this increment.
+The authoritative editorial records live in `src/content/`. Each entity is one JSON file named after its stable ID. JSON Schema files document and validate each record shape; `npm run validate:content` also checks cross-file IDs, compatibility criteria, and image paths. Git is the source of truth. The app loads this content at build time, and the optional local stdio MCP edits these same tracked files. There is no database layer.
 
 ```text
 src/content/
@@ -52,5 +52,7 @@ For hand-authored editorial updates, edit the JSON file in the matching collecti
 Run `npm run import:hairstyles` or `npm run import:people` to validate and preview a package. After reviewing the plan, add `-- --apply` to write records/assets into the appropriate `src/content/` collections and move the package into its inbox `archive/`. Import is a local Git workflow; all resulting records and assets remain Git tracked. Then run `npm run validate:content`.
 
 Run `npm run check` and `npm run build` when changing the content adapter or record shapes.
+
+For script and MCP management of records, linked entities, packages, and images, see [Local content MCP](content-management-mcp.md).
 
 `src/data/content.ts` is the read adapter used by the application. The small files next to it preserve existing import paths for the UI; edit `src/content/` for editorial data, not the adapter or generated Astro output.

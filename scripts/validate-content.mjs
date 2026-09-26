@@ -3,7 +3,7 @@ import { readdir, readFile, stat } from "node:fs/promises";
 import { join, resolve } from "node:path";
 
 const root = resolve(new URL("..", import.meta.url).pathname);
-const content = join(root, "src/content");
+const content = resolve(process.env.HHH_CONTENT_ROOT ?? join(root, "src/content"));
 const schemaDir = join(content, "schemas");
 const entitySchemas = {
   "classification-systems": "classification-system.schema.json",

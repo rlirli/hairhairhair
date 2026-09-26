@@ -83,7 +83,7 @@ const records = getAppearancesForPersonAndHairstyle(person.id, style.id);
         </h2>
       </div>
 
-      <ul class="mt-2.5 sm:mt-4 grid gap-x-4 gap-y-6 sm:grid-cols-2 lg:grid-cols-4">
+      <ul class="mt-2.5 sm:mt-4 grid grid-cols-2 gap-x-4 gap-y-6 lg:grid-cols-4">
         {records.map((appearance) => {
           const photo = media.find((item) => item.id === appearance.imageId);
           const observation = appearance.observations.find((item) => item.hairstyleId === style.id);

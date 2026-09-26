@@ -1,0 +1,14 @@
+{
+  "id": "knotless-box-braids-medium",
+  "kind": "image",
+  "alt": "Transparent editorial reference showing medium knotless box braids with flat feed-in roots.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "knotless-box-braids-medium"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/knotless-box-braids-medium.png"
+}

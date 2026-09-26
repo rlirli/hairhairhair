@@ -1,0 +1,18 @@
+{
+  "id": "hair-type-4b",
+  "classificationSystemId": "walker-inspired-expanded",
+  "code": "4B",
+  "slug": "4b",
+  "hairTypeId": "hair-type-4",
+  "pattern": "coily",
+  "subtypeCode": "B",
+  "name": "Z-shaped coils and bends",
+  "description": "Follows a compact path of sharp bends and angles rather than round loops.",
+  "sortOrder": 11,
+  "characteristics": [
+    "Z-shaped bends",
+    "Angular compact pattern",
+    "Less visibly round than 4A"
+  ],
+  "comparison": "More angular than 4A; 4C has the least consistently visible repeated pattern."
+}

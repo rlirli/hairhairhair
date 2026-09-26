@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hairhairhair.hair/schemas/style-example.schema.json",
+  "title": "Style example",
+  "type": "object",
+  "required": [
+    "id",
+    "hairstyleIds",
+    "imageId",
+    "title",
+    "caption",
+    "patternDescription",
+    "lengthDescription"
+  ],
+  "properties": {
+    "id": { "type": "string" },
+    "hairstyleIds": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "imageId": { "type": "string" },
+    "title": { "type": "string" },
+    "caption": { "type": "string" },
+    "patternDescription": { "type": "string" },
+    "lengthDescription": { "type": "string" }
+  },
+  "additionalProperties": false
+}

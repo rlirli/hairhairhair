@@ -1,0 +1,14 @@
+{
+  "id": "wolf-cut-wavy-medium",
+  "kind": "image",
+  "alt": "Editorial reference showing mid-20s, light skin woman with a wavy shoulder length wolf cut.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "wolf-cut-wavy-medium"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/wolf-cut-wavy-medium.png"
+}

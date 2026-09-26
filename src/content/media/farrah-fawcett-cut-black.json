@@ -1,0 +1,14 @@
+{
+  "id": "farrah-fawcett-cut-black",
+  "kind": "image",
+  "alt": "A fictional Indian woman in her 20s wearing long black hair in a Farrah-style feathered cut with broad face-opening layers and outward-flipped lower sections.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "farrah-fawcett-cut-black"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/farrah-fawcett-cut-black.png"
+}

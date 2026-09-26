@@ -1,0 +1,17 @@
+{
+  "id": "appearance-zendaya-paris-2025",
+  "imageId": "zendaya-paris-2025",
+  "event": "Paris Fashion Week 2025 Spring",
+  "taken": {
+    "value": "2025-09-20",
+    "precision": "day",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Zendaya_Paris_2025.jpg"
+  },
+  "observations": [
+    {
+      "hairstyleId": "hairstyle-side-parted-flipped-lob",
+      "note": "Zendaya wore a smooth shoulder-length lob with a deep side part, soft crown volume, and outward-flipped ends."
+    }
+  ],
+  "personId": "person-zendaya"
+}

@@ -1,0 +1,56 @@
+{
+  "id": "hairstyle-sculpted-spherical-afro",
+  "slug": "sculpted-spherical-afro",
+  "name": "Sculpted spherical afro",
+  "kind": "cut",
+  "summary": "A full Afro deliberately picked outward and trimmed into a dense, near-spherical silhouette with a controlled circular perimeter.",
+  "intro": [
+    "The sculpted spherical afro is a specific full-Afro silhouette rather than simply any rounded natural style. Substantial coily length is lifted away from the scalp and distributed outward so the hair forms a broad three-dimensional mass around the head.",
+    "The defining feature is geometric control of the outer silhouette. The perimeter is shaped toward an almost circular profile from the front and a rounded volume from the side, rather than following every irregularity of the natural growth pattern.",
+    "Afros became especially prominent in the United States during the Black-is-Beautiful and Black Power era of the late 1960s and 1970s, when wearing natural Black hair at visible scale carried strong cultural significance.",
+    "Afro picks and related wide-toothed tools help lift and separate dense coily hair outward. The final spherical appearance then depends on both that expansion and careful trimming of the outer surface.",
+    "“Sculpted spherical afro” is an editorial label used in this collection to distinguish this highly geometric full Afro from shorter cropped Afros and softer, more naturally irregular rounded Afros."
+  ],
+  "variations": [
+    {
+      "id": "sculpted-spherical-afro-perfect-round",
+      "name": "Near-perfect sphere",
+      "description": "Maximizes symmetry and trims the outer perimeter toward an almost continuous circular outline."
+    },
+    {
+      "id": "sculpted-spherical-afro-soft-round",
+      "name": "Soft spherical shape",
+      "description": "Retains the broad spherical mass while allowing slightly more natural irregularity at the outer edge."
+    }
+  ],
+  "consultation": {
+    "intro": "The key decisions are overall diameter, how close to a true sphere the silhouette should be, how much natural surface texture remains visible, and how much length must be retained to support the desired volume.",
+    "questions": [
+      "How large should the finished Afro read relative to your head and shoulders?",
+      "Do you want an almost mathematically round silhouette or a softer rounded shape?",
+      "Should the sides and crown carry equal visual radius, or should the top remain slightly higher?",
+      "How much natural irregularity should remain visible around the perimeter?",
+      "How frequently are you willing to pick, reshape and trim the style to maintain the spherical outline?"
+    ],
+    "sampleRequest": "“I want a large sculpted Afro with a nearly spherical silhouette. Keep enough length and density to build real outward volume, pick it evenly from the scalp, and trim the perimeter into a controlled round shape rather than a short cropped Afro.”"
+  },
+  "considerations": [
+    "The spherical silhouette depends on sufficient density and shrinkage resistance to support hair outward from the scalp rather than letting it collapse or hang.",
+    "Picking changes the visible curl definition by separating and expanding the hair, so this style intentionally prioritizes silhouette over individually defined coils.",
+    "The geometric perimeter requires periodic reshaping because uneven growth gradually disrupts the sphere.",
+    "The style should be assessed in its fully picked-out dry state before perimeter trimming because shrinkage and expansion can change the final dimensions substantially.",
+    "Very tight, dense coils are especially effective because they can maintain a large unsupported rounded mass. Looser patterns increasingly need manipulation or structural assistance and may still fail to reproduce the defining sphere.",
+    "This entry describes the sculpted result rather than claiming every full Afro must be perfectly symmetrical; natural Afros also exist with softer and more irregular silhouettes."
+  ],
+  "sourceIds": [
+    "nmaahc-strands-of-inspiration",
+    "smithsonian-black-hair-identity",
+    "smithsonian-look-talk-play",
+    "smithsonian-nathaniel-mathis"
+  ],
+  "relatedStyleIds": [
+    "hairstyle-cropped-afro",
+    "hairstyle-natural-afro"
+  ],
+  "guidePublicationStatus": "published"
+}

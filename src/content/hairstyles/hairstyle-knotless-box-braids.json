@@ -1,0 +1,51 @@
+{
+  "id": "hairstyle-knotless-box-braids",
+  "slug": "knotless-box-braids",
+  "name": "Knotless box braids",
+  "kind": "styling-technique",
+  "summary": "Individual braids that begin with natural hair at the root, with extension hair gradually fed in for a flatter, less bulky base.",
+  "intro": [
+    "Knotless box braids use the same individual sectioning associated with box braids, but omit the extension knot at the scalp.",
+    "The braider starts with the wearer’s own hair and progressively feeds in extension hair. This produces a flatter transition from scalp to braid and can reduce root tension compared with conventional knotted box braids."
+  ],
+  "variations": [
+    {
+      "id": "knotless-box-braids-jumbo",
+      "name": "Jumbo knotless box braids",
+      "description": "Larger sections and thicker individual braids for a more graphic, lower-count braid pattern."
+    },
+    {
+      "id": "knotless-box-braids-medium",
+      "name": "Medium knotless box braids",
+      "description": "Moderately sized individual braids balancing visible sectioning, installation time and overall braid density."
+    },
+    {
+      "id": "knotless-box-braids-small",
+      "name": "Small knotless box braids",
+      "description": "Finer sections and narrower braids creating a denser, more flexible finished set."
+    }
+  ],
+  "consultation": {
+    "intro": "Agree on braid size, finished length, parting pattern and extension weight before installation.",
+    "questions": [
+      "How small or large should each braid be?",
+      "What finished length do you want?",
+      "Should the sections form a regular box grid or a softer staggered pattern?",
+      "How much extension hair should be added to each braid?",
+      "How light should the front and hairline sections remain?"
+    ],
+    "sampleRequest": "“I’d like medium knotless box braids around mid-back length, with neat square sections, a flat natural-looking root and light tension around the hairline.”"
+  },
+  "considerations": [
+    "Knotless describes the feed-in starting technique, not a guarantee of low tension; section size, extension weight and braider technique still matter.",
+    "Longer or thicker extensions add more suspended weight to each section.",
+    "The natural-hair root remains more exposed than with a conventional extension knot, so new growth and frizz become visible at the base.",
+    "Installation generally takes longer than conventional box braids because extension hair is introduced incrementally."
+  ],
+  "sourceIds": [
+    "carols-daughter-knotless-braids",
+    "essence-knotless-braids"
+  ],
+  "relatedStyleIds": [],
+  "guidePublicationStatus": "published"
+}

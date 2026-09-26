@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hairhairhair.hair/schemas/hairstyle.schema.json",
+  "title": "Hairstyle",
+  "type": "object",
+  "required": [
+    "id",
+    "slug",
+    "name",
+    "kind",
+    "summary",
+    "intro",
+    "variations",
+    "consultation",
+    "considerations",
+    "sourceIds",
+    "relatedStyleIds",
+    "guidePublicationStatus"
+  ],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "slug": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "name": { "type": "string", "minLength": 1 },
+    "kind": { "enum": ["cut", "finishing-technique", "styling-technique"] },
+    "summary": { "type": "string", "minLength": 1 },
+    "intro": { "type": "array", "items": { "type": "string" } },
+    "variations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "description"],
+        "properties": { "id": { "type": "string" }, "name": { "type": "string" }, "description": { "type": "string" } },
+        "additionalProperties": false
+      }
+    },
+    "consultation": {
+      "type": "object",
+      "required": ["intro", "questions", "sampleRequest"],
+      "properties": {
+        "intro": { "type": "string" },
+        "questions": { "type": "array", "items": { "type": "string" } },
+        "sampleRequest": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "considerations": { "type": "array", "items": { "type": "string" } },
+    "sourceIds": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "relatedStyleIds": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "guidePublicationStatus": { "enum": ["draft", "published"] },
+    "inventedAt": {
+      "type": "object",
+      "required": ["year", "precision", "sourceId"],
+      "properties": {
+        "year": { "type": "integer" },
+        "precision": { "enum": ["year", "decade"] },
+        "sourceId": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "inventor": {
+      "type": "object",
+      "required": ["name", "sourceId"],
+      "properties": { "name": { "type": "string" }, "sourceId": { "type": "string" } },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

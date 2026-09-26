@@ -1,0 +1,45 @@
+{
+  "hairstyleId": "hairstyle-short-curly-shag",
+  "assessments": [
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-1"
+        }
+      ],
+      "score": 0.35,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-2"
+        }
+      ],
+      "score": 0.8,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-3"
+        }
+      ],
+      "score": 1,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-4"
+        }
+      ],
+      "score": 0.75,
+      "provenance": "estimated"
+    }
+  ]
+}

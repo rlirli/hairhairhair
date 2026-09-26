@@ -1,0 +1,18 @@
+{
+  "id": "hair-type-3c",
+  "classificationSystemId": "walker-inspired-expanded",
+  "code": "3C",
+  "slug": "3c",
+  "hairTypeId": "hair-type-3",
+  "pattern": "curly",
+  "subtypeCode": "C",
+  "name": "Tight spiral curl",
+  "description": "Forms dense, tightly looping spirals that retain a rounded curl shape.",
+  "sortOrder": 9,
+  "characteristics": [
+    "Tight spiral loops",
+    "Small rounded curl path",
+    "Strong curl definition"
+  ],
+  "comparison": "Tighter than 3B; 4A shifts from rounded spirals toward visibly coiled loops."
+}

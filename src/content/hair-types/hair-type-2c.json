@@ -1,0 +1,18 @@
+{
+  "id": "hair-type-2c",
+  "classificationSystemId": "walker-inspired-expanded",
+  "code": "2C",
+  "slug": "2c",
+  "hairTypeId": "hair-type-2",
+  "pattern": "wavy",
+  "subtypeCode": "C",
+  "name": "Strong S-wave",
+  "description": "Forms pronounced S-bends from near the roots and can approach a loose curl.",
+  "sortOrder": 6,
+  "characteristics": [
+    "Pronounced S-waves",
+    "Pattern close to the roots",
+    "Some sections may loop"
+  ],
+  "comparison": "The strongest wavy pattern; 3A begins to form repeated spiral loops."
+}

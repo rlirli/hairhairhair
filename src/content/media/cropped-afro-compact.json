@@ -1,0 +1,14 @@
+{
+  "id": "cropped-afro-compact",
+  "kind": "image",
+  "alt": "Transparent editorial reference showing a compact cropped afro with a neat silhouette.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "cropped-afro-compact"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/cropped-afro-compact.png"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "style-example-buzz-textured",
+  "hairstyleIds": [
+    "hairstyle-buzz-cut"
+  ],
+  "imageId": "buzz-textured",
+  "title": "Longer textured buzz",
+  "caption": "Notice the extra top length and the movement it leaves above the short perimeter.",
+  "patternDescription": "Texture stays visible through the top while the sides remain shorter and cleaner.",
+  "lengthDescription": "The top is visibly longer than the sides; confirm the intended balance and edge finish with the barber."
+}

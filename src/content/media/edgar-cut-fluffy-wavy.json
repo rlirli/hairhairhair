@@ -1,0 +1,14 @@
+{
+  "id": "edgar-cut-fluffy-wavy",
+  "kind": "image",
+  "alt": "Fictional young Latino man with a fluffy wavy Edgar haircut, blunt fringe and tightly faded sides.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "edgar-cut-fluffy-wavy"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/edgar-cut-fluffy-wavy.png"
+}

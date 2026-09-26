@@ -1,0 +1,165 @@
+{
+  "hairstyleId": "hairstyle-farrah-fawcett-cut",
+  "assessments": [
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-1"
+        }
+      ],
+      "score": 0.88,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-1a"
+        }
+      ],
+      "score": 0.72,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-1b"
+        }
+      ],
+      "score": 0.86,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-1c"
+        }
+      ],
+      "score": 0.96,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-2"
+        }
+      ],
+      "score": 0.87,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-2a"
+        }
+      ],
+      "score": 1,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-2b"
+        }
+      ],
+      "score": 0.9,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-2c"
+        }
+      ],
+      "score": 0.7,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-3"
+        }
+      ],
+      "score": 0.27,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-3a"
+        }
+      ],
+      "score": 0.45,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-3b"
+        }
+      ],
+      "score": 0.24,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-3c"
+        }
+      ],
+      "score": 0.12,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-4"
+        }
+      ],
+      "score": 0.05,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-4a"
+        }
+      ],
+      "score": 0.08,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-4b"
+        }
+      ],
+      "score": 0.04,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-4c"
+        }
+      ],
+      "score": 0.02,
+      "provenance": "estimated"
+    }
+  ]
+}

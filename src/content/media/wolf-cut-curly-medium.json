@@ -1,0 +1,14 @@
+{
+  "id": "wolf-cut-curly-medium",
+  "kind": "image",
+  "alt": "Editorial reference showing a dark-skinned woman with a medium-length curly wolf cut.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "wolf-cut-curly-medium"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/wolf-cut-curly-medium.png"
+}

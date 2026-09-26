@@ -1,0 +1,14 @@
+{
+  "id": "hime-cut-platinum-blonde",
+  "kind": "image",
+  "alt": "Fictional Korean woman with long platinum blonde straight hair and blunt jaw-length Hime side panels framing a center part.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "hime-cut-platinum-blonde"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/hime-cut-platinum-blonde.png"
+}

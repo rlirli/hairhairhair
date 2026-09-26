@@ -1,0 +1,14 @@
+{
+  "id": "the-rachel-soft-wave",
+  "kind": "image",
+  "alt": "Fictional middle-aged Black or mixed-race woman with a softer shoulder-length Rachel-style layered haircut and visible curved face framing.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "the-rachel-soft-wave"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/the-rachel-soft-wave.png"
+}

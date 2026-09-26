@@ -1,0 +1,57 @@
+{
+  "id": "hairstyle-buzz-cut",
+  "slug": "buzz-cut",
+  "name": "Buzz cut",
+  "kind": "cut",
+  "summary": "A clipper-led short cut whose evenness, top length, and edge finish can be adjusted to the wearer.",
+  "intro": [
+    "“Buzz cut” names a family of short clipper cuts, not one mandatory length. A uniform pass can make the head read as one clean shape; a slightly longer top, soft edge, or taper around the ears can add contrast without turning it into a different category of service.",
+    "The practical decision is the length map: same short length everywhere, a longer top, or a blended perimeter. A soft edge, sharp outline, or taper around the ears can change the character without changing the short-cut brief.",
+    "Ask to confirm the approximate length before the clipper work begins. Guards and clipper settings vary by tool, so a number alone is less useful than a visible reference and a clear “same all over” or “longer on top” instruction."
+  ],
+  "variations": [
+    {
+      "id": "buzz-cut-buzz-fade",
+      "name": "Buzz with taper or fade",
+      "description": "Pairs the short top with a gradually shorter perimeter around the ears, temples, or neckline."
+    },
+    {
+      "id": "buzz-cut-even",
+      "name": "Even buzz",
+      "description": "Uses one overall short length for a simple, uniform silhouette."
+    },
+    {
+      "id": "buzz-cut-textured",
+      "name": "Textured buzz",
+      "description": "Leaves enough top length for visible movement or texture while the perimeter stays close."
+    }
+  ],
+  "consultation": {
+    "intro": "Describe the length map first, then the edge finish and whether the top should remain visibly textured.",
+    "questions": [
+      "Do you want the same short length all over, or a longer top with a taper or fade?",
+      "What approximate length feels comfortable, and can we test a small section first?",
+      "Should the hairline, sideburns, and neckline stay natural or be sharply outlined?",
+      "Should the top be brushed, left textured, or cut to read as an even surface?"
+    ],
+    "sampleRequest": "“I want a short buzz with a little more length on top, a soft taper around the ears and neck, and a natural edge. Please show me the approximate top length before taking it shorter.”"
+  },
+  "considerations": [
+    "Head shape, hairline, growth direction, and scalp visibility affect the final silhouette; they are reasons to consult, not reasons to rule the cut out.",
+    "Very short hair makes changes in length visible quickly, so agree on the first pass before asking for a closer finish.",
+    "The visible result can differ between dry and damp hair and between straight, wavy, curly, and coily patterns; the cut should be assessed in the state in which it will usually be worn."
+  ],
+  "sourceIds": [
+    "andis-buzz-cut",
+    "wahl-cut-guide"
+  ],
+  "relatedStyleIds": [
+    "hairstyle-bald",
+    "hairstyle-flat-top",
+    "hairstyle-monastic-tonsure",
+    "hairstyle-ronaldo-2002-haircut",
+    "hairstyle-taper-fade",
+    "hairstyle-twists"
+  ],
+  "guidePublicationStatus": "published"
+}

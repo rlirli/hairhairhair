@@ -1,0 +1,52 @@
+{
+  "id": "hairstyle-side-parted-flipped-lob",
+  "slug": "side-parted-flipped-lob",
+  "name": "Side-parted flipped lob",
+  "kind": "cut",
+  "summary": "A shoulder- to collarbone-length long bob worn with a deep side part, soft crown lift, and ends styled to turn outward.",
+  "intro": [
+    "A lob is a longer bob, commonly worn around collarbone length. This version pairs that length with a deep side part and a smooth, rounded blowout, then turns the ends outward for a clear flicked finish.",
+    "The side part shifts the balance of the front sections and can add a fuller sweep across the crown. Keep the outline near one length or use only light blending so the look stays a lob rather than becoming a heavily layered shag.",
+    "The flipped ends are a styling finish as much as a cut detail. A round brush or flatiron can curve the tips outward; the strength of the flick can range from a soft bend to a more pronounced turn."
+  ],
+  "variations": [
+    {
+      "id": "side-parted-flipped-lob-pronounced-flick",
+      "name": "Pronounced flipped lob",
+      "description": "Uses a stronger outward curve through the ends and more visible lift at the crown while retaining the clean lob perimeter."
+    },
+    {
+      "id": "side-parted-flipped-lob-soft-flick",
+      "name": "Soft flipped lob",
+      "description": "Keeps the collarbone-length outline and deep side part, with only a small outward turn at the tips for a restrained finish."
+    }
+  ],
+  "consultation": {
+    "intro": "Agree on the finished length and the parting first, then describe how much crown lift, layering, and outward bend you want in the styled result.",
+    "questions": [
+      "Should the perimeter land at the shoulders or closer to the collarbone?",
+      "Where do you naturally part your hair, and how deep should the side part sit?",
+      "Would you prefer a mostly one-length outline or light layers for movement?",
+      "Should the ends turn outward subtly or form a more pronounced flick?",
+      "How often are you comfortable using a round brush or hot tool to recreate the smooth flipped finish?"
+    ],
+    "sampleRequest": "“I’d like a collarbone-length lob with a deep side part, soft lift at the crown, and a clean outline. Please keep the layers light and show me how the ends look with a subtle outward flip that I can recreate with a round brush.”"
+  },
+  "considerations": [
+    "The recognizable flip usually needs a round-brush blowout or hot-tool styling; the cut alone will not hold the same smooth outward curve on every texture.",
+    "Use heat protection and moderate heat when repeatedly shaping the ends with a dryer, hot brush, or flatiron.",
+    "Straight and gently wavy hair can show the smooth side sweep and defined flipped tips with less reshaping. Curlier and coiler patterns change the silhouette when worn naturally, so discuss whether the goal is a natural-texture variation or a heat-styled finish.",
+    "The parting, crown volume, and strength of the end flip can be adjusted independently; making every layer strongly feathered can shift the look toward a more extensively layered style.",
+    "A very deep part or high crown lift may need more daily styling to keep its intended balance as the hair grows."
+  ],
+  "sourceIds": [
+    "davines-90s-long-bob-2026",
+    "glamour-long-bob-style-2026",
+    "olivia-garden-flipped-bob",
+    "tresemme-side-part-lob"
+  ],
+  "relatedStyleIds": [
+    "hairstyle-the-rachel"
+  ],
+  "guidePublicationStatus": "published"
+}

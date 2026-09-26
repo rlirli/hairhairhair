@@ -1,0 +1,14 @@
+{
+  "id": "hime-cut-dark-red",
+  "kind": "image",
+  "alt": "Fictional Korean woman with long medium-dark red straight hair, blunt bangs and jaw-length Hime side panels.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "hime-cut-dark-red"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/hime-cut-dark-red.png"
+}

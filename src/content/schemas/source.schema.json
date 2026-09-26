@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hairhairhair.hair/schemas/source.schema.json",
+  "title": "Editorial source",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "url",
+    "publisher",
+    "reviewedAt"
+  ],
+  "properties": {
+    "id": { "type": "string" },
+    "title": { "type": "string" },
+    "displayTitle": { "type": "string" },
+    "url": { "type": "string", "format": "uri" },
+    "publisher": { "type": "string" },
+    "reviewedAt": { "type": "string", "format": "date" }
+  },
+  "additionalProperties": false
+}

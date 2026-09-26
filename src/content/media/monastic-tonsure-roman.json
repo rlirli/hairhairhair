@@ -1,0 +1,14 @@
+{
+  "id": "monastic-tonsure-roman",
+  "kind": "image",
+  "alt": "Fictional older white man with a Roman monastic tonsure, showing a shaved crown surrounded by a continuous ring of short hair.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "monastic-tonsure-roman"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/monastic-tonsure-roman.png"
+}

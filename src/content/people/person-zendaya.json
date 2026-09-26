@@ -1,0 +1,17 @@
+{
+  "id": "person-zendaya",
+  "slug": "zendaya",
+  "name": "Zendaya",
+  "description": "Zendaya is an American performer from Oakland, California, known for her Emmy-winning portrayal of Rue in Euphoria.",
+  "heroImageId": "zendaya-paris-2025",
+  "sources": [
+    {
+      "kind": "biography",
+      "url": "https://www.televisionacademy.com/bios/zendaya"
+    },
+    {
+      "kind": "photograph",
+      "url": "https://commons.wikimedia.org/wiki/File:Zendaya_Paris_2025.jpg"
+    }
+  ]
+}

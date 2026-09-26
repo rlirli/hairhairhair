@@ -1,0 +1,65 @@
+{
+  "hairstyleId": "hairstyle-cropped-afro",
+  "assessments": [
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-1"
+        }
+      ],
+      "score": 0.1,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-2"
+        }
+      ],
+      "score": 0.2,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-3"
+        }
+      ],
+      "score": 0.65,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-3a"
+        }
+      ],
+      "score": 0.45,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-3c"
+        }
+      ],
+      "score": 0.85,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-4"
+        }
+      ],
+      "score": 0.95,
+      "provenance": "estimated"
+    }
+  ]
+}

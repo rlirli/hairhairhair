@@ -1,0 +1,14 @@
+{
+  "id": "buzz-short",
+  "kind": "image",
+  "alt": "Editorial reference showing a very short even buzz silhouette.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "buzz-short"
+    }
+  },
+  "transparentBackground": false,
+  "asset": "assets/hairstyles/buzz-short.png"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "top-knot-curly",
+  "kind": "image",
+  "alt": "Transparent editorial reference showing a compact curly top knot.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "top-knot-curly"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/top-knot-curly.png"
+}

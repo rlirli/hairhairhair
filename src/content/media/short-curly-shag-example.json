@@ -1,0 +1,14 @@
+{
+  "id": "short-curly-shag-example",
+  "kind": "image",
+  "alt": "Fictional adult man with a short curly shag, rounded crown volume, close scissor-cut sides, and soft curls retained at the nape, shown in three-quarter view.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "short-curly-shag-example"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/short-curly-shag-example.png"
+}

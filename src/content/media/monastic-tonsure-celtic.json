@@ -1,0 +1,14 @@
+{
+  "id": "monastic-tonsure-celtic",
+  "kind": "image",
+  "alt": "Fictional young fair-skinned man with a Celtic tonsure, showing a shaved front scalp and longer hair retained behind it.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "monastic-tonsure-celtic"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/monastic-tonsure-celtic.png"
+}

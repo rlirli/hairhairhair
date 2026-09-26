@@ -1,0 +1,14 @@
+{
+  "id": "blunt-bob-chin",
+  "kind": "image",
+  "alt": "Transparent editorial reference showing a chin-length blunt bob with a strong single-length perimeter.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "blunt-bob-chin"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/blunt-bob-chin.png"
+}

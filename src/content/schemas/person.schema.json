@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hairhairhair.hair/schemas/person.schema.json",
+  "title": "Person",
+  "type": "object",
+  "required": [
+    "id",
+    "slug",
+    "name",
+    "description",
+    "sources"
+  ],
+  "properties": {
+    "id": { "type": "string" },
+    "slug": { "type": "string" },
+    "name": { "type": "string" },
+    "description": { "type": "string" },
+    "heroImageId": { "type": "string" },
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["kind", "url"],
+        "properties": { "kind": { "type": "string" }, "url": { "type": "string", "format": "uri" } },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

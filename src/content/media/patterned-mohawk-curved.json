@@ -1,0 +1,14 @@
+{
+  "id": "patterned-mohawk-curved",
+  "kind": "image",
+  "alt": "Transparent editorial reference showing a patterned mohawk with a curved raised crest.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "patterned-mohawk-curved"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/patterned-mohawk-curved.png"
+}

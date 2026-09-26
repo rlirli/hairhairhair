@@ -1,0 +1,45 @@
+{
+  "hairstyleId": "hairstyle-freeform-locs",
+  "assessments": [
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-1"
+        }
+      ],
+      "score": 0.45,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-2"
+        }
+      ],
+      "score": 0.65,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-3"
+        }
+      ],
+      "score": 0.9,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-4"
+        }
+      ],
+      "score": 1,
+      "provenance": "estimated"
+    }
+  ]
+}

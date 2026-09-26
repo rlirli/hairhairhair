@@ -1,0 +1,14 @@
+{
+  "id": "short-feathered-shag-copper",
+  "kind": "image",
+  "alt": "Editorial reference showing a tanned 60-year-old woman with short copper hair in a soft feathered shag.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "short-feathered-shag-copper"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/short-feathered-shag-copper.png"
+}

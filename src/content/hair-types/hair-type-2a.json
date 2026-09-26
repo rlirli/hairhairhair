@@ -1,0 +1,18 @@
+{
+  "id": "hair-type-2a",
+  "classificationSystemId": "walker-inspired-expanded",
+  "code": "2A",
+  "slug": "2a",
+  "hairTypeId": "hair-type-2",
+  "pattern": "wavy",
+  "subtypeCode": "A",
+  "name": "Loose S-wave",
+  "description": "Forms a soft, open S-shape that may begin below the roots.",
+  "sortOrder": 4,
+  "characteristics": [
+    "Open S-shaped pattern",
+    "Loose wave definition",
+    "Often flatter near the roots"
+  ],
+  "comparison": "The loosest wavy pattern; 2B and 2C have progressively stronger S-bends."
+}

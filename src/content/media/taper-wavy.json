@@ -1,0 +1,14 @@
+{
+  "id": "taper-wavy",
+  "kind": "image",
+  "alt": "Editorial reference showing a low taper with a wavy top and soft perimeter.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "taper-wavy"
+    }
+  },
+  "transparentBackground": false,
+  "asset": "assets/hairstyles/taper-wavy.png"
+}

@@ -1,0 +1,105 @@
+{
+  "hairstyleId": "hairstyle-finger-waves",
+  "assessments": [
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-1"
+        }
+      ],
+      "score": 0.95,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-2"
+        }
+      ],
+      "score": 0.95,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-3"
+        }
+      ],
+      "score": 0.78,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-3a"
+        }
+      ],
+      "score": 0.88,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-3b"
+        }
+      ],
+      "score": 0.78,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-3c"
+        }
+      ],
+      "score": 0.68,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-4"
+        }
+      ],
+      "score": 0.55,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-4a"
+        }
+      ],
+      "score": 0.62,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-4b"
+        }
+      ],
+      "score": 0.54,
+      "provenance": "estimated"
+    },
+    {
+      "criteria": [
+        {
+          "dimension": "hair-type",
+          "valueId": "hair-type-4c"
+        }
+      ],
+      "score": 0.48,
+      "provenance": "estimated"
+    }
+  ]
+}

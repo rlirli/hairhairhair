@@ -1,0 +1,14 @@
+{
+  "id": "thin-mohawk-blond",
+  "kind": "image",
+  "alt": "Transparent editorial reference showing a thin blond mohawk with close shaved sides.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "thin-mohawk-blond"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/thin-mohawk-blond.png"
+}

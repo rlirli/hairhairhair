@@ -1,0 +1,14 @@
+{
+  "id": "top-knot-tapered",
+  "kind": "image",
+  "alt": "Transparent editorial reference showing a tied top knot above a tapered perimeter.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "top-knot-tapered"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/top-knot-tapered.png"
+}

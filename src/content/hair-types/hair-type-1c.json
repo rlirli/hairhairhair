@@ -1,0 +1,18 @@
+{
+  "id": "hair-type-1c",
+  "classificationSystemId": "walker-inspired-expanded",
+  "code": "1C",
+  "slug": "1c",
+  "hairTypeId": "hair-type-1",
+  "pattern": "straight",
+  "subtypeCode": "C",
+  "name": "Straight with visible bend",
+  "description": "Generally straight, with occasional bends or a slight wave through the lengths.",
+  "sortOrder": 3,
+  "characteristics": [
+    "Straight overall shape",
+    "Noticeable bends",
+    "Movement may appear in the lengths"
+  ],
+  "comparison": "The most visibly bent straight type pattern; 2A forms a more continuous S-wave."
+}

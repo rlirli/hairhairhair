@@ -1,0 +1,17 @@
+{
+  "id": "appearance-will-smith-2011",
+  "personId": "person-will-smith",
+  "imageId": "will-smith-2011",
+  "event": "White House State Dining Room visit",
+  "taken": {
+    "value": "2011-04-24",
+    "precision": "day",
+    "sourceUrl": "https://catalog.archives.gov/id/355008678"
+  },
+  "observations": [
+    {
+      "hairstyleId": "hairstyle-flat-top",
+      "note": "A low, squared flat-top shape is visible at the crown and front."
+    }
+  ]
+}

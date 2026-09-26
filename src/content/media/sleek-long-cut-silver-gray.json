@@ -1,0 +1,14 @@
+{
+  "id": "sleek-long-cut-silver-gray",
+  "kind": "image",
+  "alt": "Fictional white woman in her 60s with long sleek center-parted silver-gray hair and a softly blunt perimeter.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "sleek-long-cut-silver-gray"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/sleek-long-cut-silver-gray.png"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "monastic-tonsure-roman",
+  "hairstyleIds": [
+    "hairstyle-monastic-tonsure"
+  ],
+  "imageId": "monastic-tonsure-roman",
+  "title": "Roman crown tonsure",
+  "caption": "A fictional older white man wearing a Roman-style tonsure with a cleanly shaved crown surrounded by a continuous ring of short hair.",
+  "patternDescription": "The retained hair is presented with a straight-to-slightly-wavy texture, but the tonsure geometry itself does not depend on a particular natural hair type.",
+  "lengthDescription": "The crown is shaved to skin level while a short, even ring of hair remains around the sides and rear of the head."
+}

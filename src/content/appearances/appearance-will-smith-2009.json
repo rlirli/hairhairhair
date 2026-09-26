@@ -1,0 +1,17 @@
+{
+  "id": "appearance-will-smith-2009",
+  "personId": "person-will-smith",
+  "imageId": "will-smith-2009",
+  "event": "Nobel Peace Prize ceremony, Oslo City Hall",
+  "taken": {
+    "value": "2009-12-10",
+    "precision": "day",
+    "sourceUrl": "https://catalog.archives.gov/id/355006648"
+  },
+  "observations": [
+    {
+      "hairstyleId": "hairstyle-buzz-cut",
+      "note": "A close-cropped silhouette with a neat, low profile in the available frame."
+    }
+  ]
+}

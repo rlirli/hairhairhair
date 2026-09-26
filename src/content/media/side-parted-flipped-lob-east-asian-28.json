@@ -1,0 +1,14 @@
+{
+  "id": "side-parted-flipped-lob-east-asian-28",
+  "kind": "image",
+  "alt": "Fictional East Asian woman in her late 20s with a smooth collarbone-length lob, deep side part, and clearly flipped-out ends.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "side-parted-flipped-lob-east-asian-28"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/side-parted-flipped-lob-east-asian-28.png"
+}

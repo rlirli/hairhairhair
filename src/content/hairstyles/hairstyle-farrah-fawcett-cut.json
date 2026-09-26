@@ -1,0 +1,66 @@
+{
+  "id": "hairstyle-farrah-fawcett-cut",
+  "slug": "farrah-fawcett-cut",
+  "name": "Farrah Fawcett cut",
+  "kind": "cut",
+  "summary": "A long, extensively layered haircut shaped into large face-opening feathers, with elevated volume around the crown and sides and lower sections that sweep away from the face.",
+  "intro": [
+    "Allen Edwards recalled beginning Farrah Fawcett's transformation in 1974, when she arrived with largely one-length hair. He progressively introduced long layering as fuller, more mobile hair was becoming fashionable.",
+    "The hairstyle became inseparable from its blow-dried finish: shorter layers around the face are directed backward and outward, creating broad feathered sections beside the cheeks and temples, while longer layers continue the movement through the shoulders.",
+    "Edwards also associated the look with a blow-curl method in which most of the hair was dried first and the ends were then shaped with smaller brushes. That styling approach helped turn the layered cut into the expansive winged silhouette associated with Fawcett.",
+    "The historical attribution is not completely uncontested. José Eber later styled Fawcett extensively and contemporary reporting documents him changing and maintaining her hair; some later accounts credit Eber with the famous feathered look. The 1974 Edwards account is nevertheless the earliest specific creation narrative located for the layered cut."
+  ],
+  "variations": [
+    {
+      "id": "farrah-fawcett-cut-classic-winged",
+      "name": "Classic winged Farrah",
+      "description": "Uses pronounced face-framing layers, substantial side volume and strongly outward-directed feathering to create the broad 1970s silhouette."
+    },
+    {
+      "id": "farrah-fawcett-cut-soft-feathered",
+      "name": "Soft feathered Farrah",
+      "description": "Keeps the long layered construction and outward movement but reduces crown height and separates the feathers less dramatically."
+    }
+  ],
+  "consultation": {
+    "intro": "Separate the underlying layer structure from the blowout: agree on overall length, where the shortest face frame begins, how much weight is removed through the sides, and how strongly the finished hair should sweep away from the face.",
+    "questions": [
+      "How much overall length do you want to retain below the shoulders?",
+      "Where should the shortest face-framing layer begin: around the cheekbone, jaw, or lower?",
+      "How dramatic should the outward feathering around the temples and cheeks be?",
+      "Do you want substantial crown and side volume or a softer contemporary interpretation?",
+      "Are you willing to use a blow-dryer and round brush regularly to produce the classic winged shape?"
+    ],
+    "sampleRequest": "“I want a long Farrah-style feathered cut with lots of movement, shorter layers beginning around my cheekbones, longer layers through the shoulders, and enough layering around the sides that I can blow-dry them back and away from my face into large soft wings.”"
+  },
+  "considerations": [
+    "The haircut alone does not automatically produce the familiar silhouette; directional blow-drying is a major part of the classic result.",
+    "The face-framing sections need enough length to sweep backward rather than falling like a short fringe.",
+    "Dense hair can support substantial feathered volume, but excessive bulk may need controlled weight removal so the layers separate rather than forming one heavy mass.",
+    "Very fine or low-density hair can lose fullness if the layering is too aggressive, particularly through the lower perimeter.",
+    "Straight hair generally needs styling to create the curved feathering, while gently wavy hair often supplies useful natural body for the shape.",
+    "Increasing curl tightness makes the canonical large, smooth feathered panels progressively harder to maintain while preserving the natural curl pattern.",
+    "The attribution to Allen Edwards is historically disputed because José Eber also styled Fawcett and has been credited with versions of her signature hair."
+  ],
+  "sourceIds": [
+    "american-salon-beauty-icon",
+    "beauty-interviews-allen-edwards",
+    "latimes-fawcett-generation-x",
+    "latimes-hair-like-theirs",
+    "washington-post-jose-eber-1979"
+  ],
+  "relatedStyleIds": [
+    "hairstyle-long-layered-cut",
+    "hairstyle-short-feathered-shag"
+  ],
+  "guidePublicationStatus": "published",
+  "inventedAt": {
+    "year": 1974,
+    "precision": "year",
+    "sourceId": "beauty-interviews-allen-edwards"
+  },
+  "inventor": {
+    "name": "Allen Edwards",
+    "sourceId": "beauty-interviews-allen-edwards"
+  }
+}

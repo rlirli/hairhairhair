@@ -27,9 +27,7 @@ npm run verify
 - [Add a person](docs/contributing/adding-a-person.md)
 - [Browse all project documentation](docs/README.md)
 
-Sort supported data collections with `npm run sort:hairstyles`. Preview changes with `npm run sort:hairstyles -- --dry-run`; target specific collections with `--only <name>`.
-
-Import hairstyle packages from `inbox-hairstyles/` with `npm run import:hairstyles` to preview, or add `-- --apply` to write changes and archive imported folders.
+The canonical Git-tracked records and image assets live in `src/content/`. Validate record schemas, relationships, and image paths with `npm run validate:content`; `npm run check` runs this validation before Astro's type checks. See [the content model](docs/content-model.md) for the directory structure and contributor workflow.
 
 The domain vocabulary is defined in [`CONTEXT.md`](CONTEXT.md). Keep content records, media metadata, research, and tests consistent in the same commit.
 

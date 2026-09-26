@@ -1,0 +1,17 @@
+{
+  "id": "appearance-mario-balotelli-2019",
+  "personId": "person-mario-balotelli",
+  "imageId": "mario-balotelli-2019-marseille",
+  "event": "Olympique de Marseille debut",
+  "taken": {
+    "value": "2019-01-25",
+    "precision": "day",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mario_Balotelli_OM_(cropped).jpg"
+  },
+  "observations": [
+    {
+      "hairstyleId": "hairstyle-top-knot",
+      "note": "Very short sides frame a longer top gathered into a small topknot."
+    }
+  ]
+}

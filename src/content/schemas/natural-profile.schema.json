@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hairhairhair.hair/schemas/natural-profile.schema.json",
+  "title": "Natural profile",
+  "type": "object",
+  "required": [
+    "id",
+    "personId",
+    "hairTypeId",
+    "hairSubtypeId",
+    "naturalHairColor",
+    "naturalSkinTone",
+    "hairThickness",
+    "hairDensity"
+  ],
+  "properties": {
+    "id": { "type": "string" },
+    "personId": { "type": "string" },
+    "hairTypeId": { "$ref": "#/$defs/trait" },
+    "hairSubtypeId": { "$ref": "#/$defs/trait" },
+    "naturalHairColor": { "$ref": "#/$defs/trait" },
+    "naturalSkinTone": { "$ref": "#/$defs/trait" },
+    "hairThickness": { "$ref": "#/$defs/trait" },
+    "hairDensity": { "$ref": "#/$defs/trait" }
+  },
+  "$defs": {
+    "trait": {
+      "type": "object",
+      "required": ["value", "provenance"],
+      "properties": {
+        "value": { "type": ["string", "null"] },
+        "provenance": {
+          "type": "object",
+          "required": [
+            "source",
+            "status",
+            "confidence",
+            "note"
+          ],
+          "properties": {
+            "source": { "type": "string" },
+            "status": { "type": "string" },
+            "confidence": { "type": "string" },
+            "note": { "type": "string" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

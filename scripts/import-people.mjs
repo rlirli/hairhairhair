@@ -417,42 +417,9 @@ async function loadExisting() {
   };
 }
 async function main() {
-  const options = parseArgs(process.argv.slice(2));
-  if (options.help) {
-    process.stdout.write(
-      "Usage: npm run import:people [-- --apply|--dry-run]\nDefault is preview; --apply imports valid folders and archives them.\n",
-    );
-    return;
-  }
-  const { packages, skipped } = await loadPackages();
-  if (!packages.length) {
-    process.stdout.write("No people packages found.\n" + (skipped.length ? `Skipped: ${skipped.join(", ")}\n` : ""));
-    return;
-  }
-  const existing = await loadExisting();
-  const validate = validateSchema(existing.schema);
-  const plan = validatePackages(packages, existing, validate);
-  if (plan.errors.length) die("Import preflight failed:\n- " + plan.errors.join("\n- "));
-  const { outputs, imageCopies } = await prepareOutputs(plan.planned);
-  await assertNoConflicts(plan.planned, imageCopies);
-  const changed = [];
-  for (const [path, contents] of outputs) if (contents !== (await readFile(path, "utf8"))) changed.push(path);
-  process.stdout.write(`${options.apply ? "Import plan" : "Dry run plan"}:\n`);
-  process.stdout.write(
-    `- People: ${plan.planned.map((x) => x.payload.person.name).join(", ")}\n- Photos: ${imageCopies.length}\n- Files to update: ${changed.map((x) => x.slice(root.length + 1)).join(", ")}\n- Archive: ${plan.planned.map((x) => `inbox-people/archive/${x.folderName}`).join(", ")}\n`,
+  throw new Error(
+    "The payload-based people importer was retired. Add JSON records under src/content/people, natural-profiles, appearances, and media; then run npm run validate:content.",
   );
-  if (plan.proposedHairstyles.length) {
-    process.stdout.write("- Proposed hairstyles (kept in archived package; not imported as confirmed IDs):\n");
-    for (const proposal of plan.proposedHairstyles)
-      process.stdout.write(`  - ${proposal.id} in ${proposal.folderName}/${proposal.appearanceId}: ${proposal.note}\n`);
-  }
-  if (skipped.length) process.stdout.write(`- Skipped folders: ${skipped.join(", ")}\n`);
-  if (!options.apply) {
-    process.stdout.write("Preview only; no files changed. Re-run with --apply to import.\n");
-    return;
-  }
-  await apply(outputs, plan.planned, imageCopies);
-  process.stdout.write("Import complete; source folders archived.\n");
 }
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   try {

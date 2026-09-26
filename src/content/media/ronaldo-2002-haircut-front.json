@@ -1,0 +1,14 @@
+{
+  "id": "ronaldo-2002-haircut-front",
+  "kind": "image",
+  "alt": "Fictional adult man shown front-on with a close-shaved scalp and one short, rounded half-circle patch at the center front hairline.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "ronaldo-2002-haircut-front"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/ronaldo-2002-haircut-front.png"
+}

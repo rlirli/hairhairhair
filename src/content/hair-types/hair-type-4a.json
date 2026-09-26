@@ -1,0 +1,18 @@
+{
+  "id": "hair-type-4a",
+  "classificationSystemId": "walker-inspired-expanded",
+  "code": "4A",
+  "slug": "4a",
+  "hairTypeId": "hair-type-4",
+  "pattern": "coily",
+  "subtypeCode": "A",
+  "name": "Defined coiled loops",
+  "description": "Forms small, visibly coiled loops with a repeating rounded pattern.",
+  "sortOrder": 10,
+  "characteristics": [
+    "Small coiled loops",
+    "Rounded repeating pattern",
+    "Visible coil from close range"
+  ],
+  "comparison": "More tightly coiled than 3C; 4B uses sharper bends rather than rounded loops."
+}

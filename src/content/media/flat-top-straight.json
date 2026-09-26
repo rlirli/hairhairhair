@@ -1,0 +1,14 @@
+{
+  "id": "flat-top-straight",
+  "kind": "image",
+  "alt": "Generated editorial reference showing an upright compact flat top with squared corners above short graduated sides on a fictional adult.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "flat-top-straight"
+    }
+  },
+  "transparentBackground": false,
+  "asset": "assets/hairstyles/flat-top-straight.png"
+}

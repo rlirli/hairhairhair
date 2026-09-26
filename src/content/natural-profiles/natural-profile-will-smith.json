@@ -1,0 +1,58 @@
+{
+  "id": "natural-profile-will-smith",
+  "personId": "person-will-smith",
+  "hairTypeId": {
+    "value": "hair-type-4",
+    "provenance": {
+      "source": "ai-prefill",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "Inferred from public photographs; not self-reported or independently verified."
+    }
+  },
+  "hairSubtypeId": {
+    "value": null,
+    "provenance": {
+      "source": "not-documented",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "No reliable public documentation found for a specific hair subtype."
+    }
+  },
+  "naturalHairColor": {
+    "value": "black",
+    "provenance": {
+      "source": "ai-prefill",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "Inferred from public photographs; lighting and styling can affect appearance."
+    }
+  },
+  "naturalSkinTone": {
+    "value": "deep-brown",
+    "provenance": {
+      "source": "ai-prefill",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "A visual descriptor, not a scientific or clinical measurement."
+    }
+  },
+  "hairThickness": {
+    "value": null,
+    "provenance": {
+      "source": "not-documented",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "No reliable public documentation found."
+    }
+  },
+  "hairDensity": {
+    "value": null,
+    "provenance": {
+      "source": "not-documented",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "No reliable public documentation found."
+    }
+  }
+}

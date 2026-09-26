@@ -1,0 +1,17 @@
+{
+  "id": "appearance-mario-balotelli-2013",
+  "personId": "person-mario-balotelli",
+  "imageId": "mario-balotelli-2013-inter",
+  "event": "Inter Milan–AC Milan match",
+  "taken": {
+    "value": "2013-02-24",
+    "precision": "day",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Balotelli_Inter-Milan_february_2013_(cropped).jpg"
+  },
+  "observations": [
+    {
+      "hairstyleId": "hairstyle-thin-mohawk",
+      "note": "The available frame shows a compact fauxhawk-like shape; Thin mohawk is the nearest published hairstyle, not a claim of an exact match."
+    }
+  ]
+}

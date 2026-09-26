@@ -1,0 +1,18 @@
+{
+  "id": "hair-type-4c",
+  "classificationSystemId": "walker-inspired-expanded",
+  "code": "4C",
+  "slug": "4c",
+  "hairTypeId": "hair-type-4",
+  "pattern": "coily",
+  "subtypeCode": "C",
+  "name": "Very tight, subtle coil pattern",
+  "description": "Has very tight bends or coils whose repeated pattern may be subtle without close inspection.",
+  "sortOrder": 12,
+  "characteristics": [
+    "Very tight bends",
+    "Pattern can look less defined",
+    "Compact coil or zig-zag path"
+  ],
+  "comparison": "The least visibly uniform coily pattern in this chart; 4A and 4B show clearer loop or angle repetition."
+}

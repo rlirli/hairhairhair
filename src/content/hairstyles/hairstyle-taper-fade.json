@@ -1,0 +1,55 @@
+{
+  "id": "hairstyle-taper-fade",
+  "slug": "taper-fade",
+  "name": "Taper fade",
+  "kind": "finishing-technique",
+  "summary": "A gradual blend that changes the edge and perimeter while the top keeps its chosen shape.",
+  "intro": [
+    "A taper fade is a conversation about where the blend begins, how far it travels, and how close the shortest finish gets to the skin. A low taper can keep more of the sides and top; a higher or skin finish changes the silhouette more visibly.",
+    "The phrase is not a single fixed blueprint. Bring a reference, name the sideburn and neckline finish, and describe how much length you want left on top. The same perimeter idea can be paired with waves, curls, coils, or a straight top while the top keeps its own shape.",
+    "A good consultation makes the blend visible in words: where it begins, how high it rises, and whether the lowest part is shadow, very short, or skin-level. Placement and finish matter more than the label alone."
+  ],
+  "variations": [
+    {
+      "id": "taper-fade-higher",
+      "name": "Higher taper / wider fade",
+      "description": "Moves the blend farther around the head; confirm whether your shop uses “higher taper” or “fade” for the requested service."
+    },
+    {
+      "id": "taper-fade-low",
+      "name": "Low taper",
+      "description": "Keeps the transition close to the sideburns and neckline, leaving more of the sides visually intact."
+    },
+    {
+      "id": "taper-fade-skin",
+      "name": "Skin or bald finish",
+      "description": "Takes the lowest part to skin-level appearance before blending upward."
+    }
+  ],
+  "consultation": {
+    "intro": "A useful request names the placement, shortest finish, top length, and edge details separately.",
+    "questions": [
+      "Should the taper sit only at the temples and neckline, or blend around the whole head?",
+      "How low should the shortest area go: shadow, very short, or skin/bald?",
+      "How much length and shape should stay on top, and should the natural pattern be left visible?",
+      "What should happen to the sideburns, neckline, and any part or line-up?"
+    ],
+    "sampleRequest": "“I’d like a low taper at the temples and neckline, blended but not bald, with the top left long enough to keep its natural shape. Please show me the shortest area before you finish the edges.”"
+  },
+  "considerations": [
+    "Growth direction, cowlicks, density, and the contrast between the perimeter and top can change how seamless the blend looks.",
+    "A reference photo communicates placement and finish better than “make it clean”; ask the practitioner to translate it to your current length.",
+    "Maintenance depends on how crisp you want the edge and how quickly your perimeter grows, not on a fixed hair-type rule."
+  ],
+  "sourceIds": [
+    "andis-low-taper",
+    "wahl-cut-guide"
+  ],
+  "relatedStyleIds": [
+    "hairstyle-buzz-cut",
+    "hairstyle-edgar-cut",
+    "hairstyle-flat-top",
+    "hairstyle-twists"
+  ],
+  "guidePublicationStatus": "published"
+}

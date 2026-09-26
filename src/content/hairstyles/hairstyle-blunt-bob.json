@@ -1,0 +1,50 @@
+{
+  "id": "hairstyle-blunt-bob",
+  "slug": "blunt-bob",
+  "name": "Blunt bob",
+  "kind": "cut",
+  "summary": "A short bob defined by a strong, nearly single-length perimeter with little or no visible layering.",
+  "intro": [
+    "A blunt bob creates its shape through the perimeter: the ends read as one deliberate line rather than a stack of visible layers.",
+    "Jaw- and chin-length versions make the outline especially obvious, but the exact length can move slightly above or below the jaw. Natural wave, curl and coil can soften the visual line without changing the underlying cut."
+  ],
+  "variations": [
+    {
+      "id": "blunt-bob-fringe",
+      "name": "Blunt bob with fringe",
+      "description": "Pairs the strong bob perimeter with a separate fringe or bang shape."
+    },
+    {
+      "id": "blunt-bob-chin",
+      "name": "Chin-length blunt bob",
+      "description": "A compact version whose perimeter finishes around the jaw or chin."
+    },
+    {
+      "id": "blunt-bob-curly",
+      "name": "Curly blunt bob",
+      "description": "Keeps the blunt perimeter while allowing natural curl to create movement and volume above it."
+    }
+  ],
+  "consultation": {
+    "intro": "Agree on the finished perimeter, dry length and amount of layering before cutting; those choices determine whether the result still reads as blunt.",
+    "questions": [
+      "Where should the perimeter sit: above the jaw, at the chin, or slightly below it?",
+      "Should the line be completely one-length or include very subtle internal shaping?",
+      "Will the hair usually be worn straight, wavy, curly or coily?",
+      "Should the front remain level with the back or become slightly longer?"
+    ],
+    "sampleRequest": "“I’d like a chin-length blunt bob with a strong single-length perimeter, no visible layers, and enough length that it still lands around my jaw when worn naturally.”"
+  },
+  "considerations": [
+    "Natural curl and coil can make an identical underlying perimeter appear less geometrically straight, so dry-state length matters.",
+    "A very precise blunt edge becomes visibly softer as it grows, making maintenance frequency part of the consultation.",
+    "Removing too much internal weight changes the silhouette toward a layered bob even if the outer perimeter remains short."
+  ],
+  "sourceIds": [
+    "haircom-blunt-bob"
+  ],
+  "relatedStyleIds": [
+    "hairstyle-five-point-cut"
+  ],
+  "guidePublicationStatus": "published"
+}

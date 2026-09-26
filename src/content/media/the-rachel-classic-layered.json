@@ -1,0 +1,14 @@
+{
+  "id": "the-rachel-classic-layered",
+  "kind": "image",
+  "alt": "Fictional South Asian woman with a shoulder-length heavily layered Rachel-style haircut, rounded face framing and flicked lower ends.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "the-rachel-classic-layered"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/the-rachel-classic-layered.png"
+}

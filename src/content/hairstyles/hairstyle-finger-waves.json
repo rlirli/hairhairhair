@@ -1,0 +1,55 @@
+{
+  "id": "hairstyle-finger-waves",
+  "slug": "finger-waves",
+  "name": "Finger waves",
+  "kind": "styling-technique",
+  "summary": "A wet-setting technique that molds hair into connected S-shaped ridges close to the scalp using the fingers, a comb, and styling product.",
+  "intro": [
+    "Finger waves are defined by a repeating S-shaped pattern molded into damp or wet hair with the fingers and a comb. The finished ridges usually sit close to the scalp and read as a deliberate continuous wave rather than loose curls.",
+    "The technique became strongly associated with short waved hairstyles in the later 1920s and 1930s. Historical sources distinguish finger waving from Marcel waving: finger waves are shaped on damp hair with fingers and a comb, while Marcel waves use heated irons.",
+    "Modern versions can cover the whole head or appear as a partial sculpted section combined with natural or otherwise styled lengths. A deep side part and glossy finish are common choices, but neither is mandatory."
+  ],
+  "variations": [
+    {
+      "id": "finger-waves-classic-full-head",
+      "name": "Classic full-head finger waves",
+      "description": "Carries a continuous sequence of close-set S-shaped ridges around most or all of the head for a compact, highly sculpted finish."
+    },
+    {
+      "id": "finger-waves-partial",
+      "name": "Partial finger waves",
+      "description": "Sculpts one section, such as the front or temple area, while leaving the remaining hair in its natural texture or another finish."
+    },
+    {
+      "id": "finger-waves-soft",
+      "name": "Soft finger waves",
+      "description": "Uses broader, less rigid ridges or gently brushes the dried set for a looser interpretation while retaining the underlying S-wave direction."
+    }
+  ],
+  "consultation": {
+    "intro": "Agree on how much of the head will be waved, the part position, ridge scale, finish, and how much product or set firmness is acceptable.",
+    "questions": [
+      "Do you want a full-head finger-wave set or only a sculpted front or side section?",
+      "Should the part sit deep to one side, near the center, or follow your usual parting?",
+      "Do you want narrow, crisp ridges or broader, softer waves?",
+      "Should the result remain very glossy and firmly set, or be softened after drying for more movement?",
+      "Will the hair be worn close to the scalp throughout, or should longer sections remain natural or differently styled?"
+    ],
+    "sampleRequest": "“I want close, glossy finger waves with a deep side part and clear S-shaped ridges from the front hairline through the temples. Keep the set compact and sculpted rather than fluffy, and tell me how much product and drying time my texture will need.”"
+  },
+  "considerations": [
+    "Finger waves are a temporary set: water, washing, humidity, friction, and repeated handling can soften or disrupt the molded ridges.",
+    "The classic technique depends on sufficient slip and hold while the hair is wet or damp, followed by drying without disturbing the shaped pattern.",
+    "Fine, straight, or relaxed hair is often easier to mold into the canonical smooth S-shape, but professional guidance notes that the technique can be adapted across hair types with differences in product, smoothing, and setting effort.",
+    "As natural curl or coil tightness increases, preserving the untouched natural pattern while also achieving a very flat, continuous classic wave becomes progressively more demanding; the compatibility scores below therefore estimate the defining look rather than general styling possibility.",
+    "Finger waves and Marcel waves can look similar, but the traditional methods differ: Marcel waving relies on heated irons, whereas finger waving is molded primarily with the fingers and comb."
+  ],
+  "sourceIds": [
+    "american-salon-finger-waves",
+    "denver-library-bobbing-waving",
+    "harpers-bazaar-finger-waves",
+    "smithsonian-flapper-bob"
+  ],
+  "relatedStyleIds": [],
+  "guidePublicationStatus": "published"
+}

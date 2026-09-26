@@ -1,0 +1,53 @@
+{
+  "id": "hairstyle-patterned-mohawk",
+  "slug": "patterned-mohawk",
+  "name": "Patterned mohawk",
+  "kind": "cut",
+  "summary": "A raised central crest paired with deliberately shaved or patterned sides.",
+  "intro": [
+    "A patterned mohawk keeps the sides intentionally visible as design: shaved lines, geometric panels, or a shaped transition frame a central strip of longer hair.",
+    "The crest can be narrow or broad, softly rounded or sharply graphic. Bring front, side, and rear references so the barber can map the pattern and explain how it will grow out."
+  ],
+  "variations": [
+    {
+      "id": "patterned-mohawk-curved",
+      "name": "Curved crest",
+      "description": "Keeps the central strip rounded or swept rather than strictly angular."
+    },
+    {
+      "id": "patterned-mohawk-geometric",
+      "name": "Geometric sides",
+      "description": "Uses crisp lines or panels shaved into the sides for a graphic finish."
+    },
+    {
+      "id": "patterned-mohawk-soft",
+      "name": "Soft transition",
+      "description": "Blends the sides more gradually while retaining a distinct raised center."
+    }
+  ],
+  "consultation": {
+    "intro": "Name the crest width, height, side pattern, and maintenance tolerance separately.",
+    "questions": [
+      "How wide and tall should the central strip read from the front and side?",
+      "Do you want hard shaved lines, a geometric panel, or a softer pattern?",
+      "Should the crest stand naturally or rely on product and directed styling?",
+      "How often can you refresh the shaved design as it grows out?"
+    ],
+    "sampleRequest": "“I want a narrow raised crest with one curved shaved design on each side. Keep the edges crisp but leave enough length to style the crest without heavy product.”"
+  },
+  "considerations": [
+    "A pattern is a design commitment: small growth changes can soften its legibility quickly.",
+    "Crest height depends on length, density, growth direction, and styling support; agree on the dry silhouette before cutting.",
+    "Shaved designs are not a natural-pattern classification and should be assessed as a cut and finish choice."
+  ],
+  "sourceIds": [
+    "guardian-balotelli-hair-obituary",
+    "mancity-balotelli-blond-bombshell"
+  ],
+  "relatedStyleIds": [
+    "hairstyle-cropped-afro",
+    "hairstyle-thin-mohawk",
+    "hairstyle-top-knot"
+  ],
+  "guidePublicationStatus": "published"
+}

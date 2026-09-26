@@ -1,0 +1,58 @@
+{
+  "id": "hairstyle-monastic-tonsure",
+  "slug": "monastic-tonsure",
+  "name": "Monastic tonsure",
+  "kind": "cut",
+  "summary": "A family of historically religious haircuts in which selected areas of the scalp are deliberately shaved or closely cut to create a symbolic clerical or monastic pattern.",
+  "intro": [
+    "Tonsure refers to deliberate removal or close cutting of scalp hair as a religious marker. In Christian history, several visually distinct forms developed rather than one universal haircut.",
+    "The Roman or St. Peter form leaves a ring of hair around a shaved crown. The Eastern or St. Paul form removes the hair across the whole head. The Celtic or St. John form removes the front portion of the hair, historically described in Britain as shaving the area in front of a line running from ear to ear.",
+    "The names associated with Peter, Paul and John are traditional labels rather than verified inventor attributions. Historical sources explicitly note that the different forms cannot securely claim apostolic origin.",
+    "Because the geometry is created by shaving or cutting selected areas rather than by exploiting a particular curl pattern, the basic forms can be produced on any natural hair type."
+  ],
+  "variations": [
+    {
+      "id": "monastic-tonsure-celtic",
+      "name": "Celtic / St. John tonsure",
+      "description": "Removes the hair across the front portion of the head, historically described as shaving forward of an ear-to-ear boundary while leaving hair behind it."
+    },
+    {
+      "id": "monastic-tonsure-eastern",
+      "name": "Eastern / St. Paul tonsure",
+      "description": "Removes or closely cuts the hair across the entire scalp rather than preserving a crown or rear section."
+    },
+    {
+      "id": "monastic-tonsure-roman",
+      "name": "Roman / St. Peter tonsure",
+      "description": "Shaves the crown while retaining a continuous ring or corona of hair around the sides and back of the head."
+    }
+  ],
+  "consultation": {
+    "intro": "A tonsure request must identify the historical form first because Roman, Celtic and Eastern tonsures create fundamentally different scalp patterns.",
+    "questions": [
+      "Which form do you want: Roman crown, Celtic front-shaved, or Eastern fully shorn?",
+      "For a Roman tonsure, how wide should the remaining ring of hair be?",
+      "For a Celtic tonsure, where should the ear-to-ear transition between shaved and retained hair sit?",
+      "Should the shaved area be razor-smooth or left with very short visible stubble?",
+      "How long should any retained hair remain, and should its perimeter be sharply defined or softer?"
+    ],
+    "sampleRequest": "“I want a Roman-style monastic tonsure: shave the crown clean while leaving a continuous, clearly defined ring of short hair around the sides and back. Keep the ring even in width and make the contrast with the shaved crown obvious.”"
+  },
+  "considerations": [
+    "The three historical forms should not be treated as interchangeable styling variations because each removes hair from a different part of the scalp.",
+    "A Roman tonsure depends on a continuous surviving ring of hair; natural balding patterns can therefore affect how faithfully that geometry can be reproduced.",
+    "The Celtic form is historically less familiar today and can easily be mistaken for an accidental or fantasy shave pattern unless the front-to-back division is deliberate and clearly defined.",
+    "The Eastern form can look visually similar to an ordinary shaved or bald head even though its historical meaning and context are different.",
+    "Visible regrowth quickly softens the boundary between shaved and retained sections, so sharply defined tonsures require regular maintenance.",
+    "The hairstyle has strong religious and historical associations; using the name accurately is preferable to treating every partially shaved head as a tonsure."
+  ],
+  "sourceIds": [
+    "catholic-encyclopedia-celtic-rite",
+    "catholic-encyclopedia-tonsure",
+    "encyclopedia-com-tonsure"
+  ],
+  "relatedStyleIds": [
+    "hairstyle-buzz-cut"
+  ],
+  "guidePublicationStatus": "published"
+}

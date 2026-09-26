@@ -1,0 +1,11 @@
+{
+  "id": "style-example-cropped-afro-compact",
+  "hairstyleIds": [
+    "hairstyle-cropped-afro"
+  ],
+  "imageId": "cropped-afro-compact",
+  "title": "Close cropped afro",
+  "caption": "Notice the tighter rounded shape while the textured surface remains visible.",
+  "patternDescription": "A closer crop reduces height without turning the silhouette into a uniform buzz cut.",
+  "lengthDescription": "The shape sits close to the head with enough texture to distinguish it from a simple clipper crop."
+}

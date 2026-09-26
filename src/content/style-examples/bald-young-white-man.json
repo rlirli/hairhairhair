@@ -1,0 +1,11 @@
+{
+  "id": "bald-young-white-man",
+  "hairstyleIds": [
+    "hairstyle-bald"
+  ],
+  "imageId": "bald-young-white-man",
+  "title": "Clean-shaven head on young man",
+  "caption": "A fictional white man in his mid-20s wearing a completely shaved head with an even scalp finish and no visible hairstyle perimeter.",
+  "patternDescription": "No visible hair pattern remains because the scalp is shaved to skin level; the model's underlying natural hair subtype is intentionally unspecified.",
+  "lengthDescription": "Bald, with scalp hair removed evenly to skin level from the hairline through the crown and nape."
+}

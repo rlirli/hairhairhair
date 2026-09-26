@@ -1,0 +1,14 @@
+{
+  "id": "finger-waves-deep-side-part",
+  "kind": "image",
+  "alt": "Three-quarter portrait of a fictional Black adult wearing glossy close-cropped finger waves with a deep side part on a transparent background.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "finger-waves-deep-side-part"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/finger-waves-deep-side-part.png"
+}

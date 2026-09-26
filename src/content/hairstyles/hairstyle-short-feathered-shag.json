@@ -1,0 +1,59 @@
+{
+  "id": "hairstyle-short-feathered-shag",
+  "slug": "short-feathered-shag",
+  "name": "Short feathered shag",
+  "kind": "cut",
+  "summary": "A short layered shag built around crown lift, airy feathered sections, face framing, and a light broken perimeter around the ears and nape.",
+  "intro": [
+    "A short feathered shag combines the layered structure of a shag with deliberately airy, feathered movement through the ends.",
+    "The defining shape uses shorter layers through the crown to create lift, while the sides and perimeter break into lighter face-framing and nape pieces rather than forming a solid bob line.",
+    "Feathering describes how strategically placed layers and styling create lightness, separation, and movement; it is not simply another word for layering."
+  ],
+  "variations": [
+    {
+      "id": "short-feathered-shag-curly",
+      "name": "Curly short shag",
+      "description": "Adapts the short shag structure to curls with customized crown and face-framing layers while retaining natural curl definition."
+    },
+    {
+      "id": "short-feathered-shag-wispy-fringe",
+      "name": "Short feathered shag with wispy fringe",
+      "description": "Adds a light broken fringe that connects into feathered face-framing layers around the temples and cheeks."
+    },
+    {
+      "id": "short-feathered-shag-soft",
+      "name": "Soft feathered shag",
+      "description": "Keeps the crown layering blended and the perimeter airy for a softer, less choppy interpretation."
+    }
+  ],
+  "consultation": {
+    "intro": "Agree on crown height, fringe shape, ear and nape length, and how pronounced the feathered movement should be before cutting.",
+    "questions": [
+      "How short should the crown layers be, and how much lift do you want there?",
+      "Should the fringe be wispy, fuller, side-swept, or omitted?",
+      "Should the sides expose the ears or retain soft pieces around them?",
+      "How much length should remain at the nape?",
+      "Do you want the ends styled with a visible outward feather or left closer to their natural texture?"
+    ],
+    "sampleRequest": "“I’d like a short feathered shag with airy crown layers, a soft wispy fringe, feathered pieces around my ears and cheeks, and a little length left at the nape. Keep it soft and blended rather than giving me a strongly disconnected wolf cut.”"
+  },
+  "considerations": [
+    "The haircut should show visible crown layering and a broken, lightweight perimeter; without that structure it can read as a generic short layered cut.",
+    "Feathering is partly a styling result. Blow-drying or shaping the ends away from the face can make the airy layered structure more pronounced.",
+    "Fine hair can benefit from strategically placed crown layers, but excessive thinning can reduce the visual density of the perimeter.",
+    "Curly and coily textures can support a shag structure, but layer length should be customized for shrinkage and curl behavior rather than copied directly from a straight or wavy reference.",
+    "Shorter, choppier feathered cuts generally need more frequent reshaping than longer, more uniform layers."
+  ],
+  "sourceIds": [
+    "allure-shag-haircut-ideas",
+    "haircom-feathered-hair",
+    "haircom-short-haircuts-older-women"
+  ],
+  "relatedStyleIds": [
+    "hairstyle-farrah-fawcett-cut",
+    "hairstyle-short-curly-shag",
+    "hairstyle-the-rachel",
+    "hairstyle-wolf-cut"
+  ],
+  "guidePublicationStatus": "published"
+}

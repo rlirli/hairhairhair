@@ -1,0 +1,52 @@
+{
+  "id": "hairstyle-top-knot",
+  "slug": "top-knot",
+  "name": "Top knot",
+  "kind": "styling-technique",
+  "summary": "Longer hair gathered and secured at the crown, often paired with a shorter or tapered perimeter.",
+  "intro": [
+    "A top knot gathers enough length at or near the crown to form a compact tied shape. The surrounding hair may remain longer or be tapered, making the perimeter part of the overall silhouette.",
+    "This is a styling arrangement as much as a cut: section placement, tie tension, and the amount of loose texture left around the knot change its character."
+  ],
+  "variations": [
+    {
+      "id": "top-knot-curly",
+      "name": "Curly knot",
+      "description": "Allows curl and coil to remain visible through the gathered shape and loose ends."
+    },
+    {
+      "id": "top-knot-loose",
+      "name": "Loose gather",
+      "description": "Keeps the knot relaxed with less tension and more visible texture around the tie."
+    },
+    {
+      "id": "top-knot-tapered",
+      "name": "Tapered perimeter",
+      "description": "Pairs the gathered crown with close, gradually shorter sides and nape."
+    }
+  ],
+  "consultation": {
+    "intro": "Confirm the minimum length, tie position, perimeter finish, and comfortable tension before committing to the arrangement.",
+    "questions": [
+      "Where should the knot sit: crown, high top, or farther back?",
+      "Should the sides and nape stay long, taper, or be cut close?",
+      "How much curl, coil, or loose texture should remain visible around the tie?",
+      "What level of tension is comfortable, and how often will the style be worn?"
+    ],
+    "sampleRequest": "“I want a small top knot at the crown with a low taper around the sides and nape. Keep the tie comfortable and leave the natural texture visible through the knot.”"
+  },
+  "considerations": [
+    "A knot needs enough length to gather securely; a stylist can test the placement before cutting the perimeter.",
+    "Tension matters. Styles that hurt, sting, or pull should be loosened and reassessed.",
+    "Curl and coil shrinkage change the apparent knot size and required length; plan with the hair in its usual worn state."
+  ],
+  "sourceIds": [
+    "guardian-balotelli-hair-obituary",
+    "mancity-balotelli-blond-bombshell"
+  ],
+  "relatedStyleIds": [
+    "hairstyle-cropped-afro",
+    "hairstyle-patterned-mohawk"
+  ],
+  "guidePublicationStatus": "published"
+}

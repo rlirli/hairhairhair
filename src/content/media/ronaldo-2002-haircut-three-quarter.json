@@ -1,0 +1,14 @@
+{
+  "id": "ronaldo-2002-haircut-three-quarter",
+  "kind": "image",
+  "alt": "Fictional adult man in three-quarter view with a close-shaved scalp and one small curved patch of hair at the front hairline.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "ronaldo-2002-haircut-three-quarter"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/ronaldo-2002-haircut-three-quarter.png"
+}

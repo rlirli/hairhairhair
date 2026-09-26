@@ -1,0 +1,58 @@
+{
+  "id": "hairstyle-hime-cut",
+  "slug": "hime-cut",
+  "name": "Hime cut",
+  "kind": "cut",
+  "summary": "A long Japanese haircut defined by sharply separated blunt side sections around cheek-to-jaw length, contrasted against substantially longer hair behind them.",
+  "intro": [
+    "The Hime cut creates its identity through abrupt differences in length rather than blended face framing. Short, dense side panels sit beside the face while the rear hair remains much longer.",
+    "A straight-across fringe commonly accompanies the classic version, but the shorter side sections are the more essential structural feature; modern versions can omit the fringe while retaining the recognizable stepped silhouette.",
+    "The hairstyle is associated historically with Japanese court-hair traditions extending back to the Heian period. Modern sources connect it with practices in which selected hair near the sides of the face was cut shorter while the remaining hair continued to grow long.",
+    "The name Hime cut is a later label meaning princess cut; it should not be interpreted as evidence that one identifiable historical person invented the hairstyle."
+  ],
+  "variations": [
+    {
+      "id": "hime-cut-classic-fringe",
+      "name": "Classic Hime with blunt fringe",
+      "description": "Combines long straight rear hair with cheek-to-jaw-length blunt side panels and a straight fringe across the forehead."
+    },
+    {
+      "id": "hime-cut-no-fringe",
+      "name": "Fringe-free Hime",
+      "description": "Keeps the abrupt blunt side sections and long rear lengths while opening the forehead with a center or near-center part."
+    },
+    {
+      "id": "hime-cut-long-side-panels",
+      "name": "Long-panel Hime",
+      "description": "Places the blunt side sections closer to jaw or upper-neck length for a softer step while retaining a clear separation from the long rear hair."
+    }
+  ],
+  "consultation": {
+    "intro": "The key choices are the exact length, width and density of the short side panels, whether a fringe is included, and how starkly the short sections should contrast with the long rear hair.",
+    "questions": [
+      "Should the blunt side panels end around the cheekbone, jaw, or slightly below the jaw?",
+      "How wide should each short side section be when viewed from the front?",
+      "Do you want a straight blunt fringe, a lighter fringe, or no dedicated fringe?",
+      "Should the side panels form a very hard horizontal edge or be softened slightly at the ends?",
+      "Will you usually wear the long rear hair straight enough for the stepped geometry to remain clearly visible?"
+    ],
+    "sampleRequest": "“I want a Hime cut with long straight hair at the back, dense blunt side sections ending around my jaw, and a very clear step between those panels and the long lengths. Keep the lines sharp rather than blending them into ordinary face-framing layers.”"
+  },
+  "considerations": [
+    "The side panels are the defining element; blending them gradually into the rear length can make the result read as ordinary face framing instead of a Hime cut.",
+    "Small amounts of growth noticeably change the position of the blunt side edge, so those panels need more frequent trimming than the long rear lengths.",
+    "Straight hair displays the stepped geometry most clearly. Waves and curls can soften or visually fragment the horizontal line.",
+    "Using frequent heat to maintain a pin-straight finish can increase damage risk, particularly on previously lightened or heavily colored hair.",
+    "Very fine hair may produce thinner-looking side panels, while dense hair can create a more graphic and substantial block of short hair beside the face.",
+    "Bleached or highly processed hair should be assessed for condition before combining repeated straightening with a highly polished Hime finish."
+  ],
+  "sourceIds": [
+    "haircom-hime-cut",
+    "met-heian-court-woman",
+    "yokohama-belle-hime-cut"
+  ],
+  "relatedStyleIds": [
+    "hairstyle-sleek-long-cut"
+  ],
+  "guidePublicationStatus": "published"
+}

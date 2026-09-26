@@ -1,0 +1,14 @@
+{
+  "id": "twists-long",
+  "kind": "image",
+  "alt": "Editorial reference showing longer individual two-strand twists.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "twists-long"
+    }
+  },
+  "transparentBackground": false,
+  "asset": "assets/hairstyles/twists-long.png"
+}

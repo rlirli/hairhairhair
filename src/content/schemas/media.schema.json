@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hairhairhair.hair/schemas/media.schema.json",
+  "title": "Image media record",
+  "type": "object",
+  "required": [
+    "id",
+    "kind",
+    "alt",
+    "provenance",
+    "asset"
+  ],
+  "properties": {
+    "id": { "type": "string" },
+    "kind": { "const": "image" },
+    "alt": { "type": "string", "minLength": 1 },
+    "asset": { "type": "string", "pattern": "^assets/[a-z0-9-]+/[a-z0-9._-]+$" },
+    "objectPosition": { "type": "string" },
+    "transparentBackground": { "type": "boolean" },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "origin": { "type": "string" },
+        "creator": { "type": "string" },
+        "licenseType": { "enum": ["public-domain", "licensed"] },
+        "licenseName": { "type": "string" },
+        "licenseUrl": { "type": "string", "format": "uri" },
+        "attribution": { "type": "string" },
+        "sourceUrl": { "type": "string", "format": "uri" },
+        "originalUrl": { "type": "string", "format": "uri" },
+        "rightsEvidenceUrl": { "type": "string", "format": "uri" },
+        "rightsBasis": { "type": "string" },
+        "jurisdiction": { "type": "string" },
+        "identifier": { "type": "string" },
+        "derivativeStatus": { "enum": ["original", "cropped", "edited"] },
+        "aiGeneration": {
+          "type": "object",
+          "properties": { "provider": { "type": "string" }, "promptKey": { "type": "string" } },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

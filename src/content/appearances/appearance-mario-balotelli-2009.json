@@ -1,0 +1,17 @@
+{
+  "id": "appearance-mario-balotelli-2009",
+  "personId": "person-mario-balotelli",
+  "imageId": "mario-balotelli-2009-inter",
+  "event": "Inter Milan match",
+  "taken": {
+    "value": "2009-08-16",
+    "precision": "day",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mario_Balotelli_-_Inter_Mailand_(1).jpg"
+  },
+  "observations": [
+    {
+      "hairstyleId": "hairstyle-buzz-cut",
+      "note": "Very short, even buzz cut with a clean, low profile; the hair is visible from the front and crown."
+    }
+  ]
+}

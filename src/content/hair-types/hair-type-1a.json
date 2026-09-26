@@ -1,0 +1,18 @@
+{
+  "id": "hair-type-1a",
+  "classificationSystemId": "walker-inspired-expanded",
+  "code": "1A",
+  "slug": "1a",
+  "hairTypeId": "hair-type-1",
+  "pattern": "straight",
+  "subtypeCode": "A",
+  "name": "Straight, very little visible bend",
+  "description": "Falls from root to tip with a nearly linear silhouette.",
+  "sortOrder": 1,
+  "characteristics": [
+    "Minimal visible bend",
+    "Smooth line when air-dried",
+    "Little to no natural wave"
+  ],
+  "comparison": "The least visibly bent pattern in this chart; 1B and 1C show more body or bend."
+}

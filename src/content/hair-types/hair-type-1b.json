@@ -1,0 +1,18 @@
+{
+  "id": "hair-type-1b",
+  "classificationSystemId": "walker-inspired-expanded",
+  "code": "1B",
+  "slug": "1b",
+  "hairTypeId": "hair-type-1",
+  "pattern": "straight",
+  "subtypeCode": "B",
+  "name": "Straight with gentle body",
+  "description": "Mostly straight, with a little natural fullness or movement.",
+  "sortOrder": 2,
+  "characteristics": [
+    "Mostly linear fall",
+    "Subtle body",
+    "No continuous S-wave"
+  ],
+  "comparison": "More body than 1A, but less visible bend than 1C."
+}

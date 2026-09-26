@@ -1,0 +1,14 @@
+{
+  "id": "cropped-afro-full",
+  "kind": "image",
+  "alt": "Transparent editorial reference showing a short cropped afro with rounded coily texture.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "cropped-afro-full"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/cropped-afro-full.png"
+}

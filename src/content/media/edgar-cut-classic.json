@@ -1,0 +1,14 @@
+{
+  "id": "edgar-cut-classic",
+  "kind": "image",
+  "alt": "Fictional young Latino man with a classic Edgar haircut featuring a blunt straight fringe, dense dark top and closely faded sides.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "edgar-cut-classic"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/edgar-cut-classic.png"
+}

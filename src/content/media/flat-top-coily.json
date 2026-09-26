@@ -1,0 +1,14 @@
+{
+  "id": "flat-top-coily",
+  "kind": "image",
+  "alt": "Generated editorial reference showing a low flat plane above short graduated sides on a fictional adult with coily texture.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "flat-top-coily"
+    }
+  },
+  "transparentBackground": false,
+  "asset": "assets/hairstyles/flat-top-coily.png"
+}

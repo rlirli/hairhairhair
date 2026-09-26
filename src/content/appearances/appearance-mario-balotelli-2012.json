@@ -1,0 +1,17 @@
+{
+  "id": "appearance-mario-balotelli-2012",
+  "personId": "person-mario-balotelli",
+  "imageId": "mario-balotelli-2012-training",
+  "event": "Italy Euro 2012 training camp",
+  "taken": {
+    "value": "2012-06-26",
+    "precision": "day",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mario_Balotelli_Euro_2012_Training.jpg"
+  },
+  "observations": [
+    {
+      "hairstyleId": "hairstyle-thin-mohawk",
+      "note": "Shaved sides and a narrow raised strip along the centre create a clearly visible mohawk-style silhouette."
+    }
+  ]
+}

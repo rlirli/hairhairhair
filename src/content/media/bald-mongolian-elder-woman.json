@@ -1,0 +1,14 @@
+{
+  "id": "bald-mongolian-elder-woman",
+  "kind": "image",
+  "alt": "Fictional Mongolian woman in her late 90s with a completely clean-shaven scalp.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "bald-mongolian-elder-woman"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/bald-mongolian-elder-woman.png"
+}

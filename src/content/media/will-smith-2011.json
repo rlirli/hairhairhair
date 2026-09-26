@@ -1,0 +1,22 @@
+{
+  "id": "will-smith-2011",
+  "kind": "image",
+  "alt": "Will Smith standing at a 2011 White House event with a low squared flat-top haircut.",
+  "objectPosition": "58% 43%",
+  "provenance": {
+    "origin": "system",
+    "licenseType": "public-domain",
+    "creator": "White House Photo Office / National Archives and Records Administration",
+    "licenseName": "Public domain",
+    "licenseUrl": "https://www.usa.gov/government-copyright",
+    "attribution": "White House Photo Office / National Archives and Records Administration, public domain",
+    "sourceUrl": "https://catalog.archives.gov/id/355008678",
+    "originalUrl": "https://catalog.archives.gov/medialz/presidential-libraries/obama/bho-whpo/81145631/Batch0031/P042411PS-0363.JPG",
+    "rightsEvidenceUrl": "https://www.obamalibrary.gov/digital-research-room/finding-aids/photographs-will-smith-22-64503-f",
+    "rightsBasis": "Official U.S. federal White House photograph held in the Obama Presidential Library collection; public-domain U.S. government work.",
+    "jurisdiction": "United States",
+    "identifier": "P042411PS-0363",
+    "derivativeStatus": "original"
+  },
+  "asset": "assets/people/will-smith-2011.jpg"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "natural-afro-deep-skin-man",
+  "kind": "image",
+  "alt": "Fictional Black man in his early 40s with very deep brown skin, no beard, and a full softly rounded natural Afro with visible coily texture.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "natural-afro-deep-skin-man"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/natural-afro-deep-skin-man.png"
+}

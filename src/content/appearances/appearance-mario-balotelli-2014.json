@@ -1,0 +1,17 @@
+{
+  "id": "appearance-mario-balotelli-2014",
+  "personId": "person-mario-balotelli",
+  "imageId": "mario-balotelli-2014-liverpool",
+  "event": "Liverpool vs West Ham United",
+  "taken": {
+    "value": "2014-09-21",
+    "precision": "day",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mario_Balotelli_with_Liverpool_September_2014.jpg"
+  },
+  "observations": [
+    {
+      "hairstyleId": "hairstyle-taper-fade",
+      "note": "Short close tapered sides with a slightly longer textured top are visible in the available frame."
+    }
+  ]
+}

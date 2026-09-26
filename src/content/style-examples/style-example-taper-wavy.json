@@ -1,0 +1,11 @@
+{
+  "id": "style-example-taper-wavy",
+  "hairstyleIds": [
+    "hairstyle-taper-fade"
+  ],
+  "imageId": "taper-wavy",
+  "title": "Low taper with wavy top",
+  "caption": "Notice how the low perimeter blend leaves an open wave visible above.",
+  "patternDescription": "A loose wave remains through the top while the sides and neckline carry a cleaner transition.",
+  "lengthDescription": "The top remains long enough to show movement; the sides and neckline carry the shorter blend."
+}

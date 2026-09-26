@@ -1,0 +1,14 @@
+{
+  "id": "five-point-cut-geometric-black",
+  "kind": "image",
+  "alt": "Fictional woman shown three-quarter view with a glossy black geometric Five Point-style short haircut and pronounced pointed side perimeter.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "five-point-cut-geometric-black"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/five-point-cut-geometric-black.png"
+}

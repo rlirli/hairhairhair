@@ -1,0 +1,13 @@
+{
+  "id": "person-mario-balotelli",
+  "slug": "mario-balotelli",
+  "name": "Mario Balotelli",
+  "description": "Mario Balotelli Barwuah (born August 12, 1990, in Palermo, Italy) is an Italian professional footballer.",
+  "heroImageId": "mario-balotelli-2012-training",
+  "sources": [
+    {
+      "kind": "biography",
+      "url": "https://www.britannica.com/biography/Mario-Balotelli"
+    }
+  ]
+}

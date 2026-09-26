@@ -1,0 +1,51 @@
+{
+  "id": "hairstyle-five-point-cut",
+  "slug": "five-point-cut",
+  "name": "Five Point Cut",
+  "kind": "cut",
+  "summary": "Vidal Sassoon's short geometric 1963 cut, defined by two deliberate points at the sides and three at the nape, with blunt precision and length increasing from the short back toward the face.",
+  "intro": [
+    "Vidal Sassoon created the Five Point in 1963 as part of his new architectural approach to haircutting. Sassoon Academy connects the method to his interest in Bauhaus design: removing the superfluous and making the cut itself determine how the hair falls rather than relying on rollers, back-combing or heavy setting products.",
+    "The five points are structural rather than decorative. Sassoon described the shape as covering the whole head, with two points at the sides and three through the nape, fitted to bone structure and the natural contours of the hair.",
+    "The nape is cut short and the shape gradually lengthens toward the face. Blunt ends preserve visual density and make the geometric outline legible, while the underlying precision was intended to let the hair move and then fall back into its designed shape."
+  ],
+  "variations": [],
+  "consultation": {
+    "intro": "The Five Point is a highly specific geometric cut, so agree on the five-point perimeter, fringe, side length and degree of graduation rather than requesting only a short bob.",
+    "questions": [
+      "Do you want the classic Five Point geometry with two pronounced side points and three distinct points through the nape?",
+      "Where should the two side points land relative to the cheekbone, jaw and ears?",
+      "How short should the central nape area be while retaining enough length to form the three rear points?",
+      "Should the fringe read as a strong blunt geometric line or be adapted slightly around the face?",
+      "How close to the original crisp Sassoon finish do you want the cut to remain when worn in your natural texture?"
+    ],
+    "sampleRequest": "“I'd like a classic Vidal Sassoon Five Point: short and graduated through the nape, two strong points at the sides, three defined points through the back, blunt dense edges and a precise geometric fringe. I want the shape fitted to my head rather than turned into a generic A-line bob.”"
+  },
+  "considerations": [
+    "The five-point perimeter is the defining feature. If the side and nape points disappear, the result can read as a generic geometric or graduated bob instead.",
+    "The original concept depends heavily on precision cutting and head shape; Sassoon described it as one of his hardest cuts to execute.",
+    "Straight hair exposes the designed lines most clearly. Increasing natural wave, curl or coil progressively softens and interrupts the crisp five-point outline.",
+    "The cut is short at the nape and longer toward the face, so shrinkage and natural movement should be assessed before establishing the final dry perimeter.",
+    "Because small amounts of growth visibly soften geometric points, maintaining the original graphic shape generally requires relatively frequent reshaping.",
+    "Straightening a naturally curly or coily texture can reproduce more of the graphic finish, but the compatibility estimates here intentionally assess the hairstyle while preserving the natural curl pattern."
+  ],
+  "sourceIds": [
+    "british-vogue-quant-sassoon",
+    "hji-five-point-sassoon-cut",
+    "latimes-legacy-vidal-sassoon",
+    "sassoon-academy-heritage"
+  ],
+  "relatedStyleIds": [
+    "hairstyle-blunt-bob"
+  ],
+  "guidePublicationStatus": "published",
+  "inventedAt": {
+    "year": 1963,
+    "precision": "year",
+    "sourceId": "sassoon-academy-heritage"
+  },
+  "inventor": {
+    "name": "Vidal Sassoon",
+    "sourceId": "sassoon-academy-heritage"
+  }
+}

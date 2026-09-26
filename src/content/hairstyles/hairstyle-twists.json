@@ -1,0 +1,55 @@
+{
+  "id": "hairstyle-twists",
+  "slug": "twists",
+  "name": "Two-strand twists",
+  "kind": "styling-technique",
+  "summary": "Two sections wrapped around each other, worn as a temporary set or as individual hanging twists.",
+  "intro": [
+    "Two-strand twists are a way of arranging hair, not a claim about the wearer’s natural pattern. The look can be individual and free-hanging, worked along the scalp as a flat twist, or adapted with extensions. Part size, direction, length, and the desired amount of stretch change the result.",
+    "A two-strand twist is not the same service as a flat twist, a braid, or starting and maintaining locs. Each changes the way sections are divided and secured, so name the arrangement you want rather than relying on a broad “twists” label.",
+    "Rope twist is a shop-dependent phrase. Some practitioners use it for a tighter two-strand effect or for twisting each section before wrapping the pair. Show a reference and ask the stylist to explain the technique, parting, extension plan, and whether the style is intended to be temporary."
+  ],
+  "variations": [
+    {
+      "id": "twists-flat",
+      "name": "Flat twists",
+      "description": "Two sections are twisted along the scalp, creating a row-like, scalp-following arrangement."
+    },
+    {
+      "id": "twists-individual",
+      "name": "Individual twists",
+      "description": "Separate sections hang away from the scalp, with size and parting determining the visual rhythm."
+    },
+    {
+      "id": "twists-rope",
+      "name": "Rope-style twists",
+      "description": "A tighter or more cord-like finish whose exact technique should be confirmed with the stylist."
+    }
+  ],
+  "consultation": {
+    "intro": "Name the twist type, part size, length, direction, and whether extensions or a temporary set are wanted.",
+    "questions": [
+      "Do you mean individual two-strand twists, flat twists along the scalp, or a rope-style finish?",
+      "What part size, direction, and finished length should the stylist use?",
+      "Are extensions wanted, and if so, what added length or weight feels manageable?",
+      "Is the goal a temporary twist set, or are you discussing starter or maintained locs instead?"
+    ],
+    "sampleRequest": "“I’m looking for medium individual two-strand twists with a visible part pattern, no extensions, and enough length to keep the ends neat. Please keep the tension comfortable and tell me how this differs from a flat twist.”"
+  },
+  "considerations": [
+    "Straight and wavy hair may need enough length, sectioning, or a setting approach to hold a temporary twist; that is a styling conversation, not an exclusion.",
+    "Curly and coily hair can show different shrinkage, definition, and stretch after twisting; agree on whether the finished look should be shrunken, elongated, or allowed to set.",
+    "Extensions, long lengths, and tight installation add weight or pull. AAD advises loosening styles that hurt, sting, crust, or visibly pull the scalp; persistent hair loss needs a dermatologist’s assessment."
+  ],
+  "sourceIds": [
+    "aad-traction",
+    "carols-daughter-braids-twists",
+    "milady-natural-hair"
+  ],
+  "relatedStyleIds": [
+    "hairstyle-buzz-cut",
+    "hairstyle-freeform-locs",
+    "hairstyle-taper-fade"
+  ],
+  "guidePublicationStatus": "published"
+}

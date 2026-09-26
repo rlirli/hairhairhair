@@ -1,0 +1,14 @@
+{
+  "id": "farrah-fawcett-cut-classic-feathered",
+  "kind": "image",
+  "alt": "Fictional blonde woman with long heavily layered hair styled into large outward feathered sections around the face and shoulders.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "farrah-fawcett-cut-classic-feathered"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/farrah-fawcett-cut-classic-feathered.png"
+}

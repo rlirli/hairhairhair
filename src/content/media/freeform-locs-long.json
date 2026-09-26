@@ -1,0 +1,14 @@
+{
+  "id": "freeform-locs-long",
+  "kind": "image",
+  "alt": "Editorial reference showing a Black man with long mature freeform locs of varied thickness and irregular natural roots.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "freeform-locs-long"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/freeform-locs-long.png"
+}

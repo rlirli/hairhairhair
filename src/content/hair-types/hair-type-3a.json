@@ -1,0 +1,18 @@
+{
+  "id": "hair-type-3a",
+  "classificationSystemId": "walker-inspired-expanded",
+  "code": "3A",
+  "slug": "3a",
+  "hairTypeId": "hair-type-3",
+  "pattern": "curly",
+  "subtypeCode": "A",
+  "name": "Loose spiral curl",
+  "description": "Forms visible, open spiral loops with a rounded curl path.",
+  "sortOrder": 7,
+  "characteristics": [
+    "Open spiral loops",
+    "Rounded curl path",
+    "Clear curl formation"
+  ],
+  "comparison": "Looser and larger-looking loops than 3B; 2C is more S-shaped than spiral."
+}

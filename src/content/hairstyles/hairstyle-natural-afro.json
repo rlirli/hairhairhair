@@ -1,0 +1,55 @@
+{
+  "id": "hairstyle-natural-afro",
+  "slug": "natural-afro",
+  "name": "Natural afro",
+  "kind": "cut",
+  "summary": "A full natural Afro that lets dense curls or coils expand outward into a broad rounded silhouette while preserving visible texture and a softer, less geometrically controlled perimeter.",
+  "intro": [
+    "The natural afro uses the hair's own curl or coil structure to create substantial volume around the head rather than relying on straightening or a tightly controlled geometric outline.",
+    "Its silhouette is usually broadly rounded, but the perimeter can remain organic: individual curl clusters, slight asymmetry and natural variation in density are compatible with the look.",
+    "Afros became especially visible during the natural-hair and Black-is-Beautiful movements of the 1960s and 1970s, when wearing Black hair in its natural texture acquired strong cultural and political significance.",
+    "Afro picks and other wide-toothed tools can lift hair away from the scalp and increase volume while keeping the natural texture present. The result does not need to be trimmed into the near-perfect sphere associated with a more heavily sculpted Afro."
+  ],
+  "variations": [
+    {
+      "id": "natural-afro-full-volume",
+      "name": "Full-volume natural afro",
+      "description": "Uses greater retained length and picking for a larger silhouette without forcing the perimeter into a precise geometric sphere."
+    },
+    {
+      "id": "natural-afro-soft-rounded",
+      "name": "Soft rounded natural afro",
+      "description": "Creates a broadly rounded silhouette while preserving visible texture, natural perimeter variation and moderate asymmetry."
+    }
+  ],
+  "consultation": {
+    "intro": "Agree on overall size, how much natural irregularity to preserve, and whether the perimeter should be lightly shaped or allowed to follow the hair's natural distribution.",
+    "questions": [
+      "How large do you want the finished Afro to appear relative to your head and shoulders?",
+      "Should the outline be softly rounded or intentionally left more irregular and organic?",
+      "How much length do you want to retain through the crown, sides and lower perimeter?",
+      "Do you want the curl or coil clusters to remain visibly defined, or should the hair be picked out more fully for volume?",
+      "Should the stylist correct noticeable asymmetry or preserve more of the natural growth pattern?"
+    ],
+    "sampleRequest": "“I want a full natural Afro with a soft rounded shape, but not a perfectly sculpted sphere. Keep the natural texture visible, retain plenty of volume, and only refine the perimeter enough that the overall silhouette feels intentional.”"
+  },
+  "considerations": [
+    "This style prioritizes natural texture and volume over a mathematically controlled outline, so some perimeter irregularity is part of the intended result.",
+    "Picking increases volume and can reduce the visual definition of individual curls or coils, so the desired balance between definition and expansion should be discussed.",
+    "Shrinkage can substantially change the apparent length and diameter of the finished Afro, so shaping should be assessed on dry hair in its intended worn state.",
+    "Greater density and tighter curl or coil patterns generally make it easier to support a large self-sustaining silhouette without the hair collapsing downward.",
+    "Looser curl patterns can still form rounded natural Afros, but they may hang more and create less radial volume than tighter coils.",
+    "Periodic trimming can maintain an intentional overall shape without converting the style into a highly sculpted spherical Afro."
+  ],
+  "sourceIds": [
+    "nmaahc-black-is-beautiful",
+    "nmaahc-strands-of-inspiration",
+    "smithsonian-afro-sheen",
+    "smithsonian-black-hair-identity"
+  ],
+  "relatedStyleIds": [
+    "hairstyle-cropped-afro",
+    "hairstyle-sculpted-spherical-afro"
+  ],
+  "guidePublicationStatus": "published"
+}

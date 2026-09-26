@@ -1,0 +1,55 @@
+{
+  "id": "hairstyle-ronaldo-2002-haircut",
+  "slug": "ronaldo-2002-haircut",
+  "name": "Ronaldo 2002 World Cup haircut",
+  "kind": "cut",
+  "summary": "A near-shaved scalp with one small, rounded half-circle patch of short hair at the front hairline, associated with Ronaldo Nazário’s 2002 World Cup look.",
+  "intro": [
+    "This distinctive cut leaves nearly the entire scalp shaved or reduced to very short stubble, with one compact half-circle tuft retained at the center of the front hairline.",
+    "The front patch is the defining feature. Keep its curved outline isolated at the forehead; a full fringe or a strip continuing over the crown changes the look into a different cut.",
+    "Ronaldo debuted the look during Brazil’s 2002 World Cup campaign while carrying an injury. He later said the sudden attention to his haircut shifted questions away from his fitness. The package describes the silhouette without assigning it an unverified origin or formal barbering name."
+  ],
+  "variations": [
+    {
+      "id": "ronaldo-2002-classic-half-circle",
+      "name": "Classic half-circle patch",
+      "description": "Leaves one short, rounded half-circle of hair at the center front while shaving the rest of the scalp very close."
+    },
+    {
+      "id": "ronaldo-2002-compact-front-patch",
+      "name": "Compact front patch",
+      "description": "Uses a smaller, narrower version of the front tuft while preserving the isolated curved outline."
+    },
+    {
+      "id": "ronaldo-2002-stubble-shave",
+      "name": "Stubble-shave version",
+      "description": "Keeps the scalp at very short clipper stubble rather than razor-smooth, with the front patch left slightly longer for contrast."
+    }
+  ],
+  "consultation": {
+    "intro": "Use a front-facing reference and agree on the patch's width, height, curve, and exact position before shaving the rest of the scalp.",
+    "questions": [
+      "Should the front patch match the broad half-circle reference or be smaller and narrower?",
+      "How close should the rest of the scalp be shaved: razor-smooth or very short clipper stubble?",
+      "Should the patch edge be sharply outlined or left with a softer natural border?",
+      "How often are you willing to refresh the shaved area to keep the contrast?"
+    ],
+    "sampleRequest": "“I want the 2002 Ronaldo-style cut: shave the scalp very close and leave one short, rounded half-circle patch at the center of the front hairline. Please show me the outline before shaving, keep the patch separate from the crown, and agree whether the rest should be razor-smooth or clipper stubble.”"
+  },
+  "considerations": [
+    "The contrast depends on precise placement and width; mark or preview the curved patch before removing the surrounding hair.",
+    "Short regrowth quickly softens the contrast, so maintaining a near-shaved scalp usually means frequent clipper or razor upkeep.",
+    "A razor-close finish may irritate sensitive skin; a very short clipper finish offers a less close alternative while keeping the same basic shape.",
+    "The small front tuft remains visible across hair textures, though its surface texture will reflect the wearer's own natural pattern."
+  ],
+  "sourceIds": [
+    "bbc-ronaldo-2002-world-cup",
+    "espn-ronaldo-2002-haircut",
+    "fifa-scolari-selecao-2002"
+  ],
+  "relatedStyleIds": [
+    "hairstyle-bald",
+    "hairstyle-buzz-cut"
+  ],
+  "guidePublicationStatus": "published"
+}

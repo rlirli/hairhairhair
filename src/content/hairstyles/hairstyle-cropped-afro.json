@@ -1,0 +1,54 @@
+{
+  "id": "hairstyle-cropped-afro",
+  "slug": "cropped-afro",
+  "name": "Cropped afro",
+  "kind": "cut",
+  "summary": "A short rounded shape that keeps coily texture visible while trimming the silhouette close and intentional.",
+  "intro": [
+    "A cropped afro keeps the natural coily texture visible in a compact, rounded silhouette. It is fuller than a buzz cut while remaining short enough for a simple everyday shape.",
+    "The outline can be soft and natural or more closely edged. Length should be agreed in the hair’s usual dry state because shrinkage changes the apparent height and width."
+  ],
+  "variations": [
+    {
+      "id": "cropped-afro-compact",
+      "name": "Close crop",
+      "description": "Keeps the shape tighter and closer to the head while preserving visible texture."
+    },
+    {
+      "id": "cropped-afro-full",
+      "name": "Full compact crop",
+      "description": "Leaves enough length for a clearly rounded, textured silhouette."
+    },
+    {
+      "id": "cropped-afro-edge",
+      "name": "Natural or edged perimeter",
+      "description": "Chooses between a softer natural hairline and a more defined outline."
+    }
+  ],
+  "consultation": {
+    "intro": "Describe the desired rounded height, shrinkage, and perimeter finish rather than relying on a generic short-cut label.",
+    "questions": [
+      "How much rounded height should remain after the hair returns to its dry state?",
+      "Should the shape stay full at the sides or taper slightly toward the perimeter?",
+      "Do you want a natural edge or a more defined line-up?",
+      "Would a small test section help confirm the finished length before the full cut?"
+    ],
+    "sampleRequest": "“I’d like a compact cropped afro with enough length to keep the coil texture visible, a softly rounded outline, and a natural hairline rather than a sharp line-up.”"
+  },
+  "considerations": [
+    "Shrinkage can make a short crop look substantially tighter after washing or drying; assess it in the state it will usually be worn.",
+    "Density and growth direction influence whether the silhouette reads round, squared, or uneven as it grows.",
+    "A cropped afro is distinct from a buzz cut by the visible textured fullness it retains; if you want a simpler uniform crop, explore the Buzz cut style."
+  ],
+  "sourceIds": [
+    "guardian-balotelli-hair-obituary"
+  ],
+  "relatedStyleIds": [
+    "hairstyle-natural-afro",
+    "hairstyle-patterned-mohawk",
+    "hairstyle-sculpted-spherical-afro",
+    "hairstyle-thin-mohawk",
+    "hairstyle-top-knot"
+  ],
+  "guidePublicationStatus": "published"
+}

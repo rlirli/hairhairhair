@@ -1,0 +1,17 @@
+{
+  "id": "person-will-smith",
+  "slug": "will-smith",
+  "name": "Will Smith",
+  "description": "Willard Carroll Smith II (born September 25, 1968, in Philadelphia, Pennsylvania) is an American actor, rapper, and film producer.",
+  "heroImageId": "will-smith-2012",
+  "sources": [
+    {
+      "kind": "photograph",
+      "url": "https://www.obamalibrary.gov/digital-research-room/finding-aids/photographs-will-smith-22-64503-f"
+    },
+    {
+      "kind": "biography",
+      "url": "https://ir.paramount.com/static-files/9b49e1c7-435f-49d1-b432-b9b08f8cd9e1"
+    }
+  ]
+}

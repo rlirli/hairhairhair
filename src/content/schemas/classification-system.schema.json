@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hairhairhair.hair/schemas/classification-system.schema.json",
+  "title": "Hair classification system",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "code",
+    "description"
+  ],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "code": { "type": "string" },
+    "description": { "type": "string" }
+  },
+  "additionalProperties": false
+}

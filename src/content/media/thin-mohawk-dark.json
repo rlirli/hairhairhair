@@ -1,0 +1,14 @@
+{
+  "id": "thin-mohawk-dark",
+  "kind": "image",
+  "alt": "Transparent editorial reference showing a thin dark mohawk with close shaved sides.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "thin-mohawk-dark"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/thin-mohawk-dark.png"
+}

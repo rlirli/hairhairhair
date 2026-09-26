@@ -1,0 +1,11 @@
+{
+  "id": "bald-mongolian-elder-woman",
+  "hairstyleIds": [
+    "hairstyle-bald"
+  ],
+  "imageId": "bald-mongolian-elder-woman",
+  "title": "Clean-shaven head on elderly woman",
+  "caption": "A fictional Mongolian woman in her late 90s wearing a fully clean-shaven scalp, showing how the style leaves the natural head shape completely visible.",
+  "patternDescription": "No visible hair pattern remains because the scalp is shaved to skin level; the model's underlying natural hair subtype is intentionally unspecified.",
+  "lengthDescription": "Bald, with visible scalp hair removed to skin level across the entire head."
+}

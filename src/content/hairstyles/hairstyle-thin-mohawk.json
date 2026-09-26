@@ -1,0 +1,52 @@
+{
+  "id": "hairstyle-thin-mohawk",
+  "slug": "thin-mohawk",
+  "name": "Thin mohawk",
+  "kind": "cut",
+  "summary": "A narrow, elongated strip of hair left through the center with close sides and a focused silhouette.",
+  "intro": [
+    "A thin mohawk reduces the mohawk idea to a deliberately narrow center strip. The sides can be skin-close or shadowed, while the strip stays short and upright or grows into a sharper crest.",
+    "Dark and blond versions can read very differently: contrast, color, and texture change how wide and tall the strip appears. Treat them as variations of one cut, not separate styles."
+  ],
+  "variations": [
+    {
+      "id": "thin-mohawk-blond",
+      "name": "Blond contrast",
+      "description": "Uses a lightened center strip to make the crest read brighter and more graphic."
+    },
+    {
+      "id": "thin-mohawk-dark",
+      "name": "Dark natural finish",
+      "description": "Keeps the center strip in a deep natural tone for strong silhouette contrast."
+    },
+    {
+      "id": "thin-mohawk-low",
+      "name": "Low narrow crest",
+      "description": "Keeps the center close and restrained for easier everyday maintenance."
+    }
+  ],
+  "consultation": {
+    "intro": "Specify the strip width, side finish, color plan, and desired height before discussing styling product.",
+    "questions": [
+      "How narrow should the center strip be at the hairline, crown, and nape?",
+      "Should the sides be skin-close, shadowed, or softly tapered?",
+      "Is the center staying dark, or is a blond/lightened contrast part of the brief?",
+      "Should the strip stand upright, sweep back, or stay low and textured?"
+    ],
+    "sampleRequest": "“Please leave a narrow center strip, close-shave the sides without taking the skin too high, and keep the top low enough to wear with a light matte product.”"
+  },
+  "considerations": [
+    "Lightened hair needs a separate color and condition conversation; the cut alone does not determine its final tone.",
+    "A narrow strip exposes growth direction and cowlicks, so a side and rear reference matters as much as the front.",
+    "The contrast between center and sides is strongest immediately after the cut and softens as the sides grow."
+  ],
+  "sourceIds": [
+    "guardian-balotelli-hair-obituary",
+    "mancity-balotelli-blond-bombshell"
+  ],
+  "relatedStyleIds": [
+    "hairstyle-cropped-afro",
+    "hairstyle-patterned-mohawk"
+  ],
+  "guidePublicationStatus": "published"
+}

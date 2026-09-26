@@ -5,14 +5,15 @@ Use this index to find the current contributor guides, supporting research, medi
 ## Contributor guides
 
 - [Add a hairstyle](contributing/adding-a-hairstyle.md)
-- [Add a person](contributing/adding-a-person.md) (includes the `inbox-people/` import flow)
+- [Add a person](contributing/adding-a-person.md)
+- [Git-backed content model](content-model.md)
 
 These guides describe the repository as it works now. Update the relevant guide in the same commit whenever a content workflow changes.
 
 ## Reference
 
 - [`CONTEXT.md`](../CONTEXT.md) defines the shared domain language.
-- [`src/data/`](../src/data/) contains the current executable content model.
+- [`src/content/`](../src/content/) contains the authoritative Git-tracked JSON records and assets; [`src/data/`](../src/data/) loads them for the app.
 - [Directory filters](reference/directory-filters.md) documents the shared filter controls and selection rules.
 - [Hair texture images](reference/hair-texture-images.md) maps the generated close-ups to the hair types and their subtype cards.
 

@@ -1,0 +1,18 @@
+{
+  "id": "hair-type-2b",
+  "classificationSystemId": "walker-inspired-expanded",
+  "code": "2B",
+  "slug": "2b",
+  "hairTypeId": "hair-type-2",
+  "pattern": "wavy",
+  "subtypeCode": "B",
+  "name": "Defined S-wave",
+  "description": "Shows a clearer S-shaped wave through the lengths, often with a straighter root area.",
+  "sortOrder": 5,
+  "characteristics": [
+    "Distinct S-waves",
+    "Wave often starts mid-length",
+    "More pattern than 2A"
+  ],
+  "comparison": "More defined than 2A, while 2C bends more strongly and closer to the roots."
+}

@@ -1,0 +1,11 @@
+{
+  "id": "style-example-buzz-short",
+  "hairstyleIds": [
+    "hairstyle-buzz-cut"
+  ],
+  "imageId": "buzz-short",
+  "title": "Very short even buzz",
+  "caption": "Notice the uniform close silhouette and the restrained edge finish.",
+  "patternDescription": "The cropped surface reads as one even field, with the outline doing most of the shaping work.",
+  "lengthDescription": "Short and visually even across the top and sides, with the exact guard or setting left to consultation."
+}

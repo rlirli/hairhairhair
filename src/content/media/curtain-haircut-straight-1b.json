@@ -1,0 +1,14 @@
+{
+  "id": "curtain-haircut-straight-1b",
+  "kind": "image",
+  "alt": "Editorial reference showing a mid-20s East Asian man with dense black straight hair in a medium-length center-parted curtain haircut.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "curtain-haircut-straight-1b"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/curtain-haircut-straight-1b.png"
+}

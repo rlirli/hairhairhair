@@ -1,0 +1,14 @@
+{
+  "id": "sleek-long-cut-straight-black",
+  "kind": "image",
+  "alt": "Fictional East Asian woman in her 30s with long sleek center-parted black hair and a dense straight perimeter.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "sleek-long-cut-straight-black"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/sleek-long-cut-straight-black.png"
+}

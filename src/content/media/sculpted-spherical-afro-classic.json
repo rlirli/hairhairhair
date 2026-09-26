@@ -1,0 +1,14 @@
+{
+  "id": "sculpted-spherical-afro-classic",
+  "kind": "image",
+  "alt": "Fictional Black woman with a large dense black Afro shaped into a nearly spherical silhouette.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "sculpted-spherical-afro-classic"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/sculpted-spherical-afro-classic.png"
+}

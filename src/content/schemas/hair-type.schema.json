@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hairhairhair.hair/schemas/hair-type.schema.json",
+  "title": "Hair type or subtype",
+  "oneOf": [
+    {
+      "type": "object",
+      "required": [
+        "id",
+        "code",
+        "slug",
+        "name",
+        "pattern",
+        "description"
+      ],
+      "properties": {
+        "id": { "type": "string" },
+        "code": { "type": "string" },
+        "slug": { "type": "string" },
+        "name": { "type": "string" },
+        "pattern": { "enum": [
+            "straight",
+            "wavy",
+            "curly",
+            "coily"
+          ] },
+        "description": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": [
+        "id",
+        "classificationSystemId",
+        "code",
+        "slug",
+        "hairTypeId",
+        "pattern",
+        "subtypeCode",
+        "name",
+        "description",
+        "sortOrder",
+        "characteristics",
+        "comparison"
+      ],
+      "properties": {
+        "id": { "type": "string" },
+        "classificationSystemId": { "type": "string" },
+        "code": { "type": "string" },
+        "slug": { "type": "string" },
+        "hairTypeId": { "type": "string" },
+        "pattern": { "enum": [
+            "straight",
+            "wavy",
+            "curly",
+            "coily"
+          ] },
+        "subtypeCode": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "sortOrder": { "type": "integer" },
+        "characteristics": { "type": "array", "items": { "type": "string" } },
+        "comparison": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  ]
+}

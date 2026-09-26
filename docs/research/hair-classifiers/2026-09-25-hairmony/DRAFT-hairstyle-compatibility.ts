@@ -110,11 +110,7 @@ export interface VisibleLook {
  * Proposed person-side inputs. Unknown means unobserved, never a negative score.
  * Natural pattern is separate from the visible/possibly styled Hairmony hairType.
  */
-export type WalkerSubtype =
-  | "1A" | "1B" | "1C"
-  | "2A" | "2B" | "2C"
-  | "3A" | "3B" | "3C"
-  | "4A" | "4B" | "4C";
+export type WalkerSubtype = "1A" | "1B" | "1C" | "2A" | "2B" | "2C" | "3A" | "3B" | "3C" | "4A" | "4B" | "4C";
 
 export type Density = "low" | "medium" | "high";
 export type HairFibreThickness = "fine" | "medium" | "coarse";

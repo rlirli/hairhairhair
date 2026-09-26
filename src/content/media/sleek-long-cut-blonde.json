@@ -1,0 +1,14 @@
+{
+  "id": "sleek-long-cut-blonde",
+  "kind": "image",
+  "alt": "Fictional tanned white woman in her 40s with long sleek highlighted blonde hair and a full continuous perimeter.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "sleek-long-cut-blonde"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/sleek-long-cut-blonde.png"
+}

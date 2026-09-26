@@ -1,0 +1,14 @@
+{
+  "id": "taper-coily",
+  "kind": "image",
+  "alt": "Editorial reference showing a low taper with a coiled top and clean perimeter.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "taper-coily"
+    }
+  },
+  "transparentBackground": false,
+  "asset": "assets/hairstyles/taper-coily.png"
+}

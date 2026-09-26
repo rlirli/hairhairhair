@@ -1,0 +1,14 @@
+{
+  "id": "french-crop-textured-2a",
+  "kind": "image",
+  "alt": "Editorial reference showing a fair-skinned white man with dark-blond wavy hair in a textured French crop with a short forward fringe.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "french-crop-textured-2a"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/french-crop-textured-2a.png"
+}

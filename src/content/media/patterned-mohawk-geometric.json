@@ -1,0 +1,14 @@
+{
+  "id": "patterned-mohawk-geometric",
+  "kind": "image",
+  "alt": "Transparent editorial reference showing a patterned mohawk with geometric shaved side detail.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "patterned-mohawk-geometric"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/patterned-mohawk-geometric.png"
+}

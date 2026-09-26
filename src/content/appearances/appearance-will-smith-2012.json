@@ -1,0 +1,17 @@
+{
+  "id": "appearance-will-smith-2012",
+  "personId": "person-will-smith",
+  "imageId": "will-smith-2012",
+  "event": "Fleet Week New York aboard Intrepid",
+  "taken": {
+    "value": "2012-05-23",
+    "precision": "day",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Flickr_-_Official_U.S._Navy_Imagery_-_Actor_Will_Smith_poses_for_a_photo_with_Sailors..jpg#Summary"
+  },
+  "observations": [
+    {
+      "hairstyleId": "hairstyle-buzz-cut",
+      "note": "A short, close-cropped top with a subtle perimeter transition is visible from the front."
+    }
+  ]
+}

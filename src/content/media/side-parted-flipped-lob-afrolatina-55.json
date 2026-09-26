@@ -1,0 +1,14 @@
+{
+  "id": "side-parted-flipped-lob-afrolatina-55",
+  "kind": "image",
+  "alt": "Fictional Afro-Latina woman in her mid-50s with a smooth shoulder-length lob, deep side part, and controlled outward-flicked ends.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "side-parted-flipped-lob-afrolatina-55"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/side-parted-flipped-lob-afrolatina-55.png"
+}

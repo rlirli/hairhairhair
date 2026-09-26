@@ -1,0 +1,14 @@
+{
+  "id": "bald-young-white-man",
+  "kind": "image",
+  "alt": "Fictional white man in his mid-20s with a completely clean-shaven scalp.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "bald-young-white-man"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/bald-young-white-man.png"
+}

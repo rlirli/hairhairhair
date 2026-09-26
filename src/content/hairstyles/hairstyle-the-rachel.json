@@ -1,0 +1,65 @@
+{
+  "id": "hairstyle-the-rachel",
+  "slug": "the-rachel",
+  "name": "The Rachel",
+  "kind": "cut",
+  "summary": "A shoulder-skimming, heavily layered 1990s cut with pronounced face framing, rounded volume and a blow-dried finish that turns individual layers into visible curved sections around the face and neck.",
+  "intro": [
+    "The Rachel emerged in 1994 after hairstylist Chris McMillan cut Jennifer Aniston’s hair during the first year of Friends. The version seen on Aniston became a mass-copied 1990s hairstyle and took its name from her character, Rachel Green.",
+    "Its structure sits between a bob and a mid-length shag: the overall length stays near the shoulders while numerous shorter layers build shape around the face and through the upper sections. The classic finish exaggerates those layers with lift and curved ends rather than pressing them flat.",
+    "McMillan has been clear that he did not invent the general idea of a mid-length layered shag. He recalled earlier related cuts on model Beri Smither, later adapted a similar idea for Cameron Diaz, and then cut the version on Aniston that became known specifically as The Rachel.",
+    "The haircut and its styling are tightly linked. The canonical look relies on a round-brush blowout to separate and bend the layers, so an unstyled version can look substantially less like the familiar 1990s silhouette."
+  ],
+  "variations": [
+    {
+      "id": "the-rachel-classic",
+      "name": "Classic Rachel",
+      "description": "Keeps the shoulder-skimming length, conspicuous face-framing layers, fuller crown and strongly curved blowout associated with the mid-1990s version."
+    },
+    {
+      "id": "the-rachel-reduced-crown",
+      "name": "Reduced-crown Rachel",
+      "description": "Retains the layered face frame and rounded ends but uses less lift through the crown for a flatter, more contemporary silhouette."
+    }
+  ],
+  "consultation": {
+    "intro": "The key decisions are finished length, where the shortest face-framing layer begins, how much layering is carried through the crown and back, and how much daily blow-drying you are willing to do.",
+    "questions": [
+      "Should the finished perimeter sit at the jaw, just above the shoulders, or brush the shoulders?",
+      "Where should the shortest face-framing layer start: around the cheekbone, mouth, or jaw?",
+      "Do you want the fuller 1990s crown shape or a lower-volume modern interpretation?",
+      "How strongly should the lower layers flick outward versus curve inward around the face?",
+      "Will you routinely use a round-brush blowout, or should the cut also work acceptably with your natural texture and minimal styling?"
+    ],
+    "sampleRequest": "“I want a classic Rachel-style cut around shoulder length, with lots of rounded face-framing layers starting near my cheekbones, visible layering through the crown and sides, and enough length at the bottom for the ends to flick outward when I blow-dry it.”"
+  },
+  "considerations": [
+    "The recognizable shape comes from both cutting and styling; without lift and directional bending at the ends, the same layers can read as a more generic mid-length layered cut.",
+    "The classic finish is maintenance-heavy compared with a wash-and-go cut because the separate curved sections are usually created with a blow-dryer and round brush.",
+    "Regular reshaping helps preserve the distinction between the shorter face frame and the longer perimeter as the haircut grows.",
+    "Straight and gently wavy hair can display the rounded layer pattern with relatively ordinary styling. Stronger curls and coils substantially change the silhouette when their natural pattern is preserved.",
+    "Dense hair may need careful weight management so the upper layers create movement rather than excessive width, while very fine or sparse hair can lose visual density if too many short layers are added.",
+    "The original 1990s version used considerable volume through the upper head; lowering crown volume produces a more contemporary interpretation without changing the basic layered concept."
+  ],
+  "sourceIds": [
+    "allure-iconic-beauty-trends",
+    "allure-rachel-haircut-history",
+    "glamour-modern-rachel",
+    "vogue-aniston-hair-products"
+  ],
+  "relatedStyleIds": [
+    "hairstyle-long-layered-cut",
+    "hairstyle-short-feathered-shag",
+    "hairstyle-side-parted-flipped-lob"
+  ],
+  "guidePublicationStatus": "published",
+  "inventedAt": {
+    "year": 1994,
+    "precision": "year",
+    "sourceId": "allure-iconic-beauty-trends"
+  },
+  "inventor": {
+    "name": "Chris McMillan",
+    "sourceId": "allure-iconic-beauty-trends"
+  }
+}

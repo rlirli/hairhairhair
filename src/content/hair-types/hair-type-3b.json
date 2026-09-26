@@ -1,0 +1,18 @@
+{
+  "id": "hair-type-3b",
+  "classificationSystemId": "walker-inspired-expanded",
+  "code": "3B",
+  "slug": "3b",
+  "hairTypeId": "hair-type-3",
+  "pattern": "curly",
+  "subtypeCode": "B",
+  "name": "Springy spiral curl",
+  "description": "Forms compact, spring-like spirals with a clear repeating curl path.",
+  "sortOrder": 8,
+  "characteristics": [
+    "Spring-like spirals",
+    "Compact repeating loops",
+    "Defined curl path"
+  ],
+  "comparison": "Tighter and more compact than 3A; 3C has the smallest curls in the curly type."
+}

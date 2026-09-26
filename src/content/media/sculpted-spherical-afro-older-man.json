@@ -1,0 +1,14 @@
+{
+  "id": "sculpted-spherical-afro-older-man",
+  "kind": "image",
+  "alt": "Fictional dark-skinned African man in his late 60s with a large dense black Afro shaped into a near-spherical silhouette.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "sculpted-spherical-afro-older-man"
+    }
+  },
+  "transparentBackground": true,
+  "asset": "assets/hairstyles/sculpted-spherical-afro-older-man.png"
+}

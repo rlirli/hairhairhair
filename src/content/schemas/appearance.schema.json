@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hairhairhair.hair/schemas/appearance.schema.json",
+  "title": "Person appearance",
+  "type": "object",
+  "required": [
+    "id",
+    "personId",
+    "imageId",
+    "event",
+    "taken",
+    "observations"
+  ],
+  "properties": {
+    "id": { "type": "string" },
+    "personId": { "type": "string" },
+    "imageId": { "type": "string" },
+    "event": { "type": "string" },
+    "taken": {
+      "type": "object",
+      "required": ["value", "precision", "sourceUrl"],
+      "properties": { "value": { "type": "string" }, "precision": { "enum": [
+            "day",
+            "month",
+            "year",
+            "decade"
+          ] }, "sourceUrl": { "type": "string", "format": "uri" } },
+      "additionalProperties": false
+    },
+    "observations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["hairstyleId", "note"],
+        "properties": { "hairstyleId": { "type": "string" }, "note": { "type": "string" } },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

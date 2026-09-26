@@ -121,6 +121,13 @@ export const sources: EditorialSource[] = [
     reviewedAt: "2026-09-20",
   },
   {
+    id: "bbc-ronaldo-2002-world-cup",
+    title: "Ronaldo: The road to redemption with Brazil at the 2002 World Cup",
+    url: "https://www.bbc.co.uk/sport/football/63432094",
+    publisher: "BBC Sport",
+    reviewedAt: "2026-09-26",
+  },
+  {
     id: "beauty-interviews-allen-edwards",
     title: "Allen Edwards — Beauty Interviews",
     url: "https://beautyinterviews.com/interview-with-allen-edwards/",
@@ -219,11 +226,25 @@ export const sources: EditorialSource[] = [
     reviewedAt: "2026-09-25",
   },
   {
+    id: "espn-ronaldo-2002-haircut",
+    title: "Ronaldo's 2002 World Cup haircut was a deliberate distraction",
+    url: "https://www.espn.com/soccer/story/_/id/37548657/ronaldo-2002-world-cup-haircut-deliberately-distracted-media-injuries",
+    publisher: "ESPN",
+    reviewedAt: "2026-09-26",
+  },
+  {
     id: "essence-knotless-braids",
     title: "Inside The Mystifying World Of Knotless Braids",
     url: "https://www.essence.com/beauty/knotless-braids-summer-protective-styles/",
     publisher: "Essence",
     reviewedAt: "2026-09-22",
+  },
+  {
+    id: "fifa-scolari-selecao-2002",
+    title: "Scolari’s Seleção of '02 in numbers",
+    url: "https://inside.fifa.com/tournaments/mens/worldcup/2002korea-japan/news/scolari-s-selecao-of-02-in-numbers-2925828",
+    publisher: "FIFA",
+    reviewedAt: "2026-09-26",
   },
   {
     id: "glamour-long-bob-style-2026",
@@ -615,7 +636,7 @@ export const hairstyles: Hairstyle[] = [
       "Natural hair type does not meaningfully constrain the finished appearance because the defining style removes the visible hair itself.",
     ],
     sourceIds: ["aad-alopecia-self-care", "aad-how-to-shave", "aad-remove-unwanted-hair"],
-    relatedStyleIds: ["hairstyle-buzz-cut"],
+    relatedStyleIds: ["hairstyle-buzz-cut", "hairstyle-ronaldo-2002-haircut"],
     guidePublicationStatus: "published",
   },
   {
@@ -715,6 +736,7 @@ export const hairstyles: Hairstyle[] = [
       "hairstyle-bald",
       "hairstyle-flat-top",
       "hairstyle-monastic-tonsure",
+      "hairstyle-ronaldo-2002-haircut",
       "hairstyle-taper-fade",
       "hairstyle-twists",
     ],
@@ -1561,6 +1583,59 @@ export const hairstyles: Hairstyle[] = [
     ],
     sourceIds: ["guardian-balotelli-hair-obituary", "mancity-balotelli-blond-bombshell"],
     relatedStyleIds: ["hairstyle-cropped-afro", "hairstyle-thin-mohawk", "hairstyle-top-knot"],
+    guidePublicationStatus: "published",
+  },
+  {
+    id: "hairstyle-ronaldo-2002-haircut",
+    slug: "ronaldo-2002-haircut",
+    name: "Ronaldo 2002 World Cup haircut",
+    kind: "cut",
+    summary:
+      "A near-shaved scalp with one small, rounded half-circle patch of short hair at the front hairline, associated with Ronaldo Nazário’s 2002 World Cup look.",
+    intro: [
+      "This distinctive cut leaves nearly the entire scalp shaved or reduced to very short stubble, with one compact half-circle tuft retained at the center of the front hairline.",
+      "The front patch is the defining feature. Keep its curved outline isolated at the forehead; a full fringe or a strip continuing over the crown changes the look into a different cut.",
+      "Ronaldo debuted the look during Brazil’s 2002 World Cup campaign while carrying an injury. He later said the sudden attention to his haircut shifted questions away from his fitness. The package describes the silhouette without assigning it an unverified origin or formal barbering name.",
+    ],
+    variations: [
+      {
+        id: "ronaldo-2002-classic-half-circle",
+        name: "Classic half-circle patch",
+        description:
+          "Leaves one short, rounded half-circle of hair at the center front while shaving the rest of the scalp very close.",
+      },
+      {
+        id: "ronaldo-2002-compact-front-patch",
+        name: "Compact front patch",
+        description: "Uses a smaller, narrower version of the front tuft while preserving the isolated curved outline.",
+      },
+      {
+        id: "ronaldo-2002-stubble-shave",
+        name: "Stubble-shave version",
+        description:
+          "Keeps the scalp at very short clipper stubble rather than razor-smooth, with the front patch left slightly longer for contrast.",
+      },
+    ],
+    consultation: {
+      intro:
+        "Use a front-facing reference and agree on the patch's width, height, curve, and exact position before shaving the rest of the scalp.",
+      questions: [
+        "Should the front patch match the broad half-circle reference or be smaller and narrower?",
+        "How close should the rest of the scalp be shaved: razor-smooth or very short clipper stubble?",
+        "Should the patch edge be sharply outlined or left with a softer natural border?",
+        "How often are you willing to refresh the shaved area to keep the contrast?",
+      ],
+      sampleRequest:
+        "“I want the 2002 Ronaldo-style cut: shave the scalp very close and leave one short, rounded half-circle patch at the center of the front hairline. Please show me the outline before shaving, keep the patch separate from the crown, and agree whether the rest should be razor-smooth or clipper stubble.”",
+    },
+    considerations: [
+      "The contrast depends on precise placement and width; mark or preview the curved patch before removing the surrounding hair.",
+      "Short regrowth quickly softens the contrast, so maintaining a near-shaved scalp usually means frequent clipper or razor upkeep.",
+      "A razor-close finish may irritate sensitive skin; a very short clipper finish offers a less close alternative while keeping the same basic shape.",
+      "The small front tuft remains visible across hair textures, though its surface texture will reflect the wearer's own natural pattern.",
+    ],
+    sourceIds: ["bbc-ronaldo-2002-world-cup", "espn-ronaldo-2002-haircut", "fifa-scolari-selecao-2002"],
+    relatedStyleIds: ["hairstyle-bald", "hairstyle-buzz-cut"],
     guidePublicationStatus: "published",
   },
   {
@@ -2579,6 +2654,29 @@ export const styleExamples: StyleExample[] = [
     patternDescription: "Hard side lines make the central crest read more graphic and deliberate.",
     lengthDescription:
       "Close sides contrast with a short upright center; the shaved detail will need regular refreshing.",
+  },
+  {
+    id: "style-example-ronaldo-2002-front",
+    hairstyleIds: ["hairstyle-ronaldo-2002-haircut"],
+    imageId: "ronaldo-2002-haircut-front",
+    title: "Half-circle patch, front view",
+    caption:
+      "One small, rounded patch sits at the center of the front hairline against an otherwise close-shaved scalp.",
+    patternDescription:
+      "The short front tuft contrasts with evenly shaved stubble around the scalp. The fictional model's appearance does not establish a natural hair subtype.",
+    lengthDescription:
+      "Very short across the scalp, with a small area of slightly longer hair forming the front half-circle.",
+  },
+  {
+    id: "style-example-ronaldo-2002-three-quarter",
+    hairstyleIds: ["hairstyle-ronaldo-2002-haircut"],
+    imageId: "ronaldo-2002-haircut-three-quarter",
+    title: "Half-circle patch, three-quarter view",
+    caption: "The curved front patch remains isolated while the crown, sides, and back stay closely shaved.",
+    patternDescription:
+      "A short dark tuft is framed by uniform scalp stubble; the three-quarter angle shows its position and raised texture without changing the silhouette.",
+    lengthDescription:
+      "Near-shaved over the whole head except for the compact front patch, which is left slightly longer and dense.",
   },
   {
     id: "style-example-short-curly-shag-editorial",

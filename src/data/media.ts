@@ -28,6 +28,8 @@ import naturalAfroDeepSkinMan from "../assets/hairstyles/natural-afro-deep-skin-
 import naturalAfroRoundedCoily from "../assets/hairstyles/natural-afro-rounded-coily.png";
 import patternedMohawkCurved from "../assets/hairstyles/patterned-mohawk-curved.png";
 import patternedMohawkGeometric from "../assets/hairstyles/patterned-mohawk-geometric.png";
+import ronaldo2002HaircutFront from "../assets/hairstyles/ronaldo-2002-haircut-front.png";
+import ronaldo2002HaircutThreeQuarter from "../assets/hairstyles/ronaldo-2002-haircut-three-quarter.png";
 import sculptedSphericalAfroClassic from "../assets/hairstyles/sculpted-spherical-afro-classic.png";
 import sculptedSphericalAfroOlderMan from "../assets/hairstyles/sculpted-spherical-afro-older-man.png";
 import shortCurlyShagExample from "../assets/hairstyles/short-curly-shag-example.png";
@@ -296,6 +298,25 @@ export const hairstyleMedia: HairstyleMedia[] = [
     image: patternedMohawkGeometric,
     alt: "Transparent editorial reference showing a patterned mohawk with geometric shaved side detail.",
     provenance: { origin: "system", aiGeneration: { provider: "OpenAI", promptKey: "patterned-mohawk-geometric" } },
+    transparentBackground: true,
+  },
+  {
+    id: "ronaldo-2002-haircut-front",
+    kind: "image",
+    image: ronaldo2002HaircutFront,
+    alt: "Fictional adult man shown front-on with a close-shaved scalp and one short, rounded half-circle patch at the center front hairline.",
+    provenance: { origin: "system", aiGeneration: { provider: "OpenAI", promptKey: "ronaldo-2002-haircut-front" } },
+    transparentBackground: true,
+  },
+  {
+    id: "ronaldo-2002-haircut-three-quarter",
+    kind: "image",
+    image: ronaldo2002HaircutThreeQuarter,
+    alt: "Fictional adult man in three-quarter view with a close-shaved scalp and one small curved patch of hair at the front hairline.",
+    provenance: {
+      origin: "system",
+      aiGeneration: { provider: "OpenAI", promptKey: "ronaldo-2002-haircut-three-quarter" },
+    },
     transparentBackground: true,
   },
   {

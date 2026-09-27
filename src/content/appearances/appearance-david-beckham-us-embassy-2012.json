@@ -1,0 +1,18 @@
+{
+  "id": "appearance-david-beckham-us-embassy-2012",
+  "personId": "person-david-beckham",
+  "imageId": "david-beckham-us-embassy-2012",
+  "event": "U.S. Embassy London visit",
+  "taken": {
+    "value": "2012-07-26",
+    "precision": "day",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:David_Beckham_at_US_Embassy_in_London.jpg"
+  },
+  "observations": [
+    {
+      "hairstyleId": "hairstyle-medium-swept-back-taper",
+      "styleExampleId": "david-beckham-swept-back-taper-example",
+      "note": "Short top hair is brushed upward and back with a compact amount of lift; the visible sides appear shorter with a connected tapered outline. The image does not establish exact clipper lengths or whether a fade was used."
+    }
+  ]
+}

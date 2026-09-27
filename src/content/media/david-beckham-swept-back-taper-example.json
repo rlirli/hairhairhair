@@ -1,0 +1,13 @@
+{
+  "id": "david-beckham-swept-back-taper-example",
+  "kind": "image",
+  "alt": "Fictional adult male model with a medium swept-back taper, longer textured top and connected tapered sides.",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "david-beckham-swept-back-taper-example"
+    }
+  },
+  "asset": "assets/hairstyles/david-beckham-swept-back-taper-example.png"
+}

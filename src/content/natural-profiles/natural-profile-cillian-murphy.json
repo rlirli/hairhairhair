@@ -1,0 +1,58 @@
+{
+  "id": "natural-profile-cillian-murphy",
+  "personId": "person-cillian-murphy",
+  "hairTypeId": {
+    "value": "hair-type-2",
+    "provenance": {
+      "source": "ai-prefill",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "The selected photographs show straight-to-loose-wave styling, but grooming and styling prevent a confident natural hair-pattern classification."
+    }
+  },
+  "hairSubtypeId": {
+    "value": null,
+    "provenance": {
+      "source": "not-documented",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "Available public photographs do not establish a natural hair subtype."
+    }
+  },
+  "naturalHairColor": {
+    "value": null,
+    "provenance": {
+      "source": "not-documented",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "Public images show dark brown hair under variable lighting; natural color is not independently documented."
+    }
+  },
+  "naturalSkinTone": {
+    "value": null,
+    "provenance": {
+      "source": "not-documented",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "Not assessed for this hairstyle-focused profile."
+    }
+  },
+  "hairThickness": {
+    "value": null,
+    "provenance": {
+      "source": "not-documented",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "Individual strand thickness cannot be established from these photographs."
+    }
+  },
+  "hairDensity": {
+    "value": null,
+    "provenance": {
+      "source": "not-documented",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "Professional styling and camera angles do not establish natural density."
+    }
+  }
+}

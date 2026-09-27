@@ -1,0 +1,18 @@
+{
+  "id": "appearance-david-beckham-wimbledon-2014",
+  "personId": "person-david-beckham",
+  "imageId": "david-beckham-wimbledon-2014",
+  "event": "2014 Wimbledon Championships, royal box",
+  "taken": {
+    "value": "2014-06-28",
+    "precision": "day",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Beckswimbledon.jpg"
+  },
+  "observations": [
+    {
+      "hairstyleId": "hairstyle-medium-swept-back-taper",
+      "styleExampleId": "david-beckham-swept-back-taper-example",
+      "note": "The photo shows a longer, voluminous top swept back from the forehead over short sides. This fits the medium swept-back taper family; the image does not establish an exact undercut or fade technique."
+    }
+  ]
+}

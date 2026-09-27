@@ -1,0 +1,18 @@
+{
+  "id": "appearance-rihanna-diamonds-tour-cologne-2013",
+  "personId": "person-rihanna",
+  "imageId": "rihanna-2013-cologne",
+  "event": "Diamonds World Tour performance in Cologne",
+  "taken": {
+    "value": "2013-06-26",
+    "precision": "day",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rihanna_Cologne_2013_03.jpg"
+  },
+  "observations": [
+    {
+      "hairstyleId": "hairstyle-long-layered-cut",
+      "styleExampleId": "rihanna-long-layered-example",
+      "note": "The photo shows long, loose waves with a center part and visible face-framing movement. Long layered cut is the nearest catalog guide; the image cannot establish the exact cut, natural texture, or whether the lengths include added hair."
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "appearance-rihanna-last-girl-on-earth-2010",
+  "personId": "person-rihanna",
+  "imageId": "rihanna-2010-lgoet",
+  "event": "Last Girl on Earth Tour performance",
+  "taken": {
+    "value": "2010-08-12",
+    "precision": "day",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rihanna_2010_cropped.jpg"
+  },
+  "observations": [
+    {
+      "hairstyleId": "hairstyle-blunt-bob",
+      "styleExampleId": "rihanna-bob-example",
+      "note": "The image shows a short rounded shape with a heavy, long side-swept fringe and close nape. The photo does not establish the perimeter or internal layering, so blunt bob is only a closest catalog match; the bright red color is a temporary visible color, not natural color."
+    }
+  ]
+}

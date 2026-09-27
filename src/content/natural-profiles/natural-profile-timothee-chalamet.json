@@ -1,0 +1,58 @@
+{
+  "id": "natural-profile-timothee-chalamet",
+  "personId": "person-timothee-chalamet",
+  "hairTypeId": {
+    "value": null,
+    "provenance": {
+      "source": "not-documented",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "Styled public photographs do not establish his natural hair type."
+    }
+  },
+  "hairSubtypeId": {
+    "value": null,
+    "provenance": {
+      "source": "not-documented",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "No reliable source establishes a natural subtype."
+    }
+  },
+  "naturalHairColor": {
+    "value": null,
+    "provenance": {
+      "source": "not-documented",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "Public appearances include varied styling; natural hair color is not established."
+    }
+  },
+  "naturalSkinTone": {
+    "value": null,
+    "provenance": {
+      "source": "not-documented",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "Not assessed for this hairstyle-focused entry."
+    }
+  },
+  "hairThickness": {
+    "value": null,
+    "provenance": {
+      "source": "not-documented",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "Strand thickness cannot be determined from event photographs."
+    }
+  },
+  "hairDensity": {
+    "value": null,
+    "provenance": {
+      "source": "not-documented",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "Styling and camera angles do not establish natural density."
+    }
+  }
+}

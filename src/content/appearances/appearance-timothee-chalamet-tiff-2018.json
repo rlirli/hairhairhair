@@ -1,0 +1,18 @@
+{
+  "id": "appearance-timothee-chalamet-tiff-2018",
+  "personId": "person-timothee-chalamet",
+  "imageId": "timothee-2018-berlin",
+  "event": "2018 Toronto International Film Festival",
+  "taken": {
+    "value": "2018-09-07",
+    "precision": "day",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Timoth%C3%A9e_Chalamet_in_2018_(cropped).jpg"
+  },
+  "observations": [
+    {
+      "hairstyleId": "hairstyle-short-curly-shag",
+      "styleExampleId": "timothee-short-curly-shag-example",
+      "note": "The photo shows dense, loose curls with considerable crown volume and irregular front curls sweeping across the forehead. The close crop does not show the full nape or exact side graduation, so the short curly shag is an approximate catalog match."
+    }
+  ]
+}

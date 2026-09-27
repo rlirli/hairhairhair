@@ -1,0 +1,15 @@
+{
+  "id": "lady-gaga-long-layered-example",
+  "kind": "image",
+  "alt": "Fictional woman showing long platinum-blonde hair with subtle face-framing layers and soft movement.",
+  "objectPosition": "center 28%",
+  "transparentBackground": true,
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "lady-gaga-long-layered-example"
+    }
+  },
+  "asset": "assets/hairstyles/lady-gaga-long-layered-example.png"
+}

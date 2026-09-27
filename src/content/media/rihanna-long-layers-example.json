@@ -1,0 +1,14 @@
+{
+  "id": "rihanna-long-layers-example",
+  "kind": "image",
+  "alt": "Fictional Black woman model demonstrating long layered hair with a center part and loose waves.",
+  "transparentBackground": false,
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "rihanna-long-layers-example"
+    }
+  },
+  "asset": "assets/hairstyles/rihanna-long-layers-example.png"
+}

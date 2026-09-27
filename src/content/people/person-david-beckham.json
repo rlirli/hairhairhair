@@ -1,0 +1,25 @@
+{
+  "id": "person-david-beckham",
+  "slug": "david-beckham",
+  "name": "David Beckham",
+  "description": "David Robert Joseph Beckham (born 2 May 1975) is an English former professional footballer. His public looks include short textured cuts and longer swept-back styles.",
+  "heroImageId": "david-beckham-wimbledon-2014",
+  "sources": [
+    {
+      "kind": "biography",
+      "url": "https://www.britannica.com/biography/David-Beckham"
+    },
+    {
+      "kind": "hairstyle reporting",
+      "url": "https://www.gq.com/story/how-to-get-every-david-beckham-haircut"
+    },
+    {
+      "kind": "photograph",
+      "url": "https://commons.wikimedia.org/wiki/File:David_Beckham_at_US_Embassy_in_London.jpg"
+    },
+    {
+      "kind": "photograph",
+      "url": "https://commons.wikimedia.org/wiki/File:Beckswimbledon.jpg"
+    }
+  ]
+}

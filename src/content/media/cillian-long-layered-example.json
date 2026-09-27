@@ -1,0 +1,11 @@
+{
+  "id": "cillian-long-layered-example",
+  "kind": "image",
+  "alt": "Fictional adult model with medium-long, loosely waved layers and a side-swept fringe.",
+  "provenance": {
+    "origin": "generated",
+    "generator": "OpenAI image generation",
+    "changesMade": false
+  },
+  "asset": "assets/hairstyles/cillian-long-layered-example.png"
+}

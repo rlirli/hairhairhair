@@ -1,0 +1,18 @@
+{
+  "id": "appearance-lady-gaga-2018",
+  "personId": "person-lady-gaga",
+  "imageId": "lady-gaga-2018-public-appearance",
+  "event": "Public appearance photographed in 2018",
+  "taken": {
+    "value": "2018-09-09",
+    "precision": "day",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lady_Gaga_(30358885287).jpg"
+  },
+  "observations": [
+    {
+      "hairstyleId": "hairstyle-top-knot",
+      "styleExampleId": "lady-gaga-top-knot-example",
+      "note": "The close portrait shows platinum-blonde hair drawn smoothly back and gathered into a high coiled knot at the crown. The sides and nape are obscured, so the underlying haircut cannot be assessed."
+    }
+  ]
+}

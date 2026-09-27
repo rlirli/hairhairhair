@@ -1,0 +1,54 @@
+{
+  "id": "hairstyle-disconnected-undercut",
+  "slug": "disconnected-undercut",
+  "name": "Disconnected undercut",
+  "kind": "cut",
+  "summary": "A haircut with closely clipped sides and back ending at a distinct shelf or weight line beneath a substantially longer top, with no gradual blend between the two lengths.",
+  "intro": [
+    "The defining feature of a disconnected undercut is the abrupt change from very short sides and back to a long top. The contrast is intentional and should remain visible rather than fading gradually.",
+    "Top length and direction vary: it can be textured and worn forward, parted and swept sideways, or brushed back. The undercut describes the cut structure, not one required styling finish.",
+    "Tommy Shelby's Peaky Blinders look uses closely shaved lower sides and a heavy top shaped forward and to the side. Cillian Murphy has described the show's shaved-sides look; this is a screen-role reference, not a claim that either selected public appearance photo shows the cut."
+  ],
+  "variations": [
+    {
+      "id": "disconnected-undercut-classic",
+      "name": "Classic disconnected undercut",
+      "description": "Very short sides and back with a clean shelf line and a longer top left visibly separate."
+    },
+    {
+      "id": "disconnected-undercut-textured",
+      "name": "Textured forward undercut",
+      "description": "A longer textured top styled forward into a short, broken fringe above closely clipped sides."
+    },
+    {
+      "id": "disconnected-undercut-swept",
+      "name": "Side-swept undercut",
+      "description": "A distinct long top parted or swept to one side over closely cut sides."
+    }
+  ],
+  "consultation": {
+    "intro": "Agree on the side length, height of the disconnection, and top direction before cutting; the transition will remain clearly visible.",
+    "questions": [
+      "How close should the sides and back be clipped?",
+      "Where should the visible shelf line sit: low, around the temple, or higher?",
+      "Should the top fall forward, sweep to one side, or brush back?",
+      "How much texture should remain through the top?"
+    ],
+    "sampleRequest": "“I want a disconnected undercut with short clippered sides, a clear shelf line around the temples, and a longer textured top that I can wear forward into a loose side fringe.”"
+  },
+  "considerations": [
+    "The abrupt transition is the key feature; a blended fade is a different finish.",
+    "Keep enough top length for the intended direction and texture.",
+    "The contrast can be softened by lowering the disconnection or leaving more side length, while retaining a visible weight line.",
+    "Hair growth patterns and head shape affect where the shelf line sits; choose its height with a barber."
+  ],
+  "sourceIds": [
+    "source-guardian-cillian-peaky-hair",
+    "source-netflix-tommy-shelby-haircut"
+  ],
+  "relatedStyleIds": [
+    "hairstyle-french-crop",
+    "hairstyle-taper-fade"
+  ],
+  "guidePublicationStatus": "published"
+}

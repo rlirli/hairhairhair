@@ -1,0 +1,18 @@
+{
+  "id": "appearance-cillian-murphy-2005-breakfast-on-pluto-premiere",
+  "personId": "person-cillian-murphy",
+  "imageId": "cillian-murphy-2005-new-york-film-festival",
+  "event": "New York Film Festival premiere of Breakfast on Pluto",
+  "taken": {
+    "value": "2005-10",
+    "precision": "month",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cillianmurphy.jpg"
+  },
+  "observations": [
+    {
+      "hairstyleId": "hairstyle-long-layered-cut",
+      "styleExampleId": "cillian-murphy-long-layered",
+      "note": "The photo shows dark, neck-length hair with a side part, long face-framing pieces and visible layers. Long layered cut is the closest published guide; the image does not establish the internal cutting technique or natural texture."
+    }
+  ]
+}

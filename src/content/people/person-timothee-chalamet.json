@@ -1,0 +1,25 @@
+{
+  "id": "person-timothee-chalamet",
+  "slug": "timothee-chalamet",
+  "name": "Timothée Chalamet",
+  "description": "Timothée Chalamet is an American and French actor known for Call Me by Your Name, Dune, and A Complete Unknown. Public photos show a range of styled looks; the hairstyle notes here describe only the photographed appearances.",
+  "heroImageId": "timothee-2024-bfi",
+  "sources": [
+    {
+      "kind": "biography",
+      "url": "https://apnews.com/article/f41295b00b9c9a622a54c380a924420f"
+    },
+    {
+      "kind": "hairstyle reporting",
+      "url": "https://www.gq.com/story/timothee-chalamet-gq-cover-hair"
+    },
+    {
+      "kind": "photograph",
+      "url": "https://commons.wikimedia.org/wiki/File:Timoth%C3%A9e_Chalamet_in_2018_(cropped).jpg"
+    },
+    {
+      "kind": "photograph",
+      "url": "https://commons.wikimedia.org/wiki/File:Timothee_Chalamet_-_2024_(53_of_65)_-_54213772308_(cropped).jpg"
+    }
+  ]
+}

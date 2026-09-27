@@ -1,0 +1,11 @@
+{
+  "id": "lady-gaga-long-layered-example",
+  "hairstyleIds": [
+    "hairstyle-long-layered-cut"
+  ],
+  "imageId": "lady-gaga-long-layered-example",
+  "title": "Long layered cut with soft movement",
+  "caption": "Fictional adult model demonstrating long platinum-blonde hair with subtle face-framing layers, lifted crown volume and soft movement.",
+  "patternDescription": "The generated example uses smooth lengths with a gentle bend for visibility; it does not assert a natural texture.",
+  "lengthDescription": "Long lengths fall below the shoulders with subtle blended layers and no dedicated fringe."
+}

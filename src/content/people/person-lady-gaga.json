@@ -1,0 +1,25 @@
+{
+  "id": "person-lady-gaga",
+  "slug": "lady-gaga",
+  "name": "Lady Gaga",
+  "description": "Stefani Joanne Angelina Germanotta, known professionally as Lady Gaga, is an American singer, songwriter, and actor born in New York City. Her public hairstyle looks span natural hair and wigs, so photographs are treated as specific styled appearances rather than evidence of her natural texture.",
+  "heroImageId": "lady-gaga-2016-super-bowl",
+  "sources": [
+    {
+      "kind": "biography",
+      "url": "https://www.grammy.com/artists/lady-gaga/3611/"
+    },
+    {
+      "kind": "hairstyle reporting",
+      "url": "https://www.vanityfair.com/style/2019/03/lady-gaga-hairstylist-daily-front-row-fashion-awards"
+    },
+    {
+      "kind": "photograph",
+      "url": "https://commons.wikimedia.org/wiki/File:Lady_Gaga_2016.jpg"
+    },
+    {
+      "kind": "photograph",
+      "url": "https://commons.wikimedia.org/wiki/File:Lady_Gaga_(30358885287).jpg"
+    }
+  ]
+}

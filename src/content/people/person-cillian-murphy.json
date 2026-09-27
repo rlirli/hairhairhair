@@ -1,0 +1,29 @@
+{
+  "id": "person-cillian-murphy",
+  "slug": "cillian-murphy",
+  "name": "Cillian Murphy",
+  "description": "Cillian Murphy is an Irish actor and producer whose public and screen looks range from medium-length side-parted layers to short textured crops and a character-associated disconnected undercut.",
+  "heroImageId": "cillian-murphy-berlinale-2024",
+  "sources": [
+    {
+      "kind": "biography",
+      "url": "https://www.biography.com/actors/a44535365/cillian-murphy"
+    },
+    {
+      "kind": "hairstyle reporting",
+      "url": "https://www.theguardian.com/film/2016/apr/23/cillian-murphy-peaky-blinders-batman-scarecrow-tom-lamont"
+    },
+    {
+      "kind": "hairstyle reporting",
+      "url": "https://www.netflix.com/tudum/articles/peaky-blinders-tommy-shelby-haircut"
+    },
+    {
+      "kind": "photograph",
+      "url": "https://commons.wikimedia.org/wiki/File:Cillianmurphy.jpg"
+    },
+    {
+      "kind": "photograph",
+      "url": "https://commons.wikimedia.org/wiki/File:Cillian_Murphy_at_Berlinale_2024-1.jpg"
+    }
+  ]
+}

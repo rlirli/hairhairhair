@@ -1,0 +1,15 @@
+{
+  "id": "lady-gaga-top-knot-example",
+  "kind": "image",
+  "alt": "Fictional woman with dark hair gathered into a neat high top knot.",
+  "objectPosition": "center 30%",
+  "transparentBackground": true,
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "lady-gaga-top-knot-example"
+    }
+  },
+  "asset": "assets/hairstyles/lady-gaga-top-knot-example.png"
+}

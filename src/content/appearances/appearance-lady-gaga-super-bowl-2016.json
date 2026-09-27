@@ -1,0 +1,18 @@
+{
+  "id": "appearance-lady-gaga-super-bowl-2016",
+  "personId": "person-lady-gaga",
+  "imageId": "lady-gaga-2016-super-bowl",
+  "event": "Super Bowl 50 National Anthem performance",
+  "taken": {
+    "value": "2016-02-07",
+    "precision": "day",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lady_Gaga_2016.jpg"
+  },
+  "observations": [
+    {
+      "hairstyleId": "hairstyle-long-layered-cut",
+      "styleExampleId": "lady-gaga-long-layered-example",
+      "note": "The photograph shows long platinum-blonde lengths with raised, swept-back crown volume and face-side sections falling below the shoulders. It does not clearly show the perimeter or internal layers, so long layered cut is a cautious catalog match rather than a verified cut."
+    }
+  ]
+}

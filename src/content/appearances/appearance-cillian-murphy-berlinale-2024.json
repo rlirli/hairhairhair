@@ -1,0 +1,18 @@
+{
+  "id": "appearance-cillian-murphy-berlinale-2024",
+  "personId": "person-cillian-murphy",
+  "imageId": "cillian-murphy-berlinale-2024",
+  "event": "Berlinale 2024 red carpet for Small Things Like These",
+  "taken": {
+    "value": "2024-02-15",
+    "precision": "day",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cillian_Murphy_at_Berlinale_2024-1.jpg"
+  },
+  "observations": [
+    {
+      "hairstyleId": "hairstyle-french-crop",
+      "styleExampleId": "cillian-murphy-french-crop",
+      "note": "A short, textured top lies forward and diagonally across the forehead, with shorter connected sides. French crop is the nearest published guide; the view does not show whether the sides are faded or disconnected."
+    }
+  ]
+}

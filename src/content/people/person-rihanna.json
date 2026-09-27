@@ -1,0 +1,29 @@
+{
+  "id": "person-rihanna",
+  "slug": "rihanna",
+  "name": "Rihanna",
+  "description": "Rihanna (Robyn Rihanna Fenty) is a Barbadian singer, songwriter and businesswoman, born in Saint Michael, Barbados.",
+  "heroImageId": "rihanna-2010-lgoet",
+  "sources": [
+    {
+      "kind": "biography",
+      "url": "https://www.visitbarbados.org/rihanna"
+    },
+    {
+      "kind": "photograph",
+      "url": "https://commons.wikimedia.org/wiki/File:Rihanna_2010_cropped.jpg"
+    },
+    {
+      "kind": "photograph",
+      "url": "https://commons.wikimedia.org/wiki/File:Rihanna_Cologne_2013_03.jpg"
+    },
+    {
+      "kind": "hairstyle-research",
+      "url": "https://www.vogue.co.uk/gallery/hair-hero-rihanna"
+    },
+    {
+      "kind": "hairstyle-research",
+      "url": "https://www.glamour.com/story/the-rihanna-hair-evolution-through-the-years"
+    }
+  ]
+}

@@ -73,6 +73,156 @@ async function listRecords(collection) {
   return Promise.all(names.map(async (name) => JSON.parse(await readFile(join(directory, name), "utf8"))));
 }
 
+const summaryFields = {
+  "classification-systems": ["id", "name", "title", "code", "description"],
+  "hair-types": ["id", "code", "slug", "name", "pattern", "description"],
+  hairstyles: ["id", "slug", "name", "kind", "summary", "relatedStyleIds", "guidePublicationStatus"],
+  compatibility: ["hairstyleId"],
+  "style-examples": ["id", "title", "caption", "hairstyleIds", "imageId"],
+  people: ["id", "slug", "name", "heroImageId", "occupation", "summary"],
+  appearances: ["id", "personId", "title", "date", "imageId", "sourceIds", "observations"],
+  sources: ["id", "title", "publisher", "url", "reviewedAt"],
+  media: ["id", "kind", "alt", "asset"],
+  "natural-profiles": [
+    "id",
+    "personId",
+    "hairTypeId",
+    "hairSubtypeId",
+    "naturalHairColor",
+    "naturalSkinTone",
+    "hairThickness",
+    "hairDensity",
+  ],
+};
+
+function clipText(value, maxLength) {
+  if (typeof value !== "string" || value.length <= maxLength) return value;
+  return `${value.slice(0, maxLength).trimEnd()}…`;
+}
+
+function truncateStrings(value, maxLength) {
+  if (typeof value === "string") return clipText(value, maxLength);
+  if (Array.isArray(value)) return value.map((item) => truncateStrings(item, maxLength));
+  if (value && typeof value === "object")
+    return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, truncateStrings(item, maxLength)]));
+  return value;
+}
+
+function summarizeRecord(collection, record) {
+  const summary = {};
+  for (const key of summaryFields[collection] ?? ["id", "name", "title", "slug"]) {
+    if (!Object.hasOwn(record, key)) continue;
+    if (key === "observations" && collection === "appearances") {
+      summary.observations = record.observations.map(({ hairstyleId, styleExampleId }) => ({
+        hairstyleId,
+        ...(styleExampleId ? { styleExampleId } : {}),
+      }));
+    } else if (collection === "natural-profiles" && record[key] && typeof record[key] === "object") {
+      summary[key] = Object.hasOwn(record[key], "value") ? record[key].value : record[key];
+    } else if (key === "relatedStyleIds" || key === "hairstyleIds" || key === "sourceIds") {
+      summary[key] = record[key];
+    } else if (key === "summary" || key === "caption" || key === "description" || key === "title") {
+      summary[key] = clipText(record[key], key === "summary" ? 320 : 180);
+    } else {
+      summary[key] = record[key];
+    }
+  }
+  if (collection === "hairstyles") {
+    summary.variationCount = record.variations?.length ?? 0;
+    summary.variations = (record.variations ?? []).map(({ id, name }) => ({ id, name }));
+    summary.sourceCount = record.sourceIds?.length ?? 0;
+  } else if (collection === "compatibility") {
+    summary.assessmentCount = record.assessments?.length ?? 0;
+    summary.dimensions = [
+      ...new Set(
+        (record.assessments ?? []).flatMap((assessment) => assessment.criteria.map(({ dimension }) => dimension)),
+      ),
+    ];
+  }
+  return summary;
+}
+
+async function relatedHairstyleSummaries(record) {
+  const related = await Promise.all(
+    (record.relatedStyleIds ?? []).map(async (id) => {
+      try {
+        return summarizeRecord("hairstyles", JSON.parse(await readFile(recordPath("hairstyles", id), "utf8")));
+      } catch {
+        return { id, missing: true };
+      }
+    }),
+  );
+  return related;
+}
+
+function readCursor(cursor, collection) {
+  if (!cursor) return null;
+  try {
+    const value = JSON.parse(Buffer.from(cursor, "base64url").toString("utf8"));
+    if (value.version !== 1 || value.collection !== collection || !Number.isInteger(value.offset) || value.offset < 0)
+      throw new Error();
+    if (!Number.isInteger(value.limit) || value.limit < 1 || value.limit > 300) throw new Error();
+    if (!["summary", "standard", "full"].includes(value.detail)) throw new Error();
+    if (!["ids", "summaries"].includes(value.includeRelations)) throw new Error();
+    return value;
+  } catch {
+    throw new Error("Invalid cursor for this collection.");
+  }
+}
+
+function makeCursor({ collection, offset, limit, detail, includeRelations }) {
+  return Buffer.from(JSON.stringify({ version: 1, collection, offset, limit, detail, includeRelations })).toString(
+    "base64url",
+  );
+}
+
+async function listRecordPage({ collection, detail, limit, cursor, includeRelations }) {
+  const page = readCursor(cursor, collection);
+  const pageLimit = limit ?? page?.limit ?? 300;
+  const pageDetail = detail ?? page?.detail ?? "summary";
+  const relationMode = includeRelations ?? page?.includeRelations ?? "ids";
+  const offset = page?.offset ?? 0;
+  const names = (await readdir(join(contentRoot, safeCollection(collection))))
+    .filter((name) => name.endsWith(".json"))
+    .sort();
+  const selected = names.slice(offset, offset + pageLimit);
+  const records = await Promise.all(
+    selected.map(async (name) => {
+      const record = JSON.parse(await readFile(join(contentRoot, collection, name), "utf8"));
+      const output =
+        pageDetail === "full"
+          ? record
+          : pageDetail === "standard"
+            ? truncateStrings(record, 600)
+            : summarizeRecord(collection, record);
+      if (collection === "hairstyles" && relationMode === "summaries")
+        output.relatedStyles = await relatedHairstyleSummaries(record);
+      return output;
+    }),
+  );
+  const nextOffset = offset + selected.length;
+  const hasMore = nextOffset < names.length;
+  return {
+    collection,
+    detail: pageDetail,
+    includeRelations: relationMode,
+    limit: pageLimit,
+    offset,
+    total: names.length,
+    records,
+    hasMore,
+    nextCursor: hasMore
+      ? makeCursor({
+          collection,
+          offset: nextOffset,
+          limit: pageLimit,
+          detail: pageDetail,
+          includeRelations: relationMode,
+        })
+      : null,
+  };
+}
+
 async function validateWithEnv(contentDirectory) {
   try {
     const { stdout, stderr } = await execFileAsync(process.execPath, [validatorPath], {
@@ -203,16 +353,129 @@ async function listPendingPackageNames(packageType) {
     .sort();
 }
 
+function searchTokens(value) {
+  const stopwords = new Set([
+    "and",
+    "cut",
+    "cuts",
+    "for",
+    "hair",
+    "haircut",
+    "haircuts",
+    "hairstyle",
+    "hairstyles",
+    "style",
+    "styles",
+    "the",
+    "with",
+  ]);
+  return new Set(
+    value
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLocaleLowerCase()
+      .match(/[\p{L}\p{N}]+/gu)
+      ?.filter((token) => token.length > 2 && !stopwords.has(token)) ?? [],
+  );
+}
+
+function scoreHairstyle(style, terms) {
+  if (!terms.size) return 0;
+  const name = searchTokens(`${style.name} ${style.slug}`);
+  const variationNames = searchTokens((style.variations ?? []).map(({ name }) => name).join(" "));
+  const summary = searchTokens(style.summary ?? "");
+  const details = searchTokens(
+    [
+      ...(style.intro ?? []),
+      ...(style.considerations ?? []),
+      ...(style.variations ?? []).map(({ description }) => description),
+    ].join(" "),
+  );
+  let score = 0;
+  for (const term of terms) {
+    if (name.has(term)) score += 5;
+    else if (variationNames.has(term)) score += 3;
+    else if (summary.has(term)) score += 2;
+    else if (details.has(term)) score += 1;
+  }
+  return score;
+}
+
+async function makeHairstyleGenerationContext(query, limit) {
+  const styles = await listRecords("hairstyles");
+  const terms = searchTokens(query);
+  const ranked = styles
+    .map((style) => ({ style, score: scoreHairstyle(style, terms) }))
+    .sort((left, right) => right.score - left.score || left.style.id.localeCompare(right.style.id));
+  const matchCount = ranked.filter(({ score }) => score > 0).length;
+  const fallback = matchCount === 0;
+  const selected = (fallback ? [...ranked].sort((a, b) => a.style.id.localeCompare(b.style.id)) : ranked)
+    .slice(0, limit)
+    .map(({ style, score }) => ({ style, score }));
+  const selectedIds = new Set(selected.map(({ style }) => style.id));
+  const relatedIds = new Set(selected.flatMap(({ style }) => style.relatedStyleIds ?? []));
+  for (const id of selectedIds) relatedIds.delete(id);
+  const relatedStyles = await Promise.all(
+    [...relatedIds].sort().map(async (id) => {
+      try {
+        return summarizeRecord("hairstyles", JSON.parse(await readFile(recordPath("hairstyles", id), "utf8")));
+      } catch {
+        return { id, missing: true };
+      }
+    }),
+  );
+  return {
+    query,
+    matching: "lexical token overlap; related styles are expanded one level only",
+    matchCount,
+    usedCatalogFallback: fallback,
+    candidates: selected.map(({ style, score }) => ({ ...summarizeRecord("hairstyles", style), matchScore: score })),
+    relatedStyles,
+    hasMore: (fallback ? styles.length : matchCount) > selected.length,
+  };
+}
+
 const server = new McpServer({ name: "hairhairhair-content", version: "1.0.0" });
 
 server.registerTool(
   "content_list",
   {
     title: "List content records",
-    description: "List Git-tracked records in a HairHairHair content collection.",
-    inputSchema: z.object({ collection: z.enum(entityCollections) }),
+    description:
+      "List records with a compact summary by default. limit defaults to 300 and is capped at 300. Use standard or full detail only when needed. For hairstyles, includeRelations=summaries adds shallow summaries for each relatedStyleId.",
+    inputSchema: z.object({
+      collection: z.enum(entityCollections),
+      detail: z.enum(["summary", "standard", "full"]).optional(),
+      limit: z.number().int().min(1).max(300).optional(),
+      cursor: z.string().optional(),
+      includeRelations: z.enum(["ids", "summaries"]).optional(),
+    }),
   },
-  async ({ collection }) => textResult(await listRecords(collection)),
+  async ({ collection, detail, limit, cursor, includeRelations }) => {
+    try {
+      return textResult(await listRecordPage({ collection, detail, limit, cursor, includeRelations }));
+    } catch (error) {
+      return textResult(error.message, true);
+    }
+  },
+);
+
+server.registerTool(
+  "hairstyle_generation_context",
+  {
+    title: "Find existing and related hairstyles for generation",
+    description:
+      "Find compact existing-style candidates for a proposed hairstyle, then expand their directly related styles as summaries. Uses simple lexical overlap, not semantic search. If no terms match, returns a compact catalog fallback. Does not return full nested hairstyle records.",
+    inputSchema: z.object({ query: z.string().min(1), limit: z.number().int().min(1).max(50).optional() }),
+    annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
+  },
+  async ({ query, limit = 12 }) => {
+    try {
+      return textResult(await makeHairstyleGenerationContext(query, limit));
+    } catch (error) {
+      return textResult(error.message, true);
+    }
+  },
 );
 
 server.registerTool(
@@ -236,20 +499,35 @@ server.registerTool(
   "content_search",
   {
     title: "Search content",
-    description: "Search record text across one or more Git-tracked content collections.",
-    inputSchema: z.object({ query: z.string().min(1), collections: z.array(z.enum(entityCollections)).optional() }),
+    description:
+      "Search record text across one or more Git-tracked content collections. Returns compact summaries by default; full detail is opt-in. limit defaults to 20 and is capped at 100.",
+    inputSchema: z.object({
+      query: z.string().min(1),
+      collections: z.array(z.enum(entityCollections)).optional(),
+      detail: z.enum(["summary", "standard", "full"]).optional(),
+      limit: z.number().int().min(1).max(100).optional(),
+    }),
   },
-  async ({ query, collections = entityCollections }) => {
+  async ({ query, collections = entityCollections, detail = "summary", limit = 20 }) => {
     const needle = query.toLocaleLowerCase();
     const matches = [];
+    let totalMatches = 0;
     for (const collection of collections) {
       for (const record of await listRecords(collection)) {
-        if (JSON.stringify(record).toLocaleLowerCase().includes(needle)) matches.push({ collection, record });
-        if (matches.length === 100) break;
+        if (!JSON.stringify(record).toLocaleLowerCase().includes(needle)) continue;
+        totalMatches += 1;
+        if (matches.length < limit) {
+          const output =
+            detail === "full"
+              ? record
+              : detail === "standard"
+                ? truncateStrings(record, 600)
+                : summarizeRecord(collection, record);
+          matches.push({ collection, record: output });
+        }
       }
-      if (matches.length === 100) break;
     }
-    return textResult({ matches, truncated: matches.length === 100 });
+    return textResult({ query, detail, limit, matches, totalMatches, truncated: totalMatches > matches.length });
   },
 );
 

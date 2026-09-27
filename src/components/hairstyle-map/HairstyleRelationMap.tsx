@@ -296,16 +296,26 @@ export default function HairstyleRelationMap({ styles }: Props) {
                 ))}
               </defs>
               <g aria-hidden="true">
-                {links.map(([source, target]) => (
-                  <line
-                    className="relation-edge"
-                    key={`${source}-${target}`}
-                    x1={positions[source]?.x ?? 0}
-                    y1={positions[source]?.y ?? 0}
-                    x2={positions[target]?.x ?? 0}
-                    y2={positions[target]?.y ?? 0}
-                  />
-                ))}
+                {links.map(([source, target]) => {
+                  const isRelatedToSelection =
+                    selectedId !== null && (styles[source]?.id === selectedId || styles[target]?.id === selectedId);
+                  return (
+                    <line
+                      className={[
+                        "relation-edge",
+                        selectedId !== null && !isRelatedToSelection && "is-dimmed",
+                        isRelatedToSelection && "is-related",
+                      ]
+                        .filter(Boolean)
+                        .join(" ")}
+                      key={`${source}-${target}`}
+                      x1={positions[source]?.x ?? 0}
+                      y1={positions[source]?.y ?? 0}
+                      x2={positions[target]?.x ?? 0}
+                      y2={positions[target]?.y ?? 0}
+                    />
+                  );
+                })}
               </g>
               {positions.map((style) => (
                 <g
@@ -340,8 +350,9 @@ export default function HairstyleRelationMap({ styles }: Props) {
                     x={-nodeRadius}
                     y={-nodeRadius}
                   />
+                  <circle className="relation-node-wash" r={nodeRadius} />
                   <circle className="relation-node-ring" r={nodeRadius} />
-                  <text className="relation-node-label" y={nodeRadius + 19}>
+                  <text className="relation-node-label" y={nodeRadius + 14}>
                     {style.name}
                   </text>
                 </g>

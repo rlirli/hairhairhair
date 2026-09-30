@@ -1,13 +1,13 @@
 import type { APIRoute } from "astro";
 import { kindLabels, publishedHairstyles } from "../../data";
 
-const siteOrigin = "https://hairhairhair.hair";
-
-export const GET: APIRoute = () => {
+export const GET: APIRoute = ({ url }) => {
+  const siteOrigin = import.meta.env.PROD ? "https://hairhairhair.hair" : url.origin;
   const lines = [
     "# Hairstyle collection — compact reference",
     "",
     `Full hairstyle guides: ${siteOrigin}/hairstyles/llms-full.txt`,
+    `Published hairstyle records: ${siteOrigin}/content/hairstyles.json`,
     `Browse the collection: ${siteOrigin}/hairstyles/`,
     "",
     "Each entry lists its stable ID, slug, page, type, summary, variations, and related hairstyle IDs.",

@@ -167,11 +167,10 @@ for (const appearance of collections.appearances) {
       );
     if (observation.styleExampleId) {
       const example = examples.get(observation.styleExampleId);
-      if (!example)
-        errors.push(`appearances/${appearance.id}: unknown styleExampleId "${observation.styleExampleId}"`);
-      else if (observation.hairstyleId && !example.hairstyleIds.includes(observation.hairstyleId))
+      if (!example) errors.push(`appearances/${appearance.id}: unknown styleExampleId "${observation.styleExampleId}"`);
+      else if (!observation.hairstyleId || !example.hairstyleIds.includes(observation.hairstyleId))
         errors.push(
-          `appearances/${appearance.id}: styleExampleId "${observation.styleExampleId}" must reference an example for hairstyle "${observation.hairstyleId}"`,
+          `appearances/${appearance.id}: styleExampleId "${observation.styleExampleId}" must reference an example for its linked hairstyle`,
         );
     }
   }

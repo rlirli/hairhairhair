@@ -3,7 +3,7 @@ export interface Person {
   slug: string;
   name: string;
   description: string;
-  heroImageId: string;
+  heroImageId?: string;
   sources: PersonSource[];
 }
 

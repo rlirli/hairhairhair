@@ -1,240 +1,243 @@
-# Draft implementation plan: orchestrated content workflows
+# LLM content pipeline implementation plan
 
-**Status:** Implementation in progress.
-**Purpose:** Define independent, reusable LLM workflow files whose outputs can be chained by an orchestrator without giving a workflow authority to invoke another workflow or commit repository changes.
+**Status:** Implementation is complete and verified with `npm run check` and `npm test`.
 
-## Decisions captured
+## Purpose and operating model
 
-- Every workflow is an independent entry point. An orchestrator may start with any one of them.
-- A workflow performs only its named task. It returns results and a `NEXT` recommendation; the orchestrator decides whether to load that workflow, ask the user, commit, or stop.
-- `NEXT` recommendations use “Unless instructed otherwise” language. An explicit instruction to stop or skip follow-ups takes precedence.
-- `observations[].hairstyleId` is optional. An Appearance can be committed before its hairstyle is matched; a later workflow run may add the link. Content validation warns when an observation has no hairstyle link, but does not fail for that omission.
-- `guidePublicationStatus` has `stub`, `draft`, and `published` values. A stub is research-pending and may contain any hairstyle fields, all optional except the stable `id` and lifecycle status. A draft is a complete guide that is not online. A published guide is eligible for public rendering.
-- Rights and license review are part of `APPEARANCE_ASSET_INGESTION`; they are not a separate workflow. An asset without a verified license that allows the intended use at no monetary license cost is not ingested.
-- The generated-hairstyle imagery direction is a style reference, not a workflow prompt. It is in `public/prompts/hairstyle-imagery-style.md`.
-- `public/prompts/llms.txt` is served by a request-aware Astro endpoint at `/prompts/llms.txt`.
+This pipeline separates independent content tasks from reusable orchestration routes. An orchestrator may start from any task prompt or workflow, decides which work to trigger, owns persistence and commits, and may stop at any point.
 
-## Workflow files and responsibilities
+- Each task lives in a standalone file under `public/prompts/*.prompt.md`. It explains the task, its own local and web environment, relevant schemas, and its result. It may link shared schemas or imagery direction. It does not depend on another task prompt.
+- Workflow files under `public/workflows/*.workflow.md` compose task prompts by URL and local path. They define ordering, isolation, working overlays, stop conditions, and optional `NEXT` recommendations. The orchestrator loads and invokes each task; a workflow never invokes another workflow itself.
+- Public indexes at `/prompts/llms.txt` and `/workflows/llms.txt` use the active local origin during development and `https://hairhairhair.hair` in the deployed build.
+- The source lists for those indexes are maintained in `src/pages/prompts/llms.txt.ts` and `src/pages/workflows/llms.txt.ts`; adding a prompt or workflow requires updating its index list.
+- Local persistence uses the content MCP attached to the active checkout. Its full catalog is authoritative for local work. Web-only work reads public references and returns proposed JSON and actual image attachments in chat; it does not claim repository writes.
+- The shared result shape is defined by `/schemas/content-task-result.schema.json`: `{task,status,records,assets,findings?}`. Status is `complete`, `partial`, or `blocked`. Each record pairs an entity collection with its schema-shaped record. Assets identify an actual or proposed media ID and file name.
+- Public catalog JSON is a published-only projection. It cannot reveal stubs or drafts and may omit internal fields. Web proposals must be reconciled with full local records and the complete local catalog before applying local writes.
 
-All workflow prompts should share a compact structure: `PURPOSE`, `INPUT`, relevant schema/data-model guidance, `RULES`, `INSTRUCTIONS`, `OUTPUT`, and `NEXT`. A prompt must define unfamiliar record concepts, link its authoritative schemas, and include a small example where it emits or edits structured records. Workflow prompts do not link to one another except in `NEXT`; `HAIRSTYLE_EXAMPLE_CREATION` may reuse the image brief in `hairstyle-imagery.prompt.md` rather than duplicating it.
+## Standalone task prompts
 
-| Workflow | Responsibility | `NEXT` recommendation, unless instructed otherwise |
-|---|---|---|
-| `PERSON_PROFILE_RESEARCH` | Research the person and supported natural-profile facts. Keep uncertain or undocumented traits explicitly unverified. | `PERSON_APPEARANCE_DISCOVERY` |
-| `PERSON_APPEARANCE_DISCOVERY` | Find appearances, dates, event context, photograph sources, and any source claims specifically about the hair at that appearance. Do not inspect the hairstyle catalog. | `APPEARANCE_ASSET_INGESTION` |
-| `APPEARANCE_ASSET_INGESTION` | Verify image rights and license terms, ingest only qualifying image assets, and preserve appearance metadata and source claims. A no-cost license may still require attribution or other terms; record those terms. | `APPEARANCE_HAIR_OBSERVATION` |
-| `APPEARANCE_HAIR_OBSERVATION` | Analyze the image without reading the internal hairstyle catalog. Produce a visual description and, when useful, ranked general hairstyle-title candidates. | `HAIR_OBSERVATION_CATALOG_MATCH` |
-| `HAIR_OBSERVATION_CATALOG_MATCH` | Compare the catalog-independent observation with catalog entries. Link a fitting entry or create a minimal hairstyle stub, then explain the decision. | Recommend that the orchestrator commit the match result before it starts `HAIRSTYLE_STUB_FILL`. |
-| `HAIRSTYLE_STUB_FILL` | Find existing stubs and return the set that can be researched. Do not write research into the guide itself. | `HAIRSTYLE_GUIDE_RESEARCH` for each selected stub |
-| `HAIRSTYLE_GUIDE_RESEARCH` | Research one hairstyle, complete its guide and compatibility data, and publish when the evidence and required content are sufficient. Preserve it as a stub if it is not yet complete. | `HAIRSTYLE_EXAMPLE_CREATION`, recommended 1–3 times based on visual variability |
-| `HAIRSTYLE_EXAMPLE_CREATION` | Create one generated example for one supplied hairstyle using the shared visual direction; register its media and example records. | End; no automatic follow-up |
-| `HAIRSTYLE_CATALOG_GAP_SCAN` | Review the full catalog for orthogonal coverage gaps and create minimal stubs for useful new candidates. | End after creating stubs; do not recommend automatic research |
+| Task prompt                                | Responsibility                                                                                                                                   |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `person-profile-research.prompt.md`        | Research a person and supported Natural Profile traits from live reliable sources.                                                               |
+| `person-appearance-discovery.prompt.md`    | Find documented appearances and photo sources without assessing reuse rights or consulting the hairstyle catalog.                                |
+| `appearance-asset-ingestion.prompt.md`     | Verify reuse terms and ingest only assets whose intended use is permitted at no monetary license cost; retain source-reported hairstyle context. |
+| `appearance-hair-observation.prompt.md`    | Describe visible hair and optional ranked title hypotheses from the image alone, without source, person, or catalog context.                     |
+| `hair-observation-catalog-match.prompt.md` | Compare an observation with the catalog, link a suitable record, or create and link a stub when a distinct missing concept is well supported.    |
+| `hairstyle-stub-selection.prompt.md`       | Find and triage existing stubs without enriching them.                                                                                           |
+| `hairstyle-guide-research.prompt.md`       | Research and update one hairstyle guide, retaining stub status while required information is incomplete.                                         |
+| `hairstyle-imagery.prompt.md`              | Generate a transparent-background PNG and register its media record locally, or return the PNG and proposed media record in web mode.            |
+| `hairstyle-example-creation.prompt.md`     | Create a style-example record for an existing generated image and media record; it does not generate imagery.                                    |
+| `hairstyle-catalog-gap-scan.prompt.md`     | Find orthogonal catalog gaps and create minimal stubs only after reviewing the full local catalog.                                               |
 
-The next-workflow text is a handoff recommendation, not an invocation. A workflow must not load another workflow file, call it as a tool, or make the orchestration decision on the caller’s behalf. The orchestrator - not the current workflow - controls the handoff.
+Every task prompt is directly usable on its own. Research tasks require live source lookup; model memory alone is not evidence. Schema and shared style links are allowed. Task prompts do not link to other task prompts.
 
-### Recommended chains
+## Workflow compositions and call chains
 
-These are default routes for an orchestrator that wants the full pipeline. They are not mandatory call graphs; any listed workflow can be invoked directly, and the orchestrator can stop at any step.
+A workflow describes a useful route, not a mandatory call graph. Any individual task can also be an entry point. Its `NEXT` section recommends what the orchestrator can do unless the invocation says otherwise.
 
 ```text
-PERSON_PROFILE_RESEARCH
-  → PERSON_APPEARANCE_DISCOVERY
-  → APPEARANCE_ASSET_INGESTION
-  → APPEARANCE_HAIR_OBSERVATION
-  → HAIR_OBSERVATION_CATALOG_MATCH
-  → [orchestrator validates and commits]
-  → HAIRSTYLE_STUB_FILL
-  → HAIRSTYLE_GUIDE_RESEARCH (once per selected stub)
-  → HAIRSTYLE_EXAMPLE_CREATION (1–3 per guide, as warranted)
+person-to-hairstyles.workflow.md
+  person profile research
+  → appearance discovery
+  → asset ingestion and rights review
+  → image-only hair observation
+  → catalog matching
+  → [orchestrator decides whether to commit]
+  → optional stub selection
+  → optional guide research
+  → optional imagery generation and media registration
+  → optional style-example creation
 ```
 
 ```text
-HAIRSTYLE_CATALOG_GAP_SCAN
-  → create stub(s)
-  → stop; orchestrator decides when or whether to commit and later fill them
+appearance-to-catalog.workflow.md
+  image-only hair observation
+  → catalog matching
+  → return the match, a justified stub proposal, or an unlinked observation
+  → [orchestrator decides whether to continue or commit]
 ```
 
 ```text
-HAIRSTYLE_GUIDE_RESEARCH (direct entry for a named stub)
-  → complete or retain the stub according to evidence
-  → if guide is ready, recommend HAIRSTYLE_EXAMPLE_CREATION (1–3 times)
+hairstyle-publication.workflow.md
+  named guide or stub selection
+  → guide research
+  → [if examples are in scope] imagery generation and media registration
+  → style-example creation using that image and media record
 ```
 
-The orchestrator owns all commit decisions. When it proceeds from catalog matching to stub research, it commits the matching result and any created stubs first. This checkpoint does not require every Appearance in the current run to be matched: observations without `hairstyleId` may remain in the content collection and be matched in a later run. No `CONTENT_VALIDATE_AND_COMMIT` workflow is introduced.
+```text
+catalog-expansion.workflow.md
+  scan for orthogonal gaps against the full local catalog
+  → create minimal stub proposals
+  → stop; orchestrator decides whether to commit or later request guide research
+```
 
-## Appearance observation data model
+The orchestrator passes earlier task results forward as a working overlay so that pending records are not lost when public snapshots omit them. Before local writes, it rereads full records, reconciles IDs, and preserves fields outside the task’s scope. If it continues from catalog matching to researching created stubs, it commits the match result and stubs first. That checkpoint does not require every Appearance to have a hairstyle link.
 
-An Appearance remains the record of a person at a particular event or date. Each item in `observations[]` represents one hairstyle observation for that Appearance. Keep four kinds of information distinct:
+## Task isolation, data boundaries, and environment behavior
 
-1. **Source-reported claim:** what a consulted source says about this person’s hairstyle at this specific Appearance. It is not an AI conclusion. Store a source ID so the claim is traceable.
-2. **Visual description:** what is visibly on the person’s head in the image, derived from the image alone and without catalog terminology.
-3. **Pre-catalog title candidates:** optional, ranked general hairstyle names produced without access to the internal catalog. These are hypotheses, not catalog IDs.
-4. **Catalog match:** the selected hairstyle ID and the reasoning for linking it. If no current entry fits, the matching workflow creates a stub and links to that ID.
+- Run each task in a fresh isolated subagent. For image observation, give the observer only the image and its task prompt. Withhold captions, source claims, Appearance metadata, person facts, catalog data, and earlier analysis. The orchestrator merges the returned observation fragment into the full Appearance while preserving other fields.
+- Keep source-reported hairstyle claims separate from visual analysis. Ingestion records only hairstyle wording that a source explicitly attributes to that Appearance. The observer describes what is visible without naming a canonical catalog style. Matching happens in a separate task after observation.
+- Local tasks use the content MCP at the active checkout for relevant reads and writes. For mutations, preview with `apply: false`, inspect the proposed changes, then apply. The image task uses the MCP image tool only after a PNG is generated.
+- Web tasks use the public indexes and published-only records at `https://hairhairhair.hair`, plus supplied complete records where required. They return proposed records and attached PNGs in chat. A web result is not persisted; absence from a published-only reference cannot establish that a concept is globally new.
+- The Appearance asset-ingestion task owns source and license review. An image is not ingested unless evidence permits the intended use at no monetary license cost. Record attribution and other license terms.
+- The imagery style reference at `public/prompts/hairstyle-imagery-style.md` describes one image’s visual treatment, including a genuinely transparent background. It is a style reference, not a task prompt.
 
-Proposed property names: `reportedHairstyle` (`description`, `sourceId`), `visualDescription`, `preCatalogCandidates` (`rank`, `title`), optional pre-match `hairstyleId`, and `catalogMatchReasoning`. `styleExampleId` remains optional and is only set when an example exists for the linked hairstyle.
+## Content data contracts
 
-The schema permits `hairstyleId` to be omitted, including on committed Appearance records. When catalog matching runs, it links an existing entry or creates a stub and links that. Missing links are allowed to remain for later work; no separate match-status field is needed.
+### Appearance observations
 
-`APPEARANCE_ASSET_INGESTION` stores a source-reported claim only when a source explicitly makes one and records its source link. `APPEARANCE_HAIR_OBSERVATION` writes the image-only description and ranked candidates; it must not read the catalog or appearance context for its image analysis. `HAIR_OBSERVATION_CATALOG_MATCH` writes the canonical ID and match reasoning.
+Each `appearances[].observations[]` item keeps four information sources distinct:
 
-### Proposed `appearance.schema.json` change
+1. `reportedHairstyle`: optional source claim, containing a description and traceable `sourceId`; populated only when the source explicitly describes the person’s hair at that Appearance.
+2. `visualDescription`: optional image-only account of visible hair features.
+3. `preCatalogCandidates`: optional ranked title hypotheses produced without access to the catalog.
+4. `hairstyleId` and `catalogMatchReasoning`: optional catalog link and its rationale, produced by matching.
+
+`styleExampleId` remains optional and may only point to an example associated with the linked hairstyle. `hairstyleId` remains optional: a missing link can be completed later. Validation warns about an absent link but does not fail for it. A known, clearly distinct concept absent from the catalog receives a stub and link when matching is performed; an uncertain match may remain unlinked.
+
+The source claim is captured during asset ingestion, visual description and title hypotheses during image-only observation, and catalog link and reasoning during catalog matching.
+
+### Appearance schema change
+
+The schema permits the distinct properties below and removes the former mixed-purpose `note`. This is a summary of the implemented contract change; the authoritative schema is `src/content/schemas/appearance.schema.json`.
 
 ```diff
-@@ observations.items
--        "required": ["hairstyleId", "note"],
-         "properties": {
--          "hairstyleId": { "type": "string" },
-+          "reportedHairstyle": {
-+            "type": "object",
-+            "required": ["description", "sourceId"],
-+            "properties": {
-+              "description": { "type": "string", "minLength": 1 },
-+              "sourceId": { "type": "string" }
-+            },
-+            "additionalProperties": false
-+          },
-+          "visualDescription": { "type": "string", "minLength": 1 },
-+          "preCatalogCandidates": {
-+            "type": "array",
-+            "items": {
-+              "type": "object",
-+              "required": ["rank", "title"],
-+              "properties": {
-+                "rank": { "type": "integer", "minimum": 1 },
-+                "title": { "type": "string", "minLength": 1 }
-+              },
-+              "additionalProperties": false
-+            }
-+          },
-+          "hairstyleId": { "type": "string" },
-           "styleExampleId": { "type": "string" },
--          "note": { "type": "string" }
-+          "catalogMatchReasoning": { "type": "string", "minLength": 1 }
-         },
+ observations.items
+-  required: [hairstyleId, note]
+-  properties: { hairstyleId, styleExampleId, note }
++  properties:
++    reportedHairstyle:
++      description: string
++      sourceId: string
++    visualDescription: string
++    preCatalogCandidates:
++      - rank: integer >= 1
++        title: string
++    hairstyleId: string              # optional catalog foreign key
++    styleExampleId: string           # optional; must match hairstyleId
++    catalogMatchReasoning: string
 ```
 
-The final schema should not retain the old mixed-purpose `note`. During migration, re-analyze existing images for `visualDescription`, preserve source claims only when a source actually supports them, and write match reasoning separately. Do not mechanically split a legacy note into multiple claims. Keep existing catalog links. If an existing observation has no link, leave it optional and let validation warn; a later match workflow can add a link or create a stub.
+### Hairstyle lifecycle
 
-## Hairstyle record lifecycle
+The existing `guidePublicationStatus` field is `stub`, `draft`, or `published`.
 
-Extend the existing `guidePublicationStatus` field with the stub state:
+- A stub requires only stable `id` and `guidePublicationStatus`. Every normal hairstyle field may also be present and is optional while the record is a stub.
+- A draft is a complete guide intentionally held back from public pages.
+- A published guide is complete and available for public rendering.
 
-- `stub`: research-pending record. It may contain any hairstyle fields; those fields are optional. Only stable `id` and `guidePublicationStatus` are required.
-- `draft`: complete, publication-ready guide, not yet publicly visible.
-- `published`: complete guide approved for public pages and public catalog results.
-
-A stub can be enriched over multiple runs. Promote it to `draft` when it is a complete guide; set it to `published` when it meets the publication bar. A complete but deliberately unpublished guide stays `draft`. Never use `draft` to mean “missing research.” Stubs must be considered during duplicate checks, but must not render as public guides or be offered as completed hairstyle recommendations.
-
-### Proposed `hairstyle.schema.json` change
+The schema requires full guide fields for drafts and published records while permitting the optional stub shape. Stub fields are not restricted by a separate summary limit.
 
 ```diff
-@@ top-level required fields
--    "id", "slug", "name", "kind", "summary", "intro", "variations",
--    "consultation", "considerations", "sourceIds", "relatedStyleIds",
--    "guidePublicationStatus"
-+    "id", "guidePublicationStatus"
-@@ properties
--    "guidePublicationStatus": { "enum": ["draft", "published"] },
-+    "guidePublicationStatus": { "enum": ["stub", "draft", "published"] },
-@@ conditional requirements for completed guides
-+  "allOf": [
-+    {
-+      "if": {
-+        "properties": {
-+          "guidePublicationStatus": { "enum": ["draft", "published"] }
-+        },
-+        "required": ["guidePublicationStatus"]
-+      },
-+      "then": {
-+        "required": [
-+          "slug", "name", "kind", "summary", "intro", "variations",
-+          "consultation", "considerations", "sourceIds", "relatedStyleIds"
-+        ]
-+      }
-+    }
-+  ]
+ hairstyle.required
+-  [id, slug, name, kind, summary, intro, variations,
+-   consultation, considerations, sourceIds, relatedStyleIds,
+-   guidePublicationStatus]
++  [id, guidePublicationStatus]
+
+ guidePublicationStatus
+-  enum: [draft, published]
++  enum: [stub, draft, published]
+
+ conditional requirements
++  when guidePublicationStatus is draft or published:
++    require slug, name, kind, summary, intro, variations,
++            consultation, considerations, sourceIds, relatedStyleIds
 ```
 
-Keep all existing hairstyle properties available for every lifecycle value. For stubs, fields such as `slug`, `name`, `kind`, `summary`, `relatedStyleIds`, and guide sections may be present or absent; the schema should not impose a summary length cap or forbid those fields. Require complete guide fields for `draft` and `published`. Update TypeScript so consumers handle missing guide fields on stubs. Existing records retain their current `draft` or `published` value when the enum is expanded.
+## Public references and indexing
 
-## Orchestration, persistence, and validation
+- `/content/llms.txt` is the entry point for public content references.
+- `/content/hairstyles.json` returns a projection of published guides only and filters related-style links to published IDs.
+- `/content/hair-types.json` returns the public taxonomy.
+- `/people/llms.txt`, `/hairstyles/llms.txt`, and `/hairstyles/llms-full.txt` remain public entry points.
+- Schemas and content-task-result schema are served under `/schemas/`.
+- `robots.txt` disallows indexing of `/prompts/`, `/workflows/`, `/schemas/`, and `/content/`. Direct HTTP requests still serve those resources.
 
-- The orchestrator loads only the selected workflow file, supplies its inputs, and receives its output plus the `NEXT` recommendation.
-- A user instruction such as “only collect appearances” suppresses the NEXT handoff. Do not run follow-ups merely because a file recommends one.
-- The orchestrator checks workflow output, decides when to persist or commit, and reports when work stops or needs more evidence.
-- When continuing from `HAIR_OBSERVATION_CATALOG_MATCH` to `HAIRSTYLE_STUB_FILL`, commit the match changes and created stubs first. Existing or newly committed observations may still lack `hairstyleId`; validation warns and passes.
-- `scripts/validate-content.mjs` should validate the new Observation properties and `reportedHairstyle.sourceId`. A missing `observations[].hairstyleId` produces a warning only and must not fail validation. A non-empty unknown hairstyle ID, invalid source reference, or invalid example-to-hairstyle reference remains an error. Validate complete guide fields for `draft` and `published`; allow stub fields to be omitted.
-- MCP schemas and read/write projections must accept the new fields and expose `guidePublicationStatus`; compact listings should distinguish stubs from guides.
-- Update imports, types, data helpers, and appearance/hairstyle pages. Public pages must never render a stub as a complete linked guide; existing published-guide filtering remains authoritative.
-- Update `docs/content-model.md`, MCP docs, prompt references, and contributing guidance alongside schema changes.
+Public data is for reference and web-mode research. It is not a replacement for the local MCP catalog during writes.
 
-## Prompt index and local/production URLs
+## File tree for this refactor
 
-The prompt index is served at `/prompts/llms.txt`. Its request-aware Astro endpoint uses the active local origin during development and `https://hairhairhair.hair` for the prerendered production response. It links to all workflow files, the hairstyle package prompt, and the style reference. The route source is `src/pages/prompts/llms.txt.ts`.
-
-`src/pages/robots.txt.ts` disallows `/prompts/`, discouraging search indexing while leaving prompt files available for direct HTTP requests.
-
-## Planned file tree
-
-Legend: 🆕 new; ✏️ changed; 🗑️ deleted; ⏳ planned but not yet implemented. No file is deleted.
+Legend: 🆕 new file; ✏️ changed file; 🗑️ removed file.
 
 ```text
 hairhairhair/
 ├── docs/
+│   ├── content-management-mcp.md ✏️
+│   ├── content-model.md ✏️
+│   ├── contributing/
+│   │   ├── adding-a-hairstyle.md ✏️
+│   │   └── adding-a-person.md ✏️
 │   └── plans/
-│       └── 🆕 llm-content-pipeline.md                 # this draft plan
+│       └── llm-content-pipeline.md ✏️
+├── inbox-people/
+│   └── README.md ✏️
 ├── public/
-│   └── prompts/
-│       ├── 🆕 hairstyle-imagery-style.md              # visual direction only
-│       ├── ✏️ hairstyle-imagery.prompt.md
-│       ├── 🆕 llms.txt                                 # generated by src/pages/prompts/llms.txt.ts
-│       └── workflows/
-│           ├── 🆕 person-profile-research.md
-│           ├── 🆕 person-appearance-discovery.md
-│           ├── 🆕 appearance-asset-ingestion.md
-│           ├── 🆕 appearance-hair-observation.md
-│           ├── 🆕 hair-observation-catalog-match.md
-│           ├── 🆕 hairstyle-stub-fill.md
-│           ├── 🆕 hairstyle-guide-research.md
-│           ├── 🆕 hairstyle-example-creation.md
-│           └── 🆕 hairstyle-catalog-gap-scan.md
-├── src/
-│   ├── content/schemas/
-│   │   ├── ✏️ appearance.schema.json
-│   │   └── ✏️ hairstyle.schema.json
-│   ├── types/
-│   │   ├── ✏️ people.types.ts
-│   │   └── ✏️ hairstyles.types.ts
-│   ├── data/
-│   │   └── ✏️ index.ts                               # resolve observations and filter published guides
-│   ├── components/people/
-│   │   └── ✏️ PersonHairstyleGrid.astro              # do not expose stub guides
-│   └── pages/
-│       ├── ✏️ people/[slug]/appearances/[appearanceId].astro
-│       ├── 🆕 prompts/llms.txt.ts                    # emits the public prompt-index URL
-│       └── 🆕 schemas/[schema].json.ts               # publishes authoritative content schemas
+│   ├── prompts/
+│   │   ├── appearance-asset-ingestion.prompt.md 🆕
+│   │   ├── appearance-hair-observation.prompt.md 🆕
+│   │   ├── hair-observation-catalog-match.prompt.md 🆕
+│   │   ├── hairstyle-catalog-gap-scan.prompt.md 🆕
+│   │   ├── hairstyle-example-creation.prompt.md 🆕
+│   │   ├── hairstyle-guide-research.prompt.md 🆕
+│   │   ├── hairstyle-imagery-style.md ✏️
+│   │   ├── hairstyle-imagery.prompt.md ✏️
+│   │   ├── hairstyle-stub-selection.prompt.md 🆕
+│   │   ├── person-appearance-discovery.prompt.md 🆕
+│   │   ├── person-profile-research.prompt.md 🆕
+│   │   └── workflows/
+│   │       ├── appearance-asset-ingestion.md 🗑️
+│   │       ├── appearance-hair-observation.md 🗑️
+│   │       ├── hair-observation-catalog-match.md 🗑️
+│   │       ├── hairstyle-catalog-gap-scan.md 🗑️
+│   │       ├── hairstyle-example-creation.md 🗑️
+│   │       ├── hairstyle-guide-research.md 🗑️
+│   │       ├── hairstyle-stub-fill.md 🗑️
+│   │       ├── person-appearance-discovery.md 🗑️
+│   │       └── person-profile-research.md 🗑️
+│   ├── schemas/
+│   │   └── content-task-result.schema.json 🆕
+│   └── workflows/
+│       ├── appearance-to-catalog.workflow.md 🆕
+│       ├── catalog-expansion.workflow.md 🆕
+│       ├── hairstyle-publication.workflow.md 🆕
+│       └── person-to-hairstyles.workflow.md 🆕
 ├── scripts/
-│   ├── ✏️ validate-content.mjs
-│   ├── ✏️ mcp-server.mjs
-│   └── ✏️ import-people.mjs
-├── public/schemas/person-package.schema.json          # ✏️ optional observations and separated fields
-├── src/content/appearances/                           # ✏️ migrate legacy note data
-└── docs/
-    ├── ✏️ content-model.md
-    ├── ✏️ content-management-mcp.md
-    └── plans/llm-content-pipeline.md                  # 🆕 this plan
-
-inbox-people/README.md                                 # ✏️ package guidance
-
-[unchanged] src/pages/robots.txt.ts                    # keep /prompts/ disallowed
+│   └── validate-content.mjs ✏️
+├── src/
+│   ├── data/index.ts ✏️
+│   ├── pages/
+│   │   ├── content/
+│   │   │   ├── [collection].json.ts 🆕
+│   │   │   └── llms.txt.ts 🆕
+│   │   ├── hairstyles/llms.txt.ts ✏️
+│   │   ├── people/llms.txt.ts ✏️
+│   │   ├── people/index.astro ✏️
+│   │   ├── prompts/llms.txt.ts ✏️
+│   │   ├── robots.txt.ts ✏️
+│   │   └── workflows/llms.txt.ts 🆕
+│   └── types/people.types.ts ✏️
+└── tests/
+    ├── astro/import-people.test.ts ✏️
+    └── content-pipeline.test.mjs 🆕
 ```
 
-## Implementation sequence and acceptance criteria
+The data-model schema changes shown above are already present in the active branch baseline; this refactor aligns prompts, workflows, public references, documentation, and validation with them.
 
-1. Implement the observation property names and stub/full-guide schema contract shown in the schema diffs.
-2. Implement and validate schemas, types, MCP projections, and cross-reference validation. Migrate existing Appearance notes without inventing source claims. Missing hairstyle links warn but do not fail; a match workflow can fill them in a later run.
-3. Write the nine independent workflow files with explicit boundaries, output contracts, and orchestrator-directed `NEXT` recommendations. No file should directly invoke or commit another workflow’s work.
-4. Update public rendering so stubs remain internal while published guides remain visible. Add request-aware prompt index generation and keep `/prompts/` accessible directly but excluded from indexing.
-5. Reuse `hairstyle-imagery.prompt.md` as the image brief for example creation. Generate 1–3 examples only when the orchestrator invokes the example workflow.
+## Acceptance checks
 
-The implementation is complete when a run can start at any workflow; each workflow returns only its scoped result and next-step recommendation; the orchestrator can stop follow-ups; missing Appearance hairstyle links produce warnings without failing validation; stub records can be incrementally enriched; stubs cannot appear as public guides; and the local and production prompt index links use their respective origins.
+The implementation is ready when:
+
+- Every task prompt can be used by itself and ends in `.prompt.md`; only workflow files compose prompts.
+- The orchestrator controls every follow-up, write, and commit. Image analysis remains isolated from sources and catalog data.
+- Unlinked Appearance observations pass validation with a warning, while invalid foreign keys and example links fail.
+- Web results are clearly proposals, the public raw projection contains only published hairstyle guides, and local writes use complete MCP records.
+- The imagery prompt and example prompt hand off one actual PNG/media record before the example is created.
+- Prompt/workflow indexes use localhost origins in development and the deployed domain in production, while robots rules discourage indexing without blocking direct requests.
+
+## Verification
+
+- `npm run check`: content validation passed for 388 records and Astro reported zero errors, warnings, or hints.
+- `npm test`: production build completed with 351 pages; 9 component tests and 5 content tests passed.
+- Build-output inspection confirmed that `/content/hairstyles.json` contains published records only, prompt and workflow files are emitted for direct requests, and `robots.txt` disallows indexing while allowing the site generally.

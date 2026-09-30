@@ -1,17 +1,17 @@
 import type { APIRoute } from "astro";
-import { hairstyles } from "../../data/hairstyles";
+import { publishedHairstyles } from "../../data";
 import { naturalProfiles } from "../../data/natural-profiles";
 import { appearances, people } from "../../data/people";
 
-const siteOrigin = "https://hairhairhair.hair";
-
-export const GET: APIRoute = () => {
-  const stylesById = new Map(hairstyles.map((style) => [style.id, style]));
+export const GET: APIRoute = ({ url }) => {
+  const siteOrigin = import.meta.env.PROD ? "https://hairhairhair.hair" : url.origin;
+  const stylesById = new Map(publishedHairstyles.map((style) => [style.id, style]));
   const profilesByPerson = new Map(naturalProfiles.map((profile) => [profile.personId, profile]));
   const lines = [
     "# People collection — compact reference",
     "",
     `Browse people: ${siteOrigin}/people/`,
+    `Public content reference index: ${siteOrigin}/content/llms.txt`,
     `Hairstyle IDs and summaries: ${siteOrigin}/hairstyles/llms.txt`,
     "",
     "Natural hair type, color, and skin tone are visual editorial estimates unless their provenance says otherwise.",
@@ -46,7 +46,7 @@ export const GET: APIRoute = () => {
           .map((item) => {
             if (!item.hairstyleId) return `unlinked: ${item.visualDescription ?? "hairstyle not yet described"}`;
             const style = stylesById.get(item.hairstyleId);
-            return `${item.hairstyleId}${style?.name ? ` (${style.name})` : ""}`;
+            return style ? `${item.hairstyleId} (${style.name})` : "pending guide";
           })
           .join(", ");
         lines.push(`  - ${appearance.taken.value}: ${appearance.event} — ${observed}`);

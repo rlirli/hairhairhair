@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { partitionProposedObservations, validatePackages } from "../../scripts/import-people.mjs";
+import { validatePackages } from "../../scripts/import-people.mjs";
 
 const aiProvenance = {
   source: "ai-prefill",
@@ -8,7 +8,10 @@ const aiProvenance = {
   note: "Estimated from photographs.",
 };
 
-function packageItem(hairstyleId = "hairstyle-buzz-cut", licenseOverrides = {}) {
+function packageItem(
+  observation = { hairstyleId: "hairstyle-buzz-cut", note: "A clearly visible test hairstyle." },
+  licenseOverrides = {},
+) {
   const person = {
     id: "person-test",
     slug: "test-person",
@@ -52,7 +55,7 @@ function packageItem(hairstyleId = "hairstyle-buzz-cut", licenseOverrides = {}) 
     imageId: photograph.id,
     event: "Test event",
     taken: { value: "2020", precision: "year", sourceUrl: "https://example.com/event" },
-    observations: [{ hairstyleId, note: "A clearly visible test hairstyle." }],
+    observations: [observation],
   };
   return {
     folderName: person.slug,
@@ -68,45 +71,64 @@ const emptyData = {
   appearanceIds: new Set<string>(),
   profileIds: new Set<string>(),
   styleIds: new Set(["hairstyle-buzz-cut"]),
+  styleExamples: [{ id: "example-buzz-cut", hairstyleIds: ["hairstyle-buzz-cut"] }],
 };
 const schemaAccepts = () => [];
 
 describe("people importer validation", () => {
-  it("rejects an appearance that references an unknown unproposed hairstyle ID", () => {
-    const result = validatePackages([packageItem("hairstyle-not-in-catalog")], emptyData, schemaAccepts);
+  it("rejects an appearance that references an unknown hairstyle ID", () => {
+    const result = validatePackages(
+      [packageItem({ hairstyleId: "hairstyle-not-in-catalog" })],
+      emptyData,
+      schemaAccepts,
+    );
 
     expect(result.errors).toContain(
-      "test-person: appearance appearance-test-person-2020 references unknown hairstyle hairstyle-not-in-catalog; use PROPOSED-<kebab-case> only for a clearly distinct missing style.",
+      "test-person: appearance appearance-test-person-2020 references unknown hairstyle hairstyle-not-in-catalog.",
     );
   });
 
-  it("reports PROPOSED hairstyle observations without rejecting the package", () => {
-    const result = validatePackages([packageItem("PROPOSED-curtain-bob")], emptyData, schemaAccepts);
+  it("accepts an appearance observation with no catalog link", () => {
+    const result = validatePackages(
+      [packageItem({ note: "A visible but unidentified hairstyle." })],
+      emptyData,
+      schemaAccepts,
+    );
 
     expect(result.errors).toEqual([]);
-    expect(result.proposedHairstyles).toEqual([
-      {
-        folderName: "test-person",
-        appearanceId: "appearance-test-person-2020",
-        id: "PROPOSED-curtain-bob",
-        note: "A clearly visible test hairstyle.",
-      },
-    ]);
+    expect(result.planned).toHaveLength(1);
   });
 
-  it("keeps proposed observations out of confirmed hairstyle observations", () => {
-    const partition = partitionProposedObservations([
-      { hairstyleId: "hairstyle-buzz-cut", note: "Known style." },
-      { hairstyleId: "PROPOSED-curtain-bob", note: "Possible new style." },
-    ]);
+  it("keeps a valid catalog link on its observation", () => {
+    const result = validatePackages(
+      [packageItem({ hairstyleId: "hairstyle-buzz-cut", note: "Known style." })],
+      emptyData,
+      schemaAccepts,
+    );
 
-    expect(partition.confirmed).toEqual([{ hairstyleId: "hairstyle-buzz-cut", note: "Known style." }]);
-    expect(partition.proposed).toEqual([{ hairstyleId: "PROPOSED-curtain-bob", note: "Possible new style." }]);
+    expect(result.errors).toEqual([]);
+    expect(result.planned[0].payload.appearances[0].observations[0]).toEqual({
+      hairstyleId: "hairstyle-buzz-cut",
+      note: "Known style.",
+    });
+  });
+
+  it("rejects a style example when the observation has no linked hairstyle", () => {
+    const result = validatePackages([packageItem({ styleExampleId: "example-buzz-cut" })], emptyData, schemaAccepts);
+
+    expect(result.errors).toContain(
+      "test-person: appearance appearance-test-person-2020 styleExampleId example-buzz-cut must reference an example for its linked hairstyle.",
+    );
   });
 
   it("rejects licensed photos without cost-free commercial derivative rights", () => {
     const result = validatePackages(
-      [packageItem("hairstyle-buzz-cut", { costFree: false, commercialUse: false, derivativesAllowed: false })],
+      [
+        packageItem(
+          { hairstyleId: "hairstyle-buzz-cut" },
+          { costFree: false, commercialUse: false, derivativesAllowed: false },
+        ),
+      ],
       emptyData,
       schemaAccepts,
     );

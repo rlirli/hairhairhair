@@ -1,16 +1,16 @@
 import type {
-  PublishedHairstyle,
+  HairstyleRecord,
   HairSubtype,
   HairType,
   HairTypePerson,
   HairTypePersonWithPhoto,
-  HairstyleRecord,
   NaturalProfile,
   NaturalProfileTrait,
   PeopleForHairTypeOptions,
   Person,
   PersonDirectoryCardImage,
   PersonDirectoryCardItem,
+  PublishedHairstyle,
   StyleExample,
 } from "../types";
 import { hairSubtypes, hairTypes } from "./hair-types";
@@ -49,7 +49,7 @@ export function getPeopleByHairTypeSlug(slug: string, options: PeopleForHairType
     if (!naturalProfileMatchesHairTypeId(profile, target.id)) continue;
     const person = peopleById.get(profile.personId);
     if (!person) continue;
-    const heroPhotograph = photographsById.get(person.heroImageId);
+    const heroPhotograph = person.heroImageId ? photographsById.get(person.heroImageId) : undefined;
     const photo = heroPhotograph ? heroPhotograph : undefined;
     if (options.requireHeroImage !== false && !photo) continue;
     const subtype = profile.hairSubtypeId.value
@@ -266,15 +266,14 @@ export function getAppearancesForPerson(personId: string) {
 export function getResolvedHairstyleObservationsForAppearance(appearanceId: string) {
   const appearance = appearances.find((item) => item.id === appearanceId);
   return (
-    appearance?.observations
-      .flatMap((observation) => {
-        if (!observation.hairstyleId) return [];
-        const style = hairstyles.find(
-          (candidate): candidate is PublishedHairstyle =>
-            candidate.id === observation.hairstyleId && candidate.guidePublicationStatus === "published",
-        );
-        return style ? [{ observation, style }] : [];
-      }) ?? []
+    appearance?.observations.flatMap((observation) => {
+      if (!observation.hairstyleId) return [];
+      const style = hairstyles.find(
+        (candidate): candidate is PublishedHairstyle =>
+          candidate.id === observation.hairstyleId && candidate.guidePublicationStatus === "published",
+      );
+      return style ? [{ observation, style }] : [];
+    }) ?? []
   );
 }
 

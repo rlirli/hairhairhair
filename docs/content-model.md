@@ -49,9 +49,11 @@ Image originals live under `src/content/assets/` and are Git tracked. Each image
 
 ## Add or update content
 
-For hand-authored editorial updates, edit the JSON file in the matching collection and use its schema in `src/content/schemas/`. For package-based additions, prepare one payload plus its images in `inbox-hairstyles/<slug>/` or `inbox-people/<slug>/`; the package-level schemas live under `public/schemas/`.
+For hand-authored editorial updates, edit the JSON file in the matching collection and use its schema in `src/content/schemas/`. For package-based additions, prepare one payload plus its images in `inbox-hairstyles/<slug>/` or `inbox-people/<slug>/`; the package-level schemas live under `public/schemas/`. LLM task and workflow entry points are under `public/prompts/` and `public/workflows/`. Their result envelope is `{task,status,records,assets,findings?}`; consult the relevant task and workflow files for the required record fragments and image handoffs.
 
 Run `npm run import:hairstyles` or `npm run import:people` to validate and preview a package. After reviewing the plan, add `-- --apply` to write records/assets into the appropriate `src/content/` collections and move the package into its inbox `archive/`. Import is a local Git workflow; all resulting records and assets remain Git tracked. Then run `npm run validate:content`.
+
+LLM workflows may read public references such as `https://hairhairhair.hair/content/llms.txt`, `/content/hairstyles.json` (published-only), `/content/hair-types.json`, `/people/llms.txt`, and `/hairstyles/llms-full.txt` (published guides). Public hairstyle data cannot reveal drafts or stubs, and its record projection may omit private links or optional fields. In a local run, compare candidate concepts with the complete local MCP catalog before applying writes; reread full records and merge only intended changes, preserving unrelated fields and remapping reused IDs. Public research alone cannot establish global uniqueness. A web-only run may return proposed records and assets in chat, leaving repository reconciliation and import for later. Public references may be stale. Carry records produced earlier in a composed run as a working overlay.
 
 Run `npm run check` and `npm run build` when changing the content adapter or record shapes.
 

@@ -8,7 +8,7 @@ import DirectoryFilters, { type FilterGroup } from "../../components/shared/Dire
 
 const mediaById = new Map(personPhotographs.map((photo) => [photo.id, photo]));
 const peopleCards = people.flatMap((person) => {
-  const image = mediaById.get(person.heroImageId);
+  const image = person.heroImageId ? mediaById.get(person.heroImageId) : undefined;
   if (!image) return [];
   return [buildPersonDirectoryCardData(person, { src: image.image.src, alt: image.alt })];
 });

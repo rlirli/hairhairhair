@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://hairhairhair.hair/schemas/content-task-result.schema.json",
+  "title": "Portable content task result",
+  "description": "Portable result envelope for standalone content research and ingestion tasks. This describes output records and assets; it does not import them automatically.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "task",
+    "status",
+    "records",
+    "assets"
+  ],
+  "properties": {
+    "task": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["complete", "partial", "blocked"] },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["collection", "record"],
+        "properties": {
+          "collection": {
+            "enum": [
+              "hairstyles",
+              "compatibility",
+              "people",
+              "appearances",
+              "natural-profiles",
+              "sources",
+              "media",
+              "style-examples",
+              "hair-types",
+              "classification-systems"
+            ]
+          },
+          "record": { "type": "object" }
+        },
+        "allOf": [
+          {
+            "if": { "properties": { "collection": { "const": "hairstyles" } } },
+            "then": { "properties": { "record": { "$ref": "hairstyle.schema.json" } } }
+          },
+          {
+            "if": { "properties": { "collection": { "const": "compatibility" } } },
+            "then": { "properties": { "record": { "$ref": "compatibility.schema.json" } } }
+          },
+          {
+            "if": { "properties": { "collection": { "const": "people" } } },
+            "then": { "properties": { "record": { "$ref": "person.schema.json" } } }
+          },
+          {
+            "if": { "properties": { "collection": { "const": "appearances" } } },
+            "then": { "properties": { "record": { "$ref": "appearance.schema.json" } } }
+          },
+          {
+            "if": { "properties": { "collection": { "const": "natural-profiles" } } },
+            "then": { "properties": { "record": { "$ref": "natural-profile.schema.json" } } }
+          },
+          {
+            "if": { "properties": { "collection": { "const": "sources" } } },
+            "then": { "properties": { "record": { "$ref": "source.schema.json" } } }
+          },
+          {
+            "if": { "properties": { "collection": { "const": "media" } } },
+            "then": { "properties": { "record": { "$ref": "media.schema.json" } } }
+          },
+          {
+            "if": { "properties": { "collection": { "const": "style-examples" } } },
+            "then": { "properties": { "record": { "$ref": "style-example.schema.json" } } }
+          },
+          {
+            "if": { "properties": { "collection": { "const": "hair-types" } } },
+            "then": { "properties": { "record": { "$ref": "hair-type.schema.json" } } }
+          },
+          {
+            "if": { "properties": { "collection": { "const": "classification-systems" } } },
+            "then": { "properties": { "record": { "$ref": "classification-system.schema.json" } } }
+          }
+        ]
+      }
+    },
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["mediaId", "fileName"],
+        "properties": {
+          "mediaId": { "type": "string", "minLength": 1 },
+          "fileName": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "findings": {
+      "type": "object",
+      "description": "Research discoveries and image-only observations that do not yet support a content record."
+    }
+  }
+}

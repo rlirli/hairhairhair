@@ -12,10 +12,23 @@ export interface PersonSource {
   url: string;
 }
 
+export interface ReportedHairstyle {
+  description: string;
+  sourceId: string;
+}
+
+export interface PreCatalogHairstyleCandidate {
+  rank: number;
+  title: string;
+}
+
 export interface AppearanceObservation {
-  hairstyleId: string;
+  reportedHairstyle?: ReportedHairstyle;
+  visualDescription?: string;
+  preCatalogCandidates?: PreCatalogHairstyleCandidate[];
+  hairstyleId?: string;
   styleExampleId?: string;
-  note: string;
+  catalogMatchReasoning?: string;
 }
 
 export interface Appearance {

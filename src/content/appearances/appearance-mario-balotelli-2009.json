@@ -11,7 +11,7 @@
   "observations": [
     {
       "hairstyleId": "hairstyle-buzz-cut",
-      "note": "Very short, even buzz cut with a clean, low profile; the hair is visible from the front and crown."
+      "visualDescription": "A close-cropped, even silhouette with a neat, low profile is visible from the front and crown."
     }
   ]
 }

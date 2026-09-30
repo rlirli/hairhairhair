@@ -11,7 +11,7 @@
   "observations": [
     {
       "hairstyleId": "hairstyle-thin-mohawk",
-      "note": "Shaved sides and a narrow raised strip along the centre create a clearly visible mohawk-style silhouette."
+      "visualDescription": "Shaved sides and a narrow raised strip along the centre create a clearly visible mohawk-style silhouette."
     }
   ]
 }

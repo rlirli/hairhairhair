@@ -15,13 +15,6 @@ const inbox = join(root, "inbox-people");
 const archive = join(inbox, "archive");
 const schemaPath = join(root, "public/schemas/person-package.schema.json");
 
-export function partitionProposedObservations(observations) {
-  return {
-    confirmed: observations.filter((item) => !item.hairstyleId.startsWith("PROPOSED-")),
-    proposed: observations.filter((item) => item.hairstyleId.startsWith("PROPOSED-")),
-  };
-}
-
 // Kept as a pure package preflight helper for the legacy package-validation unit tests.
 export function validatePackages(packages, data, validatePayload) {
   const errors = [];
@@ -34,7 +27,6 @@ export function validatePackages(packages, data, validatePayload) {
   const styleExamples = new Map((data.styleExamples ?? []).map((item) => [item.id, item]));
   const folders = new Set();
   const planned = [];
-  const proposedHairstyles = [];
   for (const item of packages) {
     const { folderName, payload } = item;
     if (folders.has(folderName)) errors.push(`${folderName}: duplicate inbox folder.`);
@@ -105,23 +97,15 @@ export function validatePackages(packages, data, validatePayload) {
         usedPhotos.add(appearance.imageId);
       }
       for (const observation of appearance.observations) {
-        if (!observation.hairstyleId.startsWith("PROPOSED-") && !styleIds.has(observation.hairstyleId)) {
+        if (observation.hairstyleId && !styleIds.has(observation.hairstyleId))
           errors.push(
-            `${folderName}: appearance ${appearance.id} references unknown hairstyle ${observation.hairstyleId}; use PROPOSED-<kebab-case> only for a clearly distinct missing style.`,
+            `${folderName}: appearance ${appearance.id} references unknown hairstyle ${observation.hairstyleId}.`,
           );
-        }
-        if (observation.hairstyleId.startsWith("PROPOSED-"))
-          proposedHairstyles.push({
-            folderName,
-            appearanceId: appearance.id,
-            id: observation.hairstyleId,
-            note: observation.note,
-          });
         if (observation.styleExampleId) {
           const example = styleExamples.get(observation.styleExampleId);
-          if (!example || !example.hairstyleIds.includes(observation.hairstyleId))
+          if (!example || !observation.hairstyleId || !example.hairstyleIds.includes(observation.hairstyleId))
             errors.push(
-              `${folderName}: appearance ${appearance.id} styleExampleId ${observation.styleExampleId} must reference an example for hairstyle ${observation.hairstyleId}.`,
+              `${folderName}: appearance ${appearance.id} styleExampleId ${observation.styleExampleId} must reference an example for its linked hairstyle.`,
             );
         }
       }
@@ -130,7 +114,7 @@ export function validatePackages(packages, data, validatePayload) {
       if (!usedPhotos.has(id)) errors.push(`${folderName}: photo ${id} is not used by an appearance.`);
     planned.push(item);
   }
-  return { errors: [...new Set(errors)], planned, proposedHairstyles };
+  return { errors: [...new Set(errors)], planned };
 }
 
 function planPackages(packages, validatePayload, data) {
@@ -145,7 +129,6 @@ function planPackages(packages, validatePayload, data) {
   const hairstyles = new Map(data.hairstyles.map((item) => [item.id, item]));
   const styleExamples = new Map((data.styleExamples ?? []).map((item) => [item.id, item]));
   const usedFolders = new Set();
-  const proposals = [];
   for (const item of packages) {
     const { folderName, payload, imageFiles } = item;
     if (usedFolders.has(folderName)) errors.push(`${folderName}: duplicate package folder.`);
@@ -245,24 +228,17 @@ function planPackages(packages, validatePayload, data) {
       )
         errors.push(`${folderName}: invalid date/precision in appearance "${appearance.id}".`);
       for (const observation of appearance.observations) {
-        if (observation.styleExampleId) {
-          const example = styleExamples.get(observation.styleExampleId);
-          if (!example || !example.hairstyleIds.includes(observation.hairstyleId))
-            errors.push(
-              `${folderName}: appearance "${appearance.id}" styleExampleId "${observation.styleExampleId}" must reference an example for hairstyle "${observation.hairstyleId}".`,
-            );
-        }
-        if (observation.hairstyleId.startsWith("PROPOSED-"))
-          proposals.push({
-            folderName,
-            appearanceId: appearance.id,
-            id: observation.hairstyleId,
-            note: observation.note,
-          });
-        else if (!hairstyles.has(observation.hairstyleId))
+        if (observation.hairstyleId && !hairstyles.has(observation.hairstyleId))
           errors.push(
             `${folderName}: appearance "${appearance.id}" references unknown hairstyle "${observation.hairstyleId}".`,
           );
+        if (observation.styleExampleId) {
+          const example = styleExamples.get(observation.styleExampleId);
+          if (!example || !observation.hairstyleId || !example.hairstyleIds.includes(observation.hairstyleId))
+            errors.push(
+              `${folderName}: appearance "${appearance.id}" styleExampleId "${observation.styleExampleId}" must reference an example for its linked hairstyle.`,
+            );
+        }
       }
       appearances.set(appearance.id, appearance);
     }
@@ -272,17 +248,16 @@ function planPackages(packages, validatePayload, data) {
       errors.push(`${folderName}: every supplied image must have exactly one photograph record.`);
   }
 
-  if (errors.length) return { errors: [...new Set(errors)], outputs, copies, packages, proposals };
+  if (errors.length) return { errors: [...new Set(errors)], outputs, copies, packages };
   for (const item of packages) {
     const { person, naturalProfile, photographs, appearances: packageAppearances } = item.payload;
     const profile = { ...naturalProfile, id: `natural-profile-${person.slug}`, personId: person.id };
     outputs.set(join(contentRoot, "people", `${person.id}.json`), json(person));
     outputs.set(join(contentRoot, "natural-profiles", `${profile.id}.json`), json(profile));
     for (const appearance of packageAppearances) {
-      const confirmed = partitionProposedObservations(appearance.observations).confirmed;
       outputs.set(
         join(contentRoot, "appearances", `${appearance.id}.json`),
-        json({ ...appearance, personId: person.id, observations: confirmed }),
+        json({ ...appearance, personId: person.id }),
       );
     }
     for (const photo of photographs) {
@@ -308,7 +283,7 @@ function planPackages(packages, validatePayload, data) {
       });
     }
   }
-  return { errors: [], outputs, copies, packages, proposals };
+  return { errors: [], outputs, copies, packages };
 }
 
 function parseArgs(args) {
@@ -368,11 +343,6 @@ export async function main(args = process.argv.slice(2)) {
   console.log(
     `- Archive destinations: ${packages.map((item) => `inbox-people/archive/${item.folderName}`).join(", ")}`,
   );
-  if (plan.proposals.length) {
-    console.log("- Proposed hairstyles kept in the archived package; not imported as confirmed observations:");
-    for (const proposal of plan.proposals)
-      console.log(`  - ${proposal.id} in ${proposal.folderName}/${proposal.appearanceId}: ${proposal.note}`);
-  }
   if (skipped.length) console.log(`- Skipped: ${skipped.join(", ")}`);
   if (!options.apply) {
     console.log("Preview only; no files changed. Re-run with --apply to import.");

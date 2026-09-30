@@ -113,9 +113,13 @@ function summarizeRecord(collection, record) {
   for (const key of summaryFields[collection] ?? ["id", "name", "title", "slug"]) {
     if (!Object.hasOwn(record, key)) continue;
     if (key === "observations" && collection === "appearances") {
-      summary.observations = record.observations.map(({ hairstyleId, styleExampleId }) => ({
-        hairstyleId,
-        ...(styleExampleId ? { styleExampleId } : {}),
+      summary.observations = record.observations.map((observation) => ({
+        ...(observation.hairstyleId ? { hairstyleId: observation.hairstyleId } : {}),
+        ...(observation.styleExampleId ? { styleExampleId: observation.styleExampleId } : {}),
+        ...(observation.reportedHairstyle ? { reportedHairstyle: observation.reportedHairstyle } : {}),
+        ...(observation.visualDescription ? { visualDescription: observation.visualDescription } : {}),
+        ...(observation.preCatalogCandidates ? { preCatalogCandidates: observation.preCatalogCandidates } : {}),
+        ...(observation.catalogMatchReasoning ? { catalogMatchReasoning: observation.catalogMatchReasoning } : {}),
       }));
     } else if (collection === "natural-profiles" && record[key] && typeof record[key] === "object") {
       summary[key] = Object.hasOwn(record[key], "value") ? record[key].value : record[key];

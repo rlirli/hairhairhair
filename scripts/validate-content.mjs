@@ -72,6 +72,7 @@ async function loadCollection(name) {
 }
 
 const errors = [];
+const warnings = [];
 const collections = {};
 for (const name of Object.keys(entitySchemas)) collections[name] = await loadCollection(name);
 
@@ -133,7 +134,7 @@ for (const record of collections.compatibility) {
       }
     }
     const style = styles.get(record.hairstyleId);
-    if (assessment.variationId && !style?.variations.some((variation) => variation.id === assessment.variationId)) {
+    if (assessment.variationId && !style?.variations?.some((variation) => variation.id === assessment.variationId)) {
       errors.push(`compatibility/${record.hairstyleId}: unknown variationId "${assessment.variationId}"`);
     }
     const criteriaKey = (assessment.criteria ?? [])
@@ -154,11 +155,21 @@ for (const appearance of collections.appearances) {
   if (appearance.imageId && !media.has(appearance.imageId))
     errors.push(`appearances/${appearance.id}: unknown imageId "${appearance.imageId}"`);
   for (const observation of appearance.observations ?? []) {
-    if (!styles.has(observation.hairstyleId))
-      errors.push(`appearances/${appearance.id}: unknown hairstyleId "${observation.hairstyleId}"`);
+    if (observation.hairstyleId) {
+      if (!styles.has(observation.hairstyleId))
+        errors.push(`appearances/${appearance.id}: unknown hairstyleId "${observation.hairstyleId}"`);
+    } else {
+      warnings.push(`appearances/${appearance.id}: observation has no hairstyleId yet`);
+    }
+    if (observation.reportedHairstyle?.sourceId && !sources.has(observation.reportedHairstyle.sourceId))
+      errors.push(
+        `appearances/${appearance.id}: reported hairstyle references unknown source "${observation.reportedHairstyle.sourceId}"`,
+      );
     if (observation.styleExampleId) {
       const example = examples.get(observation.styleExampleId);
-      if (!example || !example.hairstyleIds.includes(observation.hairstyleId))
+      if (!example)
+        errors.push(`appearances/${appearance.id}: unknown styleExampleId "${observation.styleExampleId}"`);
+      else if (observation.hairstyleId && !example.hairstyleIds.includes(observation.hairstyleId))
         errors.push(
           `appearances/${appearance.id}: styleExampleId "${observation.styleExampleId}" must reference an example for hairstyle "${observation.hairstyleId}"`,
         );
@@ -198,4 +209,7 @@ if (errors.length) {
   console.log(
     `Content validation passed: ${total} records across ${Object.keys(entitySchemas).length} collections; ${compatibilityKeys.size} compatibility assessments.`,
   );
+  if (warnings.length) {
+    console.warn(`Content validation warnings (${warnings.length}):\n- ${warnings.join("\n- ")}`);
+  }
 }

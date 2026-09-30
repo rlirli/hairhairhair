@@ -4,7 +4,7 @@ import type {
   Appearance,
   EditorialSource,
   HairClassificationSystem,
-  Hairstyle,
+  HairstyleRecord,
   HairstyleCompatibility,
   HairstyleMedia,
   HairSubtype,
@@ -24,7 +24,7 @@ function records<T extends RecordWithId>(modules: Record<string, T>): T[] {
   return Object.values(modules).sort((left, right) => left.id.localeCompare(right.id));
 }
 
-const hairstyleFiles = import.meta.glob<Hairstyle>("../content/hairstyles/*.json", {
+const hairstyleFiles = import.meta.glob<HairstyleRecord>("../content/hairstyles/*.json", {
   eager: true,
   import: "default",
 });

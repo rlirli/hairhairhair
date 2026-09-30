@@ -11,7 +11,7 @@
   "observations": [
     {
       "hairstyleId": "hairstyle-flat-top",
-      "note": "A low, squared flat-top shape is visible at the crown and front."
+      "visualDescription": "A low, squared flat-top shape is visible at the crown and front."
     }
   ]
 }

@@ -12,7 +12,8 @@
     {
       "hairstyleId": "hairstyle-long-layered-cut",
       "styleExampleId": "rihanna-long-layered-example",
-      "note": "The photo shows long, loose waves with a center part and visible face-framing movement. Long layered cut is the nearest catalog guide; the image cannot establish the exact cut, natural texture, or whether the lengths include added hair."
+      "visualDescription": "Long, loose waves with a centre part and visible face-framing movement. The image cannot establish the exact cut, natural texture, or whether the lengths include added hair.",
+      "catalogMatchReasoning": "Long layered cut is the nearest catalog guide."
     }
   ]
 }

@@ -1,9 +1,10 @@
 import type {
-  Hairstyle,
+  PublishedHairstyle,
   HairSubtype,
   HairType,
   HairTypePerson,
   HairTypePersonWithPhoto,
+  HairstyleRecord,
   NaturalProfile,
   NaturalProfileTrait,
   PeopleForHairTypeOptions,
@@ -121,15 +122,18 @@ export function getCompatibleHairTypeLabelsForHairstyle(styleId: string) {
   });
 }
 
-export function getHairstyleBySlug(slug: string): Hairstyle | undefined {
-  return hairstyles.find((hairstyle) => hairstyle.slug === slug);
+export function getHairstyleBySlug(slug: string): PublishedHairstyle | undefined {
+  return hairstyles.find(
+    (hairstyle): hairstyle is PublishedHairstyle =>
+      hairstyle.guidePublicationStatus === "published" && hairstyle.slug === slug,
+  );
 }
 
 export function getStyleExamplesForHairstyle(id: string): StyleExample[] {
   return styleExamples.filter((example) => example.hairstyleIds.includes(id));
 }
 
-export function isPublishedHairstyleGuide(hairstyle: Pick<Hairstyle, "guidePublicationStatus">): boolean {
+export function isPublishedHairstyleGuide(hairstyle: HairstyleRecord): hairstyle is PublishedHairstyle {
   return hairstyle.guidePublicationStatus === "published";
 }
 
@@ -263,13 +267,14 @@ export function getResolvedHairstyleObservationsForAppearance(appearanceId: stri
   const appearance = appearances.find((item) => item.id === appearanceId);
   return (
     appearance?.observations
-      .map((observation) => ({
-        observation,
-        style: hairstyles.find((style) => style.id === observation.hairstyleId),
-      }))
-      .filter((item): item is { observation: typeof item.observation; style: NonNullable<typeof item.style> } =>
-        Boolean(item.style),
-      ) ?? []
+      .flatMap((observation) => {
+        if (!observation.hairstyleId) return [];
+        const style = hairstyles.find(
+          (candidate): candidate is PublishedHairstyle =>
+            candidate.id === observation.hairstyleId && candidate.guidePublicationStatus === "published",
+        );
+        return style ? [{ observation, style }] : [];
+      }) ?? []
   );
 }
 
@@ -293,12 +298,16 @@ export function getHairstyleAppearancesForPerson(personId: string) {
   const appearances = getAppearancesForPerson(personId);
   const hairstyleIds = [
     ...new Set(
-      appearances.flatMap((appearance) => appearance.observations.map((observation) => observation.hairstyleId)),
+      appearances.flatMap((appearance) =>
+        appearance.observations.flatMap((observation) => (observation.hairstyleId ? [observation.hairstyleId] : [])),
+      ),
     ),
   ];
 
   return hairstyleIds.flatMap((styleId) => {
-    const style = hairstyles.find((item) => item.id === styleId);
+    const style = hairstyles.find(
+      (item): item is PublishedHairstyle => item.id === styleId && item.guidePublicationStatus === "published",
+    );
     if (!style) return [];
 
     return [{ style, appearances: getAppearancesForPersonAndHairstyle(personId, styleId) }];

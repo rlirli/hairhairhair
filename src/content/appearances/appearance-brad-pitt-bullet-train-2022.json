@@ -12,7 +12,8 @@
     {
       "hairstyleId": "hairstyle-long-layered-cut",
       "styleExampleId": "brad-pitt-long-layered-waves",
-      "note": "The image shows grown-out, medium-long loose waves and curls brushed off the face with visible movement through the sides and back. Long layered cut is the closest catalog shape; the photo does not establish the exact internal layering."
+      "visualDescription": "Grown-out, medium-long loose waves and curls are brushed off the face, with visible movement through the sides and back. The photo does not establish the exact internal layering.",
+      "catalogMatchReasoning": "Long layered cut is the closest catalog shape."
     }
   ]
 }

@@ -12,7 +12,8 @@
     {
       "hairstyleId": "hairstyle-blunt-bob",
       "styleExampleId": "rihanna-bob-example",
-      "note": "The image shows a short rounded shape with a heavy, long side-swept fringe and close nape. The photo does not establish the perimeter or internal layering, so blunt bob is only a closest catalog match; the bright red color is a temporary visible color, not natural color."
+      "visualDescription": "A short rounded shape with a heavy, long side-swept fringe and close nape. The photo does not establish the perimeter or internal layering; the visible hair color is bright red.",
+      "catalogMatchReasoning": "Blunt bob is only the closest catalog match."
     }
   ]
 }

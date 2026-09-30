@@ -21,6 +21,7 @@ export interface HairstyleInventor {
   sourceId: string;
 }
 
+/** A complete hairstyle guide. Draft and published records satisfy this shape. */
 export interface Hairstyle {
   id: string;
   slug: string;
@@ -37,6 +38,27 @@ export interface Hairstyle {
   inventedAt?: HairstyleOriginDate;
   inventor?: HairstyleInventor;
 }
+
+/** A research-pending record may be enriched with any guide fields over time. */
+export interface HairstyleStub {
+  id: string;
+  guidePublicationStatus: "stub";
+  slug?: string;
+  name?: string;
+  kind?: Hairstyle["kind"];
+  summary?: string;
+  intro?: string[];
+  variations?: HairstyleVariation[];
+  consultation?: HairstyleConsultation;
+  considerations?: string[];
+  sourceIds?: string[];
+  relatedStyleIds?: string[];
+  inventedAt?: HairstyleOriginDate;
+  inventor?: HairstyleInventor;
+}
+
+export type HairstyleRecord = Hairstyle | HairstyleStub;
+export type PublishedHairstyle = Hairstyle & { guidePublicationStatus: "published" };
 
 export interface StyleExample {
   id: string;

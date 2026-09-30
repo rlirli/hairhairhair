@@ -12,7 +12,8 @@
     {
       "hairstyleId": "hairstyle-short-curly-shag",
       "styleExampleId": "timothee-short-curly-shag-example",
-      "note": "The photo shows dense, loose curls with considerable crown volume and irregular front curls sweeping across the forehead. The close crop does not show the full nape or exact side graduation, so the short curly shag is an approximate catalog match."
+      "visualDescription": "Dense, loose curls have considerable crown volume, with irregular front curls sweeping across the forehead. The close crop does not show the full nape or exact side graduation.",
+      "catalogMatchReasoning": "Short curly shag is an approximate catalog match."
     }
   ]
 }

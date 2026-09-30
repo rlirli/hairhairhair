@@ -12,7 +12,8 @@
     {
       "hairstyleId": "hairstyle-long-layered-cut",
       "styleExampleId": "lady-gaga-long-layered-example",
-      "note": "The photograph shows long platinum-blonde lengths with raised, swept-back crown volume and face-side sections falling below the shoulders. It does not clearly show the perimeter or internal layers, so long layered cut is a cautious catalog match rather than a verified cut."
+      "visualDescription": "Long platinum-blonde lengths have raised, swept-back crown volume and face-side sections falling below the shoulders. The perimeter and internal layers are not clearly visible.",
+      "catalogMatchReasoning": "Long layered cut is a cautious catalog match, not a verified cut."
     }
   ]
 }

@@ -10,6 +10,9 @@ export type {
   EditorialSource,
   HairTypeSpecificHairstyleAdvice,
   Hairstyle,
+  HairstyleRecord,
+  HairstyleStub,
+  PublishedHairstyle,
   HairstyleCompatibility,
   HairstyleConsultation,
   HairstyleInventor,
@@ -33,6 +36,8 @@ export type {
 export type {
   Appearance,
   AppearanceObservation,
+  PreCatalogHairstyleCandidate,
+  ReportedHairstyle,
   Person,
   PersonDirectoryCardImage,
   PersonDirectoryCardItem,

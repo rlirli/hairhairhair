@@ -11,7 +11,7 @@
   "observations": [
     {
       "hairstyleId": "hairstyle-buzz-cut",
-      "note": "The photograph shows an evenly clipped, close cut bleached blond. The visible length and outline fit a buzz cut; the hair color is dyed."
+      "visualDescription": "The photograph shows an evenly clipped, close cut with bleached-blond hair. The visible length and outline fit a buzz cut; the hair color is dyed."
     }
   ]
 }

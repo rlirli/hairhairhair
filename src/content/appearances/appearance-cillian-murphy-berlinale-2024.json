@@ -12,7 +12,8 @@
     {
       "hairstyleId": "hairstyle-french-crop",
       "styleExampleId": "cillian-murphy-french-crop",
-      "note": "A short, textured top lies forward and diagonally across the forehead, with shorter connected sides. French crop is the nearest published guide; the view does not show whether the sides are faded or disconnected."
+      "visualDescription": "A short, textured top lies forward and diagonally across the forehead, with shorter connected sides. The view does not show whether the sides are faded or disconnected.",
+      "catalogMatchReasoning": "French crop is the nearest published guide."
     }
   ]
 }

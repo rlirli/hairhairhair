@@ -43,10 +43,11 @@ export const GET: APIRoute = () => {
       lines.push("- Recorded hairstyle appearances:");
       for (const appearance of personAppearances) {
         const observed = appearance.observations
-          .map(
-            (item) =>
-              `${item.hairstyleId}${stylesById.has(item.hairstyleId) ? ` (${stylesById.get(item.hairstyleId)?.name})` : ""}`,
-          )
+          .map((item) => {
+            if (!item.hairstyleId) return `unlinked: ${item.visualDescription ?? "hairstyle not yet described"}`;
+            const style = stylesById.get(item.hairstyleId);
+            return `${item.hairstyleId}${style?.name ? ` (${style.name})` : ""}`;
+          })
           .join(", ");
         lines.push(`  - ${appearance.taken.value}: ${appearance.event} — ${observed}`);
       }

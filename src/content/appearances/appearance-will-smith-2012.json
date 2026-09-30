@@ -11,7 +11,7 @@
   "observations": [
     {
       "hairstyleId": "hairstyle-buzz-cut",
-      "note": "A short, close-cropped top with a subtle perimeter transition is visible from the front."
+      "visualDescription": "A short, close-cropped top with a subtle perimeter transition is visible from the front."
     }
   ]
 }

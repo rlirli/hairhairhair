@@ -11,30 +11,101 @@
     "observations"
   ],
   "properties": {
-    "id": { "type": "string" },
-    "personId": { "type": "string" },
-    "imageId": { "type": "string" },
-    "event": { "type": "string" },
+    "id": {
+      "type": "string"
+    },
+    "personId": {
+      "type": "string"
+    },
+    "imageId": {
+      "type": "string"
+    },
+    "event": {
+      "type": "string"
+    },
     "taken": {
       "type": "object",
-      "required": ["value", "precision", "sourceUrl"],
-      "properties": { "value": { "type": "string" }, "precision": { "enum": [
+      "required": [
+        "value",
+        "precision",
+        "sourceUrl"
+      ],
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "precision": {
+          "enum": [
             "day",
             "month",
             "year",
             "decade"
-          ] }, "sourceUrl": { "type": "string", "format": "uri" } },
+          ]
+        },
+        "sourceUrl": {
+          "type": "string",
+          "format": "uri"
+        }
+      },
       "additionalProperties": false
     },
     "observations": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["hairstyleId", "note"],
         "properties": {
-          "hairstyleId": { "type": "string" },
-          "styleExampleId": { "type": "string" },
-          "note": { "type": "string" }
+          "reportedHairstyle": {
+            "type": "object",
+            "required": [
+              "description",
+              "sourceId"
+            ],
+            "properties": {
+              "description": {
+                "type": "string",
+                "minLength": 1
+              },
+              "sourceId": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "visualDescription": {
+            "type": "string",
+            "minLength": 1
+          },
+          "preCatalogCandidates": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "rank",
+                "title"
+              ],
+              "properties": {
+                "rank": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "title": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "hairstyleId": {
+            "type": "string"
+          },
+          "styleExampleId": {
+            "type": "string"
+          },
+          "catalogMatchReasoning": {
+            "type": "string",
+            "minLength": 1
+          }
         },
         "additionalProperties": false
       }

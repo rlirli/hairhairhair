@@ -11,7 +11,7 @@
   "observations": [
     {
       "hairstyleId": "hairstyle-top-knot",
-      "note": "Very short sides frame a longer top gathered into a small topknot."
+      "visualDescription": "Very short sides frame a longer top gathered into a small topknot."
     }
   ]
 }

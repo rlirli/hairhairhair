@@ -11,7 +11,7 @@
   "observations": [
     {
       "hairstyleId": "hairstyle-taper-fade",
-      "note": "Short close tapered sides with a slightly longer textured top are visible in the available frame."
+      "visualDescription": "Short, close tapered sides with a slightly longer textured top are visible in the available frame."
     }
   ]
 }

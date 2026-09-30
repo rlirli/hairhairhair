@@ -11,7 +11,11 @@
     {
       "hairstyleId": "hairstyle-graphic-hair-color",
       "styleExampleId": "graphic-hair-color-smiley",
-      "note": "The Associated Press report from December 1997 describes Rodman's short-cropped hair with a yellow base, a black smiley on the back, and red and green color at the hairline. The source photograph is not included; this hairstyle card uses an explicitly labelled generated style example."
+      "reportedHairstyle": {
+        "description": "A December 1997 Associated Press report describes Rodman’s short-cropped hair with a yellow base, a black smiley on the back, and red and green color at the hairline.",
+        "sourceId": "spokesman-rodman-smiley-dye-1997"
+      },
+      "catalogMatchReasoning": "The source-reported design is a graphic hair-color treatment and is linked to that catalog entry. No appearance photograph is included; the hairstyle card uses a generated example that is labelled as such."
     }
   ]
 }

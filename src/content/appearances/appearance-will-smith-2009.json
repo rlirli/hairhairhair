@@ -11,7 +11,7 @@
   "observations": [
     {
       "hairstyleId": "hairstyle-buzz-cut",
-      "note": "A close-cropped silhouette with a neat, low profile in the available frame."
+      "visualDescription": "A close-cropped silhouette with a neat, low profile is visible in the available frame."
     }
   ]
 }

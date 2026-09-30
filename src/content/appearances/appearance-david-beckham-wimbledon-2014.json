@@ -12,7 +12,8 @@
     {
       "hairstyleId": "hairstyle-medium-swept-back-taper",
       "styleExampleId": "david-beckham-swept-back-taper-example",
-      "note": "The photo shows a longer, voluminous top swept back from the forehead over short sides. This fits the medium swept-back taper family; the image does not establish an exact undercut or fade technique."
+      "visualDescription": "A longer, voluminous top is swept back from the forehead over short sides. The image does not establish an exact undercut or fade technique.",
+      "catalogMatchReasoning": "This fits the medium swept-back taper family."
     }
   ]
 }

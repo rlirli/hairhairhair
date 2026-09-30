@@ -12,7 +12,8 @@
     {
       "hairstyleId": "hairstyle-long-layered-cut",
       "styleExampleId": "cillian-murphy-long-layered",
-      "note": "The photo shows dark, neck-length hair with a side part, long face-framing pieces and visible layers. Long layered cut is the closest published guide; the image does not establish the internal cutting technique or natural texture."
+      "visualDescription": "Dark, neck-length hair with a side part, long face-framing pieces, and visible layers. The image does not establish the internal cutting technique or natural texture.",
+      "catalogMatchReasoning": "Long layered cut is the closest published guide."
     }
   ]
 }

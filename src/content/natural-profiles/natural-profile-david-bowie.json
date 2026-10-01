@@ -1,0 +1,58 @@
+{
+  "id": "natural-profile-david-bowie",
+  "personId": "person-david-bowie",
+  "hairTypeId": {
+    "value": null,
+    "provenance": {
+      "source": "not-documented",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "Consulted biographical sources do not document natural hair pattern; public styling and color changes cannot establish it."
+    }
+  },
+  "hairSubtypeId": {
+    "value": null,
+    "provenance": {
+      "source": "not-documented",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "No reliable source consulted documents a natural hair subtype."
+    }
+  },
+  "naturalHairColor": {
+    "value": null,
+    "provenance": {
+      "source": "not-documented",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "Sources describe highly variable styled and colored looks, not his natural hair color."
+    }
+  },
+  "naturalSkinTone": {
+    "value": null,
+    "provenance": {
+      "source": "not-documented",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "Not documented in the consulted reliable sources; no visual inference recorded."
+    }
+  },
+  "hairThickness": {
+    "value": null,
+    "provenance": {
+      "source": "not-documented",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "No reliable source consulted documents individual strand thickness."
+    }
+  },
+  "hairDensity": {
+    "value": null,
+    "provenance": {
+      "source": "not-documented",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "No reliable source consulted documents natural hair density."
+    }
+  }
+}

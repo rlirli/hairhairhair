@@ -1,0 +1,58 @@
+{
+  "id": "natural-profile-diana-princess-of-wales",
+  "personId": "person-diana-princess-of-wales",
+  "hairTypeId": {
+    "value": null,
+    "provenance": {
+      "source": "not-documented",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "No reliable source located that documents her natural hair pattern; styled public photographs are not evidence."
+    }
+  },
+  "hairSubtypeId": {
+    "value": null,
+    "provenance": {
+      "source": "not-documented",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "No reliable source located that documents her natural hair subtype."
+    }
+  },
+  "naturalHairColor": {
+    "value": null,
+    "provenance": {
+      "source": "not-documented",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "Photographs show styled and variable hair shades; natural color is not established by reliable documentation."
+    }
+  },
+  "naturalSkinTone": {
+    "value": null,
+    "provenance": {
+      "source": "not-documented",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "Not documented for this profile; no trait inferred from photographs."
+    }
+  },
+  "hairThickness": {
+    "value": null,
+    "provenance": {
+      "source": "not-documented",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "Individual strand thickness is not established by reliable documentation."
+    }
+  },
+  "hairDensity": {
+    "value": null,
+    "provenance": {
+      "source": "not-documented",
+      "status": "unverified",
+      "confidence": "low",
+      "note": "Styling and public photographs do not establish natural hair density."
+    }
+  }
+}

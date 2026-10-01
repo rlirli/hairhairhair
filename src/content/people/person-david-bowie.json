@@ -1,0 +1,20 @@
+{
+  "id": "person-david-bowie",
+  "slug": "david-bowie",
+  "name": "David Bowie",
+  "description": "David Robert Jones (January 8, 1947 – January 10, 2016), known professionally as David Bowie, was an English musician and actor.",
+  "sources": [
+    {
+      "kind": "biography",
+      "url": "https://www.davidbowie.com/about"
+    },
+    {
+      "kind": "biography",
+      "url": "https://www.televisionacademy.com/bios/david-bowie"
+    },
+    {
+      "kind": "biography",
+      "url": "https://feeds.bbci.co.uk/news/entertainment-arts-20944291"
+    }
+  ]
+}

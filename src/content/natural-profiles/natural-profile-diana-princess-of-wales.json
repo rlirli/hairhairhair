@@ -29,12 +29,12 @@
     }
   },
   "naturalSkinTone": {
-    "value": null,
+    "value": "light",
     "provenance": {
-      "source": "not-documented",
-      "status": "unverified",
-      "confidence": "low",
-      "note": "Not documented for this profile; no trait inferred from photographs."
+      "source": "model-knowledge",
+      "status": "inferred",
+      "confidence": "high",
+      "note": "High-confidence general biographical knowledge; not inferred from a portrait."
     }
   },
   "hairThickness": {

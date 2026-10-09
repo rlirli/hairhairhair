@@ -1,0 +1,18 @@
+{
+  "id": "appearance-diana-halifax-royal-tour-1983",
+  "personId": "person-diana-princess-of-wales",
+  "imageId": "diana-halifax-1983",
+  "event": "Canadian royal tour: Halifax, Nova Scotia",
+  "taken": {
+    "value": "1983-06",
+    "precision": "month",
+    "sourceUrl": "https://www.canada.ca/en/canadian-heritage/services/past-royal-tours.html"
+  },
+  "observations": [
+    {
+      "hairstyleId": "hairstyle-short-feathered-shag",
+      "visualDescription": "Short-to-medium hair with soft, slightly wavy feathered ends and a wispy side-swept fringe. The sides reach around the ears and layered ends show at the nape. A hat and veil hide the crown, part, and much of the top.",
+      "catalogMatchReasoning": "Closest existing concept: short feathered shag. Visible feathered layers and a broken, lightweight perimeter support the match; the hat obscures the crown, so crown lift and the full shape cannot be confirmed."
+    }
+  ]
+}

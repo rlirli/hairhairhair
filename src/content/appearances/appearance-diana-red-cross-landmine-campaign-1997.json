@@ -1,11 +1,17 @@
 {
   "id": "appearance-diana-red-cross-landmine-campaign-1997",
   "personId": "person-diana-princess-of-wales",
-  "event": "American Red Cross headquarters visit for the anti-landmine campaign",
+  "event": "American Red Cross headquarters press appearance for the anti-landmine campaign, Washington, D.C.",
   "taken": {
-    "value": "1997-06-17",
-    "precision": "day",
-    "sourceUrl": "https://www.washingtonpost.com/archive/lifestyle/1997/06/18/from-london-a-blitz-with-glitz/e597a0dc-b04b-41d3-b901-e28dfa85c2bb/"
+    "value": "1997-06",
+    "precision": "month",
+    "sourceUrl": "https://www.redcross.org/about-us/news-and-events/news/2021/celebrities-support-the-red-cross-mission.html"
   },
-  "observations": []
+  "observations": [
+    {
+      "hairstyleId": "hairstyle-short-layered-crop",
+      "visualDescription": "Short, smooth hair with a softly lifted crown and close sides. The top sweeps diagonally forward from a near-side part into a light, feathered fringe; wispy layered ends are visible. The back and nape are partly obscured.",
+      "catalogMatchReasoning": "This is a short layered crop with a streamlined outline and a closer perimeter than the earlier feathered shag. The photo supports the front and side shape; the nape is partly obscured, so its exact graduation remains uncertain."
+    }
+  ]
 }

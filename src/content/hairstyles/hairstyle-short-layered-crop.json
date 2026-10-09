@@ -1,0 +1,11 @@
+{
+  "id": "hairstyle-short-layered-crop",
+  "slug": "short-layered-crop",
+  "name": "Short layered crop",
+  "kind": "cut",
+  "summary": "A short cut with softly blended layers, a closer nape, and additional length through the crown for light movement and volume.",
+  "sourceIds": [
+    "source-harpers-bazaar-diana-short-layered-crop-2025"
+  ],
+  "guidePublicationStatus": "stub"
+}

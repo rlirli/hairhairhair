@@ -1,30 +1,11 @@
 # Appearance hair observation
 
-**Task.** Produce an image-only observation fragment for one supplied appearance image. Do not read context or catalog and do not persist.
+**Task ID.** `appearance-hair-observation`
 
-**Input.** One supplied image only; it may be a transient analysis-only copy that is not licensed for publication. No media ID, filename, event, caption, profile, photo URL, or hairstyle context.
+**Goal.** Describe hair visible in one supplied appearance image without using outside context.
 
-**Contracts.** Local schemas: `src/content/schemas/` in the active checkout. Public schemas: [appearance.schema.json](https://hairhairhair.hair/schemas/appearance.schema.json). The result envelope is [content-task-result.schema.json](https://hairhairhair.hair/schemas/content-task-result.schema.json).
+**Input.** One image only. The observer must not receive a filename, caption, person, event, source URL, profile, or catalog entry.
 
-**Environment.** Local or web: use the supplied image only. Do not use MCP, browse context, fetch the source image, or fetch the full Appearance. Do not save, copy, export, or retain the supplied image. The target fields are `observations[].visualDescription` and optional `observations[].preCatalogCandidates` in the linked Appearance schema.
+**Return.** A standard [content task result](https://hairhairhair.hair/schemas/content-task-result.schema.json) with no records or assets. Put `visualDescription` and optional ranked `preCatalogCandidates` in `findings.observation`. If the image does not support a useful description, return the limitation instead.
 
-**Instructions.** Describe directly visible length, silhouette, parting, direction, texture, layers, fringe, and sides/nape only when clear. State occlusion, angle, lighting, and other limits. Do not name a canonical style or infer natural traits. Optional `preCatalogCandidates` are generic title hypotheses from the image alone; omit if speculative.
-
-**Result.** Return only `findings.observation` with `visualDescription` and optional candidates, or an insufficient-evidence reason. Orchestrator merges this fragment into the Appearance. Records/assets stay empty.
-
-## Result envelope
-
-```json
-{
-  "task": "appearance-hair-observation",
-  "status": "complete",
-  "records": [],
-  "assets": [],
-  "findings": {
-    "observation": {
-      "visualDescription": "Shoulder-length hair with loose bends, a near-center part, and soft face-framing layers; the far side is partly hidden by the angle.",
-      "preCatalogCandidates": [{ "rank": 1, "title": "Long layered waves" }]
-    }
-  }
-}
-```
+**Describe.** Visible length, silhouette, part, direction, texture, layers, fringe, and sides/nape when clear. State important occlusion, angle, or lighting limits. Keep description separate from hypotheses. Do not name a canonical catalog style or infer natural hair traits. Do not retain or reproduce the image.

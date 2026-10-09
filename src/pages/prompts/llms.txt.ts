@@ -32,7 +32,7 @@ export const GET: APIRoute = ({ url }) => {
   const lines = [
     "# HairHairHair LLM content prompts and workflows",
     "",
-    "Task prompts are independently invokable. Workflow files combine task prompts and guide orchestrator decisions.",
+    "Task prompts define domain inputs, judgments, and outputs. Workflow files route tasks and describe data handoffs; the orchestrator handles persistence.",
     "",
     `## Workflows (${origin}/workflows/llms.txt)`,
     ...(workflowLines.length ? workflowLines : ["- No workflow files found."]),

@@ -1,13 +1,11 @@
 # Hairstyle stub selection
 
-**Task.** Find and triage existing hairstyle stubs. Do not enrich them.
+**Task ID.** `hairstyle-stub-selection`
 
-**Input.** Optional stub IDs, Appearance IDs, scope, or count limit; otherwise use full local catalog.
+**Goal.** Identify and prioritize existing hairstyle stubs for further research without changing them.
 
-**Contracts.** Local schemas: `src/content/schemas/` in the active checkout. Public schemas: [hairstyle.schema.json](https://hairhairhair.hair/schemas/hairstyle.schema.json). The result envelope is [content-task-result.schema.json](https://hairhairhair.hair/schemas/content-task-result.schema.json).
+**Input.** Optional stub IDs, Appearance links, scope, or count; otherwise the supplied stub list.
 
-**Environment.** Local: use MCP at active checkout to read hairstyle and scoped Appearance records. Web: use [published hairstyles](https://hairhairhair.hair/content/hairstyles.json) only; to select unpublished stubs, require supplied stub records or return blocked.
+**Return.** A standard [content task result](https://hairhairhair.hair/schemas/content-task-result.schema.json) with no records or assets. In `findings`, return a deduplicated worklist with each stub's ID, name, kind, description, related styles and Appearance links when available; add priority, readiness, ambiguity, and likely-duplicate notes.
 
-**Instructions.** Include only guidePublicationStatus stub. Summarize existing ID, name, kind, description, related IDs, and Appearance links when available. Deduplicate by ID and flag likely duplicates or underidentified entries without choosing a canonical one. Do not research or edit.
-
-**Result.** Follow the linked result schema. Return the worklist, readiness or ambiguity, and counts in `findings`; this read-only task returns no records or assets.
+**Limit.** Include only records marked `stub`. Do not research, edit, merge, or choose a canonical record among likely duplicates. State when the supplied list is incomplete.

@@ -114,6 +114,39 @@ test("task result schema accepts empty and collection-specific result envelopes"
     }),
     true,
   );
+  const imageReviewResult = {
+    task: "appearance-asset-ingestion",
+    status: "complete",
+    records: [],
+    assets: [],
+    findings: {
+      imageUseReview: {
+        candidates: [
+          {
+            candidateId: "photo-a",
+            analysis: {
+              status: "allowed",
+              reason: "The supplied policy permits temporary visual analysis.",
+              evidence: [{ url: "https://example.com/policy", supports: "Temporary visual analysis is allowed." }],
+            },
+            publication: {
+              status: "needs-review",
+              reason: "The photographer's authority to grant the license is unresolved.",
+              evidence: [{ url: "https://example.com/photo", supports: "The page does not identify the rightsholder." }],
+            },
+          },
+        ],
+      },
+    },
+  };
+  assert.equal(validate(imageReviewResult), true);
+  const reverseDecision = structuredClone(imageReviewResult);
+  reverseDecision.findings.imageUseReview.candidates[0].analysis.status = "prohibited";
+  reverseDecision.findings.imageUseReview.candidates[0].publication.status = "allowed";
+  assert.equal(validate(reverseDecision), true);
+  const invalidReview = structuredClone(imageReviewResult);
+  invalidReview.findings.imageUseReview.candidates[0].analysis.status = "not-permitted";
+  assert.equal(validate(invalidReview), false);
   assert.equal(validate({ task: "bad", status: "complete", records: [], assets: [], extra: true }), false);
 });
 

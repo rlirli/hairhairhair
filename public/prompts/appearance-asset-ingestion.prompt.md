@@ -6,7 +6,7 @@
 
 **Input.** Candidate identity, photo and event/date sources, intended public uses, the applicable analysis policy or jurisdiction when known, and an image or image handoff reference when available.
 
-**Return.** A standard [content task result](https://hairhairhair.hair/schemas/content-task-result.schema.json). In `findings.imageUseReview.candidates`, return one entry per candidate: `{candidateId, analysis: {status, reason, evidence}, publication: {status, reason, evidence}}`. Use a supplied candidate ID or a short stable label. For every candidate, return two independent decisions with evidence and unresolved facts:
+**Return.** A standard [content task result](https://hairhairhair.hair/schemas/content-task-result.schema.json). In `findings.imageUseReview.candidates`, return one entry per candidate: `{candidateId, analysis: {status, reason, evidence: [{url, supports}]}, publication: {status, reason, evidence: [{url, supports}]}}`. Use a supplied candidate ID or a short stable label. For every candidate, return two independent decisions with evidence and unresolved facts:
 
 - `analysis`: `allowed`, `needs-review`, or `prohibited`.
 - `publication`: `allowed`, `needs-review`, or `not-permitted`.

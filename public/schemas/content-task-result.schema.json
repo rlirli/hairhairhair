@@ -95,7 +95,63 @@
     },
     "findings": {
       "type": "object",
-      "description": "Research discoveries and image-only observations that do not yet support a content record."
+      "description": "Research discoveries and task-specific results.",
+      "properties": {
+        "imageUseReview": {
+          "type": "object",
+          "required": ["candidates"],
+          "properties": {
+            "candidates": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["candidateId", "analysis", "publication"],
+                "properties": {
+                  "candidateId": { "type": "string", "minLength": 1 },
+                  "analysis": { "$ref": "#/$defs/analysisDecision" },
+                  "publication": { "$ref": "#/$defs/publicationDecision" }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "$defs": {
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["url", "supports"],
+        "properties": {
+          "url": { "type": "string", "format": "uri" },
+          "supports": { "type": "string", "minLength": 1 }
+        },
+        "additionalProperties": false
+      }
+    },
+    "analysisDecision": {
+      "type": "object",
+      "required": ["status", "reason"],
+      "properties": {
+        "status": { "enum": ["allowed", "needs-review", "prohibited"] },
+        "reason": { "type": "string", "minLength": 1 },
+        "evidence": { "$ref": "#/$defs/evidence" }
+      },
+      "additionalProperties": false
+    },
+    "publicationDecision": {
+      "type": "object",
+      "required": ["status", "reason"],
+      "properties": {
+        "status": { "enum": ["allowed", "needs-review", "not-permitted"] },
+        "reason": { "type": "string", "minLength": 1 },
+        "evidence": { "$ref": "#/$defs/evidence" }
+      },
+      "additionalProperties": false
     }
   }
 }

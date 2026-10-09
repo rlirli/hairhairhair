@@ -20,7 +20,7 @@ Every prompt returns the shared `content-task-result` shape: `task`, `status`, `
 
 ## Image-use decisions
 
-The asset review returns two independent decisions for each candidate:
+The asset review returns `findings.imageUseReview.candidates[]`; each entry contains a candidate ID and two independent decisions. Each decision has a status, reason, and supporting evidence links (`{url, supports}`):
 
 | Axis | Values | Controls |
 | --- | --- | --- |

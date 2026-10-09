@@ -1,6 +1,6 @@
 .relation-explorer {
   --relation-line: color-mix(in srgb, var(--color-ink) 24%, transparent);
-  --relation-panel: color-mix(in srgb, var(--color-ink) 3%, var(--color-ivory));
+  --relation-panel: color-mix(in srgb, var(--color-ink) 2%, var(--color-ivory));
 }
 .relation-toolbar {
   display: flex;
@@ -77,6 +77,13 @@
   stroke-width: 1.5;
   opacity: 0.42;
 }
+.relation-edge.is-dimmed {
+  opacity: 0.11;
+  stroke-width: 1;
+}
+.relation-edge.is-related {
+  stroke-width: 2.5;
+}
 .relation-node {
   cursor: grab;
 }
@@ -87,7 +94,15 @@
   stroke: var(--color-orange);
   stroke-width: 2.5;
 }
-.relation-node.is-dimmed {
+.relation-node-wash {
+  fill: var(--color-hairstyle-image-bg);
+  opacity: 0;
+  pointer-events: none;
+}
+.relation-node.is-dimmed .relation-node-wash {
+  opacity: 0.68;
+}
+.relation-node.is-dimmed .relation-node-label {
   opacity: 0.18;
 }
 .relation-image-backdrop {

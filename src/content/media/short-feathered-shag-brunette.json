@@ -1,0 +1,14 @@
+{
+  "id": "short-feathered-shag-brunette",
+  "kind": "image",
+  "alt": "Editorial portrait of a fictional adult woman with a short chestnut feathered shag, airy crown layers, a wispy fringe, and separated face-framing ends.",
+  "transparentBackground": true,
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "short-feathered-shag-brunette"
+    }
+  },
+  "asset": "assets/hairstyles/short-feathered-shag-brunette.png"
+}

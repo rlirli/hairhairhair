@@ -1,114 +1,388 @@
 ---
-import Layout from "../components/shared/Layout.astro";
+import { Image } from "astro:assets";
 import Pattern from "../components/hair-types/Pattern.astro";
-import HairstyleGridData from "../components/hairstyles/HairstyleGridData.astro";
-import { hairTypes } from "../data/hair-types";
-import { publishedHairstyles } from "../data";
-import { people } from "../data/people";
+import Layout from "../components/shared/Layout.astro";
+import PhotoAttribution from "../components/shared/PhotoAttribution";
+import {
+  getHairstyleBySlug,
+  getPublishedHairstylesByIds,
+  getRepresentativeHairstyleMedia,
+  getResolvedHairstyleObservationsForAppearance,
+} from "../data";
+import { hairSubtypes, hairTypes } from "../data/hair-types";
+import { appearances, people, personPhotographs } from "../data/people";
+
+const featuredStyles = [
+  { slug: "sleek-long-cut", exampleId: "sleek-long-cut-straight-black" },
+  { slug: "short-curly-shag", exampleId: "style-example-short-curly-shag-editorial" },
+  { slug: "bantu-knots", exampleId: "style-example-bantu-knots-2-small" },
+].flatMap(({ slug, exampleId }) => {
+  const style = getHairstyleBySlug(slug);
+  const media = style && getRepresentativeHairstyleMedia(style.id, exampleId)?.media;
+  return style && media ? [{ style, media }] : [];
+});
+
+const featuredAppearances = [
+  { id: "appearance-zendaya-paris-2025", crop: "center 35%" },
+  { id: "appearance-dennis-rodman-2005-topo", crop: "center top" },
+].flatMap(({ id, crop }) => {
+  const appearance = appearances.find((item) => item.id === id);
+  if (!appearance) return [];
+  const person = people.find((item) => item.id === appearance.personId);
+  const photo = personPhotographs.find((item) => item.id === appearance.imageId);
+  const match = getResolvedHairstyleObservationsForAppearance(id)[0];
+  return person && photo && match ? [{ appearance, person, photo, style: match.style, crop }] : [];
+});
+
+const mapStyle = getHairstyleBySlug("wolf-cut");
+const relatedStyles = getPublishedHairstylesByIds(mapStyle?.relatedStyleIds ?? []).slice(0, 2);
 ---
 
-<Layout>
-  <section class="relative mx-auto max-w-7xl overflow-hidden px-5 pb-20 pt-12 sm:px-8 lg:pb-24 lg:pt-20">
-    <div class="texture pointer-events-none absolute inset-0 -z-10"></div>
-    <div class="max-w-5xl">
-      <p class="mb-7 text-xs font-black uppercase tracking-[.2em] text-orange">An illustrated hair atlas</p>
-      <h1 class="max-w-4xl font-display text-[clamp(4.2rem,12vw,10.5rem)] leading-[.8] tracking-[-.09em]">
-        Your hair,
-        <br />
-        <em class="text-orange">mapped.</em>
-      </h1>
-      <p class="mt-10 max-w-md text-lg leading-7">
-        Hair is wonderfully specific. Browse a clear, visual language for the patterns and textures that make it yours.
-      </p>
-      <a
-        href="/hair-types/"
-        class="action-primary focus-ring mt-8 inline-flex rounded-full border-2 border-ink px-6 py-3 text-sm font-black uppercase tracking-[.1em] transition"
-      >
-        <span>Explore hair types</span>{" "}
-      </a>
-    </div>
-  </section>
-  <section class="mx-auto max-w-7xl px-5 py-16 sm:px-8" id="about">
-    <div class="mb-8 flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
-      <div>
-        <p class="text-xs font-black uppercase tracking-[.2em] text-orange">Natural hair</p>
-        <h2 class="mt-2 font-display text-5xl tracking-[-.06em]">The four hair types</h2>
-      </div>
-      <a href="/hair-types/" class="focus-ring text-sm font-normal text-muted transition hover:text-ink">
-        See all types
-      </a>
-    </div>
-    <p class="mb-8 max-w-2xl text-lg leading-7">
-      This Walker-inspired chart classifies visible natural hair patterns into four numbered types - straight, wavy,
-      curly, and coily - with lettered sub-types for more specific pattern descriptions.
-    </p>
-    <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      {hairTypes.map((hairType) => (
-        <li>
-          <a
-            href={`/hair-types/${hairType.slug}/`}
-            class="hover-surface focus-ring group block rounded-3xl border-2 border-ink bg-white/30 p-5 transition hover:-translate-y-1"
-          >
-            <h3 class="font-display text-3xl tracking-[-.05em] group-hover:underline">
-              <strong>Type {hairType.code}:</strong> {hairType.name}
-            </h3>
-            <div class="mt-5">
-              <Pattern
-                pattern={hairType.pattern}
-                label={`Illustrative close-up of Type ${hairType.code} ${hairType.name.toLowerCase()} hair texture. Not a diagnostic.`}
-                caption={false}
-              />
-            </div>
-            <p class="mt-2 text-sm leading-5">{hairType.description}</p>
-          </a>
-        </li>
-      ))}
-    </ul>
-  </section>
-  <section class="mx-auto max-w-7xl px-5 py-16 sm:px-8">
-    <div class="flex flex-col items-start justify-between gap-4 border-b border-taupe pb-3 sm:flex-row sm:items-end sm:pb-2">
-      <div>
-        <p class="text-xs font-black uppercase tracking-[.2em] text-orange">New collection</p>
-        <h2 class="mt-2 font-display text-5xl tracking-[-.06em]">Hairstyles</h2>
-        <p class="mt-4 max-w-xl text-lg leading-7">
-          Find the words for a cut, finishing technique, or temporary style before your consultation.
+<Layout
+  title="HairHairHair – Hairstyles, hair types, and celebrity looks"
+  description="Browse hairstyles by hair type, compare natural hair patterns from 1A to 4C, and see how celebrities have worn the looks."
+>
+  <div class="mx-auto max-w-7xl px-5 sm:px-8">
+    <section
+      aria-labelledby="home-title"
+      class="home-hero grid items-center gap-8 pt-8 pb-12 sm:pt-12 lg:gap-14 lg:pt-14 lg:pb-16"
+    >
+      <div class="min-w-0">
+        <h1 id="home-title" class="hero-title font-display font-normal">
+          Find a style <em class="text-orange">for your hair.</em>
+        </h1>
+        <p class="mt-5 max-w-[34rem] text-base leading-relaxed sm:text-lg">
+          Browse cuts, braids, and styling techniques by hair type. See what defines each look and how it can be worn.
         </p>
+        <div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-2">
+          <a
+            href="/hairstyles/"
+            class="action-primary focus-ring inline-flex min-h-11 items-center gap-3 rounded-full px-5 text-sm font-bold transition"
+          >
+            Browse hairstyles <span aria-hidden="true">→</span>
+          </a>
+          <a href="#about" class="text-link focus-ring inline-flex min-h-11 items-center">
+            Compare hair types
+          </a>
+        </div>
       </div>
-      <a href="/hairstyles/" class="focus-ring text-sm font-normal opacity-60 transition hover:opacity-100">
-        Browse all hairstyles
-      </a>
-    </div>
-    <HairstyleGridData
-      styles={publishedHairstyles.slice(0, 4)}
-      size="medium"
-      className="mt-2.5 sm:mt-4 grid grid-cols-2 gap-4 md:grid-cols-4"
-    />
-  </section>
-  <section class="mx-auto max-w-7xl px-5 pb-20 sm:px-8">
-    <div class="rounded-[2rem] border-2 border-ink p-7 sm:p-10">
-      <p class="text-xs font-black uppercase tracking-[.2em] text-orange">Get inspired</p>
-      <h2 class="mt-3 font-display text-5xl tracking-[-.06em]">A look at the record.</h2>
-      <p class="mt-4 max-w-2xl text-lg leading-7">
-        Browse celebrities who share your hair type or skin tone, and see the hairstyles they have worn.
-      </p>
-      <ul class="mt-6 flex flex-wrap gap-3">
-        {people.slice(0, 8).map((person) => (
-          <li>
-            <a
-              href={`/people/${person.slug}/`}
-              class="hover-surface focus-ring inline-block rounded-full border border-ink/40 px-4 py-2 text-sm font-normal"
-            >
-              {person.name}
+
+      <figure class="min-w-0">
+        <ul class="hero-looks grid gap-1.5 sm:gap-2">
+          {featuredStyles.map(({ style, media }, index) => (
+            <li class:list={["min-w-0", index === 0 && "hero-lead"]}>
+              <a
+                href={`/hairstyles/${style.slug}/`}
+                class="hero-look focus-ring group relative block h-full overflow-hidden"
+              >
+                <Image
+                  src={media.image}
+                  widths={[240, 400, 640, 840]}
+                  sizes={
+                    index === 0
+                      ? "(min-width: 1280px) 360px, (min-width: 768px) 29vw, 55vw"
+                      : "(min-width: 1280px) 240px, (min-width: 768px) 19vw, 38vw"
+                  }
+                  format="webp"
+                  loading="eager"
+                  fetchpriority={index === 0 ? "high" : undefined}
+                  alt={media.alt}
+                  class:list={["absolute inset-0 h-full w-full object-cover", index > 0 && "object-top"]}
+                />
+                <span class="hero-look-label absolute inset-x-0 bottom-0 flex items-end justify-between gap-1 px-2.5 pt-8 pb-2.5 text-xs font-bold text-white sm:px-4 sm:pb-3 sm:text-sm">
+                  <span class="group-hover:underline">{style.name}</span>
+                  <span aria-hidden="true">→</span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <figcaption class="mt-2 text-right text-xs text-muted">AI-generated hairstyle examples</figcaption>
+      </figure>
+    </section>
+
+    <section
+      id="about"
+      aria-labelledby="hair-types-heading"
+      class="border-t border-ink/20 pt-8 pb-12 sm:pt-10 lg:pb-16"
+    >
+      <div class="section-heading">
+        <div>
+          <h2 id="hair-types-heading" class="section-title">
+            Hair types
+          </h2>
+          <p class="mt-2 max-w-xl leading-relaxed">Compare the 12 patterns and see which styles are listed for each.</p>
+        </div>
+        <a href="/hair-types/" class="text-link focus-ring justify-self-start sm:justify-self-end">
+          View the hair chart <span aria-hidden="true">→</span>
+        </a>
+      </div>
+      <ul class="mt-5 grid grid-cols-2 gap-x-3 gap-y-4 sm:gap-x-5 md:grid-cols-4">
+        {hairTypes.map((type) => (
+          <li class="min-w-0">
+            <a href={`/hair-types/${type.slug}/`} class="focus-ring group block">
+              <Pattern pattern={type.pattern} subtype="B" caption={false} layout="flush" />
+              <h3 class="mt-2 flex items-center justify-between gap-2 font-display text-xl leading-tight sm:text-2xl">
+                <span class="group-hover:underline">{type.name}</span>
+                <span class="shrink-0 font-sans text-xs font-bold text-muted" aria-hidden="true">
+                  Type {type.code}
+                </span>
+              </h3>
             </a>
+            <ul class="mt-2 grid grid-cols-3 gap-1.5" aria-label={`${type.name} subtypes`}>
+              {hairSubtypes
+                .filter((subtype) => subtype.hairTypeId === type.id)
+                .map((subtype) => (
+                  <li>
+                    <a
+                      href={`/hair-types/${subtype.slug}/`}
+                      aria-label={`Type ${subtype.code}: ${subtype.name}`}
+                      class="hover-surface focus-ring grid min-h-11 place-items-center rounded-md border border-ink/20 text-sm font-bold transition"
+                    >
+                      {subtype.code}
+                    </a>
+                  </li>
+                ))}
+            </ul>
           </li>
         ))}
       </ul>
-      <a
-        href="/people/"
-        class="focus-ring mt-6 inline-block text-sm font-normal opacity-60 transition hover:opacity-100"
+    </section>
+
+    <div class="home-more grid border-t border-ink/20">
+      <section aria-labelledby="people-heading" class="pt-8 pb-10 sm:pt-10 lg:pr-8 lg:pb-0">
+        <h2 id="people-heading" class="section-title">
+          Celebrity hairstyles
+        </h2>
+        <p class="mt-2 max-w-md leading-relaxed">
+          See what celebrities wore, or browse by natural hair type, hair color, and skin tone.
+        </p>
+        <ul class="mt-5 grid grid-cols-2 gap-3 sm:gap-5">
+          {featuredAppearances.map(({ appearance, person, photo, style, crop }) => (
+            <li class="min-w-0">
+              <a href={`/people/${person.slug}/appearances/${appearance.id}/`} class="focus-ring group block">
+                <Image
+                  src={photo.image}
+                  widths={[240, 400, 640]}
+                  sizes="(min-width: 1280px) 350px, (min-width: 1024px) 28vw, 46vw"
+                  format="webp"
+                  alt={photo.alt}
+                  class="block aspect-[5/4] w-full rounded-md object-cover"
+                  style={`object-position: ${crop}`}
+                />
+                <h3 class="mt-2 font-display text-xl leading-tight group-hover:underline sm:text-2xl">{person.name}</h3>
+                <p class="mt-1 text-sm leading-snug">
+                  {style.name} <span aria-hidden="true">·</span>{" "}
+                  <time datetime={appearance.taken.value}>{appearance.taken.value.slice(0, 4)}</time>
+                </p>
+              </a>
+              <PhotoAttribution
+                provenance={photo.provenance}
+                density="default"
+                className="!mt-2 !text-xs !leading-snug text-muted"
+              />
+            </li>
+          ))}
+        </ul>
+        <a href="/people/" class="text-link focus-ring mt-3">
+          Browse celebrities <span aria-hidden="true">→</span>
+        </a>
+      </section>
+
+      <section
+        aria-labelledby="map-heading"
+        class="border-t border-ink/20 pt-8 sm:pt-10 lg:border-t-0 lg:border-l lg:pl-8"
       >
-        Browse all celebs
-      </a>
+        <h2 id="map-heading" class="section-title">
+          Hairstyle map
+        </h2>
+        <p class="mt-2 max-w-sm leading-relaxed">
+          Start with a look you like and follow its connections to related styles.
+        </p>
+        {mapStyle && relatedStyles.length > 0 && (
+          <div class="map-preview mt-5 grid grid-cols-[auto_auto] items-center justify-center rounded-md border border-ink/20 px-4 py-6 sm:px-6">
+            <a class="map-node map-root focus-ring" href={`/hairstyles/${mapStyle.slug}/`}>
+              {mapStyle.name}
+            </a>
+            <ul class="map-branches" aria-label={`Styles related to the ${mapStyle.name.toLowerCase()}`}>
+              {relatedStyles.map((style) => (
+                <li>
+                  <a class="map-node focus-ring" href={`/hairstyles/${style.slug}/`}>
+                    {style.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+        <a href="/hairstyle-map/" class="text-link focus-ring mt-3">
+          Open the interactive map <span aria-hidden="true">→</span>
+        </a>
+      </section>
     </div>
-  </section>
+  </div>
 </Layout>
+
+<style>
+  .hero-title {
+    max-width: 11ch;
+    font-size: clamp(3.1rem, 8.1vw, 6.4rem);
+    line-height: 0.94;
+    letter-spacing: -0.075em;
+  }
+
+  .hero-title em {
+    display: block;
+  }
+
+  .hero-looks {
+    grid-template-columns: 3fr 2fr;
+    grid-auto-rows: minmax(0, 1fr);
+    aspect-ratio: 1.4;
+  }
+
+  .hero-lead {
+    grid-row: span 2;
+  }
+
+  .hero-look {
+    border-radius: 0.375rem;
+    background: var(--color-hairstyle-image-bg);
+  }
+
+  .hero-look-label {
+    background: linear-gradient(transparent, rgb(0 0 0 / 85%));
+  }
+
+  .section-heading {
+    display: grid;
+    align-items: end;
+    gap: 0.25rem 1rem;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.1rem, 4vw, 3.35rem);
+    line-height: 1;
+    letter-spacing: -0.055em;
+  }
+
+  .text-link {
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-ink);
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: var(--color-orange);
+    text-underline-offset: 0.25em;
+  }
+
+  .text-link:hover {
+    color: var(--color-orange);
+  }
+
+  .map-preview {
+    --edge-color: color-mix(in srgb, var(--color-ink) 38%, transparent);
+    background: color-mix(in srgb, var(--color-ink) 4%, var(--color-ivory));
+  }
+
+  .map-node {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    min-height: 2.75rem;
+    align-items: center;
+    border: 1px solid var(--edge-color);
+    border-radius: 0.375rem;
+    background: var(--color-ivory);
+    padding: 0.375rem 0.65rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .map-node:hover {
+    border-color: var(--color-orange);
+    color: var(--color-orange);
+  }
+
+  .map-root {
+    border-color: var(--color-orange);
+  }
+
+  .map-branches {
+    position: relative;
+    display: grid;
+    gap: 0.75rem;
+    padding-inline-start: 1.5rem;
+  }
+
+  .map-branches::before,
+  .map-branches li::before,
+  .map-branches li::after {
+    position: absolute;
+    background: var(--edge-color);
+    content: "";
+  }
+
+  .map-branches::before {
+    inset-inline-start: 0;
+    top: 50%;
+    width: 0.75rem;
+    height: 1px;
+  }
+
+  .map-branches li {
+    position: relative;
+  }
+
+  .map-branches li::before {
+    inset-inline-start: -0.75rem;
+    top: 50%;
+    width: 0.75rem;
+    height: 1px;
+  }
+
+  .map-branches li::after {
+    inset-inline-start: -0.75rem;
+    inset-block: -0.75rem 0;
+    width: 1px;
+  }
+
+  .map-branches li:first-child::after {
+    top: 50%;
+  }
+
+  .map-branches li:last-child::after {
+    bottom: 50%;
+  }
+
+  .map-branches li:only-child::after {
+    display: none;
+  }
+
+  @media (min-width: 640px) {
+    .section-heading {
+      grid-template-columns: 1fr auto;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .home-hero {
+      grid-template-columns: 0.95fr 1.05fr;
+    }
+
+    .hero-title {
+      font-size: clamp(3.35rem, 7.5vw, 6.4rem);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .home-more {
+      grid-template-columns: 3fr 2fr;
+    }
+  }
+</style>

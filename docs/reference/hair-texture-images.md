@@ -11,7 +11,7 @@ The subtype cards on `/hair-types/1/` through `/hair-types/4/` use twelve genera
 
 `src/components/hair-types/Pattern.astro` selects these images by pattern and subtype. The cards include subtype-specific alt text drawn from the catalog descriptions. The individual strand illustrations on `/hair-types/` are separate from these macro images.
 
-The home page uses one broad texture reference per type. The Type 3 and Type 4 filenames in this original set contain opposite textures, so the component intentionally crosses those two assignments.
+The home page previews each hair type with its B subtype swatch and links to all twelve subtype guides. The broad-texture fallback in `Pattern.astro` uses the original set below. The Type 3 and Type 4 filenames in that set contain opposite textures, so the component crosses those two assignments.
 
 - Type 1 (straight): `src/content/assets/hair-types/type-1-straight.png`
 - Type 2 (wavy): `src/content/assets/hair-types/type-2-wavy.png`

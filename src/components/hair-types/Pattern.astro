@@ -22,9 +22,10 @@ interface Props {
   subtype?: "A" | "B" | "C";
   label?: string;
   caption?: string | false;
+  layout?: "card" | "flush";
 }
 
-const { pattern = "wavy", subtype, label, caption } = Astro.props;
+const { pattern = "wavy", subtype, label, caption, layout = "card" } = Astro.props;
 const typeCodeByPattern = { straight: "1", wavy: "2", curly: "3", coily: "4" } as const;
 const textureByPattern = {
   straight: straightTexture,
@@ -43,13 +44,17 @@ const typeCode = `${typeCodeByPattern[pattern]}${subtype ?? ""}`;
 const accessibleLabel = label ?? `Illustrative close-up of natural ${pattern} hair texture, Type ${typeCode}.`;
 ---
 
-<div class="texture-panel overflow-hidden rounded-2xl border border-ink/10 bg-white/30 p-2">
+<div class:list={["overflow-hidden", layout === "card" && "rounded-2xl border border-ink/10 bg-white/30 p-2"]}>
   <Image
     src={texture}
     alt={accessibleLabel}
-    class="block aspect-[5/3] w-full rounded-xl object-cover"
+    class:list={["block aspect-[5/3] w-full object-cover", layout === "flush" ? "rounded-md" : "rounded-xl"]}
     widths={[320, 640]}
-    sizes="(min-width: 768px) 320px, 100vw"
+    sizes={
+      layout === "flush"
+        ? "(min-width: 1280px) 290px, (min-width: 768px) 25vw, 50vw"
+        : "(min-width: 768px) 320px, 100vw"
+    }
   />
   {caption !== false && (
     <span class="block px-2 pb-1 pt-2 text-[10px] font-bold uppercase tracking-[.1em]">

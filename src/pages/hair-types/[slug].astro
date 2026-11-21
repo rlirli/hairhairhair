@@ -59,7 +59,11 @@ const label =
                 href={`/hair-types/${item.slug}/`}
                 class="hover-surface focus-ring group block rounded-3xl border-2 border-ink p-5 transition"
               >
-                <Pattern pattern={item.pattern} subtype={item.subtypeCode} />
+                <Pattern
+                  pattern={item.pattern}
+                  subtype={item.subtypeCode}
+                  label={`Type ${item.code} hair texture. ${item.description}`}
+                />
                 <h3 class="mt-4 font-display text-2xl group-hover:underline">Type {item.code}</h3>
                 <p class="mt-1">{item.name}</p>
               </a>

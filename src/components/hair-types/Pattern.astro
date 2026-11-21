@@ -4,6 +4,18 @@ import straightTexture from "../../content/assets/hair-types/type-1-straight.png
 import wavyTexture from "../../content/assets/hair-types/type-2-wavy.png";
 import curlyTexture from "../../content/assets/hair-types/type-3-curly.png";
 import coilyTexture from "../../content/assets/hair-types/type-4-coily.png";
+import type1A from "../../content/assets/hair-types/type-1a.png";
+import type1B from "../../content/assets/hair-types/type-1b.png";
+import type1C from "../../content/assets/hair-types/type-1c.png";
+import type2A from "../../content/assets/hair-types/type-2a.png";
+import type2B from "../../content/assets/hair-types/type-2b.png";
+import type2C from "../../content/assets/hair-types/type-2c.png";
+import type3A from "../../content/assets/hair-types/type-3a.png";
+import type3B from "../../content/assets/hair-types/type-3b.png";
+import type3C from "../../content/assets/hair-types/type-3c.png";
+import type4A from "../../content/assets/hair-types/type-4a.png";
+import type4B from "../../content/assets/hair-types/type-4b.png";
+import type4C from "../../content/assets/hair-types/type-4c.png";
 
 interface Props {
   pattern?: "straight" | "wavy" | "curly" | "coily";
@@ -12,7 +24,7 @@ interface Props {
   caption?: string | false;
 }
 
-const { pattern = "wavy", subtype = "B", label, caption } = Astro.props;
+const { pattern = "wavy", subtype, label, caption } = Astro.props;
 const typeCodeByPattern = { straight: "1", wavy: "2", curly: "3", coily: "4" } as const;
 const textureByPattern = {
   straight: straightTexture,
@@ -20,14 +32,20 @@ const textureByPattern = {
   curly: coilyTexture,
   coily: curlyTexture,
 };
-const typeCode = typeCodeByPattern[pattern];
-const accessibleLabel =
-  label ?? `Illustrative close-up of natural ${pattern} hair texture, Type ${typeCode}. Not a diagnostic.`;
+const textureBySubtype = {
+  straight: { A: type1A, B: type1B, C: type1C },
+  wavy: { A: type2A, B: type2B, C: type2C },
+  curly: { A: type3A, B: type3B, C: type3C },
+  coily: { A: type4A, B: type4B, C: type4C },
+};
+const texture = subtype ? textureBySubtype[pattern][subtype] : textureByPattern[pattern];
+const typeCode = `${typeCodeByPattern[pattern]}${subtype ?? ""}`;
+const accessibleLabel = label ?? `Illustrative close-up of natural ${pattern} hair texture, Type ${typeCode}.`;
 ---
 
 <div class="texture-panel overflow-hidden rounded-2xl border border-ink/10 bg-white/30 p-2">
   <Image
-    src={textureByPattern[pattern]}
+    src={texture}
     alt={accessibleLabel}
     class="block aspect-[5/3] w-full rounded-xl object-cover"
     widths={[320, 640]}
@@ -35,7 +53,7 @@ const accessibleLabel =
   />
   {caption !== false && (
     <span class="block px-2 pb-1 pt-2 text-[10px] font-bold uppercase tracking-[.1em]">
-      {caption ?? `Type ${typeCode}${subtype} · ${pattern} texture`}
+      {caption ?? `Type ${typeCode} · ${pattern} texture`}
     </span>
   )}
 </div>

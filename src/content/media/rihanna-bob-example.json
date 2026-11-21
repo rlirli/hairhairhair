@@ -2,7 +2,7 @@
   "id": "rihanna-bob-example",
   "kind": "image",
   "alt": "Fictional Black woman model demonstrating a short rounded asymmetrical bob with deep side part and long side-swept fringe.",
-  "transparentBackground": false,
+  "transparentBackground": true,
   "provenance": {
     "origin": "system",
     "aiGeneration": {

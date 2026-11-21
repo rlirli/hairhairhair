@@ -1,10 +1,10 @@
 # Hairstyle image prompts
 
-The prompts below are retained verbatim as generation records. Their instruction to show an AI-generated label was superseded when the visual labels were removed; generated provenance remains in `src/content/media/`.
+Historical prompts are retained as generation records. Some originally requested an AI-generated label, which the site no longer displays. Generated provenance remains in `src/content/media/`.
 
 ## Flat-top additions — 2026-09-21
 
-Generated with OpenAI's built-in image generation tool after the Will Smith page and flat-top stub were pushed in commit `0b6d201`. No specific model identifier was returned. These fictional adults are not Will Smith, archive photographs, or reconstructions of his appearances. Inspected for a visible flat-top silhouette, complete hair framing, and absence of text or logos. Original generated PNGs are retained and their provenance is recorded in the media data.
+Generated with OpenAI's built-in image generation tool after the Will Smith page and flat-top stub were pushed in commit `0b6d201`. No specific model identifier was returned. These fictional adults are not Will Smith, archive photographs, or reconstructions of his appearances. Inspected for a visible flat-top silhouette, complete hair framing, and absence of text or logos. Generated provenance is recorded in the media data. See the gallery portrait replacements below for the updated coily flat-top image.
 
 ### flat-top-coily
 
@@ -20,7 +20,7 @@ Use case: photorealistic-natural. Asset: one square original editorial hairstyle
 
 ## Original collection
 
-Generated 2026-09-20 using OpenAI's built-in image generation tool. No specific model identifier was returned. These are fictional AI-generated reference portraits, not real clients or evidence of a person's natural hair subtype. Original PNGs are retained; Astro produces responsive WebP derivatives, and the media data preserves their generated provenance.
+Generated 2026-09-20 using OpenAI's built-in image generation tool. No specific model identifier was returned. These are fictional AI-generated reference portraits, not real clients or evidence of a person's natural hair subtype. Astro produces responsive WebP derivatives, and the media data preserves generated provenance. See the gallery portrait replacements below for updated assets.
 
 Prompts are art direction, not verified measurements of the output. Editorial captions describe visible features only.
 
@@ -333,3 +333,24 @@ Square photorealistic editorial hairstyle reference portrait. Fictional adult ma
 Asset: `src/content/assets/hairstyles/graphic-hair-color-geometric.png`
 
 Square photorealistic editorial hairstyle reference portrait. Fictional adult man with medium warm olive skin and very short even dark-brown clipper-cut hair, three-quarter rear-left angle showing rear scalp, left ear, and silhouette. A sharp two-tone geometric lightning arc colored into the short hair in muted copper-red and pale cream against natural dark brown; follows hair strands, not ink on skin, not a shaved groove, not a mohawk. Plain warm ivory studio background, cream shirt, soft daylight, realistic short hair texture. Full crown and all hair in frame. Single portrait; no collage, text, watermark, logos, hats, or celebrity likeness. Illustrative generated example, not a real person's photograph.
+
+## Gallery portrait replacements — 2026-11-21
+
+The following gallery images were regenerated with OpenAI's built-in image generation tool. Use these updated directions for future replacements. Each is a square editorial portrait of one fictional adult with a genuinely transparent RGBA background, soft neutral lighting, natural skin texture, simple cream clothing, and the full hair silhouette in frame. Use a tight head-and-shoulders crop with a little space above the hair. Angle the face away from straight-on, or show a rear three-quarter view when the haircut detail is at the back.
+
+| Asset stem                              | Haircut and composition direction                                                                                                                                         |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `rihanna-bob-example`                   | Compact rounded asymmetrical bob on a fictional Black woman, with a deep side part and long swept fringe. Show the finished perimeter and the sweep of the fringe.        |
+| `buzz-short`                            | Uniform, very short brown buzz with visible fine stubble and no fade, on a light-skinned, freckled, androgynous adult. Show the temple and crown in three-quarter view.   |
+| `cillian-disconnected-undercut-example` | Long textured dark top over closely clipped sides with an abrupt, visible break at the temple. Use a side-biased three-quarter angle.                                     |
+| `flat-top-coily`                        | Low horizontal top plane with squared corners and graduated short sides, on a deep-brown-skinned man with tightly coiled hair and a short beard.                          |
+| `cillian-french-crop-example`           | Short textured crop with a forward fringe and sides blended into the top. Use a three-quarter view that clearly shows the fringe and temple.                              |
+| `graphic-hair-color-geometric`          | A copper-and-cream geometric lightning arc dyed into a very short dark crop. Show the design from the rear in three-quarter view.                                         |
+| `brad-pitt-long-waves-example`          | Medium-long layered waves with a near-center part. Keep the crown and layered ends visible in the square crop.                                                            |
+| `brad-pitt-swept-back-example`          | Medium-length hair swept back above a neat taper. Show the sweep and transition near the ear in three-quarter view.                                                       |
+| `ronaldo-2002-haircut-front`            | Broad, dense half-circle at the front hairline with the rest of the scalp shaved close. Use a slightly elevated three-quarter view and have the subject look to the side. |
+| `taper-coily`                           | Tight coils on top, with a low taper localized to the sideburn and nape. Use a rear three-quarter view to show the taper.                                                 |
+| `lady-gaga-top-knot-example`            | Dark hair gathered into a high top knot, with the entire bun visible and room between it and the top edge.                                                                |
+| `twists-long`                           | Jaw-length natural two-strand twists on a fictional Black woman. Show two-strand structure, soft sectioning at the crown, and the ends in three-quarter view.             |
+
+Use the match photo to reference the shape and placement of the Ronaldo patch. [2002 World Cup reference](https://www.90min.com/it/posts/30-giugno-2002-il-brasile-di-ronaldo-batte-la-germania-2-0-e-il-quinto-titolo-per-la-selecao)

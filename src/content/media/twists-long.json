@@ -9,6 +9,6 @@
       "promptKey": "twists-long"
     }
   },
-  "transparentBackground": false,
+  "transparentBackground": true,
   "asset": "assets/hairstyles/twists-long.png"
 }

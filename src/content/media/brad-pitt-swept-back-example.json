@@ -9,5 +9,6 @@
       "promptKey": "brad-pitt-swept-back-example"
     }
   },
+  "transparentBackground": true,
   "asset": "assets/hairstyles/brad-pitt-swept-back-example.png"
 }

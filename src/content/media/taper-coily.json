@@ -9,6 +9,6 @@
       "promptKey": "taper-coily"
     }
   },
-  "transparentBackground": false,
+  "transparentBackground": true,
   "asset": "assets/hairstyles/taper-coily.png"
 }

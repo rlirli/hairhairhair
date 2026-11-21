@@ -1,9 +1,9 @@
 ---
 import { getImage } from "astro:assets";
 import { getRepresentativeHairstyleMedia, publishedHairstyles } from "../../data";
-import FocusedHairstyleMapCanvas from "./FocusedHairstyleMapCanvas";
+import FocusedHairstyleMapCanvas from "./focused-hairstyle-map-canvas";
 import { getFocusedGraph, valueAtDegree } from "./relation-graph";
-import { RELATION_MAP_BASE_SIZE, type RelationMapNodeDisplay } from "./RelationMapNode";
+import { RELATION_MAP_BASE_SIZE, type RelationMapNodeDisplay } from "./relation-map-node";
 
 interface Props {
   targetId: string;

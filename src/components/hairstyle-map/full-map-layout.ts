@@ -141,7 +141,7 @@ export function layoutMapGroups(labels: string[][], links: readonly RelationLink
           "link",
           forceLink<LayoutNode, LayoutLink>(
             localLinks.map(([source, target]) => ({ source: nodes[source], target: nodes[target] })),
-          ).distance(({ source, target }) => source.clearance + target.clearance + 18),
+          ).distance(({ source, target }) => source.clearance + target.clearance + 6),
         )
         .force("charge", forceManyBody<LayoutNode>().strength(-360))
         .force("x", forceX<LayoutNode>(0).strength(0.035))

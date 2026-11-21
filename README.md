@@ -11,11 +11,11 @@ npm run dev
 
 Astro prints the local URL after startup.
 
-Explore hairstyle connections at `/hairstyle-map/` while the development server is running. The map uses the same published hairstyle records and example images as the hairstyle directory. The full map uses `d3-force` to lay out connected groups, then fits them to the viewport. Selecting a style frames its direct connections. Astro bundles the simulation into the static site served by GitHub Pages.
+Explore hairstyle connections at `/hairstyle-map/` while the development server is running. The map uses the same published hairstyle records and example images as the hairstyle directory. The full map uses `d3-force` to lay out connected groups, then fits them to the viewport. Selecting a style frames its direct connections. Astro bundles the simulation into the static site served by GitHub Pages. The optional `selectionTransitionDurationMs` prop on `HairstyleRelationMap` defaults to 300 ms. Pass `0` for instant camera moves. The map also respects the system reduced-motion setting.
 
 ### Focused hairstyle maps
 
-Use `src/components/hairstyle-map/FocusedHairstyleMap.astro` to embed part of the map. Nodes link to hairstyle guides, and the map supports pan, zoom, and reset.
+Use `src/components/hairstyle-map/focused-hairstyle-map.astro` to embed part of the map. Nodes link to hairstyle guides, and the map supports pan, zoom, and reset. Its radial D3 layout pins the target to the center and gives each degree of connection a preferred distance from it.
 
 | Prop              | Default                           | Behavior                                                                                             |
 | ----------------- | --------------------------------- | ---------------------------------------------------------------------------------------------------- |

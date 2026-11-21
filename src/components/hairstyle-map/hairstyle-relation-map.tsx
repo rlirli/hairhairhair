@@ -3,7 +3,6 @@ import { select } from "d3-selection";
 import { zoomIdentity } from "d3-zoom";
 import { useEffect, useMemo, useRef, useState } from "react";
 import "../../styles/hairstyle-relation-map.css";
-import RelationMapNode, { RELATION_MAP_BASE_SIZE } from "./RelationMapNode";
 import {
   fitFullMap,
   fullMapLabelLineHeight,
@@ -13,7 +12,8 @@ import {
   type MapPoint,
 } from "./full-map-layout";
 import { getRelationLinks } from "./relation-graph";
-import { useRelationMapZoom } from "./useRelationMapZoom";
+import RelationMapNode, { RELATION_MAP_BASE_SIZE } from "./relation-map-node";
+import { useRelationMapZoom } from "./use-relation-map-zoom";
 
 export interface RelationMapStyle {
   id: string;
@@ -29,12 +29,13 @@ export interface RelationMapStyle {
 
 interface Props {
   styles: RelationMapStyle[];
+  selectionTransitionDurationMs?: number;
 }
 
 const nodeRadius = RELATION_MAP_BASE_SIZE / 2;
 const maxZoom = 4;
 
-export default function HairstyleRelationMap({ styles }: Props) {
+export default function HairstyleRelationMap({ styles, selectionTransitionDurationMs = 300 }: Props) {
   const canvasRef = useRef<HTMLDivElement>(null);
   const { svgRef, worldRef, resetZoom, setZoom } = useRelationMapZoom(true, maxZoom);
   const positionsRef = useRef<MapPoint[]>([]);
@@ -111,7 +112,7 @@ export default function HairstyleRelationMap({ styles }: Props) {
   function selectStyle(index: number | null) {
     setSelectedIndex(index);
     if (index === null) {
-      resetZoom();
+      resetZoom(selectionTransitionDurationMs);
       return;
     }
     const bounds = mapBounds(positions, labels, nodeRadius, [index, ...neighborsOf(index)]);
@@ -130,6 +131,7 @@ export default function HairstyleRelationMap({ styles }: Props) {
           layout.height / 2 - ((bounds.top + bounds.bottom) * scale) / 2,
         )
         .scale(scale),
+      selectionTransitionDurationMs,
     );
   }
 
@@ -155,9 +157,6 @@ export default function HairstyleRelationMap({ styles }: Props) {
             type="search"
           />
         </label>
-        <button className="relation-reset focus-ring" onClick={reset} type="button">
-          Reset map
-        </button>
       </div>
 
       <div className="relation-layout">
@@ -230,6 +229,11 @@ export default function HairstyleRelationMap({ styles }: Props) {
               ))}
             </g>
           </svg>
+          <div className="relation-map-footer">
+            <button className="relation-reset focus-ring" onClick={reset} type="button">
+              Reset map
+            </button>
+          </div>
         </div>
 
         <aside aria-live="polite" className={selected ? "relation-detail" : "relation-detail is-empty"}>

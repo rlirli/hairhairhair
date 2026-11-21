@@ -11,7 +11,7 @@ npm run dev
 
 Astro prints the local URL after startup.
 
-Explore hairstyle connections at `/hairstyle-map/` while the development server is running. The map uses the same published hairstyle records and example images as the hairstyle directory.
+Explore hairstyle connections at `/hairstyle-map/` while the development server is running. The map uses the same published hairstyle records and example images as the hairstyle directory. The full map uses `d3-force` to lay out connected groups, then fits them to the viewport. Selecting a style frames its direct connections. Astro bundles the simulation into the static site served by GitHub Pages.
 
 ### Focused hairstyle maps
 

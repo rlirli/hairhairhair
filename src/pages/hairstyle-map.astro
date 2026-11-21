@@ -49,8 +49,7 @@ const styles = await Promise.all(
       See how styles <span class="text-orange">connect.</span>
     </h1>
     <p class="mt-7 max-w-2xl text-base leading-7 sm:text-lg">
-      Related hairstyles pull together. Drag the styles to find a shape that makes sense to you, then open any profile
-      for the full guide.
+      Zoom in to explore the map. Select a hairstyle to see its closest connections and open its guide.
     </p>
     <HairstyleRelationMap client:load styles={styles.filter((style) => style !== undefined)} />
   </section>

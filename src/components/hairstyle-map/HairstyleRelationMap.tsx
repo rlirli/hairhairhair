@@ -1,8 +1,17 @@
 import { drag } from "d3-drag";
 import { select } from "d3-selection";
+import { zoomIdentity } from "d3-zoom";
 import { useEffect, useMemo, useRef, useState } from "react";
 import "../../styles/hairstyle-relation-map.css";
 import RelationMapNode, { RELATION_MAP_BASE_SIZE } from "./RelationMapNode";
+import {
+  fitFullMap,
+  fullMapLabelLineHeight,
+  fullMapLabelLines,
+  layoutMapGroups,
+  mapBounds,
+  type MapPoint,
+} from "./full-map-layout";
 import { getRelationLinks } from "./relation-graph";
 import { useRelationMapZoom } from "./useRelationMapZoom";
 
@@ -22,203 +31,120 @@ interface Props {
   styles: RelationMapStyle[];
 }
 
-interface PositionedStyle extends RelationMapStyle {
-  x: number;
-  y: number;
-  vx: number;
-  vy: number;
-}
-
-interface DragSubject extends PositionedStyle {
-  index: number;
-}
-
 const nodeRadius = RELATION_MAP_BASE_SIZE / 2;
-
-function relax(nodes: PositionedStyle[], links: Array<[number, number]>, width: number, height: number, ticks = 230) {
-  const placed = nodes.map((node) => ({ ...node }));
-  for (let tick = 0; tick < ticks; tick++) {
-    const alpha = 1 - tick / (ticks + 20);
-    for (const node of placed) {
-      node.vx += (width / 2 - node.x) * 0.0008 * alpha;
-      node.vy += (height / 2 - node.y) * 0.0008 * alpha;
-    }
-    for (let i = 0; i < placed.length; i++) {
-      for (let j = i + 1; j < placed.length; j++) {
-        const a = placed[i],
-          b = placed[j];
-        const dx = b.x - a.x,
-          dy = b.y - a.y;
-        const distance = Math.hypot(dx, dy) || 1;
-        const repel = Math.min(1.25, 1700 / (distance * distance)) * alpha;
-        const fx = (dx / distance) * repel,
-          fy = (dy / distance) * repel;
-        a.vx -= fx;
-        a.vy -= fy;
-        b.vx += fx;
-        b.vy += fy;
-        if (distance < 112) {
-          const push = (112 - distance) * 0.012 * alpha;
-          a.vx -= (dx / distance) * push;
-          a.vy -= (dy / distance) * push;
-          b.vx += (dx / distance) * push;
-          b.vy += (dy / distance) * push;
-        }
-      }
-    }
-    for (const [sourceIndex, targetIndex] of links) {
-      const source = placed[sourceIndex],
-        target = placed[targetIndex];
-      const dx = target.x - source.x,
-        dy = target.y - source.y;
-      const distance = Math.hypot(dx, dy) || 1;
-      const force = (distance - 158) * 0.0024 * alpha;
-      source.vx += (dx / distance) * force;
-      source.vy += (dy / distance) * force;
-      target.vx -= (dx / distance) * force;
-      target.vy -= (dy / distance) * force;
-    }
-    for (const node of placed) {
-      node.vx *= 0.86;
-      node.vy *= 0.86;
-      node.x = Math.max(52, Math.min(width - 52, node.x + node.vx));
-      node.y = Math.max(62, Math.min(height - 34, node.y + node.vy));
-    }
-  }
-  return placed;
-}
+const maxZoom = 4;
 
 export default function HairstyleRelationMap({ styles }: Props) {
   const canvasRef = useRef<HTMLDivElement>(null);
-  const { svgRef, worldRef, resetZoom } = useRelationMapZoom();
-  const positionsRef = useRef<PositionedStyle[]>([]);
-  const [dimensions, setDimensions] = useState({ width: 860, height: 630 });
-  const [positions, setPositions] = useState<PositionedStyle[]>([]);
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const { svgRef, worldRef, resetZoom, setZoom } = useRelationMapZoom(true, maxZoom);
+  const positionsRef = useRef<MapPoint[]>([]);
+  const [viewport, setViewport] = useState({ width: 860, height: 630 });
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [query, setQuery] = useState("");
 
-  const idToIndex = useMemo(() => new Map(styles.map((style, index) => [style.id, index])), [styles]);
   const links = useMemo(() => getRelationLinks(styles), [styles]);
+  const labels = useMemo(() => styles.map((style) => fullMapLabelLines(style.name)), [styles]);
+  const groups = useMemo(() => layoutMapGroups(labels, links, nodeRadius), [labels, links]);
+  const layout = useMemo(() => fitFullMap(groups, viewport), [groups, viewport]);
+  const [dragged, setDragged] = useState<{ layout: typeof layout; positions: MapPoint[] }>();
+  const positions = dragged?.layout === layout ? dragged.positions : layout.positions;
+  useEffect(() => {
+    positionsRef.current = positions;
+  }, [positions]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const resize = () => {
-      const rect = canvas.getBoundingClientRect();
-      setDimensions({ width: Math.max(500, rect.width), height: Math.max(570, rect.height) });
-    };
-    resize();
-    const observer = new ResizeObserver(resize);
+    const observer = new ResizeObserver(([{ contentRect }]) => {
+      const { width, height } = contentRect;
+      if (!width || !height) return;
+      setViewport((previous) =>
+        previous.width === width && previous.height === height ? previous : { width, height },
+      );
+    });
     observer.observe(canvas);
     return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
-    const columns = Math.ceil(Math.sqrt((styles.length * dimensions.width) / dimensions.height));
-    const rows = Math.ceil(styles.length / columns);
-    const gapX = dimensions.width / (columns + 1),
-      gapY = dimensions.height / (rows + 1);
-    const start = styles.map((style, index) => ({
-      ...style,
-      x: gapX * ((index % columns) + 1),
-      y: gapY * (Math.floor(index / columns) + 1),
-      vx: 0,
-      vy: 0,
-    }));
-    const next = relax(start, links, dimensions.width, dimensions.height);
-    positionsRef.current = next;
-    setPositions(next);
-  }, [dimensions, links, styles]);
+    resetZoom();
+  }, [layout, resetZoom]);
 
   useEffect(() => {
     const world = worldRef.current;
-    if (!world || !positions.length) return;
-
-    let startPoint: { x: number; y: number } | null = null;
+    if (!world) return;
+    let start: MapPoint | undefined;
     let moved = false;
-    const behavior = drag<SVGGElement, number, DragSubject>()
+    const behavior = drag<SVGGElement, number, MapPoint>()
       .container(() => world)
       .filter((event) => event.type === "mousedown" && !event.button)
-      .subject((_event, index) => {
-        return { ...positionsRef.current[index]!, index };
-      })
+      .subject((_event, index) => positionsRef.current[index])
       .clickDistance(3)
       .on("start", (event) => {
-        startPoint = { x: event.x, y: event.y };
+        start = { x: event.x, y: event.y };
         moved = false;
       })
-      .on("drag", (event) => {
-        if (!startPoint) return;
-        if (!moved && Math.hypot(event.x - startPoint.x, event.y - startPoint.y) < 3) return;
+      .on("drag", (event, index) => {
+        if (!moved && start && Math.hypot(event.x - start.x, event.y - start.y) < 3) return;
         moved = true;
-        const next = positionsRef.current.map((node, index) =>
-          index === event.subject.index ? { ...node, x: event.x, y: event.y, vx: 0, vy: 0 } : node,
-        );
-        positionsRef.current = next;
-        paintPositions(next);
+        setDragged((current) => {
+          const points = current?.layout === layout ? current.positions : layout.positions;
+          return { layout, positions: points.map((point, i) => (i === index ? { x: event.x, y: event.y } : point)) };
+        });
       })
-      .on("end", (event) => {
-        startPoint = null;
-        if (!moved) return;
-        setSelectedId(event.subject.id);
-        const next = relax(positionsRef.current, links, dimensions.width, dimensions.height, 170);
-        positionsRef.current = next;
-        setPositions(next);
+      .on("end", (_event, index) => {
+        if (moved) setSelectedIndex(index);
       });
-
     const selection = select(world)
       .selectAll<SVGGElement, number>(".relation-node")
-      .data(positions.map((_, i) => i));
+      .data(layout.positions.map((_, index) => index));
     selection.call(behavior);
     return () => {
       selection.on(".drag", null);
     };
-  }, [dimensions, links, positions, worldRef]);
+  }, [layout, worldRef]);
 
-  const selected = styles.find((style) => style.id === selectedId);
-  const related = selected?.relatedStyleIds.map((id) => styles[idToIndex.get(id) ?? -1]).filter(Boolean) ?? [];
-  const queryMatch = (style: RelationMapStyle) =>
-    !query || style.name.toLowerCase().includes(query.trim().toLowerCase());
-  function paintPositions(next: PositionedStyle[]) {
-    const nodeElements = svgRef.current?.querySelectorAll<SVGGElement>(".relation-node");
-    const edgeElements = svgRef.current?.querySelectorAll<SVGLineElement>(".relation-edge");
-    next.forEach((node, index) => nodeElements?.[index]?.setAttribute("transform", `translate(${node.x} ${node.y})`));
-    links.forEach(([source, target], index) => {
-      const edge = edgeElements?.[index];
-      if (!edge) return;
-      edge.setAttribute("x1", String(next[source].x));
-      edge.setAttribute("y1", String(next[source].y));
-      edge.setAttribute("x2", String(next[target].x));
-      edge.setAttribute("y2", String(next[target].y));
-    });
+  function neighborsOf(index: number) {
+    return links.flatMap(([a, b]) => (a === index ? [b] : b === index ? [a] : []));
   }
 
-  function reset() {
-    setSelectedId(null);
-    setQuery("");
-    resetZoom();
-    const columns = Math.ceil(Math.sqrt((styles.length * dimensions.width) / dimensions.height));
-    const rows = Math.ceil(styles.length / columns);
-    const gapX = dimensions.width / (columns + 1),
-      gapY = dimensions.height / (rows + 1);
-    const next = relax(
-      styles.map((style, index) => ({
-        ...style,
-        x: gapX * ((index % columns) + 1),
-        y: gapY * (Math.floor(index / columns) + 1),
-        vx: 0,
-        vy: 0,
-      })),
-      links,
-      dimensions.width,
-      dimensions.height,
+  function selectStyle(index: number | null) {
+    setSelectedIndex(index);
+    if (index === null) {
+      resetZoom();
+      return;
+    }
+    const bounds = mapBounds(positions, labels, nodeRadius, [index, ...neighborsOf(index)]);
+    const scale = Math.max(
+      1,
+      Math.min(
+        maxZoom,
+        layout.width / (bounds.right - bounds.left + 72),
+        layout.height / (bounds.bottom - bounds.top + 72),
+      ),
     );
-    positionsRef.current = next;
-    setPositions(next);
+    setZoom(
+      zoomIdentity
+        .translate(
+          layout.width / 2 - ((bounds.left + bounds.right) * scale) / 2,
+          layout.height / 2 - ((bounds.top + bounds.bottom) * scale) / 2,
+        )
+        .scale(scale),
+    );
+  }
+
+  const selected = selectedIndex === null ? undefined : styles[selectedIndex];
+  const related = selectedIndex === null ? [] : neighborsOf(selectedIndex);
+  const normalizedQuery = query.trim().toLowerCase();
+
+  function reset() {
+    selectStyle(null);
+    setQuery("");
+    setDragged(undefined);
   }
 
   return (
-    <div className="relation-explorer">
+    <div className="relation-explorer relation-full-map">
       <div className="relation-toolbar">
         <label className="relation-search">
           <span className="sr-only">Find a hairstyle</span>
@@ -229,6 +155,9 @@ export default function HairstyleRelationMap({ styles }: Props) {
             type="search"
           />
         </label>
+        <button className="relation-reset focus-ring" onClick={reset} type="button">
+          Reset map
+        </button>
       </div>
 
       <div className="relation-layout">
@@ -237,22 +166,21 @@ export default function HairstyleRelationMap({ styles }: Props) {
             aria-label="Interactive map of hairstyle connections"
             className="relation-svg"
             onClick={(event) => {
-              if (!(event.target as Element).closest(".relation-node")) setSelectedId(null);
+              if (selectedIndex !== null && !(event.target as Element).closest(".relation-node")) selectStyle(null);
             }}
             ref={svgRef}
             role="group"
-            viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
+            viewBox={`0 0 ${layout.width} ${layout.height}`}
           >
             <g ref={worldRef}>
               <g aria-hidden="true">
                 {links.map(([source, target]) => {
-                  const isRelatedToSelection =
-                    selectedId !== null && (styles[source]?.id === selectedId || styles[target]?.id === selectedId);
+                  const isRelatedToSelection = source === selectedIndex || target === selectedIndex;
                   return (
                     <line
                       className={[
                         "relation-edge",
-                        selectedId !== null && !isRelatedToSelection && "is-dimmed",
+                        selectedIndex !== null && !isRelatedToSelection && "is-dimmed",
                         isRelatedToSelection && "is-related",
                       ]
                         .filter(Boolean)
@@ -266,42 +194,45 @@ export default function HairstyleRelationMap({ styles }: Props) {
                   );
                 })}
               </g>
-              {positions.map((style) => (
+              {styles.map((style, index) => (
                 <g
                   aria-label={style.name}
                   className={[
                     "relation-node",
-                    selectedId === style.id && "is-selected",
-                    (!queryMatch(style) ||
-                      (selectedId !== null &&
-                        selectedId !== style.id &&
-                        !styles[idToIndex.get(selectedId)!]?.relatedStyleIds.includes(style.id))) &&
+                    selectedIndex === index && "is-selected",
+                    (!style.name.toLowerCase().includes(normalizedQuery) ||
+                      (selectedIndex !== null && selectedIndex !== index && !related.includes(index))) &&
                       "is-dimmed",
                   ]
                     .filter(Boolean)
                     .join(" ")}
                   key={style.id}
-                  onClick={() => setSelectedId((current) => (current === style.id ? null : style.id))}
-                  transform={`translate(${style.x} ${style.y})`}
+                  onClick={() => selectStyle(selectedIndex === index ? null : index)}
+                  onKeyDown={(event) => {
+                    if (event.key !== "Enter" && event.key !== " ") return;
+                    event.preventDefault();
+                    selectStyle(selectedIndex === index ? null : index);
+                  }}
+                  role="button"
+                  aria-pressed={selectedIndex === index}
+                  tabIndex={0}
+                  transform={`translate(${positions[index].x} ${positions[index].y})`}
                 >
                   <RelationMapNode
                     name={style.name}
                     radius={nodeRadius}
                     imageSrc={style.imageSrc}
                     transparentBackground={style.transparentBackground}
+                    labelLines={labels[index]}
+                    labelLineHeight={fullMapLabelLineHeight}
                   />
                 </g>
               ))}
             </g>
           </svg>
-          <div className="relation-map-footer">
-            <button className="relation-reset focus-ring" onClick={reset} type="button">
-              Reset map
-            </button>
-          </div>
         </div>
 
-        <aside aria-live="polite" className="relation-detail">
+        <aside aria-live="polite" className={selected ? "relation-detail" : "relation-detail is-empty"}>
           {selected ? (
             <>
               <div className="relation-detail-main">
@@ -324,11 +255,11 @@ export default function HairstyleRelationMap({ styles }: Props) {
               </h3>
               {related.length ? (
                 <ul className="relation-related-list">
-                  {related.map((style) => (
-                    <li key={style.id}>
-                      <button className="relation-related-button" onClick={() => setSelectedId(style.id)} type="button">
-                        <img alt="" src={style.imageSrc} />
-                        <span>{style.name}</span>
+                  {related.map((index) => (
+                    <li key={styles[index].id}>
+                      <button className="relation-related-button" onClick={() => selectStyle(index)} type="button">
+                        <img alt="" src={styles[index].imageSrc} />
+                        <span>{styles[index].name}</span>
                         <span aria-hidden="true">↗︎</span>
                       </button>
                     </li>

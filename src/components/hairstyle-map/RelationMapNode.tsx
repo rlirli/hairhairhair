@@ -9,6 +9,8 @@ interface Props {
   transparentBackground?: boolean;
   radius: number;
   display?: RelationMapNodeDisplay;
+  labelLines?: string[];
+  labelLineHeight?: number;
 }
 
 export default function RelationMapNode({
@@ -17,6 +19,8 @@ export default function RelationMapNode({
   transparentBackground,
   radius,
   display = "image-and-label",
+  labelLines = [name],
+  labelLineHeight = 14,
 }: Props) {
   const clipId = `relation-map-clip-${useId()}`;
 
@@ -65,7 +69,11 @@ export default function RelationMapNode({
       <circle className="relation-node-ring" r={radius} />
       {display === "image-and-label" && (
         <text className="relation-node-label" y={radius + 14}>
-          {name}
+          {labelLines.map((line, index) => (
+            <tspan x="0" dy={index ? labelLineHeight : 0} key={index}>
+              {line}
+            </tspan>
+          ))}
         </text>
       )}
     </>

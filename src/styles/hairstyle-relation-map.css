@@ -358,3 +358,42 @@
   stroke: var(--color-orange);
   stroke-width: 2.5;
 }
+
+.relation-full-map .relation-edge {
+  opacity: 0.28;
+}
+
+.relation-full-map .relation-edge.is-dimmed {
+  opacity: 0.065;
+}
+
+.relation-full-map .relation-edge.is-related {
+  opacity: 0.8;
+}
+
+.relation-full-map .relation-node-label {
+  font-size: 13px;
+  font-weight: 600;
+  stroke-width: 5px;
+}
+
+.relation-full-map .relation-node:focus-visible {
+  outline: none;
+}
+
+.relation-full-map .relation-node:focus-visible .relation-node-ring {
+  stroke: var(--color-orange);
+  stroke-width: 2.5;
+}
+
+@media (max-width: 700px) {
+  .relation-full-map .relation-canvas,
+  .relation-full-map .relation-svg {
+    height: 72vh;
+    min-height: 31rem;
+  }
+
+  .relation-full-map .relation-detail.is-empty {
+    display: none;
+  }
+}

@@ -1,8 +1,8 @@
 import { select } from "d3-selection";
-import { zoom, zoomIdentity, type ZoomBehavior } from "d3-zoom";
-import { useEffect, useRef } from "react";
+import { zoom, zoomIdentity, type ZoomBehavior, type ZoomTransform } from "d3-zoom";
+import { useCallback, useEffect, useRef } from "react";
 
-export function useRelationMapZoom(dragNodes = true) {
+export function useRelationMapZoom(dragNodes = true, maxScale = 2) {
   const svgRef = useRef<SVGSVGElement>(null);
   const worldRef = useRef<SVGGElement>(null);
   const behaviorRef = useRef<ZoomBehavior<SVGSVGElement, unknown> | null>(null);
@@ -13,7 +13,7 @@ export function useRelationMapZoom(dragNodes = true) {
     if (!svg || !world) return;
 
     const behavior = zoom<SVGSVGElement, unknown>()
-      .scaleExtent([0.65, 2])
+      .scaleExtent([0.65, maxScale])
       .clickDistance(dragNodes ? 0 : 3)
       .filter((event) => {
         if (event.type === "mousedown") {
@@ -34,13 +34,14 @@ export function useRelationMapZoom(dragNodes = true) {
       selection.on(".zoom", null);
       behaviorRef.current = null;
     };
-  }, [dragNodes]);
+  }, [dragNodes, maxScale]);
 
-  function resetZoom() {
+  const setZoom = useCallback((transform: ZoomTransform) => {
     if (svgRef.current && behaviorRef.current) {
-      select(svgRef.current).call(behaviorRef.current.transform, zoomIdentity);
+      select(svgRef.current).call(behaviorRef.current.transform, transform);
     }
-  }
+  }, []);
+  const resetZoom = useCallback(() => setZoom(zoomIdentity), [setZoom]);
 
-  return { svgRef, worldRef, resetZoom };
+  return { svgRef, worldRef, resetZoom, setZoom };
 }

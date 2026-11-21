@@ -1,0 +1,14 @@
+{
+  "id": "bantu-knots-small",
+  "alt": "Three-quarter portrait showing small salt-and-pepper Bantu knots with distinct scalp sections.",
+  "transparentBackground": true,
+  "kind": "image",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "bantu-knots-small"
+    }
+  },
+  "asset": "assets/hairstyles/bantu-knots-small.png"
+}

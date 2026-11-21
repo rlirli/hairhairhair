@@ -1,0 +1,52 @@
+{
+  "id": "hairstyle-cornrows",
+  "slug": "cornrows",
+  "name": "Cornrows",
+  "kind": "styling-technique",
+  "summary": "Continuous raised braids worked directly against the scalp in straight or curved rows.",
+  "intro": [
+    "Cornrow braiding originated in Africa. Hair is added into each braid as it advances along a parted lane, producing a raised ridge fixed close to the scalp.",
+    "The parting pattern controls the direction of the design. Parallel rows read cleanly from front to back, while curved parts guide the braids into a sweep."
+  ],
+  "variations": [
+    {
+      "id": "cornrows-parallel",
+      "name": "Straight-back cornrows",
+      "description": "Parallel lanes run from the front hairline toward the nape."
+    },
+    {
+      "id": "cornrows-swept",
+      "name": "Curved cornrows",
+      "description": "The rows follow shaped parts that arc around the crown or to one side."
+    },
+    {
+      "id": "cornrows-feed-in",
+      "name": "Feed-in cornrows",
+      "description": "Added hair is incorporated gradually when extra length or fullness is wanted."
+    }
+  ],
+  "consultation": {
+    "intro": "Agree on the row layout, width and finish before braiding. Bring a photo that shows the pattern from above.",
+    "questions": [
+      "How many rows and what spacing would you like?",
+      "Should the ends be tucked, tied, or left hanging?",
+      "Would you like the braids made entirely from your own hair?"
+    ],
+    "sampleRequest": "“I’d like raised straight-back rows with visible parts, a comfortable hairline, and the ends secured neatly at the nape.”"
+  },
+  "considerations": [
+    "Tell the braider if a section hurts or feels too tight. Repeated pull at the same spots can contribute to traction hair loss.",
+    "The starting length and density affect how narrow a braid can be and how securely the ends can be finished."
+  ],
+  "sourceIds": [
+    "city-and-guilds-hairdressing-logbook",
+    "collins-cornrow",
+    "aad-traction"
+  ],
+  "relatedStyleIds": [
+    "hairstyle-bantu-knots",
+    "hairstyle-knotless-box-braids",
+    "hairstyle-twists"
+  ],
+  "guidePublicationStatus": "published"
+}

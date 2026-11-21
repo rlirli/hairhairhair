@@ -1,0 +1,14 @@
+{
+  "id": "victory-rolls-asymmetric",
+  "alt": "Three-quarter portrait showing asymmetric copper victory rolls in a pinned updo.",
+  "transparentBackground": true,
+  "kind": "image",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "victory-rolls-asymmetric"
+    }
+  },
+  "asset": "assets/hairstyles/victory-rolls-asymmetric.png"
+}

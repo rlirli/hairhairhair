@@ -1,0 +1,14 @@
+{
+  "id": "cornrows-curved",
+  "alt": "Three-quarter portrait of curved cornrow braids with visible scalp parts.",
+  "transparentBackground": true,
+  "kind": "image",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "cornrows-curved"
+    }
+  },
+  "asset": "assets/hairstyles/cornrows-curved.png"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "mullet-straight-copper",
+  "alt": "Three-quarter portrait showing a copper mullet with short sides and straight collar-length hair at the back.",
+  "transparentBackground": true,
+  "kind": "image",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "mullet-straight-copper"
+    }
+  },
+  "asset": "assets/hairstyles/mullet-straight-copper.png"
+}

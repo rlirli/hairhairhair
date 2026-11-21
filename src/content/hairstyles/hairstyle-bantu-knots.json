@@ -1,0 +1,50 @@
+{
+  "id": "hairstyle-bantu-knots",
+  "slug": "bantu-knots",
+  "name": "Bantu knots",
+  "kind": "styling-technique",
+  "summary": "Multiple sections of hair twisted and wrapped into individual coiled knots against the scalp.",
+  "intro": [
+    "Each knot is built from its own section of hair. Even sections give a balanced arrangement, while different shapes and sizes change how the parts and knots read across the head.",
+    "The style is associated with traditional Zulu hairstyling in southern Africa. The coiled knots can be worn as the finished style or later released to make a knot-out."
+  ],
+  "variations": [
+    {
+      "id": "bantu-knots-medium",
+      "name": "Medium Bantu knots",
+      "description": "Evenly spaced sections create a set of distinct rounded knots."
+    },
+    {
+      "id": "bantu-knots-small",
+      "name": "Small Bantu knots",
+      "description": "More sections create smaller knots and a finer parting pattern."
+    },
+    {
+      "id": "bantu-knots-braided",
+      "name": "Braided Bantu knots",
+      "description": "Each section is braided before being wrapped into a knot."
+    }
+  ],
+  "consultation": {
+    "intro": "Decide how visible you want the parts to be and how many individual knots will fit the available length and density.",
+    "questions": [
+      "Would you prefer fewer prominent knots or more compact knots?",
+      "Do you want a grid, diamonds, or softer parts?",
+      "How should the ends be secured?"
+    ],
+    "sampleRequest": "“I’d like small separate Bantu knots with visible sections and the ends tucked securely, with a comfortable amount of tension.”"
+  },
+  "considerations": [
+    "Make each section large enough to wrap and hold with the length available.",
+    "A section that feels tight or uncomfortable can be rewrapped with less tension."
+  ],
+  "sourceIds": [
+    "cambridge-bantu-knots",
+    "hair-com-bantu-knots"
+  ],
+  "relatedStyleIds": [
+    "hairstyle-twists",
+    "hairstyle-cornrows"
+  ],
+  "guidePublicationStatus": "published"
+}

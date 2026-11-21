@@ -1,0 +1,51 @@
+{
+  "id": "hairstyle-mullet",
+  "slug": "mullet",
+  "name": "Mullet",
+  "kind": "cut",
+  "summary": "A cut with a shorter front and sides and a distinctly longer back at the neckline.",
+  "intro": [
+    "The shape is easiest to read in profile. The ear and temple sit inside a compact side section while the rear hair continues down the neck.",
+    "The contrast can be sharp or softly blended. A wolf cut relies more on layering through the crown and face, whereas a mullet is defined by the length left at the back.",
+    "The cut became prominent in Australian popular culture in the 1970s and 1980s."
+  ],
+  "variations": [
+    {
+      "id": "mullet-classic",
+      "name": "Classic mullet",
+      "description": "A short front and open sides frame a long back that extends down the neck."
+    },
+    {
+      "id": "mullet-curly",
+      "name": "Curly mullet",
+      "description": "Keeps curl length at the nape and uses a shorter front and sides to expose the contrast."
+    },
+    {
+      "id": "mullet-short",
+      "name": "Short mullet",
+      "description": "Retains a modest step in length toward the neckline, with a softer outline."
+    }
+  ],
+  "consultation": {
+    "intro": "Bring a side-view reference and agree on the longest point and how much hair to remove around the ears.",
+    "questions": [
+      "Where should the rear lengths end when dry?",
+      "How much of the ear should the sides expose?",
+      "Should the side-to-back transition be sharp or blended?"
+    ],
+    "sampleRequest": "“Keep the longest hair at the nape, make the sides noticeably shorter, and leave enough length at the front for a short textured fringe.”"
+  },
+  "considerations": [
+    "Check the profile as well as the front. The front can look like a crop even when the back has substantial length.",
+    "Allow for curl shrinkage when setting the dry length at the nape."
+  ],
+  "sourceIds": [
+    "gq-mullet-guide",
+    "prov-hair-from-mos-to-mullets"
+  ],
+  "relatedStyleIds": [
+    "hairstyle-wolf-cut",
+    "hairstyle-short-curly-shag"
+  ],
+  "guidePublicationStatus": "published"
+}

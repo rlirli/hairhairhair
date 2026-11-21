@@ -354,3 +354,75 @@ The following gallery images were regenerated with OpenAI's built-in image gener
 | `twists-long`                           | Jaw-length natural two-strand twists on a fictional Black woman. Show two-strand structure, soft sectioning at the crown, and the ends in three-quarter view.             |
 
 Use the match photo to reference the shape and placement of the Ronaldo patch. [2002 World Cup reference](https://www.90min.com/it/posts/30-giugno-2002-il-brasile-di-ronaldo-batte-la-germania-2-0-e-il-quinto-titolo-per-la-selecao)
+
+## mullet-straight-copper
+
+Asset: `src/content/assets/hairstyles/mullet-straight-copper.png`
+
+Generate exactly one square 1:1 portrait for hairhairhair.hair hairstyle cards. Real editorial photography, soft neutral studio light, realistic hair and skin texture, off-white crewneck or simple cream top, matching the site's tight square head-and-shoulders cutout portraits. Fill the frame with the head and shoulder silhouette, ~4% margin above the highest hair and shoulders reaching the bottom; frame long ends and structural hair details fully. One clearly fictional adult. Isolated cutout with real RGBA alpha, fully transparent space behind and around all hair and shoulders, no background color, no checkerboard, shadow, text or watermark. No resemblance to public figures. Fictional fair-skinned freckled nonbinary adult age 24 with straight muted copper hair. Classic mullet with short textured front above eyebrows, short scissor-cut open sides over the ear, and long visibly separate straight choppy panels over nape descending to collar. Back hair clearly extends well below the side hair. Three-quarter side view, looking slightly away, frame includes entire tail; no mohawk or all-over shag.
+
+## mullet-curly-dark
+
+Asset: `src/content/assets/hairstyles/mullet-curly-dark.png`
+
+Generate exactly one square 1:1 portrait for hairhairhair.hair hairstyle cards. Real editorial photography, soft neutral studio light, realistic hair and skin texture, off-white crewneck or simple cream top, matching the site's tight square head-and-shoulders cutout portraits. Fill the frame with the head and shoulder silhouette, ~4% margin above the highest hair and shoulders reaching the bottom; frame long ends and structural hair details fully. One clearly fictional adult. Isolated cutout with real RGBA alpha, fully transparent space behind and around all hair and shoulders, no background color, no checkerboard, shadow, text or watermark. No resemblance to public figures. Fictional medium-olive-skinned North African man age 30, short mustache and dark naturally curly hair. Curly mullet with compact curly front, tightly tapered temples above ear, and obvious long natural curls behind ear running down the nape to the collar. Three-quarter rear/side angle with face in profile, show front-side-back contrast and every curl down to the ends.
+
+## pompadour-classic-black
+
+Asset: `src/content/assets/hairstyles/pompadour-classic-black.png`
+
+Generate exactly one square 1:1 portrait for hairhairhair.hair hairstyle cards. Real editorial photography, soft neutral studio light, realistic hair and skin texture, off-white crewneck or simple cream top, matching the site's tight square head-and-shoulders cutout portraits. Fill the frame with the head and shoulder silhouette, ~4% margin above the highest hair and shoulders reaching the bottom; frame long ends and structural hair details fully. One clearly fictional adult. Isolated cutout with real RGBA alpha, fully transparent space behind and around all hair and shoulders, no background color, no checkerboard, shadow, text or watermark. No resemblance to public figures. Fictional Filipino man in late 30s with black straight hair. Classic polished pompadour: entire long top drawn up from forehead into a high broad rounded crest then brushed back to crown, with neat short scissor-tapered sides. Slight sheen, clearly swept-back direction, no hanging fringe, no hard part. Three-quarter side eye-level view looking off camera, showing front height and curved crest.
+
+## pompadour-soft-silver
+
+Asset: `src/content/assets/hairstyles/pompadour-soft-silver.png`
+
+Generate exactly one square 1:1 portrait for hairhairhair.hair hairstyle cards. Real editorial photography, soft neutral studio light, realistic hair and skin texture, off-white crewneck or simple cream top, matching the site's tight square head-and-shoulders cutout portraits. Fill the frame with the head and shoulder silhouette, ~4% margin above the highest hair and shoulders reaching the bottom; frame long ends and structural hair details fully. One clearly fictional adult. Isolated cutout with real RGBA alpha, fully transparent space behind and around all hair and shoulders, no background color, no checkerboard, shadow, text or watermark. No resemblance to public figures. Fictional Black woman age 58 with salt-and-pepper naturally tightly curled hair. Rounded textured pompadour with hair swept upward and back from hairline into one prominent rounded forward crest continuous with shorter hair toward crown, neat tapered sides. Natural curl texture, no hanging fringe or separate bun. Three-quarter side eye-level view looking off camera.
+
+## cornrows-straight-back
+
+Asset: `src/content/assets/hairstyles/cornrows-straight-back.png`
+
+Generate exactly one square 1:1 portrait for hairhairhair.hair hairstyle cards. Real editorial photography, soft neutral studio light, realistic hair and skin texture, off-white crewneck or simple cream top, matching the site's tight square head-and-shoulders cutout portraits. Fill the frame with the head and shoulder silhouette, ~4% margin above the highest hair and shoulders reaching the bottom; frame long ends and structural hair details fully. One clearly fictional adult. Isolated cutout with real RGBA alpha, fully transparent space behind and around all hair and shoulders, no background color, no checkerboard, shadow, text or watermark. No resemblance to public figures. Fictional dark-skinned Black man age 28 with six to eight evenly spaced, straight-back three-strand cornrows tight to scalp, individual raised braided ridges and clean parallel parts from frontal hairline over crown to nape; no hanging extensions. Three-quarter rear-side view with head slightly angled down and calm profile visible. Entire crown and nape visible, row pattern clean and anatomically coherent.
+
+## cornrows-curved
+
+Asset: `src/content/assets/hairstyles/cornrows-curved.png`
+
+Generate exactly one square 1:1 portrait for hairhairhair.hair hairstyle cards. Real editorial photography, soft neutral studio light, realistic hair and skin texture, off-white crewneck or simple cream top, matching the site's tight square head-and-shoulders cutout portraits. Fill the frame with the head and shoulder silhouette, ~4% margin above the highest hair and shoulders reaching the bottom; frame long ends and structural hair details fully. One clearly fictional adult. Isolated cutout with real RGBA alpha, fully transparent space behind and around all hair and shoulders, no background color, no checkerboard, shadow, text or watermark. No resemblance to public figures. Fictional Black woman in her 40s with warm brown skin and dark natural hair arranged in distinct gently curving cornrow braids close to scalp, clean open parts and raised braid ridges sweeping from front hairline towards nape, tucked ends. Elevated three-quarter side view showing scalp and crown with face in profile, braid paths distinct, no box braids, accessories or extensions.
+
+## bantu-knots-rounded
+
+Asset: `src/content/assets/hairstyles/bantu-knots-rounded.png`
+
+Generate exactly one square 1:1 portrait for hairhairhair.hair hairstyle cards. Real editorial photography, soft neutral studio light, realistic hair and skin texture, off-white crewneck or simple cream top, matching the site's tight square head-and-shoulders cutout portraits. Fill the frame with the head and shoulder silhouette, ~4% margin above the highest hair and shoulders reaching the bottom; frame long ends and structural hair details fully. One clearly fictional adult. Isolated cutout with real RGBA alpha, fully transparent space behind and around all hair and shoulders, no background color, no checkerboard, shadow, text or watermark. No resemblance to public figures. Fictional deep-brown-skinned Black woman 29 with about eight medium individual Bantu knots from naturally coily black hair; each of eight distinct visible scalp sections feeds a single tightly wound rounded spiral knot standing up from its own base. Crisp tasteful geometric part lines, no braids, no bead accessories. Three-quarter slightly elevated angle showing front and crown and full knots, gaze away.
+
+## bantu-knots-small
+
+Asset: `src/content/assets/hairstyles/bantu-knots-small.png`
+
+Generate exactly one square 1:1 portrait for hairhairhair.hair hairstyle cards. Real editorial photography, soft neutral studio light, realistic hair and skin texture, off-white crewneck or simple cream top, matching the site's tight square head-and-shoulders cutout portraits. Fill the frame with the head and shoulder silhouette, ~4% margin above the highest hair and shoulders reaching the bottom; frame long ends and structural hair details fully. One clearly fictional adult. Isolated cutout with real RGBA alpha, fully transparent space behind and around all hair and shoulders, no background color, no checkerboard, shadow, text or watermark. No resemblance to public figures. Fictional Black woman age 60 with natural salt-and-pepper tightly coiled hair arranged into multiple small compact Bantu knots. Each knot is a separate clearly wound little spiral from a distinct diamond-shaped scalp section; orderly genuine nape and crown geometry. Elevated side three-quarter portrait looking aside, complete knots visible, no adornments.
+
+## chignon-sleek
+
+Asset: `src/content/assets/hairstyles/chignon-sleek.png`
+
+Generate exactly one square 1:1 portrait for hairhairhair.hair hairstyle cards. Real editorial photography, soft neutral studio light, realistic hair and skin texture, off-white crewneck or simple cream top, matching the site's tight square head-and-shoulders cutout portraits. Fill the frame with the head and shoulder silhouette, ~4% margin above the highest hair and shoulders reaching the bottom; frame long ends and structural hair details fully. One clearly fictional adult. Isolated cutout with real RGBA alpha, fully transparent space behind and around all hair and shoulders, no background color, no checkerboard, shadow, text or watermark. No resemblance to public figures. Fictional East Asian woman age 39 with sleek dark straight hair, subtle side part and a polished low folded chignon sitting on the nape at the back (below the ears, clearly projecting behind head). One pinned oval fold of hair with tucked ends, no high knot. Rear three-quarter eye-level portrait with calm face profile, the entire low bun visible against transparent space.
+
+## chignon-textured
+
+Asset: `src/content/assets/hairstyles/chignon-textured.png`
+
+Generate exactly one square 1:1 portrait for hairhairhair.hair hairstyle cards. Real editorial photography, soft neutral studio light, realistic hair and skin texture, off-white crewneck or simple cream top, matching the site's tight square head-and-shoulders cutout portraits. Fill the frame with the head and shoulder silhouette, ~4% margin above the highest hair and shoulders reaching the bottom; frame long ends and structural hair details fully. One clearly fictional adult. Isolated cutout with real RGBA alpha, fully transparent space behind and around all hair and shoulders, no background color, no checkerboard, shadow, text or watermark. No resemblance to public figures. Fictional fair-skinned woman age 64 with naturally wavy silver hair, loosely gathered into a soft low loosely twisted chignon fixed at the nape below ear level with tucked ends and subtle natural wisps. Rear three-quarter view, face in profile angled off-camera, complete bun visible against transparent space. Graceful understated editorial tone.
+
+## victory-rolls-paired
+
+Asset: `src/content/assets/hairstyles/victory-rolls-paired.png`
+
+Generate exactly one square 1:1 portrait for hairhairhair.hair hairstyle cards. Real editorial photography, soft neutral studio light, realistic hair and skin texture, off-white crewneck or simple cream top, matching the site's tight square head-and-shoulders cutout portraits. Fill the frame with the head and shoulder silhouette, ~4% margin above the highest hair and shoulders reaching the bottom; frame long ends and structural hair details fully. One clearly fictional adult. Isolated cutout with real RGBA alpha, fully transparent space behind and around all hair and shoulders, no background color, no checkerboard, shadow, text or watermark. No resemblance to public figures. Fictional mid-brown-skinned Afro-Latina woman 33 wearing two prominent 1940s victory rolls of dark glossy hair above the temples, raised hollow pin curls rolled inward and pinned, their front spiral openings legible, remaining hair falls in smooth medium-length waves. Modest three-quarter front/side view and gaze just past camera, both rolls visible and fully inside frame. No bandana, costume or hair accessories.
+
+## victory-rolls-asymmetric
+
+Asset: `src/content/assets/hairstyles/victory-rolls-asymmetric.png`
+
+Generate exactly one square 1:1 portrait for hairhairhair.hair hairstyle cards. Real editorial photography, soft neutral studio light, realistic hair and skin texture, off-white crewneck or simple cream top, matching the site's tight square head-and-shoulders cutout portraits. Fill the frame with the head and shoulder silhouette, ~4% margin above the highest hair and shoulders reaching the bottom; frame long ends and structural hair details fully. One clearly fictional adult. Isolated cutout with real RGBA alpha, fully transparent space behind and around all hair and shoulders, no background color, no checkerboard, shadow, text or watermark. No resemblance to public figures. Fictional light-skinned redheaded woman age 52 with a 1940s hairstyle featuring two raised hollow victory rolls, one larger above side-parted front temple and one smaller a little farther back on opposite side, visible spiral openings, rest pinned in a neat smooth roll-free low tuck. Three-quarter front-side view showing openings, looking just aside. No costumes or adornments.

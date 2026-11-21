@@ -1,0 +1,14 @@
+{
+  "id": "chignon-textured",
+  "alt": "Rear three-quarter portrait showing a softly twisted silver chignon at the nape.",
+  "transparentBackground": true,
+  "kind": "image",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "chignon-textured"
+    }
+  },
+  "asset": "assets/hairstyles/chignon-textured.png"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "pompadour-soft-silver",
+  "alt": "Three-quarter portrait of a salt-and-pepper pompadour with visible curl texture and short sides.",
+  "transparentBackground": true,
+  "kind": "image",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "pompadour-soft-silver"
+    }
+  },
+  "asset": "assets/hairstyles/pompadour-soft-silver.png"
+}

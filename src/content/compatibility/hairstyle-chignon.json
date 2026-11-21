@@ -28,7 +28,7 @@
           "valueId": "hair-type-3"
         }
       ],
-      "score": 0.95,
+      "score": 1,
       "provenance": "estimated"
     },
     {
@@ -38,7 +38,7 @@
           "valueId": "hair-type-4"
         }
       ],
-      "score": 0.9,
+      "score": 1,
       "provenance": "estimated"
     }
   ]

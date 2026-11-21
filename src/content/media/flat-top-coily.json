@@ -9,6 +9,6 @@
       "promptKey": "flat-top-coily"
     }
   },
-  "transparentBackground": false,
+  "transparentBackground": true,
   "asset": "assets/hairstyles/flat-top-coily.png"
 }

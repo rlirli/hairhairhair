@@ -9,5 +9,6 @@
       "promptKey": "graphic-hair-color-geometric"
     }
   },
+  "transparentBackground": true,
   "asset": "assets/hairstyles/graphic-hair-color-geometric.png"
 }

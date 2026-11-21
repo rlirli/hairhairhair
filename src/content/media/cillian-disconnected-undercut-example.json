@@ -7,5 +7,6 @@
     "generator": "OpenAI image generation",
     "changesMade": false
   },
+  "transparentBackground": true,
   "asset": "assets/hairstyles/cillian-disconnected-undercut-example.png"
 }

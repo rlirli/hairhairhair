@@ -9,6 +9,6 @@
       "promptKey": "buzz-short"
     }
   },
-  "transparentBackground": false,
+  "transparentBackground": true,
   "asset": "assets/hairstyles/buzz-short.png"
 }

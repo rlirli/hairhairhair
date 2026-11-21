@@ -9,5 +9,6 @@
       "promptKey": "brad-pitt-long-waves-example"
     }
   },
+  "transparentBackground": true,
   "asset": "assets/hairstyles/brad-pitt-long-waves-example.png"
 }

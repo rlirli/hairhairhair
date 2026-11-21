@@ -1,11 +1,11 @@
 ---
 import { Image } from "astro:assets";
 import Pattern from "../components/hair-types/Pattern.astro";
+import FocusedHairstyleMap from "../components/hairstyle-map/FocusedHairstyleMap.astro";
 import Layout from "../components/shared/Layout.astro";
 import PhotoAttribution from "../components/shared/PhotoAttribution";
 import {
   getHairstyleBySlug,
-  getPublishedHairstylesByIds,
   getRepresentativeHairstyleMedia,
   getResolvedHairstyleObservationsForAppearance,
 } from "../data";
@@ -33,9 +33,6 @@ const featuredAppearances = [
   const match = getResolvedHairstyleObservationsForAppearance(id)[0];
   return person && photo && match ? [{ appearance, person, photo, style: match.style, crop }] : [];
 });
-
-const mapStyle = getHairstyleBySlug("wolf-cut");
-const relatedStyles = getPublishedHairstylesByIds(mapStyle?.relatedStyleIds ?? []).slice(0, 2);
 ---
 
 <Layout
@@ -199,24 +196,14 @@ const relatedStyles = getPublishedHairstylesByIds(mapStyle?.relatedStyleIds ?? [
         <p class="mt-2 max-w-sm leading-relaxed">
           Start with a look you like and follow its connections to related styles.
         </p>
-        {mapStyle && relatedStyles.length > 0 && (
-          <div class="map-preview mt-5 grid grid-cols-[auto_auto] items-center justify-center rounded-md border border-ink/20 px-4 py-6 sm:px-6">
-            <a class="map-node map-root focus-ring" href={`/hairstyles/${mapStyle.slug}/`}>
-              {mapStyle.name}
-            </a>
-            <ul class="map-branches" aria-label={`Styles related to the ${mapStyle.name.toLowerCase()}`}>
-              {relatedStyles.map((style) => (
-                <li>
-                  <a class="map-node focus-ring" href={`/hairstyles/${style.slug}/`}>
-                    {style.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+        <FocusedHairstyleMap
+          targetId="wolf-cut"
+          degrees={2}
+          sizeMultipliers={[1, 0.8]}
+          className="mt-5 [--relation-canvas-height:clamp(20rem,80vw,25rem)]"
+        />
         <a href="/hairstyle-map/" class="text-link focus-ring mt-3">
-          Open the interactive map <span aria-hidden="true">→</span>
+          Open the full map <span aria-hidden="true">→</span>
         </a>
       </section>
     </div>
@@ -282,86 +269,6 @@ const relatedStyles = getPublishedHairstylesByIds(mapStyle?.relatedStyleIds ?? [
 
   .text-link:hover {
     color: var(--color-orange);
-  }
-
-  .map-preview {
-    --edge-color: color-mix(in srgb, var(--color-ink) 38%, transparent);
-    background: color-mix(in srgb, var(--color-ink) 4%, var(--color-ivory));
-  }
-
-  .map-node {
-    position: relative;
-    z-index: 1;
-    display: inline-flex;
-    min-height: 2.75rem;
-    align-items: center;
-    border: 1px solid var(--edge-color);
-    border-radius: 0.375rem;
-    background: var(--color-ivory);
-    padding: 0.375rem 0.65rem;
-    font-size: 0.875rem;
-    font-weight: 700;
-    line-height: 1.2;
-  }
-
-  .map-node:hover {
-    border-color: var(--color-orange);
-    color: var(--color-orange);
-  }
-
-  .map-root {
-    border-color: var(--color-orange);
-  }
-
-  .map-branches {
-    position: relative;
-    display: grid;
-    gap: 0.75rem;
-    padding-inline-start: 1.5rem;
-  }
-
-  .map-branches::before,
-  .map-branches li::before,
-  .map-branches li::after {
-    position: absolute;
-    background: var(--edge-color);
-    content: "";
-  }
-
-  .map-branches::before {
-    inset-inline-start: 0;
-    top: 50%;
-    width: 0.75rem;
-    height: 1px;
-  }
-
-  .map-branches li {
-    position: relative;
-  }
-
-  .map-branches li::before {
-    inset-inline-start: -0.75rem;
-    top: 50%;
-    width: 0.75rem;
-    height: 1px;
-  }
-
-  .map-branches li::after {
-    inset-inline-start: -0.75rem;
-    inset-block: -0.75rem 0;
-    width: 1px;
-  }
-
-  .map-branches li:first-child::after {
-    top: 50%;
-  }
-
-  .map-branches li:last-child::after {
-    bottom: 50%;
-  }
-
-  .map-branches li:only-child::after {
-    display: none;
   }
 
   @media (min-width: 640px) {

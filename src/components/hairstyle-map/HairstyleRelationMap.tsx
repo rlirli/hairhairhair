@@ -1,8 +1,10 @@
 import { drag } from "d3-drag";
 import { select } from "d3-selection";
-import { zoom, zoomIdentity, type ZoomBehavior } from "d3-zoom";
 import { useEffect, useMemo, useRef, useState } from "react";
 import "../../styles/hairstyle-relation-map.css";
+import RelationMapNode, { RELATION_MAP_BASE_SIZE } from "./RelationMapNode";
+import { getRelationLinks } from "./relation-graph";
+import { useRelationMapZoom } from "./useRelationMapZoom";
 
 export interface RelationMapStyle {
   id: string;
@@ -31,7 +33,7 @@ interface DragSubject extends PositionedStyle {
   index: number;
 }
 
-const nodeRadius = 36;
+const nodeRadius = RELATION_MAP_BASE_SIZE / 2;
 
 function relax(nodes: PositionedStyle[], links: Array<[number, number]>, width: number, height: number, ticks = 230) {
   const placed = nodes.map((node) => ({ ...node }));
@@ -88,31 +90,15 @@ function relax(nodes: PositionedStyle[], links: Array<[number, number]>, width: 
 
 export default function HairstyleRelationMap({ styles }: Props) {
   const canvasRef = useRef<HTMLDivElement>(null);
-  const svgRef = useRef<SVGSVGElement>(null);
-  const worldRef = useRef<SVGGElement>(null);
+  const { svgRef, worldRef, resetZoom } = useRelationMapZoom();
   const positionsRef = useRef<PositionedStyle[]>([]);
-  const zoomBehaviorRef = useRef<ZoomBehavior<SVGSVGElement, unknown> | null>(null);
   const [dimensions, setDimensions] = useState({ width: 860, height: 630 });
   const [positions, setPositions] = useState<PositionedStyle[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [query, setQuery] = useState("");
 
   const idToIndex = useMemo(() => new Map(styles.map((style, index) => [style.id, index])), [styles]);
-  const links = useMemo(() => {
-    const seen = new Set<string>();
-    const result: Array<[number, number]> = [];
-    styles.forEach((style, source) => {
-      style.relatedStyleIds.forEach((id) => {
-        const target = idToIndex.get(id);
-        if (target === undefined || target === source) return;
-        const key = [style.id, id].sort().join("|");
-        if (seen.has(key)) return;
-        seen.add(key);
-        result.push([source, target]);
-      });
-    });
-    return result;
-  }, [idToIndex, styles]);
+  const links = useMemo(() => getRelationLinks(styles), [styles]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -125,34 +111,6 @@ export default function HairstyleRelationMap({ styles }: Props) {
     const observer = new ResizeObserver(resize);
     observer.observe(canvas);
     return () => observer.disconnect();
-  }, []);
-
-  useEffect(() => {
-    const svg = svgRef.current;
-    const world = worldRef.current;
-    if (!svg || !world) return;
-
-    const behavior = zoom<SVGSVGElement, unknown>()
-      .scaleExtent([0.65, 2])
-      .filter((event) => {
-        if (event.type === "mousedown") {
-          return !event.button && !(event.target as Element).closest(".relation-node");
-        }
-        return !event.ctrlKey || event.type === "wheel";
-      })
-      .on("zoom", (event) => {
-        world.setAttribute("transform", event.transform.toString());
-      });
-
-    zoomBehaviorRef.current = behavior;
-    const selection = select(svg);
-    selection.call(behavior);
-    selection.on("dblclick.zoom", null);
-
-    return () => {
-      selection.on(".zoom", null);
-      zoomBehaviorRef.current = null;
-    };
   }, []);
 
   useEffect(() => {
@@ -215,7 +173,7 @@ export default function HairstyleRelationMap({ styles }: Props) {
     return () => {
       selection.on(".drag", null);
     };
-  }, [dimensions, links, positions]);
+  }, [dimensions, links, positions, worldRef]);
 
   const selected = styles.find((style) => style.id === selectedId);
   const related = selected?.relatedStyleIds.map((id) => styles[idToIndex.get(id) ?? -1]).filter(Boolean) ?? [];
@@ -238,9 +196,7 @@ export default function HairstyleRelationMap({ styles }: Props) {
   function reset() {
     setSelectedId(null);
     setQuery("");
-    if (svgRef.current && zoomBehaviorRef.current) {
-      select(svgRef.current).call(zoomBehaviorRef.current.transform, zoomIdentity);
-    }
+    resetZoom();
     const columns = Math.ceil(Math.sqrt((styles.length * dimensions.width) / dimensions.height));
     const rows = Math.ceil(styles.length / columns);
     const gapX = dimensions.width / (columns + 1),
@@ -288,13 +244,6 @@ export default function HairstyleRelationMap({ styles }: Props) {
             viewBox={`0 0 ${dimensions.width} ${dimensions.height}`}
           >
             <g ref={worldRef}>
-              <defs>
-                {styles.map((style) => (
-                  <clipPath clipPathUnits="userSpaceOnUse" id={`${style.id}-map-clip`} key={`${style.id}-map-clip`}>
-                    <circle cx="0" cy="0" r={nodeRadius} />
-                  </clipPath>
-                ))}
-              </defs>
               <g aria-hidden="true">
                 {links.map(([source, target]) => {
                   const isRelatedToSelection =
@@ -335,26 +284,12 @@ export default function HairstyleRelationMap({ styles }: Props) {
                   onClick={() => setSelectedId((current) => (current === style.id ? null : style.id))}
                   transform={`translate(${style.x} ${style.y})`}
                 >
-                  <circle
-                    className={
-                      style.transparentBackground ? "relation-image-backdrop is-transparent" : "relation-image-backdrop"
-                    }
-                    r={nodeRadius}
+                  <RelationMapNode
+                    name={style.name}
+                    radius={nodeRadius}
+                    imageSrc={style.imageSrc}
+                    transparentBackground={style.transparentBackground}
                   />
-                  <image
-                    clipPath={`url(#${style.id}-map-clip)`}
-                    height={nodeRadius * 2}
-                    href={style.imageSrc}
-                    preserveAspectRatio="xMidYMid slice"
-                    width={nodeRadius * 2}
-                    x={-nodeRadius}
-                    y={-nodeRadius}
-                  />
-                  <circle className="relation-node-wash" r={nodeRadius} />
-                  <circle className="relation-node-ring" r={nodeRadius} />
-                  <text className="relation-node-label" y={nodeRadius + 14}>
-                    {style.name}
-                  </text>
                 </g>
               ))}
             </g>

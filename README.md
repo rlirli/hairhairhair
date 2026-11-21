@@ -13,6 +13,21 @@ Astro prints the local URL after startup.
 
 Explore hairstyle connections at `/hairstyle-map/` while the development server is running. The map uses the same published hairstyle records and example images as the hairstyle directory.
 
+### Focused hairstyle maps
+
+Use `src/components/hairstyle-map/FocusedHairstyleMap.astro` to embed part of the map. Nodes link to hairstyle guides, and the map supports pan, zoom, and reset.
+
+| Prop              | Default                           | Behavior                                                                                             |
+| ----------------- | --------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `targetId`        | Required                          | Published hairstyle ID or slug. The target stays highlighted alongside its direct connections.       |
+| `degrees`         | `1`                               | Number of relationship hops to include. Set `0` for the target alone.                                |
+| `sizeMultipliers` | `[1, 0.8]`                        | Image diameter multiplier per degree, starting with the target.                                      |
+| `displayModes`    | `image-and-label` at every degree | Each degree accepts `image-and-label`, `image-only`, or `label-only`.                                |
+| `baseSize`        | `72`                              | Base portrait diameter in SVG units, shared with the full map.                                       |
+| `className`       | —                                 | Classes for the outer component. Set `--relation-canvas-height` here to override the default height. |
+
+Each array repeats its last value for deeper degrees. Empty arrays use the defaults.
+
 Before committing, run:
 
 ```sh

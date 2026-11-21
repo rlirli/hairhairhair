@@ -1,0 +1,52 @@
+---
+import { getImage } from "astro:assets";
+import { getRepresentativeHairstyleMedia, publishedHairstyles } from "../../data";
+import FocusedHairstyleMapCanvas from "./FocusedHairstyleMapCanvas";
+import { getFocusedGraph, valueAtDegree } from "./relation-graph";
+import { RELATION_MAP_BASE_SIZE, type RelationMapNodeDisplay } from "./RelationMapNode";
+
+interface Props {
+  targetId: string;
+  degrees?: number;
+  sizeMultipliers?: readonly number[];
+  displayModes?: readonly RelationMapNodeDisplay[];
+  baseSize?: number;
+  className?: string;
+}
+
+const {
+  targetId,
+  degrees = 1,
+  sizeMultipliers = [1, 0.8],
+  displayModes = [],
+  baseSize = RELATION_MAP_BASE_SIZE,
+  className,
+} = Astro.props;
+
+const target = publishedHairstyles.find((style) => style.id === targetId || style.slug === targetId);
+if (!target) throw new Error(`Focused hairstyle map requires a published hairstyle: "${targetId}".`);
+
+const graph = getFocusedGraph(publishedHairstyles, target.id, degrees);
+const nodes = await Promise.all(
+  graph.nodes.map(async ({ style, degree, parent }) => {
+    const multiplier = valueAtDegree(sizeMultipliers, degree, degree === 0 ? 1 : 0.8);
+    const display = valueAtDegree(displayModes, degree, "image-and-label");
+    const media = display === "label-only" ? undefined : getRepresentativeHairstyleMedia(style.id)?.media;
+    const image = media && (await getImage({ src: media.image, width: 240, format: "webp" }));
+    const diameter = baseSize * multiplier;
+    return {
+      id: style.id,
+      name: style.name,
+      href: `/hairstyles/${style.slug}/`,
+      degree,
+      parent,
+      radius: media ? (Number.isFinite(diameter) && diameter >= 0 ? diameter : RELATION_MAP_BASE_SIZE) / 2 : 12,
+      display: media ? display : ("label-only" as const),
+      imageSrc: image?.src,
+      transparentBackground: media?.transparentBackground,
+    };
+  }),
+);
+---
+
+<FocusedHairstyleMapCanvas client:visible nodes={nodes} links={graph.links} className={className} />

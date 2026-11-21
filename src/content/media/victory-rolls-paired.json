@@ -1,0 +1,14 @@
+{
+  "id": "victory-rolls-paired",
+  "alt": "Three-quarter portrait showing paired dark victory rolls with loose waves below.",
+  "transparentBackground": true,
+  "kind": "image",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "victory-rolls-paired"
+    }
+  },
+  "asset": "assets/hairstyles/victory-rolls-paired.png"
+}

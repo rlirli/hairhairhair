@@ -1,0 +1,14 @@
+{
+  "id": "pompadour-classic-black",
+  "alt": "Three-quarter portrait of a dark polished pompadour with a high rounded front and short tapered sides.",
+  "transparentBackground": true,
+  "kind": "image",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "pompadour-classic-black"
+    }
+  },
+  "asset": "assets/hairstyles/pompadour-classic-black.png"
+}

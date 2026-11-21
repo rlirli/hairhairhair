@@ -46,6 +46,8 @@
     "carols-daughter-knotless-braids",
     "essence-knotless-braids"
   ],
-  "relatedStyleIds": [],
+  "relatedStyleIds": [
+    "hairstyle-cornrows"
+  ],
   "guidePublicationStatus": "published"
 }

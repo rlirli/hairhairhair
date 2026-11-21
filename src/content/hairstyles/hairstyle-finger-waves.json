@@ -50,6 +50,8 @@
     "harpers-bazaar-finger-waves",
     "smithsonian-flapper-bob"
   ],
-  "relatedStyleIds": [],
+  "relatedStyleIds": [
+    "hairstyle-victory-rolls"
+  ],
   "guidePublicationStatus": "published"
 }

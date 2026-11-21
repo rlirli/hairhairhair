@@ -1,0 +1,49 @@
+{
+  "id": "hairstyle-pompadour",
+  "slug": "pompadour",
+  "name": "Pompadour",
+  "kind": "styling-technique",
+  "summary": "Hair swept up from the forehead and back into a rounded crest with its greatest height at the front.",
+  "intro": [
+    "The defining feature is the rounded lift above the forehead. The sweep can be smooth or textured and is visible from the side as it slopes toward the crown.",
+    "Short tapered sides can accentuate the height, while longer sides can sweep back into the same shape. The pompadour describes the way the hair is arranged and can be worn on several cuts."
+  ],
+  "variations": [
+    {
+      "id": "pompadour-polished",
+      "name": "Polished pompadour",
+      "description": "A broad, smooth crest with a defined backward sweep."
+    },
+    {
+      "id": "pompadour-textured",
+      "name": "Textured pompadour",
+      "description": "A raised crest with visible wave or curl across its surface."
+    },
+    {
+      "id": "pompadour-low",
+      "name": "Low pompadour",
+      "description": "A compact sweep with enough lift to retain the rounded front silhouette."
+    }
+  ],
+  "consultation": {
+    "intro": "Show the height from the side and discuss whether the finish should look smooth and polished or retain visible texture.",
+    "questions": [
+      "How high should the front crest sit?",
+      "How much contrast should there be between the top and the sides?",
+      "How much restyling are you comfortable with between washes?"
+    ],
+    "sampleRequest": "“Keep enough length up front for a rounded sweep that is high over the forehead and comes down gradually toward the crown.”"
+  },
+  "considerations": [
+    "The front needs enough length to rise and turn back. Ask the stylist to demonstrate the shape before removing much length from the top.",
+    "Choose a crest height that works with your hair’s density and the amount of hold you want to use."
+  ],
+  "sourceIds": [
+    "fashion-encyclopedia-pompadour"
+  ],
+  "relatedStyleIds": [
+    "hairstyle-medium-swept-back-taper",
+    "hairstyle-victory-rolls"
+  ],
+  "guidePublicationStatus": "published"
+}

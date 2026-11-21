@@ -1,0 +1,50 @@
+{
+  "id": "hairstyle-victory-rolls",
+  "slug": "victory-rolls",
+  "name": "Victory rolls",
+  "kind": "styling-technique",
+  "summary": "Raised sections of hair rolled inward and pinned above the forehead or temples, a style worn in the 1940s.",
+  "intro": [
+    "Front or side sections are lifted, rolled inward into a tube, and anchored with pins. The raised shape and visible opening give the roll its characteristic profile.",
+    "Rolls can be paired evenly or arranged at different heights. The rest of the hair can hang in waves or be swept into an updo."
+  ],
+  "variations": [
+    {
+      "id": "victory-rolls-paired",
+      "name": "Paired victory rolls",
+      "description": "Two similarly sized rolls frame the front of the head."
+    },
+    {
+      "id": "victory-rolls-asymmetric",
+      "name": "Asymmetric victory rolls",
+      "description": "A larger roll sits above one temple with a smaller roll on the opposite side."
+    },
+    {
+      "id": "victory-rolls-pinned",
+      "name": "Victory roll updo",
+      "description": "The remaining hair is pinned up behind the rolls."
+    }
+  ],
+  "consultation": {
+    "intro": "Choose the placement from a front view and discuss whether the remaining lengths will be worn down or pinned up.",
+    "questions": [
+      "Would you like the front rolls to match in height?",
+      "Which way should the openings face?",
+      "Should the back be waved or pinned up?"
+    ],
+    "sampleRequest": "“I’d like two open rolls above the temples, with one slightly larger and the remaining hair pinned low at the back.”"
+  },
+  "considerations": [
+    "The front and side sections need enough length to wrap into a stable roll.",
+    "Check the outline from both sides before pinning, especially if the rolls differ in size."
+  ],
+  "sourceIds": [
+    "prov-hair-from-mos-to-mullets",
+    "rct-victory-rolls"
+  ],
+  "relatedStyleIds": [
+    "hairstyle-pompadour",
+    "hairstyle-finger-waves"
+  ],
+  "guidePublicationStatus": "published"
+}

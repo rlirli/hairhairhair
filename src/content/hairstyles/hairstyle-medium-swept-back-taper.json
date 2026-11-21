@@ -41,9 +41,10 @@
     "haircom-classic-men"
   ],
   "relatedStyleIds": [
-    "hairstyle-taper-fade",
     "hairstyle-curtain-haircut",
-    "hairstyle-long-layered-cut"
+    "hairstyle-long-layered-cut",
+    "hairstyle-pompadour",
+    "hairstyle-taper-fade"
   ],
   "guidePublicationStatus": "published"
 }

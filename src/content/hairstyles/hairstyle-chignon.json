@@ -1,0 +1,48 @@
+{
+  "id": "hairstyle-chignon",
+  "slug": "chignon",
+  "name": "Chignon",
+  "kind": "styling-technique",
+  "summary": "A gathered updo secured low at the nape, with the lengths folded or twisted into a bun.",
+  "intro": [
+    "The low placement defines the shape. The hair is drawn toward the nape and the lengths are tucked or pinned into a compact fold.",
+    "A smooth surface gives a clearly defined outline, while a softer chignon lets waves and looser pieces show. Hair that just reaches a low tie may need extra pins to secure shorter layers."
+  ],
+  "variations": [
+    {
+      "id": "chignon-sleek",
+      "name": "Sleek chignon",
+      "description": "Smoothed sides lead to a neat, compact fold at the nape."
+    },
+    {
+      "id": "chignon-soft",
+      "name": "Soft chignon",
+      "description": "A loose twist and visible natural texture give the knot a softer outline."
+    },
+    {
+      "id": "chignon-side",
+      "name": "Side chignon",
+      "description": "The low knot is shifted slightly toward one ear."
+    }
+  ],
+  "consultation": {
+    "intro": "Pick the height and placement first, then agree on whether the part and texture should remain visible.",
+    "questions": [
+      "Should the bun sit centrally or slightly to one side?",
+      "Do you want the sides smooth or softly pulled back?",
+      "Which short layers should be pinned in or left loose?"
+    ],
+    "sampleRequest": "“I’d like a low chignon at the nape, with the ends tucked in and a soft finish around the sides.”"
+  },
+  "considerations": [
+    "Check whether the shortest layers reach the intended placement. Pins can hold pieces that fall short of the tie.",
+    "Choose a position where the bun clears your collar or headrest if you plan to wear it all day."
+  ],
+  "sourceIds": [
+    "british-vogue-chignon"
+  ],
+  "relatedStyleIds": [
+    "hairstyle-top-knot"
+  ],
+  "guidePublicationStatus": "published"
+}

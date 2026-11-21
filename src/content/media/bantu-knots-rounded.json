@@ -1,0 +1,14 @@
+{
+  "id": "bantu-knots-rounded",
+  "alt": "Three-quarter portrait showing rounded dark Bantu knots with visible part lines.",
+  "transparentBackground": true,
+  "kind": "image",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "bantu-knots-rounded"
+    }
+  },
+  "asset": "assets/hairstyles/bantu-knots-rounded.png"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "chignon-sleek",
+  "alt": "Rear three-quarter portrait showing a polished dark chignon pinned low at the nape.",
+  "transparentBackground": true,
+  "kind": "image",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "chignon-sleek"
+    }
+  },
+  "asset": "assets/hairstyles/chignon-sleek.png"
+}

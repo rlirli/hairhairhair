@@ -1,0 +1,14 @@
+{
+  "id": "mullet-curly-dark",
+  "alt": "Side portrait showing a curly mullet with a close temple taper and longer dark curls at the nape.",
+  "transparentBackground": true,
+  "kind": "image",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "mullet-curly-dark"
+    }
+  },
+  "asset": "assets/hairstyles/mullet-curly-dark.png"
+}

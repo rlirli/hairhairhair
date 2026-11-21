@@ -1,0 +1,14 @@
+{
+  "id": "cornrows-straight-back",
+  "alt": "Three-quarter rear portrait of straight dark cornrows arranged in parallel rows.",
+  "transparentBackground": true,
+  "kind": "image",
+  "provenance": {
+    "origin": "system",
+    "aiGeneration": {
+      "provider": "OpenAI",
+      "promptKey": "cornrows-straight-back"
+    }
+  },
+  "asset": "assets/hairstyles/cornrows-straight-back.png"
+}
